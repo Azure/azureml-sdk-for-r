@@ -17,7 +17,15 @@ steps:
     targetType: 'inline'
     script: 'pip install --user azureml-sdk'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              package_location <- devtools::build("azureml");
+              Sys.setenv("PACKAGE_LOCATION" = package_location)
+              options(testthat.output_file = "TEST-ALL.xml");
+              testthat::test_dir("azureml/tests/testthat", reporter = "junit")'
+    workingDirectory: 'RPackage'
   displayName: 'Run a multi-line script'
