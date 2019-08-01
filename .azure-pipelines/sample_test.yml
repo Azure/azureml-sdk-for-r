@@ -31,13 +31,8 @@ steps:
       addSpnToEnvironment: true
       workingDirectory: RPackage
     displayName: 'Run a multi-line script'
+
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
-
-  - task: AzureCLI@1
-    inputs:
-      azureSubscription: 'Aether3P Dev (b8c23406-f9b5-4ccb-8a65-a8cb5dcd6a5a)'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'az group delete --yes --no-wait --name $TEST_RESOURCE_GROUP'
