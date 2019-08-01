@@ -21,11 +21,5 @@ steps:
   inputs:
     scriptSource: 'inline'
     script: |
-      R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
-              .libPaths(Sys.getenv("R_LIBS_USER"));
-              package_location <- devtools::build("azureml");
-              Sys.setenv("PACKAGE_LOCATION" = package_location)
-              options(testthat.output_file = "TEST-ALL.xml");
-              testthat::test_dir("azureml/tests/testthat", reporter = "junit")'
-    workingDirectory: 'RPackage'
+      R -e 'options(testthat.output_file = "TEST-ALL.xml");'
   displayName: 'Run a multi-line script'
