@@ -9,8 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-container: himanshuaml/aml-r:latest
-
 steps:
 - task: Bash@3
   inputs:
