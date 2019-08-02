@@ -15,10 +15,6 @@ steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: 'pip install --user azureml-sdk'
-
-  - task: PythonScript@0
-    inputs:
-      scriptSource: 'inline'
-      script: 'python -c "import azureml.core"'
-    displayName: 'Run a python script'
+      script: |
+        pip install --user azureml-sdk
+        python -c 'import azureml.core'
