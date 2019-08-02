@@ -20,6 +20,5 @@ steps:
 - task: PythonScript@0
   inputs:
     scriptSource: 'inline'
-    script: |
-      python -c "import azureml.core"
+    script: 'python -c "import azureml.core"'
   displayName: 'Run a multi-line script'
