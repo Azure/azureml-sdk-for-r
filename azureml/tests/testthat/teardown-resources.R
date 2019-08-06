@@ -1,0 +1,2 @@
+delete_aml_compute(existing_compute)
+delete_workspace(existing_ws)
