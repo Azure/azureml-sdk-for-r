@@ -26,7 +26,7 @@ steps:
 
   - task: AzureCLI@1
     inputs:
-      azureSubscription: 'Aether3P Dev (b8c23406-f9b5-4ccb-8a65-a8cb5dcd6a5a)'
+      azureSubscription: 'Project Vienna Build (ad203158-bc5d-4e72-b764-2607833a71dc)'
       scriptLocation: inlineScript
       inlineScript: | 
         python -c "from azureml.core import Workspace; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
@@ -47,7 +47,7 @@ steps:
 
   - task: AzureCLI@1
     inputs:
-      azureSubscription: 'Aether3P Dev (b8c23406-f9b5-4ccb-8a65-a8cb5dcd6a5a)'
+      azureSubscription: 'Project Vienna Build (ad203158-bc5d-4e72-b764-2607833a71dc)'
       scriptLocation: 'inlineScript'
       inlineScript: 'az group delete --yes --no-wait --name $TEST_RESOURCE_GROUP'
     condition: always()
