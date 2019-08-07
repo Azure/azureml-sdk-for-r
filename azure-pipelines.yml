@@ -37,7 +37,6 @@ steps:
         options(testthat.output_file = "TEST-ALL.xml");
         testthat::test_dir("azureml/tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true
-      workingDirectory: RPackage
     displayName: 'Run a multi-line script'
   - task: PublishTestResults@2
     inputs:
