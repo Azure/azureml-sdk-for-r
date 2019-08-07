@@ -1,0 +1,53 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: 'ubuntu-16.04'
+  
+container: himanshuaml/aml-r:latest
+    
+variables:
+- name: TEST_LOCATION
+  value: eastus2
+- name: TEST_RESOURCE_GROUP
+  value: hichando_test_rg
+- name: TEST_SUBSCRIPTION_ID
+  value: b8c23406-f9b5-4ccb-8a65-a8cb5dcd6a5a
+- name: TEST_WORKSPACE_NAME
+  value: hichando_test_workspace
+
+steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: 'pip install --user azureml-sdk'
+
+  - task: AzureCLI@1
+    inputs:
+      azureSubscription: 'Project Vienna Build (ad203158-bc5d-4e72-b764-2607833a71dc)'
+      scriptLocation: inlineScript
+      inlineScript: | 
+        python -c "from azureml.core import Workspace; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
+        .libPaths(Sys.getenv("R_LIBS_USER"));
+        package_location <- devtools::build("azureml");
+        Sys.setenv("PACKAGE_LOCATION" = package_location)
+        options(testthat.output_file = "TEST-ALL.xml");
+        testthat::test_dir("azureml/tests/testthat", reporter = "junit")'
+      addSpnToEnvironment: true
+      workingDirectory: RPackage
+    displayName: 'Run a multi-line script'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TEST-*.xml'
+      failTaskOnFailedTests: true
+
+  - task: AzureCLI@1
+    inputs:
+      azureSubscription: 'Project Vienna Build (ad203158-bc5d-4e72-b764-2607833a71dc)'
+      scriptLocation: 'inlineScript'
+      inlineScript: 'az group delete --yes --no-wait --name $TEST_RESOURCE_GROUP'
+    condition: always()
