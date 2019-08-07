@@ -12,11 +12,11 @@ variables:
 - name: TEST_LOCATION
   value: eastus2
 - name: TEST_RESOURCE_GROUP
-  value: hichando_test_rg
+  value: r_test_rg
 - name: TEST_SUBSCRIPTION_ID
-  value: b8c23406-f9b5-4ccb-8a65-a8cb5dcd6a5a
+  value: ad203158-bc5d-4e72-b764-2607833a71dc
 - name: TEST_WORKSPACE_NAME
-  value: hichando_test_workspace
+  value: r_test_workspace
 
 steps:
   - task: Bash@3
