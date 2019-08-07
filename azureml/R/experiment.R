@@ -5,7 +5,7 @@
 #' @export
 get_or_create_experiment <- function(workspace, name)
 {
-  aml$core$Experiment(workspace, name)
+  azureml$core$Experiment(workspace, name)
 }
 
 #' Submit experiment

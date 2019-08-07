@@ -1,11 +1,3 @@
-#' Create data reference configuration
-#' @param data_reference Data reference object
-#' @export
-get_data_reference_configuration <- function(data_reference)
-{
-    invisible(data_reference$to_config())
-}
-
 #' Makes a datastore available as a datareference for a run
 #' @param datastore the Datastore to reference
 #' @param data_reference_name the name of the data reference
@@ -18,7 +10,7 @@ get_data_reference_configuration <- function(data_reference)
 create_data_reference <- function(datastore, data_reference_name=NULL, path_on_datastore = NULL, mode = 'mount',
                                 path_on_compute = NULL, overwrite = FALSE)
 {
-    aml$data$data_reference$DataReference(datastore, data_reference_name = data_reference_name,
+    azureml$data$data_reference$DataReference(datastore, data_reference_name = data_reference_name,
                                 path_on_datastore = path_on_datastore, mode = mode, path_on_compute = path_on_compute,
                                 overwrite = overwrite)
 }

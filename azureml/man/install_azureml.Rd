@@ -4,7 +4,7 @@
 \alias{install_azureml}
 \title{Install azureml}
 \usage{
-install_azureml(version = NULL)
+install_azureml(version = NULL, environment_name = "r-azureml")
 }
 \arguments{
 \item{version}{pip version}

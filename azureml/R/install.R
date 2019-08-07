@@ -16,13 +16,13 @@ create_conda_env <- function(environment_name)
 #' Install azureml
 #' @param version pip version
 #' @export
-install_azureml <- function(version = NULL)
+install_azureml <- function(version = NULL, environment_name = "r-azureml")
 {
   if (is.null(reticulate::conda_binary()))
   {
     stop("Anaconda not installed or not in system path.")
   }
-  environment_name <- "r-azureml"
+
   package_name = "azureml-sdk"
   if (!is.null(version))
   {
@@ -31,6 +31,6 @@ install_azureml <- function(version = NULL)
   # create conda environment
   create_conda_env(environment_name)
 
-  conda_install(environment_name, package_name, pip = TRUE)
-  conda_install(environment_name, "numpy")
+  reticulate::conda_install(environment_name, package_name, pip = TRUE)
+  reticulate::conda_install(environment_name, "numpy")
 }

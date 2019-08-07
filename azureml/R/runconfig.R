@@ -7,7 +7,7 @@
 create_run_config <- function(
   target, data_references = NULL, base_image = "himanshuaml/aml-r")
 {
-  runconfig <- aml$core$runconfig$RunConfiguration(framework="R")
+  runconfig <- azureml$core$runconfig$RunConfiguration(framework="R")
   runconfig$target <- target
   runconfig$environment$docker$enabled <- TRUE
   runconfig$environment$docker$base_image <- base_image
@@ -39,5 +39,5 @@ create_script_run_config <- function(source_directory, script = NULL, arguments 
   run_config <- create_run_config(target,
                 data_references = data_references,
                 base_image = cpu_image)
-  aml$core$script_run_config$ScriptRunConfig(source_directory, script, arguments, run_config)
+  azureml$core$script_run_config$ScriptRunConfig(source_directory, script, arguments, run_config)
 }

@@ -32,7 +32,7 @@ wait_for_run_completion <- function(run, show_output = TRUE)
 wait_until_run_completes <- function(run)
 {
   # print dots if we get here due to unicode error on windows rstudio console terminals
-  while (run$get_status() %in% aml$core$run$RUNNING_STATES)
+  while (run$get_status() %in% azureml$core$run$RUNNING_STATES)
   {
     cat(".")
     Sys.sleep(1)
@@ -46,7 +46,7 @@ wait_until_run_completes <- function(run)
 #' @export
 get_current_run <- function(allow_offline=TRUE)
 {
-  aml$core$run$Run$get_context(allow_offline)
+  azureml$core$run$Run$get_context(allow_offline)
 }
 
 #' Log metric to run

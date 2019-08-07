@@ -4,17 +4,17 @@
 #' @export
 attach_existing_dsvm <- function(workspace, target_name)
 {
-  aml$core$compute$RemoteCompute(workspace = workspace, name = target_name)
+  azureml$core$compute$RemoteCompute(workspace = workspace, name = target_name)
   invisible(NULL)
 }
 
-#' Attach existing amlcompute
+#' Attach existing compute target
 #' @param workspace workspace object
 #' @param target_name name of the amlcompute
 #' @export
-attach_existing_aml_compute <- function(workspace, target_name)
+attach_existing_compute_target <- function(workspace, target_name)
 {
-  aml$core$compute$ComputeTarget(workspace = workspace, name = target_name)
+  azureml$core$compute$ComputeTarget(workspace = workspace, name = target_name)
   invisible(NULL)
 }
 
@@ -41,14 +41,14 @@ create_aml_compute <- function(workspace, cluster_name, vm_size, vm_priority = "
                   admin_user_password = NULL, admin_user_ssh_key = NULL, vnet_resourcegroup_name = NULL,
                   vnet_name = NULL, subnet_name = NULL, tags = NULL, description = NULL)
 {
-  compute_config <- aml$core$compute$AmlCompute$provisioning_configuration(vm_size = vm_size,
+  compute_config <- azureml$core$compute$AmlCompute$provisioning_configuration(vm_size = vm_size,
                                   vm_priority = vm_priority, min_nodes = min_nodes, max_nodes = max_nodes,
                                   idle_seconds_before_scaledown = idle_seconds_before_scaledown,
                                   admin_username = admin_username,
                                   admin_user_password = admin_user_password, admin_user_ssh_key = admin_user_ssh_key,
                                   vnet_resourcegroup_name = vnet_resourcegroup_name, vnet_name = vnet_name,
                                   subnet_name = subnet_name, tags = tags, description = description)
-  aml$core$compute$ComputeTarget$create(workspace, cluster_name, compute_config)
+  azureml$core$compute$ComputeTarget$create(workspace, cluster_name, compute_config)
 }
 
 #' Get amlcompute. Returns NULL if amlcompute is not found on workspace.
@@ -59,7 +59,7 @@ get_aml_compute <- function(workspace, cluster_name)
 {
   tryCatch(
     {
-      aml$core$compute$ComputeTarget(workspace = workspace, name = cluster_name)
+      azureml$core$compute$ComputeTarget(workspace = workspace, name = cluster_name)
     },
     error = function(e) {
       if (grepl("ComputeTargetException", e$message, ))

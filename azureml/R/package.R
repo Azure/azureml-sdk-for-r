@@ -5,7 +5,7 @@
   # conda doesnt find the environment if not activated, therefore calling
   # py_discover_config to prepend the conda scripts path to path.
   py_discover_config('azureml', 'r-azureml')
-  aml <<- import('azureml', delay_load = list(
+  azureml <<- import('azureml', delay_load = list(
     environment = "r-azureml",
     on_error = function(e) {
       if (grepl("No module named azureml", e$message)) {

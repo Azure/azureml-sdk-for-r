@@ -4,14 +4,16 @@ resource_group <- Sys.getenv("TEST_RESOURCE_GROUP")
 location <- Sys.getenv("TEST_LOCATION")
 workspace_name <- Sys.getenv("TEST_WORKSPACE_NAME", unset = "r_test_workspace")
 cluster_name <- Sys.getenv("TEST_CLUSTER_NAME", unset = "r-cpu-cluster")
-
+test_env <- paste0('test_', as.integer(Sys.time()))
 package_url <- Sys.getenv('PACKAGE_LOCATION')
 
 install.packages(package_url, repos = NULL, dep = FALSE, type = "source")
 
 library(azureml)
-
-#install_azureml()
+if(is.na(Sys.getenv("AZUREML_PYTHON_INSTALLED", unset = NA)))
+{
+    install_azureml()
+}
 
 existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
                     location = location)

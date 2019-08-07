@@ -46,7 +46,7 @@ create_workspace <- function(
     exist_ok = FALSE,
     show_output=TRUE)
 {
-  ws <- aml$core$Workspace$create(name = name, subscription_id = subscription_id, resource_group = resource_group,
+  ws <- azureml$core$Workspace$create(name = name, subscription_id = subscription_id, resource_group = resource_group,
                               location = location, create_resource_group = create_resource_group,
                               friendly_name = friendly_name, storage_account = storage_account,
                               key_vault = key_vault, app_insights = app_insights,
@@ -64,7 +64,7 @@ create_workspace <- function(
 #' @export
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 {
-    aml$core$Workspace$get(name, auth = NULL, subscription_id = subscription_id, resource_group = resource_group)
+    azureml$core$Workspace$get(name, auth = NULL, subscription_id = subscription_id, resource_group = resource_group)
 }
 
 #' Load workspace from config
@@ -73,7 +73,7 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 #' @export
 load_workspace_from_config <- function(path)
 {
-  aml$core$workspace$Workspace$from_config(path)
+  azureml$core$workspace$Workspace$from_config(path)
 }
 
 #' Delete workspace
@@ -93,7 +93,7 @@ delete_workspace <- function(ws)
 #' @export
 list_workspaces <- function(subscription_id, resource_group = NULL)
 {
-  aml$core$workspace$Workspace$list(subscription_id, resource_group)
+  azureml$core$workspace$Workspace$list(subscription_id, resource_group)
 }
 
 #' Write out the Workspace ARM properties to a config file
