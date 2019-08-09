@@ -1,7 +1,6 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+trigger:
+- master
+- releases/*
 
 pool:
   vmImage: 'ubuntu-16.04'
@@ -12,11 +11,11 @@ variables:
 - name: TEST_LOCATION
   value: eastus2
 - name: TEST_RESOURCE_GROUP
-  value: hichando_test_rg
+  value: r_sdk_test_rg
 - name: TEST_SUBSCRIPTION_ID
   value: 4faaaf21-663f-4391-96fd-47197c630979
 - name: TEST_WORKSPACE_NAME
-  value: hichando_test_workspace
+  value: r_sdk_test_workspace
 
 steps:
   - task: Bash@3
