@@ -32,7 +32,7 @@ steps:
         python -c "from azureml.core import Workspace; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
         .libPaths(Sys.getenv("R_LIBS_USER"));
-        package_location <- devtools::build("..");
+        package_location <- devtools::build();
         Sys.setenv("PACKAGE_LOCATION" = package_location)
         options(testthat.output_file = "TEST-ALL.xml");
         testthat::test_dir("tests/testthat", reporter = "junit")'
