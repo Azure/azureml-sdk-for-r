@@ -62,6 +62,7 @@ Main capabilities of the SDK include:
 - In step 3, if you get ssl errors on windows, that is due to an
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
+- If you encounter a permission error when attempting to create a Snapshot while using RStudio, it may be due to an inability to read  and copy files from the .Rproj.user subdirectory that is automatically created during an R session. To resolve the error, move the relevant data and R files into a subdirectory and set the working directory to that subdirectory before attempting the Snapshot again.
 
 
 
