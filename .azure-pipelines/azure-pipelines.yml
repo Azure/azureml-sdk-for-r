@@ -1,7 +1,6 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+trigger:
+- master
+- releases/*
 
 pool:
   vmImage: 'ubuntu-16.04'
@@ -12,11 +11,11 @@ variables:
 - name: TEST_LOCATION
   value: eastus2
 - name: TEST_RESOURCE_GROUP
-  value: hichando_test_rg
+  value: r_sdk_test_rg
 - name: TEST_SUBSCRIPTION_ID
   value: 4faaaf21-663f-4391-96fd-47197c630979
 - name: TEST_WORKSPACE_NAME
-  value: hichando_test_workspace
+  value: r_sdk_test_workspace
 
 steps:
   - task: Bash@3
@@ -32,10 +31,10 @@ steps:
         python -c "from azureml.core import Workspace; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
         .libPaths(Sys.getenv("R_LIBS_USER"));
-        package_location <- devtools::build("azureml");
+        package_location <- devtools::build();
         Sys.setenv("PACKAGE_LOCATION" = package_location)
         options(testthat.output_file = "TEST-ALL.xml");
-        testthat::test_dir("azureml/tests/testthat", reporter = "junit")'
+        testthat::test_dir("tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true
     displayName: 'Run a multi-line script'
   - task: PublishTestResults@2
