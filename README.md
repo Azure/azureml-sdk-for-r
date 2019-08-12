@@ -11,7 +11,7 @@ Main capabilities of the SDK include:
 
 ## Key Features and Roadmap
 
-:heavy_check_mark: feature available  :heavy_multiplication_x: feature planned but not supported  :heavy_minus_sign: no support planned
+:heavy_check_mark: feature available  :heavy_minus_sign: in progress  :heavy_multiplication_x: no support planned
 
 | Features                                                                                                         | Description                | Status             |
 |------------------------------------------------------------------------------------------------------------------|---------------------|---------------------|
@@ -19,11 +19,11 @@ Main capabilities of the SDK include:
 | [Data Plane Resources](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
 | [Compute](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |                                          
 [Experiment](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#experiment) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
-[Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :heavy_multiplication_x: |
+[Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :heavy_minus_sign: |
 [Run](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#run) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
-[Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_multiplication_x: |
-[Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_multiplication_x: |
-[RunConfiguration and ScriptRunConfiguration](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | `RunConfiguration` configures an environment involving `Experiment` runs and compute. `ScriptRunConfiguration` does the same for `ScriptRun` objects. | :heavy_minus_sign: |
+[Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_minus_sign: |
+[Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_minus_sign: |
+[RunConfiguration and ScriptRunConfiguration](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | `RunConfiguration` configures an environment involving `Experiment` runs and compute. `ScriptRunConfiguration` does the same for `ScriptRun` objects. | :heavy_multiplication_x: |
 
 ## Installing `azureml` R package
 1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose 
