@@ -42,10 +42,3 @@ steps:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
       failTaskOnFailedTests: true
-
-  - task: AzureCLI@1
-    inputs:
-      azureSubscription: 'Project Vienna Build Tests (4faaaf21-663f-4391-96fd-47197c630979)'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'az group delete --yes --no-wait --name $TEST_RESOURCE_GROUP'
-    condition: always()
