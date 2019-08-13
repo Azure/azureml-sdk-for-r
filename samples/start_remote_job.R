@@ -4,9 +4,11 @@ devtools::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
 library("azureml")
 
-cluster_name <- Sys.getenv('CLUSTER_NAME', unset = '<CLUSTER_NAME>')
 # Workspace subscription, name etc.
 ws <- load_workspace_from_config(".")
+
+# Attach compute
+compute_target = attach_compute(ws, 'remote_vm', dsvm=TRUE)
 
 ds <- get_default_datastore(ws)
 
