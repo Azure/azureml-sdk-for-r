@@ -14,19 +14,19 @@ target_path <- "irisdata"
 upload_files_to_azure_datastore(ds, list("./iris.csv"),
                                 target_path = target_path, overwrite = TRUE)
 
-# define script run config
+# define estimator
 data_reference <- create_data_reference(ds, path_on_datastore = target_path)
-arguments <- list("--data_folder", get_data_reference_path_in_compute(data_reference))
-data_references <- list(data_reference)
+path <- get_data_reference_path_in_compute(data_reference)
 
-src <- create_script_run_config(source_directory = ".", script = "train.R",
-                                arguments = arguments, target = cluster_name,
-                                data_references = data_references)
+est <- create_estimator(source_directory = ".", entry_script = "train.R",
+                        script_params = list("--data_folder" = path),
+                        target = compute_target,
+                        inputs = list(data_reference)
 
 experiment_name <- "train-r-script-on-remote-vm"
 exp <- get_or_create_experiment(ws, experiment_name)
 
-run <- submit_experiment(src, exp)
+run <- submit_experiment(est, exp)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)
