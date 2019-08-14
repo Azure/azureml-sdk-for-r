@@ -16,6 +16,6 @@ test_that("create amlcompute",
     non_existent_cluster <- get_aml_compute(ws, cluster_name = "nonexistent")
     expect_equal(non_existent_cluster, NULL)
 
-    # tear down compute and workspace
+    # tear down compute
     delete_aml_compute(compute_target)
 })
