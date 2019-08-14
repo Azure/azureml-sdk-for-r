@@ -13,7 +13,7 @@ path <- get_data_reference_path_in_compute(data_reference)
 
 # create aml compute
 cluster_name <- "rcluster"
-compute_target <- get_aml_compute(ws, cluster_name = cluster_name)
+compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
   vm_size <- "STANDARD_D2_V2"
