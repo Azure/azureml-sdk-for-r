@@ -7,9 +7,6 @@ library("azureml")
 # Workspace subscription, name etc.
 ws <- load_workspace_from_config(".")
 
-# Attach compute
-compute_target = attach_compute(ws, 'remote_vm', dsvm=TRUE)
-
 ds <- get_default_datastore(ws)
 
 target_path <- "irisdata"
@@ -23,7 +20,7 @@ path <- get_data_reference_path_in_compute(data_reference)
 est <- create_estimator(source_directory = ".", entry_script = "train.R",
                         script_params = list("--data_folder" = path),
                         target = compute_target,
-                        inputs = list(data_reference)
+                        inputs = list(data_reference))
 
 experiment_name <- "train-r-script-on-remote-vm"
 exp <- get_or_create_experiment(ws, experiment_name)
