@@ -62,6 +62,16 @@ Main capabilities of the SDK include:
 - In step 3, if you get ssl errors on windows, that is due to an
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
+- If the following error occurs when submitting an experiment using RStudio:
+   ```python
+    Error in py_call_impl(callable, dots$args, dots$keywords) : 
+     PermissionError: [Errno 13] Permission denied
+   ```
+  Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.
+  
+  In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
+  the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
+  session. For this reason, best practice is to isolate project files into their own directory.
 
 
 
