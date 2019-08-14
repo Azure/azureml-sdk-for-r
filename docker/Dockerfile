@@ -44,6 +44,7 @@ RUN wget -qO /tmp/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-${
 RUN conda install -c r -y r-essentials r-devtools && conda clean -ay
 
 # AzureML SDK
-ENV GITHUB_AUTH_TOKEN="<Personal access token from https://github.com/settings/tokens>"
+# Get personal access token from https://github.com/settings/tokens
+ARG GITHUB_AUTH_TOKEN
 RUN pip install --no-cache-dir azureml-defaults && \
     R -e "devtools::install_github(repo = 'https://github.com/Azure/azureml-sdk-for-r', auth_token = '${GITHUB_AUTH_TOKEN}')"
