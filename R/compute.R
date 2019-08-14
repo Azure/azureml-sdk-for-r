@@ -31,7 +31,7 @@ create_aml_compute <- function(workspace, cluster_name, vm_size, vm_priority = "
   azureml$core$compute$ComputeTarget$create(workspace, cluster_name, compute_config)
 }
 
-#' Get amlcompute. Returns NULL if amlcompute is not found on workspace.
+#' Get compute. Returns NULL if compute is not found on workspace.
 #' @param workspace workspace that has the cluster
 #' @param cluster_name name of the cluster
 #' @export
