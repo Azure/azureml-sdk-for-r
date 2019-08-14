@@ -16,3 +16,4 @@ log_metric_to_run(name, value, run)
 \description{
 Log metric to run
 }
+

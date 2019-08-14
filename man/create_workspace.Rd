@@ -5,10 +5,9 @@
 \title{Create a new Azure Machine Learning Workspace}
 \usage{
 create_workspace(name, subscription_id = NULL, resource_group = NULL,
-  location = NULL, create_resource_group = TRUE,
-  friendly_name = NULL, storage_account = NULL, key_vault = NULL,
-  app_insights = NULL, container_registry = NULL, exist_ok = FALSE,
-  show_output = TRUE)
+  location = NULL, create_resource_group = TRUE, friendly_name = NULL,
+  storage_account = NULL, key_vault = NULL, app_insights = NULL,
+  container_registry = NULL, exist_ok = FALSE, show_output = TRUE)
 }
 \arguments{
 \item{name}{The new workspace name. Workspace name has to be between
@@ -57,3 +56,4 @@ method.}
 \description{
 Create a new Azure Machine Learning Workspace
 }
+

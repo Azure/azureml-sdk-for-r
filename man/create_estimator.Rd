@@ -4,10 +4,9 @@
 \alias{create_estimator}
 \title{Create Estimator}
 \usage{
-create_estimator(source_directory, compute_target = NULL,
-  vm_size = NULL, vm_priority = NULL, entry_script = NULL,
-  script_params = NULL, use_docker = TRUE,
-  custom_docker_image = NULL, inputs = NULL)
+create_estimator(source_directory, compute_target = NULL, vm_size = NULL,
+  vm_priority = NULL, entry_script = NULL, script_params = NULL,
+  use_docker = TRUE, custom_docker_image = NULL, inputs = NULL)
 }
 \arguments{
 \item{source_directory}{A local directory containing experiment configuration files.}
@@ -37,3 +36,4 @@ not set, a default CPU based image will be used as the base image.}
 \description{
 Create Estimator
 }
+

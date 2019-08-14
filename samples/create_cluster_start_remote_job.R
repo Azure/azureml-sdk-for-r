@@ -25,7 +25,7 @@ if (is.null(compute_target))
 est <- create_estimator(source_directory = ".", entry_script = "train.R",
                         script_params = list("--data_folder" = path),
                         target = compute_target,
-                        inputs = list(data_reference)
+                        inputs = list(data_reference))
 
 experiment_name <- "train-r-script-on-remote-amlcompute"
 exp <- get_or_create_experiment(ws, experiment_name)

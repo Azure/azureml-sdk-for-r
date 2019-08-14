@@ -12,3 +12,4 @@ delete_aml_compute(cluster)
 \description{
 Delete compute
 }
+
