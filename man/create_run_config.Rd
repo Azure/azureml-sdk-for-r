@@ -4,8 +4,7 @@
 \alias{create_run_config}
 \title{Create run configuration to run a R script}
 \usage{
-create_run_config(target, data_references = NULL,
-  base_image = "himanshuaml/aml-r")
+create_run_config(target, data_references = NULL, base_image = NULL)
 }
 \arguments{
 \item{target}{target string}

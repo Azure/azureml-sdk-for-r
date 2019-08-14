@@ -6,7 +6,7 @@
 \usage{
 create_script_run_config(source_directory, script = NULL,
   arguments = NULL, target = NULL, data_references = NULL,
-  cpu_image = "himanshuaml/aml-r")
+  base_image = NULL)
 }
 \arguments{
 \item{source_directory}{source directory containing the script}
@@ -19,7 +19,7 @@ create_script_run_config(source_directory, script = NULL,
 
 \item{data_references}{list of data references}
 
-\item{cpu_image}{image to use}
+\item{base_image}{image to use}
 }
 \value{
 script runconfig object

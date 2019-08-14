@@ -4,9 +4,12 @@
 #' @param base_image image to use
 #' @return runconfig object
 #' @export
-create_run_config <- function(
-  target, data_references = NULL, base_image = "ninhu/r-base")
+create_run_config <- function(target, data_references = NULL, base_image = NULL)
 {
+  # TODO: this will be replaced to official one soon...
+  if (is.null(base_image))
+    base_image <- "ninhu/r-base"
+
   runconfig <- azureml$core$runconfig$RunConfiguration(framework="R")
   runconfig$target <- target
   runconfig$environment$docker$enabled <- TRUE
