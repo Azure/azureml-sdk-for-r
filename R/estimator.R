@@ -17,7 +17,7 @@
 #' @export
 create_estimator <- function(source_directory, compute_target = NULL, vm_size = NULL, vm_priority = NULL,
                     entry_script = NULL, script_params = NULL, use_docker = TRUE,
-                    custom_docker_image = "himanshuaml/aml-r", inputs = NULL)
+                    custom_docker_image = "ninhu/r-base", inputs = NULL)
 {
     estimator <- azureml$train$estimator$Estimator(source_directory, compute_target = compute_target, vm_size = vm_size,
         vm_priority = vm_priority, entry_script = entry_script, script_params = script_params, use_docker = use_docker,
