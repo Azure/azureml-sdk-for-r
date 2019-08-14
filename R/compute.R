@@ -1,22 +1,3 @@
-#' Attach existing compute target
-#' @param workspace workspace object
-#' @param target_name name of the compute
-#' @param dsvm dsvm compute instead of amlcompute
-#' @export
-attach_compute <- function(workspace, target_name, dsvm=FALSE)
-{
-  if (dsvm)
-  {
-    azureml$core$compute$RemoteCompute(workspace = workspace, name = target_name)
-    invisible(NULL)
-  }
-  else
-  {
-    azureml$core$compute$ComputeTarget(workspace = workspace, name = target_name)
-    invisible(NULL)
-  }
-}
-
 #' Create amlcompute
 #' @param workspace workspace object
 #' @param cluster_name cluster name
