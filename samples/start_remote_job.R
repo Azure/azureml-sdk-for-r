@@ -17,6 +17,16 @@ upload_files_to_azure_datastore(ds, list("./iris.csv"),
 data_reference <- create_data_reference(ds, path_on_datastore = target_path)
 path <- get_data_reference_path_in_compute(data_reference)
 
+# create aml compute
+cluster_name <- "rcluster"
+compute_target <- get_compute(ws, cluster_name = cluster_name)
+if (is.null(compute_target))
+{
+  vm_size <- "STANDARD_D2_V2"
+  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
+                                       vm_size = vm_size, max_nodes = 1)
+}
+
 est <- create_estimator(source_directory = ".", entry_script = "train.R",
                         script_params = list("--data_folder" = path),
                         target = compute_target,
