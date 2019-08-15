@@ -34,6 +34,7 @@ run <- submit_experiment(est, exp)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)
+metrics
 
 # delete cluster
 delete_aml_compute(compute_target)
