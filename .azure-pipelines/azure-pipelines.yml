@@ -4,9 +4,9 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-16.04'
-  
-container: himanshuaml/aml-r:latest
-    
+
+container: ninhu/r-base:latest
+
 variables:
 - name: TEST_LOCATION
   value: eastus2
@@ -27,16 +27,17 @@ steps:
     inputs:
       azureSubscription: 'Project Vienna Build Tests (4faaaf21-663f-4391-96fd-47197c630979)'
       scriptLocation: inlineScript
-      inlineScript: | 
-        python -c "from azureml.core import Workspace; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
-        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE); 
-        .libPaths(Sys.getenv("R_LIBS_USER"));
-        package_location <- devtools::build();
-        Sys.setenv("PACKAGE_LOCATION" = package_location)
-        options(testthat.output_file = "TEST-ALL.xml");
-        testthat::test_dir("tests/testthat", reporter = "junit")'
+      inlineScript: |
+        python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              install.packages("testthat")
+              package_location <- devtools::build();
+              Sys.setenv("PACKAGE_LOCATION" = package_location)
+              options(testthat.output_file = "TEST-ALL.xml");
+              testthat::test_dir("tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true
-    displayName: 'Run a multi-line script'
+    displayName: 'Build and Test R SDK'
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
