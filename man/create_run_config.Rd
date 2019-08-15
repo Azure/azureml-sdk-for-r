@@ -19,4 +19,3 @@ runconfig object
 \description{
 Create run configuration to run a R script
 }
-

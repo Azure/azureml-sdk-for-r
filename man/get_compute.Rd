@@ -14,4 +14,3 @@ get_compute(workspace, cluster_name)
 \description{
 Get compute. Returns NULL if compute is not found on workspace.
 }
-

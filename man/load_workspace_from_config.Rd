@@ -13,4 +13,3 @@ The parameter defaults to starting the search in the current directory.}
 \description{
 Load workspace from config
 }
-

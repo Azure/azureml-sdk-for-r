@@ -4,8 +4,9 @@
 \alias{create_script_run_config}
 \title{Create script runconfig}
 \usage{
-create_script_run_config(source_directory, script = NULL, arguments = NULL,
-  target = NULL, data_references = NULL, base_image = NULL)
+create_script_run_config(source_directory, script = NULL,
+  arguments = NULL, target = NULL, data_references = NULL,
+  base_image = NULL)
 }
 \arguments{
 \item{source_directory}{source directory containing the script}
@@ -26,4 +27,3 @@ script runconfig object
 \description{
 Create script runconfig
 }
-

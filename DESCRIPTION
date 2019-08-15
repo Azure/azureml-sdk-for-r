@@ -6,7 +6,7 @@ Author: Microsoft
 Description: Provides an R sdk to azureml.
 Encoding: UTF-8
 License: What license is it under?
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 Imports:
     reticulate (>= 1.12),
     R6 (>= 2.4.0)

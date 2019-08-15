@@ -17,4 +17,3 @@ If NULL the method will list all the workspaces within the specified subscriptio
 List all workspaces that the user has access to in the specified subscription_id
 parameter.The list of workspaces can be filtered based on the resource group.
 }
-

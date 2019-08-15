@@ -12,4 +12,3 @@ set_datastore_to_download(ds)
 \description{
 Set datastore to download mode
 }
-

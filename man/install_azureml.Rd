@@ -12,4 +12,3 @@ install_azureml(version = NULL, environment_name = "r-azureml")
 \description{
 Install azureml
 }
-

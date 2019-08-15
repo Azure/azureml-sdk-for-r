@@ -14,4 +14,3 @@ wait_for_compute_completion(cluster, show_output = TRUE)
 \description{
 Wait for cluster's instantiation
 }
-

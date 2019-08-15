@@ -21,4 +21,3 @@ workspace object
 \description{
 Get an existing workspace
 }
-
