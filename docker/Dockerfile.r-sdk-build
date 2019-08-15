@@ -1,5 +1,9 @@
 FROM ubuntu:16.04
 
+USER root:root
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+
 # Miniconda
 ENV MINICONDA_VERSION 4.5.11
 ENV PATH /opt/miniconda/bin:$PATH
