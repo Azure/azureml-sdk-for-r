@@ -7,7 +7,7 @@
 create_launch_script <- function(source_directory, entry_script, cran_packages = NULL, github_packages = NULL, custom_url_packages = NULL)
 {
   launch_file_name <- "launch_R_script.R"
-  launch_file_conn <- file(launch_file_name, open = "w")
+  launch_file_conn <- file(file.path(source_directory, launch_file_name), open = "w")
   
   if (!is.null(cran_packages))
   {
