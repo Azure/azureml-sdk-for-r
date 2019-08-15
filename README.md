@@ -48,9 +48,36 @@ Main capabilities of the SDK include:
    > get_current_run()
    <azureml.core.run._OfflineRun>
    ```
+## Usage
+Documentation is still a work in progress, but Azure Machine Learning SDK for R closely follows the
+Azure Machine Learning SDK for Python interface where possible ([Python docs](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro?view=azure-ml-py)). Here's a guide to the general syntax and data structure differences between the two:
+
+1. Properties are the same as in Python, and are accessed using the dollar sign
+   ($) syntax:
+
+    ```R
+    ws <- load_workspace_from_config(".")
+    ws$name # returns name of loaded workspace
+    ```
+
+1. Class methods are made global, and take the class object as the first property:
+
+    ```R
+    Workspace.list(subscription_id) # Python
+    list_workspaces(subscription_id) # R equivalent
+    subscription_id %>% list_workspaces() # R equivalent via pipe
+    ```
+
+1. R matrices are automatically converted to and from NumPy array's with float32 dtype.
+1. Python enums are accessed via function argument, e.g.:
+
+    ```R
+    UnitType.Error # Python
+    UnitType("Error") # R equivalent
+    ```
 
 ### Troubleshooting
-- In step 2, if the following error occurs:
+- In step 2 of the installation, if the following error occurs:
    ```python
     Error: 'setInternet2' is defunct.
     ```
@@ -59,7 +86,7 @@ Main capabilities of the SDK include:
    ```
    devtools::install_github("r-lib/devtools")
    ```
-- In step 3, if you get ssl errors on windows, that is due to an
+- In step 3 of the installation, if you get ssl errors on windows, that is due to an
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
 - If the following error occurs when submitting an experiment using RStudio:
