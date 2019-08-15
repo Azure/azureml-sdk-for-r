@@ -4,9 +4,12 @@
 #' @param base_image image to use
 #' @return runconfig object
 #' @export
-create_run_config <- function(
-  target, data_references = NULL, base_image = "himanshuaml/aml-r")
+create_run_config <- function(target, data_references = NULL, base_image = NULL)
 {
+  # TODO: this will be replaced to official one soon...
+  if (is.null(base_image))
+    base_image <- "ninhu/r-base"
+
   runconfig <- azureml$core$runconfig$RunConfiguration(framework="R")
   runconfig$target <- target
   runconfig$environment$docker$enabled <- TRUE
@@ -30,14 +33,14 @@ create_run_config <- function(
 #' @param arguments arguments to script
 #' @param target compute target
 #' @param data_references list of data references
-#' @param cpu_image image to use
+#' @param base_image image to use
 #' @return script runconfig object
 #' @export
 create_script_run_config <- function(source_directory, script = NULL, arguments = NULL, target = NULL,
-  data_references = NULL, cpu_image = "himanshuaml/aml-r")
+  data_references = NULL, base_image = NULL)
 {
   run_config <- create_run_config(target,
                 data_references = data_references,
-                base_image = cpu_image)
+                base_image = base_image)
   azureml$core$script_run_config$ScriptRunConfig(source_directory, script, arguments, run_config)
 }
