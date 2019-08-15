@@ -7,7 +7,7 @@ test_that("create amlcompute",
     vm_size <- "STANDARD_D2_V2"
     cluster_name <- "rpackagetestclus"
     compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name, vm_size = vm_size, max_nodes = 1)
-    wait_for_compute_completion(compute_target)
+    wait_for_compute(compute_target)
     expect_equal(compute_target$name, cluster_name)
 
     compute_target <- get_compute(ws, cluster_name = cluster_name)

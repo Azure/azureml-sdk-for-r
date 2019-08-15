@@ -24,5 +24,5 @@ if (is.null(existing_compute))
   vm_size <- "STANDARD_D2_V2"
   existing_compute <- create_aml_compute(workspace = existing_ws, cluster_name = cluster_name, vm_size = vm_size,
                   min_nodes = 0, max_nodes = 1)
-  wait_for_compute_completion(existing_compute)
+  wait_for_compute(existing_compute)
 }
