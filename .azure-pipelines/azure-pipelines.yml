@@ -5,7 +5,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-16.04'
 
-container: ninhu/r-base:latest
+container: ninhu/r-sdk-build:latest
 
 variables:
 - name: TEST_LOCATION
@@ -31,7 +31,6 @@ steps:
         python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
               .libPaths(Sys.getenv("R_LIBS_USER"));
-              install.packages("testthat", repos = "http://cran.us.r-project.org");
               package_location <- devtools::build();
               Sys.setenv("PACKAGE_LOCATION" = package_location);
               options(testthat.output_file = "TEST-ALL.xml");

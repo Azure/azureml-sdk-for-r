@@ -1,0 +1,18 @@
+FROM ubuntu:16.04
+
+# Miniconda
+ENV MINICONDA_VERSION 4.5.11
+ENV PATH /opt/miniconda/bin:$PATH
+RUN apt-get update && apt-get install -y bzip2 wget && \
+    wget -qO /tmp/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh && \
+    bash /tmp/miniconda.sh -bf -p /opt/miniconda && \
+    conda clean -ay && \
+    rm -rf /opt/miniconda/pkgs && \
+    rm /tmp/miniconda.sh && \
+    find / -type d -name __pycache__ | xargs rm -rf
+
+RUN conda install -c r -y r-base r-devtools r-testthat conda && conda clean -ay && \
+    pip install azureml-defaults
+
+# Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
