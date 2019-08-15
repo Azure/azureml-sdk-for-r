@@ -26,7 +26,7 @@ test_that("create, submit experiment, run in default amlcompute, get run metrics
     file.copy(script_name, tmp_dir_name)
 
     est <- create_estimator(source_directory = tmp_dir_name, entry_script = script_name,
-            target = existing_compute$name)
+            compute_target = existing_compute$name)
 
     run <- submit_experiment(est, exp)
     wait_for_run_completion(run, show_output = TRUE)
