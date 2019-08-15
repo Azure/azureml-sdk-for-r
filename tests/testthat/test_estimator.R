@@ -13,7 +13,7 @@ test_that("estimator",
 
     estimator <- create_estimator(tmp_dir_name, compute_target = existing_compute$name, entry_script = script_name,
                 script_params = list("data_folder" = get_data_reference_path_in_compute(data_reference)),
-                inputs = list(data_reference), cran_packages = list("ggplot")
+                inputs = list(data_reference), cran_packages = list("ggplot2")
     )
     experiment <- get_or_create_experiment(ws, "estimator_run")
     run <- submit_experiment(estimator, experiment)

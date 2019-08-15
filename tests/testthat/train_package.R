@@ -1,5 +1,5 @@
 # check if ggplot is already installed
-library("ggplot")
+library("ggplot2")
 
 library(azureml)
 
