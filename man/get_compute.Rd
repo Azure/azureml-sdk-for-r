@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute.R
 \name{get_compute}
 \alias{get_compute}
-\title{Get amlcompute. Returns NULL if amlcompute is not found on workspace.}
+\title{Get compute. Returns NULL if compute is not found on workspace.}
 \usage{
 get_compute(workspace, cluster_name)
 }
@@ -12,6 +12,6 @@ get_compute(workspace, cluster_name)
 \item{cluster_name}{name of the cluster}
 }
 \description{
-Get amlcompute. Returns NULL if amlcompute is not found on workspace.
+Get compute. Returns NULL if compute is not found on workspace.
 }
 
