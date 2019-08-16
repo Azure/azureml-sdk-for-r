@@ -28,7 +28,7 @@ est <- create_estimator(source_directory = ".", entry_script = "train.R",
                         inputs = list(data_reference))
 
 experiment_name <- "train-r-script-on-remote-amlcompute"
-exp <- get_or_create_experiment(ws, experiment_name)
+exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
 wait_for_run_completion(run, show_output = TRUE)

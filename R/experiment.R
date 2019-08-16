@@ -3,7 +3,7 @@
 #' @param name The experiment name.
 #' @return experiment object
 #' @export
-get_or_create_experiment <- function(workspace, name)
+experiment <- function(workspace, name)
 {
   azureml$core$Experiment(workspace, name)
 }

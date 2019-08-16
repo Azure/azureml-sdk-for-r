@@ -10,12 +10,11 @@ test_that("create, submit experiment, run in default amlcompute, get run metrics
     run <- get_current_run()
 
     # create experiment
-    exp <- get_or_create_experiment(ws, experiment_name)
-
+    exp <- experiment(ws, experiment_name)
     expect_equal(exp$name, experiment_name)
 
     # get existing experiment
-    exp <- get_or_create_experiment(ws, experiment_name)
+    exp <- experiment(ws, experiment_name)
     expect_equal(exp$name, experiment_name)
 
     # start a remote job and get the run, wait for it to finish

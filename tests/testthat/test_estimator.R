@@ -15,7 +15,7 @@ test_that("estimator",
                 script_params = list("data_folder" = get_data_reference_path_in_compute(data_reference)),
                 inputs = list(data_reference)
     )
-    experiment <- get_or_create_experiment(ws, "estimator_run")
+    experiment <- experiment(ws, "estimator_run")
     run <- submit_experiment(estimator, experiment)
     wait_for_run_completion(run, show_output = TRUE)
     metrics <- get_run_metrics(run)
