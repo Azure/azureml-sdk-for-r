@@ -1,6 +1,4 @@
 
-
-
 # Azure Machine Learning SDK for R
 
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
@@ -59,7 +57,7 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 	```R
 	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
 	```
-	Note: If you haven't already set up a resource group for this workspace, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
+	Note: If you haven't already set up a resource group, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
 
 2. If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:
 	```R
