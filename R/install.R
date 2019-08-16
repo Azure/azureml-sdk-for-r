@@ -15,6 +15,7 @@ create_conda_env <- function(environment_name)
 
 #' Install azureml
 #' @param version pip version
+#' @param environment_name name of environment to create
 #' @export
 install_azureml <- function(version = NULL, environment_name = "r-azureml")
 {

@@ -8,6 +8,8 @@ install_azureml(version = NULL, environment_name = "r-azureml")
 }
 \arguments{
 \item{version}{pip version}
+
+\item{environment_name}{name of environment to create}
 }
 \description{
 Install azureml

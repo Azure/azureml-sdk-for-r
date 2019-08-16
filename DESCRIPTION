@@ -3,9 +3,10 @@ Type: Package
 Title: R interface to AzureML sdk
 Version: 1.0
 Author: Microsoft
+Maintainer: AzureML SDK Team <trainsdkdevs@microsoft.com>
 Description: Provides an R sdk to azureml.
 Encoding: UTF-8
-License: What license is it under?
+License: MIT
 RoxygenNote: 6.1.1
 Imports: reticulate (>= 1.12), R6 (>= 2.4.0)
 Suggests:
