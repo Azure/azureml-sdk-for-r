@@ -1,23 +1,3 @@
-#' Attach existing dsvm
-#' @param workspace workspace object
-#' @param target_name name of the dsvm
-#' @export
-attach_existing_dsvm <- function(workspace, target_name)
-{
-  azureml$core$compute$RemoteCompute(workspace = workspace, name = target_name)
-  invisible(NULL)
-}
-
-#' Attach existing compute target
-#' @param workspace workspace object
-#' @param target_name name of the amlcompute
-#' @export
-attach_existing_compute_target <- function(workspace, target_name)
-{
-  azureml$core$compute$ComputeTarget(workspace = workspace, name = target_name)
-  invisible(NULL)
-}
-
 #' Create amlcompute
 #' @param workspace workspace object
 #' @param cluster_name cluster name
@@ -51,11 +31,11 @@ create_aml_compute <- function(workspace, cluster_name, vm_size, vm_priority = "
   azureml$core$compute$ComputeTarget$create(workspace, cluster_name, compute_config)
 }
 
-#' Get amlcompute. Returns NULL if amlcompute is not found on workspace.
+#' Get compute. Returns NULL if compute is not found on workspace.
 #' @param workspace workspace that has the cluster
 #' @param cluster_name name of the cluster
 #' @export
-get_aml_compute <- function(workspace, cluster_name)
+get_compute <- function(workspace, cluster_name)
 {
   tryCatch(
     {
@@ -78,7 +58,7 @@ get_aml_compute <- function(workspace, cluster_name)
 #' @param cluster cluster object
 #' @param show_output show output on console
 #' @export
-wait_for_aml_compute <- function(cluster, show_output = TRUE)
+wait_for_compute <- function(cluster, show_output = TRUE)
 {
   cluster$wait_for_completion(show_output)
 }

@@ -3,7 +3,6 @@
 #' @param data_references list of data references
 #' @param base_image image to use
 #' @return runconfig object
-#' @export
 create_run_config <- function(target, data_references = NULL, base_image = NULL)
 {
   runconfig <- azureml$core$runconfig$RunConfiguration(framework="R")
@@ -37,7 +36,6 @@ create_run_config <- function(target, data_references = NULL, base_image = NULL)
 #' @param data_references list of data references
 #' @param base_image image to use
 #' @return script runconfig object
-#' @export
 create_script_run_config <- function(source_directory, script = NULL, arguments = NULL, target = NULL,
   data_references = NULL, base_image = NULL)
 {

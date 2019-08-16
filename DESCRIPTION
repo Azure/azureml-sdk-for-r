@@ -8,6 +8,8 @@ Description: Provides an R sdk to azureml.
 Encoding: UTF-8
 License: MIT
 RoxygenNote: 6.1.1
-Imports: reticulate (>= 1.12), R6 (>= 2.4.0)
+Imports:
+    reticulate (>= 1.12),
+    R6 (>= 2.4.0)
 Suggests:
-	testthat
+    testthat
