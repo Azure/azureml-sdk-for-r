@@ -27,6 +27,7 @@ Main capabilities of the SDK include:
 [HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :arrows_counterclockwise: |
 
 ## Installing `azureml` R package
+
 1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose python 3.5 or later.
 
 2. Install azureml R package in Rstudio/R:
@@ -69,7 +70,8 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 	```
 Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our [samples](samples/) to learn how!
 
-### Troubleshooting
+## Troubleshooting
+
 - In step 2 of the installation, if the following error occurs:
    ```python
     Error: 'setInternet2' is defunct.
