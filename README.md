@@ -1,3 +1,4 @@
+
 # Azure Machine Learning SDK for R
 
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
@@ -49,11 +50,9 @@ Main capabilities of the SDK include:
    <azureml.core.run._OfflineRun>
    ```
 ## Usage
-Documentation is still a work in progress, but Azure Machine Learning SDK for R closely follows the
-Azure Machine Learning SDK for Python interface where possible ([Python docs](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro?view=azure-ml-py)). Here's a guide to the general syntax and data structure differences between the two:
+Complete documentation for Azure Machine Learning SDK for R is still a work in progress, but the package is designed to reflect the [Python SDK interface as best as possible](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro?view=azure-ml-py). Here's a guide to the general syntax and data structure differences between the two packages:
 
-1. Properties are the same as in Python, and are accessed using the dollar sign
-   ($) syntax:
+1. Properties are the same as in Python, and are accessed using the dollar sign syntax:
 
     ```R
     ws <- load_workspace_from_config(".")
@@ -69,11 +68,11 @@ Azure Machine Learning SDK for Python interface where possible ([Python docs](ht
     ```
 
 1. R matrices are automatically converted to and from NumPy array's with float32 dtype.
-1. Python enums are accessed via function argument, e.g.:
+1. Python enums are accessed via function argument:
 
     ```R
-    UnitType.Error # Python
-    UnitType("Error") # R equivalent
+    primary_metric_goal = PrimaryMetricGoal.MAXIMIZE # Python
+    primary_metric_goal <- PrimaryMetricGoal("MAXIMIZE") # R equivalent
     ```
 
 ### Troubleshooting
