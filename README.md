@@ -1,5 +1,6 @@
 
 
+
 # Azure Machine Learning SDK for R
 
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
@@ -50,31 +51,25 @@ Main capabilities of the SDK include:
    > get_current_run()
    <azureml.core.run._OfflineRun>
    ```
-## Usage
-Complete documentation of Azure Machine Learning SDK for R is still a work in progress, but the package is designed to reflect the [Python SDK interface](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/intro?view=azure-ml-py) as best as possible. Here's a guide to the general syntax and data structure differences between the two packages:
+## Getting Started
 
-1. Properties are the same as in Python and are accessed using the dollar sign syntax:
+To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.
 
-    ```R
-    ws <- load_workspace_from_config(".")
-    ws$name # returns name of loaded workspace
-    ```
+1. If you don't already have a workspace created, you can create one by doing:
+	```R
+	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
+	```
+	Note: If you haven't already set up a resource group for this workspace, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
 
-1. Class methods are made global and take the class object as the first property:
-
-    ```R
-    Workspace.list(subscription_id) # Python
-    list_workspaces(subscription_id) # R equivalent
-    subscription_id %>% list_workspaces() # R equivalent via pipe
-    ```
-
-1. R matrices are automatically converted to and from NumPy array's with float32 dtype.
-1. Python `enums` are accessed via function argument:
-
-    ```R
-    primary_metric_goal = PrimaryMetricGoal.MAXIMIZE # Python
-    primary_metric_goal <- PrimaryMetricGoal("MAXIMIZE") # R equivalent
-    ```
+2. If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:
+	```R
+	existing_ws <- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)
+	```
+	Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:
+	```R
+	loaded_ws <- load_workspace_from_config("insert-path-to-config-file")
+	```
+Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our [samples](samples/) to learn how!
 
 ### Troubleshooting
 - In step 2 of the installation, if the following error occurs:
