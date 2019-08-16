@@ -21,7 +21,7 @@ create_launch_script <- function(source_directory, entry_script, cran_packages =
   {
     for (package in github_packages)
     {
-      writeLines(sprintf("install_github(\"%s\")\n", package), launch_file_conn)
+      writeLines(sprintf("devtools::install_github(\"%s\")\n", package), launch_file_conn)
     }
   }
   
@@ -29,7 +29,7 @@ create_launch_script <- function(source_directory, entry_script, cran_packages =
   {
     for (package in custom_url_packages)
     {
-      writeLines(sprintf("install.packages(\"%s\", repos=NULL)\n", package), launch_file_conn)
+      writeLines(sprintf("install.packages(\"%s\", repos = NULL)\n", package), launch_file_conn)
     }
   }
   
