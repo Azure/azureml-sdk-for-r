@@ -6,15 +6,17 @@
 #' @export
 create_run_config <- function(target, data_references = NULL, base_image = NULL)
 {
-  # TODO: this will be replaced to official one soon...
-  if (is.null(base_image))
-    base_image <- "ninhu/r-base"
-
   runconfig <- azureml$core$runconfig$RunConfiguration(framework="R")
   runconfig$target <- target
   runconfig$environment$docker$enabled <- TRUE
   runconfig$environment$docker$base_image <- base_image
   runconfig$environment$python$user_managed_dependencies <- TRUE
+
+  if (is.null(base_image))
+  {
+      runconfig$environment$docker$base_image <- "r-base:cpu"
+      runconfig$environment$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
+  }
 
   data_references_list <- reticulate::py_dict(keys = NULL, values = NULL)
   if (!is.null(data_references))
