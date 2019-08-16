@@ -1,9 +1,12 @@
 
+
 # Azure Machine Learning SDK for R
 
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
 
-Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). You can interact with the service in any R environment.
+Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  Azure Machine Learning service. 
+
+Azure Machine Learning SDK for R uses the reticulate package to bind to [Azure Machine Learning's Python SDK](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.
 
 Main capabilities of the SDK include:
 
@@ -94,7 +97,4 @@ Once you've accessed your workspace, you can begin running and tracking your own
   In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
   the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
   session. For this reason, best practice is to isolate project files into their own directory.
-
-
-<p align="center"><a href="https://github.com/Azure/AzureR"><img src="https://github.com/Azure/AzureR/raw/master/images/logo2.png" width=800 /></a></p>
 
