@@ -23,12 +23,7 @@ create_estimator <- function(source_directory, compute_target = NULL, vm_size = 
                              github_packages = NULL, custom_url_packages = NULL,
                              custom_docker_image = NULL, inputs = NULL)
 { 
-  # TODO: this will be replaced to official one soon...
-  if (is.null(custom_docker_image))
-    custom_docker_image <- "ninhu/r-base"
-
   launch_script <- create_launch_script(source_directory, entry_script, cran_packages, github_packages, custom_url_packages)
-
   estimator <- azureml$train$estimator$Estimator(source_directory, compute_target = compute_target, vm_size = vm_size,
                                                  vm_priority = vm_priority, entry_script = launch_script, script_params = script_params, use_docker = use_docker,
                                                  custom_docker_image = custom_docker_image, inputs = inputs)
@@ -36,7 +31,15 @@ create_estimator <- function(source_directory, compute_target = NULL, vm_size = 
   run_config <- estimator$run_config
   run_config$framework <- "R"
   run_config$environment$python$user_managed_dependencies <- TRUE
+  
+  if (is.null(custom_docker_image))
+  {
+    run_config$environment$docker$base_image <- "r-base:cpu"
+    run_config$environment$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
+  }
+  
   invisible(estimator)
+
 }
 
 #' Creates a R launch script which contains all the packages to be installed before running entry_script
@@ -72,4 +75,3 @@ create_launch_script <- function(source_directory, entry_script, cran_packages =
   close(launch_file_conn)
   invisible(launch_file_name)
 }
-
