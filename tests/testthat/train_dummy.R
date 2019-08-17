@@ -1,5 +1,6 @@
-# check if ggplot is already installed
+# check if ggplot2 and dplyr are already installed
 library("ggplot2")
+library("dplyr")
 
 library(azureml)
 
