@@ -6,7 +6,8 @@
 \usage{
 create_estimator(source_directory, compute_target = NULL,
   vm_size = NULL, vm_priority = NULL, entry_script = NULL,
-  script_params = NULL, use_docker = TRUE,
+  script_params = NULL, use_docker = TRUE, cran_packages = NULL,
+  github_packages = NULL, custom_url_packages = NULL,
   custom_docker_image = NULL, inputs = NULL)
 }
 \arguments{
@@ -28,6 +29,12 @@ the vm_size param is specified in the input.}
 \item{script_params}{A named list containing parameters to the entry_script.}
 
 \item{use_docker}{A bool value indicating if the environment to run the experiment should be docker-based.}
+
+\item{cran_packages}{character vector of cran packages to be installed.}
+
+\item{github_packages}{character vector of github packages to be installed.}
+
+\item{custom_url_packages}{character vector of packages to be installed from local, directory or custom url.}
 
 \item{custom_docker_image}{The name of the docker image from which the image to use for training will be built. If
 not set, a default CPU based image will be used as the base image.}
