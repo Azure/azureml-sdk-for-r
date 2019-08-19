@@ -5,11 +5,10 @@ ws <- load_workspace_from_config(".")
 ds <- get_default_datastore(ws)
 
 target_path <- "irisdata"
-upload_files_to_azure_datastore(ds, list("./iris.csv"),
-                                target_path = target_path, overwrite = TRUE)
+upload_files_to_datastore(ds, list("./iris.csv"),
+                          target_path = target_path, overwrite = TRUE)
 
-data_reference <- create_data_reference(ds, path_on_datastore = target_path)
-path <- get_data_reference_path_in_compute(data_reference)
+data_reference <- ds$path(path = target_path)
 
 # create aml compute
 cluster_name <- "rcluster"
@@ -22,10 +21,10 @@ if (is.null(compute_target))
 }
 
 # define estimator
-est <- create_estimator(source_directory = ".", entry_script = "train.R",
-                        script_params = list("--data_folder" = path),
-                        compute_target = compute_target,
-                        inputs = list(data_reference))
+est <- create_estimator(source_directory = ".", 
+                        entry_script = "train.R",
+                        script_params = list("--data_folder" = py_str(data_reference)),
+                        compute_target = compute_target)
 
 experiment_name <- "train-r-script-on-remote-amlcompute"
 exp <- experiment(ws, experiment_name)
