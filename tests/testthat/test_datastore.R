@@ -21,7 +21,7 @@ test_that("datastore",
     tmp_dir_name <- "tmp_dir"
     dir.create(tmp_dir_name)
     file.copy(file_name, tmp_dir_name)
-    upload_directory_to_datastore(ds, src_dir = tmp_dir_name)
+    upload_directory_to_datastore(ds, src_dir = tmp_dir_name, target_path = tmp_dir_name)
     
     # download data from datastore
     target_dir <- "./downloaded_dir"
