@@ -17,8 +17,8 @@ Main capabilities of the SDK include:
 
 :heavy_check_mark: feature available :arrows_counterclockwise: in progress
 
-| Features                                                                                                         | Description                | Status             |
-|------------------------------------------------------------------------------------------------------------------|---------------------|---------------------|
+| Features | Description | Status |
+|----------|-------------|--------|
 [Workspace](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
 [Data Plane Resources](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
 [Compute](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
@@ -53,6 +53,7 @@ Main capabilities of the SDK include:
    > get_current_run()
    <azureml.core.run._OfflineRun>
    ```
+   
 ## Getting Started
 
 To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.
