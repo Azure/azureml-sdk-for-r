@@ -7,5 +7,5 @@ RUN conda install -c r -y r-essentials r-devtools && conda clean -ay
 # Get personal access token from https://github.com/settings/tokens
 ARG GITHUB_AUTH_TOKEN
 ENV TAR="/bin/tar"
-RUN pip install --no-cache-dir azureml-defaults && \
+RUN pip install --no-cache-dir azureml-defaults rpy2 && \
     R -e "devtools::install_github(repo = 'https://github.com/Azure/azureml-sdk-for-r', auth_token = '${GITHUB_AUTH_TOKEN}')"
