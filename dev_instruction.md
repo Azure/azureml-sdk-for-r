@@ -18,9 +18,7 @@
    # Build the R package
    package_location <- devtools::build()
    ```
-3. A file at `package_location` is created that is the `R` package.
-We can now either upload it to a blob store, publish it to CRAN or install
-directly from the file.
+3. The R package file is created at `package_location`. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.
 4. To install the package from the `.tar.gz` file in the filesystem, do:
    ```
    install.packages(package_location, repos = NULL)
