@@ -8,8 +8,6 @@ target_path <- "irisdata"
 upload_files_to_datastore(ds, list("./iris.csv"),
                           target_path = target_path, overwrite = TRUE)
 
-data_reference <- ds$path(path = target_path)
-
 # create aml compute
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
@@ -23,10 +21,10 @@ if (is.null(compute_target))
 # define estimator
 est <- create_estimator(source_directory = ".", 
                         entry_script = "train.R",
-                        script_params = list("--data_folder" = py_str(data_reference)),
+                        script_params = list("--data_folder" = ds$path(path = target_path)),
                         compute_target = compute_target)
 
-experiment_name <- "train-r-script-on-remote-amlcompute"
+experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)

@@ -13,7 +13,7 @@
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
 upload_files_to_datastore <- function(ds, files, relative_root = NULL, target_path = NULL, 
-                                overwrite = FALSE, show_progress = TRUE)
+                                      overwrite = FALSE, show_progress = TRUE)
 {
   ds$upload_files(files, relative_root, target_path, overwrite, show_progress)
   invisible(NULL)
@@ -26,8 +26,8 @@ upload_files_to_datastore <- function(ds, files, relative_root = NULL, target_pa
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_directory_to_datastore <- function(ds, src_dir, target_path = NULL, 
-                                      overwrite = FALSE, show_progress = TRUE)
+upload_to_datastore <- function(ds, src_dir, target_path = NULL, 
+                                overwrite = FALSE, show_progress = TRUE)
 {
   ds$upload(src_dir, target_path, overwrite, show_progress)
   invisible(NULL)

@@ -9,12 +9,11 @@ test_that("estimator",
     dir.create(tmp_dir_name)
     file.copy(script_name, tmp_dir_name)
 
-    ds <-get_default_datastore(ws)
-    data_reference <- ds$as_mount()
+    ds <- get_default_datastore(ws)
 
     estimator <- create_estimator(tmp_dir_name, compute_target = existing_compute$name, 
                                   entry_script = script_name, 
-                                  script_params = list("data_folder" = py_str(data_reference)),
+                                  script_params = list("data_folder" = ds$as_mount()),
                                   cran_packages = c("ggplot2", "dplyr")
     )
     experiment <- experiment(ws, "estimator_run")
