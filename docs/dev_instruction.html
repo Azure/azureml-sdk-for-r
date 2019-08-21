@@ -119,12 +119,12 @@ roxygen2::roxygenise()
 pkgdown::build_site()
 
 # Build the R package
-devtools::build()</code></pre>
+package_location &lt;- devtools::build()</code></pre>
 </li>
-<li><p>A file called <code>azureml_1.0.tar.gz</code> is created that is the <code>R</code> package. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</p></li>
+<li><p>The R package file is created at <code>package_location</code>. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</p></li>
 <li>
 <p>To install the package from the <code>.tar.gz</code> file in the filesystem, do:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages('azureml_0.1.0.tar.gz', repos = NULL)</a></code></pre>
+<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages(package_location, repos = NULL)</a></code></pre>
 <p>To install from a url:</p>
 <pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages(package_url, repos = NULL)</a></code></pre>
 <p>If you already have the package loaded in your R session, you may want to remove it from the session to use the new one. This can be done by the following:</p>
