@@ -1,4 +1,4 @@
-# python wrapper. The code should auto-generated based on InferenceConfig
+# python wrapper. The code can be auto-generated based on InferenceConfig
 import rpy2.robjects as robjects
 import os
 import json
