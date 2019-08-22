@@ -1,0 +1,24 @@
+trigger:
+- master
+- releases/*
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container: ninhu/r-sdk-build:latest
+
+steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              package_location <- devtools::build();
+              Sys.setenv("PACKAGE_LOCATION" = package_location);
+              install.packages(rcmdcheck);
+              library(rcmdcheck);
+              check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
+              stopifnot(length(check_results$errors) == 0);
+              stopifnot(length(check_results$warnings) == 0)'
+    displayName: 'Test Code Quality'
