@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set datastore to mount mode — set_datastore_to_mount • azureml</title>
+<title>Upload the data from the local file system to the Azure storage this datastore points to. — upload_files_to_datastore • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Set datastore to mount mode — set_datastore_to_mount" />
+<meta property="og:title" content="Upload the data from the local file system to the Azure storage this datastore points to. — upload_files_to_datastore" />
 
-<meta property="og:description" content="Set datastore to mount mode" />
+<meta property="og:description" content="Upload the data from the local file system to the Azure storage this datastore points to." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,18 +99,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set datastore to mount mode</h1>
+    <h1>Upload the data from the local file system to the Azure storage this datastore points to.</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
-    <div class="hidden name"><code>set_datastore_to_mount.Rd</code></div>
+    <div class="hidden name"><code>upload_files_to_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Set datastore to mount mode</p>
+    <p>Upload the data from the local file system to the Azure storage this datastore points to.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>set_datastore_to_mount</span>(<span class='no'>ds</span>)</pre>
+    <pre class="usage"><span class='fu'>upload_files_to_datastore</span>(<span class='no'>ds</span>, <span class='no'>files</span>, <span class='kw'>relative_root</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -118,6 +119,32 @@
     <tr>
       <th>ds</th>
       <td><p>datastore object</p></td>
+    </tr>
+    <tr>
+      <th>files</th>
+      <td><p>list of absolute path to files to upload</p></td>
+    </tr>
+    <tr>
+      <th>relative_root</th>
+      <td><p>the base path from which is used to determine the path
+of the files in the file share. For example, if we upload /path/to/file.txt, and we define
+base path to be /path, when file.txt is uploaded to the file share, it will have
+the path of /to/file.txt. If target_path is also given, then it will be used as
+the prefix for the derived path from above. The base path must be a common path of
+all of the files, otherwise an exception will be thrown, defaults to None, which will find
+the common path.</p></td>
+    </tr>
+    <tr>
+      <th>target_path</th>
+      <td><p>location in the file share to upload the data to, defaults to None, the root</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>overwrites, defaults to FALSE</p></td>
+    </tr>
+    <tr>
+      <th>show_progress</th>
+      <td><p>progress of upload in the console, defaults to TRUE</p></td>
     </tr>
     </table>
     

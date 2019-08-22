@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -78,7 +78,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/azure/azureml-sdk-for-r">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,12 +133,6 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="create_conda_env.html">create_conda_env()</a></code> </p>
         </td>
         <td><p>Create conda environment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_data_reference.html">create_data_reference()</a></code> </p>
-        </td>
-        <td><p>Makes a datastore available as a datareference for a run</p></td>
       </tr><tr>
         
         <td>
@@ -203,12 +202,6 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
-          <p><code><a href="get_data_reference_path_in_compute.html">get_data_reference_path_in_compute()</a></code> </p>
-        </td>
-        <td><p>Get data reference path on path_on_compute</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="get_default_datastore.html">get_default_datastore()</a></code> </p>
         </td>
         <td><p>Get default datastore associated with a workspace</p></td>
@@ -252,27 +245,21 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
-          <p><code><a href="set_datastore_to_download.html">set_datastore_to_download()</a></code> </p>
-        </td>
-        <td><p>Set datastore to download mode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_datastore_to_mount.html">set_datastore_to_mount()</a></code> </p>
-        </td>
-        <td><p>Set datastore to mount mode</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
         </td>
         <td><p>Submit experiment</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="upload_files_to_azure_datastore.html">upload_files_to_azure_datastore()</a></code> </p>
+          <p><code><a href="upload_files_to_datastore.html">upload_files_to_datastore()</a></code> </p>
         </td>
-        <td><p>Upload the data from the local file system to the file share this datastore points to.</p></td>
+        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="upload_to_datastore.html">upload_to_datastore()</a></code> </p>
+        </td>
+        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
       </tr><tr>
         
         <td>
@@ -306,7 +293,7 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML SDK Team.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
 </div>
 
 <div class="pkgdown">
