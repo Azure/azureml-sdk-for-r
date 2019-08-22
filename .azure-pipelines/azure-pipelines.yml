@@ -5,7 +5,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-16.04'
 
-container: himanshuaml/aml-r:latest
+container: ninhu/r-sdk-build:latest
 
 variables:
 - name: TEST_LOCATION
