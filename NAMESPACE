@@ -3,6 +3,7 @@
 export(azureml)
 export(create_aml_compute)
 export(create_estimator)
+export(create_hyperdrive_config)
 export(create_workspace)
 export(delete_aml_compute)
 export(delete_workspace)
