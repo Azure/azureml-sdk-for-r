@@ -77,7 +77,7 @@ Once you've accessed your workspace, you can begin running and tracking your own
 ## Troubleshooting
 
 - In step 2 of the installation, if the following error occurs:
-   ```python
+   ```R
     Error: 'setInternet2' is defunct.
     ```
     Then upgrade devtools to the latest version or
@@ -89,7 +89,7 @@ Once you've accessed your workspace, you can begin running and tracking your own
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
 - If the following error occurs when submitting an experiment using RStudio:
-   ```python
+   ```R
     Error in py_call_impl(callable, dots$args, dots$keywords) : 
      PermissionError: [Errno 13] Permission denied
    ```
