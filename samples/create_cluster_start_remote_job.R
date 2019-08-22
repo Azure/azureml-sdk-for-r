@@ -4,6 +4,7 @@ library("azureml")
 ws <- load_workspace_from_config(".")
 ds <- get_default_datastore(ws)
 
+# upload iris data to the datastore
 target_path <- "irisdata"
 upload_files_to_datastore(ds, list("./iris.csv"),
                           target_path = target_path, overwrite = TRUE)
@@ -21,7 +22,7 @@ if (is.null(compute_target))
 # define estimator
 est <- create_estimator(source_directory = ".", 
                         entry_script = "train.R",
-                        script_params = list("--data_folder" = ds$path(path = target_path)),
+                        script_params = list("--data_folder" = ds$path(target_path)),
                         compute_target = compute_target)
 
 experiment_name <- "train-r-script-on-amlcompute"
