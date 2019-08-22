@@ -1,8 +1,6 @@
 library(jsonlite)
 library(azureml)
 
-model <- NULL
-
 init <- function(model_path)
 {
     # get_model_path('model.rds') doesn't work in R session for some reason
