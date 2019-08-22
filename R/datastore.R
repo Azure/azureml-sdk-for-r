@@ -1,23 +1,4 @@
-#' Set datastore to download mode
-#' @param ds datastore object
-#' @export
-set_datastore_to_download <- function(ds)
-{
-  ds$as_download()
-  invisible(ds)
-}
-
-#' Set datastore to mount mode
-#' @param ds datastore object
-#' @export
-set_datastore_to_mount <- function(ds)
-{
-  ds$as_mount()
-  invisible(ds)
-}
-
-
-#' Upload the data from the local file system to the file share this datastore points to.
+#' Upload the data from the local file system to the Azure storage this datastore points to.
 #' @param ds datastore object
 #' @param files list of absolute path to files to upload
 #' @param relative_root the base path from which is used to determine the path
@@ -31,10 +12,24 @@ set_datastore_to_mount <- function(ds)
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_files_to_azure_datastore <- function(ds, files, relative_root = NULL, target_path = NULL, overwrite = FALSE,
-                                            show_progress = TRUE)
+upload_files_to_datastore <- function(ds, files, relative_root = NULL, target_path = NULL, 
+                                      overwrite = FALSE, show_progress = TRUE)
 {
   ds$upload_files(files, relative_root, target_path, overwrite, show_progress)
+  invisible(NULL)
+}
+
+#' Upload the data from the local file system to the Azure storage this datastore points to.
+#' @param ds datastore object
+#' @param src_dir the local directory to upload
+#' @param target_path location in the file share to upload the data to, defaults to None, the root
+#' @param overwrite overwrites, defaults to FALSE
+#' @param show_progress progress of upload in the console, defaults to TRUE
+#' @export
+upload_to_datastore <- function(ds, src_dir, target_path = NULL, 
+                                overwrite = FALSE, show_progress = TRUE)
+{
+  ds$upload(src_dir, target_path, overwrite, show_progress)
   invisible(NULL)
 }
 
@@ -46,7 +41,8 @@ upload_files_to_azure_datastore <- function(ds, files, relative_root = NULL, tar
 #' @param overwrite overwrite existing file, defaults to FALSE
 #' @param show_progress show progress of download in the console, defaults to TRUE
 #' @export
-download_from_datastore <- function(ds, target_path, prefix = NULL, overwrite = FALSE, show_progress = TRUE)
+download_from_datastore <- function(ds, target_path, prefix = NULL, overwrite = FALSE,
+                                    show_progress = TRUE)
 {
   ds$download(target_path, prefix = prefix, overwrite = overwrite, show_progress = show_progress)
   invisible(NULL)
