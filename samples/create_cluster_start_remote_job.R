@@ -4,12 +4,10 @@ library("azureml")
 ws <- load_workspace_from_config(".")
 ds <- get_default_datastore(ws)
 
+# upload iris data to the datastore
 target_path <- "irisdata"
-upload_files_to_azure_datastore(ds, list("./iris.csv"),
-                                target_path = target_path, overwrite = TRUE)
-
-data_reference <- create_data_reference(ds, path_on_datastore = target_path)
-path <- get_data_reference_path_in_compute(data_reference)
+upload_files_to_datastore(ds, list("./iris.csv"),
+                          target_path = target_path, overwrite = TRUE)
 
 # create aml compute
 cluster_name <- "rcluster"
@@ -25,11 +23,10 @@ if (is.null(compute_target))
 est <- create_estimator(source_directory = ".", entry_script = "train.R",
                         script_params = list("--data_folder" = path),
                         compute_target = compute_target,
-                        cran_packages = c("caret", "optparse", "e1071"),
-                        inputs = list(data_reference)
+                        cran_packages = c("caret", "optparse", "e1071")
                         )
 
-experiment_name <- "train-r-script-on-remote-amlcompute"
+experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
