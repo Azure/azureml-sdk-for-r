@@ -1,8 +1,12 @@
+
+
 # Azure Machine Learning SDK for R
 
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
 
-Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). You can interact with the service in any R environment.
+Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  Azure Machine Learning service. 
+
+Azure Machine Learning SDK for R uses the reticulate package to bind to [Azure Machine Learning's Python SDK](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.
 
 Main capabilities of the SDK include:
 
@@ -11,21 +15,22 @@ Main capabilities of the SDK include:
 
 ## Key Features and Roadmap
 
-:heavy_check_mark: feature available  :heavy_minus_sign: in progress  :heavy_multiplication_x: no support planned
+:heavy_check_mark: feature available :arrows_counterclockwise: in progress
 
-| Features                                                                                                         | Description                | Status             |
-|------------------------------------------------------------------------------------------------------------------|---------------------|---------------------|
-| [Workspace](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
-| [Data Plane Resources](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
-| [Compute](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
+| Features | Description | Status |
+|----------|-------------|--------|
+[Workspace](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
+[Data Plane Resources](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
+[Compute](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
 [Experiment](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#experiment) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
-[Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :heavy_minus_sign: |
 [Run](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#run) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
-[Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_minus_sign: |
-[Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_minus_sign: |
-[RunConfiguration and ScriptRunConfiguration](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | `RunConfiguration` configures an environment involving `Experiment` runs and compute. `ScriptRunConfiguration` does the same for `ScriptRun` objects. | :heavy_multiplication_x: |
+[Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :arrows_counterclockwise: |
+[Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :arrows_counterclockwise: |
+[Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
+[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :arrows_counterclockwise: |
 
 ## Installing `azureml` R package
+
 1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose python 3.5 or later.
 
 2. Install azureml R package in Rstudio/R:
@@ -48,9 +53,30 @@ Main capabilities of the SDK include:
    > get_current_run()
    <azureml.core.run._OfflineRun>
    ```
+   
+## Getting Started
 
-### Troubleshooting
-- In step 2, if the following error occurs:
+To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.
+
+1. If you don't already have a workspace created, you can create one by doing:
+	```R
+	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
+	```
+	Note: If you haven't already set up a resource group, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
+
+2. If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:
+	```R
+	existing_ws <- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)
+	```
+	Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:
+	```R
+	loaded_ws <- load_workspace_from_config("insert-path-to-config-file")
+	```
+Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our [samples](samples/) to learn how!
+
+## Troubleshooting
+
+- In step 2 of the installation, if the following error occurs:
    ```python
     Error: 'setInternet2' is defunct.
     ```
@@ -59,7 +85,7 @@ Main capabilities of the SDK include:
    ```
    devtools::install_github("r-lib/devtools")
    ```
-- In step 3, if you get ssl errors on windows, that is due to an
+- In step 3 of the installation, if you get ssl errors on windows, that is due to an
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
 - If the following error occurs when submitting an experiment using RStudio:
@@ -72,23 +98,4 @@ Main capabilities of the SDK include:
   In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
   the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
   session. For this reason, best practice is to isolate project files into their own directory.
-
-
-
-## Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-
-<p align="center"><a href="https://github.com/Azure/AzureR"><img src="https://github.com/Azure/AzureR/raw/master/images/logo2.png" width=800 /></a></p>
 

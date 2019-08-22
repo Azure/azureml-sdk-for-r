@@ -1,15 +1,24 @@
 Package: azureml
 Type: Package
-Title: R interface to AzureML sdk
-Version: 1.0
-Author: Microsoft
-Maintainer: AzureML SDK Team <trainsdkdevs@microsoft.com>
-Description: Provides an R sdk to azureml.
+Title: R interface to AzureML SDK
+Version: 0.1.0
+Authors@R: c(
+    person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
+    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut", "cre")),
+    person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("aut")),
+    person("Diondra", "Peck", email = "Diondra.Peck@microsoft.com", role = c("aut")),
+    person("Microsoft", role = c("cph", "fnd"))
+    )
+URL: https://github.com/azure/azureml-sdk-for-r
+BugReports: https://github.com/azure/azureml-sdk-for-r/issues
+Description: Provides an R interface to the AzureML Service.
 Encoding: UTF-8
 License: MIT
 RoxygenNote: 6.1.1
 Imports:
     reticulate (>= 1.12),
     R6 (>= 2.4.0)
-Suggests:
+Suggests: rmarkdown,
+    knitr,
     testthat
+VignetteBuilder: knitr
