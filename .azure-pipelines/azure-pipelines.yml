@@ -33,7 +33,7 @@ steps:
               .libPaths(Sys.getenv("R_LIBS_USER"));
               package_location <- devtools::build();
               Sys.setenv("PACKAGE_LOCATION" = package_location);
-              install.packages("rcmdcheck");
+              install.packages("rcmdcheck", repos = "http://cran.us.r-project.org");
               library("rcmdcheck");
               check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
               stopifnot(length(check_results$errors) == 0);
