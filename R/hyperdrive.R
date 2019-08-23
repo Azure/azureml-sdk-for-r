@@ -28,7 +28,7 @@ create_hyperdrive_config <- function(estimator, param_sampling,
 #' @param slack_amount absolute allowed distance from the best-performing run
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
-#' @return Early Termination Policy object
+#' @return EarlyTerminationPolicy object
 #' @export
 create_bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
                               evaluation_interval = 1, delay_evaluation = 0)
@@ -40,7 +40,7 @@ create_bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
 #' Create Median Stopping policy for HyperDrive runs
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
-#' @return Early Termination Policy object
+#' @return EarlyTerminationPolicy object
 #' @export
 create_median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0)
 {
@@ -51,7 +51,7 @@ create_median_stopping_policy <- function(evaluation_interval = 1, delay_evaluat
 #' @param truncation_percentage percentage of lowest performing runs to terminate at each interval
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
-#' @return Early Termination Policy object
+#' @return EarlyTerminationPolicy object
 #' @export
 create_truncation_selection_policy <- function(truncation_percentage,
                                             evaluation_interval = 1, delay_evaluation = 0)
@@ -59,4 +59,32 @@ create_truncation_selection_policy <- function(truncation_percentage,
   azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage,
                                                      evaluation_interval,
                                                      delay_evaluation)
+}
+
+#' Define Random Parameter sampling over hyperparameter search space
+#' @param parameter_space a named list containing each parameter and its distribution
+#' @param properties a named list of additional properties for the algorithm
+#' @return HyperParameterSampling object
+#' @export
+random_parameter_sampling <- function(parameter_space, properties = NULL)
+{
+  azureml$train$hyperdrive$RandomParameterSampling(parameter_space, properties)
+}
+
+#' Define Grid Parameter sampling over hyperparameter search space
+#' @param parameter_space a named list containing each parameter and its distribution
+#' @return HyperParameterSampling object
+#' @export
+random_parameter_sampling <- function(parameter_space)
+{
+  azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
+}
+
+#' Define Random Parameter sampling over hyperparameter search space
+#' @param parameter_space a named list containing each parameter and its distribution
+#' @return HyperParameterSampling object
+#' @export
+random_parameter_sampling <- function(parameter_space)
+{
+  azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
 }
