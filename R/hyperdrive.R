@@ -8,9 +8,10 @@
 #' @param max_concurrent_runs maximum number of runs to start concurrently
 #' @return HyperDrive config object
 #' @export
-create_hyperdrive_config <- function(estimator, param_sampling, policy,
+create_hyperdrive_config <- function(estimator, param_sampling,
                                      primary_metric_name, primary_metric_goal,
-                                     max_total_runs, max_concurrent_runs = NULL)
+                                     max_total_runs, max_concurrent_runs = NULL,
+                                     policy = NULL)
 {
   
   azureml$train$hyperdrive$HyperDriveConfig(estimator = estimator,
@@ -22,29 +23,37 @@ create_hyperdrive_config <- function(estimator, param_sampling, policy,
                                             max_concurrent_runs = max_concurrent_runs)
 }
 
-#' Get early termination policy for HyperDrive runs
-#' @param policy_type one of "truncation", "bandit", "median_stopping", "no_policy"
+#' Get Bandit policy for HyperDrive runs
+#' @param slack_factor ratio of the allowed distance from best-performing run
+#' @param slack_amount absolute allowed distance from the best-performing run
+#' @param evaluation_interval frequency for applying policy
+#' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return Early Termination Policy object
-get_termination_policy <- function(policy_type)
+get_bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
+                              evaluation_interval = 1, delay_evaluation = 0)
 {
-  policies <- c(azureml$train$hyperdrive$TruncationSelectionPolicy,
-               azureml$train$hyperdrive$BanditPolicy,
-               azureml$train$hyperdrive$MedianStoppingPolicy,
-               NULL)
-  names(policies) <- c("truncation", "bandit", "median_stopping", "no_policy")
-  
-  policies[policy_type]
+  azureml$train$hyperdrive$BanditPolicy(slack_factor, slack_amount,
+                                        evaluation_interval, delay_evaluation)
 }
 
-#' Get early termination policy for HyperDrive runs
-#' @param policy_type one of "random", "grid", "bayesian"
-#' @return Parameter sampling object
-get_param_sampling <- function(sampling_type) 
+#' Get Median Stopping policy for HyperDrive runs
+#' @param evaluation_interval frequency for applying policy
+#' @param delay_evaluation how many intervals to delay the first evaluation
+#' @return Early Termination Policy object
+get_median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0)
 {
-  samplings <- c(azureml$train$hyperdrive$RandomParameterSampling,
-                azureml$train$hyperdrive$GridParameterSampling,
-                azureml$train$hyperdrive$BayesianParameterSampling)
-  names(samplings) <- c("random", "grid", "bayesian")
-  
-  samplings[sampling_type]
+  azureml$train$hyperdrive$MedianStoppingPolicy(evaluation_interval, delay_evaluation)
+}
+
+#' Get Truncation Selection policy for HyperDrive runs
+#' @param truncation_percentage percentage of lowest performing runs to terminate at each interval
+#' @param evaluation_interval frequency for applying policy
+#' @param delay_evaluation how many intervals to delay the first evaluation
+#' @return Early Termination Policy object
+get_truncation_selection_policy <- function(truncation_percentage,
+                                            evaluation_interval = 1, delay_evaluation = 0)
+{
+  azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage,
+                                                     evaluation_interval,
+                                                     delay_evaluation)
 }
