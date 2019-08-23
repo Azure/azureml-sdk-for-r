@@ -29,6 +29,7 @@ create_hyperdrive_config <- function(estimator, param_sampling,
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return Early Termination Policy object
+#' @export
 get_bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
                               evaluation_interval = 1, delay_evaluation = 0)
 {
@@ -40,6 +41,7 @@ get_bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return Early Termination Policy object
+#' @export
 get_median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0)
 {
   azureml$train$hyperdrive$MedianStoppingPolicy(evaluation_interval, delay_evaluation)
@@ -50,6 +52,7 @@ get_median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation
 #' @param evaluation_interval frequency for applying policy
 #' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return Early Termination Policy object
+#' @export
 get_truncation_selection_policy <- function(truncation_percentage,
                                             evaluation_interval = 1, delay_evaluation = 0)
 {
