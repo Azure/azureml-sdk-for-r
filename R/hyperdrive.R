@@ -75,16 +75,16 @@ random_parameter_sampling <- function(parameter_space, properties = NULL)
 #' @param parameter_space a named list containing each parameter and its distribution
 #' @return HyperParameterSampling object
 #' @export
-random_parameter_sampling <- function(parameter_space)
+grid_parameter_sampling <- function(parameter_space)
 {
   azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
 }
 
-#' Define Random Parameter sampling over hyperparameter search space
+#' Define Bayesian Parameter sampling over hyperparameter search space
 #' @param parameter_space a named list containing each parameter and its distribution
 #' @return HyperParameterSampling object
 #' @export
-random_parameter_sampling <- function(parameter_space)
+bayesian_parameter_sampling <- function(parameter_space)
 {
   azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
 }
