@@ -1,4 +1,4 @@
-# run setup.R prior to running this script
+# run setup.R to setup workspace for the first time prior to running this script
 library("azureml")
 
 ws <- load_workspace_from_config(".")
@@ -21,7 +21,7 @@ if (is.null(compute_target))
 
 # define estimator
 est <- create_estimator(source_directory = ".", entry_script = "train.R",
-                        script_params = list("--data_folder" = path),
+                        script_params = list("--data_folder" = ds$path(target_path)),
                         compute_target = compute_target,
                         cran_packages = c("caret", "optparse", "e1071")
                         )
