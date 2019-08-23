@@ -1,7 +1,4 @@
 # This script loads a dataset of which the last column is supposed to be the class and logs the accuracy
-install.packages("caret", repos = "http://cran.us.r-project.org")
-install.packages("optparse", repos = "http://cran.us.r-project.org")
-install.packages("e1071", repos = "http://cran.us.r-project.org")
 
 library("azureml")
 library("caret")
