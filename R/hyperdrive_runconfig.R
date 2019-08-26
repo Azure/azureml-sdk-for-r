@@ -21,7 +21,7 @@ create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_nam
   azureml$train$hyperdrive$HyperDriveConfig(hyperparameter_sampling, primary_metric_name,
                                             primary_metric_goal, max_total_runs,
                                             max_concurrent_runs, max_duration_minutes,
-                                            policy, estimatorL,
+                                            policy, estimator,
                                             run_config, pipeline)
 }
 
@@ -42,7 +42,7 @@ primary_metric_goal <- function(goal)
 #' @return EarlyTerminationPolicy object
 #' @export
 bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
-                              evaluation_interval = 1, delay_evaluation = 0)
+                          evaluation_interval = 1, delay_evaluation = 0)
 {
   azureml$train$hyperdrive$BanditPolicy(slack_factor, slack_amount,
                                         evaluation_interval, delay_evaluation)
@@ -67,8 +67,7 @@ median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0
 truncation_selection_policy <- function(truncation_percentage,
                                         evaluation_interval = 1, delay_evaluation = 0)
 {
-  azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage,
-                                                     evaluation_interval,
+  azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage, evaluation_interval,
                                                      delay_evaluation)
 }
 
@@ -181,7 +180,7 @@ qnormal <- function(mu, sigma, q)
   azureml$train$hyperdrive$qnormal(mu, sigma, q)
 }
 
-#' Specify a normal distribution of the form according to exp(normal(mu, sigma))
+#' Specify a normal distribution of the form exp(normal(mu, sigma))
 #' @param mu mean of the normal distribution
 #' @param sigma standard deviation of the normal distribution
 #' @return the stochastic expression

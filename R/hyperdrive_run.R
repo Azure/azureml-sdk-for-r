@@ -30,7 +30,7 @@ get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
 #' @export
 get_children_hyperparameters <- function(hyperdrive_run)
 {
-  hyperdrive_run$get_hyperparameters(hyperdrive_run)
+  hyperdrive_run$get_hyperparameters()
 }
 
 #' Return metrics from all child runs
