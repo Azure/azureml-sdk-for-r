@@ -71,7 +71,7 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 #' @param path Path to the config file or starting directory for search.
 #' The parameter defaults to starting the search in the current directory.
 #' @export
-load_workspace_from_config <- function(path)
+load_workspace_from_config <- function(path = NULL)
 {
   azureml$core$workspace$Workspace$from_config(path)
 }
