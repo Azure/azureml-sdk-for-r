@@ -1,7 +1,7 @@
 # run setup.R to setup workspace for the first time prior to running this script
 library("azureml")
 
-ws <- load_workspace_from_config(".")
+ws <- load_workspace_from_config()
 ds <- get_default_datastore(ws)
 
 # upload iris data to the datastore
