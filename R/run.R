@@ -66,5 +66,5 @@ log_metric_to_run <- function(name, value, run)
 #' @export
 cancel_run <- function(run)
 {
-  run$cancel(hyperdrive_run)
+  run$cancel()
 }
