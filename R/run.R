@@ -59,3 +59,12 @@ log_metric_to_run <- function(name, value, run)
   run$log(name, value)
   run$flush()
 }
+
+#' Cancel run
+#' @param run run to be cancelled
+#' @return TRUE if cancellation was successful, else FALSE
+#' @export
+cancel_run <- function(run)
+{
+  run$cancel(hyperdrive_run)
+}
