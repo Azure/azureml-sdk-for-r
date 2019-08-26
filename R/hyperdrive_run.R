@@ -7,7 +7,7 @@
 get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE,
                                            include_canceled = TRUE)
 {
-  azureml$train$hyperdrive$get_best_run_by_primary_metric(include_failed, include_canceled)
+  hyperdrive_run$get_best_run_by_primary_metric(include_failed, include_canceled)
 }
 
 #' Return the child runs sorted in descending order by best primary metric
@@ -20,8 +20,8 @@ get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE
 get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
                                                   reverse = FALSE, discard_no_metric = FALSE)
 {
-  azureml$train$hyperdrive$get_children_sorted_by_primary_metric(top, reverse,
-                                                                 discard_no_metric)
+  hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,
+                                                       discard_no_metric)
 }
 
 #' Return hyperparameters for all child runs
@@ -30,7 +30,7 @@ get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
 #' @export
 get_children_hyperparameters <- function(hyperdrive_run)
 {
-  azureml$train$hyperdrive$get_hyperparameters(hyperdrive_run)
+  hyperdrive_run$get_hyperparameters(hyperdrive_run)
 }
 
 #' Return metrics from all child runs
@@ -39,5 +39,5 @@ get_children_hyperparameters <- function(hyperdrive_run)
 #' @export
 get_children_metrics <- function(hyperdrive_run)
 {
-  azureml$train$hyperdrive$get_metrics(hyperdrive_run)
+  hyperdrive_run$get_metrics()
 }
