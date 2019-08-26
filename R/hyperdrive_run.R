@@ -24,15 +24,6 @@ get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
                                                                  discard_no_metric)
 }
 
-#' Cancel HyperDrive run
-#' @param hyperdrive_run HyperDriveRun object to be cancelled
-#' @return TRUE if cancellation was successful, else FALSE
-#' @export
-cancel_hyperdrive_run <- function(hyperdrive_run)
-{
-  azureml$train$hyperdrive$cancel(hyperdrive_run)
-}
-
 #' Return hyperparameters for all child runs
 #' @param hyperdrive_run HyperDriveRun object
 #' @return named list of hyperparameters grouped by run_id
