@@ -18,7 +18,7 @@ wait_for_compute(compute_target)
 script_params <- list(step = 0.01, num_octave = 3, octave_scale = 1.4, iterations = 20,
                       max_loss = 10)
 
-est <- create_estimator(source_directory = ".", entry_script = "hyperdrive_script.R",
+est <- create_estimator(source_directory = ".", entry_script = "deep_dream.R",
                         compute_target = compute_target, script_params = script_params,
                         cran_packages = c("keras"))
 
@@ -38,7 +38,7 @@ sampling <- random_parameter_sampling(list(step = normal(0.05, 0.01, 0.02),
                                            iterations = choice(10, 20, 30),
                                            max_loss = choice(5, 10, 5)))
 policy <- bandit_policy(slack_factor = 0.15)
-hyperdrive_config <- create_hyperdrive_config(sampling, "Accuracy", "MAXIMIZE", 10,
+hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", "MINIMIZE", 10,
                                               policy = policy, estimator = est)
 
 # submit hyperdrive run
