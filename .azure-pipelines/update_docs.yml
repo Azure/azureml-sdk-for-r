@@ -1,0 +1,56 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container: ninhu/r-sdk-build:latest
+
+variables:
+- name: TEST_LOCATION
+  value: eastus2
+- name: TEST_RESOURCE_GROUP
+  value: r_sdk_test_rg
+- name: TEST_SUBSCRIPTION_ID
+  value: 4faaaf21-663f-4391-96fd-47197c630979
+- name: TEST_WORKSPACE_NAME
+  value: r_sdk_test_workspace
+
+steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: 'pip install --user azureml-sdk'
+
+  - task: AzureCLI@1
+    inputs:
+      azureSubscription: 'Project Vienna Build Tests (4faaaf21-663f-4391-96fd-47197c630979)'
+      scriptLocation: inlineScript
+      inlineScript: |
+        python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              install.packages("devtools", repos = "http://cran.us.r-project.org");
+              install.packages("roxygen2", repos = "http://cran.us.r-project.org");
+              install.packages("pkgdown", repos = "http://cran.us.r-project.org");
+              library("roxygen2");
+              library("pkgdown");
+              roxygen2::roxygenise();
+              pkgdown::build_site();
+              devtools::build();
+      addSpnToEnvironment: true
+    displayName: 'Generate Docs'
+    
+  - task: CopyFiles@2
+    inputs:
+      Contents: |
+        'docs/**'
+        'man/**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: 'Copy generated docs to staging directory'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'Docs'
+    displayName: 'Publish docs from staging directory'
