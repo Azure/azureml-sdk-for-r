@@ -25,6 +25,15 @@ create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_nam
                                             run_config, pipeline)
 }
 
+#' Define supported metric goals for hyperparameter tuning
+#' @param goal string name of the goal ("MAXIMIZE" or "MINIMIZE")
+#' @return PrimaryMetricGoal object
+#' @export
+primary_metric_goal <- function(goal)
+{
+  azureml$train$hyperdrive$PrimaryMetricGoal(goal)
+}
+
 #' Create Bandit policy for HyperDrive runs
 #' @param slack_factor ratio of the allowed distance from best-performing run
 #' @param slack_amount absolute allowed distance from the best-performing run
@@ -89,4 +98,106 @@ grid_parameter_sampling <- function(parameter_space)
 bayesian_parameter_sampling <- function(parameter_space)
 {
   azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
+}
+
+#' Specify a discrete set of options to sample from
+#' @param options list of options to choose from 
+#' @return the stochastic expression
+#' @export
+choice <- function(options)
+{
+  azureml$train$hyperdrive$choice(options)
+}
+
+#' Specify a set of random integers in the range [0, upper)
+#' @param upper upper bound for the range of integers (exclusive)
+#' @return the stochastic expression
+#' @export
+randint <- function(upper)
+{
+  azureml$train$hyperdrive$randint(upper)
+}
+
+#' Specify a uniform distribution from which samples are taken
+#' @param min_value minimum value in the range (inclusive)
+#' @param max_value maximum value in the range (inclusive)
+#' @return the stochastic expression
+#' @export
+uniform <- function(min_value, max_value)
+{
+  azureml$train$hyperdrive$uniform(min_value, max_value)
+}
+
+#' Specify a uniform distribution of the form round(uniform(min_value, max_value) / q) * q
+#' @param min_value minimum value in the range (inclusive)
+#' @param max_value maximum value in the range (inclusive)
+#' @param q smoothing factor
+#' @return the stochastic expression
+#' @export
+quniform <- function(min_value, max_value, q)
+{
+  azureml$train$hyperdrive$quniform(min_value, max_value, q)
+}
+
+#' Specify a log uniform distribution
+#' @param min_value minimum value in the range will be exp(min_value) (inclusive)
+#' @param max_value maximum value in the range will be exp(min_value) (inclusive)
+#' @return the stochastic expression
+#' @export
+loguniform <- function(min_value, max_value)
+{
+  azureml$train$hyperdrive$loguniform(min_value, max_value)
+}
+
+#' Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q
+#' @param min_value minimum value in the range (inclusive)
+#' @param max_value maximum value in the range (inclusive)
+#' @param q smoothing factor
+#' @return the stochastic expression
+#' @export
+qloguniform <- function(min_value, max_value, q)
+{
+  azureml$train$hyperdrive$qloguniform(min_value, max_value, q)
+}
+
+#' Specify a real value that is normally-distributed with mean mu and standard deviation sigma
+#' @param mu mean of the normal distribution
+#' @param sigma standard deviation of the normal distribution
+#' @return the stochastic expression
+#' @export
+normal <- function(mu, sigma)
+{
+  azureml$train$hyperdrive$normal(mu, sigma)
+}
+
+#' Specify a normal distribution of the form round(normal(mu, sigma) / q) * q
+#' @param mu mean of the normal distribution
+#' @param sigma standard deviation of the normal distribution
+#' @param q smoothing factor
+#' @return the stochastic expression
+#' @export
+qnormal <- function(mu, sigma, q)
+{
+  azureml$train$hyperdrive$qnormal(mu, sigma, q)
+}
+
+#' Specify a normal distribution of the form according to exp(normal(mu, sigma))
+#' @param mu mean of the normal distribution
+#' @param sigma standard deviation of the normal distribution
+#' @return the stochastic expression
+#' @export
+lognormal <- function(mu, sigma)
+{
+  azureml$train$hyperdrive$lognormal(mu, sigma)
+}
+
+#' Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q
+#' @param mu mean of the normal distribution
+#' @param sigma standard deviation of the normal distribution
+#' @param q smoothing factor
+#' @return the stochastic expression
+#' @export
+qlognormal <- function(mu, sigma, q)
+{
+  azureml$train$hyperdrive$qlognormal(mu, sigma, q)
 }
