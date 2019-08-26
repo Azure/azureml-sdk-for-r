@@ -1,7 +1,7 @@
 # run setup.R prior to running this script
 library("azureml")
 
-ws <- load_workspace_from_config("~/azureml-sdk-for-r/samples/.azureml/config.json")
+ws <- load_workspace_from_config()
 
 # create aml compute
 cluster_name <- "rcluster"
