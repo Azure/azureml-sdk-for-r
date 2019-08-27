@@ -1,13 +1,7 @@
 # run setup.R prior to running this script
 library("azureml")
 
-ws <- load_workspace_from_config(".")
-ds <- get_default_datastore(ws)
-
-# upload iris data to the datastore
-target_path <- "irisdata"
-upload_files_to_datastore(ds, list("./iris.csv"),
-                          target_path = target_path, overwrite = TRUE)
+ws <- load_workspace_from_config()
 
 # create aml compute
 cluster_name <- "rcluster"
@@ -18,14 +12,13 @@ if (is.null(compute_target))
   compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
                                        vm_size = vm_size, max_nodes = 1)
 }
+wait_for_compute(compute_target)
 
 # define estimator
-est <- create_estimator(source_directory = ".", 
-                        entry_script = "train.R",
-                        script_params = list("--data_folder" = ds$path(target_path)),
-                        compute_target = compute_target)
+est <- create_estimator(source_directory = "./tensorflow", entry_script = "tf_mnist.R",
+                        compute_target = compute_target, cran_packages = c("tensorflow"))
 
-experiment_name <- "train-r-script-on-amlcompute"
+experiment_name <- "train-tf-script-on-remote-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)

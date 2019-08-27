@@ -1,8 +1,8 @@
-Before running the samples in Rstudio, change to the samples directory in Rstudio using `setwd(dirname)`.
+## Using basic AzureML APIs
+
+Before running the samples in RStudio, change to the sample directory in Rstudio using `setwd(dirname)`.
 The examples assume that the data and scripts are in the current directory.
 
-- `setup.R`: Setup workspace before running samples.
-- `create_cluster_start_remote_job.R`: Runs a remote job by creating a compute target and running `train.R`.
-- `train.R` : Trains a glm model on the iris dataset and logs the metrics after training.
-- `tensorflow/create_tensorflow_remote_job.R` : Runs a remote TensorFlow job by creating a compute target and running `tf_mnist.R`.
-- `tensorflow/tf_mnist.R` : Trains a TensorFlow gradient descent model on the MNIST dataset.
+1. [setup.R](setup.R): Setup workspace before running samples.
+2. [Train on ML Compute](training/train-on-amlcompute): Train a model using an ML Compute cluster as compute target.
+3. [Train with TensorFlow](training/train-with-tensorflow): Train a TensorFlow GradientDescentOptimizer on MNIST.
