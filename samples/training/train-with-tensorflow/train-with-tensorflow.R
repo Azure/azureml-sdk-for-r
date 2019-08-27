@@ -15,7 +15,7 @@ if (is.null(compute_target))
 wait_for_compute(compute_target)
 
 # define estimator
-est <- create_estimator(source_directory = "./tensorflow", entry_script = "tf_mnist.R",
+est <- create_estimator(source_directory = ".", entry_script = "tf_mnist.R",
                         compute_target = compute_target, cran_packages = c("tensorflow"))
 
 experiment_name <- "train-tf-script-on-remote-amlcompute"
