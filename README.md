@@ -27,7 +27,7 @@ Main capabilities of the SDK include:
 [Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :heavy_check_mark: |
 [Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :arrows_counterclockwise: |
 [Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
-[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :arrows_counterclockwise: |
+[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
 
 ## Installing `azureml` R package
 
