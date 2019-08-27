@@ -10,7 +10,7 @@ upload_files_to_datastore(ds, list("./iris.csv"),
                           target_path = target_path, overwrite = TRUE)
 
 # create aml compute
-cluster_name <- "rcluster"
+cluster_name <- "gpu-std-nc6"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
@@ -31,6 +31,8 @@ exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
 wait_for_run_completion(run, show_output = TRUE)
+
+show_run_status(run)
 
 metrics <- get_run_metrics(run)
 metrics
