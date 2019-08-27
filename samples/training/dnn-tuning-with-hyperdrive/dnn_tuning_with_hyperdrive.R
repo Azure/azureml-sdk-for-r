@@ -15,12 +15,12 @@ if (is.null(compute_target))
 wait_for_compute(compute_target)
 
 # define estimator
-script_params <- list(step = 0.01, num_octave = 3, octave_scale = 1.4, iterations = 20,
-                      max_loss = 10)
+script_params <- list(iterations = 10, total_variation_weight = 1, style_weight = 1,
+                      content_weight = 0.025)
 
-est <- create_estimator(source_directory = ".", entry_script = "deep_dream.R",
+est <- create_estimator(source_directory = ".", entry_script = "neural_style_transfer.R",
                         compute_target = compute_target, script_params = script_params,
-                        cran_packages = c("keras"))
+                        cran_packages = c("keras", "purrr", "R6"))
 
 experiment_name <- "hyperparameter-tuning-on-remote-amlcompute"
 exp <- experiment(ws, experiment_name)
@@ -32,13 +32,12 @@ metrics <- get_run_metrics(run)
 metrics
 
 # define sampling and policy for hyperparameter tuning
-sampling <- random_parameter_sampling(list(step = normal(0.05, 0.01, 0.02),
-                                           num_octave = choice(2, 3, 5),
-                                           octave_scale = loguniform(0.4, 1.4, 2.4),
-                                           iterations = choice(10, 20, 30),
-                                           max_loss = choice(5, 10, 5)))
+sampling <- random_parameter_sampling(list(iterations = choice(6, 8, 10),
+                                           total_variation_weight = normal(0.75, 0.5),
+                                           style_weight = normal(1, 0.75),
+                                           content_weight = normal(0.025, 0.01)))
 policy <- bandit_policy(slack_factor = 0.15)
-hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", "MINIMIZE", 10,
+hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", "MINIMIZE", 4,
                                               policy = policy, estimator = est)
 
 # submit hyperdrive run
