@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Developer instructions on building azureml package • azureml</title>
+<title>Specify a log uniform distribution — loguniform • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,12 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Developer instructions on building azureml package" />
+<meta property="og:title" content="Specify a log uniform distribution — loguniform" />
+
+<meta property="og:description" content="Specify a log uniform distribution" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,7 +62,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">azureml</a>
+        <a class="navbar-link" href="../index.html">azureml</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -67,13 +70,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
@@ -94,49 +97,50 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Developer instructions on building azureml package</h1>
+    <h1>Specify a log uniform distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive_runconfig.R'><code>R/hyperdrive_runconfig.R</code></a></small>
+    <div class="hidden name"><code>loguniform.Rd</code></div>
     </div>
 
-<div id="developer-instructions-on-building-azureml-package" class="section level1">
+    <div class="ref-description">
+    
+    <p>Specify a log uniform distribution</p>
+    
+    </div>
 
-<ol>
-<li>
-<p>Make sure below packages are installed.</p>
-<pre><code>install.packages('devtools')
-install.packages('roxygen2')
-install.packages('pkgdown')</code></pre>
-</li>
-<li>
-<p>Run the following to generate docs and build the code:</p>
-<pre><code>setwd('&lt;repo_root&gt;')
+    <pre class="usage"><span class='fu'>loguniform</span>(<span class='no'>min_value</span>, <span class='no'>max_value</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>min_value</th>
+      <td><p>minimum value in the range will be exp(min_value) (inclusive)</p></td>
+    </tr>
+    <tr>
+      <th>max_value</th>
+      <td><p>maximum value in the range will be exp(min_value) (inclusive)</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-# Generate Pakcage Documentation
-roxygen2::roxygenise()
-
-# Generate a docs directory for hosting on GitHub pages
-pkgdown::build_site()
-
-# Build the R package
-package_location &lt;- devtools::build()</code></pre>
-</li>
-<li>The R package file is created at <code>package_location</code>. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</li>
-<li>
-<p>To install the package from the <code>.tar.gz</code> file in the filesystem, do:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages(package_location, repos = NULL)</a></code></pre>
-<p>To install from a url:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages(package_url, repos = NULL)</a></code></pre>
-<p>If you already have the package loaded in your R session, you may want to remove it from the session to use the new one. This can be done by the following:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/base/topics/detach">detach("package:azureml", unload = TRUE)</a></code></pre>
-</li>
-</ol>
-</div>
+    <p>the stochastic expression</p>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

@@ -123,18 +123,18 @@
 <td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
 </tr>
 <tr class="odd">
+<td><a href="https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py">HyperDrive</a></td>
+<td>HyperDrive automates the process of running hyperparameter sweeps for an <code>Experiment</code>.</td>
+<td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
+</tr>
+<tr class="even">
 <td><a href="https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model">Models</a></td>
 <td>Cloud representations of machine learning models that help you transfer models between local development environments and the <code>Workspace</code> object in the cloud.</td>
 <td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice">Webservice</a></td>
 <td>Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. <code>Webservice</code> is the abstract parent class for creating and deploying web services for your models.</td>
-<td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py">HyperDrive</a></td>
-<td>HyperDrive automates the process of running hyperparameter sweeps for an <code>Experiment</code>.</td>
 <td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
 </tr>
 </tbody>
@@ -175,8 +175,9 @@
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
-<li><p>In step 2 of the installation, if the following error occurs: <code>R   Error: 'setInternet2' is defunct.</code> Then upgrade devtools to the latest version or install the latest <code>devtools</code> from github through: <code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("r-lib/devtools")</a></code></p></li>
-<li><p>In step 3 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
+<li>In step 2 of the installation, if the following error occurs: <code>R   Error: 'setInternet2' is defunct.</code> Then upgrade devtools to the latest version or install the latest <code>devtools</code> from github through: <code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("r-lib/devtools")</a></code>
+</li>
+<li>In step 3 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
 <li>
 <p>If the following error occurs when submitting an experiment using RStudio: <code>R   Error in py_call_impl(callable, dots$args, dots$keywords) :     PermissionError: [Errno 13] Permission denied</code> Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.</p>
 <p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>
@@ -190,9 +191,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/azure/azureml-sdk-for-r">https://github.com/azure/azureml-sdk-for-r</a>
+<li>Browse source code at <br><a href="https://github.com/azure/azureml-sdk-for-r">https://​github.com/​azure/​azureml-sdk-for-r</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/azure/azureml-sdk-for-r/issues">https://github.com/azure/azureml-sdk-for-r/issues</a>
+<li>Report a bug at <br><a href="https://github.com/azure/azureml-sdk-for-r/issues">https://​github.com/​azure/​azureml-sdk-for-r/​issues</a>
 </li>
 </ul>
 </div>

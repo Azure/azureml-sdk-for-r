@@ -7,22 +7,18 @@
 #' @param max_duration_minutes maximum time to allow runs
 #' @param policy termination policy
 #' @param estimator estimator object (N/A if using run_config or pipeline)
-#' @param run_config configuration from Run object (N/A if using estimator or pipeline)
-#' @param pipeline pipeline object (N/A if using run_config or estimator)
 #' @return HyperDrive config object
 #' @export
 create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
                                      primary_metric_goal, max_total_runs,
                                      max_concurrent_runs = NULL, max_duration_minutes = 10080,
-                                     policy = NULL, estimator = NULL,
-                                     run_config = NULL, pipeline = NULL)
+                                     policy = NULL, estimator = NULL)
 {
   
   azureml$train$hyperdrive$HyperDriveConfig(hyperparameter_sampling, primary_metric_name,
                                             primary_metric_goal, max_total_runs,
                                             max_concurrent_runs, max_duration_minutes,
-                                            policy, estimator,
-                                            run_config, pipeline)
+                                            policy, estimator)
 }
 
 #' Define supported metric goals for hyperparameter tuning

@@ -1,10 +1,10 @@
 # run setup.R prior to running this script
-library("azureml")
+library(azureml)
 
-ws <- load_workspace_from_config()
+ws <- get_workspace("r_workspace", "e9b2ec51-5c94-4fa8-809a-dc1e695e4896")
 
 # create aml compute
-cluster_name <- "rcluster"
+cluster_name <- "r-cluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
@@ -15,14 +15,14 @@ if (is.null(compute_target))
 wait_for_compute(compute_target)
 
 # define estimator
-script_params <- list(iterations = 10, total_variation_weight = 1, style_weight = 1,
-                      content_weight = 0.025)
+script_params <- list(batch_size = 32, epochs = 200,
+                      lr = 0.0001, decay = 1e-6)
 
-est <- create_estimator(source_directory = ".", entry_script = "neural_style_transfer.R",
+est <- create_estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
                         compute_target = compute_target, script_params = script_params,
-                        cran_packages = c("keras", "purrr", "R6"))
+                        cran_packages = c("keras"))
 
-experiment_name <- "hyperparameter-tuning-on-remote-amlcompute"
+experiment_name <- "hyperparameter-tuning-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
@@ -32,11 +32,12 @@ metrics <- get_run_metrics(run)
 metrics
 
 # define sampling and policy for hyperparameter tuning
-sampling <- random_parameter_sampling(list(iterations = choice(6, 8, 10),
-                                           total_variation_weight = normal(0.75, 0.5),
-                                           style_weight = normal(1, 0.75),
-                                           content_weight = normal(0.025, 0.01)))
-policy <- bandit_policy(slack_factor = 0.15)
+sampling <- random_parameter_sampling(list(batch_size <- choice(c(16, 32, 64)),
+                                           epochs = choice(c(100, 200, 300)),
+                                           lr = normal(0.0001, 0.0005),
+                                           decay = uniform(1e-7, 1e-5)))
+evaluation_int <- as.integer(1)
+policy <- bandit_policy(slack_factor = 0.15, evaluation_interval = evaluation_int)
 hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", "MINIMIZE", 4,
                                               policy = policy, estimator = est)
 
