@@ -5,7 +5,7 @@
 \title{Create Truncation Selection policy for HyperDrive runs}
 \usage{
 truncation_selection_policy(truncation_percentage,
-  evaluation_interval = 1, delay_evaluation = 0)
+  evaluation_interval = 1L, delay_evaluation = 0L)
 }
 \arguments{
 \item{truncation_percentage}{percentage of lowest performing runs to terminate at each interval}

@@ -5,7 +5,7 @@
 \title{Create Bandit policy for HyperDrive runs}
 \usage{
 bandit_policy(slack_factor = NULL, slack_amount = NULL,
-  evaluation_interval = 1, delay_evaluation = 0)
+  evaluation_interval = 1L, delay_evaluation = 0L)
 }
 \arguments{
 \item{slack_factor}{ratio of the allowed distance from best-performing run}

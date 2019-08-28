@@ -4,7 +4,7 @@
 \alias{median_stopping_policy}
 \title{Create Median Stopping policy for HyperDrive runs}
 \usage{
-median_stopping_policy(evaluation_interval = 1, delay_evaluation = 0)
+median_stopping_policy(evaluation_interval = 1L, delay_evaluation = 0L)
 }
 \arguments{
 \item{evaluation_interval}{frequency for applying policy}

@@ -38,7 +38,7 @@ primary_metric_goal <- function(goal)
 #' @return EarlyTerminationPolicy object
 #' @export
 bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
-                          evaluation_interval = 1, delay_evaluation = 0)
+                          evaluation_interval = 1L, delay_evaluation = 0L)
 {
   azureml$train$hyperdrive$BanditPolicy(slack_factor, slack_amount,
                                         evaluation_interval, delay_evaluation)
@@ -49,7 +49,7 @@ bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
 #' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return EarlyTerminationPolicy object
 #' @export
-median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0)
+median_stopping_policy <- function(evaluation_interval = 1L, delay_evaluation = 0L)
 {
   azureml$train$hyperdrive$MedianStoppingPolicy(evaluation_interval, delay_evaluation)
 }
@@ -61,7 +61,7 @@ median_stopping_policy <- function(evaluation_interval = 1, delay_evaluation = 0
 #' @return EarlyTerminationPolicy object
 #' @export
 truncation_selection_policy <- function(truncation_percentage,
-                                        evaluation_interval = 1, delay_evaluation = 0)
+                                        evaluation_interval = 1L, delay_evaluation = 0L)
 {
   azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage, evaluation_interval,
                                                      delay_evaluation)
