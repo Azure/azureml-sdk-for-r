@@ -1,5 +1,5 @@
 # Developer instructions on building `azureml` package
-1.  Make sure below packages are installed.
+1. Make sure below packages are installed.
     ```
     install.packages('devtools')
     install.packages('roxygen2')

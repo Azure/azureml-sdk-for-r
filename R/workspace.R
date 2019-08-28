@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create a new Azure Machine Learning Workspace
 #' @param name The new workspace name. Workspace name has to be between
 #'  2 and 32 characters of letters and numbers.

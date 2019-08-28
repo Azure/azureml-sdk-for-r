@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Upload the data from the local file system to the Azure storage this datastore points to.
 #' @param ds datastore object
 #' @param files list of absolute path to files to upload

@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create conda environment
 #' @param environment_name name of environment to create
 create_conda_env <- function(environment_name)
