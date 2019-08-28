@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create run configuration to run a R script
 #' @param target target string
 #' @param data_references list of data references

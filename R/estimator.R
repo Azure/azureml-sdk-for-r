@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create Estimator
 #' @param source_directory A local directory containing experiment configuration files.
 #' @param compute_target The ComputeTarget where training will happen. This can either be an object or the

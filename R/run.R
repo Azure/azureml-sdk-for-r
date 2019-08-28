@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Get the metrics for run
 #' @param run Run object
 #' @return named list containing metrics associated with the run.

@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' @importFrom reticulate import py_discover_config py_str
 
 .onLoad <- function(libname, pkgname)

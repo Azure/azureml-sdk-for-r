@@ -98,4 +98,9 @@ Once you've accessed your workspace, you can begin running and tracking your own
   In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
   the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
   session. For this reason, best practice is to isolate project files into their own directory.
+  
+## Code of Conduct
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 

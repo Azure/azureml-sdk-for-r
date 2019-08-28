@@ -4,7 +4,7 @@
 \alias{load_workspace_from_config}
 \title{Load workspace from config}
 \usage{
-load_workspace_from_config(path)
+load_workspace_from_config(path = NULL)
 }
 \arguments{
 \item{path}{Path to the config file or starting directory for search.
