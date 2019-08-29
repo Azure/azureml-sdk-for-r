@@ -29,8 +29,8 @@ r_env$docker$enabled <- TRUE
 # TODO: rpy2 needs to be added to base image
 # In this sample, I am using a pre-built image from my workspace ACR.
 r_env$docker$base_image <- "r-base:cpu"
-#r_env$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
-r_env$docker$base_image_registry$address <- "ninhuadhacrrhgxycwt.azurecr.io"
+r_env$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
+#r_env$docker$base_image_registry$address <- "ninhuadhacrrhgxycwt.azurecr.io"
 r_env$inferencing_stack_version='latest'
 
 # 1) We can consider exposing the packages parameter for inference_config wrapper similar to what we did to estimator
@@ -65,3 +65,27 @@ plant <- data.frame(Sepal.Length=5.1, Sepal.Width=3.5, Petal.Length=1.4, Petal.W
 plant <- data.frame(Sepal.Length=6.7, Sepal.Width=3.3, Petal.Length=5.2, Petal.Width=2.3)
 
 service$run(input_data=toJSON(plant))
+
+
+
+
+
+# model packing
+# 1) Image
+package <- azureml$core$model$Model$package(ws, list(model), inference_config)
+package$wait_for_creation(show_output=TRUE) 
+package$pull()
+
+# 2) Dockerfile
+package <- azureml$core$model$Model$package(ws, list(model), inference_config, generate_dockerfile=TRUE)
+package$wait_for_creation(show_output=TRUE)
+# Download the package
+package$save("./imagefiles")
+
+
+# model profiling - note it's not working currently because profiling doesn't support environment
+profile <- azureml$core$model$Model$profile(ws, "profilename", list(model), inference_config, toJSON(plant))
+profile$wait_for_profiling(True)
+profiling_results <- profile$get_results()
+print(profiling_results)
+
