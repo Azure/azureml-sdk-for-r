@@ -1,10 +1,10 @@
 # run setup.R prior to running this script
 library(azureml)
 
-ws <- get_workspace("r_workspace", "e9b2ec51-5c94-4fa8-809a-dc1e695e4896")
+ws <- load_workspace_from_config(".")
 
 # create aml compute
-cluster_name <- "r-cluster"
+cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
