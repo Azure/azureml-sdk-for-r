@@ -16,7 +16,7 @@ wait_for_compute(compute_target)
 
 # define estimator
 script_params <- list(batch_size = 32, epochs = 200,
-                      lr = 0.0001, decay = 1e-6)
+                      lr = 0.0001, decay = 0.000001)
 
 est <- create_estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
                         compute_target = compute_target, script_params = script_params,
@@ -35,7 +35,7 @@ metrics
 sampling <- random_parameter_sampling(list(batch_size <- choice(c(16, 32, 64)),
                                            epochs = choice(c(200, 350, 500)),
                                            lr = normal(0.0001, 0.005),
-                                           decay = uniform(1e-7, 1e-5)))
+                                           decay = uniform(0.0000001, 0.00001)))
 
 policy <- bandit_policy(slack_factor = 0.15)
 hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", primary_metric_goal("MINIMIZE"),
