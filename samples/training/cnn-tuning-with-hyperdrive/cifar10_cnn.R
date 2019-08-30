@@ -7,7 +7,7 @@
 
 library(azureml)
 library(keras)
-install_keras(tensorflow = "gpu")
+install_keras()
 
 # Parameters --------------------------------------------------------------
 
@@ -120,5 +120,5 @@ if(!data_augmentation){
   results <- evaluate(model, x_train, y_train, batch_size)
   log_metric_to_run("Loss", results[[1]], current_run)
   cat("Loss: ", results[[1]], "\n")
-  cat("Accuracy: ", results[[1]], "\n")
+  cat("Accuracy: ", results[[2]], "\n")
 }
