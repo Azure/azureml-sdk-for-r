@@ -19,31 +19,34 @@ test_that("create hyperdrive config, launch runs, get run metrics",
             
             # start a remote job and get the run, wait for it to finish
             tmp_dir_name <- "tmp_dir"
-            script_name <- "train_empty.R"
+            script_name <- "train_hyperdrive_dummy.R"
             
             dir.create(tmp_dir_name)
             file.copy(script_name, tmp_dir_name)
+
+            script_params <- list(number_1 = 3, number_2 = 2)
             
             est <- create_estimator(source_directory = tmp_dir_name, entry_script = script_name,
-                                    compute_target = existing_compute$name)
+                                    compute_target = existing_compute$name,
+                                    script_params = script_params)
 
             run <- submit_experiment(est, exp)
             wait_for_run_completion(run, show_output = TRUE)
             metrics <- get_run_metrics(run)
             
-            expected_metrics <- list("test_metric" = 10)
+            expected_metrics <- list("Sum" = 5)
             expect_equal(length(setdiff(metrics, expected_metrics)), 0)
             
             
             # define sampling and policy for hyperparameter tuning
-            sampling <- bayesian_parameter_sampling(list(param1 = choice(5, 10),
-                                                       param2 = choice(1, 2)))
-            policy <- bandit_policy(slack_factor = 0.15)
-            hyperdrive_config <- create_hyperdrive_config(sampling, "Product", "MAXIMIZE", 4,
+            sampling <- bayesian_parameter_sampling(list(number_1 = choice(3, 6),
+                                                       number_2 = choice(2, 5)))
+            policy <- median_stopping_policy()
+            hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", "MAXIMIZE", 4,
                                                           policy = policy, estimator = est)
             
             # submit hyperdrive run
-            hyperdrive_run <- submit_experiment(config = hyperdrive_config, exp)
+            hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
             wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 
             children <- get_children_sorted_by_primary_metric()
@@ -56,7 +59,7 @@ test_that("create hyperdrive config, launch runs, get run metrics",
             best_run <- get_best_run_by_primary_metric(hyperdrive_run)
             best_run_metrics <- get_run_metrics(best_run)
 
-            expected_best_metrics <- list("test_metric" = 20)
+            expected_best_metrics <- list("Sum" = 11)
             expect_equal(length(setdiff(best_run-metrics, expected_best_metrics)), 0)
 
             # tear down resources

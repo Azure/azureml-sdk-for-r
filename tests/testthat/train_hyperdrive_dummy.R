@@ -1,0 +1,9 @@
+library(azureml)
+
+args <- commandArgs()
+
+number_1 <- args[2]
+number_2 <- args[4]
+sum <- as.numeric(number_1) + as.numeric(number_2)
+
+log_metric_to_run("Sum", sum, get_current_run())
