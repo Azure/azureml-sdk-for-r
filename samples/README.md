@@ -6,4 +6,4 @@ The examples assume that the data and scripts are in the current directory.
 1. [setup.R](setup.R): Setup workspace before running samples.
 2. [Train on ML Compute](training/train-on-amlcompute): Train a model using an ML Compute cluster as compute target.
 3. [Train with TensorFlow](training/train-with-tensorflow): Train a TensorFlow GradientDescentOptimizer on MNIST.
-4. [DNN Tuning with HyperDrive](training/dnn-tuning-with-hyperdrive): Use AzureML's HyperDrive service to tune hyperparameters for neural style transfer with Keras
+4. [CNN Tuning with HyperDrive](training/cnn-tuning-with-hyperdrive): Use AzureML's HyperDrive service to tune hyperparameters for CNN MNIST training with Keras

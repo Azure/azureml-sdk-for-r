@@ -1,10 +1,10 @@
 # run setup.R prior to running this script
 library(azureml)
 
-ws <- get_workspace("r_workspace", "e9b2ec51-5c94-4fa8-809a-dc1e695e4896")
+ws <- load_workspace_from_config(".")
 
 # create aml compute
-cluster_name <- "r-cluster"
+cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
@@ -22,7 +22,7 @@ est <- create_estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
                         compute_target = compute_target, script_params = script_params,
                         cran_packages = c("keras"))
 
-experiment_name <- "hyperparameter-tuning-on-amlcompute"
+experiment_name <- "hyperdrive-testing"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
@@ -33,16 +33,16 @@ metrics
 
 # define sampling and policy for hyperparameter tuning
 sampling <- random_parameter_sampling(list(batch_size <- choice(c(16, 32, 64)),
-                                           epochs = choice(c(100, 200, 300)),
-                                           lr = normal(0.0001, 0.0005),
+                                           epochs = choice(c(200, 350, 500)),
+                                           lr = normal(0.0001, 0.005),
                                            decay = uniform(1e-7, 1e-5)))
-evaluation_int <- as.integer(1)
-policy <- bandit_policy(slack_factor = 0.15, evaluation_interval = evaluation_int)
-hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", "MINIMIZE", 4,
-                                              policy = policy, estimator = est)
+
+policy <- bandit_policy(slack_factor = 0.15)
+hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", primary_metric_goal("MINIMIZE"),
+                                              4, policy = policy, estimator = est)
 
 # submit hyperdrive run
-hyperdrive_run <- submit_experiment(config = hyperdrive_config, exp)
+hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 
 # find best-performing run

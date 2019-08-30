@@ -40,8 +40,8 @@ primary_metric_goal <- function(goal)
 bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
                           evaluation_interval = 1L, delay_evaluation = 0L)
 {
-  azureml$train$hyperdrive$BanditPolicy(slack_factor, slack_amount,
-                                        evaluation_interval, delay_evaluation)
+  azureml$train$hyperdrive$BanditPolicy(evaluation_interval, slack_factor,
+                                        slack_amount, delay_evaluation)
 }
 
 #' Create Median Stopping policy for HyperDrive runs
@@ -83,7 +83,7 @@ random_parameter_sampling <- function(parameter_space, properties = NULL)
 #' @export
 grid_parameter_sampling <- function(parameter_space)
 {
-  azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
+  azureml$train$hyperdrive$GridParameterSampling(parameter_space)
 }
 
 #' Define Bayesian Parameter sampling over hyperparameter search space
@@ -92,7 +92,7 @@ grid_parameter_sampling <- function(parameter_space)
 #' @export
 bayesian_parameter_sampling <- function(parameter_space)
 {
-  azureml$train$hyperdrive$RandomParameterSampling(parameter_space)
+  azureml$train$hyperdrive$BayesianParameterSampling(parameter_space)
 }
 
 #' Specify a discrete set of options to sample from
