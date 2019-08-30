@@ -22,7 +22,7 @@ est <- create_estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
                         compute_target = compute_target, script_params = script_params,
                         cran_packages = c("keras"))
 
-experiment_name <- "hyperdrive-testing"
+experiment_name <- "hyperdrive-cifar10"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
