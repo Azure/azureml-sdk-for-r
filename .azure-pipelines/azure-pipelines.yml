@@ -16,6 +16,8 @@ variables:
   value: 4faaaf21-663f-4391-96fd-47197c630979
 - name: TEST_WORKSPACE_NAME
   value: r_sdk_workspace
+- name: TEST_BUILD_ID
+  value: $(Build.BuildId)
 
 steps:
   - task: Bash@3
