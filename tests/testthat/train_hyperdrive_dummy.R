@@ -9,5 +9,5 @@ log_metric_to_run("Second Number", number_2, get_current_run())
 
 sum <- as.numeric(number_1) + as.numeric(number_2)
 
-cat(sum)
+cat("Sum = ", sum)
 log_metric_to_run("Sum", sum, get_current_run())
