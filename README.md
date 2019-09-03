@@ -19,15 +19,15 @@ Main capabilities of the SDK include:
 
 | Features | Description | Status |
 |----------|-------------|--------|
-[Workspace](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
-[Data Plane Resources](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
-[Compute](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#computetarget-runconfiguration-and-scriptrunconfig) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
-[Experiment](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#experiment) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
-[Run](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#run) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
-[Estimator](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.estimator.estimator?view=azure-ml-py) | A generic estimator to train data using any supplied training script. | :heavy_check_mark: |
-[Models](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#model) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :arrows_counterclockwise: |
-[Webservice](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#image-and-webservice) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
-[HyperDrive](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive?view=azure-ml-py) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :arrows_counterclockwise: |
+[Workspace](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#workspaces)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
+[Data Plane Resources](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
+[Compute](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#compute-targets) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
+[Experiment](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#experiments) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
+[Run](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#runs) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
+[Estimator](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#estimators) | A generic estimator to train data using any supplied training script. | :heavy_check_mark: |
+[Models](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :arrows_counterclockwise: |
+[Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
+[HyperDrive](https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :arrows_counterclockwise: |
 
 ## Installing `azureml` R package
 
@@ -98,4 +98,9 @@ Once you've accessed your workspace, you can begin running and tracking your own
   In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
   the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
   session. For this reason, best practice is to isolate project files into their own directory.
+  
+## Code of Conduct
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 

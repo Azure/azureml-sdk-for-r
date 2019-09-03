@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create amlcompute
 #' @param workspace workspace object
 #' @param cluster_name cluster name
