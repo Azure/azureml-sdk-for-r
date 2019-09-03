@@ -7,6 +7,7 @@ cluster_name <- Sys.getenv("TEST_CLUSTER_NAME", unset = "r-cpu-cluster")
 test_env <- paste0('test_', as.integer(Sys.time()))
 package_url <- Sys.getenv('PACKAGE_LOCATION')
 build_id <- Sys.getenv('TEST_BUILD_ID')
+build_id <- substr(build_id, (nchar(build_id)+1) - 8, nchar(build_id))
 
 install.packages(package_url, repos = NULL, dep = FALSE, type = "source")
 
