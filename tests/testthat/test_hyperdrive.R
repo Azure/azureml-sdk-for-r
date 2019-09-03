@@ -39,8 +39,8 @@ test_that("create hyperdrive config, launch runs, get run metrics",
             
             
             # define sampling and policy for hyperparameter tuning
-            sampling <- bayesian_parameter_sampling(list(number_1 = choice(3, 6),
-                                                       number_2 = choice(2, 5)))
+            sampling <- bayesian_parameter_sampling(list(number_1 = choice(c(3, 6)),
+                                                       number_2 = choice(c(2, 5))))
             policy <- median_stopping_policy()
             hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", "MAXIMIZE", 4,
                                                           policy = policy, estimator = est)
