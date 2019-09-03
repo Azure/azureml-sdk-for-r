@@ -10,6 +10,44 @@ get_run_metrics <- function(run)
   run$get_metrics()
 }
 
+#' Show run status in viewer pane
+#' @param run Run object
+#' @export
+show_run_status <- function(run) {
+  viewer <- getOption("viewer")
+  if (!is.null(viewer))
+  {
+    library(DT)
+    
+    details = run$get_details()
+    
+    web_view_link = paste0('<a href="',run$get_portal_url(),'">', "Link" ,"</a>")
+    df <- matrix(list("Run Id",
+                   "Status",
+                   "Start Time",
+                   "Target",
+                   "Script Name",
+                   "Arguments",
+                   "Web View",
+                   run$id,
+                   run$status,
+                   format(Sys.time(), format="%B %d, %Y %I:%M %p"),
+                   details$runDefinition$target,
+                   details$runDefinition$script,
+                   toString(details$runDefinition$arguments),
+                   web_view_link),
+                 nrow = 7,
+                 ncol = 2)
+    
+    datatable(df,
+              escape = FALSE,
+              rownames = FALSE,
+              colnames = c(" ", " "),
+              caption = paste(unlist(details$warnings), collapse='\r\n'),
+              options = list(dom = 't'))
+  }
+}
+
 #' Wait for the completion of this run
 #' @param run run object
 #' @param show_output print verbose output to console

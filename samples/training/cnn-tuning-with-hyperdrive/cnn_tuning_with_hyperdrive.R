@@ -26,6 +26,7 @@ experiment_name <- "hyperdrive-cifar10"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
+show_run_status(run)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)
