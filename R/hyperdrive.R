@@ -1,3 +1,5 @@
+### HyperDrive configuration ###
+
 #' Create configuration for a HyperDrive run
 #' @param hyperparameter_sampling hyperparameter sampling option
 #' @param primary_metric_name name of primary metric
@@ -21,10 +23,14 @@ create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_nam
                                             policy, estimator)
 }
 
+### Specifying metric goal ###
+
 #' Global variable to access PrimaryMetricGoal enum (MAXIMIZE or MINIMIZE)
 #' @return PrimaryMetricGoal object
 #' @export
 primary_metric_goal <- azureml$train$hyperdrive$PrimaryMetricGoal
+
+### Specifying early termination policy ###
 
 #' Create Bandit policy for HyperDrive runs
 #' @param slack_factor ratio of the allowed distance from best-performing run
@@ -63,6 +69,8 @@ truncation_selection_policy <- function(truncation_percentage,
                                                      delay_evaluation)
 }
 
+### Specifying sampling space ###
+
 #' Define Random Parameter sampling over hyperparameter search space
 #' @param parameter_space a named list containing each parameter and its distribution
 #' @param properties a named list of additional properties for the algorithm
@@ -90,6 +98,8 @@ bayesian_parameter_sampling <- function(parameter_space)
 {
   azureml$train$hyperdrive$BayesianParameterSampling(parameter_space)
 }
+
+### Parameter expressions for describing search space ###
 
 #' Specify a discrete set of options to sample from
 #' @param options list of options to choose from 
@@ -191,4 +201,50 @@ lognormal <- function(mu, sigma)
 qlognormal <- function(mu, sigma, q)
 {
   azureml$train$hyperdrive$qlognormal(mu, sigma, q)
+}
+
+### Retrieving run metrics ###
+
+#' Return the best performing run amongst all completed runs
+#' @param hyperdrive_run HyperDriveRun object
+#' @param include_failed whether to include failed runs
+#' @param include_canceled whether to include canceled runs
+#' @return Run object
+#' @export
+get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE,
+                                           include_canceled = TRUE)
+{
+  hyperdrive_run$get_best_run_by_primary_metric(include_failed, include_canceled)
+}
+
+#' Return the child runs sorted in descending order by best primary metric
+#' @param hyperdrive_run HyperDriveRun object
+#' @param top number of top children to be returned, default value of 0 will return all
+#' @param reverse reverse the sorting order
+#' @param discard_no_metric whether to include children without the primary metric
+#' @return named list of child runs
+#' @export
+get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
+                                                  reverse = FALSE, discard_no_metric = FALSE)
+{
+  hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,
+                                                       discard_no_metric)
+}
+
+#' Return hyperparameters for all child runs
+#' @param hyperdrive_run HyperDriveRun object
+#' @return named list of hyperparameters grouped by run_id
+#' @export
+get_children_hyperparameters <- function(hyperdrive_run)
+{
+  hyperdrive_run$get_hyperparameters()
+}
+
+#' Return metrics from all child runs
+#' @param hyperdrive_run HyperDriveRun object
+#' @return name list of metrics grouped by run_id
+#' @export
+get_children_metrics <- function(hyperdrive_run)
+{
+  hyperdrive_run$get_metrics()
 }
