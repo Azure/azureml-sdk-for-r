@@ -61,7 +61,7 @@ list_environments_in_workspace <- function(workspace)
   invisible(environments)
 }
 
-#' Create a dockerfile string forto build the image for training.
+#' Create a dockerfile string to build the image for training.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
 #' @param cran_packages character vector of cran packages to be installed.
