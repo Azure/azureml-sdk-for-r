@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 ### HyperDrive configuration ###
 
 #' Create configuration for a HyperDrive run
