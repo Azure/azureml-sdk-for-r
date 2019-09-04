@@ -14,7 +14,7 @@ create_run_config(target, data_references = NULL, base_image = NULL)
 \item{base_image}{image to use}
 }
 \value{
-runconfig object
+RunConfig object
 }
 \description{
 Create run configuration to run a R script

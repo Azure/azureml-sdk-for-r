@@ -23,10 +23,10 @@ create_hyperdrive_config(hyperparameter_sampling, primary_metric_name,
 
 \item{policy}{termination policy}
 
-\item{estimator}{estimator object (N/A if using run_config or pipeline)}
+\item{estimator}{Estimator object}
 }
 \value{
-HyperDrive config object
+HyperDriveConfig object
 }
 \description{
 Create configuration for a HyperDrive run

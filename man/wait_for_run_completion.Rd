@@ -7,7 +7,7 @@
 wait_for_run_completion(run, show_output = TRUE)
 }
 \arguments{
-\item{run}{run object}
+\item{run}{Run object}
 
 \item{show_output}{print verbose output to console}
 }

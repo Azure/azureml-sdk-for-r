@@ -26,17 +26,8 @@ test_that("create hyperdrive config, launch runs, get run metrics",
     
     script_params <- list(number_1 = 3, number_2 = 2)
     est <- create_estimator(source_directory = tmp_dir_name, entry_script = script_name,
-                                      compute_target = existing_compute$name,
-                                      script_params = script_params)
-    
-    run <- submit_experiment(est, exp)
-    wait_for_run_completion(run, show_output = TRUE)
-    metrics <- get_run_metrics(run)
-    
-    expected_metrics <- list("Sum" = 5)
-    expect_equal(length(setdiff(metrics, expected_metrics)), 0)
-    
-    
+                            compute_target = existing_compute$name, script_params = script_params)
+
     # define sampling and policy for hyperparameter tuning
     sampling <- grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
                                              number_2 = choice(c(2, 5))))
@@ -47,17 +38,17 @@ test_that("create hyperdrive config, launch runs, get run metrics",
     hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
     wait_for_run_completion(hyperdrive_run, show_output = TRUE)
     
-    children <- get_children_sorted_by_primary_metric()
-    expect_equal(length(children), 4)
+    child_run <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
+    expect_equal(length(child_run), 4)
     
-    children_hyperparams <- get_children_hyperparameters()
-    children_metrics <- get_children_metrics()
+    child_run_hyperparams <- get_child_run_hyperparameters(hyperdrive_run)
+    child_run_metrics <- get_child_run_metrics(hyperdrive_run)
     
     # find best-performing run
     best_run <- get_best_run_by_primary_metric(hyperdrive_run)
     best_run_metrics <- get_run_metrics(best_run)
     
-    expected_best_metrics <- list("Sum" = 11)
+    expected_best_metrics <- list("First Number" = 6, "Second Number" = 5, "Sum" = 11)
     expect_equal(length(setdiff(best_run-metrics, expected_best_metrics)), 0)
     
     # tear down resources

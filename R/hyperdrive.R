@@ -1,6 +1,3 @@
-# Copyright(c) Microsoft Corporation.
-# Licensed under the MIT license.
-
 ### HyperDrive configuration ###
 
 #' Create configuration for a HyperDrive run
@@ -11,8 +8,8 @@
 #' @param max_concurrent_runs maximum number of runs to start concurrently
 #' @param max_duration_minutes maximum time to allow runs
 #' @param policy termination policy
-#' @param estimator estimator object (N/A if using run_config or pipeline)
-#' @return HyperDrive config object
+#' @param estimator Estimator object
+#' @return HyperDriveConfig object
 #' @export
 create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
                                      primary_metric_goal, max_total_runs,
@@ -231,8 +228,8 @@ get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE
 #' @param discard_no_metric whether to include children without the primary metric
 #' @return named list of child runs
 #' @export
-get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
-                                                  reverse = FALSE, discard_no_metric = FALSE)
+get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
+                                                    reverse = FALSE, discard_no_metric = FALSE)
 {
   hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,
                                                        discard_no_metric)
@@ -242,7 +239,7 @@ get_children_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
 #' @param hyperdrive_run HyperDriveRun object
 #' @return named list of hyperparameters grouped by run_id
 #' @export
-get_children_hyperparameters <- function(hyperdrive_run)
+get_child_run_hyperparameters <- function(hyperdrive_run)
 {
   hyperdrive_run$get_hyperparameters()
 }
@@ -251,7 +248,7 @@ get_children_hyperparameters <- function(hyperdrive_run)
 #' @param hyperdrive_run HyperDriveRun object
 #' @return name list of metrics grouped by run_id
 #' @export
-get_children_metrics <- function(hyperdrive_run)
+get_child_run_metrics <- function(hyperdrive_run)
 {
   hyperdrive_run$get_metrics()
 }

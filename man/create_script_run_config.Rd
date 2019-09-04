@@ -22,7 +22,7 @@ create_script_run_config(source_directory, script = NULL,
 \item{base_image}{image to use}
 }
 \value{
-script runconfig object
+ScriptRunConfig object
 }
 \description{
 Create script runconfig

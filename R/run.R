@@ -11,7 +11,7 @@ get_run_metrics <- function(run)
 }
 
 #' Wait for the completion of this run
-#' @param run run object
+#' @param run Run object
 #' @param show_output print verbose output to console
 #' @export
 wait_for_run_completion <- function(run, show_output = TRUE)
@@ -55,7 +55,7 @@ get_current_run <- function(allow_offline=TRUE)
 #' Log metric to run
 #' @param name name of the metric
 #' @param value value of the metric
-#' @param run run object
+#' @param run Run object
 #' @export
 log_metric_to_run <- function(name, value, run)
 {
