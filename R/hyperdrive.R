@@ -28,10 +28,14 @@ create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_nam
 
 ### Specifying metric goal ###
 
-#' Global variable to access PrimaryMetricGoal enum (MAXIMIZE or MINIMIZE)
+#' Define supported metric goals for hyperparameter tuning
+#' @param goal string name of the goal ("MAXIMIZE" or "MINIMIZE")
 #' @return PrimaryMetricGoal object
 #' @export
-primary_metric_goal <- azureml$train$hyperdrive$PrimaryMetricGoal
+primary_metric_goal <- function(goal)
+{
+  azureml$train$hyperdrive$PrimaryMetricGoal(goal)
+}
 
 ### Specifying early termination policy ###
 
