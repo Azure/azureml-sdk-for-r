@@ -21,14 +21,10 @@ create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_nam
                                             policy, estimator)
 }
 
-#' Define supported metric goals for hyperparameter tuning
-#' @param goal string name of the goal ("MAXIMIZE" or "MINIMIZE")
+#' Global variable to access PrimaryMetricGoal enum (MAXIMIZE or MINIMIZE)
 #' @return PrimaryMetricGoal object
 #' @export
-primary_metric_goal <- function(goal)
-{
-  azureml$train$hyperdrive$PrimaryMetricGoal(goal)
-}
+primary_metric_goal <- azureml$train$hyperdrive$PrimaryMetricGoal
 
 #' Create Bandit policy for HyperDrive runs
 #' @param slack_factor ratio of the allowed distance from best-performing run

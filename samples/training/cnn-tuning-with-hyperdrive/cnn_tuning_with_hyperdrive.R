@@ -38,7 +38,7 @@ sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
                                            decay = uniform(1e-6, 3e-6)))
 
 policy <- bandit_policy(slack_factor = 0.15)
-hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", primary_metric_goal("MINIMIZE"),
+hyperdrive_config <- create_hyperdrive_config(sampling, "Loss", primary_metric_goal$MINIMIZE,
                                               4, policy = policy, estimator = est)
 
 # submit hyperdrive run
