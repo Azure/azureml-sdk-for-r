@@ -91,7 +91,7 @@ create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
     custom_docker_image <- paste(image_registry_address, custom_docker_image, sep = "/")
   }
   
-  base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image))
+  base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image), sep = "")
 
   if (!is.null(cran_packages))
   {
