@@ -5,16 +5,17 @@
 #' @param name The name of the environment
 #' @param version The version of the environment
 #' @param environment_variables A dictionary of environment variables names and values.
-#' @param r This section specifies which R environment to use on the target compute.
 #' @param cran_packages character vector of cran packages to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
+#' @param base_image_registry Image registry that contains the base image.
 #' @export
 create_environment <- function(name, version = NULL, environment_variables = NULL,
-                               r = NULL, cran_packages = NULL, github_packages = NULL,
-                               custom_url_packages = NULL, custom_docker_image = NULL)
+                               cran_packages = NULL, github_packages = NULL,
+                               custom_url_packages = NULL, custom_docker_image = NULL,
+                               base_image_registry = NULL)
 {
   env <- azureml$core$Environment(name)
   env$version <- version
@@ -25,8 +26,13 @@ create_environment <- function(name, version = NULL, environment_variables = NUL
   }
   
   env$docker$base_dockerfile <- create_docker_file(custom_docker_image, cran_packages,
-                                                   github_packages, custom_url_packages)
+                                                   github_packages, custom_url_packages,
+                                                   base_image_registry)
   env$docker$base_image <- NULL
+  if (!is.null(base_image_registry))
+  {
+    env$docker$base_image_registry = base_image_registry
+  }
   
   invisible(env)
 }
@@ -52,35 +58,41 @@ get_environment <- function(workspace, name, version = NULL)
   azureml$core$Environment$get(workspace, name, version)
 }
 
-#' Return the list of environments in the workspace.
-#' @param workspace The workspace
-#' @export
-list_environments_in_workspace <- function(workspace)
-{
-  environments <- azureml$core$Environment$list(workspace)
-  invisible(environments)
-}
-
 #' Create a dockerfile string to build the image for training.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
 #' @param cran_packages character vector of cran packages to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
+#' @param base_image_registry Image registry that contains the base image.
 create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
-                               github_packages = NULL, custom_url_packages = NULL)
+                               github_packages = NULL, custom_url_packages = NULL,
+                               base_image_registry = NULL)
 {
   base_dockerfile <- NULL
-  
-  if(!is.null(custom_docker_image))
+  image_registry_address <- NULL
+
+  if(!is.null(base_image_registry) && !is.null(base_image_registry$address))
   {
-    base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image))
-  }
-  else
-  {
-    base_dockerfile <- paste(base_dockerfile, "FROM viennaprivate.azurecr.io/r-base:cpu\n")
+    image_registry_address <- base_image_registry$address
   }
   
+  if(is.null(custom_docker_image))
+  {
+    if (is.null(image_registry_address))
+    {
+      image_registry_address <- "viennaprivate.azurecr.io"
+    }
+    custom_docker_image <- "r-base:cpu"
+  }
+  
+  if(!is.null(image_registry_address))
+  {
+    custom_docker_image <- paste(image_registry_address, custom_docker_image, sep = "/")
+  }
+  
+  base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image))
+
   if (!is.null(cran_packages))
   {
     base_dockerfile <- paste(base_dockerfile, sprintf("install.packages(\"%s\", repos = \"http://cran.us.r-project.org\")\n", cran_packages))

@@ -5,8 +5,9 @@
 \title{Configure the python environment where the experiment is executed.}
 \usage{
 create_environment(name, version = NULL, environment_variables = NULL,
-  r = NULL, cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, custom_docker_image = NULL)
+  cran_packages = NULL, github_packages = NULL,
+  custom_url_packages = NULL, custom_docker_image = NULL,
+  base_image_registry = NULL)
 }
 \arguments{
 \item{name}{The name of the environment}
@@ -14,8 +15,6 @@ create_environment(name, version = NULL, environment_variables = NULL,
 \item{version}{The version of the environment}
 
 \item{environment_variables}{A dictionary of environment variables names and values.}
-
-\item{r}{This section specifies which R environment to use on the target compute.}
 
 \item{cran_packages}{character vector of cran packages to be installed.}
 
@@ -25,6 +24,8 @@ create_environment(name, version = NULL, environment_variables = NULL,
 
 \item{custom_docker_image}{The name of the docker image from which the image to use for training will be built. If
 not set, a default CPU based image will be used as the base image.}
+
+\item{base_image_registry}{Image registry that contains the base image.}
 }
 \description{
 Configure the python environment where the experiment is executed.
