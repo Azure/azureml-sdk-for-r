@@ -58,6 +58,21 @@ get_environment <- function(workspace, name, version = NULL)
   azureml$core$Environment$get(workspace, name, version)
 }
 
+#' Get Azure Container Registry.
+#' @param address DNS name or IP address of azure container registry(ACR)
+#' @param username The username for ACR
+#' @param password The password for ACR
+#' @export
+create_container_registry <- function(address = NULL, username = NULL, password = NULL)
+{
+  container_registry <- azureml$core$ContainerRegistry()
+  container_registry$address <- address
+  container_registry$username <- username
+  container_registry$password <- password
+  
+  invisible(container_registry)
+}
+
 #' Create a dockerfile string to build the image for training.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
@@ -95,17 +110,26 @@ create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
 
   if (!is.null(cran_packages))
   {
-    base_dockerfile <- paste(base_dockerfile, sprintf("install.packages(\"%s\", repos = \"http://cran.us.r-project.org\")\n", cran_packages))
+    for (package in cran_packages)
+    {
+      base_dockerfile <- paste(base_dockerfile, sprintf("RUN R -e install.packages(\"%s\", repos = \"http://cran.us.r-project.org\")\n", package), sep = "")
+    }
   }
   
   if (!is.null(github_packages))
   {
-    base_dockerfile <- paste(base_dockerfile, sprintf("devtools::install_github(\"%s\")\n", github_packages))
+    for (package in github_packages)
+    {
+      base_dockerfile <- paste(base_dockerfile, sprintf("RUN R -e devtools::install_github(\"%s\")\n", package), sep = "")
+    }
   }
   
   if (!is.null(custom_url_packages))
   {
-    base_dockerfile <- paste(base_dockerfile, sprintf("install.packages(\"%s\", repos = NULL)\n", custom_url_packages))
+    for (package in custom_url_packages)
+    {
+      base_dockerfile <- paste(base_dockerfile, sprintf("RUN R -e install.packages(\"%s\", repos = NULL)\n", package), sep = "")
+    }
   }
   invisible(base_dockerfile)
 }
