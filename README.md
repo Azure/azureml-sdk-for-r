@@ -33,21 +33,26 @@ Main capabilities of the SDK include:
 
 1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose python 3.5 or later.
 
-2. Install azureml R package in Rstudio/R:
+2. Install the latest `devtools` in Rstudio/R:
+   ```
+   > install.packages('devtools')
+   ```
+
+3. Install azureml R package:
 
    Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in "https://github.com/settings/tokens" and supply to `auth_token` argument.
    ```
    > devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '<personal access toke>')
    ```
 
-3. Install azureml python sdk. This will create a conda environment
+4. Install azureml python sdk. This will create a conda environment
    called `r-azureml` in which the package would be installed. Run the
    following in Rstudio.
    ```
    > azureml::install_azureml()
    ```
 
-4. You can test by doing:
+5. You can test by doing:
    ```
    > library(azureml)
    > get_current_run()
@@ -76,16 +81,7 @@ Once you've accessed your workspace, you can begin running and tracking your own
 
 ## Troubleshooting
 
-- In step 2 of the installation, if the following error occurs:
-   ```R
-    Error: 'setInternet2' is defunct.
-    ```
-    Then upgrade devtools to the latest version or
-   install the latest `devtools` from github through:
-   ```
-   devtools::install_github("r-lib/devtools")
-   ```
-- In step 3 of the installation, if you get ssl errors on windows, that is due to an
+- In step 4 of the installation, if you get ssl errors on windows, that is due to an
   outdated openssl binary. Install the latest openssl binaries from
   [here](https://wiki.openssl.org/index.php/Binaries).
 - If the following error occurs when submitting an experiment using RStudio:
