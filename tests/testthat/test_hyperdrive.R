@@ -49,8 +49,8 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               # find best-performing run
               best_run <- get_best_run_by_primary_metric(hyperdrive_run)
 
-              expected_best_run <- max(unlist(child_run_metrics))
-              expect_equal(expected_best_run, best_run$id)
+              expected_best_run_id <- names(child_run_metrics)[which.max(child_run_metrics)]
+              expect_equal(expected_best_run_id, best_run$id)
               
               # tear down resources
               unlink(tmp_dir_name, recursive = TRUE)
