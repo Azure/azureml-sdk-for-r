@@ -42,15 +42,15 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               expect_equal(length(child_run), 5)
               
               child_run_hyperparams <- get_child_run_hyperparameters(hyperdrive_run)
+              expect_equal(length(child_run_hyperparams), 4)
               child_run_metrics <- get_child_run_metrics(hyperdrive_run)
+              expect_equal(length(child_run_metrics), 4)
               
               # find best-performing run
               best_run <- get_best_run_by_primary_metric(hyperdrive_run)
-              best_run_metrics <- get_run_metrics(best_run)
-              
-              expect_equal(best_run_metrics$"First Number", 6)
-              expect_equal(best_run_metrics$"Second Number", 5)
-              expect_equal(best_run_metrics$"Sum", 11)
+
+              expected_best_run <- max(unlist(child_run_metrics))
+              expect_equal(expected_best_run, best_run$id)
               
               # tear down resources
               unlink(tmp_dir_name, recursive = TRUE)
