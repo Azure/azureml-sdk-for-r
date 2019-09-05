@@ -231,8 +231,8 @@ get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE
 get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
                                                     reverse = FALSE, discard_no_metric = FALSE)
 {
-  hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,
-                                                       discard_no_metric)
+  hyperdrive_run$get_children_sorted_by_primary_metric(top = top, reverse = reverse,
+                                                       discard_no_metric = discard_no_metric)
 }
 
 #' Return hyperparameters for all child runs
