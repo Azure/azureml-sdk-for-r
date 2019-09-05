@@ -4,7 +4,7 @@
 \alias{get_child_runs_sorted_by_primary_metric}
 \title{Return the child runs sorted in descending order by best primary metric}
 \usage{
-get_child_runs_sorted_by_primary_metric(hyperdrive_run, top = 0,
+get_child_runs_sorted_by_primary_metric(hyperdrive_run, top = 0L,
   reverse = FALSE, discard_no_metric = FALSE)
 }
 \arguments{

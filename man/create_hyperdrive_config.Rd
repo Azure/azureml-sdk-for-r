@@ -6,7 +6,7 @@
 \usage{
 create_hyperdrive_config(hyperparameter_sampling, primary_metric_name,
   primary_metric_goal, max_total_runs, max_concurrent_runs = NULL,
-  max_duration_minutes = 10080, policy = NULL, estimator = NULL)
+  max_duration_minutes = 10080L, policy = NULL, estimator = NULL)
 }
 \arguments{
 \item{hyperparameter_sampling}{hyperparameter sampling option}
