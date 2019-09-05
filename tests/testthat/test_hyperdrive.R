@@ -32,14 +32,14 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               sampling <- grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
                                                        number_2 = choice(c(2, 5))))
               policy <- median_stopping_policy()
-              hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4L,
+              hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4,
                                                             policy = policy, estimator = est)
               # submit hyperdrive run
               hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
               wait_for_run_completion(hyperdrive_run, show_output = TRUE)
               
               child_run <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
-              expect_equal(length(child_run), 4)
+              expect_equal(length(child_run), 5)
               
               child_run_hyperparams <- get_child_run_hyperparameters(hyperdrive_run)
               child_run_metrics <- get_child_run_metrics(hyperdrive_run)
@@ -48,8 +48,9 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               best_run <- get_best_run_by_primary_metric(hyperdrive_run)
               best_run_metrics <- get_run_metrics(best_run)
               
-              expected_best_metrics <- list("First Number" = 6, "Second Number" = 5, "Sum" = 11)
-              expect_equal(length(setdiff(best_run_metrics, expected_best_metrics)), 0)
+              expect_equal(best_run_metrics$"First Number", 6)
+              expect_equal(best_run_metrics$"Second Number", 5)
+              expect_equal(best_run_metrics$"Sum", 11)
               
               # tear down resources
               unlink(tmp_dir_name, recursive = TRUE)
