@@ -13,7 +13,7 @@
 #' @export
 create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
                                      primary_metric_goal, max_total_runs,
-                                     max_concurrent_runs = NULL, max_duration_minutes = 10080,
+                                     max_concurrent_runs = NULL, max_duration_minutes = 10080L,
                                      policy = NULL, estimator = NULL)
 {
   
@@ -228,11 +228,10 @@ get_best_run_by_primary_metric <- function(hyperdrive_run, include_failed = TRUE
 #' @param discard_no_metric whether to include children without the primary metric
 #' @return named list of child runs
 #' @export
-get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0,
+get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0L,
                                                     reverse = FALSE, discard_no_metric = FALSE)
 {
-  hyperdrive_run$get_children_sorted_by_primary_metric(top = top, reverse = reverse,
-                                                       discard_no_metric = discard_no_metric)
+  hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse, discard_no_metric)
 }
 
 #' Return hyperparameters for all child runs
