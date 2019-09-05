@@ -32,7 +32,7 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               sampling <- grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
                                                        number_2 = choice(c(2, 5))))
               policy <- median_stopping_policy()
-              hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4,
+              hyperdrive_config <- create_hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4L,
                                                             policy = policy, estimator = est)
               # submit hyperdrive run
               hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
@@ -49,7 +49,7 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               best_run_metrics <- get_run_metrics(best_run)
               
               expected_best_metrics <- list("First Number" = 6, "Second Number" = 5, "Sum" = 11)
-              expect_equal(length(setdiff(best_run-metrics, expected_best_metrics)), 0)
+              expect_equal(length(setdiff(best_run_metrics, expected_best_metrics)), 0)
               
               # tear down resources
               unlink(tmp_dir_name, recursive = TRUE)
