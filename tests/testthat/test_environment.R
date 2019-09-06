@@ -7,7 +7,7 @@ test_that("create, register, and get environment",
     env_name <- "testenv"
     
     # Create environment
-    env <- create_environment(env_name, version = "1")
+    env <- environment(env_name, version = "1")
     expect_equal(env$name, env_name)
     expect_equal(env$version, "1")
     expect_equal(env$docker$base_image, NULL)
@@ -18,5 +18,5 @@ test_that("create, register, and get environment",
     
     # Get environment
     environ <- get_environment(ws, env_name, "1")
-    expect_equal(env, environ)
+    expect_equal(env$name, environ$name)
 })

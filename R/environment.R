@@ -12,10 +12,10 @@
 #' not set, a default CPU based image will be used as the base image.
 #' @param base_image_registry Image registry that contains the base image.
 #' @export
-create_environment <- function(name, version = NULL, environment_variables = NULL,
-                               cran_packages = NULL, github_packages = NULL,
-                               custom_url_packages = NULL, custom_docker_image = NULL,
-                               base_image_registry = NULL)
+environment <- function(name, version = NULL, environment_variables = NULL,
+                        cran_packages = NULL, github_packages = NULL,
+                        custom_url_packages = NULL, custom_docker_image = NULL,
+                        base_image_registry = NULL)
 {
   env <- azureml$core$Environment(name)
   env$version <- version
@@ -25,9 +25,10 @@ create_environment <- function(name, version = NULL, environment_variables = NUL
     env$environment_variables <- environment_variables
   }
   
-  env$docker$base_dockerfile <- create_docker_file(custom_docker_image, cran_packages,
-                                                   github_packages, custom_url_packages,
-                                                   base_image_registry)
+  base_docker_image <- build_docker_image_name(custom_docker_image, base_image_registry)
+
+  env$docker$base_dockerfile <- create_docker_file(base_docker_image, cran_packages,
+                                                   github_packages, custom_url_packages)
   env$docker$base_image <- NULL
   if (!is.null(base_image_registry))
   {
@@ -36,7 +37,6 @@ create_environment <- function(name, version = NULL, environment_variables = NUL
   
   invisible(env)
 }
-
 
 #' Returns the environment object
 #' @param workspace The workspace
@@ -63,7 +63,7 @@ get_environment <- function(workspace, name, version = NULL)
 #' @param username The username for ACR
 #' @param password The password for ACR
 #' @export
-create_container_registry <- function(address = NULL, username = NULL, password = NULL)
+container_registry <- function(address = NULL, username = NULL, password = NULL)
 {
   container_registry <- azureml$core$ContainerRegistry()
   container_registry$address <- address
@@ -73,20 +73,14 @@ create_container_registry <- function(address = NULL, username = NULL, password 
   invisible(container_registry)
 }
 
-#' Create a dockerfile string to build the image for training.
+#' Build the base docker image name incorporating the registry details.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
-#' @param cran_packages character vector of cran packages to be installed.
-#' @param github_packages character vector of github packages to be installed.
-#' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
 #' @param base_image_registry Image registry that contains the base image.
-create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
-                               github_packages = NULL, custom_url_packages = NULL,
-                               base_image_registry = NULL)
+build_docker_image_name <- function(custom_docker_image = NULL, base_image_registry = NULL)
 {
-  base_dockerfile <- NULL
   image_registry_address <- NULL
-
+  
   if(!is.null(base_image_registry) && !is.null(base_image_registry$address))
   {
     image_registry_address <- base_image_registry$address
@@ -106,6 +100,19 @@ create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
     custom_docker_image <- paste(image_registry_address, custom_docker_image, sep = "/")
   }
   
+  invisible(custom_docker_image)
+}
+
+#' Create a dockerfile string to build the image for training.
+#' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
+#' not set, a default CPU based image will be used as the base image.
+#' @param cran_packages character vector of cran packages to be installed.
+#' @param github_packages character vector of github packages to be installed.
+#' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
+create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
+                               github_packages = NULL, custom_url_packages = NULL)
+{
+  base_dockerfile <- NULL
   base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image), sep = "")
 
   if (!is.null(cran_packages))

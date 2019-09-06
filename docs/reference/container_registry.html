@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a dockerfile string to build the image for training. — create_docker_file • azureml</title>
+<title>Get Azure Container Registry. — container_registry • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a dockerfile string to build the image for training. — create_docker_file" />
+<meta property="og:title" content="Get Azure Container Registry. — container_registry" />
 
-<meta property="og:description" content="Create a dockerfile string to build the image for training." />
+<meta property="og:description" content="Get Azure Container Registry." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,39 +99,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a dockerfile string to build the image for training.</h1>
+    <h1>Get Azure Container Registry.</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
-    <div class="hidden name"><code>create_docker_file.Rd</code></div>
+    <div class="hidden name"><code>container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a dockerfile string to build the image for training.</p>
+    <p>Get Azure Container Registry.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_docker_file</span>(<span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>container_registry</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>custom_docker_image</th>
-      <td><p>The name of the docker image from which the image to use for training will be built. If
-not set, a default CPU based image will be used as the base image.</p></td>
+      <th>address</th>
+      <td><p>DNS name or IP address of azure container registry(ACR)</p></td>
     </tr>
     <tr>
-      <th>cran_packages</th>
-      <td><p>character vector of cran packages to be installed.</p></td>
+      <th>username</th>
+      <td><p>The username for ACR</p></td>
     </tr>
     <tr>
-      <th>github_packages</th>
-      <td><p>character vector of github packages to be installed.</p></td>
-    </tr>
-    <tr>
-      <th>custom_url_packages</th>
-      <td><p>character vector of packages to be installed from local, directory or custom url.</p></td>
+      <th>password</th>
+      <td><p>The password for ACR</p></td>
     </tr>
     </table>
     
