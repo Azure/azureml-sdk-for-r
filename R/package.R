@@ -19,6 +19,9 @@
       }
     }
   ))
+  
+  ver <- toString(utils::packageVersion("azureml"))
+  azureml$"_base_sdk_common"$user_agent$append("azureml-r-sdk", ver)
 
   invisible(NULL)
 }
