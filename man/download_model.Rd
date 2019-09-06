@@ -4,7 +4,7 @@
 \alias{download_model}
 \title{Download model to target_dir of local file system.}
 \usage{
-download_model(model, target_dir = ".", exist_ok = False)
+download_model(model, target_dir = ".", exist_ok = FALSE)
 }
 \arguments{
 \item{model}{The model to download}

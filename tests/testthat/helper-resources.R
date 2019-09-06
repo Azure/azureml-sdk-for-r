@@ -6,6 +6,8 @@ workspace_name <- Sys.getenv("TEST_WORKSPACE_NAME", unset = "r_sdk_workspace")
 cluster_name <- Sys.getenv("TEST_CLUSTER_NAME", unset = "r-cpu-cluster")
 test_env <- paste0('test_', as.integer(Sys.time()))
 package_url <- Sys.getenv('PACKAGE_LOCATION')
+build_num <- Sys.getenv('TEST_BUILD_NUMBER')
+build_num <- gsub('[.]', '-', build_num)
 
 install.packages(package_url, repos = NULL, dep = FALSE, type = "source")
 

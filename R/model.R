@@ -46,7 +46,7 @@ register_model <- function(workspace, model_path, model_name, tags = NULL,
 #' @param target_dir Path to directory for where to download the model. Defaults to "."
 #' @param exist_ok Boolean to replace downloaded dir/files if exists. Defaults to False
 #' @export
-download_model <- function(model, target_dir = '.', exist_ok = False)
+download_model <- function(model, target_dir = '.', exist_ok = FALSE)
 {
   model_path <- model$download(target_dir, exist_ok)
   invisible(model_path)
@@ -67,7 +67,7 @@ serialize_model <- function(model)
 #' @export
 deserialize_to_model <- function(workspace, model_payload)
 {
-  model <- azureml$core$Model$deserialize()
+  model <- azureml$core$Model$deserialize(workspace, model_payload)
   invisible(model)
 }
 
