@@ -123,18 +123,18 @@
 <td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
 </tr>
 <tr class="odd">
+<td><a href="https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters">HyperDrive</a></td>
+<td>HyperDrive automates the process of running hyperparameter sweeps for an <code>Experiment</code>.</td>
+<td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
+</tr>
+<tr class="even">
 <td><a href="https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models">Models</a></td>
 <td>Cloud representations of machine learning models that help you transfer models between local development environments and the <code>Workspace</code> object in the cloud.</td>
 <td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments">Webservice</a></td>
 <td>Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. <code>Webservice</code> is the abstract parent class for creating and deploying web services for your models.</td>
-<td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters">HyperDrive</a></td>
-<td>HyperDrive automates the process of running hyperparameter sweeps for an <code>Experiment</code>.</td>
 <td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
 </tr>
 </tbody>
@@ -179,7 +179,7 @@
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
-<li><p>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
+<li>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
 <li>
 <p>If the following error occurs when submitting an experiment using RStudio: <code>R   Error in py_call_impl(callable, dots$args, dots$keywords) :     PermissionError: [Errno 13] Permission denied</code> Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.</p>
 <p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>

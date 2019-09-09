@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create run configuration to run a R script — create_run_config • azureml</title>
+<title>Specify a log uniform distribution — loguniform • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create run configuration to run a R script — create_run_config" />
+<meta property="og:title" content="Specify a log uniform distribution — loguniform" />
 
-<meta property="og:description" content="Create run configuration to run a R script" />
+<meta property="og:description" content="Specify a log uniform distribution" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,39 +99,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create run configuration to run a R script</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/runconfig.R'><code>R/runconfig.R</code></a></small>
-    <div class="hidden name"><code>create_run_config.Rd</code></div>
+    <h1>Specify a log uniform distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
+    <div class="hidden name"><code>loguniform.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create run configuration to run a R script</p>
+    <p>Specify a log uniform distribution</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_run_config</span>(<span class='no'>target</span>, <span class='kw'>data_references</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>base_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>loguniform</span>(<span class='no'>min_value</span>, <span class='no'>max_value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>target</th>
-      <td><p>target string</p></td>
+      <th>min_value</th>
+      <td><p>minimum value in the range will be exp(min_value) (inclusive)</p></td>
     </tr>
     <tr>
-      <th>data_references</th>
-      <td><p>list of data references</p></td>
-    </tr>
-    <tr>
-      <th>base_image</th>
-      <td><p>image to use</p></td>
+      <th>max_value</th>
+      <td><p>maximum value in the range will be exp(min_value) (inclusive)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>RunConfig object</p>
+    <p>the stochastic expression</p>
     
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create run configuration to run a R script — create_run_config • azureml</title>
+<title>Create configuration for a HyperDrive run — hyperdrive_config • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create run configuration to run a R script — create_run_config" />
+<meta property="og:title" content="Create configuration for a HyperDrive run — hyperdrive_config" />
 
-<meta property="og:description" content="Create run configuration to run a R script" />
+<meta property="og:description" content="Create configuration for a HyperDrive run" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,39 +99,61 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create run configuration to run a R script</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/runconfig.R'><code>R/runconfig.R</code></a></small>
-    <div class="hidden name"><code>create_run_config.Rd</code></div>
+    <h1>Create configuration for a HyperDrive run</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
+    <div class="hidden name"><code>hyperdrive_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create run configuration to run a R script</p>
+    <p>Create configuration for a HyperDrive run</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_run_config</span>(<span class='no'>target</span>, <span class='kw'>data_references</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>base_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>hyperdrive_config</span>(<span class='no'>hyperparameter_sampling</span>, <span class='no'>primary_metric_name</span>,
+  <span class='no'>primary_metric_goal</span>, <span class='no'>max_total_runs</span>, <span class='kw'>max_concurrent_runs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_duration_minutes</span> <span class='kw'>=</span> <span class='fl'>10080L</span>, <span class='kw'>policy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>target</th>
-      <td><p>target string</p></td>
+      <th>hyperparameter_sampling</th>
+      <td><p>hyperparameter sampling option</p></td>
     </tr>
     <tr>
-      <th>data_references</th>
-      <td><p>list of data references</p></td>
+      <th>primary_metric_name</th>
+      <td><p>name of primary metric</p></td>
     </tr>
     <tr>
-      <th>base_image</th>
-      <td><p>image to use</p></td>
+      <th>primary_metric_goal</th>
+      <td><p>goal of primary metric</p></td>
+    </tr>
+    <tr>
+      <th>max_total_runs</th>
+      <td><p>maximum number of runs to queue</p></td>
+    </tr>
+    <tr>
+      <th>max_concurrent_runs</th>
+      <td><p>maximum number of runs to start concurrently</p></td>
+    </tr>
+    <tr>
+      <th>max_duration_minutes</th>
+      <td><p>maximum time to allow runs</p></td>
+    </tr>
+    <tr>
+      <th>policy</th>
+      <td><p>termination policy</p></td>
+    </tr>
+    <tr>
+      <th>estimator</th>
+      <td><p>Estimator object</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>RunConfig object</p>
+    <p>HyperDriveConfig object</p>
     
 
   </div>

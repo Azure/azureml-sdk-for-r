@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create run configuration to run a R script — create_run_config • azureml</title>
+<title>Return the child runs sorted in descending order by best primary metric — get_child_runs_sorted_by_primary_metric • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create run configuration to run a R script — create_run_config" />
+<meta property="og:title" content="Return the child runs sorted in descending order by best primary metric — get_child_runs_sorted_by_primary_metric" />
 
-<meta property="og:description" content="Create run configuration to run a R script" />
+<meta property="og:description" content="Return the child runs sorted in descending order by best primary metric" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,39 +99,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create run configuration to run a R script</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/runconfig.R'><code>R/runconfig.R</code></a></small>
-    <div class="hidden name"><code>create_run_config.Rd</code></div>
+    <h1>Return the child runs sorted in descending order by best primary metric</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
+    <div class="hidden name"><code>get_child_runs_sorted_by_primary_metric.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create run configuration to run a R script</p>
+    <p>Return the child runs sorted in descending order by best primary metric</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_run_config</span>(<span class='no'>target</span>, <span class='kw'>data_references</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>base_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_child_runs_sorted_by_primary_metric</span>(<span class='no'>hyperdrive_run</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>discard_no_metric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>target</th>
-      <td><p>target string</p></td>
+      <th>hyperdrive_run</th>
+      <td><p>HyperDriveRun object</p></td>
     </tr>
     <tr>
-      <th>data_references</th>
-      <td><p>list of data references</p></td>
+      <th>top</th>
+      <td><p>number of top children to be returned, default value of 0 will return all</p></td>
     </tr>
     <tr>
-      <th>base_image</th>
-      <td><p>image to use</p></td>
+      <th>reverse</th>
+      <td><p>reverse the sorting order</p></td>
+    </tr>
+    <tr>
+      <th>discard_no_metric</th>
+      <td><p>whether to include children without the primary metric</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>RunConfig object</p>
+    <p>named list of child runs</p>
     
 
   </div>
