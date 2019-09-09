@@ -14,10 +14,10 @@
 #' @param estimator Estimator object
 #' @return HyperDriveConfig object
 #' @export
-create_hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
-                                     primary_metric_goal, max_total_runs,
-                                     max_concurrent_runs = NULL, max_duration_minutes = 10080L,
-                                     policy = NULL, estimator = NULL)
+hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
+                              primary_metric_goal, max_total_runs,
+                              max_concurrent_runs = NULL, max_duration_minutes = 10080L,
+                              policy = NULL, estimator = NULL)
 {
   
   azureml$train$hyperdrive$HyperDriveConfig(hyperparameter_sampling, primary_metric_name,
