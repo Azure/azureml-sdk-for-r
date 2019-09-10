@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Create amlcompute
+#' Create AmlCompute
 #' @param workspace workspace object
 #' @param cluster_name cluster name
 #' @param vm_size Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
@@ -57,6 +57,29 @@ get_compute <- function(workspace, cluster_name)
   )
 }
 
+#' Get compute. Returns NULL if compute is not found on workspace.
+#' @param workspace workspace that has the cluster
+#' @param cluster_name name of the cluster
+#' @export
+get_compute <- function(workspace, cluster_name)
+{
+  tryCatch(
+    {
+      azureml$core$compute$ComputeTarget(workspace = workspace, name = cluster_name)
+    },
+    error = function(e) {
+      if (grepl("ComputeTargetException", e$message, ))
+      {
+        NULL
+      }
+      else
+      {
+        stop(message(e))
+      }
+    }
+  )
+}
+
 #' Wait for cluster's instantiation
 #' @param cluster cluster object
 #' @param show_output show output on console
@@ -69,7 +92,7 @@ wait_for_compute <- function(cluster, show_output = TRUE)
 #' Delete compute
 #' @param cluster cluster object
 #' @export
-delete_aml_compute <- function(cluster)
+delete_compute <- function(cluster)
 {
   cluster$delete()
   invisible(NULL)

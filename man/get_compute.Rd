@@ -5,12 +5,20 @@
 \title{Get compute. Returns NULL if compute is not found on workspace.}
 \usage{
 get_compute(workspace, cluster_name)
+
+get_compute(workspace, cluster_name)
 }
 \arguments{
 \item{workspace}{workspace that has the cluster}
 
 \item{cluster_name}{name of the cluster}
+
+\item{workspace}{workspace that has the cluster}
+
+\item{cluster_name}{name of the cluster}
 }
 \description{
+Get compute. Returns NULL if compute is not found on workspace.
+
 Get compute. Returns NULL if compute is not found on workspace.
 }

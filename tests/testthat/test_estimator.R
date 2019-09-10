@@ -11,11 +11,11 @@ test_that("estimator",
 
     ds <- get_default_datastore(ws)
 
-    estimator <- create_estimator(tmp_dir_name, compute_target = existing_compute$name, 
-                                  entry_script = script_name, 
-                                  script_params = list("data_folder" = ds$as_mount()),
-                                  cran_packages = c("ggplot2", "dplyr")
-    )
+    estimator <- estimator(tmp_dir_name, compute_target = existing_compute$name, 
+                           entry_script = script_name, 
+                           script_params = list("data_folder" = ds$as_mount()),
+                           cran_packages = c("ggplot2", "dplyr"))
+    
     experiment <- experiment(ws, "estimator_run")
     run <- submit_experiment(estimator, experiment)
     wait_for_run_completion(run, show_output = TRUE)
