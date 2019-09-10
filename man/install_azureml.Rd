@@ -2,15 +2,24 @@
 % Please edit documentation in R/install.R
 \name{install_azureml}
 \alias{install_azureml}
-\title{Install azureml}
+\title{Copyright(c) Microsoft Corporation.
+Licensed under the MIT license.}
 \usage{
-install_azureml(version = NULL, environment_name = "r-azureml")
+install_azureml(method = "conda", conda = "auto", version = NULL,
+  envname = "r-azureml", conda_python_version = "3.6")
 }
 \arguments{
+\item{method}{installation method for reticulate::py_install()}
+
+\item{conda}{path to conda executable ("auto" will find using PATH)}
+
 \item{version}{pip version}
 
-\item{environment_name}{name of environment to create}
+\item{envname}{name of environment to create}
+
+\item{conda_python_version}{version of python for conda environment}
 }
 \description{
-Install azureml
+Copyright(c) Microsoft Corporation.
+Licensed under the MIT license.
 }
