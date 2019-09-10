@@ -57,29 +57,6 @@ get_compute <- function(workspace, cluster_name)
   )
 }
 
-#' Get compute. Returns NULL if compute is not found on workspace.
-#' @param workspace workspace that has the cluster
-#' @param cluster_name name of the cluster
-#' @export
-get_compute <- function(workspace, cluster_name)
-{
-  tryCatch(
-    {
-      azureml$core$compute$ComputeTarget(workspace = workspace, name = cluster_name)
-    },
-    error = function(e) {
-      if (grepl("ComputeTargetException", e$message, ))
-      {
-        NULL
-      }
-      else
-      {
-        stop(message(e))
-      }
-    }
-  )
-}
-
 #' Wait for cluster's instantiation
 #' @param cluster cluster object
 #' @param show_output show output on console
