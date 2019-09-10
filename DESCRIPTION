@@ -20,5 +20,6 @@ Imports:
     R6 (>= 2.4.0)
 Suggests: rmarkdown,
     knitr,
-    testthat
+    testthat,
+    rstudioapi
 VignetteBuilder: knitr
