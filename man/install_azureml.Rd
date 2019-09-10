@@ -6,7 +6,7 @@
 Licensed under the MIT license.}
 \usage{
 install_azureml(method = "conda", conda = "auto", version = NULL,
-  envname = "r-azureml", conda_python_version = "3.6")
+  envname = "r-azureml", conda_python_version = "3.6", ...)
 }
 \arguments{
 \item{method}{installation method for reticulate::py_install()}
