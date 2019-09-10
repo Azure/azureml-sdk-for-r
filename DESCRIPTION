@@ -17,9 +17,9 @@ License: MIT
 RoxygenNote: 6.1.1
 Imports:
     reticulate (>= 1.12),
-    R6 (>= 2.4.0)
+    R6 (>= 2.4.0),
+    rstudioapi (>= 0.7)
 Suggests: rmarkdown,
     knitr,
-    testthat,
-    rstudioapi
+    testthat
 VignetteBuilder: knitr

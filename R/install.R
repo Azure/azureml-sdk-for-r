@@ -11,7 +11,8 @@ install_azureml <- function(method = "conda",
                             conda = "auto",
                             version = NULL,
                             envname = "r-azureml",
-                            conda_python_version = "3.6")
+                            conda_python_version = "3.6",
+                            ...)
 {
   method <- match.arg(method)
   main_package = "azureml-sdk"
@@ -47,7 +48,8 @@ install_azureml <- function(method = "conda",
     method = method,
     conda = conda,
     python_version = conda_python_version,
-    pip = TRUE
+    pip = TRUE,
+    ...
   )
   
   cat("\nInstallation complete.\n\n")
