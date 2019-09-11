@@ -179,7 +179,7 @@
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
-<li>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
+<li><p>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
 <li>
 <p>If the following error occurs when submitting an experiment using RStudio: <code>R   Error in py_call_impl(callable, dots$args, dots$keywords) :     PermissionError: [Errno 13] Permission denied</code> Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.</p>
 <p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>

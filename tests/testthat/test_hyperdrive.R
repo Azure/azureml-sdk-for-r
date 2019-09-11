@@ -25,8 +25,8 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               file.copy(script_name, tmp_dir_name)
               
               script_params <- list(number_1 = 3, number_2 = 2)
-              est <- create_estimator(source_directory = tmp_dir_name, entry_script = script_name,
-                                      compute_target = existing_compute$name, script_params = script_params)
+              est <- estimator(source_directory = tmp_dir_name, entry_script = script_name,
+                               compute_target = existing_compute$name, script_params = script_params)
               
               # define sampling and policy for hyperparameter tuning
               sampling <- grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
