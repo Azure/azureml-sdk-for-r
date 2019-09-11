@@ -24,6 +24,7 @@ test_that("create akscompute",
 {
   ws <- existing_ws
   
+  # create aks compute
   cluster_name <- paste("aks", build_num, sep="")
   compute_target <- create_aks_compute(workspace = ws, cluster_name = cluster_name)
   wait_for_compute(compute_target)
@@ -32,8 +33,11 @@ test_that("create akscompute",
   compute_target <- get_compute(ws, cluster_name = cluster_name)
   expect_equal(compute_target$name, cluster_name)
   
-  non_existent_cluster <- get_compute(ws, cluster_name = "nonexistent")
-  expect_equal(non_existent_cluster, NULL)
+  # detach and attach
+  aks_resource_id <- compute_target$cluster_resource_id
+  detach_aks_compute(cluster)
+  
+  attach_aks_compute(ws, cluster_name, aks_resource_id)
   
   # tear down compute
   delete_compute(compute_target)

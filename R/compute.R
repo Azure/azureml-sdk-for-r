@@ -125,18 +125,16 @@ get_aks_compute_credentials <- function(cluster)
 
 #' Retrieve the credentials for the AKS target
 #' @param workspace The workspace object to attach the Compute object to. 
-#' @param name The name to associate with the compute resource inside the provided workspace. 
-#' @param resource_group Name of the resource group in which the AKS is located. 
 #' @param cluster_name The AKS cluster name 
 #' @param resource_id The Azure resource ID for the compute resource being attached
+#' @param resource_group Name of the resource group in which the AKS is located. 
 #' @return An AksCompute object representation of the compute object
 #' @export
-attach_aks_compute <- function(workspace, name, resource_group = NULL, cluster_name = NULL, resource_id = NULL)
+attach_aks_compute <- function(workspace, cluster_name, resource_id, resource_group = NULL)
 {
-  attach_config <- azureml$core$compute$AksCompute$attach_configuration(resource_group = resource_group, cluster_name = cluster_name,
-                                                                        resource_id = resource_id)
+  attach_config <- azureml$core$compute$AksCompute$attach_configuration(resource_group = resource_group, resource_id = resource_id)
   
-  azureml$core$compute$ComputeTarget$attach(workspace, name, attach_config)
+  azureml$core$compute$ComputeTarget$attach(workspace, cluster_name, attach_config)
 }
 
 #' Detach the AksCompute object from its associated workspace
