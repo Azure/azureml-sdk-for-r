@@ -45,6 +45,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/installation.html">Installing AzureML SDK for R</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -143,28 +155,8 @@
 <div id="installing-azureml-r-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-azureml-r-package" class="anchor"></a>Installing <code>azureml</code> R package</h2>
-<ol>
-<li><p>Install <a href="https://www.anaconda.com/">anaconda</a> if not already installed. Choose python 3.5 or later.</p></li>
-<li>
-<p>Install the latest <code>devtools</code> in Rstudio/R:</p>
-<pre><code>&gt; install.packages('devtools')</code></pre>
-</li>
-<li>
-<p>Install azureml R package:</p>
-<p>Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in “<a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>” and supply to <code>auth_token</code> argument.</p>
-<pre><code>&gt; devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '&lt;personal access toke&gt;')</code></pre>
-</li>
-<li>
-<p>Install azureml python sdk. This will create a conda environment called <code>r-azureml</code> in which the package would be installed. Run the following in Rstudio.</p>
-<pre><code>&gt; azureml::install_azureml()</code></pre>
-</li>
-<li>
-<p>You can test by doing:</p>
-<pre><code>&gt; library(azureml)
-&gt; get_current_run()
-&lt;azureml.core.run._OfflineRun&gt;</code></pre>
-</li>
-</ol>
+<p>To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo.</p>
+<p>For a detailed walk-through of the installation process, see our <a href="https://microsoft.github.io/azureml-sdk-for-r/articles/installation.html">article</a>.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -179,7 +171,7 @@
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
-<li><p>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
+<li>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
 <li>
 <p>If the following error occurs when submitting an experiment using RStudio: <code>R   Error in py_call_impl(callable, dots$args, dots$keywords) :     PermissionError: [Errno 13] Permission denied</code> Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.</p>
 <p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>

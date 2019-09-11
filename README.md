@@ -31,33 +31,9 @@ Main capabilities of the SDK include:
 
 ## Installing `azureml` R package
 
-1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose python 3.5 or later.
+To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo.
 
-2. Install the latest `devtools` in Rstudio/R:
-   ```
-   > install.packages('devtools')
-   ```
-
-3. Install azureml R package:
-
-   Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in "https://github.com/settings/tokens" and supply to `auth_token` argument.
-   ```
-   > devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '<personal access toke>')
-   ```
-
-4. Install azureml python sdk. This will create a conda environment
-   called `r-azureml` in which the package would be installed. Run the
-   following in Rstudio.
-   ```
-   > azureml::install_azureml()
-   ```
-
-5. You can test by doing:
-   ```
-   > library(azureml)
-   > get_current_run()
-   <azureml.core.run._OfflineRun>
-   ```
+For a detailed walk-through of the installation process, see our [article](https://microsoft.github.io/azureml-sdk-for-r/articles/installation.html).
    
 ## Getting Started
 
