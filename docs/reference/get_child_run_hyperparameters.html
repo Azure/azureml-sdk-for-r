@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Makes a datastore available as a datareference for a run — create_data_reference • azureml</title>
+<title>Return hyperparameters for all child runs — get_child_run_hyperparameters • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Makes a datastore available as a datareference for a run — create_data_reference" />
+<meta property="og:title" content="Return hyperparameters for all child runs — get_child_run_hyperparameters" />
 
-<meta property="og:description" content="Makes a datastore available as a datareference for a run" />
+<meta property="og:description" content="Return hyperparameters for all child runs" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,53 +99,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Makes a datastore available as a datareference for a run</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/data_reference.R'><code>R/data_reference.R</code></a></small>
-    <div class="hidden name"><code>create_data_reference.Rd</code></div>
+    <h1>Return hyperparameters for all child runs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
+    <div class="hidden name"><code>get_child_run_hyperparameters.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Makes a datastore available as a datareference for a run</p>
+    <p>Return hyperparameters for all child runs</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_data_reference</span>(<span class='no'>datastore</span>, <span class='kw'>data_reference_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>path_on_datastore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"mount"</span>, <span class='kw'>path_on_compute</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_child_run_hyperparameters</span>(<span class='no'>hyperdrive_run</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>datastore</th>
-      <td><p>the Datastore to reference</p></td>
-    </tr>
-    <tr>
-      <th>data_reference_name</th>
-      <td><p>the name of the data reference</p></td>
-    </tr>
-    <tr>
-      <th>path_on_datastore</th>
-      <td><p>the relative path on cloud for the data reference</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>the operation on the data reference, we support mount, download</p></td>
-    </tr>
-    <tr>
-      <th>path_on_compute</th>
-      <td><p>the path on compute for the data reference</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>overwrite if data reference exists</p></td>
+      <th>hyperdrive_run</th>
+      <td><p>HyperDriveRun object</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data reference object</p>
+    <p>named list of hyperparameters grouped by run_id</p>
     
 
   </div>

@@ -11,7 +11,7 @@ log_metric_to_run(name, value, run)
 
 \item{value}{value of the metric}
 
-\item{run}{run object}
+\item{run}{Run object}
 }
 \description{
 Log metric to run
