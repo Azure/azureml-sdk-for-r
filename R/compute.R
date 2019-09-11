@@ -102,7 +102,7 @@ delete_compute <- function(cluster)
 create_aks_compute <- function(workspace, cluster_name, agent_count = NULL, vm_size = NULL, ssl_cname = NULL, ssl_cert_pem_file = NULL,
                                ssl_key_pem_file = NULL, location = NULL, vnet_resourcegroup_name = NULL,
                                vnet_name = NULL, subnet_name = NULL, service_cidr = NULL,
-                               dns_service_ip = NULL, docker_bridge_cidr = NULL, cluster_purpose = NULL)
+                               dns_service_ip = NULL, docker_bridge_cidr = NULL)
 {
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(agent_count = agent_count, vm_size = vm_size,
                                                                                ssl_cname = ssl_cname, ssl_cert_pem_file = ssl_cert_pem_file, ssl_key_pem_file = ssl_key_pem_file,
