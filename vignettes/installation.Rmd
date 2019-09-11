@@ -18,14 +18,14 @@ Next, install [`reticulate`](https://rstudio.github.io/reticulate/). The binding
 > install.packages('reticulate')
 ```
 
-## 3. Install `azureml` R package with `devtools`
-As the `azureml` package is not available on CRAN, you will need `devtools` to install from the GitHub repo.
+## 3. Install `azureml` R package with `remotes`
+As the `azureml` package is not available on CRAN, you will need `remotes` to install from the GitHub repo.
 ```
-> install.packages('devtools')
+> install.packages('remotes')
 ```
 Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply it along with your username.
 ```
-> devtools::install_github('https://github.com/Azure/azureml-sdk-for-r',
+> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            user_name = '<your GitHub user name>',
                            auth_token = '<your personal access token>',
                            INSTALL_opts=c("--no-multiarch"))

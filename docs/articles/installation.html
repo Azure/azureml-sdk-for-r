@@ -100,14 +100,14 @@
 <p>Next, install <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. The bindings for AzureML SDK for R rely on <code>reticulate</code> to interface with <a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml">AzureML SDK for Python</a> and run operations. If using Windows, make sure that <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> is installed first.</p>
 <pre><code>&gt; install.packages('reticulate')</code></pre>
 </div>
-<div id="install-azureml-r-package-with-devtools" class="section level2">
+<div id="install-azureml-r-package-with-remotes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#install-azureml-r-package-with-devtools" class="anchor"></a>3. Install <code>azureml</code> R package with <code>devtools</code>
+<a href="#install-azureml-r-package-with-remotes" class="anchor"></a>3. Install <code>azureml</code> R package with <code>remotes</code>
 </h2>
-<p>As the <code>azureml</code> package is not available on CRAN, you will need <code>devtools</code> to install from the GitHub repo.</p>
-<pre><code>&gt; install.packages('devtools')</code></pre>
+<p>As the <code>azureml</code> package is not available on CRAN, you will need <code>remotes</code> to install from the GitHub repo.</p>
+<pre><code>&gt; install.packages('remotes')</code></pre>
 <p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to <a href="https://github.com/settings/tokens">generate a personal access token</a> and supply it along with your username.</p>
-<pre><code>&gt; devtools::install_github('https://github.com/Azure/azureml-sdk-for-r',
+<pre><code>&gt; remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            user_name = '&lt;your GitHub user name&gt;',
                            auth_token = '&lt;your personal access token&gt;',
                            INSTALL_opts=c("--no-multiarch"))</code></pre>
@@ -135,7 +135,7 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#install-anaconda">1. Install Anaconda</a></li>
       <li><a href="#install-reticulate">2. Install <code>reticulate</code></a></li>
-      <li><a href="#install-azureml-r-package-with-devtools">3. Install <code>azureml</code> R package with <code>devtools</code></a></li>
+      <li><a href="#install-azureml-r-package-with-remotes">3. Install <code>azureml</code> R package with <code>remotes</code></a></li>
       <li><a href="#install-azureml-python-sdk">4. Install azureml Python SDK</a></li>
       <li><a href="#test-installation">5. Test installation</a></li>
       </ul>
