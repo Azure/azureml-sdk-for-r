@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upload the data from the local file system to the file share this datastore points to. — upload_files_to_azure_datastore • azureml</title>
+<title>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q — qlognormal • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Upload the data from the local file system to the file share this datastore points to. — upload_files_to_azure_datastore" />
+<meta property="og:title" content="Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q — qlognormal" />
 
-<meta property="og:description" content="Upload the data from the local file system to the file share this datastore points to." />
+<meta property="og:description" content="Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,54 +99,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Upload the data from the local file system to the file share this datastore points to.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
-    <div class="hidden name"><code>upload_files_to_azure_datastore.Rd</code></div>
+    <h1>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
+    <div class="hidden name"><code>qlognormal.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Upload the data from the local file system to the file share this datastore points to.</p>
+    <p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>upload_files_to_azure_datastore</span>(<span class='no'>ds</span>, <span class='no'>files</span>, <span class='kw'>relative_root</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>qlognormal</span>(<span class='no'>mu</span>, <span class='no'>sigma</span>, <span class='no'>q</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ds</th>
-      <td><p>datastore object</p></td>
+      <th>mu</th>
+      <td><p>mean of the normal distribution</p></td>
     </tr>
     <tr>
-      <th>files</th>
-      <td><p>list of absolute path to files to upload</p></td>
+      <th>sigma</th>
+      <td><p>standard deviation of the normal distribution</p></td>
     </tr>
     <tr>
-      <th>relative_root</th>
-      <td><p>the base path from which is used to determine the path
-of the files in the file share. For example, if we upload /path/to/file.txt, and we define
-base path to be /path, when file.txt is uploaded to the file share, it will have
-the path of /to/file.txt. If target_path is also given, then it will be used as
-the prefix for the derived path from above. The base path must be a common path of
-all of the files, otherwise an exception will be thrown, defaults to None, which will find
-the common path.</p></td>
-    </tr>
-    <tr>
-      <th>target_path</th>
-      <td><p>location in the file share to upload the data to, defaults to None, the root</p></td>
-    </tr>
-    <tr>
-      <th>overwrite</th>
-      <td><p>overwrites, defaults to FALSE</p></td>
-    </tr>
-    <tr>
-      <th>show_progress</th>
-      <td><p>progress of upload in the console, defaults to TRUE</p></td>
+      <th>q</th>
+      <td><p>smoothing factor</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>the stochastic expression</p>
     
 
   </div>
@@ -154,7 +139,9 @@ the common path.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
