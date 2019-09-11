@@ -25,8 +25,28 @@ environment <- function(name, version = NULL, environment_variables = NULL,
     env$environment_variables <- environment_variables
   }
   
-  base_docker_image <- build_docker_image_name(custom_docker_image, base_image_registry)
+  base_docker_image <- custom_docker_image
+  image_registry_address <- NULL
 
+  if(!is.null(base_image_registry) && !is.null(base_image_registry$address))
+  {
+    image_registry_address <- base_image_registry$address
+  }
+    
+  if(is.null(base_docker_image))
+  {
+    if (is.null(image_registry_address))
+    {
+      image_registry_address <- "viennaprivate.azurecr.io"
+    }
+    base_docker_image <- "r-base:cpu"
+  }
+    
+  if(!is.null(image_registry_address))
+  {
+    base_docker_image <- paste(image_registry_address, base_docker_image, sep = "/")
+  }
+    
   env$docker$base_dockerfile <- create_docker_file(base_docker_image, cran_packages,
                                                    github_packages, custom_url_packages)
   env$docker$base_image <- NULL
@@ -71,36 +91,6 @@ container_registry <- function(address = NULL, username = NULL, password = NULL)
   container_registry$password <- password
   
   invisible(container_registry)
-}
-
-#' Build the base docker image name incorporating the registry details.
-#' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
-#' not set, a default CPU based image will be used as the base image.
-#' @param base_image_registry Image registry that contains the base image.
-build_docker_image_name <- function(custom_docker_image = NULL, base_image_registry = NULL)
-{
-  image_registry_address <- NULL
-  
-  if(!is.null(base_image_registry) && !is.null(base_image_registry$address))
-  {
-    image_registry_address <- base_image_registry$address
-  }
-  
-  if(is.null(custom_docker_image))
-  {
-    if (is.null(image_registry_address))
-    {
-      image_registry_address <- "viennaprivate.azurecr.io"
-    }
-    custom_docker_image <- "r-base:cpu"
-  }
-  
-  if(!is.null(image_registry_address))
-  {
-    custom_docker_image <- paste(image_registry_address, custom_docker_image, sep = "/")
-  }
-  
-  invisible(custom_docker_image)
 }
 
 #' Create a dockerfile string to build the image for training.
