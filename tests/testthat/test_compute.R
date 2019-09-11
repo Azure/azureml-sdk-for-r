@@ -17,5 +17,5 @@ test_that("create amlcompute",
     expect_equal(non_existent_cluster, NULL)
 
     # tear down compute
-    delete_aml_compute(compute_target)
+    delete_compute(compute_target)
 })

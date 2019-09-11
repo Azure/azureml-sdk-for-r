@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Create amlcompute
+#' Create AmlCompute
 #' @param workspace workspace object
 #' @param cluster_name cluster name
 #' @param vm_size Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
@@ -69,7 +69,7 @@ wait_for_compute <- function(cluster, show_output = TRUE)
 #' Delete compute
 #' @param cluster cluster object
 #' @export
-delete_aml_compute <- function(cluster)
+delete_compute <- function(cluster)
 {
   cluster$delete()
   invisible(NULL)

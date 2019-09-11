@@ -10,6 +10,7 @@ upload_files_to_datastore(ds, list("./iris.csv"),
                           target_path = target_path, overwrite = TRUE)
 
 # create aml compute
+#cluster_name <- "gpu-std-nc6"
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
@@ -20,11 +21,10 @@ if (is.null(compute_target))
 }
 
 # define estimator
-est <- create_estimator(source_directory = ".", entry_script = "train.R",
-                        script_params = list("--data_folder" = ds$path(target_path)),
-                        compute_target = compute_target,
-                        cran_packages = c("caret", "optparse", "e1071")
-                        )
+est <- estimator(source_directory = ".", entry_script = "train.R",
+                 script_params = list("--data_folder" = ds$path(target_path)),
+                 compute_target = compute_target,
+                 cran_packages = c("caret", "optparse", "e1071"))
 
 experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
@@ -36,4 +36,4 @@ metrics <- get_run_metrics(run)
 metrics
 
 # delete cluster
-delete_aml_compute(compute_target)
+delete_compute(compute_target)

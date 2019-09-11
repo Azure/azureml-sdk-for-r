@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Show run status in viewer pane — show_run_status • azureml</title>
+<title>Create Estimator — estimator • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Show run status in viewer pane — show_run_status" />
+<meta property="og:title" content="Create Estimator — estimator" />
 
-<meta property="og:description" content="Show run status in viewer pane" />
+<meta property="og:description" content="Create Estimator" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,25 +99,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Show run status in viewer pane</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>show_run_status.Rd</code></div>
+    <h1>Create Estimator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/estimator.R'><code>R/estimator.R</code></a></small>
+    <div class="hidden name"><code>estimator.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Show run status in viewer pane</p>
+    <p>Create Estimator</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>show_run_status</span>(<span class='no'>run</span>)</pre>
+    <pre class="usage"><span class='fu'>estimator</span>(<span class='no'>source_directory</span>, <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>script_params</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_docker</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>run</th>
-      <td><p>Run object</p></td>
+      <th>source_directory</th>
+      <td><p>A local directory containing experiment configuration files.</p></td>
+    </tr>
+    <tr>
+      <th>compute_target</th>
+      <td><p>The ComputeTarget where training will happen. This can either be an object or the
+string "local".</p></td>
+    </tr>
+    <tr>
+      <th>vm_size</th>
+      <td><p>The VM size of the compute target that will be created for the training. Supported values:
+Any Azure VM size. The list of available VM sizes are listed here:
+https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs</p></td>
+    </tr>
+    <tr>
+      <th>vm_priority</th>
+      <td><p>The VM priority of the compute target that will be created for the training. If not specified,
+it will be defaulted to 'dedicated'. Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
+the vm_size param is specified in the input.</p></td>
+    </tr>
+    <tr>
+      <th>entry_script</th>
+      <td><p>A string representing the relative path to the file used to start training.</p></td>
+    </tr>
+    <tr>
+      <th>script_params</th>
+      <td><p>A named list containing parameters to the entry_script.</p></td>
+    </tr>
+    <tr>
+      <th>use_docker</th>
+      <td><p>A bool value indicating if the environment to run the experiment should be docker-based.</p></td>
+    </tr>
+    <tr>
+      <th>cran_packages</th>
+      <td><p>character vector of cran packages to be installed.</p></td>
+    </tr>
+    <tr>
+      <th>github_packages</th>
+      <td><p>character vector of github packages to be installed.</p></td>
+    </tr>
+    <tr>
+      <th>custom_url_packages</th>
+      <td><p>character vector of packages to be installed from local, directory or custom url.</p></td>
+    </tr>
+    <tr>
+      <th>custom_docker_image</th>
+      <td><p>The name of the docker image from which the image to use for training will be built. If
+not set, a default CPU based image will be used as the base image.</p></td>
+    </tr>
+    <tr>
+      <th>inputs</th>
+      <td><p>list of data references as input</p></td>
     </tr>
     </table>
     

@@ -15,8 +15,8 @@ if (is.null(compute_target))
 wait_for_compute(compute_target)
 
 # define estimator
-est <- create_estimator(source_directory = ".", entry_script = "tf_mnist.R",
-                        compute_target = compute_target, cran_packages = c("tensorflow"))
+est <- estimator(source_directory = ".", entry_script = "tf_mnist.R",
+                 compute_target = compute_target, cran_packages = c("tensorflow"))
 
 experiment_name <- "train-tf-script-on-remote-amlcompute"
 exp <- experiment(ws, experiment_name)
@@ -28,4 +28,4 @@ metrics <- get_run_metrics(run)
 metrics
 
 # delete cluster
-delete_aml_compute(compute_target)
+delete_compute(compute_target)

@@ -18,9 +18,9 @@ wait_for_compute(compute_target)
 script_params <- list(batch_size = 32, epochs = 200,
                       lr = 0.0001, decay = 1e-6)
 
-est <- create_estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
-                        compute_target = compute_target, script_params = script_params,
-                        cran_packages = c("keras"))
+est <- estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
+                 compute_target = compute_target, script_params = script_params,
+                 cran_packages = c("keras"))
 
 experiment_name <- "hyperdrive-cifar10"
 exp <- experiment(ws, experiment_name)
@@ -51,4 +51,4 @@ metrics <- get_run_metrics(best_run)
 metrics
 
 # delete cluster
-delete_aml_compute(compute_target)
+delete_compute(compute_target)

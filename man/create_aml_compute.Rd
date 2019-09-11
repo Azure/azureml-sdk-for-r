@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute.R
 \name{create_aml_compute}
 \alias{create_aml_compute}
-\title{Create amlcompute}
+\title{Create AmlCompute}
 \usage{
 create_aml_compute(workspace, cluster_name, vm_size,
   vm_priority = "dedicated", min_nodes = 0, max_nodes = NULL,
@@ -44,5 +44,5 @@ Note that not all sizes are available in all regions, as detailed in the previou
 \item{description}{A description to provide to the compute object}
 }
 \description{
-Create amlcompute
+Create AmlCompute
 }
