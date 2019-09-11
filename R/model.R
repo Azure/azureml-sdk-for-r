@@ -54,7 +54,6 @@ download_model <- function(model, target_dir = '.', exist_ok = FALSE)
 
 #' Convert this Model into a json serialized dictionary
 #' @param model The model to download
-#' @export
 serialize_model <- function(model)
 {
   result <- model$serialize()
@@ -64,7 +63,6 @@ serialize_model <- function(model)
 #' Convert a json object into a Model object.
 #' @param workspace The workspace object the model is registered under
 #' @param model_payload A json object to convert to a Model object
-#' @export
 deserialize_to_model <- function(workspace, model_payload)
 {
   model <- azureml$core$Model$deserialize(workspace, model_payload)

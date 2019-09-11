@@ -23,7 +23,7 @@ test_that("get, register, download, serialize, deserialize and delete model",
     path <- download_model(model, download_dir)
     expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)), TRUE)
     
-    # serialize sndand deserialize model
+    # serialize and deserialize model
     model_payload <- serialize_model(model)
     deserialized_model <- deserialize_to_model(ws, model_payload)
 
