@@ -19,6 +19,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
 {
   env <- azureml$core$Environment(name)
   env$version <- version
+  env$python$user_managed <- TRUE
   
   if(!is.null(environment_variables))
   {
@@ -47,8 +48,8 @@ environment <- function(name, version = NULL, environment_variables = NULL,
     base_docker_image <- paste(image_registry_address, base_docker_image, sep = "/")
   }
     
-  env$docker$base_dockerfile <- docker_file(base_docker_image, cran_packages,
-                                            github_packages, custom_url_packages)
+  env$docker$base_dockerfile <- generate_docker_file(base_docker_image, cran_packages,
+                                                     github_packages, custom_url_packages)
   env$docker$base_image <- NULL
   if (!is.null(base_image_registry))
   {
@@ -93,14 +94,14 @@ container_registry <- function(address = NULL, username = NULL, password = NULL)
   invisible(container_registry)
 }
 
-#' Create a dockerfile string to build the image for training.
+#' Generate a dockerfile string to build the image for training.
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
 #' @param cran_packages character vector of cran packages to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
-docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
-                               github_packages = NULL, custom_url_packages = NULL)
+generate_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
+                                 github_packages = NULL, custom_url_packages = NULL)
 {
   base_dockerfile <- NULL
   base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n", custom_docker_image), sep = "")
