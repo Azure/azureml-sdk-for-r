@@ -34,9 +34,9 @@ test_that("create akscompute",
   expect_equal(compute_target$name, cluster_name)
   
   # detach and attach
+  detach_aks_compute(compute_target)
+
   aks_resource_id <- compute_target$cluster_resource_id
-  detach_aks_compute(cluster)
-  
   attach_aks_compute(ws, cluster_name, aks_resource_id)
   
   # tear down compute
