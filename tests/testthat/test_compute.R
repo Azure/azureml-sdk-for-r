@@ -22,6 +22,7 @@ test_that("create amlcompute",
 
 test_that("create akscompute",
 {
+  skip('skip')
   ws <- existing_ws
   
   # create aks compute
