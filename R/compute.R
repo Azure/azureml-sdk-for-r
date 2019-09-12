@@ -123,7 +123,7 @@ get_aks_compute_credentials <- function(cluster)
   cluster$get_credentials()
 }
 
-#' Retrieve the credentials for the AKS target
+#' Attach an already existing AKS compute resource with the provided workspace
 #' @param workspace The workspace object to attach the Compute object to. 
 #' @param cluster_name The AKS cluster name 
 #' @param resource_id The Azure resource ID for the compute resource being attached
