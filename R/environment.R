@@ -19,7 +19,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
 {
   env <- azureml$core$Environment(name)
   env$version <- version
-  env$python$user_managed <- TRUE
+  env$python$user_managed_dependencies <- TRUE
   
   if(!is.null(environment_variables))
   {
@@ -47,10 +47,28 @@ environment <- function(name, version = NULL, environment_variables = NULL,
   {
     base_docker_image <- paste(image_registry_address, base_docker_image, sep = "/")
   }
-    
-  env$docker$base_dockerfile <- generate_docker_file(base_docker_image, cran_packages,
-                                                     github_packages, custom_url_packages)
-  env$docker$base_image <- NULL
+  
+  # if no package is specified, then use base image instead of building a new one
+  if(is.null(cran_packages) && is.null(github_packages) && is.null(custom_url_packages))
+  {
+    if(is.null(custom_docker_image))
+    {
+      env$docker$base_image <- "r-base:cpu"
+      env$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
+    }
+    else
+    {
+      env$docker$base_image <- custom_docker_image
+    }
+  }
+  else
+  {
+    # generate a dockerfile for the environment
+    env$docker$base_dockerfile <- generate_docker_file(base_docker_image, cran_packages,
+                                                       github_packages, custom_url_packages)
+    env$docker$base_image <- NULL
+  }
+
   if (!is.null(base_image_registry))
   {
     env$docker$base_image_registry = base_image_registry
