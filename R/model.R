@@ -100,9 +100,9 @@ deploy_model <- function(workspace, name, models, inference_config,
 #' Create a model package in the form of a Docker image or Dockerfile build context
 #' @param workspace The workspace in which to create the package.
 #' @param models A list of Model objects to include in the package. Can be an empty list.
-#' @param inference_config: An InferenceConfig object to configure the operation of the models.
+#' @param inference_config An InferenceConfig object to configure the operation of the models.
 #' This must include an Environment object.
-#' @param generate_dockerfile: Whether to create a Dockerfile that can be run locally
+#' @param generate_dockerfile Whether to create a Dockerfile that can be run locally
 #' instead of building an image.
 #' @export
 package_model <- function(workspace, models, inference_config,
