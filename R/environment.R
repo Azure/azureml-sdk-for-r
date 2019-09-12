@@ -47,8 +47,8 @@ environment <- function(name, version = NULL, environment_variables = NULL,
     base_docker_image <- paste(image_registry_address, base_docker_image, sep = "/")
   }
     
-  env$docker$base_dockerfile <- create_docker_file(base_docker_image, cran_packages,
-                                                   github_packages, custom_url_packages)
+  env$docker$base_dockerfile <- docker_file(base_docker_image, cran_packages,
+                                            github_packages, custom_url_packages)
   env$docker$base_image <- NULL
   if (!is.null(base_image_registry))
   {
@@ -58,7 +58,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
   invisible(env)
 }
 
-#' Returns the environment object
+#' Register the environment object in your workspace.
 #' @param workspace The workspace
 #' @param environment The python environment where the experiment is executed.
 #' @export
@@ -99,7 +99,7 @@ container_registry <- function(address = NULL, username = NULL, password = NULL)
 #' @param cran_packages character vector of cran packages to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from local, directory or custom url.
-create_docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
+docker_file <- function(custom_docker_image = NULL, cran_packages = NULL,
                                github_packages = NULL, custom_url_packages = NULL)
 {
   base_dockerfile <- NULL

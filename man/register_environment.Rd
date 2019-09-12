@@ -2,7 +2,7 @@
 % Please edit documentation in R/environment.R
 \name{register_environment}
 \alias{register_environment}
-\title{Returns the environment object}
+\title{Register the environment object in your workspace.}
 \usage{
 register_environment(environment, workspace)
 }
@@ -12,5 +12,5 @@ register_environment(environment, workspace)
 \item{workspace}{The workspace}
 }
 \description{
-Returns the environment object
+Register the environment object in your workspace.
 }
