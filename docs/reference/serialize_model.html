@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a model package in the form of a Docker image or Dockerfile build context — package_model • azureml</title>
+<title>Convert this Model into a json serialized dictionary — serialize_model • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a model package in the form of a Docker image or Dockerfile build context — package_model" />
+<meta property="og:title" content="Convert this Model into a json serialized dictionary — serialize_model" />
 
-<meta property="og:description" content="Create a model package in the form of a Docker image or Dockerfile build context" />
+<meta property="og:description" content="Convert this Model into a json serialized dictionary" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,40 +99,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a model package in the form of a Docker image or Dockerfile build context</h1>
+    <h1>Convert this Model into a json serialized dictionary</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
-    <div class="hidden name"><code>package_model.Rd</code></div>
+    <div class="hidden name"><code>serialize_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a model package in the form of a Docker image or Dockerfile build context</p>
+    <p>Convert this Model into a json serialized dictionary</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>package_model</span>(<span class='no'>workspace</span>, <span class='no'>models</span>, <span class='no'>inference_config</span>,
-  <span class='kw'>generate_dockerfile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>serialize_model</span>(<span class='no'>model</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The workspace in which to create the package.</p></td>
-    </tr>
-    <tr>
-      <th>models</th>
-      <td><p>A list of Model objects to include in the package. Can be an empty list.</p></td>
-    </tr>
-    <tr>
-      <th>inference_config:</th>
-      <td><p>An InferenceConfig object to configure the operation of the models.
-This must include an Environment object.</p></td>
-    </tr>
-    <tr>
-      <th>generate_dockerfile:</th>
-      <td><p>Whether to create a Dockerfile that can be run locally
-instead of building an image.</p></td>
+      <th>model</th>
+      <td><p>The model to download</p></td>
     </tr>
     </table>
     

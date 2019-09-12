@@ -5,7 +5,7 @@
 \title{Create a model package in the form of a Docker image or Dockerfile build context}
 \usage{
 package_model(workspace, models, inference_config,
-  generate_dockerfile = False)
+  generate_dockerfile = FALSE)
 }
 \arguments{
 \item{workspace}{The workspace in which to create the package.}

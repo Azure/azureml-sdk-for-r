@@ -106,7 +106,7 @@ deploy_model <- function(workspace, name, models, inference_config,
 #' instead of building an image.
 #' @export
 package_model <- function(workspace, models, inference_config,
-                          generate_dockerfile = False)
+                          generate_dockerfile = FALSE)
 {
   model_package <- azureml$core$Model$package(workspace, models, inference_config,
                                               generate_dockerfile)
