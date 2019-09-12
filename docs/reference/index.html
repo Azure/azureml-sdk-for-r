@@ -178,9 +178,21 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
+          <p><code><a href="delete_webservice.html">delete_webservice()</a></code> </p>
+        </td>
+        <td><p>Delete this Webservice from its associated workspace.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="delete_workspace.html">delete_workspace()</a></code> </p>
         </td>
         <td><p>Delete workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="deserialize_to_webservice.html">deserialize_to_webservice()</a></code> </p>
+        </td>
+        <td><p>Convert a json object into a Webservice object.</p></td>
       </tr><tr>
         
         <td>
@@ -199,6 +211,12 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="experiment.html">experiment()</a></code> </p>
         </td>
         <td><p>Create an Azure Machine Learning Experiment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="generate_new_webservice_key.html">generate_new_webservice_key()</a></code> </p>
+        </td>
+        <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or 'Secondary' key.</p></td>
       </tr><tr>
         
         <td>
@@ -250,6 +268,32 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
+          <p><code><a href="get_webservice.html">get_webservice()</a></code> </p>
+        </td>
+        <td><p>Retrieve a cloud representation of a Webservice object associated with the
+provided workspace. Will return an instance of a child class corresponding to the
+specific type of the retrieved Webservice object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_keys.html">get_webservice_keys()</a></code> </p>
+        </td>
+        <td><p>Retrieve auth keys for this Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_logs.html">get_webservice_logs()</a></code> </p>
+        </td>
+        <td><p>Retrieve logs for the Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_token.html">get_webservice_token()</a></code> </p>
+        </td>
+        <td><p>Retrieve auth token for this Webservice, scoped to the current user.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="get_workspace.html">get_workspace()</a></code> </p>
         </td>
         <td><p>Get an existing workspace</p></td>
@@ -271,6 +315,12 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="install_azureml.html">install_azureml()</a></code> </p>
         </td>
         <td><p>Install azureml</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="invoke_webservice.html">invoke_webservice()</a></code> </p>
+        </td>
+        <td><p>Call this Webservice with the provided input.</p></td>
       </tr><tr>
         
         <td>
@@ -359,6 +409,12 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
+          <p><code><a href="serialize_webservice.html">serialize_webservice()</a></code> </p>
+        </td>
+        <td><p>Convert this Webservice into a json serialized dictionary.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
         </td>
         <td><p>Submit experiment</p></td>
@@ -392,6 +448,12 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
           <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
         </td>
         <td><p>Wait for cluster's instantiation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wait_for_deployment.html">wait_for_deployment()</a></code> </p>
+        </td>
+        <td><p>Automatically poll on the running Webservice deployment.</p></td>
       </tr><tr>
         
         <td>

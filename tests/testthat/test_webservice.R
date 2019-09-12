@@ -1,0 +1,15 @@
+context("webservice tests")
+
+test_that("create webservice",
+{
+get_webservice
+wait_for_deployment
+get_webservice_logs
+get_webservice_keys
+delete_webservice
+invoke_webservice
+generate_new_webservice_key
+get_webservice_token
+serialize_webservice
+deserialize_to_webservice
+})
