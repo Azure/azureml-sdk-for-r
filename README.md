@@ -67,6 +67,9 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 1. If you don't already have a workspace created, you can create one by doing:
 	```R
 	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
+	
+  # write the details of the workspace to a configuration file to the local machine
+  write_workspace_config(new_ws, path = "path-to-write-config-file")
 	```
 	Note: If you haven't already set up a resource group, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
 
