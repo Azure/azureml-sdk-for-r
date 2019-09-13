@@ -11,11 +11,13 @@ variables:
 - name: TEST_LOCATION
   value: eastus2
 - name: TEST_RESOURCE_GROUP
-  value: r_sdk_test_rg
+  value: static_resources_r_sdk
 - name: TEST_SUBSCRIPTION_ID
   value: 4faaaf21-663f-4391-96fd-47197c630979
 - name: TEST_WORKSPACE_NAME
-  value: r_sdk_test_workspace
+  value: r_sdk_workspace
+- name: TEST_BUILD_NUMBER
+  value: $(Build.BuildNumber)
 
 steps:
   - task: Bash@3
@@ -33,6 +35,13 @@ steps:
               .libPaths(Sys.getenv("R_LIBS_USER"));
               package_location <- devtools::build();
               Sys.setenv("PACKAGE_LOCATION" = package_location);
+              install.packages("rcmdcheck", repos = "http://cran.us.r-project.org");
+              library("rcmdcheck");
+              check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
+              stopifnot(length(check_results$errors) == 0);
+              stopifnot(length(check_results$warnings) == 0);
+              # needed to load all non exported packages;
+              devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
               testthat::test_dir("tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true

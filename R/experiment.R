@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' Create an Azure Machine Learning Experiment
 #' @param workspace The workspace object that would contain the experiment.
 #' @param name The experiment name.

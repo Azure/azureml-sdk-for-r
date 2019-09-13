@@ -1,3 +1,6 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
 #' @importFrom reticulate import py_discover_config py_str
 
 .onLoad <- function(libname, pkgname)
@@ -16,6 +19,9 @@
       }
     }
   ))
+  
+  ver <- toString(utils::packageVersion("azureml"))
+  azureml$"_base_sdk_common"$user_agent$append("azureml-r-sdk", ver)
 
   invisible(NULL)
 }
