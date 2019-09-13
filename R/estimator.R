@@ -26,9 +26,9 @@
 #' parameter is not set.
 #' @export
 estimator <- function(source_directory, compute_target = NULL, vm_size = NULL, vm_priority = NULL,
-                             entry_script = NULL, script_params = NULL, use_docker = TRUE, cran_packages = NULL,
-                             github_packages = NULL, custom_url_packages = NULL,
-                             custom_docker_image = NULL, inputs = NULL, use_gpu = FALSE)
+                      entry_script = NULL, script_params = NULL, use_docker = TRUE, cran_packages = NULL,
+                      github_packages = NULL, custom_url_packages = NULL,
+                      custom_docker_image = NULL, inputs = NULL, use_gpu = FALSE)
 { 
   launch_script <- create_launch_script(source_directory, entry_script, cran_packages, github_packages, custom_url_packages)
   est <- azureml$train$estimator$Estimator(source_directory, compute_target = compute_target, vm_size = vm_size,
