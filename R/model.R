@@ -113,3 +113,52 @@ package_model <- function(workspace, models, inference_config,
   invisible(model_package)
 }
 
+#' Return a ContainerRegistry object for where the image 
+#' (or base image, for Dockerfile packages) is stored.
+#' @param package Package created with model(s) and dependencies.
+#' @return ContainerRegistry object
+#' @export
+get_model_package_container_registry <- function(package)
+{
+  package$get_container_registry()
+}
+
+#' Retrieve the package creation logs.
+#' @param package Package created with model(s) and dependencies.
+#' @param decode Whether to decode the raw log bytes to a string.
+#' @param offset Byte offset from which to start reading the logs.
+#' @return Package creation logs.
+#' @export
+get_model_package_creation_logs <- function(package, decode = TRUE, offset = 0)
+{
+  package$get_logs(decode, offset)
+}
+
+#' Pull the package output to the local machine.
+#' This can only be used with a Docker image package.
+#' @param package Package created with model(s) and dependencies.
+#' @export
+pull_model_package_image <- function(package)
+{
+  package$pull()
+}
+
+#' Save the package output to a local directory.
+#' This can only be used with a Dockerfile package.
+#' @param package Package created with model(s) and dependencies.
+#' @param output_directory Local directory that will be created to contain 
+#' the contents of the package.
+#' @export
+save_model_package_files <- function(package, output_directory)
+{
+  package$save(output_directory)
+}
+
+#' Wait for the package to finish creating.
+#' @param package Package created with model(s) and dependencies.
+#' @param show_output Boolean option to print more verbose output. Defaults to FALSE.
+#' @export
+wait_for_model_package_creation <- function(package, show_output = FALSE)
+{
+  package$wait_for_creation(show_output)
+}
