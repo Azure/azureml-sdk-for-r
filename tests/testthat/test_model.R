@@ -46,11 +46,11 @@ test_that("create, check container registry and save model package",
   env <- azureml$core$Environment(name = "newenv")
   env$register(ws)
   
-  inference_config <- azureml$core$model$InferenceConfig(entry_script = "dummy_train.py",
-                                                         environment = env)
+  config <- inference_config(entry_script = "dummy_train.py",
+                             environment = env)
 
   # Create ModelPackage with dockerfile
-  model_package <- package_model(ws, c(model), inference_config, 
+  model_package <- package_model(ws, c(model), config, 
                                  generate_dockerfile = TRUE)
   
   # wait for the package to be created
@@ -69,7 +69,7 @@ test_that("create, check container registry and save model package",
   
 
   # Create ModelPackage without dockerfile
-  model_package <- package_model(ws, c(model), inference_config)
+  model_package <- package_model(ws, c(model), config)
   
   # wait for the package to be created
   wait_for_model_package_creation(model_package, show_output = TRUE)

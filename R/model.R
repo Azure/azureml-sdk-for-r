@@ -162,3 +162,23 @@ wait_for_model_package_creation <- function(package, show_output = FALSE)
 {
   package$wait_for_creation(show_output)
 }
+
+#' Creates the Model deployment config specific to model deployments.
+#' @param entry_script Path to local file that contains the code to run for the image.
+#' @param source_directory paths to folders that contains all files to create the image.
+#' @param description A description to give this image.
+#' @param environment An environment object to use for the deployment. Doesn't have to be registered. A user
+#' should provide either this, or the other parameters, not both. The individual parameters will NOT serve
+#' as an override for the environment object. Exceptions include `entry_script`, `source_directory` and
+#' `description`.
+#' @return An InferenceConfig object
+#' @export
+inference_config <- function(entry_script, source_directory = NULL, 
+                             description = NULL, environment = NULL)
+{
+  inference_config <- azureml$core$model$InferenceConfig(entry_script = entry_script,
+                                                         source_directory = source_directory,
+                                                         description = description,
+                                                         environment = environment)
+  invisible(inference_config)
+}
