@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute.R
 \name{attach_aks_compute}
 \alias{attach_aks_compute}
-\title{Retrieve the credentials for the AKS target}
+\title{Attach an already existing AKS compute resource with the provided workspace}
 \usage{
 attach_aks_compute(workspace, cluster_name, resource_id,
   resource_group = NULL)
@@ -20,5 +20,5 @@ attach_aks_compute(workspace, cluster_name, resource_id,
 An AksCompute object representation of the compute object
 }
 \description{
-Retrieve the credentials for the AKS target
+Attach an already existing AKS compute resource with the provided workspace
 }
