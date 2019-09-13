@@ -42,8 +42,8 @@ not set, a default CPU based image will be used as the base image.}
 \item{inputs}{list of data references as input}
 
 \item{use_gpu}{Indicates whether the environment to run the experiment should support GPUs.
-If true, a GPU - based default Docker image will be used in the environment. If false, a CPU - based
-image will be used. Default Docker images(CPU or GPU) will be used only if the 'custom_docker_image'
+If TRUE, a GPU - based default Docker image will be used in the environment. If FALSE, a CPU - based
+image will be used. Default Docker images (CPU or GPU) will be used only if the 'custom_docker_image'
 parameter is not set.}
 }
 \description{
