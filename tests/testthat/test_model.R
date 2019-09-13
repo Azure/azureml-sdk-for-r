@@ -46,7 +46,7 @@ test_that("create, check container registry and save model package",
   env <- azureml$core$Environment(name = "newenv")
   env$register(ws)
   
-  config <- inference_config(entry_script = "dummy_train.py",
+  config <- inference_config(entry_script = "dummy_score.py",
                              environment = env)
 
   # Create ModelPackage with dockerfile
@@ -64,10 +64,9 @@ test_that("create, check container registry and save model package",
   
   # save package files locally
   save_model_package_files(model_package, output_directory = "downloaded_package")
-  expect_equal(file.exists(file.path("downloaded_package", Dockerfile)), TRUE)
+  expect_equal(file.exists(file.path("downloaded_package", "Dockerfile")), TRUE)
   expect_equal(file.exists(file.path("downloaded_package", "model_config_map.json")), TRUE)
   
-
   # Create ModelPackage without dockerfile
   model_package <- package_model(ws, c(model), config)
   
