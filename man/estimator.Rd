@@ -8,7 +8,7 @@ estimator(source_directory, compute_target = NULL, vm_size = NULL,
   vm_priority = NULL, entry_script = NULL, script_params = NULL,
   use_docker = TRUE, cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
-  inputs = NULL)
+  inputs = NULL, use_gpu = FALSE)
 }
 \arguments{
 \item{source_directory}{A local directory containing experiment configuration files.}
@@ -40,6 +40,11 @@ the vm_size param is specified in the input.}
 not set, a default CPU based image will be used as the base image.}
 
 \item{inputs}{list of data references as input}
+
+\item{use_gpu}{Indicates whether the environment to run the experiment should support GPUs.
+If TRUE, a GPU - based default Docker image will be used in the environment. If FALSE, a CPU - based
+image will be used. Default Docker images (CPU or GPU) will be used only if the 'custom_docker_image'
+parameter is not set.}
 }
 \description{
 Create Estimator

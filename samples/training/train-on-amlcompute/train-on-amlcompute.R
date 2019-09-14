@@ -1,7 +1,9 @@
-# run setup.R to setup workspace for the first time prior to running this script
+# run setup.R to setup workspace for the first time
+# set working directory to current file location prior to running this script
 library("azureml")
 
-ws <- load_workspace_from_config(".")
+ws <- load_workspace_from_config()
+
 ds <- get_default_datastore(ws)
 
 # upload iris data to the datastore
@@ -10,7 +12,6 @@ upload_files_to_datastore(ds, list("./iris.csv"),
                           target_path = target_path, overwrite = TRUE)
 
 # create aml compute
-#cluster_name <- "gpu-std-nc6"
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
