@@ -20,16 +20,20 @@
 #' @param custom_docker_image The name of the docker image from which the image to use for training will be built. If
 #' not set, a default CPU based image will be used as the base image.
 #' @param inputs list of data references as input
+#' @param use_gpu Indicates whether the environment to run the experiment should support GPUs.
+#' If TRUE, a GPU - based default Docker image will be used in the environment. If FALSE, a CPU - based
+#' image will be used. Default Docker images (CPU or GPU) will be used only if the 'custom_docker_image'
+#' parameter is not set.
 #' @export
 estimator <- function(source_directory, compute_target = NULL, vm_size = NULL, vm_priority = NULL,
-                             entry_script = NULL, script_params = NULL, use_docker = TRUE, cran_packages = NULL,
-                             github_packages = NULL, custom_url_packages = NULL,
-                             custom_docker_image = NULL, inputs = NULL)
+                      entry_script = NULL, script_params = NULL, use_docker = TRUE, cran_packages = NULL,
+                      github_packages = NULL, custom_url_packages = NULL,
+                      custom_docker_image = NULL, inputs = NULL, use_gpu = FALSE)
 { 
   launch_script <- create_launch_script(source_directory, entry_script, cran_packages, github_packages, custom_url_packages)
   est <- azureml$train$estimator$Estimator(source_directory, compute_target = compute_target, vm_size = vm_size,
-                                                 vm_priority = vm_priority, entry_script = launch_script, script_params = script_params, use_docker = use_docker,
-                                                 custom_docker_image = custom_docker_image, inputs = inputs)
+                                           vm_priority = vm_priority, entry_script = launch_script, script_params = script_params, use_docker = use_docker,
+                                           custom_docker_image = custom_docker_image, inputs = inputs)
   
   run_config <- est$run_config
   run_config$framework <- "R"
@@ -37,7 +41,13 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL, v
   
   if (is.null(custom_docker_image))
   {
-    run_config$environment$docker$base_image <- "r-base:cpu"
+    processor <- "cpu"
+    if (use_gpu)
+    {
+      processor <- "gpu"
+    }
+
+    run_config$environment$docker$base_image <- paste("r-base", processor, sep = ":")
     run_config$environment$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
   }
   
