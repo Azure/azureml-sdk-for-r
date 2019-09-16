@@ -1,6 +1,7 @@
-#' Copyright(c) Microsoft Corporation.
-#' Licensed under the MIT license.
-#'  
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+#' Install azureml sdk package
 #' @param method installation method for reticulate::py_install()
 #' @param conda path to conda executable ("auto" will find using PATH)
 #' @param version pip version

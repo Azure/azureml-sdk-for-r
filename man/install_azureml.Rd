@@ -2,11 +2,10 @@
 % Please edit documentation in R/install.R
 \name{install_azureml}
 \alias{install_azureml}
-\title{Copyright(c) Microsoft Corporation.
-Licensed under the MIT license.}
+\title{Install azureml sdk package}
 \usage{
 install_azureml(method = "conda", conda = "auto", version = NULL,
-  envname = "r-azureml", conda_python_version = "3.6", ...)
+  envname = "r-azureml", conda_python_version = "3.6")
 }
 \arguments{
 \item{method}{installation method for reticulate::py_install()}
@@ -20,6 +19,5 @@ install_azureml(method = "conda", conda = "auto", version = NULL,
 \item{conda_python_version}{version of python for conda environment}
 }
 \description{
-Copyright(c) Microsoft Corporation.
-Licensed under the MIT license.
+Install azureml sdk package
 }
