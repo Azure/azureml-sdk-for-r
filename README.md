@@ -32,7 +32,17 @@ Main capabilities of the SDK include:
 
 ## Installing `azureml` R package
 
-To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo.
+To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo and build it locally in R.
+```
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
+                           user_name = '<your GitHub user name>',
+                           auth_token = '<your personal access token>',
+                           INSTALL_opts=c("--no-multiarch"))
+```
+
+```R
+> azureml::install_azureml()
+```
 
 For a detailed walk-through of the installation process, see our [article](https://microsoft.github.io/azureml-sdk-for-r/articles/installation.html).
    
