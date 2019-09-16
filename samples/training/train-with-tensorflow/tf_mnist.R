@@ -14,9 +14,11 @@
 # limitations under the License.
 # ==============================================================================
 
-library("azureml")
+
 library("tensorflow")
-install_tensorflow()
+install_tensorflow(version = "gpu")
+
+library("azureml")
 
 # Create the model
 x <- tf$placeholder(tf$float32, shape(NULL, 784L))

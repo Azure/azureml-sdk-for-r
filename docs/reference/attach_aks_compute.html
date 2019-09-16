@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return metrics from all child runs — get_children_metrics • azureml</title>
+<title>Attach an already existing AKS compute resource with the provided workspace — attach_aks_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Return metrics from all child runs — get_children_metrics" />
+<meta property="og:title" content="Attach an already existing AKS compute resource with the provided workspace — attach_aks_compute" />
 
-<meta property="og:description" content="Return metrics from all child runs" />
+<meta property="og:description" content="Attach an already existing AKS compute resource with the provided workspace" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,31 +99,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return metrics from all child runs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
-    <div class="hidden name"><code>get_children_metrics.Rd</code></div>
+    <h1>Attach an already existing AKS compute resource with the provided workspace</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
+    <div class="hidden name"><code>attach_aks_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return metrics from all child runs</p>
+    <p>Attach an already existing AKS compute resource with the provided workspace</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_children_metrics</span>(<span class='no'>hyperdrive_run</span>)</pre>
+    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='no'>resource_id</span>,
+  <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>hyperdrive_run</th>
-      <td><p>HyperDriveRun object</p></td>
+      <th>workspace</th>
+      <td><p>The workspace object to attach the Compute object to.</p></td>
+    </tr>
+    <tr>
+      <th>cluster_name</th>
+      <td><p>The AKS cluster name</p></td>
+    </tr>
+    <tr>
+      <th>resource_id</th>
+      <td><p>The Azure resource ID for the compute resource being attached</p></td>
+    </tr>
+    <tr>
+      <th>resource_group</th>
+      <td><p>Name of the resource group in which the AKS is located.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>name list of metrics grouped by run_id</p>
+    <p>An AksCompute object representation of the compute object</p>
     
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Makes a datastore available as a datareference for a run — create_data_reference • azureml</title>
+<title>Register a model with the provided workspace. — register_model • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Makes a datastore available as a datareference for a run — create_data_reference" />
+<meta property="og:title" content="Register a model with the provided workspace. — register_model" />
 
-<meta property="og:description" content="Makes a datastore available as a datareference for a run" />
+<meta property="og:description" content="Register a model with the provided workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,53 +99,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Makes a datastore available as a datareference for a run</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/data_reference.R'><code>R/data_reference.R</code></a></small>
-    <div class="hidden name"><code>create_data_reference.Rd</code></div>
+    <h1>Register a model with the provided workspace.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
+    <div class="hidden name"><code>register_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Makes a datastore available as a datareference for a run</p>
+    <p>Register a model with the provided workspace.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_data_reference</span>(<span class='no'>datastore</span>, <span class='kw'>data_reference_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>path_on_datastore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"mount"</span>, <span class='kw'>path_on_compute</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>datastore</th>
-      <td><p>the Datastore to reference</p></td>
+      <th>workspace</th>
+      <td><p>The workspace to register the model under</p></td>
     </tr>
     <tr>
-      <th>data_reference_name</th>
-      <td><p>the name of the data reference</p></td>
+      <th>model_path</th>
+      <td><p>String which points to the path on the local file system where the model assets are
+located. This can be a direct pointer to a single file or folder. If pointing to a folder, the
+child_paths parameter can be used to specify individual files to bundle together as the Model object,
+as opposed to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
-      <th>path_on_datastore</th>
-      <td><p>the relative path on cloud for the data reference</p></td>
+      <th>model_name</th>
+      <td><p>The name to register the model with</p></td>
     </tr>
     <tr>
-      <th>mode</th>
-      <td><p>the operation on the data reference, we support mount, download</p></td>
+      <th>tags</th>
+      <td><p>Dictionary of key value tags to give the model</p></td>
     </tr>
     <tr>
-      <th>path_on_compute</th>
-      <td><p>the path on compute for the data reference</p></td>
+      <th>properties</th>
+      <td><p>Dictionary of key value properties to give the model. These properties cannot
+be changed after model creation, however new key value pairs can be added</p></td>
     </tr>
     <tr>
-      <th>overwrite</th>
-      <td><p>overwrite if data reference exists</p></td>
+      <th>description</th>
+      <td><p>A text description of the model</p></td>
+    </tr>
+    <tr>
+      <th>child_paths</th>
+      <td><p>If provided in conjunction with a model_path to a folder, only the specified files will be
+bundled into the Model object.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>data reference object</p>
     
 
   </div>
@@ -153,9 +157,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

@@ -1,7 +1,9 @@
-# run setup.R to setup workspace for the first time prior to running this script
+# run setup.R to setup workspace for the first time
+# set working directory to current file location prior to running this script
 library("azureml")
 
-ws <- load_workspace_from_config(".")
+ws <- load_workspace_from_config()
+
 ds <- get_default_datastore(ws)
 
 # upload iris data to the datastore
@@ -20,11 +22,10 @@ if (is.null(compute_target))
 }
 
 # define estimator
-est <- create_estimator(source_directory = ".", entry_script = "train.R",
-                        script_params = list("--data_folder" = ds$path(target_path)),
-                        compute_target = compute_target,
-                        cran_packages = c("caret", "optparse", "e1071")
-                        )
+est <- estimator(source_directory = ".", entry_script = "train.R",
+                 script_params = list("--data_folder" = ds$path(target_path)),
+                 compute_target = compute_target,
+                 cran_packages = c("caret", "optparse", "e1071"))
 
 experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
@@ -36,4 +37,4 @@ metrics <- get_run_metrics(run)
 metrics
 
 # delete cluster
-delete_aml_compute(compute_target)
+delete_compute(compute_target)

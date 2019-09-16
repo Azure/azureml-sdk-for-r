@@ -78,7 +78,7 @@
 <div id="key-features-and-roadmap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#key-features-and-roadmap" class="anchor"></a>Key Features and Roadmap</h2>
-<p><span class="emoji" data-emoji="heavy_check_mark">✔️</span> feature available <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span> in progress</p>
+<p><span class="emoji" data-emoji="heavy_check_mark">✔️</span> feature available <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span> in progress <span class="emoji" data-emoji="clipboard">📋</span> planned</p>
 <table class="table">
 <colgroup>
 <col width="32%">
@@ -137,6 +137,11 @@
 <td>Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. <code>Webservice</code> is the abstract parent class for creating and deploying web services for your models.</td>
 <td><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span></td>
 </tr>
+<tr class="even">
+<td><a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines">Pipeline</a></td>
+<td>Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A <code>Pipeline</code> represents a collection of steps which can be executed as a workflow.</td>
+<td><span class="emoji" data-emoji="clipboard">📋</span></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -151,11 +156,11 @@
 </li>
 <li>
 <p>Install azureml R package:</p>
-<p>Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in “<a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>” and supply to <code>auth_token</code> argument.</p>
+<p>Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in “<a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>” and supply to <code>auth_token</code> argument. When generating the token, make sure to select the “repo” scope.</p>
 <pre><code>&gt; devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '&lt;personal access toke&gt;')</code></pre>
 </li>
 <li>
-<p>Install azureml python sdk. This will create a conda environment called <code>r-azureml</code> in which the package would be installed. Run the following in Rstudio.</p>
+<p>Install azureml python sdk. This will create a conda environment called <code>r-azureml</code> in which the package would be installed. Run the following in RStudio.</p>
 <pre><code>&gt; azureml::install_azureml()</code></pre>
 </li>
 <li>
@@ -185,6 +190,11 @@
 <p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>
 </li>
 </ul>
+</div>
+<div id="contribute" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contribute" class="anchor"></a>Contribute</h2>
+<p>We welcome contributions from the community. If you would like to contribute to the repository, please refer to the <a href="CONTRIBUTING.html">contribution guide</a>.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">

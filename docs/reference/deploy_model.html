@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set datastore to mount mode — set_datastore_to_mount • azureml</title>
+<title>Deploy a Webservice from zero or more model objects. — deploy_model • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Set datastore to mount mode — set_datastore_to_mount" />
+<meta property="og:title" content="Deploy a Webservice from zero or more model objects. — deploy_model" />
 
-<meta property="og:description" content="Set datastore to mount mode" />
+<meta property="og:description" content="Deploy a Webservice from zero or more model objects." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,25 +99,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set datastore to mount mode</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
-    <div class="hidden name"><code>set_datastore_to_mount.Rd</code></div>
+    <h1>Deploy a Webservice from zero or more model objects.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
+    <div class="hidden name"><code>deploy_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Set datastore to mount mode</p>
+    <p>Deploy a Webservice from zero or more model objects.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>set_datastore_to_mount</span>(<span class='no'>ds</span>)</pre>
+    <pre class="usage"><span class='fu'>deploy_model</span>(<span class='no'>workspace</span>, <span class='no'>name</span>, <span class='no'>models</span>, <span class='no'>inference_config</span>,
+  <span class='kw'>deployment_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>deployment_target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ds</th>
-      <td><p>datastore object</p></td>
+      <th>workspace</th>
+      <td><p>A Workspace object to associate the Webservice with</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>The name to give the deployed service. Must be unique to the workspace, only consist of lowercase
+letters, numbers, or dashes, start with a letter, and be between 3 and 32 characters long.</p></td>
+    </tr>
+    <tr>
+      <th>models</th>
+      <td><p>A list of model objects. Can be an empty list.</p></td>
+    </tr>
+    <tr>
+      <th>inference_config</th>
+      <td><p>An InferenceConfig object used to determine required model properties.</p></td>
+    </tr>
+    <tr>
+      <th>deployment_config</th>
+      <td><p>A WebserviceDeploymentConfiguration used to configure the webservice. If one is not
+provided, an empty configuration object will be used based on the desired target.</p></td>
+    </tr>
+    <tr>
+      <th>deployment_target</th>
+      <td><p>A azureml.core.ComputeTarget to deploy the Webservice to.
+As Azure Container Instances has no associated azureml.core.ComputeTarget, leave
+this parameter as None to deploy to Azure Container Instances.</p></td>
     </tr>
     </table>
     

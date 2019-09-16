@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create script runconfig — create_script_run_config • azureml</title>
+<title>Get Azure Container Registry. — container_registry • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create script runconfig — create_script_run_config" />
+<meta property="og:title" content="Get Azure Container Registry. — container_registry" />
 
-<meta property="og:description" content="Create script runconfig" />
+<meta property="og:description" content="Get Azure Container Registry." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,53 +99,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create script runconfig</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/runconfig.R'><code>R/runconfig.R</code></a></small>
-    <div class="hidden name"><code>create_script_run_config.Rd</code></div>
+    <h1>Get Azure Container Registry.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
+    <div class="hidden name"><code>container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create script runconfig</p>
+    <p>Get Azure Container Registry.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_script_run_config</span>(<span class='no'>source_directory</span>, <span class='kw'>script</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>arguments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_references</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>base_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>container_registry</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>source_directory</th>
-      <td><p>source directory containing the script</p></td>
+      <th>address</th>
+      <td><p>DNS name or IP address of azure container registry(ACR)</p></td>
     </tr>
     <tr>
-      <th>script</th>
-      <td><p>script name</p></td>
+      <th>username</th>
+      <td><p>The username for ACR</p></td>
     </tr>
     <tr>
-      <th>arguments</th>
-      <td><p>arguments to script</p></td>
-    </tr>
-    <tr>
-      <th>target</th>
-      <td><p>compute target</p></td>
-    </tr>
-    <tr>
-      <th>data_references</th>
-      <td><p>list of data references</p></td>
-    </tr>
-    <tr>
-      <th>base_image</th>
-      <td><p>image to use</p></td>
+      <th>password</th>
+      <td><p>The password for ACR</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>ScriptRunConfig object</p>
     
 
   </div>
@@ -153,9 +135,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get data reference path on path_on_compute — get_data_reference_path_in_compute • azureml</title>
+<title>Convert a json object into a Model object. — deserialize_to_model • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get data reference path on path_on_compute — get_data_reference_path_in_compute" />
+<meta property="og:title" content="Convert a json object into a Model object. — deserialize_to_model" />
 
-<meta property="og:description" content="Get data reference path on path_on_compute" />
+<meta property="og:description" content="Convert a json object into a Model object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,31 +99,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get data reference path on path_on_compute</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/data_reference.R'><code>R/data_reference.R</code></a></small>
-    <div class="hidden name"><code>get_data_reference_path_in_compute.Rd</code></div>
+    <h1>Convert a json object into a Model object.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
+    <div class="hidden name"><code>deserialize_to_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get data reference path on path_on_compute</p>
+    <p>Convert a json object into a Model object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_data_reference_path_in_compute</span>(<span class='no'>data_reference</span>)</pre>
+    <pre class="usage"><span class='fu'>deserialize_to_model</span>(<span class='no'>workspace</span>, <span class='no'>model_payload</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data_reference</th>
-      <td><p>DataReference whose path is needed</p></td>
+      <th>workspace</th>
+      <td><p>The workspace object the model is registered under</p></td>
+    </tr>
+    <tr>
+      <th>model_payload</th>
+      <td><p>A json object to convert to a Model object</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>environment variable in remote compute that holds the data reference path.</p>
     
 
   </div>
@@ -131,9 +131,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
