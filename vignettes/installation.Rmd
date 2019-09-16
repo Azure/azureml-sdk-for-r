@@ -12,13 +12,7 @@ vignette: >
 
 To ensure that your environment is set up correctly for installation, you will first need to install the 64-bit binary of [Anaconda](https://www.anaconda.com/) for Python 3.5 or later.
 
-## 2. Install `reticulate`
-Next, install [`reticulate`](https://rstudio.github.io/reticulate/). The bindings for AzureML SDK for R rely on `reticulate` to interface with [AzureML SDK for Python](https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml) and run operations. If using Windows, make sure that [Rtools](https://cran.r-project.org/bin/windows/Rtools/) is installed first.
-```
-> install.packages('reticulate')
-```
-
-## 3. Install `azureml` R package with `remotes`
+## 2. Install `azureml` R package with `remotes`
 As the `azureml` package is not available on CRAN, you will need `remotes` to install from the GitHub repo.
 ```
 > install.packages('remotes')
@@ -31,16 +25,21 @@ Then, you can use the `install_github` function to install the package. Until th
                            INSTALL_opts=c("--no-multiarch"))
 ```
 
-## 4. Install azureml Python SDK
+## 3. Install azureml Python SDK
 Lastly, use the `azureml` R package to create a conda environment called `r-azureml` where the Python SDK package will be installed.
 ```
 > azureml::install_azureml()
 ```
 
-## 5. Test installation
+## 4. Test installation
 You can confirm your installation by loading the library and successfully retrieving a run.
 ```
 > library(azureml)
 > get_current_run()
 <azureml.core.run._OfflineRun>
 ```
+
+## Troubleshooting
+In step 3 of the installation, if you get ssl errors on windows, it is due to an
+outdated openssl binary. Install the latest openssl binaries from
+[here](https://wiki.openssl.org/index.php/Binaries).
