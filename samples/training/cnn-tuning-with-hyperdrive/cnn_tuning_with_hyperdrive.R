@@ -1,4 +1,5 @@
-# run setup.R prior to running this script
+# run setup.R to setup workspace for the first time
+# set working directory to current file location prior to running this script
 library(azureml)
 
 ws <- load_workspace_from_config()

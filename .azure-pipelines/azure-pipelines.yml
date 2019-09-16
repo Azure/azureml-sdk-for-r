@@ -40,6 +40,8 @@ steps:
               check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
               stopifnot(length(check_results$errors) == 0);
               stopifnot(length(check_results$warnings) == 0);
+              # needed to load all non exported packages;
+              devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
               testthat::test_dir("tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true

@@ -18,6 +18,7 @@
 #' @param subnet_name Name of the subnet inside the vnet
 #' @param tags A dictionary of key value tags to provide to the compute object
 #' @param description A description to provide to the compute object
+#' @return An AmlCompute object representation of the compute object
 #' @export
 create_aml_compute <- function(workspace, cluster_name, vm_size, vm_priority = "dedicated", min_nodes = 0,
                   max_nodes = NULL, idle_seconds_before_scaledown = NULL, admin_username = NULL,
@@ -72,5 +73,75 @@ wait_for_compute <- function(cluster, show_output = TRUE)
 delete_compute <- function(cluster)
 {
   cluster$delete()
+  invisible(NULL)
+}
+
+#' Create AksCompute
+#' @param workspace workspace object
+#' @param cluster_name cluster name
+#' @param agent_count Number of agents (VMs) to host containers. Defaults to 3
+#' @param vm_size Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
+#' Defaults to Standard_D3_v2
+#' @param ssl_cname A CName to use if enabling SSL validation on the cluster. Must provide all three
+#' CName, cert file, and key file to enable SSL validation
+#' @param ssl_cert_pem_file A file path to a file containing cert information for SSL validation. Must provide
+#' all three CName, cert file, and key file to enable SSL validation
+#' @param ssl_key_pem_file A file path to a file containing key information for SSL validation. Must provide
+#' all three CName, cert file, and key file to enable SSL validation
+#' @param location Location to provision cluster in. If not specified, will default to workspace location.
+#' Available regions for this compute can be found here:
+#' https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=kubernetes-service
+#' @param vnet_resourcegroup_name Name of the resource group where the virtual network is located
+#' @param vnet_name Name of the virtual network
+#' @param subnet_name Name of the subnet inside the vnet
+#' @param service_cidr A CIDR notation IP range from which to assign service cluster IPs.
+#' @param dns_service_ip Containers DNS server IP address.
+#' @param docker_bridge_cidr A CIDR notation IP for Docker bridge.
+#' @return An AksCompute object representation of the compute object
+#' @export
+create_aks_compute <- function(workspace, cluster_name, agent_count = NULL, vm_size = NULL, ssl_cname = NULL, ssl_cert_pem_file = NULL,
+                               ssl_key_pem_file = NULL, location = NULL, vnet_resourcegroup_name = NULL,
+                               vnet_name = NULL, subnet_name = NULL, service_cidr = NULL,
+                               dns_service_ip = NULL, docker_bridge_cidr = NULL)
+{
+  compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(agent_count = agent_count, vm_size = vm_size,
+                                                                               ssl_cname = ssl_cname, ssl_cert_pem_file = ssl_cert_pem_file, ssl_key_pem_file = ssl_key_pem_file,
+                                                                               location = location,
+                                                                               vnet_resourcegroup_name = vnet_resourcegroup_name, vnet_name = vnet_name,
+                                                                               subnet_name = subnet_name, service_cidr = service_cidr,
+                                                                               dns_service_ip = dns_service_ip, docker_bridge_cidr = docker_bridge_cidr)
+  
+  azureml$core$compute$ComputeTarget$create(workspace, cluster_name, compute_config)
+}
+
+#' Retrieve the credentials for the AKS target
+#' @param cluster cluster object
+#' @return Credentials for the AKS target
+#' @export
+get_aks_compute_credentials <- function(cluster)
+{
+  cluster$get_credentials()
+}
+
+#' Attach an already existing AKS compute resource with the provided workspace
+#' @param workspace The workspace object to attach the Compute object to. 
+#' @param cluster_name The AKS cluster name 
+#' @param resource_id The Azure resource ID for the compute resource being attached
+#' @param resource_group Name of the resource group in which the AKS is located. 
+#' @return An AksCompute object representation of the compute object
+#' @export
+attach_aks_compute <- function(workspace, cluster_name, resource_id, resource_group = NULL)
+{
+  attach_config <- azureml$core$compute$AksCompute$attach_configuration(resource_group = resource_group, resource_id = resource_id)
+  
+  azureml$core$compute$ComputeTarget$attach(workspace, cluster_name, attach_config)
+}
+
+#' Detach the AksCompute object from its associated workspace
+#' @param cluster cluster object
+#' @export
+detach_aks_compute <- function(cluster)
+{
+  cluster$detach()
   invisible(NULL)
 }
