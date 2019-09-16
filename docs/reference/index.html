@@ -117,6 +117,12 @@
       <tr>
         
         <td>
+          <p><code><a href="attach_aks_compute.html">attach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Attach an already existing AKS compute resource with the provided workspace</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="azureml.html">azureml</a></code> </p>
         </td>
         <td><p>azureml module
@@ -145,6 +151,18 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="choice.html">choice()</a></code> </p>
         </td>
         <td><p>Specify a discrete set of options to sample from</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="container_registry.html">container_registry()</a></code> </p>
+        </td>
+        <td><p>Get Azure Container Registry.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_aks_compute.html">create_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Create AksCompute</p></td>
       </tr><tr>
         
         <td>
@@ -181,6 +199,9 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="delete_webservice.html">delete_webservice()</a></code> </p>
         </td>
         <td><p>Delete this Webservice from its associated workspace.</p></td>
+          <p><code><a href="delete_model.html">delete_model()</a></code> </p>
+        </td>
+        <td><p>Delete this model from its associated workspace.</p></td>
       </tr><tr>
         
         <td>
@@ -193,12 +214,39 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="deserialize_to_webservice.html">deserialize_to_webservice()</a></code> </p>
         </td>
         <td><p>Convert a json object into a Webservice object.</p></td>
+          <p><code><a href="deploy_model.html">deploy_model()</a></code> </p>
+        </td>
+        <td><p>Deploy a Webservice from zero or more model objects.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="deserialize_to_model.html">deserialize_to_model()</a></code> </p>
+        </td>
+        <td><p>Convert a json object into a Model object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Detach the AksCompute object from its associated workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="download_from_datastore.html">download_from_datastore()</a></code> </p>
         </td>
         <td><p>Download the data from the datastore to the local file system</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_model.html">download_model()</a></code> </p>
+        </td>
+        <td><p>Download model to target_dir of local file system.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="environment.html">environment()</a></code> </p>
+        </td>
+        <td><p>Configure the python environment where the experiment is executed.</p></td>
       </tr><tr>
         
         <td>
@@ -217,6 +265,15 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="generate_new_webservice_key.html">generate_new_webservice_key()</a></code> </p>
         </td>
         <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or 'Secondary' key.</p></td>
+          <p><code><a href="generate_docker_file.html">generate_docker_file()</a></code> </p>
+        </td>
+        <td><p>Generate a dockerfile string to build the image for training.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aks_compute_credentials.html">get_aks_compute_credentials()</a></code> </p>
+        </td>
+        <td><p>Retrieve the credentials for the AKS target</p></td>
       </tr><tr>
         
         <td>
@@ -259,6 +316,18 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="get_default_datastore.html">get_default_datastore()</a></code> </p>
         </td>
         <td><p>Get default datastore associated with a workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_environment.html">get_environment()</a></code> </p>
+        </td>
+        <td><p>Return the environment object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_model.html">get_model()</a></code> </p>
+        </td>
+        <td><p>Retrieve the Model object from the cloud.</p></td>
       </tr><tr>
         
         <td>
@@ -367,6 +436,12 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
+          <p><code><a href="package_model.html">package_model()</a></code> </p>
+        </td>
+        <td><p>Create a model package in the form of a Docker image or Dockerfile build context</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="primary_metric_goal.html">primary_metric_goal()</a></code> </p>
         </td>
         <td><p>Define supported metric goals for hyperparameter tuning</p></td>
@@ -412,6 +487,21 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
           <p><code><a href="serialize_webservice.html">serialize_webservice()</a></code> </p>
         </td>
         <td><p>Convert this Webservice into a json serialized dictionary.</p></td>
+          <p><code><a href="register_environment.html">register_environment()</a></code> </p>
+        </td>
+        <td><p>Register the environment object in your workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_model.html">register_model()</a></code> </p>
+        </td>
+        <td><p>Register a model with the provided workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="serialize_model.html">serialize_model()</a></code> </p>
+        </td>
+        <td><p>Convert this Model into a json serialized dictionary</p></td>
       </tr><tr>
         
         <td>

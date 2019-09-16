@@ -111,6 +111,7 @@
 roxygen2::roxygenise()
 
 # Generate a docs directory for hosting on GitHub pages
+unlink("docs", recursive=TRUE, force=TRUE)
 pkgdown::build_site()
 
 # Build the R package

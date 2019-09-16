@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create AmlCompute — create_aml_compute • azureml</title>
+<title>Get Azure Container Registry. — container_registry • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create AmlCompute — create_aml_compute" />
+<meta property="og:title" content="Get Azure Container Registry. — container_registry" />
 
-<meta property="og:description" content="Create AmlCompute" />
+<meta property="og:description" content="Get Azure Container Registry." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,93 +99,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create AmlCompute</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
-    <div class="hidden name"><code>create_aml_compute.Rd</code></div>
+    <h1>Get Azure Container Registry.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
+    <div class="hidden name"><code>container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create AmlCompute</p>
+    <p>Get Azure Container Registry.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_aml_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='no'>vm_size</span>,
-  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='st'>"dedicated"</span>, <span class='kw'>min_nodes</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>idle_seconds_before_scaledown</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>admin_username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>admin_user_password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>admin_user_ssh_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vnet_resourcegroup_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>container_registry</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>workspace object</p></td>
+      <th>address</th>
+      <td><p>DNS name or IP address of azure container registry(ACR)</p></td>
     </tr>
     <tr>
-      <th>cluster_name</th>
-      <td><p>cluster name</p></td>
+      <th>username</th>
+      <td><p>The username for ACR</p></td>
     </tr>
     <tr>
-      <th>vm_size</th>
-      <td><p>Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
-Note that not all sizes are available in all regions, as detailed in the previous link.</p></td>
-    </tr>
-    <tr>
-      <th>vm_priority</th>
-      <td><p>dedicated or lowpriority VMs. If not specified, will default to dedicated.</p></td>
-    </tr>
-    <tr>
-      <th>min_nodes</th>
-      <td><p>Minimum number of nodes to use on the cluster. If not specified, will default to 0</p></td>
-    </tr>
-    <tr>
-      <th>max_nodes</th>
-      <td><p>Maximum number of nodes to use on the cluster</p></td>
-    </tr>
-    <tr>
-      <th>idle_seconds_before_scaledown</th>
-      <td><p>Node idle time in seconds before scaling down the cluster</p></td>
-    </tr>
-    <tr>
-      <th>admin_username</th>
-      <td><p>Name of the administrator user account which can be used to SSH into nodes</p></td>
-    </tr>
-    <tr>
-      <th>admin_user_password</th>
-      <td><p>Password of the administrator user account</p></td>
-    </tr>
-    <tr>
-      <th>admin_user_ssh_key</th>
-      <td><p>SSH public key of the administrator user account</p></td>
-    </tr>
-    <tr>
-      <th>vnet_resourcegroup_name</th>
-      <td><p>Name of the resource group where the virtual network is located</p></td>
-    </tr>
-    <tr>
-      <th>vnet_name</th>
-      <td><p>Name of the virtual network</p></td>
-    </tr>
-    <tr>
-      <th>subnet_name</th>
-      <td><p>Name of the subnet inside the vnet</p></td>
-    </tr>
-    <tr>
-      <th>tags</th>
-      <td><p>A dictionary of key value tags to provide to the compute object</p></td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td><p>A description to provide to the compute object</p></td>
+      <th>password</th>
+      <td><p>The password for ACR</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An AmlCompute object representation of the compute object</p>
     
 
   </div>
@@ -193,9 +135,7 @@ Note that not all sizes are available in all regions, as detailed in the previou
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

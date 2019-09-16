@@ -15,7 +15,7 @@ Main capabilities of the SDK include:
 
 ## Key Features and Roadmap
 
-:heavy_check_mark: feature available :arrows_counterclockwise: in progress
+:heavy_check_mark: feature available :arrows_counterclockwise: in progress :clipboard: planned
 
 | Features | Description | Status |
 |----------|-------------|--------|
@@ -28,6 +28,7 @@ Main capabilities of the SDK include:
 [HyperDrive](https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
 [Models](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :arrows_counterclockwise: |
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
+[Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
 
 ## Installing `azureml` R package
 
@@ -40,14 +41,14 @@ Main capabilities of the SDK include:
 
 3. Install azureml R package:
 
-   Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in "https://github.com/settings/tokens" and supply to `auth_token` argument.
+   Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in "https://github.com/settings/tokens" and supply to `auth_token` argument. When generating the token, make sure to select the "repo" scope.
    ```
    > devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '<personal access toke>')
    ```
 
 4. Install azureml python sdk. This will create a conda environment
    called `r-azureml` in which the package would be installed. Run the
-   following in Rstudio.
+   following in RStudio.
    ```
    > azureml::install_azureml()
    ```
@@ -95,8 +96,10 @@ Once you've accessed your workspace, you can begin running and tracking your own
   the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
   session. For this reason, best practice is to isolate project files into their own directory.
   
+## Contribute
+We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](CONTRIBUTING.md).
+
 ## Code of Conduct
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-

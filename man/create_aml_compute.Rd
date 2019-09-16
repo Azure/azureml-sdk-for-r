@@ -43,6 +43,9 @@ Note that not all sizes are available in all regions, as detailed in the previou
 
 \item{description}{A description to provide to the compute object}
 }
+\value{
+An AmlCompute object representation of the compute object
+}
 \description{
 Create AmlCompute
 }
