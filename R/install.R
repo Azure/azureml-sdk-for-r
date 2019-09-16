@@ -14,6 +14,13 @@ install_azureml <- function(method = "conda",
                             conda_python_version = "3.6",
                             ...)
 {
+
+  # verify 64-bit
+  if (.Machine$sizeof.pointer != 8) {
+    stop("Unable to install AzureMLSDK on this machine.",
+         "Binary installation is only available for 64-bit platforms.")
+  }
+  
   method <- match.arg(method)
   main_package = "azureml-sdk"
   default_packages <- c("numpy")
@@ -34,10 +41,13 @@ install_azureml <- function(method = "conda",
   envs <- reticulate::conda_list()
   if (envname %in% envs$name)
   {
-    message("Using existing r-azureml environment.")
+    msg = paste("Using existing environment: ", envname)
+    message(msg)
   }
   else
   {
+    msg = paste("Creating environment: ", envname)
+    message(msg)
     reticulate::conda_create(envname, packages = "python=3.6")
   }
   
