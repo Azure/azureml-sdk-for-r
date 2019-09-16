@@ -11,14 +11,16 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        R -e 'roxygen2::roxygenise();
+        echo UPDATE DOCS
+        R -e 'unlink("man", recursive=TRUE, force=TRUE);
+              unlink("docs", recursive=TRUE, force=TRUE)
+              roxygen2::roxygenise();
               pkgdown::build_site();'
-        ECHO GIT ADD
+        ls
+        echo GIT ADD
         git add man/* docs/*
-        ECHO GIT COMMIT
+        echo GIT COMMIT
         git commit -m "Update docs automatically"
-        ECHO GIT PUSH
+        echo GIT PUSH
         git push
-        ECHO GIT STATUS
-        git status
     displayName: 'Update Docs'
