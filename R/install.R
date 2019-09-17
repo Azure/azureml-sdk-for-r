@@ -1,40 +1,57 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Create conda environment
-#' @param environment_name name of environment to create
-create_conda_env <- function(environment_name)
-{
-  envs <- reticulate::conda_list()
-  if (environment_name %in% envs$name)
-  {
-    message("Using existing r-azureml environment.")
-  }
-  else
-  {
-    reticulate::conda_create(environment_name, packages = "python=3.6")
-  }
-}
-
-#' Install azureml
-#' @param version pip version
-#' @param environment_name name of environment to create
+#' Install azureml sdk package
+#' @param version azureml sdk package version
+#' @param envname name of environment to create
+#' @param conda_python_version version of python for conda environment
 #' @export
-install_azureml <- function(version = NULL, environment_name = "r-azureml")
+install_azureml <- function(version = NULL,
+                            envname = "r-azureml",
+                            conda_python_version = "3.6")
 {
+  main_package <- "azureml-sdk"
+  default_packages <- c("numpy")
+  
+  # set version if provided
+  if (!is.null(version))
+  {
+    main_package <- paste(main_package, "==", version, sep="")
+  }
+  
+  # check for anaconda installation
   if (is.null(reticulate::conda_binary()))
   {
     stop("Anaconda not installed or not in system path.")
   }
-
-  package_name = "azureml-sdk"
-  if (!is.null(version))
+  
+  # create conda environment if missing
+  envs <- reticulate::conda_list()
+  if (envname %in% envs$name)
   {
-    package_name = paste(package_name, "==", version, sep="")
+    msg <- paste("Using existing environment: ", envname)
+    message(msg)
   }
-  # create conda environment
-  create_conda_env(environment_name)
+  else
+  {
+    msg <- paste("Creating environment: ", envname)
+    message(msg)
+    py_version <- paste("python=", conda_python_version, sep="")
+    reticulate::conda_create(envname, packages = py_version)
+  }
+  
+  # install packages
+  reticulate::py_install(
+    packages = c(main_package, default_packages),
+    envname = envname,
+    method = "conda",
+    conda = "auto",
+    pip = TRUE)
 
-  reticulate::conda_install(environment_name, package_name, pip = TRUE)
-  reticulate::conda_install(environment_name, "numpy")
+  cat("\nInstallation complete.\n\n")
+  
+  if (rstudioapi::hasFun("restartSession"))
+    rstudioapi::restartSession()
+  
+  invisible(NULL)
 }
