@@ -20,8 +20,8 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        #git config --global user.email "ninhu@microsoft.com"
-        #git config --global user.name "ninghu"
+        git config --global user.email "ninhu@microsoft.com"
+        git config --global user.name "ninghu"
         echo SOURCE BRANCH IS $BUILD_SOURCEBRANCH
         ECHO GIT CHECKOUT MASTER
         git checkout ninhu/docs_build
