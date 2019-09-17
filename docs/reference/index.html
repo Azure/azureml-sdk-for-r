@@ -334,6 +334,19 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
+          <p><code><a href="get_model_package_container_registry.html">get_model_package_container_registry()</a></code> </p>
+        </td>
+        <td><p>Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_model_package_creation_logs.html">get_model_package_creation_logs()</a></code> </p>
+        </td>
+        <td><p>Retrieve the package creation logs.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="get_run_metrics.html">get_run_metrics()</a></code> </p>
         </td>
         <td><p>Get the metrics for run</p></td>
@@ -355,6 +368,12 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="hyperdrive_config.html">hyperdrive_config()</a></code> </p>
         </td>
         <td><p>Create configuration for a HyperDrive run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="inference_config.html">inference_config()</a></code> </p>
+        </td>
+        <td><p>Creates the Model deployment config specific to model deployments.</p></td>
       </tr><tr>
         
         <td>
@@ -419,6 +438,13 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
+          <p><code><a href="pull_model_package_image.html">pull_model_package_image()</a></code> </p>
+        </td>
+        <td><p>Pull the package output to the local machine.
+This can only be used with a Docker image package.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
         </td>
         <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</p></td>
@@ -467,6 +493,13 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
+          <p><code><a href="save_model_package_files.html">save_model_package_files()</a></code> </p>
+        </td>
+        <td><p>Save the package output to a local directory.
+This can only be used with a Dockerfile package.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="serialize_model.html">serialize_model()</a></code> </p>
         </td>
         <td><p>Convert this Model into a json serialized dictionary</p></td>
@@ -506,6 +539,12 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
           <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
         </td>
         <td><p>Wait for cluster's instantiation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wait_for_model_package_creation.html">wait_for_model_package_creation()</a></code> </p>
+        </td>
+        <td><p>Wait for the package to finish creating.</p></td>
       </tr><tr>
         
         <td>
