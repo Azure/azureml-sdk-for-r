@@ -24,9 +24,9 @@
   azureml$"_base_sdk_common"$user_agent$append("azureml-r-sdk", ver)
 
   # for solving login hang issue on rstudio server
-  if (grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH")))
-  {
+  if (grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))) {
     webbrowser <- reticulate::import("webbrowser")
+    # this will force to use device code login
     webbrowser$"_tryorder" <- list()
   }
 
