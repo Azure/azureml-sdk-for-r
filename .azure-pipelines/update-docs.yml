@@ -7,20 +7,23 @@ pool:
 container: ninhu/r-sdk-build:test
 
 steps:
+  - checkout: self
+    persistCredentials: true
+    clean: true
+
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
-              unlink("docs", recursive=TRUE, force=TRUE)
+              unlink("docs", recursive=TRUE, force=TRUE);
               roxygen2::roxygenise();
               pkgdown::build_site();'
-        ls
         echo GIT ADD
         git add man/* docs/*
         echo GIT COMMIT
         git commit -m "Update docs automatically"
-        echo GIT PUSH
-        git push
+        ECHO GIT PUSH
+        git push origin
     displayName: 'Update Docs'
