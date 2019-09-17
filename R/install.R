@@ -54,5 +54,4 @@ install_azureml <- function(version = NULL,
     rstudioapi::restartSession()
   
   invisible(NULL)
-  
 }
