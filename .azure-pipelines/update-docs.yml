@@ -10,7 +10,7 @@ pr: none
 pool:
   vmImage: 'ubuntu-16.04'
 
-container: ninhu/r-sdk-build:test
+container: ninhu/r-sdk-build:latest
 
 steps:
   - task: Bash@3
@@ -20,7 +20,7 @@ steps:
         git config --global user.email "$(GITHUB_USER_EMAIL)"
         git config --global user.name "$(GITHUB_USER_NAME)"
         echo GIT CHECKOUT MASTER
-        git checkout ninhu/docs_build
+        git checkout master
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
               unlink("docs", recursive=TRUE, force=TRUE);

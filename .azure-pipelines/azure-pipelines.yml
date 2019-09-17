@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-16.04'
 
-container: ninhu/r-sdk-build:test
+container: ninhu/r-sdk-build:latest
 
 variables:
 - name: TEST_LOCATION
