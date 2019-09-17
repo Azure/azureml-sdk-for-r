@@ -3,11 +3,11 @@
 
 #' Install azureml sdk package
 #' @param version pip version
-#' @param environment name of environment to create
+#' @param envname name of environment to create
 #' @param conda_python_version version of python for conda environment
 #' @export
 install_azureml <- function(version = NULL,
-                            environment = "r-azureml",
+                            envname = "r-azureml",
                             conda_python_version = "3.6")
 {
   main_package = "azureml-sdk"
@@ -27,22 +27,22 @@ install_azureml <- function(version = NULL,
   
   # create conda environment if missing
   envs <- reticulate::conda_list()
-  if (environment %in% envs$name)
+  if (envname %in% envs$name)
   {
-    msg = paste("Using existing environment: ", environment)
+    msg = paste("Using existing environment: ", envname)
     message(msg)
   }
   else
   {
-    msg = paste("Creating environment: ", environment)
+    msg = paste("Creating environment: ", envname)
     message(msg)
-    reticulate::conda_create(environment, packages = "python=3.6")
+    reticulate::conda_create(envname, packages = "python=3.6")
   }
   
   # install packages
   reticulate::py_install(
     packages = c(main_package, default_packages),
-    environment = environment,
+    envname = envname,
     method = "conda",
     conda = "auto",
     python_version = conda_python_version,
