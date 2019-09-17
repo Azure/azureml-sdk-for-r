@@ -106,23 +106,15 @@
 <div id="developer-instructions-on-building-azureml-package" class="section level1">
 
 <ol>
-<li>Make sure below packages are installed. <code>install.packages('devtools')  install.packages('roxygen2')  install.packages('pkgdown')</code>
+<li>Make sure below packages are installed. <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages('devtools')</a></code>
 </li>
 <li>
-<p>Run the following to generate docs and build the code:</p>
+<p>Run the following to build the code. The R package file will be created at <code>package_location</code>. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</p>
 <pre><code><a href="https://rdrr.io/r/base/getwd.html">setwd('&lt;repo_root&gt;')
-
-# Generate Pakcage Documentation
-roxygen2::roxygenise()
-
-# Generate a docs directory for hosting on GitHub pages
-unlink("docs", recursive=TRUE, force=TRUE)
-pkgdown::build_site()
 
 # Build the R package
 package_location &lt;- devtools::build()</a></code></pre>
 </li>
-<li>The R package file is created at <code>package_location</code>. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</li>
 <li>
 <p>To install the package from the <code>.tar.gz</code> file in the filesystem, do:</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages(package_location, repos = NULL)</a></code></pre>
