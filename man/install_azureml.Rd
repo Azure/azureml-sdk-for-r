@@ -4,13 +4,13 @@
 \alias{install_azureml}
 \title{Install azureml sdk package}
 \usage{
-install_azureml(version = NULL, environment = "r-azureml",
+install_azureml(version = NULL, envname = "r-azureml",
   conda_python_version = "3.6")
 }
 \arguments{
-\item{version}{pip version}
+\item{version}{azureml sdk package version}
 
-\item{environment}{name of environment to create}
+\item{envname}{name of environment to create}
 
 \item{conda_python_version}{version of python for conda environment}
 }

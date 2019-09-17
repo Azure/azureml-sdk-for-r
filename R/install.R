@@ -2,7 +2,7 @@
 # Licensed under the MIT license.
 
 #' Install azureml sdk package
-#' @param version pip version
+#' @param version azureml sdk package version
 #' @param envname name of environment to create
 #' @param conda_python_version version of python for conda environment
 #' @export
