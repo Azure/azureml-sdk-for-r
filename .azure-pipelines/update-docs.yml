@@ -13,17 +13,13 @@ pool:
 container: ninhu/r-sdk-build:test
 
 steps:
-  - checkout: self
-    persistCredentials: true
-
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
-        git config --global user.email "ninhu@microsoft.com"
-        git config --global user.name "ninghu"
-        echo SOURCE BRANCH IS $BUILD_SOURCEBRANCH
-        ECHO GIT CHECKOUT MASTER
+        git config --global user.email "$(GITHUB_USER_EMAIL)"
+        git config --global user.name "$(GITHUB_USER_NAME)"
+        echo GIT CHECKOUT MASTER
         git checkout ninhu/docs_build
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
