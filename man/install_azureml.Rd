@@ -4,17 +4,13 @@
 \alias{install_azureml}
 \title{Install azureml sdk package}
 \usage{
-install_azureml(method = "conda", conda = "auto", version = NULL,
-  envname = "r-azureml", conda_python_version = "3.6")
+install_azureml(version = NULL, environment = "r-azureml",
+  conda_python_version = "3.6")
 }
 \arguments{
-\item{method}{installation method for reticulate::py_install()}
-
-\item{conda}{path to conda executable ("auto" will find using PATH)}
-
 \item{version}{pip version}
 
-\item{envname}{name of environment to create}
+\item{environment}{name of environment to create}
 
 \item{conda_python_version}{version of python for conda environment}
 }

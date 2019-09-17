@@ -2,26 +2,14 @@
 # Licensed under the MIT license.
 
 #' Install azureml sdk package
-#' @param method installation method for reticulate::py_install()
-#' @param conda path to conda executable ("auto" will find using PATH)
 #' @param version pip version
-#' @param envname name of environment to create
+#' @param environment name of environment to create
 #' @param conda_python_version version of python for conda environment
 #' @export
-install_azureml <- function(method = "conda",
-                            conda = "auto",
-                            version = NULL,
-                            envname = "r-azureml",
+install_azureml <- function(version = NULL,
+                            environment = "r-azureml",
                             conda_python_version = "3.6")
 {
-
-  # verify 64-bit
-  if (.Machine$sizeof.pointer != 8) {
-    stop("Unable to install AzureMLSDK on this machine.",
-         "Binary installation is only available for 64-bit platforms.")
-  }
-  
-  method <- match.arg(method)
   main_package = "azureml-sdk"
   default_packages <- c("numpy")
   
@@ -39,27 +27,27 @@ install_azureml <- function(method = "conda",
   
   # create conda environment if missing
   envs <- reticulate::conda_list()
-  if (envname %in% envs$name)
+  if (environment %in% envs$name)
   {
-    msg = paste("Using existing environment: ", envname)
+    msg = paste("Using existing environment: ", environment)
     message(msg)
   }
   else
   {
-    msg = paste("Creating environment: ", envname)
+    msg = paste("Creating environment: ", environment)
     message(msg)
-    reticulate::conda_create(envname, packages = "python=3.6")
+    reticulate::conda_create(environment, packages = "python=3.6")
   }
   
   # install packages
   reticulate::py_install(
     packages = c(main_package, default_packages),
-    envname = envname,
-    method = method,
-    conda = conda,
+    environment = environment,
+    method = "conda",
+    conda = "auto",
     python_version = conda_python_version,
     pip = TRUE)
-  
+
   cat("\nInstallation complete.\n\n")
   
   if (rstudioapi::hasFun("restartSession"))
