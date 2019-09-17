@@ -157,16 +157,16 @@
 </tbody>
 </table>
 </div>
-<div id="installing-azureml-r-package" class="section level2">
+<div id="installing-azureml-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installing-azureml-r-package" class="anchor"></a>Installing <code>azureml</code> R package</h2>
-<p>To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo and build it locally in R.</p>
-<pre><code>remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           user_name = '&lt;your GitHub user name&gt;',
-                           auth_token = '&lt;your personal access token&gt;',
-                           INSTALL_opts=c("--no-multiarch"))</code></pre>
+<a href="#installing-azureml-package" class="anchor"></a>Installing <code>azureml</code> package</h2>
+<p>To get started, use the <code>devtools</code> package to install AzureML SDK for R from GitHub.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&gt;</span><span class="st"> </span>remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
+<a class="sourceLine" id="cb1-2" title="2">                           <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
+<p>Then, use <code><a href="reference/install_azureml.html">install_azureml()</a></code> to install the compiled code from the AzureML Python SDK.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="op">&gt;</span><span class="st"> </span>azureml<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/azureml/topics/install_azureml">install_azureml</a></span>()</a></code></pre></div>
-<p>For a detailed walk-through of the installation process, see our <a href="articles/installation.html">article</a>.</p>
+<p>Now, you’re ready to get started!</p>
+<p>For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our <a href="articles/installation.html">Installation Guide</a>.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">

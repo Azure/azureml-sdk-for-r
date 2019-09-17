@@ -79,7 +79,7 @@
     <div class="page-header toc-ignore">
       <h1>Installing AzureML SDK for R</h1>
             
-            <h4 class="date">2019-09-16</h4>
+            <h4 class="date">2019-09-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
@@ -91,7 +91,7 @@
 <div id="install-anaconda" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-anaconda" class="anchor"></a>1. Install Anaconda</h2>
-<p>To ensure that your environment is set up correctly for installation, you will first need to install the 64-bit binary of <a href="https://www.anaconda.com/">Anaconda</a> for Python 3.5 or later.</p>
+<p>If you do not have Anaconda already installed on your machine, you will first need to <a href="https://www.anaconda.com/">install</a> it. Choose the 64-bit binary for Python 3.5 or later.</p>
 </div>
 <div id="install-azureml-r-package-with-remotes" class="section level2">
 <h2 class="hasAnchor">
@@ -99,22 +99,22 @@
 </h2>
 <p>As the <code>azureml</code> package is not available on CRAN, you will need <code>remotes</code> to install from the GitHub repo.</p>
 <pre><code>&gt; install.packages('remotes')</code></pre>
-<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to <a href="https://github.com/settings/tokens">generate a personal access token</a> and supply it along with your username.</p>
+<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>.</p>
 <pre><code>&gt; remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           user_name = '&lt;your GitHub user name&gt;',
                            auth_token = '&lt;your personal access token&gt;',
                            INSTALL_opts=c("--no-multiarch"))</code></pre>
 </div>
 <div id="install-azureml-python-sdk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#install-azureml-python-sdk" class="anchor"></a>3. Install azureml Python SDK</h2>
-<p>Lastly, use the <code>azureml</code> R package to create a conda environment called <code>r-azureml</code> where the Python SDK package will be installed.</p>
-<pre><code>&gt; azureml::install_azureml()</code></pre>
+<a href="#install-azureml-python-sdk" class="anchor"></a>3. Install AzureML Python SDK</h2>
+<p>Lastly, use the <code>azureml</code> R library to install the compiled code. By default, <code>install_azureml</code> will install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the AzureML Python SDK</a> in a conda environment called <code>r-azureml</code>. If you would like to override the default version, environment name, or python version, you can pass in those arguments:</p>
+<pre><code>&gt; azureml::install_azureml(version = NULL, envname = "&lt;your conda environment name&gt;",
+                           conda_python_version = "&lt;desired python version&gt;")</code></pre>
 </div>
 <div id="test-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-installation" class="anchor"></a>4. Test installation</h2>
-<p>You can confirm your installation by loading the library and successfully retrieving a run.</p>
+<p>You can confirm your installation worked by loading the library and successfully retrieving a run.</p>
 <pre><code>&gt; library(azureml)
 &gt; get_current_run()
 &lt;azureml.core.run._OfflineRun&gt;</code></pre>
@@ -122,7 +122,9 @@
 <div id="troubleshooting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
-<p>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p>
+<ul>
+<li>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
+</ul>
 </div>
   </div>
 
@@ -133,7 +135,7 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#install-anaconda">1. Install Anaconda</a></li>
       <li><a href="#install-azureml-r-package-with-remotes">2. Install <code>azureml</code> R package with <code>remotes</code></a></li>
-      <li><a href="#install-azureml-python-sdk">3. Install azureml Python SDK</a></li>
+      <li><a href="#install-azureml-python-sdk">3. Install AzureML Python SDK</a></li>
       <li><a href="#test-installation">4. Test installation</a></li>
       <li><a href="#troubleshooting">Troubleshooting</a></li>
       </ul>

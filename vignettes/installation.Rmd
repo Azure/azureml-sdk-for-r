@@ -10,29 +10,29 @@ vignette: >
 
 ## 1. Install Anaconda
 
-To ensure that your environment is set up correctly for installation, you will first need to install the 64-bit binary of [Anaconda](https://www.anaconda.com/) for Python 3.5 or later.
+If you do not have Anaconda already installed on your machine, you will first need to [install](https://www.anaconda.com/) it. Choose the 64-bit binary for Python 3.5 or later.
 
 ## 2. Install `azureml` R package with `remotes`
 As the `azureml` package is not available on CRAN, you will need `remotes` to install from the GitHub repo.
 ```
 > install.packages('remotes')
 ```
-Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply it along with your username.
+Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to use a [generated personal access token](https://github.com/settings/tokens).
 ```
 > remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           user_name = '<your GitHub user name>',
                            auth_token = '<your personal access token>',
                            INSTALL_opts=c("--no-multiarch"))
 ```
 
-## 3. Install azureml Python SDK
-Lastly, use the `azureml` R package to create a conda environment called `r-azureml` where the Python SDK package will be installed.
+## 3. Install AzureML Python SDK
+Lastly, use the `azureml` R library to install the compiled code. By default, `install_azureml` will install the [latest version of the AzureML Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`. If you would like to override the default version, environment name, or python version, you can pass in those arguments: 
 ```
-> azureml::install_azureml()
+> azureml::install_azureml(version = NULL, envname = "<your conda environment name>",
+                           conda_python_version = "<desired python version>")
 ```
 
 ## 4. Test installation
-You can confirm your installation by loading the library and successfully retrieving a run.
+You can confirm your installation worked by loading the library and successfully retrieving a run.
 ```
 > library(azureml)
 > get_current_run()
@@ -40,6 +40,6 @@ You can confirm your installation by loading the library and successfully retrie
 ```
 
 ## Troubleshooting
-In step 3 of the installation, if you get ssl errors on windows, it is due to an
+-   In step 3 of the installation, if you get ssl errors on windows, it is due to an
 outdated openssl binary. Install the latest openssl binaries from
 [here](https://wiki.openssl.org/index.php/Binaries).

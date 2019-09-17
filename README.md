@@ -30,21 +30,22 @@ Main capabilities of the SDK include:
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
 [Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
 
-## Installing `azureml` R package
+## Installing `azureml` package
 
-To use AzureML SDK for R, you will first need to have the appropriate Python wheel for your system already installed along with some CRAN dependencies. Then, you can install the package from this GitHub repo and build it locally in R.
-```
-remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           user_name = '<your GitHub user name>',
-                           auth_token = '<your personal access token>',
+To get started, use the `devtools` package to install AzureML SDK for R from GitHub.
+```R
+> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            INSTALL_opts=c("--no-multiarch"))
 ```
-
+Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 ```R
 > azureml::install_azureml()
 ```
 
-For a detailed walk-through of the installation process, see our [article](articles/installation.html).
+Now, you're ready to get started!
+
+
+For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](articles/installation.html).
 
 ## Getting Started
 
