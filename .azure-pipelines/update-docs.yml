@@ -22,6 +22,9 @@ steps:
       script: |
         git config --global user.email "amlrsdk@microsoft.com"
         git config --global user.name "amlrsdk"
+        echo SOURCE BRANCH IS %BUILD_SOURCEBRANCH%
+        ECHO GIT CHECKOUT MASTER
+        git checkout ninhu/docs_build
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
               unlink("docs", recursive=TRUE, force=TRUE);
@@ -32,5 +35,5 @@ steps:
         echo GIT COMMIT
         git commit -m "Update R SDK Docs [skip ci]"
         ECHO GIT PUSH
-        git push origin
+        git push origin ninhu/docs_build
     displayName: 'Update Docs'
