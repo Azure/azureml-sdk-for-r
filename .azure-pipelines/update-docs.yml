@@ -14,6 +14,8 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        git config --global user.email "amlrsdk@microsoft.com"
+        git config --global user.name "amlrsdk"
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
               unlink("docs", recursive=TRUE, force=TRUE);
@@ -22,7 +24,7 @@ steps:
         echo GIT ADD
         git add man/* docs/*
         echo GIT COMMIT
-        git commit -m "Update docs automatically"
+        git commit -m "Update R SDK Docs [skip ci]"
         ECHO GIT PUSH
         git push origin
     displayName: 'Update Docs'
