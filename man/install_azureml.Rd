@@ -2,15 +2,18 @@
 % Please edit documentation in R/install.R
 \name{install_azureml}
 \alias{install_azureml}
-\title{Install azureml}
+\title{Install azureml sdk package}
 \usage{
-install_azureml(version = NULL, environment_name = "r-azureml")
+install_azureml(version = NULL, envname = "r-azureml",
+  conda_python_version = "3.6")
 }
 \arguments{
-\item{version}{pip version}
+\item{version}{azureml sdk package version}
 
-\item{environment_name}{name of environment to create}
+\item{envname}{name of environment to create}
+
+\item{conda_python_version}{version of python for conda environment}
 }
 \description{
-Install azureml
+Install azureml sdk package
 }

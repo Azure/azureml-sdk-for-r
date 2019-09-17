@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install azureml sdk package — install_azureml • azureml</title>
+<title>Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored. — get_model_package_container_registry • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Install azureml sdk package — install_azureml" />
+<meta property="og:title" content="Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored. — get_model_package_container_registry" />
 
-<meta property="og:description" content="Install azureml sdk package" />
+<meta property="og:description" content="Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,36 +106,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Install azureml sdk package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/install.R'><code>R/install.R</code></a></small>
-    <div class="hidden name"><code>install_azureml.Rd</code></div>
+    <h1>Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
+    <div class="hidden name"><code>get_model_package_container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Install azureml sdk package</p>
+    <p>Return a ContainerRegistry object for where the image 
+(or base image, for Dockerfile packages) is stored.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
-  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_model_package_container_registry</span>(<span class='no'>package</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>version</th>
-      <td><p>azureml sdk package version</p></td>
-    </tr>
-    <tr>
-      <th>envname</th>
-      <td><p>name of environment to create</p></td>
-    </tr>
-    <tr>
-      <th>conda_python_version</th>
-      <td><p>version of python for conda environment</p></td>
+      <th>package</th>
+      <td><p>Package created with model(s) and dependencies.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>ContainerRegistry object</p>
     
 
   </div>
@@ -140,7 +140,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
