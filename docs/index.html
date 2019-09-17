@@ -160,7 +160,8 @@
 <div id="installing-azureml-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-azureml-package" class="anchor"></a>Installing <code>azureml</code> package</h2>
-<p>To get started, use the <code>devtools</code> package to install AzureML SDK for R from GitHub.</p>
+<p>Install <a href="https://www.anaconda.com/">Anaconda</a> if not already installed. Choose Python 3.5 or later.</p>
+<p>To get started, use the <code>remotes</code> package to install AzureML SDK for R from GitHub.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&gt;</span><span class="st"> </span>remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
 <a class="sourceLine" id="cb1-2" title="2">                           <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
 <p>Then, use <code><a href="reference/install_azureml.html">install_azureml()</a></code> to install the compiled code from the AzureML Python SDK.</p>
