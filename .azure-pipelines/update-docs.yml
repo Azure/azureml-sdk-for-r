@@ -35,5 +35,5 @@ steps:
         echo GIT COMMIT
         git commit -m "Update R SDK Docs [skip ci]"
         ECHO GIT PUSH
-        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
+        git push https://$(GITHUB_AUTH_TOKEN)@github.com/Azure/azureml-sdk-for-r.git
     displayName: 'Update Docs'
