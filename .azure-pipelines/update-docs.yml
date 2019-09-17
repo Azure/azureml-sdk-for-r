@@ -20,9 +20,9 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        git config --global user.email "amlrsdk@microsoft.com"
-        git config --global user.name "amlrsdk"
-        echo SOURCE BRANCH IS %BUILD_SOURCEBRANCH%
+        #git config --global user.email "ninhu@microsoft.com"
+        #git config --global user.name "ninghu"
+        echo SOURCE BRANCH IS $BUILD_SOURCEBRANCH
         ECHO GIT CHECKOUT MASTER
         git checkout ninhu/docs_build
         echo UPDATE DOCS
@@ -35,5 +35,5 @@ steps:
         echo GIT COMMIT
         git commit -m "Update R SDK Docs [skip ci]"
         ECHO GIT PUSH
-        git push origin ninhu/docs_build
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push
     displayName: 'Update Docs'
