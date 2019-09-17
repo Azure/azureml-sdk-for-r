@@ -9,7 +9,6 @@ container: ninhu/r-sdk-build:test
 steps:
   - checkout: self
     persistCredentials: true
-    clean: true
 
   - task: Bash@3
     inputs:
