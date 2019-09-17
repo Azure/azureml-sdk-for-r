@@ -29,7 +29,7 @@ steps:
         echo GIT ADD
         git add man/* docs/*
         echo GIT COMMIT
-        git commit -m "Update R SDK Docs [skip ci]"
+        git commit -m "Update R SDK Docs via $(Build.DefinitionName) $(Build.BuildNumber) [skip ci]"
         echo GIT PUSH
         git push https://$(GITHUB_AUTH_TOKEN)@github.com/Azure/azureml-sdk-for-r.git
     displayName: 'Update Docs'
