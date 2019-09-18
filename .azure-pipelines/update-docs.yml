@@ -25,7 +25,7 @@ steps:
         echo BranchName=$branch_name
         echo GIT CHECKOUT
         git checkout $branch_name
-        ECHO GIT STATUS
+        echo GIT STATUS
         git status
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
@@ -36,10 +36,10 @@ steps:
         git add man/* docs/*
         echo GIT COMMIT
         git commit -m "Update R SDK Docs via $(Build.DefinitionName) $(Build.BuildNumber) [skip ci]"
-        ECHO GIT STATUS
+        echo GIT STATUS
         git status
         echo GIT PUSH
         git push https://$(GITHUB_AUTH_TOKEN)@github.com/Azure/azureml-sdk-for-r.git
-        ECHO GIT STATUS
+        echo GIT STATUS
         git status
     displayName: 'Update Docs'
