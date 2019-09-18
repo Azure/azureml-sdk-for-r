@@ -1,0 +1,195 @@
+---
+title: "Hyperparameter Tuning a Keras Model with HyperDrive"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hyperparameter Tuning a Keras Mode with HyperDrive"l}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This article demonstrates how you can efficiently tune hyperparameters for a model using AzureML SDK for R. 
+We will train a Keras model on the CIFAR10 dataset, automate hyperparameter exploration, launch parallel jobs, log our results, and find the best run using AzureML's HyperDrive service.
+
+### What are hyperparameters?
+
+Hyperparameters are variable parameters chosen to train a model. Learning rate, number of epochs, and batch size are all examples of hyperparameters.
+
+Using brute-force methods to find the optimal values for parameters can be time-consuming, and poor-performing runs can result in wasted money. To avoid this, HyperDrive automates hyperparameter exploration in a time-saving and cost-effective manner by launching several parallel runs with different configurations and finding the configuration that results in best performance on your primary metric.
+
+Let's get started with the example to see how it works!
+
+## 1. Set up the experiment
+
+First, we will prepare for training by loading the required package, initializing a workspace, and creating an experiment.
+
+### Import package
+
+```R
+library("azureml")
+```
+
+### Initialize a workspace
+
+The `Workspace` is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create. 
+
+You can create a `Workspace` object from a local `config.json` file
+```R
+ws <- load_workspace_from_config()
+```
+
+Or load an existing workspace from your Azure Machine Learning account
+```R
+ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your resource group>")
+```
+
+### Create a deep learning experiment
+
+For this example, we will create an experiment named "hyperdrive-cifar10".
+
+```R
+exp <- experiment(workspace = ws, name = 'hyperdrive-cifar10')
+```
+
+## 2. Create a compute target
+
+Now, we will create a compute target for our job to run on. In this example, we are creating a GPU-enabled compute cluster.
+```R
+cluster_name <- "rcluster"
+compute_target <- get_compute(ws, cluster_name = cluster_name)
+if (is.null(compute_target))
+{
+  vm_size <- "STANDARD_NC6"
+  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
+                                       vm_size = vm_size, max_nodes = 1)
+}
+wait_for_compute(compute_target)
+```
+
+## 3. Prepare training script
+
+In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["cifar10_cnn.R"](../../samples/training/cnn-tuning-with-hyperdrive/cifar10_cnn.R).
+
+```R
+library("azureml")
+```
+
+Then, we need to edit our script so that it can log our parameters. We will use the `log_metric_to_run` function to log our hyperparameters at the top of the script and to log our primary metric at the bottom of the script.
+
+```R
+current_run <- get_current_run()
+...
+log_metric_to_run("batch_size", batch_size, current_run)
+...
+log_metric_to_run("epochs", epochs, current_run)
+...
+log_metric_to_run("lr", lr, current_run)
+...
+log_metric_to_run("decay", decay, current_run)
+```
+
+```R
+log_metric_to_run("Loss", results[[1]], current_run)
+```
+
+## 4. Create an estimator
+
+An `Estimator` offers a simple way to launch a training job on a compute target. 
+
+Our training script will need the Keras package to run, and we can have it installed in the Docker container where our job will run by passing the package name via the `cran_packages` parameter.
+```R
+est <- estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
+                 compute_target = compute_target, cran_packages = c("keras"))
+```
+
+## 5. Set HyperDrive configuration
+
+### Define search space
+
+In this experiment, we will use four hyperparameters: batch size, number of epochs, learning rate, and decay. In order to begin tuning, we must define the range of values we would like to pull from and how they will be distributed. This is called a parameter space definition and can be created with discrete or continuous ranges.
+
+__Discrete hyperparameters__ are specified as a choice among discrete values represented as a list.
+
+Advanced discrete hyperparameters can also be specified using a distribution. The following distributions are supported:
+
+ * `quniform(low, high, q)`
+ * `qloguniform(low, high, q)`
+ * `qnormal(mu, sigma, q)`
+ * `qlognormal(mu, sigma, q)`
+
+__Continuous hyperparameters__ are specified as a distribution over a continuous range of values. The following distributions are supported:
+
+ * `uniform(low, high)`
+ * `loguniform(low, high)`
+ * `normal(mu, sigma)`
+ * `lognormal(mu, sigma)`
+
+Here, we will use the `random_parameter_sampling` function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
+
+Other sampling function options are:
+
+ * `grid_parameter_sampling(parameter_space)`
+ * `bayesian_parameter_sampling(parameter_space)`
+
+```R
+sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
+                                           epochs = choice(c(200, 350, 500)),
+                                           lr = normal(0.0001, 0.005),
+                                           decay = uniform(1e-6, 3e-6)))
+```
+
+### Define termination policy
+
+To prevent resource waste, we should detect and terminate poorly performing runs. HyperDrive will do this automatically if we set up an early termination policy.
+
+Here, we will use the `bandit_policy` which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
+
+```R
+policy <- bandit_policy(slack_factor = 0.15)
+```
+
+Other termination policy options are:
+
+ * `median_stopping_policy(evaluation_interval, delay_evaluation)`
+ * `truncation_selection_policy(truncation_percentage, evaluation_interval, delay_evaluation)`
+ 
+If no policy is provided, all runs will continue to completion regardless of performance.
+
+### Finalize configuration
+
+Now, we can create a `HyperDriveConfig` object to define our group of jobs. Along with our sampling and policy definitions, we need to specify the name of the primary metric that we want to track and whether we want to maximize it or minimize it.
+
+```R
+hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
+                                       primary_metric_goal("MINIMIZE"),
+                                       primary_metric_name = "Loss",
+                                       max_total_runs = 4,
+                                       policy = policy,
+                                       estimator = est)
+```
+
+## 6. Submit HyperDrive run
+
+Submitting our experiment will start multiple simultaneous runs and return a `HyperDriveRun` object that we will use to interface with the run history during and after the job.
+
+```R
+hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
+wait_for_run_completion(hyperdrive_run, show_output = TRUE)
+```
+
+## 7. Analyse runs by performance
+
+Finally, we can view and compare the metrics collected during our all of our child runs!
+
+```R
+child_run_metrics <- get_child_run_metrics(hyperdrive_run)
+child_run_metrics
+
+child_runs <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
+child_runs
+
+best_run <- get_best_run_by_primary_metric(hyperdrive_run)
+
+metrics <- get_run_metrics(best_run)
+metrics
+```

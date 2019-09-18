@@ -37,6 +37,7 @@ Install [Anaconda](https://www.anaconda.com/) if not already installed. Choose P
 To get started, use the `remotes` package to install AzureML SDK for R from GitHub.
 ```R
 > remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
+                           auth_token = '<your personal access token>',
                            INSTALL_opts=c("--no-multiarch"))
 ```
 Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
@@ -46,13 +47,14 @@ Then, use `install_azureml()` to install the compiled code from the AzureML Pyth
 
 Now, you're ready to get started!
 
-For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](articles/installation.html).
+For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](./docs/articles/installation.html).
 
 ## Getting Started
 
 To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.
 
 1. If you don't already have a workspace created, you can create one by doing:
+
 	```R
 	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
 
@@ -63,14 +65,18 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 	Note: If you haven't already set up a resource group, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
 
 2. If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:
+
 	```R
 	existing_ws <- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)
 	```
 	Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:
+
 	```R
 	loaded_ws <- load_workspace_from_config()
 	```
-Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our [samples](samples/) to learn how!
+Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R.
+
+Take a look at our [code samples](samples/) and [end-to-end vignettes](vignettes/) for examples of what's possible with the SDK!
   
 ## Contribute
 We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](CONTRIBUTING.md).

@@ -3,14 +3,14 @@ title: "Training a TensorFlow Model on MNIST"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Training a TensorFlow Model on MNIST}
   %\VignetteEngine{knitr::rmarkdown}
   \use_package{UTF-8}
 ---
 
 This article demonstrates how to run a TensorFlow training script at scale using AzureML SDK for R. We will train a TensorFlow model to classify handwritten digits using a deep neural network (DNN) and log our results to the Azure Machine Learning service.
 
-## Set up the experiment
+## 1. Set up the experiment
 
 Let's prepare for training by loading the required package, initializing a workspace, and creating an experiment.
 
@@ -41,7 +41,7 @@ For this example, we will create an `Experiment` called "tf-mnist".
 exp <- Experiment(workspace = ws, name = 'tf-mnist')
 ```
 
-## Create a compute target
+## 2. Create a compute target
 
 Now, we will create a compute target for our TensorFlow job to run on. In this example, we are creating a CPU-enabled compute cluster.
 ```R
@@ -58,7 +58,7 @@ if (is.null(compute_target))
 wait_for_compute(compute_target)
 ```
 
-## Prepare training script
+## 3. Prepare training script
 
 In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["tf_mnist.R"](../../samples/training/train-with-tensorflow/tf_mnist.R).
 
@@ -76,7 +76,7 @@ log_metric_to_run("accuracy",
                   current_run)
 ```
 
-## Create an estimator
+## 4. Create an estimator
 
 An `Estimator` offers a simple way to launch a training job on a compute target. Our training script will need the TensorFlow package to run, and we can have it installed in the Docker container where our job will run by passing the package name to the `cran_packages` parameter.
 
@@ -87,7 +87,7 @@ est <- estimator(source_directory = ".",
                  cran_packages = c("tensorflow"))
 ```
 
-## Submit a run
+## 5. Submit a run
 
 Submitting our experiment will return a `Run` object that we will use to interface with the run history during and after the job.
 
@@ -96,7 +96,7 @@ run <- submit_experiment(est, exp)
 wait_for_run_completion(run, show_output = TRUE)
 ```
 
-### View metrics
+### 6. View metrics
 
 Finally, we can view the metrics collected during our TensorFlow run!
 

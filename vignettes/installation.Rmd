@@ -3,25 +3,27 @@ title: "Installing AzureML SDK for R"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Installing AzureML SDK for R}
   %\VignetteEngine{knitr::rmarkdown}
   \use_package{UTF-8}
 ---
 
 ## 1. Install Anaconda
 
-If you do not have Anaconda already installed on your machine, you will first need to [install](https://www.anaconda.com/) it. Choose the 64-bit binary for Python 3.5 or later.
+If you do not have Anaconda already installed on your machine, you will first need to [install](https://www.anaconda.com/distribution/) it. Choose the 64-bit binary for Python 3.5 or later.
 
 ## 2. Install `azureml` R package with `remotes`
 As the `azureml` package is not available on CRAN, you will need `remotes` to install from the GitHub repo.
 ```
 > install.packages('remotes')
 ```
-Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to use a [generated personal access token](https://github.com/settings/tokens).
+Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to use a [generated personal access token](https://github.com/settings/tokens). Set `build_vignettes` to TRUE if you would like the vignettes to be downloaded along with the main package.
+
 ```
 > remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            auth_token = '<your personal access token>',
-                           INSTALL_opts=c("--no-multiarch"))
+                           INSTALL_opts=c("--no-multiarch"),
+                           build_vignettes = FALSE)
 ```
 
 ## 3. Install AzureML Python SDK
