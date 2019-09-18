@@ -19,8 +19,10 @@ steps:
       script: |
         git config --global user.email "$(GITHUB_USER_EMAIL)"
         git config --global user.name "$(GITHUB_USER_NAME)"
-        echo $(Build.SourceBranch)
-        branch_name="${$(Build.SourceBranch)/"refs/heads"}"
+        branch_ref=$(Build.SourceBranch)
+        echo BranchRef=$branch_ref
+        branch_name="${branch_ref/"refs/heads/"}"
+        echo BranchName=$branch_name
         echo GIT CHECKOUT $branch_name
         git checkout $branch_name
         echo GIT PULL
