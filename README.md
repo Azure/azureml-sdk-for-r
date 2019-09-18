@@ -30,36 +30,24 @@ Main capabilities of the SDK include:
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
 [Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
 
-## Installing `azureml` R package
+## Installing `azureml` package
 
-1. Install [anaconda](https://www.anaconda.com/) if not already installed. Choose python 3.5 or later.
+Install [Anaconda](https://www.anaconda.com/) if not already installed. Choose Python 3.5 or later.
 
-2. Install the latest `devtools` in Rstudio/R:
-   ```
-   > install.packages('devtools')
-   ```
+To get started, use the `remotes` package to install AzureML SDK for R from GitHub.
+```R
+> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
+                           INSTALL_opts=c("--no-multiarch"))
+```
+Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
+```R
+> azureml::install_azureml()
+```
 
-3. Install azureml R package:
+Now, you're ready to get started!
 
-   Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in "https://github.com/settings/tokens" and supply to `auth_token` argument. When generating the token, make sure to select the "repo" scope.
-   ```
-   > devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '<personal access toke>')
-   ```
+For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](articles/installation.html).
 
-4. Install azureml python sdk. This will create a conda environment
-   called `r-azureml` in which the package would be installed. Run the
-   following in RStudio.
-   ```
-   > azureml::install_azureml()
-   ```
-
-5. You can test by doing:
-   ```
-   > library(azureml)
-   > get_current_run()
-   <azureml.core.run._OfflineRun>
-   ```
-   
 ## Getting Started
 
 To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.
@@ -80,25 +68,9 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 	```
 	Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:
 	```R
-	loaded_ws <- load_workspace_from_config("insert-path-to-config-file")
+	loaded_ws <- load_workspace_from_config()
 	```
 Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our [samples](samples/) to learn how!
-
-## Troubleshooting
-
-- In step 4 of the installation, if you get ssl errors on windows, that is due to an
-  outdated openssl binary. Install the latest openssl binaries from
-  [here](https://wiki.openssl.org/index.php/Binaries).
-- If the following error occurs when submitting an experiment using RStudio:
-   ```R
-    Error in py_call_impl(callable, dots$args, dots$keywords) : 
-     PermissionError: [Errno 13] Permission denied
-   ```
-  Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.
-  
-  In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However,
-  the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
-  session. For this reason, best practice is to isolate project files into their own directory.
   
 ## Contribute
 We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](CONTRIBUTING.md).
