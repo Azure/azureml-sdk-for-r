@@ -46,7 +46,7 @@ Then, use `install_azureml()` to install the compiled code from the AzureML Pyth
 
 Now, you're ready to get started!
 
-For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](articles/installation.html).
+For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](docs/articles/installation.html).
 
 ## Getting Started
 
