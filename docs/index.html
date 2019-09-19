@@ -87,7 +87,16 @@
 <div id="azure-machine-learning-sdk-for-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#azure-machine-learning-sdk-for-r" class="anchor"></a>Azure Machine Learning SDK for R</h1></div>
-
+<table class="table">
+<thead><tr class="header">
+<th align="left">Build</th>
+<th align="left">Docs</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left"><a href="https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&amp;branchName=master"><img src="https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master" alt="Build Status"></a></td>
+<td align="left"><a href="https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7950&amp;branchName=master"><img src="https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master" alt="Build Status"></a></td>
+</tr></tbody>
+</table>
 <p>Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service.</p>
 <p>Azure Machine Learning SDK for R uses the reticulate package to bind to <a href="https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml">Azure Machine Learning’s Python SDK</a>. By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.</p>
 <p>Main capabilities of the SDK include:</p>
@@ -184,20 +193,11 @@
 <p>To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.</p>
 <ol>
 <li>
-<p>If you don’t already have a workspace created, you can create one by doing:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">new_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/create_workspace.html">create_workspace</a></span>(<span class="dt">name =</span> workspace_name, <span class="dt">subscription_id =</span> your_sub_id, <span class="dt">resource_group =</span> your_rg, <span class="dt">location =</span> location, <span class="dt">create_resource_group =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># write the details of the workspace to a configuration file to the local machine</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="kw"><a href="reference/write_workspace_config.html">write_workspace_config</a></span>(new_ws, <span class="dt">path =</span> <span class="st">"path-to-write-config-file"</span>)</a></code></pre></div>
+<p>If you don’t already have a workspace created, you can create one by doing: ```R new_ws &lt;- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)</p>
+<p># write the details of the workspace to a configuration file to the local machine write_workspace_config(new_ws, path = “path-to-write-config-file”) ```</p>
 <p>Note: If you haven’t already set up a resource group, set <code>create_resource_group = TRUE</code> and set <code>resource_group</code> to your desired resource group name in order to create the resource group in the same step.</p>
 </li>
-<li>
-<p>If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">existing_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_workspace.html">get_workspace</a></span>(name, <span class="dt">subscription_id  =</span>  your_sub_id, <span class="dt">resource_group  =</span>  your_rg)</a></code></pre></div>
-<p>Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">loaded_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
-<p>Once you’ve accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R.</p>
-</li>
+<li><p>If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing: <code>R  existing_ws &lt;- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)</code> Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing: <code>R  loaded_ws &lt;- load_workspace_from_config()</code> Once you’ve accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our <a href="samples/">samples</a> to learn how!</p></li>
 </ol>
 <p>Take a look at our <a href="samples/">code samples</a> and <a href="vignettes/">end-to-end vignettes</a> for examples of what’s possible with the SDK!</p>
 </div>
@@ -218,9 +218,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/azure/azureml-sdk-for-r">https://​github.com/​azure/​azureml-sdk-for-r</a>
+<li>Browse source code at <br><a href="https://github.com/azure/azureml-sdk-for-r">https://github.com/azure/azureml-sdk-for-r</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/azure/azureml-sdk-for-r/issues">https://​github.com/​azure/​azureml-sdk-for-r/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/azure/azureml-sdk-for-r/issues">https://github.com/azure/azureml-sdk-for-r/issues</a>
 </li>
 </ul>
 </div>
@@ -248,13 +248,7 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&amp;branchName=master"><img src="https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master" alt="Build Status"></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 
