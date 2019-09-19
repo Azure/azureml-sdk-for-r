@@ -34,7 +34,8 @@ Main capabilities of the SDK include:
 
 Install [Anaconda](https://www.anaconda.com/) if not already installed. Choose Python 3.5 or later.
 
-To get started, use the `remotes` package to install AzureML SDK for R from GitHub.
+To get started, use the `remotes` package to install AzureML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
+
 ```R
 > remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            auth_token = '<your personal access token>',
