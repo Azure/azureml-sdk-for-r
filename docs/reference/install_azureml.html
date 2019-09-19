@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install azureml — install_azureml • azureml</title>
+<title>Install azureml sdk package — install_azureml • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Install azureml — install_azureml" />
+<meta property="og:title" content="Install azureml sdk package — install_azureml" />
 
-<meta property="og:description" content="Install azureml" />
+<meta property="og:description" content="Install azureml sdk package" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,6 +78,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -99,29 +111,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Install azureml</h1>
+    <h1>Install azureml sdk package</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/install.R'><code>R/install.R</code></a></small>
     <div class="hidden name"><code>install_azureml.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Install azureml</p>
+    <p>Install azureml sdk package</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment_name</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>)</pre>
+    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
+  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>version</th>
-      <td><p>pip version</p></td>
+      <td><p>azureml sdk package version</p></td>
     </tr>
     <tr>
-      <th>environment_name</th>
+      <th>envname</th>
       <td><p>name of environment to create</p></td>
+    </tr>
+    <tr>
+      <th>conda_python_version</th>
+      <td><p>version of python for conda environment</p></td>
     </tr>
     </table>
     

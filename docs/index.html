@@ -45,6 +45,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/installation.html">Installing AzureML SDK for R</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -145,51 +157,30 @@
 </tbody>
 </table>
 </div>
-<div id="installing-azureml-r-package" class="section level2">
+<div id="installing-azureml-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installing-azureml-r-package" class="anchor"></a>Installing <code>azureml</code> R package</h2>
-<ol>
-<li><p>Install <a href="https://www.anaconda.com/">anaconda</a> if not already installed. Choose python 3.5 or later.</p></li>
-<li>
-<p>Install the latest <code>devtools</code> in Rstudio/R:</p>
-<pre><code>&gt; install.packages('devtools')</code></pre>
-</li>
-<li>
-<p>Install azureml R package:</p>
-<p>Current repo is not opened up for public yet. To install from a private repo, generate a personal access token (PAT) in “<a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>” and supply to <code>auth_token</code> argument. When generating the token, make sure to select the “repo” scope.</p>
-<pre><code>&gt; devtools::install_github('https://github.com/Azure/azureml-sdk-for-r', auth_token = '&lt;personal access toke&gt;')</code></pre>
-</li>
-<li>
-<p>Install azureml python sdk. This will create a conda environment called <code>r-azureml</code> in which the package would be installed. Run the following in RStudio.</p>
-<pre><code>&gt; azureml::install_azureml()</code></pre>
-</li>
-<li>
-<p>You can test by doing:</p>
-<pre><code>&gt; library(azureml)
-&gt; get_current_run()
-&lt;azureml.core.run._OfflineRun&gt;</code></pre>
-</li>
-</ol>
+<a href="#installing-azureml-package" class="anchor"></a>Installing <code>azureml</code> package</h2>
+<p>Install <a href="https://www.anaconda.com/">Anaconda</a> if not already installed. Choose Python 3.5 or later.</p>
+<p>To get started, use the <code>remotes</code> package to install AzureML SDK for R from GitHub.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&gt;</span><span class="st"> </span>remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
+<a class="sourceLine" id="cb1-2" title="2">                           <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
+<p>Then, use <code><a href="reference/install_azureml.html">install_azureml()</a></code> to install the compiled code from the AzureML Python SDK.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="op">&gt;</span><span class="st"> </span>azureml<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/azureml/topics/install_azureml">install_azureml</a></span>()</a></code></pre></div>
+<p>Now, you’re ready to get started!</p>
+<p>For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our <a href="articles/installation.html">Installation Guide</a>.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>To begin running experiments with Azure Machine Learning, you must establish a connection to your Azure Machine Learning workspace.</p>
 <ol>
-<li><p>If you don’t already have a workspace created, you can create one by doing: <code>R  new_ws &lt;- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)</code> Note: If you haven’t already set up a resource group, set <code>create_resource_group = TRUE</code> and set <code>resource_group</code> to your desired resource group name in order to create the resource group in the same step.</p></li>
-<li><p>If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing: <code>R  existing_ws &lt;- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)</code> Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing: <code>R  loaded_ws &lt;- load_workspace_from_config("insert-path-to-config-file")</code> Once you’ve accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our <a href="samples/">samples</a> to learn how!</p></li>
-</ol>
-</div>
-<div id="troubleshooting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
-<ul>
-<li>In step 4 of the installation, if you get ssl errors on windows, that is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
 <li>
-<p>If the following error occurs when submitting an experiment using RStudio: <code>R   Error in py_call_impl(callable, dots$args, dots$keywords) :     PermissionError: [Errno 13] Permission denied</code> Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.</p>
-<p>In order to submit an experiment, AzureML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, best practice is to isolate project files into their own directory.</p>
+<p>If you don’t already have a workspace created, you can create one by doing: ```R new_ws &lt;- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)</p>
+<p># write the details of the workspace to a configuration file to the local machine write_workspace_config(new_ws, path = “path-to-write-config-file”) ```</p>
+<p>Note: If you haven’t already set up a resource group, set <code>create_resource_group = TRUE</code> and set <code>resource_group</code> to your desired resource group name in order to create the resource group in the same step.</p>
 </li>
-</ul>
+<li><p>If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing: <code>R  existing_ws &lt;- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)</code> Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing: <code>R  loaded_ws &lt;- load_workspace_from_config()</code> Once you’ve accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R. Take a look at our <a href="samples/">samples</a> to learn how!</p></li>
+</ol>
 </div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
