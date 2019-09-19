@@ -29,9 +29,14 @@ steps:
         git status
         echo UPDATE DOCS
         R -e 'unlink("man", recursive=TRUE, force=TRUE);
-              unlink("docs", recursive=TRUE, force=TRUE);
               roxygen2::roxygenise();
+              unlink("docs", recursive=TRUE, force=TRUE);
               pkgdown::build_site();'
+        retVal=$?
+        if [ $retVal -ne 0 ]; then
+            echo "Failed to generate documents!! Exiting..."
+            exit $retVal
+        fi
         echo GIT ADD
         git add man/* docs/*
         echo GIT COMMIT
