@@ -12,6 +12,8 @@ Main capabilities of the SDK include:
 -   Manage cloud resources for monitoring, logging, and organizing your machine learning experiments.
 -   Train models using cloud resources, including GPU-accelerated model training.
 
+Please take a look at the package website https://azure.github.io/azureml-sdk-for-r for complete documentation.
+
 ## Key Features and Roadmap
 
 :heavy_check_mark: feature available :arrows_counterclockwise: in progress :clipboard: planned
