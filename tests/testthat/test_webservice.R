@@ -22,7 +22,7 @@ test_that("create, get, generate keys of, and delete webservice",
   # Create ACI deployment config  
   aciconfig = azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores=1, 
                                                                          memory_gb=1,
-                                                                         tags = {'name': 'temp'},
+                                                                         tags = reticulate::py_dict('name', 'temp'),
                                                                          auth_enabled = TRUE)
   # Deploy the model
   service_name <- "temp-service"
