@@ -126,72 +126,25 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-installation" class="hasAnchor"><a href="#section-installation" class="anchor"></a>Installation</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="attach_aks_compute.html">attach_aks_compute()</a></code> </p>
+          <p><code><a href="install_azureml.html">install_azureml()</a></code> </p>
         </td>
-        <td><p>Attach an already existing AKS compute resource with the provided workspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="azureml.html">azureml</a></code> </p>
-        </td>
-        <td><p>azureml module
-User can access functions/modules in azureml that are not exposed through the exported R functions.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bandit_policy.html">bandit_policy()</a></code> </p>
-        </td>
-        <td><p>Create Bandit policy for HyperDrive runs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bayesian_parameter_sampling.html">bayesian_parameter_sampling()</a></code> </p>
-        </td>
-        <td><p>Define Bayesian Parameter sampling over hyperparameter search space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
-        </td>
-        <td><p>Cancel run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="choice.html">choice()</a></code> </p>
-        </td>
-        <td><p>Specify a discrete set of options to sample from</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="container_registry.html">container_registry()</a></code> </p>
-        </td>
-        <td><p>Get Azure Container Registry.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_aks_compute.html">create_aks_compute()</a></code> </p>
-        </td>
-        <td><p>Create AksCompute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_aml_compute.html">create_aml_compute()</a></code> </p>
-        </td>
-        <td><p>Create AmlCompute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_launch_script.html">create_launch_script()</a></code> </p>
-        </td>
-        <td><p>Creates a R launch script which contains all the packages to be installed before running entry_script</p></td>
-      </tr><tr>
+        <td><p>Install azureml sdk package</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-workspaces" class="hasAnchor"><a href="#section-workspaces" class="anchor"></a>Workspaces</h2>
+          <p class="section-desc"><p>Functions for managing workspace resources. A <strong>Workspace</strong> is the top-level resource for Azure Machine Learning service. It provides a centralized place to work with all the artifacts you create when you use Azure ML.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="create_workspace.html">create_workspace()</a></code> </p>
@@ -200,15 +153,27 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
-          <p><code><a href="delete_compute.html">delete_compute()</a></code> </p>
+          <p><code><a href="get_workspace.html">get_workspace()</a></code> </p>
         </td>
-        <td><p>Delete compute</p></td>
+        <td><p>Get an existing workspace</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="delete_model.html">delete_model()</a></code> </p>
+          <p><code><a href="load_workspace_from_config.html">load_workspace_from_config()</a></code> </p>
         </td>
-        <td><p>Delete this model from its associated workspace.</p></td>
+        <td><p>Load workspace from config</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="write_workspace_config.html">write_workspace_config()</a></code> </p>
+        </td>
+        <td><p>Write out the Workspace ARM properties to a config file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_default_datastore.html">get_default_datastore()</a></code> </p>
+        </td>
+        <td><p>Get default datastore associated with a workspace</p></td>
       </tr><tr>
         
         <td>
@@ -218,57 +183,48 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
-          <p><code><a href="deploy_model.html">deploy_model()</a></code> </p>
+          <p><code><a href="list_workspaces.html">list_workspaces()</a></code> </p>
         </td>
-        <td><p>Deploy a Webservice from zero or more model objects.</p></td>
+        <td><p>List all workspaces that the user has access to in the specified subscription_id
+parameter.The list of workspaces can be filtered based on the resource group.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-compute-targets" class="hasAnchor"><a href="#section-compute-targets" class="anchor"></a>Compute targets</h2>
+          <p class="section-desc"><p>Functions for managing compute resources. A <strong>Compute Target</strong> is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include <code>AmlCompute</code> and <code>AksCompute</code>.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="get_compute.html">get_compute()</a></code> </p>
+        </td>
+        <td><p>Get compute. Returns NULL if compute is not found on workspace.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="deserialize_to_model.html">deserialize_to_model()</a></code> </p>
+          <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
         </td>
-        <td><p>Convert a json object into a Model object.</p></td>
+        <td><p>Wait for cluster's instantiation</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
+          <p><code><a href="delete_compute.html">delete_compute()</a></code> </p>
         </td>
-        <td><p>Detach the AksCompute object from its associated workspace</p></td>
+        <td><p>Delete compute</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="download_from_datastore.html">download_from_datastore()</a></code> </p>
+          <p><code><a href="create_aml_compute.html">create_aml_compute()</a></code> </p>
         </td>
-        <td><p>Download the data from the datastore to the local file system</p></td>
+        <td><p>Create AmlCompute</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="download_model.html">download_model()</a></code> </p>
+          <p><code><a href="create_aks_compute.html">create_aks_compute()</a></code> </p>
         </td>
-        <td><p>Download model to target_dir of local file system.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="environment.html">environment()</a></code> </p>
-        </td>
-        <td><p>Configure the python environment where the experiment is executed.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="estimator.html">estimator()</a></code> </p>
-        </td>
-        <td><p>Create Estimator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="experiment.html">experiment()</a></code> </p>
-        </td>
-        <td><p>Create an Azure Machine Learning Experiment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="generate_docker_file.html">generate_docker_file()</a></code> </p>
-        </td>
-        <td><p>Generate a dockerfile string to build the image for training.</p></td>
+        <td><p>Create AksCompute</p></td>
       </tr><tr>
         
         <td>
@@ -278,9 +234,225 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
+          <p><code><a href="attach_aks_compute.html">attach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Attach an already existing AKS compute resource with the provided workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Detach the AksCompute object from its associated workspace</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-working-with-data" class="hasAnchor"><a href="#section-working-with-data" class="anchor"></a>Working with data</h2>
+          <p class="section-desc"><p>Functions for managing and accessing data for your machine learning workflows. A <strong>Datastore</strong> is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="upload_files_to_datastore.html">upload_files_to_datastore()</a></code> </p>
+        </td>
+        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="upload_to_datastore.html">upload_to_datastore()</a></code> </p>
+        </td>
+        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_from_datastore.html">download_from_datastore()</a></code> </p>
+        </td>
+        <td><p>Download the data from the datastore to the local file system</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-training-experimentation" class="hasAnchor"><a href="#section-training-experimentation" class="anchor"></a>Training &amp; experimentation</h2>
+          <p class="section-desc"><p>Functions for managing experiments and runs. An <strong>Experiment</strong> is a grouping of the collection of runs from a specified script. A <strong>Run</strong> represents a single trial of an experiment. A run is the object used to monitor the asynchronous execution of a trial, log metrics and store output of the trial, and to analyze results and access artifacts generated by the trial. The following run types are supported - <code>ScriptRun</code> (for Estimator experiments), <code>HyperDriveRun</code> (for HyperDrive experiments), and <code>PipelineRun</code> (for Pipeline experiments). For functions that are specific only to HyperDriveRuns and PipelineRuns, see the respective <strong>Hyperparameter tuning</strong> and <strong>ML pipelines</strong> reference sections. An <strong>Estimator</strong> wraps run configuration information for specifying details of executing an R script. Running an Estimator experiment (using <code><a href="../reference/submit_experiment.html">submit_experiment()</a></code>) will return a <code>ScriptRun</code> object and execute your training script on the specified compute target.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="experiment.html">experiment()</a></code> </p>
+        </td>
+        <td><p>Create an Azure Machine Learning Experiment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
+        </td>
+        <td><p>Submit experiment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="estimator.html">estimator()</a></code> </p>
+        </td>
+        <td><p>Create Estimator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wait_for_run_completion.html">wait_for_run_completion()</a></code> </p>
+        </td>
+        <td><p>Wait for the completion of this run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_current_run.html">get_current_run()</a></code> </p>
+        </td>
+        <td><p>Gets the context object for a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_metric_to_run.html">log_metric_to_run()</a></code> </p>
+        </td>
+        <td><p>Log metric to run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_metrics.html">get_run_metrics()</a></code> </p>
+        </td>
+        <td><p>Get the metrics for run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
+        </td>
+        <td><p>Cancel run</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-hyperparameter-tuning" class="hasAnchor"><a href="#section-hyperparameter-tuning" class="anchor"></a>Hyperparameter tuning</h2>
+          <p class="section-desc"><p>Functions for configuring and managing hyperparameter tuning (HyperDrive) experiments. Azure ML’s HyperDrive functionality enables you to automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You can also define early termination policies in which poorly performing experiment runs are canceled and new ones started.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="hyperdrive_config.html">hyperdrive_config()</a></code> </p>
+        </td>
+        <td><p>Create configuration for a HyperDrive run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="random_parameter_sampling.html">random_parameter_sampling()</a></code> </p>
+        </td>
+        <td><p>Define Random Parameter sampling over hyperparameter search space</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grid_parameter_sampling.html">grid_parameter_sampling()</a></code> </p>
+        </td>
+        <td><p>Define Grid Parameter sampling over hyperparameter search space</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bayesian_parameter_sampling.html">bayesian_parameter_sampling()</a></code> </p>
+        </td>
+        <td><p>Define Bayesian Parameter sampling over hyperparameter search space</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="choice.html">choice()</a></code> </p>
+        </td>
+        <td><p>Specify a discrete set of options to sample from</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="randint.html">randint()</a></code> </p>
+        </td>
+        <td><p>Specify a set of random integers in the range [0, upper)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="uniform.html">uniform()</a></code> </p>
+        </td>
+        <td><p>Specify a uniform distribution from which samples are taken</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="quniform.html">quniform()</a></code> </p>
+        </td>
+        <td><p>Specify a uniform distribution of the form round(uniform(min_value, max_value) / q) * q</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loguniform.html">loguniform()</a></code> </p>
+        </td>
+        <td><p>Specify a log uniform distribution</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qloguniform.html">qloguniform()</a></code> </p>
+        </td>
+        <td><p>Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="normal.html">normal()</a></code> </p>
+        </td>
+        <td><p>Specify a real value that is normally-distributed with mean mu and standard deviation sigma</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qnormal.html">qnormal()</a></code> </p>
+        </td>
+        <td><p>Specify a normal distribution of the form round(normal(mu, sigma) / q) * q</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_metric_to_run.html">log_metric_to_run()</a></code> </p>
+        </td>
+        <td><p>Log metric to run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
+        </td>
+        <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="primary_metric_goal.html">primary_metric_goal()</a></code> </p>
+        </td>
+        <td><p>Define supported metric goals for hyperparameter tuning</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bandit_policy.html">bandit_policy()</a></code> </p>
+        </td>
+        <td><p>Create Bandit policy for HyperDrive runs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="median_stopping_policy.html">median_stopping_policy()</a></code> </p>
+        </td>
+        <td><p>Create Median Stopping policy for HyperDrive runs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="truncation_selection_policy.html">truncation_selection_policy()</a></code> </p>
+        </td>
+        <td><p>Create Truncation Selection policy for HyperDrive runs</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="get_best_run_by_primary_metric.html">get_best_run_by_primary_metric()</a></code> </p>
         </td>
         <td><p>Return the best performing run amongst all completed runs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric()</a></code> </p>
+        </td>
+        <td><p>Return the child runs sorted in descending order by best primary metric</p></td>
       </tr><tr>
         
         <td>
@@ -293,42 +465,50 @@ User can access functions/modules in azureml that are not exposed through the ex
           <p><code><a href="get_child_run_metrics.html">get_child_run_metrics()</a></code> </p>
         </td>
         <td><p>Return metrics from all child runs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric()</a></code> </p>
-        </td>
-        <td><p>Return the child runs sorted in descending order by best primary metric</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_compute.html">get_compute()</a></code> </p>
-        </td>
-        <td><p>Get compute. Returns NULL if compute is not found on workspace.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_current_run.html">get_current_run()</a></code> </p>
-        </td>
-        <td><p>Gets the context object for a run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_default_datastore.html">get_default_datastore()</a></code> </p>
-        </td>
-        <td><p>Get default datastore associated with a workspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_environment.html">get_environment()</a></code> </p>
-        </td>
-        <td><p>Return the environment object.</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-model-management-deployment" class="hasAnchor"><a href="#section-model-management-deployment" class="anchor"></a>Model management &amp; deployment</h2>
+          <p class="section-desc"><p>Functions for model management and deployment. Registering a model allows you to store and version your trained model in a workspace. A registered <strong>Model</strong> can then be deployed as a <strong>Webservice</strong> using Azure ML. If you would like to access all the assets needed to host a model as a web service without actually deploying the model, you can do so by packaging the model as a <code>ModelPackage</code>. You can deploy your model as a <code>LocalWebservice</code> (locally), <code>AciWebservice</code> (on Azure Container Instances), or <code>AksWebservice</code> (on Azure Kubernetes Service).</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="get_model.html">get_model()</a></code> </p>
         </td>
         <td><p>Retrieve the Model object from the cloud.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_model.html">register_model()</a></code> </p>
+        </td>
+        <td><p>Register a model with the provided workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_model.html">download_model()</a></code> </p>
+        </td>
+        <td><p>Download model to target_dir of local file system.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="deploy_model.html">deploy_model()</a></code> </p>
+        </td>
+        <td><p>Deploy a Webservice from zero or more model objects.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="package_model.html">package_model()</a></code> </p>
+        </td>
+        <td><p>Create a model package in the form of a Docker image or Dockerfile build context</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_model.html">delete_model()</a></code> </p>
+        </td>
+        <td><p>Delete this model from its associated workspace.</p></td>
       </tr><tr>
         
         <td>
@@ -345,149 +525,10 @@ User can access functions/modules in azureml that are not exposed through the ex
       </tr><tr>
         
         <td>
-          <p><code><a href="get_run_metrics.html">get_run_metrics()</a></code> </p>
-        </td>
-        <td><p>Get the metrics for run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_workspace.html">get_workspace()</a></code> </p>
-        </td>
-        <td><p>Get an existing workspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="grid_parameter_sampling.html">grid_parameter_sampling()</a></code> </p>
-        </td>
-        <td><p>Define Grid Parameter sampling over hyperparameter search space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hyperdrive_config.html">hyperdrive_config()</a></code> </p>
-        </td>
-        <td><p>Create configuration for a HyperDrive run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="inference_config.html">inference_config()</a></code> </p>
-        </td>
-        <td><p>Creates the Model deployment config specific to model deployments.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="install_azureml.html">install_azureml()</a></code> </p>
-        </td>
-        <td><p>Install azureml sdk package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="list_workspaces.html">list_workspaces()</a></code> </p>
-        </td>
-        <td><p>List all workspaces that the user has access to in the specified subscription_id
-parameter.The list of workspaces can be filtered based on the resource group.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_workspace_from_config.html">load_workspace_from_config()</a></code> </p>
-        </td>
-        <td><p>Load workspace from config</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="log_metric_to_run.html">log_metric_to_run()</a></code> </p>
-        </td>
-        <td><p>Log metric to run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lognormal.html">lognormal()</a></code> </p>
-        </td>
-        <td><p>Specify a normal distribution of the form exp(normal(mu, sigma))</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loguniform.html">loguniform()</a></code> </p>
-        </td>
-        <td><p>Specify a log uniform distribution</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="median_stopping_policy.html">median_stopping_policy()</a></code> </p>
-        </td>
-        <td><p>Create Median Stopping policy for HyperDrive runs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="normal.html">normal()</a></code> </p>
-        </td>
-        <td><p>Specify a real value that is normally-distributed with mean mu and standard deviation sigma</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="package_model.html">package_model()</a></code> </p>
-        </td>
-        <td><p>Create a model package in the form of a Docker image or Dockerfile build context</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="primary_metric_goal.html">primary_metric_goal()</a></code> </p>
-        </td>
-        <td><p>Define supported metric goals for hyperparameter tuning</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="pull_model_package_image.html">pull_model_package_image()</a></code> </p>
         </td>
         <td><p>Pull the package output to the local machine.
 This can only be used with a Docker image package.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
-        </td>
-        <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="qloguniform.html">qloguniform()</a></code> </p>
-        </td>
-        <td><p>Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="qnormal.html">qnormal()</a></code> </p>
-        </td>
-        <td><p>Specify a normal distribution of the form round(normal(mu, sigma) / q) * q</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="quniform.html">quniform()</a></code> </p>
-        </td>
-        <td><p>Specify a uniform distribution of the form round(uniform(min_value, max_value) / q) * q</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="randint.html">randint()</a></code> </p>
-        </td>
-        <td><p>Specify a set of random integers in the range [0, upper)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="random_parameter_sampling.html">random_parameter_sampling()</a></code> </p>
-        </td>
-        <td><p>Define Random Parameter sampling over hyperparameter search space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="register_environment.html">register_environment()</a></code> </p>
-        </td>
-        <td><p>Register the environment object in your workspace.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="register_model.html">register_model()</a></code> </p>
-        </td>
-        <td><p>Register a model with the provided workspace.</p></td>
       </tr><tr>
         
         <td>
@@ -498,63 +539,39 @@ This can only be used with a Dockerfile package.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="serialize_model.html">serialize_model()</a></code> </p>
-        </td>
-        <td><p>Convert this Model into a json serialized dictionary</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
-        </td>
-        <td><p>Submit experiment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="truncation_selection_policy.html">truncation_selection_policy()</a></code> </p>
-        </td>
-        <td><p>Create Truncation Selection policy for HyperDrive runs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="uniform.html">uniform()</a></code> </p>
-        </td>
-        <td><p>Specify a uniform distribution from which samples are taken</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upload_files_to_datastore.html">upload_files_to_datastore()</a></code> </p>
-        </td>
-        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upload_to_datastore.html">upload_to_datastore()</a></code> </p>
-        </td>
-        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
-        </td>
-        <td><p>Wait for cluster's instantiation</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="wait_for_model_package_creation.html">wait_for_model_package_creation()</a></code> </p>
         </td>
         <td><p>Wait for the package to finish creating.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="wait_for_run_completion.html">wait_for_run_completion()</a></code> </p>
+          <p><code><a href="inference_config.html">inference_config()</a></code> </p>
         </td>
-        <td><p>Wait for the completion of this run</p></td>
+        <td><p>Creates the Model deployment config specific to model deployments.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="write_workspace_config.html">write_workspace_config()</a></code> </p>
+          <p><code><a href="environment.html">environment()</a></code> </p>
         </td>
-        <td><p>Write out the Workspace ARM properties to a config file</p></td>
+        <td><p>Configure the python environment where the experiment is executed.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_environment.html">register_environment()</a></code> </p>
+        </td>
+        <td><p>Register the environment object in your workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_environment.html">get_environment()</a></code> </p>
+        </td>
+        <td><p>Return the environment object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="container_registry.html">container_registry()</a></code> </p>
+        </td>
+        <td><p>Get Azure Container Registry.</p></td>
       </tr>
     </tbody>
     </table>
@@ -563,7 +580,13 @@ This can only be used with a Dockerfile package.</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-installation">Installation</a></li>
+      <li><a href="#section-workspaces">Workspaces</a></li>
+      <li><a href="#section-compute-targets">Compute targets</a></li>
+      <li><a href="#section-working-with-data">Working with data</a></li>
+      <li><a href="#section-training-experimentation">Training &amp; experimentation</a></li>
+      <li><a href="#section-hyperparameter-tuning">Hyperparameter tuning</a></li>
+      <li><a href="#section-model-management-deployment">Model management &amp; deployment</a></li>
     </ul>
   </div>
 </div>
