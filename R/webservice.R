@@ -26,7 +26,7 @@ wait_for_deployment <- function(webservice, show_output = FALSE)
 #' @param webservice The webservice object.
 #' @param num_lines The maximum number of log lines to retrieve.
 #' @export
-get_webservice_logs <- function(webservice, num_lines = 5000)
+get_webservice_logs <- function(webservice, num_lines = 5000L)
 {
   webservice$get_logs(num_lines)
 }

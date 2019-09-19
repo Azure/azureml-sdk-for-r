@@ -4,7 +4,7 @@
 \alias{get_webservice_logs}
 \title{Retrieve logs for the Webservice.}
 \usage{
-get_webservice_logs(webservice, num_lines = 5000)
+get_webservice_logs(webservice, num_lines = 5000L)
 }
 \arguments{
 \item{webservice}{The webservice object.}
