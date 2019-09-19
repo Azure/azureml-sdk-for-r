@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Miniconda
 ENV MINICONDA_VERSION 4.5.11
 ENV PATH /opt/miniconda/bin:$PATH
-RUN apt-get update && apt-get install -y bzip2 wget && \
+RUN apt-get update && apt-get install -y bzip2 wget git libxrender1 && \
     wget -qO /tmp/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh && \
     bash /tmp/miniconda.sh -bf -p /opt/miniconda && \
     conda clean -ay && \
@@ -20,3 +20,6 @@ RUN conda install -c r -y r-essentials r-devtools r-testthat r-reticulate && con
 
 # Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+# Install R packages from CRAN
+RUN R -e 'install.packages(c("roxygen2", "pkgdown", "rcmdcheck", "fs"), repos = "http://cran.us.r-project.org")'
