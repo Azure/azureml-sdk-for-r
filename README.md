@@ -1,8 +1,7 @@
-
-
 # Azure Machine Learning SDK for R
-
-[![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master)
+| Build | Docs |
+|:------|:-----|
+| [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7950&branchName=master) |
 
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  Azure Machine Learning service. 
 
