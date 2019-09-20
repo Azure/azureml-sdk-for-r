@@ -87,8 +87,8 @@
     <div class="page-header toc-ignore">
       <h1>Installing AzureML SDK for R</h1>
             
-            <h4 class="date">2019-09-19</h4>
-
+            <h4 class="date">2019-09-20</h4>
+      
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
 
@@ -107,11 +107,12 @@
 </h2>
 <p>As the <code>azureml</code> package is not available on CRAN, you will need <code>remotes</code> to install from the GitHub repo.</p>
 <pre><code>&gt; install.packages('remotes')</code></pre>
-<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>. Set <code>build_vignettes</code> to TRUE if you would like the vignettes to be downloaded along with the main package.</p>
+<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>. When generating the token, make sure to select the “repo” scope.</p>
 <pre><code>&gt; remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            auth_token = '&lt;your personal access token&gt;',
                            INSTALL_opts=c("--no-multiarch"),
                            build_vignettes = FALSE)</code></pre>
+<p>Set <code>build_vignettes</code> to TRUE if you would like the vignettes to be downloaded along with the main package.</p>
 </div>
 <div id="install-azureml-python-sdk" class="section level2">
 <h2 class="hasAnchor">
