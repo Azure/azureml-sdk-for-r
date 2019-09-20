@@ -7,7 +7,8 @@ test_that("create amlcompute", {
   cluster_name <- paste("aml", build_num, sep = "")
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,
-                                       vm_size = vm_size, max_nodes = 1)
+                                       vm_size = vm_size,
+                                       max_nodes = 1)
   wait_for_compute(compute_target)
   expect_equal(compute_target$name, cluster_name)
 

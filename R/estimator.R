@@ -37,15 +37,23 @@
 #' the 'custom_docker_image'
 #' parameter is not set.
 #' @export
-estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
+estimator <- function(source_directory,
+                      compute_target = NULL,
+                      vm_size = NULL,
                       vm_priority = NULL,
-                      entry_script = NULL, script_params = NULL,
-                      use_docker = TRUE, cran_packages = NULL,
-                      github_packages = NULL, custom_url_packages = NULL,
-                      custom_docker_image = NULL, inputs = NULL,
+                      entry_script = NULL,
+                      script_params = NULL,
+                      use_docker = TRUE,
+                      cran_packages = NULL,
+                      github_packages = NULL,
+                      custom_url_packages = NULL,
+                      custom_docker_image = NULL,
+                      inputs = NULL,
                       use_gpu = FALSE) { 
-  launch_script <- create_launch_script(source_directory, entry_script,
-                                        cran_packages, github_packages,
+  launch_script <- create_launch_script(source_directory,
+                                        entry_script,
+                                        cran_packages,
+                                        github_packages,
                                         custom_url_packages)
   est <- azureml$train$estimator$Estimator(
                                       source_directory,
@@ -68,7 +76,8 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
       processor <- "gpu"
     }
 
-    run_config$environment$docker$base_image <- paste("r-base", processor,
+    run_config$environment$docker$base_image <- paste("r-base",
+                                                      processor,
                                                       sep = ":")
     run_config$environment$docker$base_image_registry$address <-
       "viennaprivate.azurecr.io"
@@ -88,8 +97,10 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
-create_launch_script <- function(source_directory, entry_script,
-                                 cran_packages = NULL, github_packages = NULL,
+create_launch_script <- function(source_directory,
+                                 entry_script,
+                                 cran_packages = NULL,
+                                 github_packages = NULL,
                                  custom_url_packages = NULL) {
   launch_file_name <- "launcher.R"
   launch_file_conn <- file(file.path(source_directory, launch_file_name),

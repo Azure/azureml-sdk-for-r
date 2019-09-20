@@ -88,10 +88,10 @@ model %>%
 
 opt <- optimizer_rmsprop(lr, decay)
 
-model %>% compile(
-  loss = "categorical_crossentropy",
-  optimizer = opt,
-  metrics = "accuracy"
+model %>% 
+  compile(loss = "categorical_crossentropy",
+          optimizer = opt,
+          metrics = "accuracy"
 )
 
 
@@ -99,21 +99,21 @@ model %>% compile(
 
 if (!data_augmentation){
   
-  model %>% fit(
-    x_train, y_train,
-    batch_size = batch_size,
-    epochs = epochs,
-    validation_data = list(x_test, y_test),
-    shuffle = TRUE
+  model %>%
+    fit(x_train,
+        y_train,
+        batch_size = batch_size,
+        epochs = epochs,
+        validation_data = list(x_test, y_test),
+        shuffle = TRUE
   )
   
 } else {
   
-  datagen <- image_data_generator(
-    rotation_range = 20,
-    width_shift_range = 0.2,
-    height_shift_range = 0.2,
-    horizontal_flip = TRUE
+  datagen <- image_data_generator(rotation_range = 20,
+                                  width_shift_range = 0.2,
+                                  height_shift_range = 0.2,
+                                  horizontal_flip = TRUE
   )
   
   datagen %>% fit_image_data_generator(x_train)

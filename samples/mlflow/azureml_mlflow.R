@@ -11,12 +11,16 @@ library(mlflow)
 install_mlflow()
 
 
-get_tracking_uri <- function(region, subscription_id, resource_group,
+get_tracking_uri <- function(region,
+                             subscription_id,
+                             resource_group,
                              workspace_name) {
     sprintf(paste0('https://%s.experiments.azureml.net/history/v1.0/
                    subscriptions/%s/resourceGroups/%s/providers/',
-                    'Microsoft.MachineLearningServices/workspaces/%s'), region,
-            subscription_id, resource_group,
+                    'Microsoft.MachineLearningServices/workspaces/%s'),
+            region,
+            subscription_id,
+            resource_group,
             workspace_name)
 }
 
@@ -29,8 +33,11 @@ secret <- Sys.getenv('SECRET', unset = '<SECRET>')
 # service principal should have contributor access to workspace
 # call token$refresh() to refresh the token if you start hitting 403 errors.
 token <- get_azure_token(c('https://management.azure.com/.default',
-                           'offline_access'), tenant = tenant_id,
-                         app = client_id, password = secret, version=2)
+                           'offline_access'),
+                         tenant = tenant_id,
+                         app = client_id,
+                         password = secret,
+                         version=2)
 
 Sys.setenv('MLFLOW_TOKEN' = token$credentials$access_token)
 
@@ -50,7 +57,9 @@ subscription_id <- Sys.getenv('SUBSCRIPTION_ID', unset = '<subscription_id>')
 resource_group <- Sys.getenv('RESOURCE_GROUP', unset = '<resource_group')
 workspace_name <- Sys.getenv('WORKSPACE_NAME', unset = '<workspace_name')
 
-tracking_uri <- get_tracking_uri(region, subscription_id, resource_group,
+tracking_uri <- get_tracking_uri(region,
+                                 subscription_id,
+                                 resource_group,
                                  workspace_name)
 client <- mlflow_client(tracking_uri = tracking_uri)
 

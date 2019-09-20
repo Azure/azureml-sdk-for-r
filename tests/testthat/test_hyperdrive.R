@@ -36,8 +36,10 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
               policy <- median_stopping_policy()
               hyperdrive_config <- 
                 hyperdrive_config(sampling, "Sum",
-                                  primary_metric_goal("MAXIMIZE"), 4,
-                                  policy = policy, estimator = est)
+                                  primary_metric_goal("MAXIMIZE"),
+                                  4,
+                                  policy = policy,
+                                  estimator = est)
               # submit hyperdrive run
               hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
               wait_for_run_completion(hyperdrive_run, show_output = TRUE)

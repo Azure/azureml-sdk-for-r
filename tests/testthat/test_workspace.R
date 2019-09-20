@@ -13,7 +13,8 @@ test_that("create, get, save, load and delete workspace", {
                                     location = location)
 
     # retrieve workspace
-    ws <- get_workspace(workspace_name, subscription_id = subscription_id,
+    ws <- get_workspace(workspace_name,
+                        subscription_id = subscription_id,
                         resource_group = resource_group)
     expect_equal(ws$name, existing_ws$name)
 

@@ -40,8 +40,7 @@ get_webservice_keys <- function(webservice) {
 #' Delete this Webservice from its associated workspace.
 #' @param webservice The webservice object.
 #' @export
-delete_webservice <- function(webservice)
-{
+delete_webservice <- function(webservice) {
   webservice$delete()
 }
 

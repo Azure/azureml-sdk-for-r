@@ -15,9 +15,12 @@
 #' not set, a default CPU based image will be used as the base image.
 #' @param base_image_registry Image registry that contains the base image.
 #' @export
-environment <- function(name, version = NULL, environment_variables = NULL,
-                        cran_packages = NULL, github_packages = NULL,
-                        custom_url_packages = NULL, custom_docker_image = NULL,
+environment <- function(name, version = NULL,
+                        environment_variables = NULL,
+                        cran_packages = NULL,
+                        github_packages = NULL,
+                        custom_url_packages = NULL,
+                        custom_docker_image = NULL,
                         base_image_registry = NULL) {
   env <- azureml$core$Environment(name)
   env$version <- version
@@ -42,7 +45,8 @@ environment <- function(name, version = NULL, environment_variables = NULL,
   }
     
   if(!is.null(image_registry_address)) {
-    base_docker_image <- paste(image_registry_address, base_docker_image,
+    base_docker_image <- paste(image_registry_address,
+                               base_docker_image,
                                sep = "/")
   }
   
@@ -96,7 +100,8 @@ get_environment <- function(workspace, name, version = NULL) {
 #' @param username The username for ACR
 #' @param password The password for ACR
 #' @export
-container_registry <- function(address = NULL, username = NULL,
+container_registry <- function(address = NULL,
+                               username = NULL,
                                password = NULL) {
   container_registry <- azureml$core$ContainerRegistry()
   container_registry$address <- address

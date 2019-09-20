@@ -10,7 +10,8 @@ test_that("estimator", {
 
     ds <- get_default_datastore(ws)
 
-    estimator <- estimator(tmp_dir_name, compute_target = existing_compute$name, 
+    estimator <- estimator(tmp_dir_name,
+                           compute_target = existing_compute$name, 
                            entry_script = script_name, 
                            script_params = list("data_folder" = ds$as_mount()),
                            cran_packages = c("ggplot2", "dplyr"))

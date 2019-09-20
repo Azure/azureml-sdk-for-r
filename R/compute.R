@@ -27,26 +27,38 @@
 #' @param description A description to provide to the compute object
 #' @return An AmlCompute object representation of the compute object
 #' @export
-create_aml_compute <- function(workspace, cluster_name, vm_size,
-                               vm_priority = "dedicated", min_nodes = 0,
+create_aml_compute <- function(workspace,
+                               cluster_name,
+                               vm_size,
+                               vm_priority = "dedicated",
+                               min_nodes = 0,
                                max_nodes = NULL,
                                idle_seconds_before_scaledown = NULL,
                                admin_username = NULL,
                                admin_user_password = NULL,
                                admin_user_ssh_key = NULL,
-                               vnet_resourcegroup_name = NULL, vnet_name = NULL,
-                               subnet_name = NULL, tags = NULL,
+                               vnet_resourcegroup_name = NULL,
+                               vnet_name = NULL,
+                               subnet_name = NULL,
+                               tags = NULL,
                                description = NULL) {
   compute_config <- azureml$core$compute$AmlCompute$provisioning_configuration(
     vm_size = vm_size,
-    vm_priority = vm_priority, min_nodes = min_nodes, max_nodes = max_nodes,
+    vm_priority = vm_priority,
+    min_nodes = min_nodes,
+    max_nodes = max_nodes,
     idle_seconds_before_scaledown = idle_seconds_before_scaledown,
-    admin_username = admin_username, admin_user_password = admin_user_password,
+    admin_username = admin_username,
+    admin_user_password = admin_user_password,
     admin_user_ssh_key = admin_user_ssh_key,
-    vnet_resourcegroup_name = vnet_resourcegroup_name, vnet_name = vnet_name,
-    subnet_name = subnet_name, tags = tags, description = description)
+    vnet_resourcegroup_name = vnet_resourcegroup_name,
+    vnet_name = vnet_name,
+    subnet_name = subnet_name,
+    tags = tags,
+    description = description)
 
-  azureml$core$compute$ComputeTarget$create(workspace, cluster_name,
+  azureml$core$compute$ComputeTarget$create(workspace,
+                                            cluster_name,
                                             compute_config)
 }
 
@@ -56,8 +68,8 @@ create_aml_compute <- function(workspace, cluster_name, vm_size,
 #' @export
 get_compute <- function(workspace, cluster_name) {
   tryCatch( {
-      azureml$core$compute$ComputeTarget(workspace = workspace,
-                                         name = cluster_name)
+    azureml$core$compute$ComputeTarget(workspace = workspace,
+                                       name = cluster_name)
     },
     error = function(e) {
       if (grepl("ComputeTargetException", e$message, )) {
@@ -116,24 +128,36 @@ delete_compute <- function(cluster) {
 #' @param docker_bridge_cidr A CIDR notation IP for Docker bridge.
 #' @return An AksCompute object representation of the compute object
 #' @export
-create_aks_compute <- function(workspace, cluster_name, agent_count = NULL,
-                               vm_size = NULL, ssl_cname = NULL,
+create_aks_compute <- function(workspace,
+                               cluster_name,
+                               agent_count = NULL,
+                               vm_size = NULL,
+                               ssl_cname = NULL,
                                ssl_cert_pem_file = NULL,
-                               ssl_key_pem_file = NULL, location = NULL,
+                               ssl_key_pem_file = NULL,
+                               location = NULL,
                                vnet_resourcegroup_name = NULL,
-                               vnet_name = NULL, subnet_name = NULL,
+                               vnet_name = NULL,
+                               subnet_name = NULL,
                                service_cidr = NULL,
                                dns_service_ip = NULL,
                                docker_bridge_cidr = NULL) {
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(
-    agent_count = agent_count, vm_size = vm_size, ssl_cname = ssl_cname,
-    ssl_cert_pem_file = ssl_cert_pem_file, ssl_key_pem_file = ssl_key_pem_file,
-    location = location, vnet_resourcegroup_name = vnet_resourcegroup_name,
-    vnet_name = vnet_name, subnet_name = subnet_name,
-    service_cidr = service_cidr, dns_service_ip = dns_service_ip,
+    agent_count = agent_count,
+    vm_size = vm_size,
+    ssl_cname = ssl_cname,
+    ssl_cert_pem_file = ssl_cert_pem_file,
+    ssl_key_pem_file = ssl_key_pem_file,
+    location = location,
+    vnet_resourcegroup_name = vnet_resourcegroup_name,
+    vnet_name = vnet_name,
+    subnet_name = subnet_name,
+    service_cidr = service_cidr,
+    dns_service_ip = dns_service_ip,
     docker_bridge_cidr = docker_bridge_cidr)
   
-  azureml$core$compute$ComputeTarget$create(workspace, cluster_name,
+  azureml$core$compute$ComputeTarget$create(workspace,
+                                            cluster_name,
                                             compute_config)
 }
 
@@ -153,12 +177,15 @@ get_aks_compute_credentials <- function(cluster) {
 #' @param resource_group Name of the resource group in which the AKS is located. 
 #' @return An AksCompute object representation of the compute object
 #' @export
-attach_aks_compute <- function(workspace, cluster_name, resource_id,
+attach_aks_compute <- function(workspace,
+                               cluster_name,
+                               resource_id,
                                resource_group = NULL) {
   attach_config <- azureml$core$compute$AksCompute$attach_configuration(
     resource_group = resource_group, resource_id = resource_id)
   
-  azureml$core$compute$ComputeTarget$attach(workspace, cluster_name,
+  azureml$core$compute$ComputeTarget$attach(workspace,
+                                            cluster_name,
                                             attach_config)
 }
 

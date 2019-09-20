@@ -22,9 +22,11 @@
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_files_to_datastore <- function(ds, files, relative_root = NULL,
+upload_files_to_datastore <- function(ds, files,
+                                      relative_root = NULL,
                                       target_path = NULL, 
-                                      overwrite = FALSE, show_progress = TRUE) {
+                                      overwrite = FALSE,
+                                      show_progress = TRUE) {
   ds$upload_files(files, relative_root, target_path, overwrite, show_progress)
   invisible(NULL)
 }
@@ -38,8 +40,11 @@ upload_files_to_datastore <- function(ds, files, relative_root = NULL,
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_to_datastore <- function(ds, src_dir, target_path = NULL, 
-                                overwrite = FALSE, show_progress = TRUE) {
+upload_to_datastore <- function(ds,
+                                src_dir,
+                                target_path = NULL, 
+                                overwrite = FALSE,
+                                show_progress = TRUE) {
   ds$upload(src_dir, target_path, overwrite, show_progress)
   invisible(NULL)
 }
@@ -54,10 +59,14 @@ upload_to_datastore <- function(ds, src_dir, target_path = NULL,
 #' @param show_progress show progress of download in the console, defaults to
 #' TRUE
 #' @export
-download_from_datastore <- function(ds, target_path, prefix = NULL,
+download_from_datastore <- function(ds,
+                                    target_path,
+                                    prefix = NULL,
                                     overwrite = FALSE,
                                     show_progress = TRUE) {
-  ds$download(target_path, prefix = prefix, overwrite = overwrite,
+  ds$download(target_path,
+              prefix = prefix,
+              overwrite = overwrite,
               show_progress = show_progress)
   invisible(NULL)
 }

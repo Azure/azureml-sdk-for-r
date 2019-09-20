@@ -10,9 +10,11 @@ resource_group <- Sys.getenv("RESOURCE_GROUP", unset = "my-resource_group")
 workspace_name <- Sys.getenv("WORKSPACE_NAME", unset = "<my-workspace-name>")
 location <- Sys.getenv("WORKSPACE_REGION", unset = "eastus2")
 
-ws <- create_workspace(name = workspace_name, subscription_id = subscription_id,
+ws <- create_workspace(name = workspace_name,
+                       subscription_id = subscription_id,
                        resource_group = resource_group,
-                       location = location, create_resource_group = TRUE,
+                       location = location,
+                       create_resource_group = TRUE,
                        exist_ok = TRUE)
 write_workspace_config(ws, path = '.')
 

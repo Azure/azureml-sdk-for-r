@@ -14,11 +14,14 @@
 #' @param estimator Estimator object
 #' @return HyperDriveConfig object
 #' @export
-hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
-                              primary_metric_goal, max_total_runs,
+hyperdrive_config <- function(hyperparameter_sampling,
+                              primary_metric_name,
+                              primary_metric_goal,
+                              max_total_runs,
                               max_concurrent_runs = NULL,
                               max_duration_minutes = 10080L,
-                              policy = NULL, estimator = NULL) {
+                              policy = NULL,
+                              estimator = NULL) {
   
   azureml$train$hyperdrive$HyperDriveConfig(hyperparameter_sampling,
                                             primary_metric_name,
@@ -48,10 +51,14 @@ primary_metric_goal <- function(goal) {
 #' @param delay_evaluation how many intervals to delay the first evaluation
 #' @return EarlyTerminationPolicy object
 #' @export
-bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
-                          evaluation_interval = 1L, delay_evaluation = 0L) {
-  azureml$train$hyperdrive$BanditPolicy(evaluation_interval, slack_factor,
-                                        slack_amount, delay_evaluation)
+bandit_policy <- function(slack_factor = NULL,
+                          slack_amount = NULL,
+                          evaluation_interval = 1L,
+                          delay_evaluation = 0L) {
+  azureml$train$hyperdrive$BanditPolicy(evaluation_interval,
+                                        slack_factor,
+                                        slack_amount,
+                                        delay_evaluation)
 }
 
 #' Create Median Stopping policy for HyperDrive runs
@@ -233,7 +240,8 @@ get_best_run_by_primary_metric <- function(hyperdrive_run,
 #' metric
 #' @return named list of child runs
 #' @export
-get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0L,
+get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run,
+                                                    top = 0L,
                                                     reverse = FALSE,
                                                     discard_no_metric = FALSE) {
   hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,

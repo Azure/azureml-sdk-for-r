@@ -14,10 +14,20 @@
 #' of the specified named model, if it exists
 #' @param run_id Optional, will filter based on the provided ID.
 #' @export
-get_model <- function(workspace, name = NULL, id = NULL, tags = NULL, 
-                      properties = NULL, version = NULL, run_id = NULL) {
-  model <- azureml$core$Model(workspace, name, id, tags, properties, 
-                              version, run_id)
+get_model <- function(workspace,
+                      name = NULL,
+                      id = NULL,
+                      tags = NULL, 
+                      properties = NULL,
+                      version = NULL,
+                      run_id = NULL) {
+  model <- azureml$core$Model(workspace,
+                              name,
+                              id,
+                              tags,
+                              properties, 
+                              version,
+                              run_id)
   invisible(model)
 }
 
@@ -40,10 +50,16 @@ get_model <- function(workspace, name = NULL, id = NULL, tags = NULL,
 #' only the specified files will be
 #' bundled into the Model object.
 #' @export
-register_model <- function(workspace, model_path, model_name, tags = NULL,
-                           properties = NULL, description = NULL,
+register_model <- function(workspace,
+                           model_path,
+                           model_name,
+                           tags = NULL,
+                           properties = NULL,
+                           description = NULL,
                            child_paths = NULL) {
-  model <- azureml$core$Model$register(workspace, model_path, model_name,
+  model <- azureml$core$Model$register(workspace,
+                                       model_path,
+                                       model_name,
                                        tags = tags,
                                        properties = properties,
                                        description = description,
@@ -104,11 +120,18 @@ delete_model <- function(model) {
 #' leave
 #' this parameter as None to deploy to Azure Container Instances.
 #' @export
-deploy_model <- function(workspace, name, models, inference_config,
-                         deployment_config = NULL, deployment_target = NULL) {
-  webservice <- azureml$core$Model$deploy(workspace, name, models,
+deploy_model <- function(workspace,
+                         name,
+                         models,
+                         inference_config,
+                         deployment_config = NULL,
+                         deployment_target = NULL) {
+  webservice <- azureml$core$Model$deploy(workspace,
+                                          name,
+                                          models,
                                           inference_config,
-                                          deployment_config, deployment_target)
+                                          deployment_config,
+                                          deployment_target)
   invisible(webservice)
 }
 
@@ -124,9 +147,12 @@ deploy_model <- function(workspace, name, models, inference_config,
 #' locally
 #' instead of building an image.
 #' @export
-package_model <- function(workspace, models, inference_config,
+package_model <- function(workspace,
+                          models,
+                          inference_config,
                           generate_dockerfile = FALSE) {
-  model_package <- azureml$core$Model$package(workspace, models,
+  model_package <- azureml$core$Model$package(workspace,
+                                              models,
                                               inference_config,
                                               generate_dockerfile)
   invisible(model_package)
@@ -193,8 +219,10 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' `description`.
 #' @return An InferenceConfig object
 #' @export
-inference_config <- function(entry_script, source_directory = NULL, 
-                             description = NULL, environment = NULL) {
+inference_config <- function(entry_script,
+                             source_directory = NULL, 
+                             description = NULL,
+                             environment = NULL) {
   inference_config <- 
     azureml$core$model$InferenceConfig(entry_script = entry_script,
                                        source_directory = source_directory,

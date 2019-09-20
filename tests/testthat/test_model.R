@@ -49,7 +49,9 @@ test_that("create, check container registry and save model package", {
                              environment = env)
 
   # Create ModelPackage with dockerfile
-  model_package <- package_model(ws, c(model), config, 
+  model_package <- package_model(ws,
+                                 c(model),
+                                 config, 
                                  generate_dockerfile = TRUE)
   
   # wait for the package to be created

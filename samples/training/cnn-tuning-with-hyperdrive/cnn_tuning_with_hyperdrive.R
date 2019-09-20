@@ -11,16 +11,21 @@ if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,
-                                       vm_size = vm_size, max_nodes = 1)
+                                       vm_size = vm_size,
+                                       max_nodes = 1)
 }
 wait_for_compute(compute_target)
 
 # define estimator
-script_params <- list(batch_size = 32, epochs = 200,
-                      lr = 0.0001, decay = 1e-6)
+script_params <- list(batch_size = 32,
+                      epochs = 200,
+                      lr = 0.0001,
+                      decay = 1e-6)
 
-est <- estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
-                 compute_target = compute_target, script_params = script_params,
+est <- estimator(source_directory = ".",
+                 entry_script = "cifar10_cnn.R",
+                 compute_target = compute_target,
+                 script_params = script_params,
                  cran_packages = c("keras"))
 
 experiment_name <- "hyperdrive-cifar10"
@@ -39,9 +44,12 @@ sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
                                            decay = uniform(1e-6, 3e-6)))
 
 policy <- bandit_policy(slack_factor = 0.15)
-hyperdrive_config <- hyperdrive_config(sampling, "Loss",
+hyperdrive_config <- hyperdrive_config(sampling,
+                                       "Loss",
                                        primary_metric_goal("MINIMIZE"),
-                                       4, policy = policy, estimator = est)
+                                       4,
+                                       policy = policy,
+                                       estimator = est)
 
 # submit hyperdrive run
 hyperdrive_run <- submit_experiment(hyperdrive_config, exp)

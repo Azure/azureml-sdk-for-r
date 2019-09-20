@@ -27,7 +27,9 @@ test_that("create, get, generate keys of, and delete webservice", {
                                                                auth_enabled = T)
   # Deploy the model
   service_name <- "temp-service"
-  service <- deploy_model(ws, service_name, models = c(model),
+  service <- deploy_model(ws,
+                          service_name,
+                          models = c(model),
                           inference_config = config,
                           deployment_config = aciconfig)
   
