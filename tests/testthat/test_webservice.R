@@ -12,8 +12,8 @@ test_that("create, get, generate keys of, and delete webservice",
   # register the model
   model <- register_model(ws, tmp_dir_name, model_name)
   
-  # Create a new environmenr
-  env <- azureml$core$Environment(name = "newenv")
+  # Create a new environment
+  env <- environment(name = "newenv")
   env$register(ws)
   
   # Create the inference config to use for Webservice
