@@ -25,7 +25,7 @@ test_that("create, get, generate keys of, and delete webservice",
                                                                          tags = reticulate::py_dict('name', 'temp'),
                                                                          auth_enabled = TRUE)
   # Deploy the model
-  service_name <- "temp-service"
+  service_name <- paste("svc", build_num, sep="")
   service <- deploy_model(ws, service_name, models = c(model), inference_config = config,
                           deployment_config = aciconfig)
   
