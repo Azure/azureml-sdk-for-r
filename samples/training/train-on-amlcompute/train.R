@@ -29,7 +29,7 @@ set.seed(7)
 model <- train(Species ~ ., data = train_data, method = "lda", metric = metric,
                trControl = control)
 predictions <- predict(model, test_data)
-conf_matrix = confusionMatrix(predictions, test_data$Species)
+conf_matrix <- confusionMatrix(predictions, test_data$Species)
 message(conf_matrix)
 
 current_run <- get_current_run()

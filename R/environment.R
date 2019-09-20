@@ -79,7 +79,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
 
   if (!is.null(base_image_registry))
   {
-    env$docker$base_image_registry = base_image_registry
+    env$docker$base_image_registry <- base_image_registry
   }
   
   invisible(env)
