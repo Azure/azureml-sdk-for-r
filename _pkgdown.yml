@@ -11,8 +11,11 @@ reference:
   - '`load_workspace_from_config`'
   - '`write_workspace_config`'
   - '`get_default_datastore`'
+  - '`set_default_datastore`'
   - '`delete_workspace`'
   - '`list_workspaces`'
+  - '`get_workspace_details`'
+  - '`get_default_keyvault `'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:

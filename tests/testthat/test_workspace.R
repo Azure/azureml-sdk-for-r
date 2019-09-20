@@ -7,13 +7,16 @@ location <- Sys.getenv("TEST_LOCATION")
 test_that("create, get, save, load and delete workspace",
 {
     # create workspace
-    workspace_name <- paste("ws", build_num, sep="")
+    workspace_name <- paste("test_ws", build_num, sep="")
     existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
                                     location = location)
 
     # retrieve workspace
     ws <- get_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group)
     expect_equal(ws$name, existing_ws$name)
+    get_workspace_details(ws)
+    kv <- get_default_keyvault(ws)
+    expect_equal(length(kv$list_secrets()), 0)
 
     # write config
     write_workspace_config(existing_ws)
