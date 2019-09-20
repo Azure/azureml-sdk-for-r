@@ -108,8 +108,7 @@ delete_workspace <- function(ws)
 #' If NULL the method will list all the workspaces within the specified
 #' subscription.
 #' @export
-list_workspaces <- function(subscription_id, resource_group = NULL)
-{
+list_workspaces <- function(subscription_id, resource_group = NULL) {
   azureml$core$workspace$Workspace$list(subscription_id, resource_group)
 }
 
@@ -120,15 +119,13 @@ list_workspaces <- function(subscription_id, resource_group = NULL)
 #' @param file_name Name to use for the config file. The parameter defaults to
 #' config.json.
 #' @export
-write_workspace_config <- function(ws, path = NULL, file_name = NULL)
-{
+write_workspace_config <- function(ws, path = NULL, file_name = NULL) {
   ws$write_config(path, file_name)
 }
 
 #' Get default datastore associated with a workspace
 #' @param ws workspace object
 #' @export
-get_default_datastore <- function(ws)
-{
+get_default_datastore <- function(ws) {
   ws$get_default_datastore()
 }

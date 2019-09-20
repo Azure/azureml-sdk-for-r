@@ -18,8 +18,7 @@ hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
                               primary_metric_goal, max_total_runs,
                               max_concurrent_runs = NULL,
                               max_duration_minutes = 10080L,
-                              policy = NULL, estimator = NULL)
-{
+                              policy = NULL, estimator = NULL) {
   
   azureml$train$hyperdrive$HyperDriveConfig(hyperparameter_sampling,
                                             primary_metric_name,
@@ -36,8 +35,7 @@ hyperdrive_config <- function(hyperparameter_sampling, primary_metric_name,
 #' @param goal string name of the goal ("MAXIMIZE" or "MINIMIZE")
 #' @return PrimaryMetricGoal object
 #' @export
-primary_metric_goal <- function(goal)
-{
+primary_metric_goal <- function(goal) {
   azureml$train$hyperdrive$PrimaryMetricGoal(goal)
 }
 
@@ -51,8 +49,7 @@ primary_metric_goal <- function(goal)
 #' @return EarlyTerminationPolicy object
 #' @export
 bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
-                          evaluation_interval = 1L, delay_evaluation = 0L)
-{
+                          evaluation_interval = 1L, delay_evaluation = 0L) {
   azureml$train$hyperdrive$BanditPolicy(evaluation_interval, slack_factor,
                                         slack_amount, delay_evaluation)
 }
@@ -63,8 +60,7 @@ bandit_policy <- function(slack_factor = NULL, slack_amount = NULL,
 #' @return EarlyTerminationPolicy object
 #' @export
 median_stopping_policy <- function(evaluation_interval = 1L,
-                                   delay_evaluation = 0L)
-{
+                                   delay_evaluation = 0L) {
   azureml$train$hyperdrive$MedianStoppingPolicy(evaluation_interval,
                                                 delay_evaluation)
 }
@@ -78,8 +74,7 @@ median_stopping_policy <- function(evaluation_interval = 1L,
 #' @export
 truncation_selection_policy <- function(truncation_percentage,
                                         evaluation_interval = 1L,
-                                        delay_evaluation = 0L)
-{
+                                        delay_evaluation = 0L) {
   azureml$train$hyperdrive$TruncationSelectionPolicy(truncation_percentage,
                                                      evaluation_interval,
                                                      delay_evaluation)
@@ -93,8 +88,7 @@ truncation_selection_policy <- function(truncation_percentage,
 #' @param properties a named list of additional properties for the algorithm
 #' @return HyperParameterSampling object
 #' @export
-random_parameter_sampling <- function(parameter_space, properties = NULL)
-{
+random_parameter_sampling <- function(parameter_space, properties = NULL) {
   azureml$train$hyperdrive$RandomParameterSampling(parameter_space, properties)
 }
 
@@ -103,8 +97,7 @@ random_parameter_sampling <- function(parameter_space, properties = NULL)
 #' distribution
 #' @return HyperParameterSampling object
 #' @export
-grid_parameter_sampling <- function(parameter_space)
-{
+grid_parameter_sampling <- function(parameter_space) {
   azureml$train$hyperdrive$GridParameterSampling(parameter_space)
 }
 
@@ -113,8 +106,7 @@ grid_parameter_sampling <- function(parameter_space)
 #' distribution
 #' @return HyperParameterSampling object
 #' @export
-bayesian_parameter_sampling <- function(parameter_space)
-{
+bayesian_parameter_sampling <- function(parameter_space) {
   azureml$train$hyperdrive$BayesianParameterSampling(parameter_space)
 }
 
@@ -124,8 +116,7 @@ bayesian_parameter_sampling <- function(parameter_space)
 #' @param options list of options to choose from 
 #' @return the stochastic expression
 #' @export
-choice <- function(options)
-{
+choice <- function(options) {
   azureml$train$hyperdrive$choice(options)
 }
 
@@ -133,8 +124,7 @@ choice <- function(options)
 #' @param upper upper bound for the range of integers (exclusive)
 #' @return the stochastic expression
 #' @export
-randint <- function(upper)
-{
+randint <- function(upper) {
   azureml$train$hyperdrive$randint(upper)
 }
 
@@ -143,8 +133,7 @@ randint <- function(upper)
 #' @param max_value maximum value in the range (inclusive)
 #' @return the stochastic expression
 #' @export
-uniform <- function(min_value, max_value)
-{
+uniform <- function(min_value, max_value) {
   azureml$train$hyperdrive$uniform(min_value, max_value)
 }
 
@@ -155,8 +144,7 @@ uniform <- function(min_value, max_value)
 #' @param q smoothing factor
 #' @return the stochastic expression
 #' @export
-quniform <- function(min_value, max_value, q)
-{
+quniform <- function(min_value, max_value, q) {
   azureml$train$hyperdrive$quniform(min_value, max_value, q)
 }
 
@@ -167,8 +155,7 @@ quniform <- function(min_value, max_value, q)
 #' (inclusive)
 #' @return the stochastic expression
 #' @export
-loguniform <- function(min_value, max_value)
-{
+loguniform <- function(min_value, max_value) {
   azureml$train$hyperdrive$loguniform(min_value, max_value)
 }
 
@@ -179,8 +166,7 @@ loguniform <- function(min_value, max_value)
 #' @param q smoothing factor
 #' @return the stochastic expression
 #' @export
-qloguniform <- function(min_value, max_value, q)
-{
+qloguniform <- function(min_value, max_value, q) {
   azureml$train$hyperdrive$qloguniform(min_value, max_value, q)
 }
 
@@ -190,8 +176,7 @@ qloguniform <- function(min_value, max_value, q)
 #' @param sigma standard deviation of the normal distribution
 #' @return the stochastic expression
 #' @export
-normal <- function(mu, sigma)
-{
+normal <- function(mu, sigma) {
   azureml$train$hyperdrive$normal(mu, sigma)
 }
 
@@ -201,8 +186,7 @@ normal <- function(mu, sigma)
 #' @param q smoothing factor
 #' @return the stochastic expression
 #' @export
-qnormal <- function(mu, sigma, q)
-{
+qnormal <- function(mu, sigma, q) {
   azureml$train$hyperdrive$qnormal(mu, sigma, q)
 }
 
@@ -211,8 +195,7 @@ qnormal <- function(mu, sigma, q)
 #' @param sigma standard deviation of the normal distribution
 #' @return the stochastic expression
 #' @export
-lognormal <- function(mu, sigma)
-{
+lognormal <- function(mu, sigma) {
   azureml$train$hyperdrive$lognormal(mu, sigma)
 }
 
@@ -222,8 +205,7 @@ lognormal <- function(mu, sigma)
 #' @param q smoothing factor
 #' @return the stochastic expression
 #' @export
-qlognormal <- function(mu, sigma, q)
-{
+qlognormal <- function(mu, sigma, q) {
   azureml$train$hyperdrive$qlognormal(mu, sigma, q)
 }
 
@@ -237,8 +219,7 @@ qlognormal <- function(mu, sigma, q)
 #' @export
 get_best_run_by_primary_metric <- function(hyperdrive_run,
                                            include_failed = TRUE,
-                                           include_canceled = TRUE)
-{
+                                           include_canceled = TRUE) {
   hyperdrive_run$get_best_run_by_primary_metric(include_failed,
                                                 include_canceled)
 }
@@ -254,8 +235,7 @@ get_best_run_by_primary_metric <- function(hyperdrive_run,
 #' @export
 get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0L,
                                                     reverse = FALSE,
-                                                    discard_no_metric = FALSE)
-{
+                                                    discard_no_metric = FALSE) {
   hyperdrive_run$get_children_sorted_by_primary_metric(top, reverse,
                                                        discard_no_metric)
 }
@@ -264,8 +244,7 @@ get_child_runs_sorted_by_primary_metric <- function(hyperdrive_run, top = 0L,
 #' @param hyperdrive_run HyperDriveRun object
 #' @return named list of hyperparameters grouped by run_id
 #' @export
-get_child_run_hyperparameters <- function(hyperdrive_run)
-{
+get_child_run_hyperparameters <- function(hyperdrive_run) {
   hyperdrive_run$get_hyperparameters()
 }
 
@@ -273,7 +252,6 @@ get_child_run_hyperparameters <- function(hyperdrive_run)
 #' @param hyperdrive_run HyperDriveRun object
 #' @return name list of metrics grouped by run_id
 #' @export
-get_child_run_metrics <- function(hyperdrive_run)
-{
+get_child_run_metrics <- function(hyperdrive_run) {
   hyperdrive_run$get_metrics()
 }

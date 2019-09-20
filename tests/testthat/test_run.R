@@ -1,8 +1,7 @@
 context("run")
 
 test_that("create, submit experiment, run in default amlcompute,
-          get run metrics",
-{
+          get run metrics", {
     experiment_name <- "test_experiment"
 
     ws <- existing_ws

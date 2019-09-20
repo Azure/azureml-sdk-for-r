@@ -1,7 +1,6 @@
 context("model tests")
 
-test_that("get, register, download, serialize, deserialize and delete model",
-{
+test_that("get, register, download, serialize, deserialize and delete model", {
     ws <- existing_ws
     
     tmp_dir_name <- "tmp_dir"
@@ -32,8 +31,7 @@ test_that("get, register, download, serialize, deserialize and delete model",
     delete_model(model)
 })
 
-test_that("create, check container registry and save model package",
-{
+test_that("create, check container registry and save model package", {
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"

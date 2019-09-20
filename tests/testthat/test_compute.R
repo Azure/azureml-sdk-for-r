@@ -1,7 +1,6 @@
 context("compute tests")
 
-test_that("create amlcompute",
-{
+test_that("create amlcompute", {
   ws <- existing_ws
 
   vm_size <- "STANDARD_D2_V2"
@@ -22,8 +21,7 @@ test_that("create amlcompute",
   delete_compute(compute_target)
 })
 
-test_that("create akscompute",
-{
+test_that("create akscompute", {
   skip('skip')
   ws <- existing_ws
   

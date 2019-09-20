@@ -1,7 +1,6 @@
 context("create docker file tests")
 
-test_that("create dockerfile",
-{
+test_that("create dockerfile", {
     dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04")
     expect_equal(dockerfile, "FROM ubuntu-18.04\n")
 

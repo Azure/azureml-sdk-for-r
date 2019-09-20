@@ -6,8 +6,7 @@
 #' @param name The experiment name.
 #' @return experiment object
 #' @export
-experiment <- function(workspace, name)
-{
+experiment <- function(workspace, name) {
   azureml$core$Experiment(workspace, name)
 }
 
@@ -18,7 +17,6 @@ experiment <- function(workspace, name)
 #' list("tag" = "value")
 #' @return run object
 #' @export
-submit_experiment <- function(config, experiment, tags = NULL)
-{
+submit_experiment <- function(config, experiment, tags = NULL) {
   experiment$submit(config, tags = tags)
 }

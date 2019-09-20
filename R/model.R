@@ -15,8 +15,7 @@
 #' @param run_id Optional, will filter based on the provided ID.
 #' @export
 get_model <- function(workspace, name = NULL, id = NULL, tags = NULL, 
-                      properties = NULL, version = NULL, run_id = NULL)
-{
+                      properties = NULL, version = NULL, run_id = NULL) {
   model <- azureml$core$Model(workspace, name, id, tags, properties, 
                               version, run_id)
   invisible(model)
@@ -43,8 +42,7 @@ get_model <- function(workspace, name = NULL, id = NULL, tags = NULL,
 #' @export
 register_model <- function(workspace, model_path, model_name, tags = NULL,
                            properties = NULL, description = NULL,
-                           child_paths = NULL)
-{
+                           child_paths = NULL) {
   model <- azureml$core$Model$register(workspace, model_path, model_name,
                                        tags = tags,
                                        properties = properties,
@@ -60,16 +58,14 @@ register_model <- function(workspace, model_path, model_name, tags = NULL,
 #' @param exist_ok Boolean to replace downloaded dir/files if exists. Defaults
 #' to False
 #' @export
-download_model <- function(model, target_dir = '.', exist_ok = FALSE)
-{
+download_model <- function(model, target_dir = '.', exist_ok = FALSE) {
   model_path <- model$download(target_dir, exist_ok)
   invisible(model_path)
 }
 
 #' Convert this Model into a json serialized dictionary
 #' @param model The model to download
-serialize_model <- function(model)
-{
+serialize_model <- function(model) {
   result <- model$serialize()
   invisible(result)
 }
@@ -77,8 +73,7 @@ serialize_model <- function(model)
 #' Convert a json object into a Model object.
 #' @param workspace The workspace object the model is registered under
 #' @param model_payload A json object to convert to a Model object
-deserialize_to_model <- function(workspace, model_payload)
-{
+deserialize_to_model <- function(workspace, model_payload) {
   model <- azureml$core$Model$deserialize(workspace, model_payload)
   invisible(model)
 }
@@ -86,8 +81,7 @@ deserialize_to_model <- function(workspace, model_payload)
 #' Delete this model from its associated workspace.
 #' @param model The model to download
 #' @export
-delete_model <- function(model)
-{
+delete_model <- function(model) {
   model$delete()
 }
 
@@ -111,8 +105,7 @@ delete_model <- function(model)
 #' this parameter as None to deploy to Azure Container Instances.
 #' @export
 deploy_model <- function(workspace, name, models, inference_config,
-                         deployment_config = NULL, deployment_target = NULL)
-{
+                         deployment_config = NULL, deployment_target = NULL) {
   webservice <- azureml$core$Model$deploy(workspace, name, models,
                                           inference_config,
                                           deployment_config, deployment_target)
@@ -132,8 +125,7 @@ deploy_model <- function(workspace, name, models, inference_config,
 #' instead of building an image.
 #' @export
 package_model <- function(workspace, models, inference_config,
-                          generate_dockerfile = FALSE)
-{
+                          generate_dockerfile = FALSE) {
   model_package <- azureml$core$Model$package(workspace, models,
                                               inference_config,
                                               generate_dockerfile)
@@ -145,8 +137,7 @@ package_model <- function(workspace, models, inference_config,
 #' @param package Package created with model(s) and dependencies.
 #' @return ContainerRegistry object
 #' @export
-get_model_package_container_registry <- function(package)
-{
+get_model_package_container_registry <- function(package) {
   package$get_container_registry()
 }
 
@@ -156,8 +147,7 @@ get_model_package_container_registry <- function(package)
 #' @param offset Byte offset from which to start reading the logs.
 #' @return Package creation logs.
 #' @export
-get_model_package_creation_logs <- function(package, decode = TRUE, offset = 0)
-{
+get_model_package_creation_logs <- function(package, decode = T, offset = 0) {
   package$get_logs(decode, offset)
 }
 
@@ -165,8 +155,7 @@ get_model_package_creation_logs <- function(package, decode = TRUE, offset = 0)
 #' This can only be used with a Docker image package.
 #' @param package Package created with model(s) and dependencies.
 #' @export
-pull_model_package_image <- function(package)
-{
+pull_model_package_image <- function(package) {
   package$pull()
 }
 
@@ -176,8 +165,7 @@ pull_model_package_image <- function(package)
 #' @param output_directory Local directory that will be created to contain 
 #' the contents of the package.
 #' @export
-save_model_package_files <- function(package, output_directory)
-{
+save_model_package_files <- function(package, output_directory) {
   package$save(output_directory)
 }
 
@@ -186,8 +174,7 @@ save_model_package_files <- function(package, output_directory)
 #' @param show_output Boolean option to print more verbose output. Defaults to
 #' FALSE.
 #' @export
-wait_for_model_package_creation <- function(package, show_output = FALSE)
-{
+wait_for_model_package_creation <- function(package, show_output = FALSE) {
   package$wait_for_creation(show_output)
 }
 
@@ -207,8 +194,7 @@ wait_for_model_package_creation <- function(package, show_output = FALSE)
 #' @return An InferenceConfig object
 #' @export
 inference_config <- function(entry_script, source_directory = NULL, 
-                             description = NULL, environment = NULL)
-{
+                             description = NULL, environment = NULL) {
   inference_config <- 
     azureml$core$model$InferenceConfig(entry_script = entry_script,
                                        source_directory = source_directory,

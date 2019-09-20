@@ -1,7 +1,6 @@
 context("datastore")
 
-test_that("datastore",
-{
+test_that("datastore", {
     ws <- existing_ws
     ds <- get_default_datastore(ws)
     # upload files to datastore

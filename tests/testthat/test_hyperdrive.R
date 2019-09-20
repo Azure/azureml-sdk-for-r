@@ -1,7 +1,6 @@
 context("hyperdrive")
 
-test_that("create hyperdrive config, launch runs, get run metrics",
-          {
+test_that("create hyperdrive config, launch runs, get run metrics", {
               experiment_name <- "test_experiment"
               
               ws <- existing_ws

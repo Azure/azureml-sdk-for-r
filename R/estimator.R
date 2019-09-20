@@ -43,8 +43,7 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
                       use_docker = TRUE, cran_packages = NULL,
                       github_packages = NULL, custom_url_packages = NULL,
                       custom_docker_image = NULL, inputs = NULL,
-                      use_gpu = FALSE)
-{ 
+                      use_gpu = FALSE) { 
   launch_script <- create_launch_script(source_directory, entry_script,
                                         cran_packages, github_packages,
                                         custom_url_packages)
@@ -63,11 +62,9 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
   run_config$framework <- "R"
   run_config$environment$python$user_managed_dependencies <- TRUE
   
-  if (is.null(custom_docker_image))
-  {
+  if (is.null(custom_docker_image)) {
     processor <- "cpu"
-    if (use_gpu)
-    {
+    if (use_gpu) {
       processor <- "gpu"
     }
 
@@ -93,8 +90,7 @@ estimator <- function(source_directory, compute_target = NULL, vm_size = NULL,
 #' local, directory or custom url.
 create_launch_script <- function(source_directory, entry_script,
                                  cran_packages = NULL, github_packages = NULL,
-                                 custom_url_packages = NULL)
-{
+                                 custom_url_packages = NULL) {
   launch_file_name <- "launcher.R"
   launch_file_conn <- file(file.path(source_directory, launch_file_name),
                            open = "w")
@@ -104,22 +100,19 @@ create_launch_script <- function(source_directory, entry_script,
              successfully installed, it will execute the entry script.\n",
              launch_file_conn)
   
-  if (!is.null(cran_packages))
-  {
+  if (!is.null(cran_packages)) {
     writeLines(sprintf("install.packages(\"%s\",
                        repos = \"http://cran.us.r-project.org\")\n",
                        cran_packages),
                launch_file_conn)
   }
   
-  if (!is.null(github_packages))
-  {
+  if (!is.null(github_packages)) {
     writeLines(sprintf("devtools::install_github(\"%s\")\n", github_packages),
                launch_file_conn)
   }
   
-  if (!is.null(custom_url_packages))
-  {
+  if (!is.null(custom_url_packages)) {
     writeLines(sprintf("install.packages(\"%s\", repos = NULL)\n",
                        custom_url_packages), launch_file_conn)
   }

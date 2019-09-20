@@ -36,8 +36,7 @@ create_aml_compute <- function(workspace, cluster_name, vm_size,
                                admin_user_ssh_key = NULL,
                                vnet_resourcegroup_name = NULL, vnet_name = NULL,
                                subnet_name = NULL, tags = NULL,
-                               description = NULL)
-{
+                               description = NULL) {
   compute_config <- azureml$core$compute$AmlCompute$provisioning_configuration(
     vm_size = vm_size,
     vm_priority = vm_priority, min_nodes = min_nodes, max_nodes = max_nodes,
@@ -55,20 +54,15 @@ create_aml_compute <- function(workspace, cluster_name, vm_size,
 #' @param workspace workspace that has the cluster
 #' @param cluster_name name of the cluster
 #' @export
-get_compute <- function(workspace, cluster_name)
-{
-  tryCatch(
-    {
+get_compute <- function(workspace, cluster_name) {
+  tryCatch( {
       azureml$core$compute$ComputeTarget(workspace = workspace,
                                          name = cluster_name)
     },
     error = function(e) {
-      if (grepl("ComputeTargetException", e$message, ))
-      {
+      if (grepl("ComputeTargetException", e$message, )) {
         NULL
-      }
-      else
-      {
+      } else {
         stop(message(e))
       }
     }
@@ -79,16 +73,14 @@ get_compute <- function(workspace, cluster_name)
 #' @param cluster cluster object
 #' @param show_output show output on console
 #' @export
-wait_for_compute <- function(cluster, show_output = TRUE)
-{
+wait_for_compute <- function(cluster, show_output = TRUE) {
   cluster$wait_for_completion(show_output)
 }
 
 #' Delete compute
 #' @param cluster cluster object
 #' @export
-delete_compute <- function(cluster)
-{
+delete_compute <- function(cluster) {
   cluster$delete()
   invisible(NULL)
 }
@@ -131,8 +123,8 @@ create_aks_compute <- function(workspace, cluster_name, agent_count = NULL,
                                vnet_resourcegroup_name = NULL,
                                vnet_name = NULL, subnet_name = NULL,
                                service_cidr = NULL,
-                               dns_service_ip = NULL, docker_bridge_cidr = NULL)
-{
+                               dns_service_ip = NULL,
+                               docker_bridge_cidr = NULL) {
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(
     agent_count = agent_count, vm_size = vm_size, ssl_cname = ssl_cname,
     ssl_cert_pem_file = ssl_cert_pem_file, ssl_key_pem_file = ssl_key_pem_file,
@@ -149,8 +141,7 @@ create_aks_compute <- function(workspace, cluster_name, agent_count = NULL,
 #' @param cluster cluster object
 #' @return Credentials for the AKS target
 #' @export
-get_aks_compute_credentials <- function(cluster)
-{
+get_aks_compute_credentials <- function(cluster) {
   cluster$get_credentials()
 }
 
@@ -163,8 +154,7 @@ get_aks_compute_credentials <- function(cluster)
 #' @return An AksCompute object representation of the compute object
 #' @export
 attach_aks_compute <- function(workspace, cluster_name, resource_id,
-                               resource_group = NULL)
-{
+                               resource_group = NULL) {
   attach_config <- azureml$core$compute$AksCompute$attach_configuration(
     resource_group = resource_group, resource_id = resource_id)
   
@@ -175,8 +165,7 @@ attach_aks_compute <- function(workspace, cluster_name, resource_id,
 #' Detach the AksCompute object from its associated workspace
 #' @param cluster cluster object
 #' @export
-detach_aks_compute <- function(cluster)
-{
+detach_aks_compute <- function(cluster) {
   cluster$detach()
   invisible(NULL)
 }

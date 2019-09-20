@@ -1,7 +1,6 @@
 context("webservice tests")
 
-test_that("create, get, generate keys of, and delete webservice",
-{
+test_that("create, get, generate keys of, and delete webservice", {
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"

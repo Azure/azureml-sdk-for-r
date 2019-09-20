@@ -18,36 +18,30 @@
 environment <- function(name, version = NULL, environment_variables = NULL,
                         cran_packages = NULL, github_packages = NULL,
                         custom_url_packages = NULL, custom_docker_image = NULL,
-                        base_image_registry = NULL)
-{
+                        base_image_registry = NULL) {
   env <- azureml$core$Environment(name)
   env$version <- version
   env$python$user_managed_dependencies <- TRUE
   
-  if(!is.null(environment_variables))
-  {
+  if(!is.null(environment_variables)) {
     env$environment_variables <- environment_variables
   }
   
   base_docker_image <- custom_docker_image
   image_registry_address <- NULL
 
-  if(!is.null(base_image_registry) && !is.null(base_image_registry$address))
-  {
+  if(!is.null(base_image_registry) && !is.null(base_image_registry$address)) {
     image_registry_address <- base_image_registry$address
   }
     
-  if(is.null(base_docker_image))
-  {
-    if (is.null(image_registry_address))
-    {
+  if(is.null(base_docker_image)) {
+    if (is.null(image_registry_address)) {
       image_registry_address <- "viennaprivate.azurecr.io"
     }
     base_docker_image <- "r-base:cpu"
   }
     
-  if(!is.null(image_registry_address))
-  {
+  if(!is.null(image_registry_address)) {
     base_docker_image <- paste(image_registry_address, base_docker_image,
                                sep = "/")
   }
@@ -55,20 +49,15 @@ environment <- function(name, version = NULL, environment_variables = NULL,
   # if no package is specified, then use base image instead of building a new
   # one
   if(is.null(cran_packages) && is.null(github_packages) &&
-     is.null(custom_url_packages))
-  {
-    if(is.null(custom_docker_image))
-    {
+     is.null(custom_url_packages)) {
+    if(is.null(custom_docker_image)) {
       env$docker$base_image <- "r-base:cpu"
       env$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
     }
-    else
-    {
+    else {
       env$docker$base_image <- custom_docker_image
     }
-  }
-  else
-  {
+  } else {
     # generate a dockerfile for the environment
     env$docker$base_dockerfile <- generate_docker_file(base_docker_image,
                                                        cran_packages,
@@ -77,8 +66,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
     env$docker$base_image <- NULL
   }
 
-  if (!is.null(base_image_registry))
-  {
+  if (!is.null(base_image_registry)) {
     env$docker$base_image_registry <- base_image_registry
   }
   
@@ -89,8 +77,7 @@ environment <- function(name, version = NULL, environment_variables = NULL,
 #' @param workspace The workspace
 #' @param environment The python environment where the experiment is executed.
 #' @export
-register_environment <- function(environment, workspace)
-{
+register_environment <- function(environment, workspace) {
   env <- environment$register(workspace)
   invisible(env)
 }
@@ -100,8 +87,7 @@ register_environment <- function(environment, workspace)
 #' @param name The name of the environment
 #' @param version The version of the environment
 #' @export
-get_environment <- function(workspace, name, version = NULL)
-{
+get_environment <- function(workspace, name, version = NULL) {
   azureml$core$Environment$get(workspace, name, version)
 }
 
@@ -110,8 +96,8 @@ get_environment <- function(workspace, name, version = NULL)
 #' @param username The username for ACR
 #' @param password The password for ACR
 #' @export
-container_registry <- function(address = NULL, username = NULL, password = NULL)
-{
+container_registry <- function(address = NULL, username = NULL,
+                               password = NULL) {
   container_registry <- azureml$core$ContainerRegistry()
   container_registry$address <- address
   container_registry$username <- username
@@ -131,17 +117,14 @@ container_registry <- function(address = NULL, username = NULL, password = NULL)
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,
-                                 custom_url_packages = NULL)
-{
+                                 custom_url_packages = NULL) {
   base_dockerfile <- NULL
   base_dockerfile <- paste(base_dockerfile, sprintf("FROM %s\n",
                                                     custom_docker_image),
                            sep = "")
 
-  if (!is.null(cran_packages))
-  {
-    for (package in cran_packages)
-    {
+  if (!is.null(cran_packages)) {
+    for (package in cran_packages) {
       base_dockerfile <- paste(
                           base_dockerfile,
                           sprintf("RUN R -e install.packages(\"%s\",
@@ -151,10 +134,8 @@ generate_docker_file <- function(custom_docker_image = NULL,
     }
   }
   
-  if (!is.null(github_packages))
-  {
-    for (package in github_packages)
-    {
+  if (!is.null(github_packages)) {
+    for (package in github_packages) {
       base_dockerfile <- paste(
                           base_dockerfile,
                           sprintf("RUN R -e devtools::install_github(\"%s\")\n",
@@ -163,10 +144,8 @@ generate_docker_file <- function(custom_docker_image = NULL,
     }
   }
   
-  if (!is.null(custom_url_packages))
-  {
-    for (package in custom_url_packages)
-    {
+  if (!is.null(custom_url_packages)) {
+    for (package in custom_url_packages) {
       base_dockerfile <- paste(
                     base_dockerfile,
                     sprintf("RUN R -e install.packages(\"%s\", repos = NULL)\n",

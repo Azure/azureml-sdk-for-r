@@ -14,8 +14,7 @@ upload_files_to_datastore(ds, list("./iris.csv"),
 # create aml compute
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
-if (is.null(compute_target))
-{
+if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,

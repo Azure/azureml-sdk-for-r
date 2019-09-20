@@ -4,8 +4,7 @@ subscription_id <- Sys.getenv("TEST_SUBSCRIPTION_ID")
 resource_group <- Sys.getenv("TEST_RESOURCE_GROUP")
 location <- Sys.getenv("TEST_LOCATION")
 
-test_that("create, get, save, load and delete workspace",
-{
+test_that("create, get, save, load and delete workspace", {
     # create workspace
     workspace_name <- paste("ws", build_num, sep="")
     existing_ws <- create_workspace(workspace_name,

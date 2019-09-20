@@ -12,8 +12,7 @@ install_mlflow()
 
 
 get_tracking_uri <- function(region, subscription_id, resource_group,
-                             workspace_name)
-{
+                             workspace_name) {
     sprintf(paste0('https://%s.experiments.azureml.net/history/v1.0/
                    subscriptions/%s/resourceGroups/%s/providers/',
                     'Microsoft.MachineLearningServices/workspaces/%s'), region,

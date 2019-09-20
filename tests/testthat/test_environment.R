@@ -1,7 +1,6 @@
 context("environment")
 
-test_that("create, register, and get environment",
-{
+test_that("create, register, and get environment", {
     ws <- existing_ws
     
     env_name <- "testenv"
