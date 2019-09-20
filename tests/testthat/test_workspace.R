@@ -7,7 +7,7 @@ location <- Sys.getenv("TEST_LOCATION")
 test_that("create, get, save, load and delete workspace",
 {
     # create workspace
-    workspace_name <- paste("test_ws", build_num, sep="")
+    workspace_name <- paste0("test_ws", build_num)
     existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
                                     location = location)
 
