@@ -47,7 +47,7 @@ create_workspace <- function(
     app_insights = NULL,
     container_registry = NULL,
     exist_ok = FALSE,
-    show_output=TRUE)
+    show_output = TRUE)
 {
   ws <- 
     azureml$core$Workspace$create(name = name,

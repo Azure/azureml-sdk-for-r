@@ -22,8 +22,8 @@ test_that("create, get, generate keys of, and delete webservice",
   # Create ACI deployment config
   tags <- reticulate::py_dict('name', 'temp')
   aciconfig <- 
-    azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores=1,
-                                                               memory_gb=1,
+    azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores = 1,
+                                                               memory_gb = 1,
                                                                tags = tags,
                                                                auth_enabled = T)
   # Deploy the model

@@ -16,7 +16,7 @@ install_azureml <- function(version = NULL,
   # set version if provided
   if (!is.null(version))
   {
-    main_package <- paste(main_package, "==", version, sep="")
+    main_package <- paste(main_package, "==", version, sep = "")
   }
   
   # check for anaconda installation
@@ -36,7 +36,7 @@ install_azureml <- function(version = NULL,
   {
     msg <- paste("Creating environment: ", envname)
     message(msg)
-    py_version <- paste("python=", conda_python_version, sep="")
+    py_version <- paste("python=", conda_python_version, sep = "")
     reticulate::conda_create(envname, packages = py_version)
   }
   

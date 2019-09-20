@@ -49,7 +49,7 @@ wait_until_run_completes <- function(run)
 #' can be tested locally without submitting a job with the SDK.
 #' @return get current run
 #' @export
-get_current_run <- function(allow_offline=TRUE)
+get_current_run <- function(allow_offline = TRUE)
 {
   azureml$core$run$Run$get_context(allow_offline)
 }

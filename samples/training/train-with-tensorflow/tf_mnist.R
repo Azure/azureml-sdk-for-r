@@ -30,7 +30,7 @@ y <- tf$nn$softmax(tf$matmul(x, W) + b)
 # Define loss and optimizer
 y_ <- tf$placeholder(tf$float32, shape(NULL, 10L))
 cross_entropy <- tf$reduce_mean(-tf$reduce_sum(y_ * log(y),
-                                               reduction_indices=1L))
+                                               reduction_indices = 1L))
 train_step <- tf$train$GradientDescentOptimizer(0.5)$minimize(cross_entropy)
 
 # Create session and initialize  variables
