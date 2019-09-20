@@ -16,7 +16,7 @@ to more than one subscription.}
 the subscription.}
 }
 \value{
-workspace object
+The workspace object.
 }
 \description{
 Get an existing workspace
