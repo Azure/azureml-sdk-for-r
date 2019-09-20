@@ -34,7 +34,8 @@ wait_for_run_completion <- function(run, show_output = TRUE)
 
 wait_until_run_completes <- function(run)
 {
-  # print dots if we get here due to unicode error on windows rstudio console terminals
+  # print dots if we get here due to unicode error on windows rstudio console
+  terminals
   while (run$get_status() %in% azureml$core$run$RUNNING_STATES)
   {
     cat(".")
@@ -43,7 +44,8 @@ wait_until_run_completes <- function(run)
 }
 
 #' Gets the context object for a run
-#' @param allow_offline Allow the service context to fall back to offline mode so that the training script
+#' @param allow_offline Allow the service context to fall back to offline mode
+#' so that the training script
 #' can be tested locally without submitting a job with the SDK.
 #' @return get current run
 #' @export

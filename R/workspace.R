@@ -49,25 +49,37 @@ create_workspace <- function(
     exist_ok = FALSE,
     show_output=TRUE)
 {
-  ws <- azureml$core$Workspace$create(name = name, subscription_id = subscription_id, resource_group = resource_group,
-                              location = location, create_resource_group = create_resource_group,
-                              friendly_name = friendly_name, storage_account = storage_account,
-                              key_vault = key_vault, app_insights = app_insights,
-                              container_registry = container_registry, exist_ok = exist_ok, show_output = show_output)
+  ws <- 
+    azureml$core$Workspace$create(name = name,
+                                  subscription_id = subscription_id,
+                                  resource_group = resource_group,
+                                  location = location,
+                                  create_resource_group = create_resource_group,
+                                  friendly_name = friendly_name,
+                                  storage_account = storage_account,
+                                  key_vault = key_vault,
+                                  app_insights = app_insights,
+                                  container_registry = container_registry,
+                                  exist_ok = exist_ok,
+                                  show_output = show_output)
   invisible(ws)
 }
 
 #' Get an existing workspace
 #' @param name The workspace name to get.
-#' @param subscription_id The subscription ID to use. The parameter is required if the user has access
+#' @param subscription_id The subscription ID to use. The parameter is required
+#' if the user has access
 #' to more than one subscription.
-#' @param resource_group The resource group to use. If NULL the method will search all resource groups in
+#' @param resource_group The resource group to use. If NULL the method will
+#' search all resource groups in
 #' the subscription.
 #' @return workspace object
 #' @export
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 {
-    azureml$core$Workspace$get(name, auth = NULL, subscription_id = subscription_id, resource_group = resource_group)
+    azureml$core$Workspace$get(name, auth = NULL,
+                               subscription_id = subscription_id,
+                               resource_group = resource_group)
 }
 
 #' Load workspace from config
@@ -88,11 +100,13 @@ delete_workspace <- function(ws)
     invisible(NULL)
 }
 
-#' List all workspaces that the user has access to in the specified subscription_id
-#' parameter.The list of workspaces can be filtered based on the resource group.
+#' List all workspaces that the user has access to in the specified
+#' subscription_id parameter.The list of workspaces can be filtered based on the
+#' resource group.
 #' @param subscription_id To list workspaces in the specified subscription ID.
 #' @param resource_group To list workspaces in the specified resource group.
-#' If NULL the method will list all the workspaces within the specified subscription.
+#' If NULL the method will list all the workspaces within the specified
+#' subscription.
 #' @export
 list_workspaces <- function(subscription_id, resource_group = NULL)
 {
@@ -103,7 +117,8 @@ list_workspaces <- function(subscription_id, resource_group = NULL)
 #' @param ws The workspace whose config has to be written down.
 #' @param path User provided location to write the config.json file.
 #' The parameter defaults to the current working directory.
-#' @param file_name Name to use for the config file. The parameter defaults to config.json.
+#' @param file_name Name to use for the config file. The parameter defaults to
+#' config.json.
 #' @export
 write_workspace_config <- function(ws, path = NULL, file_name = NULL)
 {

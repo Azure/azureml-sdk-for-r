@@ -2,9 +2,11 @@
 # Licensed under the MIT license.
 
 #' Retrieve a cloud representation of a Webservice object associated with the
-#' provided workspace. Will return an instance of a child class corresponding to the
+#' provided workspace. Will return an instance of a child class corresponding to
+#' the
 #' specific type of the retrieved Webservice object.
-#' @param workspace The workspace object containing the Webservice object to retrieve
+#' @param workspace The workspace object containing the Webservice object to
+#' retrieve
 #' @param name The name of the of the Webservice object to retrieve
 #' @export
 get_webservice <- function(workspace, name)
@@ -49,15 +51,16 @@ delete_webservice <- function(webservice)
 
 #' Call this Webservice with the provided input.
 #' @param webservice The webservice object.
-#' @param input_data The input data to call the Webservice with. This is the data your 
-#' machine learning model expects as an input to run predictions.
+#' @param input_data The input data to call the Webservice with. This is the
+#' data your machine learning model expects as an input to run predictions.
 #' @export
 invoke_webservice <- function(webservice, input_data)
 {
   webservice$run(input_data)
 }
 
-#' Regenerate one of the Webservice's keys. Must specify either 'Primary' or 'Secondary' key.
+#' Regenerate one of the Webservice's keys. Must specify either 'Primary' or
+#' 'Secondary' key.
 #' @param webservice The webservice object.
 #' @param key_type Which key to regenerate. Options are 'Primary' or 'Secondary'
 #' @export

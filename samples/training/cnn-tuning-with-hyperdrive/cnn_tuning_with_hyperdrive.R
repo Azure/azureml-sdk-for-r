@@ -10,7 +10,8 @@ compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
   vm_size <- "STANDARD_D2_V2"
-  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
+  compute_target <- create_aml_compute(workspace = ws,
+                                       cluster_name = cluster_name,
                                        vm_size = vm_size, max_nodes = 1)
 }
 wait_for_compute(compute_target)
@@ -39,8 +40,9 @@ sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
                                            decay = uniform(1e-6, 3e-6)))
 
 policy <- bandit_policy(slack_factor = 0.15)
-hyperdrive_config <- hyperdrive_config(sampling, "Loss", primary_metric_goal("MINIMIZE"),
-                                              4, policy = policy, estimator = est)
+hyperdrive_config <- hyperdrive_config(sampling, "Loss",
+                                       primary_metric_goal("MINIMIZE"),
+                                       4, policy = policy, estimator = est)
 
 # submit hyperdrive run
 hyperdrive_run <- submit_experiment(hyperdrive_config, exp)

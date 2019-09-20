@@ -21,7 +21,8 @@ test_that("get, register, download, serialize, deserialize and delete model",
     download_dir <- "downloaded"
     dir.create(download_dir)
     path <- download_model(model, download_dir)
-    expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)), TRUE)
+    expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)),
+                 TRUE)
     
     # serialize and deserialize model
     model_payload <- serialize_model(model)
@@ -63,9 +64,11 @@ test_that("create, check container registry and save model package",
   expect_equal(cr$username, env_image_details$dockerImage$registry$username)
   
   # save package files locally
-  save_model_package_files(model_package, output_directory = "downloaded_package")
+  save_model_package_files(model_package,
+                           output_directory = "downloaded_package")
   expect_equal(file.exists(file.path("downloaded_package", "Dockerfile")), TRUE)
-  expect_equal(file.exists(file.path("downloaded_package", "model_config_map.json")), TRUE)
+  expect_equal(file.exists(file.path("downloaded_package",
+                                     "model_config_map.json")), TRUE)
   
   # Create ModelPackage without dockerfile
   model_package <- package_model(ws, c(model), config)

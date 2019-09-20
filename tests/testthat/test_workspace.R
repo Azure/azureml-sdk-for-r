@@ -8,11 +8,14 @@ test_that("create, get, save, load and delete workspace",
 {
     # create workspace
     workspace_name <- paste("ws", build_num, sep="")
-    existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
+    existing_ws <- create_workspace(workspace_name,
+                                    subscription_id = subscription_id,
+                                    resource_group = resource_group,
                                     location = location)
 
     # retrieve workspace
-    ws <- get_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group)
+    ws <- get_workspace(workspace_name, subscription_id = subscription_id,
+                        resource_group = resource_group)
     expect_equal(ws$name, existing_ws$name)
 
     # write config

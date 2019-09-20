@@ -14,7 +14,8 @@ experiment <- function(workspace, name)
 #' Submit experiment
 #' @param config runconfig or estimator
 #' @param experiment experiment object
-#' @param tags Tags to be added to the submitted run. A named list eg. list("tag" = "value")
+#' @param tags Tags to be added to the submitted run. A named list eg. 
+#' list("tag" = "value")
 #' @return run object
 #' @export
 submit_experiment <- function(config, experiment, tags = NULL)

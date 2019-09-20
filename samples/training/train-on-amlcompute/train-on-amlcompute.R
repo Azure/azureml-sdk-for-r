@@ -17,7 +17,8 @@ compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
   vm_size <- "STANDARD_D2_V2"
-  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
+  compute_target <- create_aml_compute(workspace = ws,
+                                       cluster_name = cluster_name,
                                        vm_size = vm_size, max_nodes = 1)
 }
 

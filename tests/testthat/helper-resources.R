@@ -17,14 +17,19 @@ if(is.na(Sys.getenv("AZUREML_PYTHON_INSTALLED", unset = NA)))
     install_azureml()
 }
 
-existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
+existing_ws <- create_workspace(workspace_name,
+                                subscription_id = subscription_id,
+                                resource_group = resource_group,
                                 location = location, exist_ok = TRUE)
 
-existing_compute <- get_compute(workspace = existing_ws, cluster_name = cluster_name)
+existing_compute <- get_compute(workspace = existing_ws,
+                                cluster_name = cluster_name)
 if (is.null(existing_compute))
 {
   vm_size <- "STANDARD_D2_V2"
-  existing_compute <- create_aml_compute(workspace = existing_ws, cluster_name = cluster_name, 
-                                         vm_size = vm_size, min_nodes = 0, max_nodes = 1)
+  existing_compute <- create_aml_compute(workspace = existing_ws,
+                                         cluster_name = cluster_name, 
+                                         vm_size = vm_size, min_nodes = 0,
+                                         max_nodes = 1)
   wait_for_compute(existing_compute)
 }

@@ -12,7 +12,8 @@
     environment = "r-azureml",
     on_error = function(e) {
       if (grepl("No module named azureml", e$message)) {
-        stop("Use azureml::install_azureml() to install azureml python ", call. = FALSE)
+        stop("Use azureml::install_azureml() to install azureml python ",
+             call. = FALSE)
       }
       else {
         stop(e$message, call. = FALSE)

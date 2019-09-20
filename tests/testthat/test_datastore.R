@@ -30,7 +30,8 @@ test_that("datastore",
     
     # check whether the directory contents are downloaded
     expect_equal(file.exists(file.path(target_dir, tmp_dir_name)), TRUE)
-    expect_equal(file.exists(file.path(target_dir, tmp_dir_name, file_name)), TRUE)
+    expect_equal(file.exists(file.path(target_dir, tmp_dir_name, file_name)),
+                 TRUE)
     
 
     # tear down workspace and directory
