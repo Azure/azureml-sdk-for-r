@@ -1,0 +1,50 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+# no PR builds
+pr: none
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container: ninhu/r-sdk-build:latest
+
+steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        git config --global user.email "$(GITHUB_USER_EMAIL)"
+        git config --global user.name "$(GITHUB_USER_NAME)"
+        branch_ref=$(Build.SourceBranch)
+        echo BranchRef=$branch_ref
+        branch_name="${branch_ref/"refs/heads/"}"
+        echo BranchName=$branch_name
+        echo GIT CHECKOUT
+        git checkout $branch_name
+        echo GIT STATUS
+        git status
+        echo UPDATE DOCS
+        R -e 'unlink("man", recursive=TRUE, force=TRUE);
+              roxygen2::roxygenise();
+              unlink("docs", recursive=TRUE, force=TRUE);
+              pkgdown::build_site();'
+        retVal=$?
+        if [ $retVal -ne 0 ]; then
+            echo "Failed to generate documents!! Exiting..."
+            exit $retVal
+        fi
+        echo GIT ADD
+        git add man/* docs/*
+        echo GIT COMMIT
+        git commit -m "Update R SDK docs via Build $(Build.BuildNumber) [skip ci]"
+        echo GIT STATUS
+        git status
+        echo GIT PUSH
+        git push https://$(GITHUB_AUTH_TOKEN)@github.com/Azure/azureml-sdk-for-r.git
+        echo GIT STATUS
+        git status
+    displayName: 'Update Docs'
