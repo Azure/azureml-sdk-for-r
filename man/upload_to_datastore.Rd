@@ -2,7 +2,8 @@
 % Please edit documentation in R/datastore.R
 \name{upload_to_datastore}
 \alias{upload_to_datastore}
-\title{Upload the data from the local file system to the Azure storage this datastore points to.}
+\title{Upload the data from the local file system to the Azure storage this
+datastore points to.}
 \usage{
 upload_to_datastore(ds, src_dir, target_path = NULL, overwrite = FALSE,
   show_progress = TRUE)
@@ -12,12 +13,14 @@ upload_to_datastore(ds, src_dir, target_path = NULL, overwrite = FALSE,
 
 \item{src_dir}{the local directory to upload}
 
-\item{target_path}{location in the file share to upload the data to, defaults to None, the root}
+\item{target_path}{location in the file share to upload the data to, defaults
+to None, the root}
 
 \item{overwrite}{overwrites, defaults to FALSE}
 
 \item{show_progress}{progress of upload in the console, defaults to TRUE}
 }
 \description{
-Upload the data from the local file system to the Azure storage this datastore points to.
+Upload the data from the local file system to the Azure storage this
+datastore points to.
 }

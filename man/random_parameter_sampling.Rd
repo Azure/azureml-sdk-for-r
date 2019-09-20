@@ -7,7 +7,8 @@
 random_parameter_sampling(parameter_space, properties = NULL)
 }
 \arguments{
-\item{parameter_space}{a named list containing each parameter and its distribution}
+\item{parameter_space}{a named list containing each parameter and its
+distribution}
 
 \item{properties}{a named list of additional properties for the algorithm}
 }

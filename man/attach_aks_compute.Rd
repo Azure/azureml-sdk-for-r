@@ -12,7 +12,8 @@ attach_aks_compute(workspace, cluster_name, resource_id,
 
 \item{cluster_name}{The AKS cluster name}
 
-\item{resource_id}{The Azure resource ID for the compute resource being attached}
+\item{resource_id}{The Azure resource ID for the compute resource being
+attached}
 
 \item{resource_group}{Name of the resource group in which the AKS is located.}
 }

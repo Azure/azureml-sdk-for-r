@@ -5,16 +5,14 @@
 #' @param source_directory A local directory containing experiment configuration
 #' files.
 #' @param compute_target The ComputeTarget where training will happen. This can
-#' either be an object or the
-#' string "local".
+#' either be an object or the string "local".
 #' @param vm_size The VM size of the compute target that will be created for the
-#' training. Supported values:
-#' Any Azure VM size. The list of available VM sizes are listed here:
+#' training. Supported values: Any Azure VM size. The list of available VM sizes
+#' are listed here:
 #' https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs
 #' @param vm_priority The VM priority of the compute target that will be created
-#' for the training. If not specified,
-#' it will be defaulted to 'dedicated'. Supported values: 'dedicated' and
-#' 'lowpriority'. This takes effect only when
+#' for the training. If not specified, it will be defaulted to 'dedicated'.
+#' Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
 #' the vm_size param is specified in the input.
 #' @param entry_script A string representing the relative path to the file used
 #' to start training.
@@ -26,16 +24,15 @@
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
 #' @param custom_docker_image The name of the docker image from which the image
-#' to use for training will be built. If
-#' not set, a default CPU based image will be used as the base image.
+#' to use for training will be built. If not set, a default CPU based image will
+#' be used as the base image.
 #' @param inputs list of data references as input
 #' @param use_gpu Indicates whether the environment to run the experiment should
 #' support GPUs.
 #' If TRUE, a GPU - based default Docker image will be used in the environment.
-#' If FALSE, a CPU - based
-#' image will be used. Default Docker images (CPU or GPU) will be used only if
-#' the 'custom_docker_image'
-#' parameter is not set.
+#' If FALSE, a CPU - based image will be used. Default Docker images
+#' (CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
+#' set.
 #' @export
 estimator <- function(source_directory,
                       compute_target = NULL,

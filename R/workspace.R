@@ -71,8 +71,7 @@ create_workspace <- function(
 #' if the user has access
 #' to more than one subscription.
 #' @param resource_group The resource group to use. If NULL the method will
-#' search all resource groups in
-#' the subscription.
+#' search all resource groups in the subscription.
 #' @return workspace object
 #' @export
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)

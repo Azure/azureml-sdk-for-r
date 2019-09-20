@@ -11,8 +11,8 @@
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
 #' @param custom_docker_image The name of the docker image from which the image
-#' to use for training will be built. If
-#' not set, a default CPU based image will be used as the base image.
+#' to use for training will be built. If not set, a default CPU based image will
+#' be used as the base image.
 #' @param base_image_registry Image registry that contains the base image.
 #' @export
 environment <- function(name, version = NULL,
@@ -26,25 +26,25 @@ environment <- function(name, version = NULL,
   env$version <- version
   env$python$user_managed_dependencies <- TRUE
   
-  if(!is.null(environment_variables)) {
+  if (!is.null(environment_variables)) {
     env$environment_variables <- environment_variables
   }
   
   base_docker_image <- custom_docker_image
   image_registry_address <- NULL
 
-  if(!is.null(base_image_registry) && !is.null(base_image_registry$address)) {
+  if (!is.null(base_image_registry) && !is.null(base_image_registry$address)) {
     image_registry_address <- base_image_registry$address
   }
     
-  if(is.null(base_docker_image)) {
+  if (is.null(base_docker_image)) {
     if (is.null(image_registry_address)) {
       image_registry_address <- "viennaprivate.azurecr.io"
     }
     base_docker_image <- "r-base:cpu"
   }
     
-  if(!is.null(image_registry_address)) {
+  if (!is.null(image_registry_address)) {
     base_docker_image <- paste(image_registry_address,
                                base_docker_image,
                                sep = "/")
@@ -52,9 +52,9 @@ environment <- function(name, version = NULL,
   
   # if no package is specified, then use base image instead of building a new
   # one
-  if(is.null(cran_packages) && is.null(github_packages) &&
+  if (is.null(cran_packages) && is.null(github_packages) &&
      is.null(custom_url_packages)) {
-    if(is.null(custom_docker_image)) {
+    if (is.null(custom_docker_image)) {
       env$docker$base_image <- "r-base:cpu"
       env$docker$base_image_registry$address <- "viennaprivate.azurecr.io"
     }
@@ -113,8 +113,8 @@ container_registry <- function(address = NULL,
 
 #' Generate a dockerfile string to build the image for training.
 #' @param custom_docker_image The name of the docker image from which the image
-#' to use for training will be built. If
-#' not set, a default CPU based image will be used as the base image.
+#' to use for training will be built. If not set, a default CPU based image will
+#' be used as the base image.
 #' @param cran_packages character vector of cran packages to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from

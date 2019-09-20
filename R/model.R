@@ -34,21 +34,18 @@ get_model <- function(workspace,
 #' Register a model with the provided workspace.
 #' @param workspace The workspace to register the model under
 #' @param model_path String which points to the path on the local file system
-#' where the model assets are
-#' located. This can be a direct pointer to a single file or folder. If pointing
-#' to a folder, the
-#' child_paths parameter can be used to specify individual files to bundle
-#' together as the Model object,
-#' as opposed to using the entire contents of the folder.
+#' where the model assets are located. This can be a direct pointer to a single
+#' file or folder. If pointing to a folder, the child_paths parameter can be
+#' used to specify individual files to bundle together as the Model object, as
+#' opposed to using the entire contents of the folder.
 #' @param model_name The name to register the model with
 #' @param tags Dictionary of key value tags to give the model
 #' @param properties Dictionary of key value properties to give the model. These
-#' properties cannot
-#' be changed after model creation, however new key value pairs can be added
+#' properties cannot be changed after model creation, however new key value
+#' pairs can be added
 #' @param description A text description of the model
 #' @param child_paths If provided in conjunction with a model_path to a folder,
-#' only the specified files will be
-#' bundled into the Model object.
+#' only the specified files will be bundled into the Model object.
 #' @export
 register_model <- function(workspace,
                            model_path,
@@ -104,21 +101,18 @@ delete_model <- function(model) {
 #' Deploy a Webservice from zero or more model objects.
 #' @param workspace A Workspace object to associate the Webservice with
 #' @param name The name to give the deployed service. Must be unique to the
-#' workspace, only consist of lowercase
-#' letters, numbers, or dashes, start with a letter, and be between 3 and 32
-#' characters long.
+#' workspace, only consist of lowercase letters, numbers, or dashes, start with
+#' a letter, and be between 3 and 32 characters long.
 #' @param models A list of model objects. Can be an empty list.
 #' @param inference_config An InferenceConfig object used to determine required
 #' model properties.
 #' @param deployment_config A WebserviceDeploymentConfiguration used to
-#' configure the webservice. If one is not
-#' provided, an empty configuration object will be used based on the desired
-#' target.
+#' configure the webservice. If one is not provided, an empty configuration
+#' object will be used based on the desired target.
 #' @param deployment_target A azureml.core.ComputeTarget to deploy the
-#' Webservice to.
-#' As Azure Container Instances has no associated azureml.core.ComputeTarget,
-#' leave
-#' this parameter as None to deploy to Azure Container Instances.
+#' Webservice to. As Azure Container Instances has no associated
+#' azureml.core.ComputeTarget, leave this parameter as None to deploy to Azure
+#' Container Instances.
 #' @export
 deploy_model <- function(workspace,
                          name,
@@ -141,11 +135,9 @@ deploy_model <- function(workspace,
 #' @param models A list of Model objects to include in the package. Can be an
 #' empty list.
 #' @param inference_config An InferenceConfig object to configure the operation
-#' of the models.
-#' This must include an Environment object.
+#' of the models. This must include an Environment object.
 #' @param generate_dockerfile Whether to create a Dockerfile that can be run
-#' locally
-#' instead of building an image.
+#' locally instead of building an image.
 #' @export
 package_model <- function(workspace,
                           models,
@@ -158,8 +150,8 @@ package_model <- function(workspace,
   invisible(model_package)
 }
 
-#' Return a ContainerRegistry object for where the image 
-#' (or base image, for Dockerfile packages) is stored.
+#' Return a ContainerRegistry object for where the image (or base image, for
+#' Dockerfile packages) is stored.
 #' @param package Package created with model(s) and dependencies.
 #' @return ContainerRegistry object
 #' @export
@@ -211,12 +203,10 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' the image.
 #' @param description A description to give this image.
 #' @param environment An environment object to use for the deployment. Doesn't
-#' have to be registered. A user
-#' should provide either this, or the other parameters, not both. The individual
-#' parameters will NOT serve
-#' as an override for the environment object. Exceptions include `entry_script`,
-#' `source_directory` and
-#' `description`.
+#' have to be registered. A user should provide either this, or the other
+#' parameters, not both. The individual parameters will NOT serve as an override
+#' for the environment object. Exceptions include `entry_script`,
+#' `source_directory` and `description`.
 #' @return An InferenceConfig object
 #' @export
 inference_config <- function(entry_script,

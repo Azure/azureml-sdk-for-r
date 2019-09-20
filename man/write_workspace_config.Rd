@@ -12,7 +12,8 @@ write_workspace_config(ws, path = NULL, file_name = NULL)
 \item{path}{User provided location to write the config.json file.
 The parameter defaults to the current working directory.}
 
-\item{file_name}{Name to use for the config file. The parameter defaults to config.json.}
+\item{file_name}{Name to use for the config file. The parameter defaults to
+config.json.}
 }
 \description{
 Write out the Workspace ARM properties to a config file

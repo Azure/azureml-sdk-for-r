@@ -2,7 +2,7 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qlognormal}
 \alias{qlognormal}
-\title{Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q}
+\title{Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q}
 \usage{
 qlognormal(mu, sigma, q)
 }
@@ -17,5 +17,5 @@ qlognormal(mu, sigma, q)
 the stochastic expression
 }
 \description{
-Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q
+Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q
 }

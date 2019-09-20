@@ -37,8 +37,8 @@ wait_until_run_completes <- function(run) {
 
 #' Gets the context object for a run
 #' @param allow_offline Allow the service context to fall back to offline mode
-#' so that the training script
-#' can be tested locally without submitting a job with the SDK.
+#' so that the training script can be tested locally without submitting a job
+#' with the SDK.
 #' @return get current run
 #' @export
 get_current_run <- function(allow_offline = TRUE) {

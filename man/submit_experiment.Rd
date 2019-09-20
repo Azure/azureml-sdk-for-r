@@ -11,7 +11,8 @@ submit_experiment(config, experiment, tags = NULL)
 
 \item{experiment}{experiment object}
 
-\item{tags}{Tags to be added to the submitted run. A named list eg. list("tag" = "value")}
+\item{tags}{Tags to be added to the submitted run. A named list eg. 
+list("tag" = "value")}
 }
 \value{
 run object

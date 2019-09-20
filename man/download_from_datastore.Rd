@@ -12,12 +12,13 @@ download_from_datastore(ds, target_path, prefix = NULL,
 
 \item{target_path}{the local directory to download the file to}
 
-\item{prefix}{path to the folder in the blob container to
-download. If set to NULL, will download everything in the blob defaults to NULL}
+\item{prefix}{path to the folder in the blob container to download. If set to
+NULL, will download everything in the blob defaults to NULL}
 
 \item{overwrite}{overwrite existing file, defaults to FALSE}
 
-\item{show_progress}{show progress of download in the console, defaults to TRUE}
+\item{show_progress}{show progress of download in the console, defaults to
+TRUE}
 }
 \description{
 Download the data from the datastore to the local file system

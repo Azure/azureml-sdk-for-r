@@ -2,23 +2,28 @@
 % Please edit documentation in R/estimator.R
 \name{create_launch_script}
 \alias{create_launch_script}
-\title{Creates a R launch script which contains all the packages to be installed before running entry_script}
+\title{Creates a R launch script which contains all the packages to be installed
+before running entry_script}
 \usage{
 create_launch_script(source_directory, entry_script,
   cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL)
 }
 \arguments{
-\item{source_directory}{A local directory containing experiment configuration files.}
+\item{source_directory}{A local directory containing experiment configuration
+files.}
 
-\item{entry_script}{A string representing the relative path to the file used to start training.}
+\item{entry_script}{A string representing the relative path to the file used
+to start training.}
 
 \item{cran_packages}{character vector of cran packages to be installed.}
 
 \item{github_packages}{character vector of github packages to be installed.}
 
-\item{custom_url_packages}{character vector of packages to be installed from local, directory or custom url.}
+\item{custom_url_packages}{character vector of packages to be installed from
+local, directory or custom url.}
 }
 \description{
-Creates a R launch script which contains all the packages to be installed before running entry_script
+Creates a R launch script which contains all the packages to be installed
+before running entry_script
 }

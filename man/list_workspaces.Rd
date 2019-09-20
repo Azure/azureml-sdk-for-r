@@ -2,8 +2,9 @@
 % Please edit documentation in R/workspace.R
 \name{list_workspaces}
 \alias{list_workspaces}
-\title{List all workspaces that the user has access to in the specified subscription_id
-parameter.The list of workspaces can be filtered based on the resource group.}
+\title{List all workspaces that the user has access to in the specified
+subscription_id parameter.The list of workspaces can be filtered based on the
+resource group.}
 \usage{
 list_workspaces(subscription_id, resource_group = NULL)
 }
@@ -11,9 +12,11 @@ list_workspaces(subscription_id, resource_group = NULL)
 \item{subscription_id}{To list workspaces in the specified subscription ID.}
 
 \item{resource_group}{To list workspaces in the specified resource group.
-If NULL the method will list all the workspaces within the specified subscription.}
+If NULL the method will list all the workspaces within the specified
+subscription.}
 }
 \description{
-List all workspaces that the user has access to in the specified subscription_id
-parameter.The list of workspaces can be filtered based on the resource group.
+List all workspaces that the user has access to in the specified
+subscription_id parameter.The list of workspaces can be filtered based on the
+resource group.
 }
