@@ -3,6 +3,7 @@
 
 #' Create a configuration object for deploying a local Webservice.
 #' @param port The local port on which to expose the service's HTTP endpoint.
+#' @return LocalWebserviceDeploymentConfiguration object to use when deploying a Webservice object.
 #' @export
 local_webservice_deployment_config <- function(port = NULL)
 {
