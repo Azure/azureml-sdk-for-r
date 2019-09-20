@@ -12,7 +12,8 @@ build_num <- gsub('[.]', '-', build_num)
 install.packages(package_url, repos = NULL, dep = FALSE, type = "source")
 
 library(azureml)
-if(is.na(Sys.getenv("AZUREML_PYTHON_INSTALLED", unset = NA)))
+
+if (is.na(Sys.getenv("AZUREML_PYTHON_INSTALLED", unset = NA)))
 {
     install_azureml()
 }

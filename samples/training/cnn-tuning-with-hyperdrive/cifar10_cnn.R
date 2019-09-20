@@ -58,21 +58,21 @@ model %>%
   layer_activation("relu") %>%
   
   # Second hidden layer
-  layer_conv_2d(filter = 32, kernel_size = c(3,3)) %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3)) %>%
   layer_activation("relu") %>%
   
   # Use max pooling
-  layer_max_pooling_2d(pool_size = c(2,2)) %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
   layer_dropout(0.25) %>%
   
   # 2 additional hidden 2D convolutional layers
-  layer_conv_2d(filter = 32, kernel_size = c(3,3), padding = "same") %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3), padding = "same") %>%
   layer_activation("relu") %>%
-  layer_conv_2d(filter = 32, kernel_size = c(3,3)) %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3)) %>%
   layer_activation("relu") %>%
   
   # Use max pooling once more
-  layer_max_pooling_2d(pool_size = c(2,2)) %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
   layer_dropout(0.25) %>%
   
   # Flatten max filtered output into feature vector 
@@ -97,7 +97,7 @@ model %>% compile(
 
 # Training ----------------------------------------------------------------
 
-if(!data_augmentation){
+if (!data_augmentation){
   
   model %>% fit(
     x_train, y_train,

@@ -18,8 +18,8 @@ all_data <- read.csv(file.path(opt$data_folder, "iris.csv"))
 summary(all_data)
 
 in_train <- createDataPartition(y = all_data$Species, p = .8, list = FALSE)
-train_data <- all_data[in_train,]
-test_data <- all_data[-in_train,]
+train_data <- all_data[in_train, ]
+test_data <- all_data[-in_train, ]
 
 # Run algorithms using 10-fold cross validation
 control <- trainControl(method = "cv", number = 10)
