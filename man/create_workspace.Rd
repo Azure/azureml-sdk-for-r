@@ -54,6 +54,9 @@ exists.}
 \item{show_output}{If TRUE the method will print out incremental progress of
 method.}
 }
+\value{
+The workspace object.
+}
 \description{
 Create a new Azure Machine Learning Workspace
 }

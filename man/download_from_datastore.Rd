@@ -4,11 +4,11 @@
 \alias{download_from_datastore}
 \title{Download the data from the datastore to the local file system}
 \usage{
-download_from_datastore(ds, target_path, prefix = NULL,
+download_from_datastore(datastore, target_path, prefix = NULL,
   overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{ds}{datastore object}
+\item{datastore}{datastore object}
 
 \item{target_path}{the local directory to download the file to}
 
