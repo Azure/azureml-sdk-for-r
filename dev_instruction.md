@@ -6,6 +6,9 @@
 2. Run the following to build the code. The R package file will be created at `package_location`. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.
    ```
    setwd('<repo_root>')
+   
+   # Generate .Rd files in man/ and NAMESPACE
+   roxygen2::roxygenise()
 
    # Build the R package
    package_location <- devtools::build()
