@@ -54,7 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/hyperdrive_example.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/tensorflow_example.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
 </li>
@@ -81,7 +87,7 @@
     <div class="page-header toc-ignore">
       <h1>Installing AzureML SDK for R</h1>
             
-            <h4 class="date">2019-09-19</h4>
+            <h4 class="date">2019-09-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
@@ -93,7 +99,7 @@
 <div id="install-anaconda" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-anaconda" class="anchor"></a>1. Install Anaconda</h2>
-<p>If you do not have Anaconda already installed on your machine, you will first need to <a href="https://www.anaconda.com/">install</a> it. Choose the 64-bit binary for Python 3.5 or later.</p>
+<p>If you do not have Anaconda already installed on your machine, you will first need to <a href="https://www.anaconda.com/distribution/">install</a> it. Choose the 64-bit binary for Python 3.5 or later.</p>
 </div>
 <div id="install-azureml-r-package-with-remotes" class="section level2">
 <h2 class="hasAnchor">
@@ -101,10 +107,12 @@
 </h2>
 <p>As the <code>azureml</code> package is not available on CRAN, you will need <code>remotes</code> to install from the GitHub repo.</p>
 <pre><code>&gt; install.packages('remotes')</code></pre>
-<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>.</p>
+<p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>. When generating the token, make sure to select the “repo” scope.</p>
 <pre><code>&gt; remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
                            auth_token = '&lt;your personal access token&gt;',
-                           INSTALL_opts=c("--no-multiarch"))</code></pre>
+                           INSTALL_opts=c("--no-multiarch"),
+                           build_vignettes = FALSE)</code></pre>
+<p>Set <code>build_vignettes</code> to TRUE if you would like the vignettes to be downloaded along with the main package.</p>
 </div>
 <div id="install-azureml-python-sdk" class="section level2">
 <h2 class="hasAnchor">

@@ -2,5 +2,7 @@ pandoc: 2.2.3.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  hyperdrive_example: hyperdrive_example.html
   installation: installation.html
+  tensorflow_example: tensorflow_example.html
 
