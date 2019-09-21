@@ -20,7 +20,7 @@ reference:
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:
   - '`get_compute`'
-  - '`wait_for_compute`'
+  - '`wait_for_provisioning_completion`'
   - '`delete_compute`'
   - '`create_aml_compute`'
   - '`create_aks_compute`'

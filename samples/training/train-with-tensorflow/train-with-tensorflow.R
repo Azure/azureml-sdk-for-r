@@ -13,7 +13,7 @@ if (is.null(compute_target))
   compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
                                        vm_size = vm_size, max_nodes = 1)
 }
-wait_for_compute(compute_target)
+wait_for_provisioning_completion(compute_target)
 
 # define estimator
 est <- estimator(source_directory = ".", entry_script = "tf_mnist.R",

@@ -62,7 +62,7 @@ get_compute <- function(workspace, cluster_name)
 #' @param cluster cluster object
 #' @param show_output show output on console
 #' @export
-wait_for_compute <- function(cluster, show_output = TRUE)
+wait_for_provisioning_completion <- function(cluster, show_output = TRUE)
 {
   cluster$wait_for_completion(show_output)
 }
