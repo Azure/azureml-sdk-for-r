@@ -27,6 +27,9 @@ reference:
   - '`get_aks_compute_credentials`'
   - '`attach_aks_compute`'
   - '`detach_aks_compute`'
+  - '`list_nodes_in_aml_compute`'
+  - '`list_supported_vm_sizes`'
+  - '`update_aml_compute`'
 - title: Working with data
   desc: Functions for managing and accessing data for your machine learning workflows. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.
   contents:
