@@ -2,7 +2,7 @@
 % Please edit documentation in R/experiment.R
 \name{submit_experiment}
 \alias{submit_experiment}
-\title{Submit experiment}
+\title{Submit an experiment and return the active created run}
 \usage{
 submit_experiment(config, experiment, tags = NULL)
 }
@@ -17,5 +17,5 @@ submit_experiment(config, experiment, tags = NULL)
 run object
 }
 \description{
-Submit experiment
+Submit an experiment and return the active created run
 }
