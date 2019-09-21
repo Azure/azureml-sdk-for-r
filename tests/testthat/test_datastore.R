@@ -41,7 +41,7 @@ test_that("register azure blob/fileshare datastores",
   
   # register azure blob datastore
   ws_blob_datastore <- get_datastore(ws, "workspaceblobstore")
-  blob_datastore_name <- paste("ds_blob", build_num, sep="_")
+  blob_datastore_name <- paste0("dsblob", build_num)
   register_azure_blob_container_datastore(
     workspace = ws, 
     datastore_name = blob_datastore_name, 
@@ -56,7 +56,7 @@ test_that("register azure blob/fileshare datastores",
   
   # register azure fileshare datastore
   ws_fileshare_datastore <- get_datastore(ws, "workspacefilestore")
-  fileshare_datastore_name <- paste("ds_fileshare", build_num, sep="_")
+  fileshare_datastore_name <- paste0("dsfileshare", build_num)
   register_azure_file_share_datastore(
     workspace = ws, 
     datastore_name = fileshare_datastore_name, 
