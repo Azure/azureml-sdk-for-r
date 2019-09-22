@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Azure Machine Learning Workspace — create_workspace • azureml</title>
+<title>Unregisters the datastore. the underlying storage service will not 
+be deleted. — unregister_datastore • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Create a new Azure Machine Learning Workspace — create_workspace" />
+<meta property="og:title" content="Unregisters the datastore. the underlying storage service will not 
+be deleted. — unregister_datastore" />
 
-<meta property="og:description" content="Create a new Azure Machine Learning Workspace" />
+<meta property="og:description" content="Unregisters the datastore. the underlying storage service will not 
+be deleted." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,98 +124,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Azure Machine Learning Workspace</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
-    <div class="hidden name"><code>create_workspace.Rd</code></div>
+    <h1>Unregisters the datastore. the underlying storage service will not 
+be deleted.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
+    <div class="hidden name"><code>unregister_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a new Azure Machine Learning Workspace</p>
+    <p>Unregisters the datastore. the underlying storage service will not 
+be deleted.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_workspace</span>(<span class='no'>name</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>unregister_datastore</span>(<span class='no'>datastore</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The new workspace name. Workspace name has to be between
-2 and 32 characters of letters and numbers.</p></td>
-    </tr>
-    <tr>
-      <th>subscription_id</th>
-      <td><p>The subscription ID of the containing subscription
-for the new workspace. The parameter is required if the user has access to
- more than one subscription.</p></td>
-    </tr>
-    <tr>
-      <th>resource_group</th>
-      <td><p>The Azure resource group that is containing the
-workspace. The parameter defaults to a mutation of the workspace name.</p></td>
-    </tr>
-    <tr>
-      <th>location</th>
-      <td><p>The location of the workspace. The parameter defaults to
-the resource group location. The location has to be a supported region for
-Azure Machine Learning Services.</p></td>
-    </tr>
-    <tr>
-      <th>create_resource_group</th>
-      <td><p>When true the resource group will be created
-if it doesn't exist.</p></td>
-    </tr>
-    <tr>
-      <th>friendly_name</th>
-      <td><p>A friendly name for the workspace that can be displayed
-in the UI.</p></td>
-    </tr>
-    <tr>
-      <th>storage_account</th>
-      <td><p>An existing storage account in the Azure resource ID
-format. The storage will be used by the workspace to save run outputs, code,
- logs etc. If None a new storage will be created.</p></td>
-    </tr>
-    <tr>
-      <th>key_vault</th>
-      <td><p>An existing key vault in the Azure resource ID format.
-The Key vault will be used by the workspace to store credentials added to
-the workspace by the users. If None a new key vault will be created.</p></td>
-    </tr>
-    <tr>
-      <th>app_insights</th>
-      <td><p>An existing Application Insights in the Azure resource
-ID format. The Application Insights will be used by the workspace to log
-webservices events. If None a new Application Insights will be created.</p></td>
-    </tr>
-    <tr>
-      <th>container_registry</th>
-      <td><p>An existing Container registery in the Azure
-resource ID format. The Container registery will be used by the workspace
-to pull and push both experimentation and webservices images. If None a new
-Container registery will be created.</p></td>
-    </tr>
-    <tr>
-      <th>exist_ok</th>
-      <td><p>If TRUE the method will not fail if the workspace already
-exists.</p></td>
-    </tr>
-    <tr>
-      <th>show_output</th>
-      <td><p>If TRUE the method will print out incremental progress of
-method.</p></td>
+      <th>datastore</th>
+      <td><p>datastore object</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The workspace object.</p>
     
 
   </div>
@@ -220,9 +154,7 @@ method.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

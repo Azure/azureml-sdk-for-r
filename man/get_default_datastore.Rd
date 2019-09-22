@@ -4,10 +4,13 @@
 \alias{get_default_datastore}
 \title{Get default datastore associated with a workspace}
 \usage{
-get_default_datastore(ws)
+get_default_datastore(workspace)
 }
 \arguments{
-\item{ws}{workspace object}
+\item{workspace}{The workspace object}
+}
+\value{
+The default datastore
 }
 \description{
 Get default datastore associated with a workspace

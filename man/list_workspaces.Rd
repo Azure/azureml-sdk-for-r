@@ -13,6 +13,9 @@ list_workspaces(subscription_id, resource_group = NULL)
 \item{resource_group}{To list workspaces in the specified resource group.
 If NULL the method will list all the workspaces within the specified subscription.}
 }
+\value{
+A list of Workspace objects.
+}
 \description{
 List all workspaces that the user has access to in the specified subscription_id
 parameter.The list of workspaces can be filtered based on the resource group.

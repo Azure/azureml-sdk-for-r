@@ -183,6 +183,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="set_default_datastore.html">set_default_datastore()</a></code> </p>
+        </td>
+        <td><p>Set the default datastore for the workspace.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="delete_workspace.html">delete_workspace()</a></code> </p>
         </td>
         <td><p>Delete workspace</p></td>
@@ -193,6 +199,12 @@
         </td>
         <td><p>List all workspaces that the user has access to in the specified subscription_id
 parameter.The list of workspaces can be filtered based on the resource group.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_workspace_details.html">get_workspace_details()</a></code> </p>
+        </td>
+        <td><p>Return details of this workspace.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -272,9 +284,30 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
-          <p><code><a href="download_from_datastore.html">download_from_datastore()</a></code> </p>
+          <p><code><a href="get_datastore.html">get_datastore()</a></code> </p>
         </td>
-        <td><p>Download the data from the datastore to the local file system</p></td>
+        <td><p>Get a datastore by name</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_azure_blob_container_datastore.html">register_azure_blob_container_datastore()</a></code> </p>
+        </td>
+        <td><p>Register an Azure Blob Container to the datastore.
+You can choose to use SAS Token or Storage Account Key</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_azure_file_share_datastore.html">register_azure_file_share_datastore()</a></code> </p>
+        </td>
+        <td><p>Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unregister_datastore.html">unregister_datastore()</a></code> </p>
+        </td>
+        <td><p>Unregisters the datastore. the underlying storage service will not 
+be deleted.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -578,6 +611,56 @@ This can only be used with a Dockerfile package.</p></td>
           <p><code><a href="container_registry.html">container_registry()</a></code> </p>
         </td>
         <td><p>Get Azure Container Registry.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice.html">get_webservice()</a></code> </p>
+        </td>
+        <td><p>Retrieve a cloud representation of a Webservice object associated with the
+provided workspace. Will return an instance of a child class corresponding to the
+specific type of the retrieved Webservice object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wait_for_deployment.html">wait_for_deployment()</a></code> </p>
+        </td>
+        <td><p>Automatically poll on the running Webservice deployment.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_logs.html">get_webservice_logs()</a></code> </p>
+        </td>
+        <td><p>Retrieve logs for the Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_keys.html">get_webservice_keys()</a></code> </p>
+        </td>
+        <td><p>Retrieve auth keys for this Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="generate_new_webservice_key.html">generate_new_webservice_key()</a></code> </p>
+        </td>
+        <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or 'Secondary' key.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_webservice_token.html">get_webservice_token()</a></code> </p>
+        </td>
+        <td><p>Retrieve auth token for this Webservice, scoped to the current user.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="invoke_webservice.html">invoke_webservice()</a></code> </p>
+        </td>
+        <td><p>Call this Webservice with the provided input.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_webservice.html">delete_webservice()</a></code> </p>
+        </td>
+        <td><p>Delete this Webservice from its associated workspace.</p></td>
       </tr>
     </tbody>
     </table>

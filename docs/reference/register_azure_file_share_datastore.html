@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Azure Machine Learning Workspace — create_workspace • azureml</title>
+<title>Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key — register_azure_file_share_datastore • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Create a new Azure Machine Learning Workspace — create_workspace" />
+<meta property="og:title" content="Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key — register_azure_file_share_datastore" />
 
-<meta property="og:description" content="Create a new Azure Machine Learning Workspace" />
+<meta property="og:description" content="Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,98 +124,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Azure Machine Learning Workspace</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
-    <div class="hidden name"><code>create_workspace.Rd</code></div>
+    <h1>Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
+    <div class="hidden name"><code>register_azure_file_share_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a new Azure Machine Learning Workspace</p>
+    <p>Register an Azure File Share to the datastore.
+You can choose to use SAS Token or Storage Account Key</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_workspace</span>(<span class='no'>name</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>register_azure_file_share_datastore</span>(<span class='no'>workspace</span>, <span class='no'>datastore_name</span>,
+  <span class='no'>file_share_name</span>, <span class='no'>account_name</span>, <span class='kw'>sas_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>account_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>protocol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>create_if_not_exists</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>skip_validation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The new workspace name. Workspace name has to be between
-2 and 32 characters of letters and numbers.</p></td>
+      <th>workspace</th>
+      <td><p>The workspace object</p></td>
     </tr>
     <tr>
-      <th>subscription_id</th>
-      <td><p>The subscription ID of the containing subscription
-for the new workspace. The parameter is required if the user has access to
- more than one subscription.</p></td>
+      <th>datastore_name</th>
+      <td><p>The name of the datastore, case insensitive, can only 
+contain alphanumeric characters and _</p></td>
     </tr>
     <tr>
-      <th>resource_group</th>
-      <td><p>The Azure resource group that is containing the
-workspace. The parameter defaults to a mutation of the workspace name.</p></td>
+      <th>file_share_name</th>
+      <td><p>The name of the azure file container.</p></td>
     </tr>
     <tr>
-      <th>location</th>
-      <td><p>The location of the workspace. The parameter defaults to
-the resource group location. The location has to be a supported region for
-Azure Machine Learning Services.</p></td>
+      <th>account_name</th>
+      <td><p>The storage account name.</p></td>
     </tr>
     <tr>
-      <th>create_resource_group</th>
-      <td><p>When true the resource group will be created
-if it doesn't exist.</p></td>
+      <th>sas_token</th>
+      <td><p>An account SAS token, defaults to NULL.</p></td>
     </tr>
     <tr>
-      <th>friendly_name</th>
-      <td><p>A friendly name for the workspace that can be displayed
-in the UI.</p></td>
+      <th>account_key</th>
+      <td><p>A storage account key, defaults to NULL.</p></td>
     </tr>
     <tr>
-      <th>storage_account</th>
-      <td><p>An existing storage account in the Azure resource ID
-format. The storage will be used by the workspace to save run outputs, code,
- logs etc. If None a new storage will be created.</p></td>
+      <th>protocol</th>
+      <td><p>Protocol to use to connect to the blob container. 
+If NULL, defaults to https.</p></td>
     </tr>
     <tr>
-      <th>key_vault</th>
-      <td><p>An existing key vault in the Azure resource ID format.
-The Key vault will be used by the workspace to store credentials added to
-the workspace by the users. If None a new key vault will be created.</p></td>
+      <th>endpoint</th>
+      <td><p>The endpoint of the blob container. 
+If NULL, defaults to core.windows.net.</p></td>
     </tr>
     <tr>
-      <th>app_insights</th>
-      <td><p>An existing Application Insights in the Azure resource
-ID format. The Application Insights will be used by the workspace to log
-webservices events. If None a new Application Insights will be created.</p></td>
+      <th>overwrite</th>
+      <td><p>overwrites an existing datastore. If the datastore does not 
+exist, it will create one, defaults to FALSE</p></td>
     </tr>
     <tr>
-      <th>container_registry</th>
-      <td><p>An existing Container registery in the Azure
-resource ID format. The Container registery will be used by the workspace
-to pull and push both experimentation and webservices images. If None a new
-Container registery will be created.</p></td>
+      <th>create_if_not_exists</th>
+      <td><p>create the file share if it does not exists, 
+defaults to FALSE</p></td>
     </tr>
     <tr>
-      <th>exist_ok</th>
-      <td><p>If TRUE the method will not fail if the workspace already
-exists.</p></td>
-    </tr>
-    <tr>
-      <th>show_output</th>
-      <td><p>If TRUE the method will print out incremental progress of
-method.</p></td>
+      <th>skip_validation</th>
+      <td><p>skips validation of storage keys, defaults to FALSE</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The workspace object.</p>
+    <p>The file datastore.</p>
     
 
   </div>
