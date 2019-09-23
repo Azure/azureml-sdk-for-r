@@ -24,6 +24,7 @@ experiment_name <- "train-tf-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
+view_run_details(run)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)

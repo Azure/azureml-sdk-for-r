@@ -71,3 +71,46 @@ cancel_run <- function(run)
 {
   run$cancel()
 }
+
+#' Plot table of run details in Viewer
+#' @param run run used for plotting
+#' @export
+view_run_details <- function(run) {
+  status <- run$get_status()
+  details <- run$get_details()
+  web_view_link <- paste0('<a href="', run$get_portal_url(),'">',
+                          "Link", "</a>")
+
+  if (status == "Completed" || status == "Failed"){
+    diff <- (parse_iso_8601(details$endTimeUtc) - 
+             parse_iso_8601(details$startTimeUtc))
+    duration <- paste(as.numeric(diff), "mins")
+  }
+  else {
+    duration <- "-"
+  }
+
+  df <- matrix(list("Run Id",
+                    "Status",
+                    "Start Time",
+                    "Duration",
+                    "Target",
+                    "Script Name",
+                    "Arguments",
+                    "Web View",
+                    run$id,
+                    status,
+                    format(parsedate::parse_iso_8601(details$startTimeUtc),
+                           format='%B %d %Y %H:%M:%S'),
+                    duration,
+                    details$runDefinition$target,
+                    details$runDefinition$script,
+                    toString(details$runDefinition$arguments),
+                    web_view_link),
+               nrow = 8,
+               ncol = 2) 
+
+  DT::datatable(df, escape=FALSE, rownames=FALSE, colnames=c(" ", " "),
+                caption = paste(unlist(details$warnings), collapse='\r\n'),
+                options = list(dom = 't', scrollY = TRUE))
+}

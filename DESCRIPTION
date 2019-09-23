@@ -21,5 +21,7 @@ Imports:
 Suggests: rmarkdown,
     knitr,
     testthat,
-    rstudioapi (>= 0.7)
+    rstudioapi (>= 0.7),
+    DT,
+    parsedate
 VignetteBuilder: knitr
