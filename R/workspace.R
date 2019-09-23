@@ -33,7 +33,7 @@
 #' exists.
 #' @param show_output If TRUE the method will print out incremental progress of
 #' method.
-#'
+#' @return The workspace object.
 #' @export
 create_workspace <- function(
     name,
@@ -84,6 +84,7 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 #' Load workspace from config
 #' @param path Path to the config file or starting directory for search.
 #' The parameter defaults to starting the search in the current directory.
+#' @return The workspace object for an existing Azure ML Workspace
 #' @export
 load_workspace_from_config <- function(path = NULL)
 {
@@ -91,12 +92,12 @@ load_workspace_from_config <- function(path = NULL)
 }
 
 #' Delete workspace
-#' @param ws The workspace to delete
+#' @param workspace The workspace to delete
 #' @export
-delete_workspace <- function(ws)
+delete_workspace <- function(workspace)
 {
-    ws$delete()
-    invisible(NULL)
+  workspace$delete()
+  invisible(NULL)
 }
 
 #' List all workspaces that the user has access to in the specified
@@ -112,19 +113,46 @@ list_workspaces <- function(subscription_id, resource_group = NULL) {
 }
 
 #' Write out the Workspace ARM properties to a config file
-#' @param ws The workspace whose config has to be written down.
+#' @param workspace The workspace whose config has to be written down.
 #' @param path User provided location to write the config.json file.
 #' The parameter defaults to the current working directory.
 #' @param file_name Name to use for the config file. The parameter defaults to
 #' config.json.
 #' @export
-write_workspace_config <- function(ws, path = NULL, file_name = NULL) {
-  ws$write_config(path, file_name)
+write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
+  workspace$write_config(path, file_name)
+  invisible(NULL)
 }
 
 #' Get default datastore associated with a workspace
-#' @param ws workspace object
+#' @param workspace The workspace object
+#' @return The default datastore
 #' @export
-get_default_datastore <- function(ws) {
-  ws$get_default_datastore()
+get_default_datastore <- function(workspace) {
+  workspace$get_default_datastore()
+}
+
+#' Get the default keyvault object for the workspace.
+#' @param workspace The workspace object
+#' @return The keyvault object associated with your workspace
+#' @export
+get_default_keyvault <- function(workspace) {
+  workspace$get_default_keyvault()
+}
+
+#' Return details of this workspace.
+#' @param workspace The workspace object
+#' @return Workspace details
+#' @export
+get_workspace_details <- function(workspace) {
+  workspace$get_details()
+}
+
+#' Set the default datastore for the workspace.
+#' @param workspace The workspace object
+#' @param datastore_name The name of the datastore to be set as default
+#' @export
+set_default_datastore <- function(workspace, datastore_name) {
+  workspace$set_default_datastore(datastore_name)
+  invisible(NULL)
 }

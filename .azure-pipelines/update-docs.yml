@@ -38,7 +38,7 @@ steps:
             exit $retVal
         fi
         echo GIT ADD
-        git add man/* docs/*
+        git add man/* docs/* DESCRIPTION NAMESPACE
         echo GIT COMMIT
         git commit -m "Update R SDK docs via Build $(Build.BuildNumber) [skip ci]"
         echo GIT STATUS

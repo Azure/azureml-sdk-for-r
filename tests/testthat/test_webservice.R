@@ -11,8 +11,8 @@ test_that("create, get, generate keys of, and delete webservice", {
   # register the model
   model <- register_model(ws, tmp_dir_name, model_name)
   
-  # Create a new environmenr
-  env <- azureml$core$Environment(name = "newenv")
+  # Create a new environment
+  env <- environment(name = "newenv")
   env$register(ws)
   
   # Create the inference config to use for Webservice
@@ -26,7 +26,7 @@ test_that("create, get, generate keys of, and delete webservice", {
                                                                tags = tags,
                                                                auth_enabled = T)
   # Deploy the model
-  service_name <- "temp-service"
+  service_name <- paste("svc", build_num, sep="")
   service <- deploy_model(ws,
                           service_name,
                           models = c(model),

@@ -14,6 +14,9 @@ retrieve}
 
 \item{name}{The name of the of the Webservice object to retrieve}
 }
+\value{
+The webservice object
+}
 \description{
 Retrieve a cloud representation of a Webservice object associated with the
 provided workspace. Will return an instance of a child class corresponding to
