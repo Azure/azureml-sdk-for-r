@@ -55,6 +55,20 @@ reference:
   - '`log_metric_to_run`'
   - '`get_run_metrics`'
   - '`cancel_run`'
+  - '`download_file_from_run`'
+  - '`download_files_from_run`'
+  - '`get_run_details`'
+  - '`get_run_details_with_logs`'
+  - '`get_run_file_names`'
+  - '`get_secrets_from_run`'
+  - '`log_accuracy_table_to_run`'
+  - '`log_confusion_matrix_to_run`'
+  - '`log_image_to_run`'
+  - '`log_list_to_run`'
+  - '`log_predictions_to_run`'
+  - '`log_residuals_to_run`'
+  - '`log_row_to_run`'
+  - '`log_table_to_run`'
 - title: Hyperparameter tuning
   desc: Functions for configuring and managing hyperparameter tuning (HyperDrive) experiments. Azure ML's HyperDrive functionality enables you to automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You can also define early termination policies in which poorly performing experiment runs are canceled and new ones started.
   contents:
