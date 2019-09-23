@@ -47,7 +47,7 @@ wait_until_run_completes <- function(run)
 #' @param allow_offline Allow the service context to fall back to offline mode 
 #' so that the training script
 #' can be tested locally without submitting a job with the SDK.
-#' @return get current run
+#' @return The run object.
 #' @export
 get_current_run <- function(allow_offline = TRUE)
 {
@@ -61,6 +61,17 @@ get_current_run <- function(allow_offline = TRUE)
 cancel_run <- function(run)
 {
   run$cancel()
+}
+
+#' Gets the Run object from a given experiment
+#' @param experiment The containing experiment.
+#' @param run_id The run id for the run.
+#' @return The run object.
+#' @export
+get_experiment_run <- function(experiment, run_id)
+{
+  run <- azureml$core$run$Run(experiment, run_id)
+  invisible(run)
 }
 
 #' Download an associated file from storage.

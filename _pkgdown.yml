@@ -49,6 +49,7 @@ reference:
   - '`experiment`'
   - '`submit_experiment`'
   - '`get_experiment_runs`'
+  - '`get_experiment_run`'
   - '`estimator`'
   - '`wait_for_run_completion`'
   - '`get_current_run`'
