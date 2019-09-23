@@ -17,7 +17,7 @@ test_that("estimator",
                            cran_packages = c("ggplot2", "dplyr"))
     
     experiment <- experiment(ws, "estimator_run")
-    run <- submit_experiment(estimator, experiment)
+    run <- submit_experiment(experiment, estimator)
     wait_for_run_completion(run, show_output = TRUE)
     metrics <- get_run_metrics(run)
     expected_metrics <- list("test_metric" = 0)

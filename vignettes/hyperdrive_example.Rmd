@@ -173,7 +173,7 @@ hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
 Submitting our experiment will start multiple simultaneous runs and return a `HyperDriveRun` object that we will use to interface with the run history during and after the job.
 
 ```R
-hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
+hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 ```
 

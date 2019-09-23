@@ -23,7 +23,7 @@ est <- estimator(source_directory = ".", entry_script = "tf_mnist.R",
 experiment_name <- "train-tf-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
-run <- submit_experiment(est, exp)
+run <- submit_experiment(exp, est)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)

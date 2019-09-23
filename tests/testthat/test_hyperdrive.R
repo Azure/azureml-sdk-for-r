@@ -35,7 +35,7 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               hyperdrive_config <- hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4,
                                                             policy = policy, estimator = est)
               # submit hyperdrive run
-              hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
+              hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
               wait_for_run_completion(hyperdrive_run, show_output = TRUE)
               
               child_runs <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
