@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth keys for this Webservice. — get_webservice_keys • azureml</title>
+<title>Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Retrieve auth keys for this Webservice. — get_webservice_keys" />
+<meta property="og:title" content="Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config" />
 
-<meta property="og:description" content="Retrieve auth keys for this Webservice." />
+<meta property="og:description" content="Create a configuration object for deploying a local Webservice." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,31 +121,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth keys for this Webservice.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
-    <div class="hidden name"><code>get_webservice_keys.Rd</code></div>
+    <h1>Create a configuration object for deploying a local Webservice.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
+    <div class="hidden name"><code>local_webservice_deployment_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve auth keys for this Webservice.</p>
+    <p>Create a configuration object for deploying a local Webservice.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_webservice_keys</span>(<span class='no'>webservice</span>)</pre>
+    <pre class="usage"><span class='fu'>local_webservice_deployment_config</span>(<span class='kw'>port</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <th>port</th>
+      <td><p>The local port on which to expose the service's HTTP endpoint.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The auth keys for this Webservice</p>
+    <p>LocalWebserviceDeploymentConfiguration object to use when deploying 
+a Webservice object.</p>
     
 
   </div>
