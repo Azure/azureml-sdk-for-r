@@ -9,6 +9,10 @@ get_webservice_token(webservice)
 \arguments{
 \item{webservice}{The webservice object.}
 }
+\value{
+The auth token for this Webservice and when it should be 
+refreshed after.
+}
 \description{
 Retrieve auth token for this Webservice, scoped to the current user.
 }

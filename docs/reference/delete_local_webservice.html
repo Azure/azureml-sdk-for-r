@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth keys for this Webservice. — get_webservice_keys • azureml</title>
+<title>Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted. — delete_local_webservice • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Retrieve auth keys for this Webservice. — get_webservice_keys" />
+<meta property="og:title" content="Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted. — delete_local_webservice" />
 
-<meta property="og:description" content="Retrieve auth keys for this Webservice." />
+<meta property="og:description" content="Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,31 +124,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth keys for this Webservice.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
-    <div class="hidden name"><code>get_webservice_keys.Rd</code></div>
+    <h1>Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
+    <div class="hidden name"><code>delete_local_webservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve auth keys for this Webservice.</p>
+    <p>Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_webservice_keys</span>(<span class='no'>webservice</span>)</pre>
+    <pre class="usage"><span class='fu'>delete_local_webservice</span>(<span class='no'>webservice</span>, <span class='kw'>delete_cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>delete_image</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>LocalWebservice object.</p></td>
+    </tr>
+    <tr>
+      <th>delete_cache</th>
+      <td><p>Delete temporary files cached for the service.</p></td>
+    </tr>
+    <tr>
+      <th>delete_image</th>
+      <td><p>Delete the service's Docker image.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The auth keys for this Webservice</p>
     
 
   </div>
@@ -153,9 +163,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

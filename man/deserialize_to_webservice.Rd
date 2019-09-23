@@ -11,6 +11,9 @@ deserialize_to_webservice(workspace, webservice_payload)
 
 \item{webservice_payload}{A json object to convert to a Webservice object}
 }
+\value{
+The Webservice representation of the provided json object
+}
 \description{
 Convert a json object into a Webservice object.
 }
