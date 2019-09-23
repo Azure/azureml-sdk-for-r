@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth keys for this Webservice. — get_webservice_keys • azureml</title>
+<title>Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice. — update_aci_webservice • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Retrieve auth keys for this Webservice. — get_webservice_keys" />
+<meta property="og:title" content="Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice. — update_aci_webservice" />
 
-<meta property="og:description" content="Retrieve auth keys for this Webservice." />
+<meta property="og:description" content="Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,31 +124,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth keys for this Webservice.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
-    <div class="hidden name"><code>get_webservice_keys.Rd</code></div>
+    <h1>Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-aci.R'><code>R/webservice-aci.R</code></a></small>
+    <div class="hidden name"><code>update_aci_webservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve auth keys for this Webservice.</p>
+    <p>Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_webservice_keys</span>(<span class='no'>webservice</span>)</pre>
+    <pre class="usage"><span class='fu'>update_aci_webservice</span>(<span class='no'>webservice</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl_cert_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_key_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl_cname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>enable_app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>models</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>AciWebservice object.</p></td>
+    </tr>
+    <tr>
+      <th>tags</th>
+      <td><p>Dictionary of key value tags to give this Webservice. 
+Will replace existing tags.</p></td>
+    </tr>
+    <tr>
+      <th>properties</th>
+      <td><p>Dictionary of key value properties to add to existing 
+properties dictionary.</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>A description to give this Webservice.</p></td>
+    </tr>
+    <tr>
+      <th>auth_enabled</th>
+      <td><p>Enable or disable auth for this Webservice.</p></td>
+    </tr>
+    <tr>
+      <th>ssl_enabled</th>
+      <td><p>Whether or not to enable SSL for this Webservice.</p></td>
+    </tr>
+    <tr>
+      <th>ssl_cert_pem_file</th>
+      <td><p>The cert file needed if SSL is enabled.</p></td>
+    </tr>
+    <tr>
+      <th>ssl_key_pem_file</th>
+      <td><p>The key file needed if SSL is enabled.</p></td>
+    </tr>
+    <tr>
+      <th>ssl_cname</th>
+      <td><p>The cname for if SSL is enabled.</p></td>
+    </tr>
+    <tr>
+      <th>enable_app_insights</th>
+      <td><p>Whether or not to enable AppInsights for this 
+Webservice.</p></td>
+    </tr>
+    <tr>
+      <th>models</th>
+      <td><p>A list of Model objects to package into the updated service.</p></td>
+    </tr>
+    <tr>
+      <th>inference_config</th>
+      <td><p>An InferenceConfig object used to provide the 
+required model deployment properties.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The auth keys for this Webservice</p>
     
 
   </div>
@@ -153,9 +206,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

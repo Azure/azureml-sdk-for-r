@@ -9,6 +9,9 @@ serialize_webservice(webservice)
 \arguments{
 \item{webservice}{The webservice object.}
 }
+\value{
+The json representation of this Webservice
+}
 \description{
 Convert this Webservice into a json serialized dictionary.
 }
