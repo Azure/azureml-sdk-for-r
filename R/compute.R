@@ -66,7 +66,7 @@ create_aml_compute <- function(workspace,
 #' @param cluster_name name of the cluster
 #' @export
 get_compute <- function(workspace, cluster_name) {
-  tryCatch( {
+  tryCatch({
     azureml$core$compute$ComputeTarget(workspace = workspace,
                                        name = cluster_name)
     },
