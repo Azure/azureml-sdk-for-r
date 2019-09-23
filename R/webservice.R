@@ -2,15 +2,9 @@
 # Licensed under the MIT license.
 
 #' Retrieve a cloud representation of a Webservice object associated with the
-<<<<<<< HEAD
 #' provided workspace. Will return an instance of a child class corresponding to
 #' the specific type of the retrieved Webservice object.
 #' @param workspace The workspace object containing the Webservice object to
-=======
-#' provided workspace. Will return an instance of a child class corresponding 
-#' to the specific type of the retrieved Webservice object.
-#' @param workspace The workspace object containing the Webservice object to 
->>>>>>> master
 #' retrieve
 #' @param name The name of the of the Webservice object to retrieve
 #' @return The webservice object
