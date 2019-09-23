@@ -85,7 +85,7 @@ aks_webservice_deployment_config <- function(autoscale_enabled = NULL,
                                              success_threshold = NULL, 
                                              failure_threshold = NULL, 
                                              namespace = NULL, 
-                                             token_auth_enabled = NULL){
+                                             token_auth_enabled = NULL) {
   config <- azureml$core$webservice$AksWebservice$deploy_configuration(
     autoscale_enabled = autoscale_enabled, 
     autoscale_min_replicas = autoscale_min_replicas, 
@@ -197,7 +197,7 @@ update_aks_webservice <- function(webservice, autoscale_enabled = NULL,
                                   success_threshold = NULL, 
                                   failure_threshold = NULL, 
                                   namespace = NULL, 
-                                  token_auth_enabled = NULL){
+                                  token_auth_enabled = NULL) {
   webservice$update(autoscale_enabled = autoscale_enabled, 
                     autoscale_min_replicas = autoscale_min_replicas, 
                     autoscale_max_replicas = autoscale_max_replicas, 
@@ -224,4 +224,5 @@ update_aks_webservice <- function(webservice, autoscale_enabled = NULL,
                     failure_threshold = failure_threshold, 
                     namespace = namespace, 
                     token_auth_enabled = token_auth_enabled)
+  invisible(NULL)
 }

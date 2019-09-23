@@ -42,7 +42,7 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
                                              ssl_cert_pem_file = NULL, 
                                              ssl_key_pem_file = NULL, 
                                              ssl_cname = NULL, 
-                                             dns_name_label = NULL){
+                                             dns_name_label = NULL) {
   azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores, 
                                                              memory_gb, 
                                                              tags, 
@@ -100,4 +100,5 @@ update_aci_webservice <- function(webservice,
                     enable_app_insights = enable_app_insights, 
                     models = models, 
                     inference_config = inference_config)
+  invisible(NULL)
 }

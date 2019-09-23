@@ -6,7 +6,7 @@
 #' @return LocalWebserviceDeploymentConfiguration object to use when deploying 
 #' a Webservice object.
 #' @export
-local_webservice_deployment_config <- function(port = NULL){
+local_webservice_deployment_config <- function(port = NULL) {
   config <- azureml$core$webservice$LocalWebservice$deploy_configuration(port)
   invisible(config)
 }
@@ -24,11 +24,12 @@ local_webservice_deployment_config <- function(port = NULL){
 update_local_webservice <- function(webservice, models = NULL, 
                                     deployment_config = NULL, 
                                     wait = FALSE, 
-                                    inference_config = NULL){
+                                    inference_config = NULL) {
   webservice$update(models = models, 
                     deployment_config = deployment_config,
                     wait = wait, 
                     inference_config = inference_config)
+  invisible(NULL)
 }
 
 #' Delete this LocalWebservice from the local machine.
@@ -39,10 +40,10 @@ update_local_webservice <- function(webservice, models = NULL,
 #' @export
 delete_local_webservice <- function(webservice, 
                                     delete_cache = TRUE,
-                                    delete_image = FALSE)
-{
+                                    delete_image = FALSE) {
   webservice$delete(delete_cache = delete_cache, 
                     delete_image = delete_image)
+  invisible(NULL)
 }
 
 #' Reload the LocalWebservice's execution script and dependencies.
@@ -54,7 +55,7 @@ delete_local_webservice <- function(webservice,
 #' @param webservice LocalWebservice object.
 #' @param wait Wait for the service's container to reach a healthy state.
 #' @export
-reload_local_webservice_assets <- function(webservice, 
-                                           wait = FALSE){
+reload_local_webservice_assets <- function(webservice, wait = FALSE) {
   webservice$reload(wait)
+  invisible(NULL)
 }
