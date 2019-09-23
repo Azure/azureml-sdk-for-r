@@ -7,10 +7,11 @@ datastore points to.}
 \usage{
 upload_files_to_datastore(datastore, files, relative_root = NULL,
   target_path = NULL, overwrite = FALSE, show_progress = TRUE)
+
+upload_files_to_datastore(datastore, files, relative_root = NULL,
+  target_path = NULL, overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{datastore}{datastore object}
-
 \item{files}{list of absolute path to files to upload}
 
 \item{relative_root}{the base path from which is used to determine the path
@@ -27,8 +28,15 @@ to None, the root}
 \item{overwrite}{overwrites, defaults to FALSE}
 
 \item{show_progress}{progress of upload in the console, defaults to TRUE}
+
+\item{ds}{datastore object}
+
+\item{ds}{datastore object}
 }
 \description{
+Upload the data from the local file system to the Azure storage this
+datastore points to.
+
 Upload the data from the local file system to the Azure storage this
 datastore points to.
 }

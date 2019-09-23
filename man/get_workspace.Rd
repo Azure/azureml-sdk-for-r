@@ -17,7 +17,7 @@ to more than one subscription.}
 search all resource groups in the subscription.}
 }
 \value{
-The workspace object.
+workspace object
 }
 \description{
 Get an existing workspace

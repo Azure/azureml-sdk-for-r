@@ -11,6 +11,7 @@ invoke_webservice(webservice, input_data)
 
 \item{input_data}{The input data to call the Webservice with. This is the
 data your machine learning model expects as an input to run predictions.}
+}
 \value{
 The result of calling the Webservice. This will return predictions 
 run from your machine learning model.

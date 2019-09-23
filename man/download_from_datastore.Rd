@@ -4,12 +4,10 @@
 \alias{download_from_datastore}
 \title{Download the data from the datastore to the local file system}
 \usage{
-download_from_datastore(datastore, target_path, prefix = NULL,
+download_from_datastore(ds, target_path, prefix = NULL,
   overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{datastore}{datastore object}
-
 \item{target_path}{the local directory to download the file to}
 
 \item{prefix}{path to the folder in the blob container to download. If set to
@@ -19,6 +17,8 @@ NULL, will download everything in the blob defaults to NULL}
 
 \item{show_progress}{show progress of download in the console, defaults to
 TRUE}
+
+\item{datastore}{datastore object}
 }
 \description{
 Download the data from the datastore to the local file system
