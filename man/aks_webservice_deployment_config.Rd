@@ -14,7 +14,7 @@ aks_webservice_deployment_config(autoscale_enabled = NULL,
   primary_key = NULL, secondary_key = NULL, tags = NULL,
   properties = NULL, description = NULL, gpu_cores = NULL,
   period_seconds = NULL, initial_delay_seconds = NULL,
-  timeout_second = NULL, success_threshold = NULL,
+  timeout_seconds = NULL, success_threshold = NULL,
   failure_threshold = NULL, namespace = NULL,
   token_auth_enabled = NULL)
 }
