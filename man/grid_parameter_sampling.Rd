@@ -7,7 +7,8 @@
 grid_parameter_sampling(parameter_space)
 }
 \arguments{
-\item{parameter_space}{a named list containing each parameter and its distribution}
+\item{parameter_space}{a named list containing each parameter and its
+distribution}
 }
 \value{
 HyperParameterSampling object

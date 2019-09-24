@@ -10,11 +10,13 @@ get_child_runs_sorted_by_primary_metric(hyperdrive_run, top = 0L,
 \arguments{
 \item{hyperdrive_run}{HyperDriveRun object}
 
-\item{top}{number of top children to be returned, default value of 0 will return all}
+\item{top}{number of top children to be returned, default value of 0 will
+return all}
 
 \item{reverse}{reverse the sorting order}
 
-\item{discard_no_metric}{whether to include children without the primary metric}
+\item{discard_no_metric}{whether to include children without the primary
+metric}
 }
 \value{
 named list of child runs

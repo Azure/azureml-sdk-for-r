@@ -7,17 +7,20 @@ ws <- load_workspace_from_config()
 # create aml compute
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
-if (is.null(compute_target))
-{
+if (is.null(compute_target)) {
   vm_size <- "STANDARD_NC6"
-  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
-                                       vm_size = vm_size, max_nodes = 1)
+  compute_target <- create_aml_compute(workspace = ws,
+                                       cluster_name = cluster_name,
+                                       vm_size = vm_size,
+                                       max_nodes = 1)
 }
 wait_for_compute(compute_target)
 
 # define estimator
-est <- estimator(source_directory = ".", entry_script = "tf_mnist.R",
-                 compute_target = compute_target, cran_packages = c("tensorflow"),
+est <- estimator(source_directory = ".",
+                 entry_script = "tf_mnist.R",
+                 compute_target = compute_target,
+                 cran_packages = c("tensorflow"),
                  use_gpu = TRUE)
 
 experiment_name <- "train-tf-script-on-amlcompute"

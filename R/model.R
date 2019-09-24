@@ -246,7 +246,10 @@ from azureml.core.model import Model
 def init():
     global r_run
 
-    score_r_path = \"%s\"
+    score_r_path = os.path.join(os.path.dirname(
+      os.path.realpath(__file__)), 
+      \"%s\")
+
     # handle path for windows os
     score_r_path = score_r_path.replace('\\\\', '/')
     robjects.r('''source('{}')'''.format(score_r_path))
@@ -254,7 +257,7 @@ def init():
 def run(input_data):
     dataR = r_run(input_data)[0]
     return json.loads(dataR)", 
-                               entry_script_path)
+                               entry_script)
 
   score_py_file_path <- file.path(source_directory, "score.py")
   py_file <- file(score_py_file_path, open = "w")

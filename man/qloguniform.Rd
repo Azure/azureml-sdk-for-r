@@ -2,7 +2,8 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qloguniform}
 \alias{qloguniform}
-\title{Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q}
+\title{Specify a uniform distribution of the form round(exp(uniform(min_value,
+max_value) / q) * q}
 \usage{
 qloguniform(min_value, max_value, q)
 }
@@ -17,5 +18,6 @@ qloguniform(min_value, max_value, q)
 the stochastic expression
 }
 \description{
-Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q
+Specify a uniform distribution of the form round(exp(uniform(min_value,
+max_value) / q) * q
 }

@@ -9,14 +9,15 @@ get_workspace(name, subscription_id = NULL, resource_group = NULL)
 \arguments{
 \item{name}{The workspace name to get.}
 
-\item{subscription_id}{The subscription ID to use. The parameter is required if the user has access
+\item{subscription_id}{The subscription ID to use. The parameter is required
+if the user has access
 to more than one subscription.}
 
-\item{resource_group}{The resource group to use. If NULL the method will search all resource groups in
-the subscription.}
+\item{resource_group}{The resource group to use. If NULL the method will
+search all resource groups in the subscription.}
 }
 \value{
-The workspace object.
+workspace object
 }
 \description{
 Get an existing workspace
