@@ -2,7 +2,8 @@
 % Please edit documentation in R/model.R
 \name{package_model}
 \alias{package_model}
-\title{Create a model package in the form of a Docker image or Dockerfile build context}
+\title{Create a model package in the form of a Docker image or Dockerfile build
+context}
 \usage{
 package_model(workspace, models, inference_config,
   generate_dockerfile = FALSE)
@@ -10,14 +11,16 @@ package_model(workspace, models, inference_config,
 \arguments{
 \item{workspace}{The workspace in which to create the package.}
 
-\item{models}{A list of Model objects to include in the package. Can be an empty list.}
+\item{models}{A list of Model objects to include in the package. Can be an
+empty list.}
 
-\item{inference_config}{An InferenceConfig object to configure the operation of the models.
-This must include an Environment object.}
+\item{inference_config}{An InferenceConfig object to configure the operation
+of the models. This must include an Environment object.}
 
-\item{generate_dockerfile}{Whether to create a Dockerfile that can be run locally
-instead of building an image.}
+\item{generate_dockerfile}{Whether to create a Dockerfile that can be run
+locally instead of building an image.}
 }
 \description{
-Create a model package in the form of a Docker image or Dockerfile build context
+Create a model package in the form of a Docker image or Dockerfile build
+context
 }

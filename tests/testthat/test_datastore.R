@@ -1,7 +1,6 @@
 context("datastore")
 
-test_that("default datastore",
-{
+test_that("default datastore", {
     ws <- existing_ws
     ds <- get_default_datastore(ws)
     # upload files to datastore
@@ -29,7 +28,8 @@ test_that("default datastore",
     
     # check whether the directory contents are downloaded
     expect_equal(file.exists(file.path(target_dir, tmp_dir_name)), TRUE)
-    expect_equal(file.exists(file.path(target_dir, tmp_dir_name, file_name)), TRUE)
+    expect_equal(file.exists(file.path(target_dir, tmp_dir_name, file_name)),
+                 TRUE)
     
     # tear down workspace and directory
     unlink(target_dir, recursive = TRUE)
