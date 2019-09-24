@@ -63,12 +63,12 @@ cancel_run <- function(run)
   run$cancel()
 }
 
-#' Gets the Run object from a given experiment
+#' Gets the Run object from a given run id
 #' @param experiment The containing experiment.
 #' @param run_id The run id for the run.
 #' @return The run object.
 #' @export
-get_experiment_run <- function(experiment, run_id)
+get_run <- function(experiment, run_id)
 {
   run <- azureml$core$run$Run(experiment, run_id)
   invisible(run)

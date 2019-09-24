@@ -32,7 +32,7 @@ test_that("create, submit experiment, run in default amlcompute,
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
 
-  run <- get_experiment_run(exp, run$id)
+  run <- get_run(exp, run$id)
   metrics <- get_run_metrics(run)
 
   expected_metrics <- list("test_metric" = 0.5)

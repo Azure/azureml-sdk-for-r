@@ -48,8 +48,7 @@ reference:
   contents:
   - '`experiment`'
   - '`submit_experiment`'
-  - '`get_experiment_runs`'
-  - '`get_experiment_run`'
+  - '`get_runs_in_experiment`'
   - '`estimator`'
   - '`wait_for_run_completion`'
   - '`get_current_run`'
@@ -58,6 +57,7 @@ reference:
   - '`cancel_run`'
   - '`download_file_from_run`'
   - '`download_files_from_run`'
+  - '`get__run`'
   - '`get_run_details`'
   - '`get_run_details_with_logs`'
   - '`get_run_file_names`'

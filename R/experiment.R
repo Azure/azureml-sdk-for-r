@@ -32,8 +32,8 @@ submit_experiment <- function(experiment, config, tags = NULL)
 #' Set to TRUE to list all runs
 #' @return The list of runs matching supplied filters
 #' @export
-get_experiment_runs <- function(experiment, type = NULL, tags = NULL, 
-                                properties = NULL, include_children = FALSE) {
+get_runs_in_experiment <- function(experiment, type = NULL, tags = NULL,
+                                   properties = NULL, include_children = FALSE) {
   experiment$get_runs(type = type,
                       tags = tags,
                       properties = properties,
