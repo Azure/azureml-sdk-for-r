@@ -3,7 +3,7 @@
 
 #' Upload the data from the local file system to the Azure storage this
 #' datastore points to.
-#' @param ds datastore object
+#' @param datastore datastore object
 #' @param files list of absolute path to files to upload
 #' @param relative_root the base path from which is used to determine the path
 #' of the files in the file share. For example, if we upload /path/to/file.txt,
@@ -17,22 +17,34 @@
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_files_to_datastore <- function(ds, files,
+upload_files_to_datastore <- function(datastore, files,
                                       relative_root = NULL,
                                       target_path = NULL, 
                                       overwrite = FALSE,
                                       show_progress = TRUE) {
-  ds$upload_files(files, relative_root, target_path, overwrite, show_progress)
+  datastore$upload_files(files,
+                         relative_root,
+                         target_path,
+                         overwrite,
+                         show_progress)
   invisible(NULL)
 }
 
 #' Upload the data from the local file system to the Azure storage this
 #' datastore points to.
-#' @param ds datastore object
-upload_files_to_datastore <- function(datastore, files, relative_root = NULL, target_path = NULL, 
-                                      overwrite = FALSE, show_progress = TRUE)
+#' @param datastore datastore object
+upload_files_to_datastore <- function(datastore,
+                                      files,
+                                      relative_root = NULL,
+                                      target_path = NULL, 
+                                      overwrite = FALSE,
+                                      show_progress = TRUE)
 {
-  datastore$upload_files(files, relative_root, target_path, overwrite, show_progress)
+  datastore$upload_files(files,
+                         relative_root,
+                         target_path,
+                         overwrite,
+                         show_progress)
   invisible(NULL)
 }
 
@@ -45,7 +57,7 @@ upload_files_to_datastore <- function(datastore, files, relative_root = NULL, ta
 #' @param overwrite overwrites, defaults to FALSE
 #' @param show_progress progress of upload in the console, defaults to TRUE
 #' @export
-upload_to_datastore <- function(ds,
+upload_to_datastore <- function(datastore,
                                 src_dir,
                                 target_path = NULL, 
                                 overwrite = FALSE,
@@ -63,12 +75,12 @@ upload_to_datastore <- function(ds,
 #' @param show_progress show progress of download in the console, defaults to
 #' TRUE
 #' @export
-download_from_datastore <- function(ds,
+download_from_datastore <- function(datastore,
                                     target_path,
                                     prefix = NULL,
                                     overwrite = FALSE,
                                     show_progress = TRUE) {
-  ds$download(target_path,
+  datastore$download(target_path,
               prefix = prefix,
               overwrite = overwrite,
               show_progress = show_progress)
