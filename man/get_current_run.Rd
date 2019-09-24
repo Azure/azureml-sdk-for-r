@@ -12,7 +12,7 @@ so that the training script can be tested locally without submitting a job
 with the SDK.}
 }
 \value{
-get current run
+The run object.
 }
 \description{
 Gets the context object for a run
