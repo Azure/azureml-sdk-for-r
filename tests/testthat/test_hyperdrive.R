@@ -1,7 +1,6 @@
 context("hyperdrive")
 
-test_that("create hyperdrive config, launch runs, get run metrics",
-          {
+test_that("create hyperdrive config, launch runs, get run metrics", {
               experiment_name <- "test_experiment"
               
               ws <- existing_ws
@@ -25,20 +24,28 @@ test_that("create hyperdrive config, launch runs, get run metrics",
               file.copy(script_name, tmp_dir_name)
               
               script_params <- list(number_1 = 3, number_2 = 2)
-              est <- estimator(source_directory = tmp_dir_name, entry_script = script_name,
-                               compute_target = existing_compute$name, script_params = script_params)
+              est <- estimator(source_directory = tmp_dir_name,
+                               entry_script = script_name,
+                               compute_target = existing_compute$name,
+                               script_params = script_params)
               
               # define sampling and policy for hyperparameter tuning
-              sampling <- grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
-                                                       number_2 = choice(c(2, 5))))
+              sampling <- 
+                grid_parameter_sampling(list(number_1 = choice(c(3, 6)),
+                                             number_2 = choice(c(2, 5))))
               policy <- median_stopping_policy()
-              hyperdrive_config <- hyperdrive_config(sampling, "Sum", primary_metric_goal("MAXIMIZE"), 4,
-                                                            policy = policy, estimator = est)
+              hyperdrive_config <- 
+                hyperdrive_config(sampling, "Sum",
+                                  primary_metric_goal("MAXIMIZE"),
+                                  4,
+                                  policy = policy,
+                                  estimator = est)
               # submit hyperdrive run
               hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
               wait_for_run_completion(hyperdrive_run, show_output = TRUE)
               
-              child_runs <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
+              child_runs <- 
+                get_child_runs_sorted_by_primary_metric(hyperdrive_run)
               expected_best_run <- toString(child_runs[[1]][1])
               expect_equal(length(child_runs), 5)
               

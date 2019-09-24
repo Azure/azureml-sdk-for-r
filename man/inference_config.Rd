@@ -8,16 +8,19 @@ inference_config(entry_script, source_directory = NULL,
   description = NULL, environment = NULL)
 }
 \arguments{
-\item{entry_script}{Path to local file that contains the code to run for the image.}
+\item{entry_script}{Path to local file that contains the code to run for the
+image.}
 
-\item{source_directory}{paths to folders that contains all files to create the image.}
+\item{source_directory}{paths to folders that contains all files to create
+the image.}
 
 \item{description}{A description to give this image.}
 
-\item{environment}{An environment object to use for the deployment. Doesn't have to be registered. A user
-should provide either this, or the other parameters, not both. The individual parameters will NOT serve
-as an override for the environment object. Exceptions include `entry_script`, `source_directory` and
-`description`.}
+\item{environment}{An environment object to use for the deployment. Doesn't
+have to be registered. A user should provide either this, or the other
+parameters, not both. The individual parameters will NOT serve as an override
+for the environment object. Exceptions include `entry_script`,
+`source_directory` and `description`.}
 }
 \value{
 An InferenceConfig object

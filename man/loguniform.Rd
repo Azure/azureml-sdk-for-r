@@ -7,9 +7,11 @@
 loguniform(min_value, max_value)
 }
 \arguments{
-\item{min_value}{minimum value in the range will be exp(min_value) (inclusive)}
+\item{min_value}{minimum value in the range will be exp(min_value)
+(inclusive)}
 
-\item{max_value}{maximum value in the range will be exp(min_value) (inclusive)}
+\item{max_value}{maximum value in the range will be exp(min_value)
+(inclusive)}
 }
 \value{
 the stochastic expression

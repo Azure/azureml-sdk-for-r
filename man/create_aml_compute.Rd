@@ -16,24 +16,30 @@ create_aml_compute(workspace, cluster_name, vm_size,
 
 \item{cluster_name}{cluster name}
 
-\item{vm_size}{Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
-Note that not all sizes are available in all regions, as detailed in the previous link.}
+\item{vm_size}{Size of agent VMs. More details can be found here:
+https://aka.ms/azureml-vm-details. Note that not all sizes are available in
+all regions, as detailed in the previous link.}
 
-\item{vm_priority}{dedicated or lowpriority VMs. If not specified, will default to dedicated.}
+\item{vm_priority}{dedicated or lowpriority VMs. If not specified, will
+default to dedicated.}
 
-\item{min_nodes}{Minimum number of nodes to use on the cluster. If not specified, will default to 0}
+\item{min_nodes}{Minimum number of nodes to use on the cluster. If not
+specified, will default to 0}
 
 \item{max_nodes}{Maximum number of nodes to use on the cluster}
 
-\item{idle_seconds_before_scaledown}{Node idle time in seconds before scaling down the cluster}
+\item{idle_seconds_before_scaledown}{Node idle time in seconds before scaling
+down the cluster}
 
-\item{admin_username}{Name of the administrator user account which can be used to SSH into nodes}
+\item{admin_username}{Name of the administrator user account which can be
+used to SSH into nodes}
 
 \item{admin_user_password}{Password of the administrator user account}
 
 \item{admin_user_ssh_key}{SSH public key of the administrator user account}
 
-\item{vnet_resourcegroup_name}{Name of the resource group where the virtual network is located}
+\item{vnet_resourcegroup_name}{Name of the resource group where the virtual
+network is located}
 
 \item{vnet_name}{Name of the virtual network}
 

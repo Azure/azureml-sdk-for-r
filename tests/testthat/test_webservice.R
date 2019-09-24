@@ -1,7 +1,6 @@
 context("webservice tests")
 
-test_that("create, get, generate keys of, and delete webservice",
-{
+test_that("create, get, generate keys of, and delete webservice", {
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"
@@ -19,14 +18,19 @@ test_that("create, get, generate keys of, and delete webservice",
   # Create the inference config to use for Webservice
   config <- inference_config(entry_script = "dummy_score.py", environment = env)
   
-  # Create ACI deployment config  
-  aciconfig = azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores=1, 
-                                                                         memory_gb=1,
-                                                                         tags = reticulate::py_dict('name', 'temp'),
-                                                                         auth_enabled = TRUE)
+  # Create ACI deployment config
+  tags <- reticulate::py_dict('name', 'temp')
+  aciconfig <- 
+    azureml$core$webservice$AciWebservice$deploy_configuration(cpu_cores = 1,
+                                                               memory_gb = 1,
+                                                               tags = tags,
+                                                               auth_enabled = T)
   # Deploy the model
   service_name <- paste("svc", build_num, sep="")
-  service <- deploy_model(ws, service_name, models = c(model), inference_config = config,
+  service <- deploy_model(ws,
+                          service_name,
+                          models = c(model),
+                          inference_config = config,
                           deployment_config = aciconfig)
   
   wait_for_deployment(service, show_output = TRUE)

@@ -142,7 +142,7 @@
   <span class='kw'>primary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>secondary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gpu_cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>period_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_delay_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>timeout_second</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>success_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>timeout_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>success_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>failure_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>token_auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -254,6 +254,11 @@ Default to 10 seconds. Minimum value is 1.</p></td>
 started before liveness probes are initiated. Defaults to 310</p></td>
     </tr>
     <tr>
+      <th>timeout_seconds</th>
+      <td><p>Number of seconds after which the liveness probe 
+times out. Defaults to 2 second. Minimum value is 1</p></td>
+    </tr>
+    <tr>
       <th>success_threshold</th>
       <td><p>Minimum consecutive successes for the liveness 
 probe to be considered successful after having failed. Defaults to 1. 
@@ -277,11 +282,6 @@ Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen
 Webservice. If this is enabled, users can access this Webservice by fetching 
 access token using their Azure Active Directory credentials. 
 Defaults to FALSE</p></td>
-    </tr>
-    <tr>
-      <th>timeout_seconds</th>
-      <td><p>Number of seconds after which the liveness probe 
-times out. Defaults to 2 second. Minimum value is 1</p></td>
     </tr>
     </table>
     

@@ -8,7 +8,8 @@ truncation_selection_policy(truncation_percentage,
   evaluation_interval = 1L, delay_evaluation = 0L)
 }
 \arguments{
-\item{truncation_percentage}{percentage of lowest performing runs to terminate at each interval}
+\item{truncation_percentage}{percentage of lowest performing runs to
+terminate at each interval}
 
 \item{evaluation_interval}{frequency for applying policy}
 

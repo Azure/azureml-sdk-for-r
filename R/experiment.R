@@ -6,19 +6,18 @@
 #' @param name The experiment name.
 #' @return experiment object
 #' @export
-experiment <- function(workspace, name)
-{
+experiment <- function(workspace, name) {
   azureml$core$Experiment(workspace, name)
 }
 
 #' Submit an experiment and return the active created run
 #' @param experiment experiment object
 #' @param config runconfig or estimator
-#' @param tags Tags to be added to the submitted run. A named list eg. list("tag" = "value")
+#' @param tags Tags to be added to the submitted run. A named list
+#' eg. list("tag" = "value")
 #' @return run object
 #' @export
-submit_experiment <- function(experiment, config, tags = NULL)
-{
+submit_experiment <- function(experiment, config, tags = NULL) {
   experiment$submit(config, tags = tags)
 }
 

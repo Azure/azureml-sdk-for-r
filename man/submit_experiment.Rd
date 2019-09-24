@@ -2,20 +2,21 @@
 % Please edit documentation in R/experiment.R
 \name{submit_experiment}
 \alias{submit_experiment}
-\title{Submit an experiment and return the active created run}
+\title{Submit experiment}
 \usage{
-submit_experiment(experiment, config, tags = NULL)
+submit_experiment(config, experiment, tags = NULL)
 }
 \arguments{
-\item{experiment}{experiment object}
-
 \item{config}{runconfig or estimator}
 
-\item{tags}{Tags to be added to the submitted run. A named list eg. list("tag" = "value")}
+\item{experiment}{experiment object}
+
+\item{tags}{Tags to be added to the submitted run. A named list eg. 
+list("tag" = "value")}
 }
 \value{
 run object
 }
 \description{
-Submit an experiment and return the active created run
+Submit experiment
 }

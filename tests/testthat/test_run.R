@@ -1,8 +1,8 @@
 context("run")
 
-test_that("create, submit experiment, run in default amlcompute, 
+test_that("create, submit experiment, run in default amlcompute,
           get run metrics", {
-  experiment_name <- "test_experiment"
+    experiment_name <- "test_experiment"
 
   ws <- existing_ws
 
@@ -24,10 +24,9 @@ test_that("create, submit experiment, run in default amlcompute,
   dir.create(tmp_dir_name)
   file.copy(script_name, tmp_dir_name)
 
-  est <- estimator(
-    source_directory = tmp_dir_name, entry_script = script_name,
-    compute_target = existing_compute$name
-  )
+    est <- estimator(source_directory = tmp_dir_name,
+                     entry_script = script_name,
+                     compute_target = existing_compute$name)
 
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)

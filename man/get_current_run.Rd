@@ -7,12 +7,12 @@
 get_current_run(allow_offline = TRUE)
 }
 \arguments{
-\item{allow_offline}{Allow the service context to fall back to offline mode 
-so that the training script
-can be tested locally without submitting a job with the SDK.}
+\item{allow_offline}{Allow the service context to fall back to offline mode
+so that the training script can be tested locally without submitting a job
+with the SDK.}
 }
 \value{
-The run object.
+get current run
 }
 \description{
 Gets the context object for a run

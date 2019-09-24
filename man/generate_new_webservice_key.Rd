@@ -2,7 +2,7 @@
 % Please edit documentation in R/webservice.R
 \name{generate_new_webservice_key}
 \alias{generate_new_webservice_key}
-\title{Regenerate one of the Webservice's keys. Must specify either 'Primary' or 
+\title{Regenerate one of the Webservice's keys. Must specify either 'Primary' or
 'Secondary' key.}
 \usage{
 generate_new_webservice_key(webservice, key_type)
@@ -14,6 +14,6 @@ generate_new_webservice_key(webservice, key_type)
 'Secondary'}
 }
 \description{
-Regenerate one of the Webservice's keys. Must specify either 'Primary' or 
+Regenerate one of the Webservice's keys. Must specify either 'Primary' or
 'Secondary' key.
 }
