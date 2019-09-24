@@ -5,10 +5,12 @@
 \title{Upload the data from the local file system to the Azure storage this
 datastore points to.}
 \usage{
-upload_to_datastore(ds, src_dir, target_path = NULL, overwrite = FALSE,
-  show_progress = TRUE)
+upload_to_datastore(datastore, src_dir, target_path = NULL,
+  overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
+\item{datastore}{datastore object}
+
 \item{src_dir}{the local directory to upload}
 
 \item{target_path}{location in the file share to upload the data to, defaults
@@ -17,8 +19,6 @@ to None, the root}
 \item{overwrite}{overwrites, defaults to FALSE}
 
 \item{show_progress}{progress of upload in the console, defaults to TRUE}
-
-\item{datastore}{datastore object}
 }
 \description{
 Upload the data from the local file system to the Azure storage this
