@@ -33,24 +33,6 @@ upload_files_to_datastore <- function(datastore, files,
 #' Upload the data from the local file system to the Azure storage this
 #' datastore points to.
 #' @param datastore datastore object
-upload_files_to_datastore <- function(datastore,
-                                      files,
-                                      relative_root = NULL,
-                                      target_path = NULL, 
-                                      overwrite = FALSE,
-                                      show_progress = TRUE)
-{
-  datastore$upload_files(files,
-                         relative_root,
-                         target_path,
-                         overwrite,
-                         show_progress)
-  invisible(NULL)
-}
-
-#' Upload the data from the local file system to the Azure storage this
-#' datastore points to.
-#' @param datastore datastore object
 #' @param src_dir the local directory to upload
 #' @param target_path location in the file share to upload the data to, defaults
 #' to None, the root
