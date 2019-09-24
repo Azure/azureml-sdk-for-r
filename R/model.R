@@ -225,7 +225,6 @@ inference_config <- function(entry_script,
   inference_config <- azureml$core$model$InferenceConfig(
     entry_script = "score.py",
     source_directory = source_directory,
-    runtime = "python",
     description = description,
     environment = environment)
 
