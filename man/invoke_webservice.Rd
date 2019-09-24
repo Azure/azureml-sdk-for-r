@@ -9,8 +9,12 @@ invoke_webservice(webservice, input_data)
 \arguments{
 \item{webservice}{The webservice object.}
 
-\item{input_data}{The input data to call the Webservice with. This is the data your 
-machine learning model expects as an input to run predictions.}
+\item{input_data}{The input data to call the Webservice with. This is the 
+data yourmachine learning model expects as an input to run predictions.}
+}
+\value{
+The result of calling the Webservice. This will return predictions 
+run from your machine learning model.
 }
 \description{
 Call this Webservice with the provided input.

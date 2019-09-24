@@ -4,11 +4,11 @@
 \alias{upload_files_to_datastore}
 \title{Upload the data from the local file system to the Azure storage this datastore points to.}
 \usage{
-upload_files_to_datastore(ds, files, relative_root = NULL,
+upload_files_to_datastore(datastore, files, relative_root = NULL,
   target_path = NULL, overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{ds}{datastore object}
+\item{datastore}{datastore object}
 
 \item{files}{list of absolute path to files to upload}
 

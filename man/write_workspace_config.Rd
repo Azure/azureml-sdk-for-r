@@ -4,10 +4,10 @@
 \alias{write_workspace_config}
 \title{Write out the Workspace ARM properties to a config file}
 \usage{
-write_workspace_config(ws, path = NULL, file_name = NULL)
+write_workspace_config(workspace, path = NULL, file_name = NULL)
 }
 \arguments{
-\item{ws}{The workspace whose config has to be written down.}
+\item{workspace}{The workspace whose config has to be written down.}
 
 \item{path}{User provided location to write the config.json file.
 The parameter defaults to the current working directory.}

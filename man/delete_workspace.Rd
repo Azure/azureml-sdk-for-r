@@ -4,10 +4,10 @@
 \alias{delete_workspace}
 \title{Delete workspace}
 \usage{
-delete_workspace(ws)
+delete_workspace(workspace)
 }
 \arguments{
-\item{ws}{The workspace to delete}
+\item{workspace}{The workspace to delete}
 }
 \description{
 Delete workspace

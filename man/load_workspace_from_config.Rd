@@ -10,6 +10,9 @@ load_workspace_from_config(path = NULL)
 \item{path}{Path to the config file or starting directory for search.
 The parameter defaults to starting the search in the current directory.}
 }
+\value{
+The workspace object for an existing Azure ML Workspace
+}
 \description{
 Load workspace from config
 }
