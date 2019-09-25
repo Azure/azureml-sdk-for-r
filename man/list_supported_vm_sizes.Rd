@@ -14,7 +14,7 @@ workspace location.}
 }
 \value{
 List of supported VM sizes in a region with name of the VM, VCPUs, 
-RAM
+RAM in data frame
 }
 \description{
 List the supported VM sizes in a region.

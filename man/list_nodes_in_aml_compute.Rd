@@ -11,7 +11,7 @@ list_nodes_in_aml_compute(cluster)
 \item{cluster}{cluster object}
 }
 \value{
-Details of all the compute nodes in the compute
+Details of all the compute nodes in the cluster in data frame
 }
 \description{
 Get the details (e.g IP address, port etc) of all the compute nodes in the 

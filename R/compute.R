@@ -84,8 +84,7 @@ get_compute <- function(workspace, cluster_name) {
 #' @param cluster cluster object
 #' @param show_output show output on console
 #' @export
-wait_for_provisioning_completion <- function(cluster, show_output = TRUE)
-{
+wait_for_provisioning_completion <- function(cluster, show_output = TRUE) {
   cluster$wait_for_completion(show_output)
 }
 
@@ -198,7 +197,7 @@ detach_aks_compute <- function(cluster) {
 #' Get the details (e.g IP address, port etc) of all the compute nodes in the 
 #' compute.
 #' @param cluster cluster object
-#' @return Details of all the compute nodes in the compute
+#' @return Details of all the compute nodes in the cluster in data frame
 #' @export
 list_nodes_in_aml_compute <- function(cluster) {
   nodes <- cluster$list_nodes()
@@ -210,7 +209,7 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' @param location Location of cluster. If not specified, will default to 
 #' workspace location.
 #' @return List of supported VM sizes in a region with name of the VM, VCPUs, 
-#' RAM
+#' RAM in data frame
 #' @export
 list_supported_vm_sizes <- function(workspace, location = NULL) {
   vm_sizes <- azureml$core$compute$AmlCompute$supported_vmsizes(workspace, 
