@@ -223,7 +223,7 @@ resource group.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
+          <p><code><a href="wait_for_provisioning_completion.html">wait_for_provisioning_completion()</a></code> </p>
         </td>
         <td><p>Wait for cluster's instantiation</p></td>
       </tr><tr>
@@ -262,6 +262,25 @@ resource group.</p></td>
           <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
         </td>
         <td><p>Detach the AksCompute object from its associated workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_nodes_in_aml_compute.html">list_nodes_in_aml_compute()</a></code> </p>
+        </td>
+        <td><p>Get the details (e.g IP address, port etc) of all the compute nodes in the 
+compute.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_supported_vm_sizes.html">list_supported_vm_sizes()</a></code> </p>
+        </td>
+        <td><p>List the supported VM sizes in a region.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_aml_compute.html">update_aml_compute()</a></code> </p>
+        </td>
+        <td><p>Update Scale settings for AmlCompute target.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -330,7 +349,13 @@ be deleted.</p></td>
         <td>
           <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
         </td>
-        <td><p>Submit experiment</p></td>
+        <td><p>Submit an experiment and return the active created run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_runs_in_experiment.html">get_runs_in_experiment()</a></code> </p>
+        </td>
+        <td><p>Return a generator of the runs for this experiment</p></td>
       </tr><tr>
         
         <td>
@@ -367,6 +392,94 @@ be deleted.</p></td>
           <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
         </td>
         <td><p>Cancel run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_file_from_run.html">download_file_from_run()</a></code> </p>
+        </td>
+        <td><p>Download an associated file from storage.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_files_from_run.html">download_files_from_run()</a></code> </p>
+        </td>
+        <td><p>Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_details.html">get_run_details()</a></code> </p>
+        </td>
+        <td><p>Get the definition, status information, current log files and other details 
+of the run.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_details_with_logs.html">get_run_details_with_logs()</a></code> </p>
+        </td>
+        <td><p>Return run status including log file content.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_file_names.html">get_run_file_names()</a></code> </p>
+        </td>
+        <td><p>List the files that are stored in association with the run.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_secrets_from_run.html">get_secrets_from_run()</a></code> </p>
+        </td>
+        <td><p>Get the secret values for a given list of secret names.
+Get a dictionary of found and not found secrets for the list of names 
+provided.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_accuracy_table_to_run.html">log_accuracy_table_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a accuracy table to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_confusion_matrix_to_run.html">log_confusion_matrix_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a confusion matrix to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_image_to_run.html">log_image_to_run()</a></code> </p>
+        </td>
+        <td><p>Log an image metric to the run record.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_list_to_run.html">log_list_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a list metric value to the run with the given name.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_predictions_to_run.html">log_predictions_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a predictions to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_residuals_to_run.html">log_residuals_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a residuals to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_row_to_run.html">log_row_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a row metric to the run with the given name.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_table_to_run.html">log_table_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a table metric to the run with the given name.</p></td>
       </tr>
     </tbody><tbody>
       <tr>

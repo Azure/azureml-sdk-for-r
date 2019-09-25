@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gets the context object for a run — get_current_run • azureml</title>
+<title>Log a accuracy table to the artifact store. — log_accuracy_table_to_run • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Gets the context object for a run — get_current_run" />
+<meta property="og:title" content="Log a accuracy table to the artifact store. — log_accuracy_table_to_run" />
 
-<meta property="og:description" content="Gets the context object for a run" />
+<meta property="og:description" content="Log a accuracy table to the artifact store." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,33 +121,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gets the context object for a run</h1>
+    <h1>Log a accuracy table to the artifact store.</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>get_current_run.Rd</code></div>
+    <div class="hidden name"><code>log_accuracy_table_to_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the context object for a run</p>
+    <p>Log a accuracy table to the artifact store.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_current_run</span>(<span class='kw'>allow_offline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>log_accuracy_table_to_run</span>(<span class='no'>name</span>, <span class='no'>value</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>run</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>allow_offline</th>
-      <td><p>Allow the service context to fall back to offline mode
-so that the training script can be tested locally without submitting a job
-with the SDK.</p></td>
+      <th>name</th>
+      <td><p>The name of the accuracy table</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>json containing name, version, and data properties</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>An optional metric description</p></td>
+    </tr>
+    <tr>
+      <th>run</th>
+      <td><p>Run object. If not specified, will default to current run from 
+service context.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The run object.</p>
     
 
   </div>
@@ -155,9 +162,7 @@ with the SDK.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

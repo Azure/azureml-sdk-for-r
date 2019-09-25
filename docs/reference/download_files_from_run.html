@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gets the context object for a run — get_current_run • azureml</title>
+<title>Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified. — download_files_from_run • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Gets the context object for a run — get_current_run" />
+<meta property="og:title" content="Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified. — download_files_from_run" />
 
-<meta property="og:description" content="Gets the context object for a run" />
+<meta property="og:description" content="Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,33 +124,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gets the context object for a run</h1>
+    <h1>Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified.</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>get_current_run.Rd</code></div>
+    <div class="hidden name"><code>download_files_from_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the context object for a run</p>
+    <p>Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_current_run</span>(<span class='kw'>allow_offline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>download_files_from_run</span>(<span class='no'>run</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>output_directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>output_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>allow_offline</th>
-      <td><p>Allow the service context to fall back to offline mode
-so that the training script can be tested locally without submitting a job
-with the SDK.</p></td>
+      <th>run</th>
+      <td><p>the run object</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>the filepath prefix within the container from 
+which to download all artifacts</p></td>
+    </tr>
+    <tr>
+      <th>output_directory</th>
+      <td><p>optional directory that all artifact paths use 
+as a prefix</p></td>
+    </tr>
+    <tr>
+      <th>output_paths</th>
+      <td><p>optional filepaths in which to store the downloaded 
+artifacts. Should be unique and match length of paths.</p></td>
+    </tr>
+    <tr>
+      <th>batch_size</th>
+      <td><p>number of files to download per batch</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The run object.</p>
     
 
   </div>
@@ -155,9 +174,7 @@ with the SDK.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
