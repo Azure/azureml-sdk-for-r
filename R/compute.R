@@ -222,7 +222,7 @@ list_supported_vm_sizes <- function(workspace, location = NULL) {
 #' @param cluster cluster object
 #' @param min_nodes Minimum number of nodes to use on the cluster
 #' @param max_nodes Maximum number of nodes to use on the cluster
-#' idle_seconds_before_scaledown: Node idle time in seconds before 
+#' @param idle_seconds_before_scaledown: Node idle time in seconds before 
 #' scaling down the cluster
 #' @export
 update_aml_compute <- function(cluster, min_nodes = NULL, max_nodes = NULL, 

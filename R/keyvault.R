@@ -3,6 +3,7 @@
 
 #' Add a named list of secrets eg. list("name" = "value") into the keyvault
 #' @param keyvault keyvault object
+#' @param secrets list of secret names and values to be added
 #' @export
 set_secrets <- function(keyvault, secrets) {
   keyvault$set_secrets(secrets)

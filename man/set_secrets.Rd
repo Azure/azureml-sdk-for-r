@@ -8,6 +8,8 @@ set_secrets(keyvault, secrets)
 }
 \arguments{
 \item{keyvault}{keyvault object}
+
+\item{secrets}{list of secret names and values to be added}
 }
 \description{
 Add a named list of secrets eg. list("name" = "value") into the keyvault

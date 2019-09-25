@@ -12,8 +12,9 @@ update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
 
 \item{min_nodes}{Minimum number of nodes to use on the cluster}
 
-\item{max_nodes}{Maximum number of nodes to use on the cluster
-idle_seconds_before_scaledown: Node idle time in seconds before 
+\item{max_nodes}{Maximum number of nodes to use on the cluster}
+
+\item{idle_seconds_before_scaledown:}{Node idle time in seconds before 
 scaling down the cluster}
 }
 \description{
