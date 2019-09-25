@@ -14,7 +14,7 @@ if (is.null(compute_target)) {
                                        vm_size = vm_size,
                                        max_nodes = 1)
 }
-wait_for_compute(compute_target)
+wait_for_provisioning_completion(compute_target)
 
 # define estimator
 script_params <- list(batch_size = 32,
@@ -31,7 +31,7 @@ est <- estimator(source_directory = ".",
 experiment_name <- "hyperdrive-cifar10"
 exp <- experiment(ws, experiment_name)
 
-run <- submit_experiment(est, exp)
+run <- submit_experiment(exp, est)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)
@@ -52,7 +52,7 @@ hyperdrive_config <- hyperdrive_config(sampling,
                                        estimator = est)
 
 # submit hyperdrive run
-hyperdrive_run <- submit_experiment(hyperdrive_config, exp)
+hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 
 # find best-performing run

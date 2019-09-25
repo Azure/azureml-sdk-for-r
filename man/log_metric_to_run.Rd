@@ -4,14 +4,15 @@
 \alias{log_metric_to_run}
 \title{Log metric to run}
 \usage{
-log_metric_to_run(name, value, run)
+log_metric_to_run(name, value, run = NULL)
 }
 \arguments{
 \item{name}{name of the metric}
 
 \item{value}{value of the metric}
 
-\item{run}{Run object}
+\item{run}{Run object. If not specified, will default to current run from 
+service context.}
 }
 \description{
 Log metric to run

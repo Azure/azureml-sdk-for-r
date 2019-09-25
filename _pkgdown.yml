@@ -16,17 +16,24 @@ reference:
   - '`list_workspaces`'
   - '`get_workspace_details`'
   - '`get_default_keyvault `'
+  - '`set_secrets `'
+  - '`get_secrets `'
+  - '`delete_secrets `'
+  - '`list_secrets `'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:
   - '`get_compute`'
-  - '`wait_for_compute`'
+  - '`wait_for_provisioning_completion`'
   - '`delete_compute`'
   - '`create_aml_compute`'
   - '`create_aks_compute`'
   - '`get_aks_compute_credentials`'
   - '`attach_aks_compute`'
   - '`detach_aks_compute`'
+  - '`list_nodes_in_aml_compute`'
+  - '`list_supported_vm_sizes`'
+  - '`update_aml_compute`'
 - title: Working with data
   desc: Functions for managing and accessing data for your machine learning workflows. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.
   contents:
@@ -41,12 +48,28 @@ reference:
   contents:
   - '`experiment`'
   - '`submit_experiment`'
+  - '`get_runs_in_experiment`'
   - '`estimator`'
   - '`wait_for_run_completion`'
   - '`get_current_run`'
   - '`log_metric_to_run`'
   - '`get_run_metrics`'
   - '`cancel_run`'
+  - '`download_file_from_run`'
+  - '`download_files_from_run`'
+  - '`get__run`'
+  - '`get_run_details`'
+  - '`get_run_details_with_logs`'
+  - '`get_run_file_names`'
+  - '`get_secrets_from_run`'
+  - '`log_accuracy_table_to_run`'
+  - '`log_confusion_matrix_to_run`'
+  - '`log_image_to_run`'
+  - '`log_list_to_run`'
+  - '`log_predictions_to_run`'
+  - '`log_residuals_to_run`'
+  - '`log_row_to_run`'
+  - '`log_table_to_run`'
 - title: Hyperparameter tuning
   desc: Functions for configuring and managing hyperparameter tuning (HyperDrive) experiments. Azure ML's HyperDrive functionality enables you to automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You can also define early termination policies in which poorly performing experiment runs are canceled and new ones started.
   contents:

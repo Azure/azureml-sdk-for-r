@@ -84,7 +84,7 @@ get_compute <- function(workspace, cluster_name) {
 #' @param cluster cluster object
 #' @param show_output show output on console
 #' @export
-wait_for_compute <- function(cluster, show_output = TRUE) {
+wait_for_provisioning_completion <- function(cluster, show_output = TRUE) {
   cluster$wait_for_completion(show_output)
 }
 
@@ -191,5 +191,44 @@ attach_aks_compute <- function(workspace,
 #' @export
 detach_aks_compute <- function(cluster) {
   cluster$detach()
+  invisible(NULL)
+}
+
+#' Get the details (e.g IP address, port etc) of all the compute nodes in the 
+#' compute.
+#' @param cluster cluster object
+#' @return Details of all the compute nodes in the cluster in data frame
+#' @export
+list_nodes_in_aml_compute <- function(cluster) {
+  nodes <- cluster$list_nodes()
+  plyr::ldply(nodes, data.frame)
+}
+
+#' List the supported VM sizes in a region.
+#' @param workspace workspace object
+#' @param location Location of cluster. If not specified, will default to 
+#' workspace location.
+#' @return List of supported VM sizes in a region with name of the VM, VCPUs, 
+#' RAM in data frame
+#' @export
+list_supported_vm_sizes <- function(workspace, location = NULL) {
+  vm_sizes <- azureml$core$compute$AmlCompute$supported_vmsizes(workspace, 
+                                                                location)
+  plyr::ldply(vm_sizes, data.frame)
+}
+
+#' Update Scale settings for AmlCompute target.
+#' @param cluster cluster object
+#' @param min_nodes Minimum number of nodes to use on the cluster
+#' @param max_nodes Maximum number of nodes to use on the cluster
+#' @param idle_seconds_before_scaledown Node idle time in seconds before 
+#' scaling down the cluster
+#' @export
+update_aml_compute <- function(cluster, min_nodes = NULL, max_nodes = NULL, 
+                               idle_seconds_before_scaledown = NULL) {
+  cluster$update(cluster = cluster,
+                 min_nodes = min_nodes,
+                 max_nodes = max_nodes,
+                 idle_seconds_before_scaledown = idle_seconds_before_scaledown)
   invisible(NULL)
 }
