@@ -1,6 +1,6 @@
 library(azureml)
 
-log_metric_to_run("test_metric", 0.5)
+log_metric_to_run("test_metric", 0.5, get_current_run())
 
 # Uncomment once base image upgrades the sdk
 #log_list_to_run("test_list", c(1, 2, 3))
