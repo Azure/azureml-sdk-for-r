@@ -250,6 +250,7 @@ log_residuals_to_run <- function(name, value, description = '', run = NULL) {
 #' @param description An optional metric description
 #' @param run Run object. If not specified, will default to current run from 
 #' service context.
+#' @param ... Each named parameter generates a column with the value specified.
 #' @export
 log_row_to_run <- function(name, description = '', run = NULL, ...) {
   if (is.null(run)) {
