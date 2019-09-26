@@ -60,7 +60,7 @@ test_that("submit experiment through a custom environment", {
   dir.create(tmp_dir_name)
   file.copy(script_name, tmp_dir_name)
   
-  env <- environment("myenv", cran_packages = c("ggplot2", "dplyr"))
+  env <- r_environment("myenv", cran_packages = c("ggplot2", "dplyr"))
 
   estimator <- estimator(tmp_dir_name,
                          compute_target = existing_compute$name, 

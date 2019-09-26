@@ -78,26 +78,25 @@ estimator <- function(source_directory,
                             environment_variables = environment_variables,
                             shm_size = shm_size,
                             max_run_duration_seconds = max_run_duration_seconds,
-                            environment = environment)
+                            environment_definition = environment)
   
-  if (!is.null(environment))
-    invisible(est)
+  if (is.null(environment)) {
+    run_config <- est$run_config
+    run_config$framework <- "R"
+    run_config$environment$python$user_managed_dependencies <- TRUE
+    
+    if (is.null(custom_docker_image)) {
+      processor <- "cpu"
+      if (use_gpu) {
+        processor <- "gpu"
+      }
   
-  run_config <- est$run_config
-  run_config$framework <- "R"
-  run_config$environment$python$user_managed_dependencies <- TRUE
-  
-  if (is.null(custom_docker_image)) {
-    processor <- "cpu"
-    if (use_gpu) {
-      processor <- "gpu"
+      run_config$environment$docker$base_image <- paste("r-base",
+                                                        processor,
+                                                        sep = ":")
+      run_config$environment$docker$base_image_registry$address <-
+        "viennaprivate.azurecr.io"
     }
-
-    run_config$environment$docker$base_image <- paste("r-base",
-                                                      processor,
-                                                      sep = ":")
-    run_config$environment$docker$base_image_registry$address <-
-      "viennaprivate.azurecr.io"
   }
   
   invisible(est)
