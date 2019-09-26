@@ -110,7 +110,7 @@ reference:
   - '`save_model_package_files`'
   - '`wait_for_model_package_creation`'
   - '`inference_config`'
-  - '`environment`'
+  - '`r_environment`'
   - '`register_environment`'
   - '`get_environment`'
   - '`container_registry`'

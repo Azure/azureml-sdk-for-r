@@ -19,10 +19,10 @@ Imports:
     reticulate (>= 1.12),
     R6 (>= 2.4.0),
     plyr (>= 1.8),
-    DT,
-    parsedate
+    DT (>= 0.8),
+    parsedate,
+    rstudioapi (>= 0.7)
 Suggests: rmarkdown,
     knitr,
-    testthat,
-    rstudioapi (>= 0.7)
+    testthat
 VignetteBuilder: knitr
