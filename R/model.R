@@ -259,6 +259,8 @@ def run(input_data):
     return json.loads(dataR)", 
                                entry_script)
 
+  if (is.null(source_directory))
+    source_directory <- "."
   score_py_file_path <- file.path(source_directory, "_generated_score.py")
   py_file <- file(score_py_file_path, open = "w")
   writeLines(score_py_template, py_file)
