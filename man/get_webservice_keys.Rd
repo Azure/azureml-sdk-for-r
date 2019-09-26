@@ -9,6 +9,9 @@ get_webservice_keys(webservice)
 \arguments{
 \item{webservice}{The webservice object.}
 }
+\value{
+The auth keys for this Webservice
+}
 \description{
 Retrieve auth keys for this Webservice.
 }

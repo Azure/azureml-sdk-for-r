@@ -3,18 +3,22 @@
 \name{get_webservice}
 \alias{get_webservice}
 \title{Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding to the
-specific type of the retrieved Webservice object.}
+provided workspace. Will return an instance of a child class corresponding to
+the specific type of the retrieved Webservice object.}
 \usage{
 get_webservice(workspace, name)
 }
 \arguments{
-\item{workspace}{The workspace object containing the Webservice object to retrieve}
+\item{workspace}{The workspace object containing the Webservice object to
+retrieve}
 
 \item{name}{The name of the of the Webservice object to retrieve}
 }
+\value{
+The webservice object
+}
 \description{
 Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding to the
-specific type of the retrieved Webservice object.
+provided workspace. Will return an instance of a child class corresponding to
+the specific type of the retrieved Webservice object.
 }

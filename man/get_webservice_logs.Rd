@@ -11,6 +11,9 @@ get_webservice_logs(webservice, num_lines = 5000L)
 
 \item{num_lines}{The maximum number of log lines to retrieve.}
 }
+\value{
+The logs for this Webservice
+}
 \description{
 Retrieve logs for the Webservice.
 }

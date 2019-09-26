@@ -9,7 +9,8 @@ wait_for_model_package_creation(package, show_output = FALSE)
 \arguments{
 \item{package}{Package created with model(s) and dependencies.}
 
-\item{show_output}{Boolean option to print more verbose output. Defaults to FALSE.}
+\item{show_output}{Boolean option to print more verbose output. Defaults to
+FALSE.}
 }
 \description{
 Wait for the package to finish creating.

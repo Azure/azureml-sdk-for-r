@@ -19,7 +19,8 @@ Imports:
     reticulate (>= 1.12),
     R6 (>= 2.4.0),
     DT,
-    parsedate
+    parsedate,
+    plyr (>= 1.8)
 Suggests: rmarkdown,
     knitr,
     testthat,
