@@ -44,7 +44,7 @@ install_azureml <- function(version = NULL,
 
   cat("\nInstallation complete.\n\n")
   
-  if (rstudioapi::hasFun("restartSession"))
+  if (rstudioapi::isAvailable() && rstudioapi::hasFun("restartSession"))
     rstudioapi::restartSession()
   
   invisible(NULL)
