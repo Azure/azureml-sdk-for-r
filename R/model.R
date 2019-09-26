@@ -15,19 +15,19 @@
 #' @param run_id Optional, will filter based on the provided ID.
 #' @return A model object, if one is found in the provided workspace
 #' @export
-get_model <- function(workspace, 
-                      name = NULL, 
-                      id = NULL, 
-                      tags = NULL, 
-                      properties = NULL, 
-                      version = NULL, 
+get_model <- function(workspace,
+                      name = NULL,
+                      id = NULL,
+                      tags = NULL,
+                      properties = NULL,
+                      version = NULL,
                       run_id = NULL) {
-  model <- azureml$core$Model(workspace, 
-                              name, 
-                              id, 
-                              tags, 
-                              properties, 
-                              version, 
+  model <- azureml$core$Model(workspace,
+                              name,
+                              id,
+                              tags,
+                              properties,
+                              version,
                               run_id)
   invisible(model)
 }
@@ -221,9 +221,9 @@ inference_config <- function(entry_script,
                              source_directory = NULL, 
                              description = NULL, 
                              environment = NULL) {
-  generate_score_py(entry_script, source_directory)
+  generate_score_python_wrapper(entry_script, source_directory)
   inference_config <- azureml$core$model$InferenceConfig(
-    entry_script = "score.py",
+    entry_script = "_generated_score.py",
     source_directory = source_directory,
     description = description,
     environment = environment)
@@ -231,17 +231,16 @@ inference_config <- function(entry_script,
   invisible(inference_config)
 }
 
-#' Generate score.py file for the corresponding score.R file
+#' Generate _generated_score.py file for the corresponding entry_script file
 #' @param entry_script Path to local file that contains the code to run for 
 #' the image.
 #' @param source_directory paths to folders that contains all files to 
 #' create the image.
-generate_score_py <- function(entry_script, source_directory) {
+generate_score_python_wrapper <- function(entry_script, source_directory) {
   score_py_template <- sprintf("# This is auto-generated python wrapper.
 import rpy2.robjects as robjects
 import os
 import json
-from azureml.core.model import Model
 
 def init():
     global r_run
@@ -252,14 +251,15 @@ def init():
 
     # handle path for windows os
     score_r_path = score_r_path.replace('\\\\', '/')
-    robjects.r('''source('{}')'''.format(score_r_path))
+    robjects.r.source(\"{}\".format(score_r_path))
+    r_run = robjects.r['init']()
 
 def run(input_data):
     dataR = r_run(input_data)[0]
     return json.loads(dataR)", 
                                entry_script)
 
-  score_py_file_path <- file.path(source_directory, "score.py")
+  score_py_file_path <- file.path(source_directory, "_generated_score.py")
   py_file <- file(score_py_file_path, open = "w")
   writeLines(score_py_template, py_file)
   close(py_file)
