@@ -35,8 +35,7 @@ test_that("default datastore", {
     unlink(target_dir, recursive = TRUE)
 })
 
-test_that("register azure blob/fileshare datastores",
-{
+test_that("register azure blob/fileshare datastores", {
   ws <- existing_ws
   
   # register azure blob datastore
