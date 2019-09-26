@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Configure the python environment where the experiment is executed.
+#' Configure the R environment where the experiment is executed.
 #' @param name The name of the environment
 #' @param version The version of the environment
 #' @param environment_variables A dictionary of environment variables names and
@@ -15,13 +15,13 @@
 #' be used as the base image.
 #' @param base_image_registry Image registry that contains the base image.
 #' @export
-environment <- function(name, version = NULL,
-                        environment_variables = NULL,
-                        cran_packages = NULL,
-                        github_packages = NULL,
-                        custom_url_packages = NULL,
-                        custom_docker_image = NULL,
-                        base_image_registry = NULL) {
+r_environment <- function(name, version = NULL,
+                          environment_variables = NULL,
+                          cran_packages = NULL,
+                          github_packages = NULL,
+                          custom_url_packages = NULL,
+                          custom_docker_image = NULL,
+                          base_image_registry = NULL) {
   env <- azureml$core$Environment(name)
   env$version <- version
   env$python$user_managed_dependencies <- TRUE
