@@ -20,9 +20,9 @@ Imports:
     R6 (>= 2.4.0),
     plyr (>= 1.8),
     DT,
-    parsedate
+    parsedate,
+    rstudioapi (>= 0.7)
 Suggests: rmarkdown,
     knitr,
-    testthat,
-    rstudioapi (>= 0.7)
+    testthat
 VignetteBuilder: knitr
