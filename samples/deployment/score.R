@@ -1,12 +1,12 @@
-# Copyright(c) Microsoft Corporation.
-# Licensed under the MIT license.
+#' Copyright(c) Microsoft Corporation.
+#' Licensed under the MIT license.
 
 library(jsonlite)
-library(azureml)
 
 init <- function()
 {
-  model <<- readRDS(Sys.getenv("AZUREML_MODEL_DIR"))
+  model_path <- Sys.getenv("AZUREML_MODEL_DIR")
+  model <- readRDS(file.path(model_path, "model.rds"))
   message("model is loaded")
   
   function(data)
