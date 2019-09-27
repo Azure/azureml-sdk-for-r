@@ -32,8 +32,7 @@ wait_for_run_completion(run, show_output = TRUE)
 model <- run$register_model(model_name = "model.rds", 
                             model_path = "outputs/model.rds")
 
-r_env <- environment(name="r_env")
-r_env$inferencing_stack_version='latest'
+r_env <- environment(name = "r_env", inferencing_stack_version = 'latest')
 
 # create inference config
 inference_config <- inference_config(

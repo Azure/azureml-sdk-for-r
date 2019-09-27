@@ -14,6 +14,10 @@
 #' to use for training will be built. If not set, a default CPU based image will
 #' be used as the base image.
 #' @param base_image_registry Image registry that contains the base image.
+#' @param inferencing_stack_version This section specifies the inferencing 
+#' stack version added to the image. To avoid adding an inferencing stack, 
+#' do not set this value. Valid values: "latest"
+#' @return Environment object
 #' @export
 r_environment <- function(name, version = NULL,
                           environment_variables = NULL,
@@ -21,7 +25,8 @@ r_environment <- function(name, version = NULL,
                           github_packages = NULL,
                           custom_url_packages = NULL,
                           custom_docker_image = NULL,
-                          base_image_registry = NULL) {
+                          base_image_registry = NULL,
+                          inferencing_stack_version = NULL) {
   env <- azureml$core$Environment(name)
   env$version <- version
   env$python$user_managed_dependencies <- TRUE
@@ -29,6 +34,8 @@ r_environment <- function(name, version = NULL,
   if (!is.null(environment_variables)) {
     env$environment_variables <- environment_variables
   }
+  
+  env$inferencing_stack_version <- inferencing_stack_version
   
   base_docker_image <- custom_docker_image
   image_registry_address <- NULL
