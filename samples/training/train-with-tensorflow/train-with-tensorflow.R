@@ -14,7 +14,7 @@ if (is.null(compute_target)) {
                                        vm_size = vm_size,
                                        max_nodes = 1)
 }
-wait_for_compute(compute_target)
+wait_for_provisioning_completion(compute_target)
 
 # define estimator
 est <- estimator(source_directory = ".",
@@ -27,6 +27,7 @@ experiment_name <- "train-tf-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
 
 run <- submit_experiment(est, exp)
+view_run_details(run)
 wait_for_run_completion(run, show_output = TRUE)
 
 metrics <- get_run_metrics(run)

@@ -103,15 +103,17 @@ create_launch_script <- function(source_directory,
   launch_file_conn <- file(file.path(source_directory, launch_file_name),
                            open = "w")
   
-  writeLines("# This is the auto-generated launcher file.\n# It installs the
-             packages specified in the estimator.\n# Once all the packages are
-             successfully installed, it will execute the entry script.\n",
-             launch_file_conn)
+  writeLines(
+    c("# This is the auto-generated launcher file.",
+      "# It installs the packages specified in the estimator.",
+      "# Once all the packages are successfully installed, ", 
+      "# it will execute the entry script."),
+    launch_file_conn)
   
   if (!is.null(cran_packages)) {
-    writeLines(sprintf("install.packages(\"%s\",
-                       repos = \"http://cran.us.r-project.org\")\n",
-                       cran_packages),
+    writeLines(sprintf("install.packages(\"%s\", repos = \"%s\")\n",
+                       cran_packages,
+                       "http://cran.us.r-project.org"),
                launch_file_conn)
   }
   

@@ -5,10 +5,10 @@ devtools::install_github('https://github.com/Azure/azureml-sdk-for-r')
 library(azureml)
 install_azureml()
 
-subscription_id <- Sys.getenv("SUBSCRIPTION_ID", unset = "my-subscription_id")
-resource_group <- Sys.getenv("RESOURCE_GROUP", unset = "my-resource_group")
+subscription_id <- Sys.getenv("SUBSCRIPTION_ID", unset = "<my-subscription-id>")
+resource_group <- Sys.getenv("RESOURCE_GROUP", unset = "<my-resource-group>")
 workspace_name <- Sys.getenv("WORKSPACE_NAME", unset = "<my-workspace-name>")
-location <- Sys.getenv("WORKSPACE_REGION", unset = "eastus2")
+location <- Sys.getenv("WORKSPACE_REGION", unset = "<my-region>")
 
 ws <- create_workspace(name = workspace_name,
                        subscription_id = subscription_id,

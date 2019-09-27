@@ -31,9 +31,9 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :arrows_counterclockwise: |
 [Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
 
-## Installing `azureml` package
+## Installation
 
-Install [Anaconda](https://www.anaconda.com/) if not already installed. Choose Python 3.5 or later.
+Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
 To get started, use the `remotes` package to install AzureML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
 

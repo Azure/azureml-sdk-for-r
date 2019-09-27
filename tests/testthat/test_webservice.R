@@ -13,7 +13,7 @@ test_that("create, get, generate keys of, and delete webservice", {
   model <- register_model(ws, tmp_dir_name, model_name)
   
   # Create a new environment
-  env <- environment(name = "newenv")
+  env <- r_environment(name = "newenv")
   env$register(ws)
   
   # Create the inference config to use for Webservice
