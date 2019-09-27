@@ -80,9 +80,11 @@ estimator <- function(source_directory,
                             max_run_duration_seconds = max_run_duration_seconds,
                             environment_definition = environment)
   
+  run_config <- est$run_config
+  run_config$framework <- "R"
+  
   if (is.null(environment)) {
-    run_config <- est$run_config
-    run_config$framework <- "R"
+    
     run_config$environment$python$user_managed_dependencies <- TRUE
     
     if (is.null(custom_docker_image)) {

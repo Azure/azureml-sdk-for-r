@@ -18,13 +18,13 @@ test_that("create, submit experiment, run in default amlcompute,
 
   ds <- get_default_datastore(ws)
 
-  estimator <- estimator(tmp_dir_name,
-                         compute_target = existing_compute$name, 
-                         entry_script = script_name, 
-                         script_params = list("data_folder" = ds$as_mount()),
-                         cran_packages = c("ggplot2", "dplyr"))
+  est <- estimator(tmp_dir_name,
+                   compute_target = existing_compute$name, 
+                   entry_script = script_name, 
+                   script_params = list("data_folder" = ds$as_mount()),
+                   cran_packages = c("ggplot2", "dplyr"))
   
-  run <- submit_experiment(exp, estimator)
+  run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
   
   run <- get_run(exp, run$id)
@@ -62,13 +62,13 @@ test_that("submit experiment through a custom environment", {
   
   env <- r_environment("myenv", cran_packages = c("ggplot2", "dplyr"))
 
-  estimator <- estimator(tmp_dir_name,
-                         compute_target = existing_compute$name, 
-                         entry_script = script_name,
-                         environment = env)
+  est <- estimator(tmp_dir_name,
+                   compute_target = existing_compute$name, 
+                   entry_script = script_name,
+                   environment = env)
   
   exp <- experiment(ws, "estimator_run")
-  run <- submit_experiment(exp, estimator)
+  run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
   expect_equal(run$status, "Completed")
   
