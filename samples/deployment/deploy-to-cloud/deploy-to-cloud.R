@@ -5,33 +5,8 @@ library("azureml")
 
 ws <- load_workspace_from_config()
 
-# create aml compute
-cluster_name <- "rcluster"
-compute_target <- get_compute(ws, cluster_name = cluster_name)
-if (is.null(compute_target)) {
-  vm_size <- "STANDARD_NC6"
-  compute_target <- create_aml_compute(workspace = ws,
-                                       cluster_name = cluster_name,
-                                       vm_size = vm_size,
-                                       max_nodes = 1)
-}
-wait_for_compute(compute_target)
-
-# define estimator
-est <- estimator(source_directory = ".",
-                 entry_script = "train_script.R",
-                 compute_target = compute_target)
-
-experiment_name <- "train-then-deploy-model"
-exp <- experiment(ws, experiment_name)
-
-run <- submit_experiment(est, exp)
-wait_for_run_completion(run, show_output = TRUE)
-
 # register the model
-model <- run$register_model(model_name = "model.rds", 
-                            model_path = "outputs/model.rds")
-
+model <- register_model(ws, model_path = "model.rds", model_name = "model.rds")
 r_env <- environment(name = "r_env", inferencing_stack_version = 'latest')
 
 # create inference config

@@ -7,7 +7,7 @@ The examples assume that the data and scripts are in the current directory.
 2. [Train on ML Compute](training/train-on-amlcompute): Train a model using an ML Compute cluster as compute target.
 3. [Train with TensorFlow](training/train-with-tensorflow): Train a TensorFlow GradientDescentOptimizer on MNIST.
 4. [CNN Tuning with HyperDrive](training/cnn-tuning-with-hyperdrive): Use AzureML's HyperDrive service to tune hyperparameters for CIFAR10 training with Keras
-5. [Deploying a model to Cloud](deployment/deploy-to-cloud): Train a model and deploy it as a Webservice.
+5. [Deploying a model to Cloud](deployment/deploy-to-cloud): Deploy a model as a Webservice.
 
 ### Troubleshooting
 
