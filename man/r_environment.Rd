@@ -7,7 +7,7 @@
 r_environment(name, version = NULL, environment_variables = NULL,
   cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
-  base_image_registry = NULL, inferencing_stack_version = NULL)
+  base_image_registry = NULL)
 }
 \arguments{
 \item{name}{The name of the environment}
@@ -29,13 +29,6 @@ to use for training will be built. If not set, a default CPU based image will
 be used as the base image.}
 
 \item{base_image_registry}{Image registry that contains the base image.}
-
-\item{inferencing_stack_version}{This section specifies the inferencing 
-stack version added to the image. To avoid adding an inferencing stack, 
-do not set this value. Valid values: "latest"}
-}
-\value{
-Environment object
 }
 \description{
 Configure the R environment where the experiment is executed.
