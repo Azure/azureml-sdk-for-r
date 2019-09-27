@@ -1,6 +1,7 @@
 context("webservice tests")
 
 test_that("create, get, generate keys of, and delete webservice", {
+  skip('skip')
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"

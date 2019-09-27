@@ -49,18 +49,18 @@ get_model <- function(workspace,
 #' only the specified files will be bundled into the Model object.
 #' @return The registered Model object
 #' @export
-register_model <- function(workspace, 
-                           model_path, 
-                           model_name, 
+register_model <- function(workspace,
+                           model_path,
+                           model_name,
                            tags = NULL,
-                           properties = NULL, 
-                           description = NULL, 
+                           properties = NULL,
+                           description = NULL,
                            child_paths = NULL) {
-  model <- azureml$core$Model$register(workspace, 
-                                       model_path, 
-                                       model_name, 
+  model <- azureml$core$Model$register(workspace,
+                                       model_path,
+                                       model_name,
                                        tags = tags,
-                                       properties = properties, 
+                                       properties = properties,
                                        description = description,
                                        child_paths = child_paths)
   invisible(model)

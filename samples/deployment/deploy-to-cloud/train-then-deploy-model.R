@@ -52,6 +52,9 @@ service <- deploy_model(ws,
                         deployment_config)
 wait_for_deployment(service, show_output = TRUE)
 
+# If you encounter any issue in deploying the webservice, please visit
+# https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment
+
 # Inferencing
 # versicolor
 plant <- data.frame(Sepal.Length=6.4, 
