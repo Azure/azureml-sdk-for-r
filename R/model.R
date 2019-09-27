@@ -223,6 +223,9 @@ inference_config <- function(entry_script,
                              description = NULL,
                              environment = NULL) {
   generate_score_python_wrapper(entry_script, source_directory)
+  if (!is.null(environment)
+      environment$inferencing_stack_version <- 'latest'
+
   inference_config <- azureml$core$model$InferenceConfig(
     entry_script = "_generated_score.py",
     source_directory = source_directory,
