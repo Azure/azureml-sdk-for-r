@@ -7,7 +7,7 @@ ws <- load_workspace_from_config()
 
 # register the model
 model <- register_model(ws, model_path = "model.rds", model_name = "model.rds")
-r_env <- environment(name = "r_env", inferencing_stack_version = 'latest')
+r_env <- environment(name = "r_env")
 
 # create inference config
 inference_config <- inference_config(
