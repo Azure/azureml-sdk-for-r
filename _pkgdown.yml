@@ -15,11 +15,11 @@ reference:
   - '`delete_workspace`'
   - '`list_workspaces`'
   - '`get_workspace_details`'
-  - '`get_default_keyvault `'
-  - '`set_secrets `'
-  - '`get_secrets `'
-  - '`delete_secrets `'
-  - '`list_secrets `'
+  - '`get_default_keyvault`'
+  - '`set_secrets`'
+  - '`get_secrets`'
+  - '`delete_secrets`'
+  - '`list_secrets`'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:
@@ -57,7 +57,7 @@ reference:
   - '`cancel_run`'
   - '`download_file_from_run`'
   - '`download_files_from_run`'
-  - '`get__run`'
+  - '`get_run`'
   - '`get_run_details`'
   - '`get_run_details_with_logs`'
   - '`get_run_file_names`'
