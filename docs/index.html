@@ -195,17 +195,24 @@
 <ol>
 <li>
 <p>If you don’t already have a workspace created, you can create one by doing:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">new_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/create_workspace.html">create_workspace</a></span>(<span class="dt">name =</span> workspace_name, <span class="dt">subscription_id =</span> your_sub_id, <span class="dt">resource_group =</span> your_rg, <span class="dt">location =</span> location, <span class="dt">create_resource_group =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># write the details of the workspace to a configuration file to the local machine</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw"><a href="reference/write_workspace_config.html">write_workspace_config</a></span>(new_ws, <span class="dt">path =</span> <span class="st">"path-to-write-config-file"</span>)</a></code></pre></div>
-<p>Note: If you haven’t already set up a resource group, set <code>create_resource_group = TRUE</code> and set <code>resource_group</code> to your desired resource group name in order to create the resource group in the same step.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># If you haven't already set up a resource group, set `create_resource_group = TRUE`  </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># and set `resource_group` to your desired resource group name in order to create the resource group </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># in the same step.</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">new_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/create_workspace.html">create_workspace</a></span>(<span class="dt">name =</span> <span class="op">&lt;</span>workspace_name<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">                           <span class="dt">subscription_id =</span> <span class="op">&lt;</span>subscription_id<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">               <span class="dt">resource_group =</span> <span class="op">&lt;</span>resource_group_name<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">               <span class="dt">location =</span> location, </a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">               <span class="dt">create_resource_group =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>After the workspace is created, you can save it to a configuration file to the local machine.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/write_workspace_config.html">write_workspace_config</a></span>(new_ws)</a></code></pre></div>
 </li>
 <li>
 <p>If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">existing_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_workspace.html">get_workspace</a></span>(name, <span class="dt">subscription_id  =</span>  your_sub_id, <span class="dt">resource_group  =</span>  your_rg)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">existing_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_workspace.html">get_workspace</a></span>(<span class="dt">name =</span> <span class="op">&lt;</span>workspace_name<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                 <span class="dt">subscription_id =</span> <span class="op">&lt;</span>subscription_id<span class="op">&gt;</span>, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                 <span class="dt">resource_group =</span> <span class="op">&lt;</span>resource_group_name<span class="op">&gt;</span>)</a></code></pre></div>
 <p>Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">loaded_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">loaded_ws &lt;-<span class="st"> </span><span class="kw"><a href="reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>Once you’ve accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R.</p>
 </li>
 </ol>
