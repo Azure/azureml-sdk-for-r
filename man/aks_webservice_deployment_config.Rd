@@ -81,6 +81,9 @@ Default to 10 seconds. Minimum value is 1.}
 \item{initial_delay_seconds}{Number of seconds after the container has 
 started before liveness probes are initiated. Defaults to 310}
 
+\item{timeout_seconds}{Number of seconds after which the liveness probe 
+times out. Defaults to 2 second. Minimum value is 1}
+
 \item{success_threshold}{Minimum consecutive successes for the liveness 
 probe to be considered successful after having failed. Defaults to 1. 
 Minimum value is 1.}
@@ -97,9 +100,6 @@ Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen
 Webservice. If this is enabled, users can access this Webservice by fetching 
 access token using their Azure Active Directory credentials. 
 Defaults to FALSE}
-
-\item{timeout_seconds}{Number of seconds after which the liveness probe 
-times out. Defaults to 2 second. Minimum value is 1}
 }
 \value{
 AksServiceDeploymentConfiguration object

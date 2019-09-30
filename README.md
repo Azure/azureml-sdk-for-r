@@ -31,9 +31,9 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
 [Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
 
-## Installing `azureml` package
+## Installation
 
-Install [Anaconda](https://www.anaconda.com/) if not already installed. Choose Python 3.5 or later.
+Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
 To get started, use the `remotes` package to install AzureML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
 
@@ -58,21 +58,31 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 1. If you don't already have a workspace created, you can create one by doing:
 
 	```R
-	new_ws <- create_workspace(name = workspace_name, subscription_id = your_sub_id, resource_group = your_rg, location = location, create_resource_group = FALSE)
-
-	# write the details of the workspace to a configuration file to the local machine
-	write_workspace_config(new_ws, path = "path-to-write-config-file")
+	# If you haven't already set up a resource group, set `create_resource_group = TRUE`  
+	# and set `resource_group` to your desired resource group name in order to create the resource group 
+	# in the same step.
+	new_ws <- create_workspace(name = <workspace_name>, 
+	                           subscription_id = <subscription_id>, 
+				   resource_group = <resource_group_name>, 
+				   location = location, 
+				   create_resource_group = FALSE)
 	```
-
-	Note: If you haven't already set up a resource group, set `create_resource_group = TRUE`  and set `resource_group` to your desired resource group name in order to create the resource group in the same step.
+	
+	After the workspace is created, you can save it to a configuration file to the local machine.
+	
+	```R
+	write_workspace_config(new_ws)
+	```
 
 2. If you have an existing workspace associated with your subscription, you can retrieve it from the server by doing:
 
 	```R
-	existing_ws <- get_workspace(name, subscription_id  =  your_sub_id, resource_group  =  your_rg)
+	existing_ws <- get_workspace(name = <workspace_name>, 
+				     subscription_id = <subscription_id>, 
+				     resource_group = <resource_group_name>)
 	```
 	Or, if you have the workspace config.json file on your local machine, you can load the workspace by doing:
-
+	
 	```R
 	loaded_ws <- load_workspace_from_config()
 	```

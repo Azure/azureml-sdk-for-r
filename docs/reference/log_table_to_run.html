@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait for cluster's instantiation — wait_for_compute • azureml</title>
+<title>Log a table metric to the run with the given name. — log_table_to_run • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Wait for cluster's instantiation — wait_for_compute" />
+<meta property="og:title" content="Log a table metric to the run with the given name. — log_table_to_run" />
 
-<meta property="og:description" content="Wait for cluster's instantiation" />
+<meta property="og:description" content="Log a table metric to the run with the given name." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,29 +121,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wait for cluster's instantiation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
-    <div class="hidden name"><code>wait_for_compute.Rd</code></div>
+    <h1>Log a table metric to the run with the given name.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
+    <div class="hidden name"><code>log_table_to_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Wait for cluster's instantiation</p>
+    <p>Log a table metric to the run with the given name.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wait_for_compute</span>(<span class='no'>cluster</span>, <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>log_table_to_run</span>(<span class='no'>name</span>, <span class='no'>value</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>run</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cluster</th>
-      <td><p>cluster object</p></td>
+      <th>name</th>
+      <td><p>The name of metric</p></td>
     </tr>
     <tr>
-      <th>show_output</th>
-      <td><p>show output on console</p></td>
+      <th>value</th>
+      <td><p>The table value of the metric (dictionary where keys are 
+columns to be posted to the service)</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>An optional metric description</p></td>
+    </tr>
+    <tr>
+      <th>run</th>
+      <td><p>Run object. If not specified, will default to current run from 
+service context.</p></td>
     </tr>
     </table>
     

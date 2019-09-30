@@ -18,29 +18,35 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
 
 \item{agent_count}{Number of agents (VMs) to host containers. Defaults to 3}
 
-\item{vm_size}{Size of agent VMs. More details can be found here: https://aka.ms/azureml-vm-details.
-Defaults to Standard_D3_v2}
+\item{vm_size}{Size of agent VMs. More details can be found here:
+https://aka.ms/azureml-vm-details. Defaults to Standard_D3_v2}
 
-\item{ssl_cname}{A CName to use if enabling SSL validation on the cluster. Must provide all three
-CName, cert file, and key file to enable SSL validation}
+\item{ssl_cname}{A CName to use if enabling SSL validation on the cluster.
+Must provide all three CName, cert file, and key file to enable SSL
+validation}
 
-\item{ssl_cert_pem_file}{A file path to a file containing cert information for SSL validation. Must provide
-all three CName, cert file, and key file to enable SSL validation}
+\item{ssl_cert_pem_file}{A file path to a file containing cert information
+for SSL validation. Must provide all three CName, cert file, and key file to
+enable SSL validation}
 
-\item{ssl_key_pem_file}{A file path to a file containing key information for SSL validation. Must provide
-all three CName, cert file, and key file to enable SSL validation}
+\item{ssl_key_pem_file}{A file path to a file containing key information for
+SSL validation. Must provide all three CName, cert file, and key file to
+enable SSL validation}
 
-\item{location}{Location to provision cluster in. If not specified, will default to workspace location.
-Available regions for this compute can be found here:
-https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=kubernetes-service}
+\item{location}{Location to provision cluster in. If not specified, will
+default to workspace location. Available regions for this compute can be
+found here: "https://azure.microsoft.com/global-infrastructure/services/?
+regions=all&products=kubernetes-service"}
 
-\item{vnet_resourcegroup_name}{Name of the resource group where the virtual network is located}
+\item{vnet_resourcegroup_name}{Name of the resource group where the virtual
+network is located}
 
 \item{vnet_name}{Name of the virtual network}
 
 \item{subnet_name}{Name of the subnet inside the vnet}
 
-\item{service_cidr}{A CIDR notation IP range from which to assign service cluster IPs.}
+\item{service_cidr}{A CIDR notation IP range from which to assign service
+cluster IPs.}
 
 \item{dns_service_ip}{Containers DNS server IP address.}
 

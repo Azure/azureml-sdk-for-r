@@ -1,13 +1,12 @@
 context("environment")
 
-test_that("create, register, and get environment",
-{
+test_that("create, register, and get environment", {
     ws <- existing_ws
     
     env_name <- "testenv"
     
     # Create environment
-    env <- environment(env_name, version = "1")
+    env <- r_environment(env_name, version = "1")
     expect_equal(env$name, env_name)
     expect_equal(env$version, "1")
     

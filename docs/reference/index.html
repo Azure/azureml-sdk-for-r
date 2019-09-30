@@ -197,8 +197,9 @@
         <td>
           <p><code><a href="list_workspaces.html">list_workspaces()</a></code> </p>
         </td>
-        <td><p>List all workspaces that the user has access to in the specified subscription_id
-parameter.The list of workspaces can be filtered based on the resource group.</p></td>
+        <td><p>List all workspaces that the user has access to in the specified
+subscription_id parameter.The list of workspaces can be filtered based on the
+resource group.</p></td>
       </tr><tr>
         
         <td>
@@ -222,7 +223,7 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
       </tr><tr>
         
         <td>
-          <p><code><a href="wait_for_compute.html">wait_for_compute()</a></code> </p>
+          <p><code><a href="wait_for_provisioning_completion.html">wait_for_provisioning_completion()</a></code> </p>
         </td>
         <td><p>Wait for cluster's instantiation</p></td>
       </tr><tr>
@@ -261,6 +262,25 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
           <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
         </td>
         <td><p>Detach the AksCompute object from its associated workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_nodes_in_aml_compute.html">list_nodes_in_aml_compute()</a></code> </p>
+        </td>
+        <td><p>Get the details (e.g IP address, port etc) of all the compute nodes in the 
+compute.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_supported_vm_sizes.html">list_supported_vm_sizes()</a></code> </p>
+        </td>
+        <td><p>List the supported VM sizes in a region.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_aml_compute.html">update_aml_compute()</a></code> </p>
+        </td>
+        <td><p>Update Scale settings for AmlCompute target.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -274,13 +294,15 @@ parameter.The list of workspaces can be filtered based on the resource group.</p
         <td>
           <p><code><a href="upload_files_to_datastore.html">upload_files_to_datastore()</a></code> </p>
         </td>
-        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
+        <td><p>Upload the data from the local file system to the Azure storage this
+datastore points to.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="upload_to_datastore.html">upload_to_datastore()</a></code> </p>
         </td>
-        <td><p>Upload the data from the local file system to the Azure storage this datastore points to.</p></td>
+        <td><p>Upload the data from the local file system to the Azure storage this
+datastore points to.</p></td>
       </tr><tr>
         
         <td>
@@ -327,7 +349,13 @@ be deleted.</p></td>
         <td>
           <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
         </td>
-        <td><p>Submit experiment</p></td>
+        <td><p>Submit an experiment and return the active created run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_runs_in_experiment.html">get_runs_in_experiment()</a></code> </p>
+        </td>
+        <td><p>Return a generator of the runs for this experiment</p></td>
       </tr><tr>
         
         <td>
@@ -364,6 +392,94 @@ be deleted.</p></td>
           <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
         </td>
         <td><p>Cancel run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_file_from_run.html">download_file_from_run()</a></code> </p>
+        </td>
+        <td><p>Download an associated file from storage.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_files_from_run.html">download_files_from_run()</a></code> </p>
+        </td>
+        <td><p>Download files from a given storage prefix (folder name) or 
+the entire container if prefix is unspecified.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_details.html">get_run_details()</a></code> </p>
+        </td>
+        <td><p>Get the definition, status information, current log files and other details 
+of the run.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_details_with_logs.html">get_run_details_with_logs()</a></code> </p>
+        </td>
+        <td><p>Return run status including log file content.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_file_names.html">get_run_file_names()</a></code> </p>
+        </td>
+        <td><p>List the files that are stored in association with the run.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_secrets_from_run.html">get_secrets_from_run()</a></code> </p>
+        </td>
+        <td><p>Get the secret values for a given list of secret names.
+Get a dictionary of found and not found secrets for the list of names 
+provided.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_accuracy_table_to_run.html">log_accuracy_table_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a accuracy table to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_confusion_matrix_to_run.html">log_confusion_matrix_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a confusion matrix to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_image_to_run.html">log_image_to_run()</a></code> </p>
+        </td>
+        <td><p>Log an image metric to the run record.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_list_to_run.html">log_list_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a list metric value to the run with the given name.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_predictions_to_run.html">log_predictions_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a predictions to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_residuals_to_run.html">log_residuals_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a residuals to the artifact store.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_row_to_run.html">log_row_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a row metric to the run with the given name.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_table_to_run.html">log_table_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a table metric to the run with the given name.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -419,7 +535,8 @@ be deleted.</p></td>
         <td>
           <p><code><a href="quniform.html">quniform()</a></code> </p>
         </td>
-        <td><p>Specify a uniform distribution of the form round(uniform(min_value, max_value) / q) * q</p></td>
+        <td><p>Specify a uniform distribution of the form round(uniform(min_value,
+max_value) / q) * q</p></td>
       </tr><tr>
         
         <td>
@@ -431,13 +548,15 @@ be deleted.</p></td>
         <td>
           <p><code><a href="qloguniform.html">qloguniform()</a></code> </p>
         </td>
-        <td><p>Specify a uniform distribution of the form round(exp(uniform(min_value, max_value) / q) * q</p></td>
+        <td><p>Specify a uniform distribution of the form round(exp(uniform(min_value,
+max_value) / q) * q</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="normal.html">normal()</a></code> </p>
         </td>
-        <td><p>Specify a real value that is normally-distributed with mean mu and standard deviation sigma</p></td>
+        <td><p>Specify a real value that is normally-distributed with mean mu and standard
+deviation sigma</p></td>
       </tr><tr>
         
         <td>
@@ -455,7 +574,7 @@ be deleted.</p></td>
         <td>
           <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
         </td>
-        <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q) * q</p></td>
+        <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q</p></td>
       </tr><tr>
         
         <td>
@@ -541,7 +660,8 @@ be deleted.</p></td>
         <td>
           <p><code><a href="package_model.html">package_model()</a></code> </p>
         </td>
-        <td><p>Create a model package in the form of a Docker image or Dockerfile build context</p></td>
+        <td><p>Create a model package in the form of a Docker image or Dockerfile build
+context</p></td>
       </tr><tr>
         
         <td>
@@ -553,8 +673,8 @@ be deleted.</p></td>
         <td>
           <p><code><a href="get_model_package_container_registry.html">get_model_package_container_registry()</a></code> </p>
         </td>
-        <td><p>Return a ContainerRegistry object for where the image 
-(or base image, for Dockerfile packages) is stored.</p></td>
+        <td><p>Return a ContainerRegistry object for where the image (or base image, for
+Dockerfile packages) is stored.</p></td>
       </tr><tr>
         
         <td>
@@ -590,9 +710,9 @@ This can only be used with a Dockerfile package.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="environment.html">environment()</a></code> </p>
+          <p><code><a href="r_environment.html">r_environment()</a></code> </p>
         </td>
-        <td><p>Configure the python environment where the experiment is executed.</p></td>
+        <td><p>Configure the R environment where the experiment is executed.</p></td>
       </tr><tr>
         
         <td>
@@ -617,8 +737,8 @@ This can only be used with a Dockerfile package.</p></td>
           <p><code><a href="get_webservice.html">get_webservice()</a></code> </p>
         </td>
         <td><p>Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding 
-to the specific type of the retrieved Webservice object.</p></td>
+provided workspace. Will return an instance of a child class corresponding to
+the specific type of the retrieved Webservice object.</p></td>
       </tr><tr>
         
         <td>
@@ -642,7 +762,7 @@ to the specific type of the retrieved Webservice object.</p></td>
         <td>
           <p><code><a href="generate_new_webservice_key.html">generate_new_webservice_key()</a></code> </p>
         </td>
-        <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or 
+        <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or
 'Secondary' key.</p></td>
       </tr><tr>
         

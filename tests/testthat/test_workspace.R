@@ -4,15 +4,18 @@ subscription_id <- Sys.getenv("TEST_SUBSCRIPTION_ID")
 resource_group <- Sys.getenv("TEST_RESOURCE_GROUP")
 location <- Sys.getenv("TEST_LOCATION")
 
-test_that("create, get, save, load and delete workspace",
-{
+test_that("create, get, save, load and delete workspace", {
     # create workspace
     workspace_name <- paste0("test_ws", build_num)
-    existing_ws <- create_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group,
+    existing_ws <- create_workspace(workspace_name,
+                                    subscription_id = subscription_id,
+                                    resource_group = resource_group,
                                     location = location)
 
     # retrieve workspace
-    ws <- get_workspace(workspace_name, subscription_id = subscription_id, resource_group = resource_group)
+    ws <- get_workspace(workspace_name,
+                        subscription_id = subscription_id,
+                        resource_group = resource_group)
     expect_equal(ws$name, existing_ws$name)
     get_workspace_details(ws)
     kv <- get_default_keyvault(ws)

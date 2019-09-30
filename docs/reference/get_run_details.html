@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configure the python environment where the experiment is executed. — environment • azureml</title>
+<title>Get the definition, status information, current log files and other details 
+of the run. — get_run_details • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,11 @@
 
 
 
-<meta property="og:title" content="Configure the python environment where the experiment is executed. — environment" />
+<meta property="og:title" content="Get the definition, status information, current log files and other details 
+of the run. — get_run_details" />
 
-<meta property="og:description" content="Configure the python environment where the experiment is executed." />
+<meta property="og:description" content="Get the definition, status information, current log files and other details 
+of the run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,59 +124,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configure the python environment where the experiment is executed.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
-    <div class="hidden name"><code>environment.Rd</code></div>
+    <h1>Get the definition, status information, current log files and other details 
+of the run.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
+    <div class="hidden name"><code>get_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Configure the python environment where the experiment is executed.</p>
+    <p>Get the definition, status information, current log files and other details 
+of the run.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>environment</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>base_image_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_run_details</span>(<span class='no'>run</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the environment</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>The version of the environment</p></td>
-    </tr>
-    <tr>
-      <th>environment_variables</th>
-      <td><p>A dictionary of environment variables names and values.</p></td>
-    </tr>
-    <tr>
-      <th>cran_packages</th>
-      <td><p>character vector of cran packages to be installed.</p></td>
-    </tr>
-    <tr>
-      <th>github_packages</th>
-      <td><p>character vector of github packages to be installed.</p></td>
-    </tr>
-    <tr>
-      <th>custom_url_packages</th>
-      <td><p>character vector of packages to be installed from local, directory or custom url.</p></td>
-    </tr>
-    <tr>
-      <th>custom_docker_image</th>
-      <td><p>The name of the docker image from which the image to use for training will be built. If
-not set, a default CPU based image will be used as the base image.</p></td>
-    </tr>
-    <tr>
-      <th>base_image_registry</th>
-      <td><p>Image registry that contains the base image.</p></td>
+      <th>run</th>
+      <td><p>the run object</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Return the details for the run</p>
     
 
   </div>
@@ -181,7 +158,9 @@ not set, a default CPU based image will be used as the base image.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

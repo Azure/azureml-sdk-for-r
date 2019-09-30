@@ -11,40 +11,49 @@ estimator(source_directory, compute_target = NULL, vm_size = NULL,
   inputs = NULL, use_gpu = FALSE)
 }
 \arguments{
-\item{source_directory}{A local directory containing experiment configuration files.}
+\item{source_directory}{A local directory containing experiment configuration
+files.}
 
-\item{compute_target}{The ComputeTarget where training will happen. This can either be an object or the
-string "local".}
+\item{compute_target}{The ComputeTarget where training will happen. This can
+either be an object or the string "local".}
 
-\item{vm_size}{The VM size of the compute target that will be created for the training. Supported values:
-Any Azure VM size. The list of available VM sizes are listed here:
-https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs}
+\item{vm_size}{The VM size of the compute target that will be created for the
+training. Supported values: Any Azure VM size. The list of available VM sizes
+are listed here:
+https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs}
 
-\item{vm_priority}{The VM priority of the compute target that will be created for the training. If not specified,
-it will be defaulted to 'dedicated'. Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
+\item{vm_priority}{The VM priority of the compute target that will be created
+for the training. If not specified, it will be defaulted to 'dedicated'.
+Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
 the vm_size param is specified in the input.}
 
-\item{entry_script}{A string representing the relative path to the file used to start training.}
+\item{entry_script}{A string representing the relative path to the file used
+to start training.}
 
 \item{script_params}{A named list containing parameters to the entry_script.}
 
-\item{use_docker}{A bool value indicating if the environment to run the experiment should be docker-based.}
+\item{use_docker}{A bool value indicating if the environment to run the
+experiment should be docker-based.}
 
 \item{cran_packages}{character vector of cran packages to be installed.}
 
 \item{github_packages}{character vector of github packages to be installed.}
 
-\item{custom_url_packages}{character vector of packages to be installed from local, directory or custom url.}
+\item{custom_url_packages}{character vector of packages to be installed from
+local, directory or custom url.}
 
-\item{custom_docker_image}{The name of the docker image from which the image to use for training will be built. If
-not set, a default CPU based image will be used as the base image.}
+\item{custom_docker_image}{The name of the docker image from which the image
+to use for training will be built. If not set, a default CPU based image will
+be used as the base image.}
 
 \item{inputs}{list of data references as input}
 
-\item{use_gpu}{Indicates whether the environment to run the experiment should support GPUs.
-If TRUE, a GPU - based default Docker image will be used in the environment. If FALSE, a CPU - based
-image will be used. Default Docker images (CPU or GPU) will be used only if the 'custom_docker_image'
-parameter is not set.}
+\item{use_gpu}{Indicates whether the environment to run the experiment should
+support GPUs.
+If TRUE, a GPU - based default Docker image will be used in the environment.
+If FALSE, a CPU - based image will be used. Default Docker images
+(CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
+set.}
 }
 \description{
 Create Estimator

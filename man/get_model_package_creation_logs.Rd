@@ -4,7 +4,7 @@
 \alias{get_model_package_creation_logs}
 \title{Retrieve the package creation logs.}
 \usage{
-get_model_package_creation_logs(package, decode = TRUE, offset = 0)
+get_model_package_creation_logs(package, decode = T, offset = 0)
 }
 \arguments{
 \item{package}{Package created with model(s) and dependencies.}
