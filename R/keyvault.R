@@ -6,7 +6,6 @@
 #' @description 
 #' Add a named list of secrets into the keyvault associated with the 
 #' workspace.
-#' 
 #' @param keyvault The `Keyvault` object.
 #' @param secrets The named list of secrets to be added to the keyvault, 
 #' where element name corresponds to the secret name.
@@ -18,7 +17,6 @@
 #' keyvault <- get_default_keyvault(ws)
 #' set_secrets(list("mysecret" = my_secret))
 #' ```
-#' 
 #' @md
 set_secrets <- function(keyvault, secrets) {
   keyvault$set_secrets(secrets)
@@ -33,14 +31,12 @@ set_secrets <- function(keyvault, secrets) {
 #' `submit_experiment()`, you can use `get_secrets_from_run()` instead, 
 #' as that method shortcuts workspace instantiation (since a submitted 
 #' run is aware of its workspace).
-#' 
 #' @param keyvault The `Keyvault` object.
 #' @param secrets A vector of secret names.
 #' @return A named list of found and not found secrets, where element 
 #' name corresponds to the secret name. If a secret was not found, the 
 #' corresponding element will be `NULL`.
 #' @export
-#' 
 #' @md
 get_secrets <- function(keyvault, secrets) {
   keyvault$get_secrets(secrets)
@@ -51,7 +47,6 @@ get_secrets <- function(keyvault, secrets) {
 #' @description 
 #' Delete secrets from the keyvault associated with the workspace for 
 #' a specified set of secret names.
-#' 
 #' @param keyvault The `Keyvault` object.
 #' @param secrets A vector of secret names.
 #' @export
@@ -66,7 +61,6 @@ delete_secrets <- function(keyvault, secrets) {
 #' @description 
 #' Returns the list of secret names for all the secrets in the keyvault 
 #' associated with the workspace.
-#' 
 #' @param keyvault The `Keyvault` object.
 #' @return A list of secret names.
 #' @export

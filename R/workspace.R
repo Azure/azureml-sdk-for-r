@@ -16,7 +16,6 @@
 #' * Azure Application Insights: Stores monitoring information about your models.
 #' * Azure Key Vault: Stores secrets that are used by compute targets and other
 #'   sensitive information that's needed by the workspace.
-#'   
 #' @param name A string of the new workspace name. Workspace name has to be between 
 #' 2 and 32 characters of letters and numbers.
 #' @param subscription_id A string of the subscription ID of the containing 
@@ -51,7 +50,6 @@
 #' @return The `Workspace` object.
 #' @export
 #' @section Usage:
-#' 
 #' The first example requires only minimal specification, and all dependent resources
 #' as well as the resource group will be created automatically.
 #' ```
@@ -138,7 +136,6 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 #' workspace ARM properties using `write_workspace_config()`, and use this method to 
 #' load the same workspace in different files or projects without retyping the workspace 
 #' ARM properties.
-#' 
 #' @param path A string of the path to the config file or starting directory for search. 
 #' The parameter defaults to starting the search in the current directory.
 #' @return The `Workspace` object.
@@ -154,7 +151,6 @@ load_workspace_from_config <- function(path = NULL)
 #' @description 
 #' Delete the Azure Machine Learning workspace resource. `delete_workspace()` can 
 #' also delete the workspace's associated resources.
-#' 
 #' @param workspace The `Workspace` object of the workspace to delete.
 #' @param delete_dependent_resources If `TRUE` the workspace's associated resources, 
 #' i.e. ACR, storage account, key value, and application insights will also be 
@@ -174,7 +170,6 @@ delete_workspace <- function(workspace)
 #' List all workspaces that the user has access to in the specified 
 #' `subscription_id` parameter. The list of workspaces can be filtered 
 #' based on the resource group.
-#' 
 #' @param subscription_id A string of the specified subscription ID to 
 #' list the workspaces in.
 #' @param resource_group A string of the specified resource group to list 
@@ -198,7 +193,6 @@ list_workspaces <- function(subscription_id, resource_group = NULL) {
 #' using this function, and use `load_workspace_from_config()` to load the 
 #' same workspace in different files or projects without retyping the 
 #' workspace ARM properties.
-#' 
 #' @param workspace The `Workspace` object whose config has to be written down.
 #' @param path A string of the location to write the config.json file. 
 #' The parameter defaults to the current working directory.
@@ -215,7 +209,6 @@ write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
 #' 
 #' @description 
 #' Returns the default datastore associated with the workspace.
-#' 
 #' @param workspace The `Workspace` object.
 #' @return The default `Datastore` object.
 #' @export
@@ -229,11 +222,9 @@ get_default_datastore <- function(workspace) {
 #' @description 
 #' Returns a `Keyvault` object representing the default [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview) 
 #' associated with the workspace.
-#' 
 #' @param workspace The `Workspace` object.
 #' @return The `Keyvault` object.
 #' @export
-#' 
 #' @seealso 
 #' `set_secrets()`, `get_secrets()`, `list_secrets()`, `delete_secrets()`
 #' @md
@@ -245,7 +236,6 @@ get_default_keyvault <- function(workspace) {
 #' 
 #' @description 
 #' Returns the details of the workspace.
-#' 
 #' @param workspace The `Workspace` object.
 #' @return A named list of the workspace details.
 #' @export
@@ -267,7 +257,6 @@ get_default_keyvault <- function(workspace) {
 #' * *identityTenantId*: Workspace tenant ID.
 #' * *identityType*: Workspace identity type.
 #' * *storageAccount*: Workspace storage account.
-#' 
 #' @md
 get_workspace_details <- function(workspace) {
   workspace$get_details()
@@ -277,7 +266,6 @@ get_workspace_details <- function(workspace) {
 #' 
 #' @description 
 #' Set the default datastore associated with the workspace.
-#' 
 #' @param workspace The `Workspace` object.
 #' @param datastore_name The name of the datastore to be set as default.
 #' @export
