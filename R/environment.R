@@ -18,7 +18,7 @@
 #' support GPUs.
 #' If TRUE, a GPU - based default Docker image will be used in the environment.
 #' If FALSE, a CPU - based image will be used. Default Docker images
-#' (CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
+#' (CPU or GPU) will be used only if the 'custom_docker_image' parameter is not
 #' set.
 #' @param shm_size The size of the Docker container's shared memory block.
 #' @return the environment object.
@@ -127,7 +127,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
                                  custom_url_packages = NULL) {
   base_dockerfile <- NULL
   base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
-                                                    custom_docker_image))
+                                                     custom_docker_image))
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {

@@ -34,7 +34,7 @@ be used as the base image.}
 support GPUs.
 If TRUE, a GPU - based default Docker image will be used in the environment.
 If FALSE, a CPU - based image will be used. Default Docker images
-(CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
+(CPU or GPU) will be used only if the 'custom_docker_image' parameter is not
 set.}
 
 \item{shm_size}{The size of the Docker container's shared memory block.}
