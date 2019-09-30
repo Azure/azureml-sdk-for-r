@@ -93,10 +93,15 @@ load_workspace_from_config <- function(path = NULL)
 
 #' Delete workspace
 #' @param workspace The workspace to delete
+#' @param delete_dependent_resources Set delete_dependent_resources = TRUE for
+#' deleting workspace associated resources, i.e. container registry, storage
+#' account, key vault and application insights.
+#' @param no_wait Do not wait for the workspace deletion to complete.
 #' @export
-delete_workspace <- function(workspace)
-{
-  workspace$delete()
+delete_workspace <- function(workspace,
+                             delete_dependent_resources = FALSE,
+                             no_wait = FALSE) {
+  workspace$delete(delete_dependent_resources, no_wait)
   invisible(NULL)
 }
 
