@@ -36,7 +36,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        RScript './scripts/validate_copyright_header.R'
+        Rscript './scripts/validate_copyright_header.R'
     displayName: 'Validate copyright header'
 
   - task: Bash@3
