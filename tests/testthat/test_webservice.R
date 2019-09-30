@@ -1,6 +1,7 @@
 context("webservice tests")
 
 test_that("create, get, generate keys of, and delete webservice", {
+  skip('skip')
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"
@@ -16,7 +17,7 @@ test_that("create, get, generate keys of, and delete webservice", {
   env$register(ws)
   
   # Create the inference config to use for Webservice
-  config <- inference_config(entry_script = "dummy_score.py", environment = env)
+  config <- inference_config(entry_script = "dummy_score.R", environment = env)
   
   # Create ACI deployment config
   tags <- reticulate::py_dict('name', 'temp')

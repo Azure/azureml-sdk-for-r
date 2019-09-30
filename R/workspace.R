@@ -158,9 +158,10 @@ load_workspace_from_config <- function(path = NULL)
 #' @param no_wait If `FALSE` do not wait for the workspace deletion to complete.
 #' @export
 #' @md
-delete_workspace <- function(workspace)
-{
-  workspace$delete()
+delete_workspace <- function(workspace,
+                             delete_dependent_resources = FALSE,
+                             no_wait = FALSE) {
+  workspace$delete(delete_dependent_resources, no_wait)
   invisible(NULL)
 }
 
