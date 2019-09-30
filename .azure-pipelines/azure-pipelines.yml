@@ -31,6 +31,7 @@ steps:
       scriptLocation: inlineScript
       inlineScript: |
         python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        RScript './tests/validate_copyright_header.R'
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
               .libPaths(Sys.getenv("R_LIBS_USER"));
               # build and install R sdk
