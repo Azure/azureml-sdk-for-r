@@ -8,14 +8,16 @@ generate_docker_file(custom_docker_image = NULL, cran_packages = NULL,
   github_packages = NULL, custom_url_packages = NULL)
 }
 \arguments{
-\item{custom_docker_image}{The name of the docker image from which the image to use for training will be built. If
-not set, a default CPU based image will be used as the base image.}
+\item{custom_docker_image}{The name of the docker image from which the image
+to use for training will be built. If not set, a default CPU based image will
+be used as the base image.}
 
 \item{cran_packages}{character vector of cran packages to be installed.}
 
 \item{github_packages}{character vector of github packages to be installed.}
 
-\item{custom_url_packages}{character vector of packages to be installed from local, directory or custom url.}
+\item{custom_url_packages}{character vector of packages to be installed from
+local, directory or custom url.}
 }
 \description{
 Generate a dockerfile string to build the image for training.

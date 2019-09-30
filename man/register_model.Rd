@@ -10,22 +10,24 @@ register_model(workspace, model_path, model_name, tags = NULL,
 \arguments{
 \item{workspace}{The workspace to register the model under}
 
-\item{model_path}{String which points to the path on the local file system where the model assets are
-located. This can be a direct pointer to a single file or folder. If pointing to a folder, the
-child_paths parameter can be used to specify individual files to bundle together as the Model object,
-as opposed to using the entire contents of the folder.}
+\item{model_path}{String which points to the path on the local file system
+where the model assets are located. This can be a direct pointer to a single
+file or folder. If pointing to a folder, the child_paths parameter can be
+used to specify individual files to bundle together as the Model object, as
+opposed to using the entire contents of the folder.}
 
 \item{model_name}{The name to register the model with}
 
 \item{tags}{Dictionary of key value tags to give the model}
 
-\item{properties}{Dictionary of key value properties to give the model. These properties cannot
-be changed after model creation, however new key value pairs can be added}
+\item{properties}{Dictionary of key value properties to give the model. These
+properties cannot be changed after model creation, however new key value
+pairs can be added}
 
 \item{description}{A text description of the model}
 
-\item{child_paths}{If provided in conjunction with a model_path to a folder, only the specified files will be
-bundled into the Model object.}
+\item{child_paths}{If provided in conjunction with a model_path to a folder,
+only the specified files will be bundled into the Model object.}
 }
 \description{
 Register a model with the provided workspace.

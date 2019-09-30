@@ -132,7 +132,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>log_metric_to_run</span>(<span class='no'>name</span>, <span class='no'>value</span>, <span class='no'>run</span>)</pre>
+    <pre class="usage"><span class='fu'>log_metric_to_run</span>(<span class='no'>name</span>, <span class='no'>value</span>, <span class='kw'>run</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,7 +147,8 @@
     </tr>
     <tr>
       <th>run</th>
-      <td><p>Run object</p></td>
+      <td><p>Run object. If not specified, will default to current run from 
+service context.</p></td>
     </tr>
     </table>
     

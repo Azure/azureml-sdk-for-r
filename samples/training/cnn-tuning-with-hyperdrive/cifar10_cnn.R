@@ -1,9 +1,10 @@
-#' Modified from: https://github.com/rstudio/keras/blob/master/vignettes/examples/cifar10_cnn.R
+#' Modified from: "https://github.com/rstudio/keras/blob/master/vignettes/
+#' examples/cifar10_cnn.R"
 #' 
 #' Train a simple deep CNN on the CIFAR10 small images dataset.
 #'  
-#' It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50 epochs,
-#' though it is still underfitting at that point.
+#' It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50
+#' epochs, though it is still underfitting at that point.
 
 library(azureml)
 library(keras)
@@ -57,21 +58,21 @@ model %>%
   layer_activation("relu") %>%
   
   # Second hidden layer
-  layer_conv_2d(filter = 32, kernel_size = c(3,3)) %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3)) %>%
   layer_activation("relu") %>%
   
   # Use max pooling
-  layer_max_pooling_2d(pool_size = c(2,2)) %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
   layer_dropout(0.25) %>%
   
   # 2 additional hidden 2D convolutional layers
-  layer_conv_2d(filter = 32, kernel_size = c(3,3), padding = "same") %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3), padding = "same") %>%
   layer_activation("relu") %>%
-  layer_conv_2d(filter = 32, kernel_size = c(3,3)) %>%
+  layer_conv_2d(filter = 32, kernel_size = c(3, 3)) %>%
   layer_activation("relu") %>%
   
   # Use max pooling once more
-  layer_max_pooling_2d(pool_size = c(2,2)) %>%
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>%
   layer_dropout(0.25) %>%
   
   # Flatten max filtered output into feature vector 
@@ -87,32 +88,32 @@ model %>%
 
 opt <- optimizer_rmsprop(lr, decay)
 
-model %>% compile(
-  loss = "categorical_crossentropy",
-  optimizer = opt,
-  metrics = "accuracy"
+model %>% 
+  compile(loss = "categorical_crossentropy",
+          optimizer = opt,
+          metrics = "accuracy"
 )
 
 
 # Training ----------------------------------------------------------------
 
-if(!data_augmentation){
+if (!data_augmentation){
   
-  model %>% fit(
-    x_train, y_train,
-    batch_size = batch_size,
-    epochs = epochs,
-    validation_data = list(x_test, y_test),
-    shuffle = TRUE
+  model %>%
+    fit(x_train,
+        y_train,
+        batch_size = batch_size,
+        epochs = epochs,
+        validation_data = list(x_test, y_test),
+        shuffle = TRUE
   )
   
 } else {
   
-  datagen <- image_data_generator(
-    rotation_range = 20,
-    width_shift_range = 0.2,
-    height_shift_range = 0.2,
-    horizontal_flip = TRUE
+  datagen <- image_data_generator(rotation_range = 20,
+                                  width_shift_range = 0.2,
+                                  height_shift_range = 0.2,
+                                  horizontal_flip = TRUE
   )
   
   datagen %>% fit_image_data_generator(x_train)

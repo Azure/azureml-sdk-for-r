@@ -2,7 +2,8 @@
 % Please edit documentation in R/hyperdrive.R
 \name{normal}
 \alias{normal}
-\title{Specify a real value that is normally-distributed with mean mu and standard deviation sigma}
+\title{Specify a real value that is normally-distributed with mean mu and standard
+deviation sigma}
 \usage{
 normal(mu, sigma)
 }
@@ -15,5 +16,6 @@ normal(mu, sigma)
 the stochastic expression
 }
 \description{
-Specify a real value that is normally-distributed with mean mu and standard deviation sigma
+Specify a real value that is normally-distributed with mean mu and standard
+deviation sigma
 }
