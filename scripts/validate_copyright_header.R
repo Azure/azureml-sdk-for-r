@@ -1,3 +1,9 @@
+#!/usr/bin/env
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) == 0) {
+  stop("Please provide the direcotry path", call.=FALSE)
+}
+
 validate_copyright_header <- function(directory) {
   copyright_header <- c("# Copyright(c) Microsoft Corporation.", 
                         "# Licensed under the MIT license.")
@@ -15,4 +21,5 @@ validate_copyright_header <- function(directory) {
   }
 }
 
-validate_copyright_header(directory = "R")
+
+validate_copyright_header(directory = args[1])
