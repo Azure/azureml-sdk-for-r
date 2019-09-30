@@ -22,8 +22,31 @@ steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: 'pip install --user azureml-sdk'
-    displayName: 'Install AzureML SDK'
+      script: RScript './scripts/validate_copyright_header.R'
+    displayName: 'Validate copyright header'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        library("rcmdcheck")
+        check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"))
+        stopifnot(length(check_results$errors) == 0)
+        stopifnot(length(check_results$warnings) == 0)
+    displayName: 'Check package build'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        pip install --user azureml-sdk
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              # build and install R sdk
+              devtools::install_deps(upgrade = FALSE);
+              package_location <- devtools::build();
+              install.packages(package_location, repos = NULL)'
+    displayName: 'Build and Install SDK'
 
   - task: AzureCLI@1
     inputs:
@@ -31,24 +54,12 @@ steps:
       scriptLocation: inlineScript
       inlineScript: |
         python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
-        RScript './tests/validate_copyright_header.R'
-        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
-              .libPaths(Sys.getenv("R_LIBS_USER"));
-              # build and install R sdk
-              devtools::install_deps(upgrade = FALSE);
-              package_location <- devtools::build();
-              install.packages(package_location, repos = NULL)
-              # run rcmdcheck
-              library("rcmdcheck");
-              check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
-              stopifnot(length(check_results$errors) == 0);
-              stopifnot(length(check_results$warnings) == 0);
-              # needed to load all non exported packages for testing
+        R -e '# needed to load all non exported packages for testing
               devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
               testthat::test_dir("tests/testthat", reporter = "junit")'
       addSpnToEnvironment: true
-    displayName: 'Build and Test R SDK'
+    displayName: 'Run R SDK Tests'
 
   - task: PublishTestResults@2
     inputs:

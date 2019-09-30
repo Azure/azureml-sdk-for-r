@@ -1,7 +1,7 @@
-validate_copyright_header <- function() {
+validate_copyright_header <- function(directory) {
   copyright_header <- c("# Copyright(c) Microsoft Corporation.", 
                         "# Licensed under the MIT license.")
-  files <- list.files("R")
+  files <- list.files(directory)
   for (filename in files) {
     file <- file.path(".", "R", filename)
     file_handle <- file(file, open="r")
@@ -12,8 +12,7 @@ validate_copyright_header <- function() {
     for (i in 1:length(copyright_header)) {
       assertthat::assert_that(lines[[i]] == copyright_header[[i]])
     }
-    
   }
 }
 
-validate_copyright_header()
+validate_copyright_header(directory = "R")
