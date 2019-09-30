@@ -6,16 +6,18 @@
 \usage{
 estimator(source_directory, compute_target = NULL, vm_size = NULL,
   vm_priority = NULL, entry_script = NULL, script_params = NULL,
-  use_docker = TRUE, cran_packages = NULL, github_packages = NULL,
+  cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
-  inputs = NULL, use_gpu = FALSE)
+  image_registry_details = NULL, use_gpu = FALSE,
+  environment_variables = NULL, shm_size = NULL,
+  max_run_duration_seconds = NULL, environment = NULL)
 }
 \arguments{
 \item{source_directory}{A local directory containing experiment configuration
 files.}
 
-\item{compute_target}{The ComputeTarget where training will happen. This can
-either be an object or the string "local".}
+\item{compute_target}{The ComputeTarget where training will happen.
+Currently only support AmlCompute type.}
 
 \item{vm_size}{The VM size of the compute target that will be created for the
 training. Supported values: Any Azure VM size. The list of available VM sizes
@@ -32,9 +34,6 @@ to start training.}
 
 \item{script_params}{A named list containing parameters to the entry_script.}
 
-\item{use_docker}{A bool value indicating if the environment to run the
-experiment should be docker-based.}
-
 \item{cran_packages}{character vector of cran packages to be installed.}
 
 \item{github_packages}{character vector of github packages to be installed.}
@@ -46,7 +45,7 @@ local, directory or custom url.}
 to use for training will be built. If not set, a default CPU based image will
 be used as the base image.}
 
-\item{inputs}{list of data references as input}
+\item{image_registry_details}{The details of the Docker image registry.}
 
 \item{use_gpu}{Indicates whether the environment to run the experiment should
 support GPUs.
@@ -54,6 +53,21 @@ If TRUE, a GPU - based default Docker image will be used in the environment.
 If FALSE, a CPU - based image will be used. Default Docker images
 (CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
 set.}
+
+\item{environment_variables}{A dictionary of environment variables names 
+and values. These environment variables are set on the process where user 
+script is being executed.}
+
+\item{shm_size}{The size of the Docker container's shared memory block.}
+
+\item{max_run_duration_seconds}{The maximum allowed time for the run. 
+Azure ML will attempt to automatically cancel the run if it take longer 
+than this value.}
+
+\item{environment}{the R environment where the experiment is executed.
+Mutually exclusive with custom_docker_image, image_registry_details, use_gpu,
+environment_variables, shm_size, max_run_duration_seconds, cran_packages,
+github_packages and custom_url_packages.}
 }
 \description{
 Create Estimator

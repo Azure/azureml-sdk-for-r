@@ -7,7 +7,7 @@
 r_environment(name, version = NULL, environment_variables = NULL,
   cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
-  base_image_registry = NULL)
+  image_registry_details = NULL, use_gpu = FALSE, shm_size = NULL)
 }
 \arguments{
 \item{name}{The name of the environment}
@@ -28,7 +28,19 @@ local, directory or custom url.}
 to use for training will be built. If not set, a default CPU based image will
 be used as the base image.}
 
-\item{base_image_registry}{Image registry that contains the base image.}
+\item{image_registry_details}{The details of the Docker image registry.}
+
+\item{use_gpu}{Indicates whether the environment to run the experiment should
+support GPUs.
+If TRUE, a GPU - based default Docker image will be used in the environment.
+If FALSE, a CPU - based image will be used. Default Docker images
+(CPU or GPU) will be used only if the 'custom_docker_image' parameter is not
+set.}
+
+\item{shm_size}{The size of the Docker container's shared memory block.}
+}
+\value{
+the environment object.
 }
 \description{
 Configure the R environment where the experiment is executed.
