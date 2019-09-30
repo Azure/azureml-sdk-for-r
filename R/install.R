@@ -22,17 +22,21 @@ install_azureml <- function(version = NULL,
     stop("Anaconda not installed or not in system path.")
   }
   
-  # create conda environment if missing
+  # remove conda environment if already exists
   envs <- reticulate::conda_list()
   if (envname %in% envs$name) {
-    msg <- paste("Using existing environment: ", envname)
+    msg <- sprintf(paste("Environment \"%s\" already exists.", 
+                         "Remove the environment..."),
+                   envname)
     message(msg)
-  } else {
-    msg <- paste("Creating environment: ", envname)
-    message(msg)
-    py_version <- paste("python=", conda_python_version, sep = "")
-    reticulate::conda_create(envname, packages = py_version)
-  }
+    reticulate::conda_remove(envname)
+  } 
+  
+  # create conda environment
+  msg <- paste("Creating environment: ", envname)
+  message(msg)
+  py_version <- paste("python=", conda_python_version, sep = "")
+  reticulate::conda_create(envname, packages = py_version)
   
   # install packages
   reticulate::py_install(
