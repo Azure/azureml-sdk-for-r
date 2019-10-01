@@ -9,6 +9,9 @@ serialize_model(model)
 \arguments{
 \item{model}{The model to download}
 }
+\value{
+The json representation of this Model
+}
 \description{
 Convert this Model into a json serialized dictionary
 }

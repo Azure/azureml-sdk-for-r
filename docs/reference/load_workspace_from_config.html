@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load workspace from config — load_workspace_from_config • azureml</title>
+<title>Load workspace configuration details from a config file — load_workspace_from_config • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,14 @@
 
 
 
-<meta property="og:title" content="Load workspace from config — load_workspace_from_config" />
+<meta property="og:title" content="Load workspace configuration details from a config file — load_workspace_from_config" />
 
-<meta property="og:description" content="Load workspace from config" />
+<meta property="og:description" content="Returns a Workspace object for an existing Azure Machine Learning workspace by
+reading the workspace configuration from a file. The method provides a simple way of
+reusing the same workspace across multiple files or projects. Users can save the
+workspace ARM properties using write_workspace_config(), and use this method to
+load the same workspace in different files or projects without retyping the workspace
+ARM properties." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +126,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load workspace from config</h1>
+    <h1>Load workspace configuration details from a config file</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
     <div class="hidden name"><code>load_workspace_from_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Load workspace from config</p>
+    <p>Returns a <code>Workspace</code> object for an existing Azure Machine Learning workspace by
+reading the workspace configuration from a file. The method provides a simple way of
+reusing the same workspace across multiple files or projects. Users can save the
+workspace ARM properties using <code><a href='write_workspace_config.html'>write_workspace_config()</a></code>, and use this method to
+load the same workspace in different files or projects without retyping the workspace
+ARM properties.</p>
     
     </div>
 
@@ -139,14 +149,14 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Path to the config file or starting directory for search.
+      <td><p>A string of the path to the config file or starting directory for search.
 The parameter defaults to starting the search in the current directory.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The workspace object for an existing Azure ML Workspace</p>
+    <p>The <code>Workspace</code> object.</p>
     
 
   </div>

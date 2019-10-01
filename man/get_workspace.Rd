@@ -7,18 +7,19 @@
 get_workspace(name, subscription_id = NULL, resource_group = NULL)
 }
 \arguments{
-\item{name}{The workspace name to get.}
+\item{name}{A string of the workspace name to get.}
 
-\item{subscription_id}{The subscription ID to use. The parameter is required
-if the user has access
-to more than one subscription.}
+\item{subscription_id}{A string of the subscription ID to use. The parameter is required
+if the user has access to more than one subscription.}
 
-\item{resource_group}{The resource group to use. If NULL the method will
+\item{resource_group}{A string of the resource group to use. If \code{NULL} the method will
 search all resource groups in the subscription.}
 }
 \value{
-workspace object
+The \code{Workspace} object.
 }
 \description{
-Get an existing workspace
+Returns a \code{Workspace} object for an existing Azure Machine Learning workspace. Throws an
+exception if the workpsace doesn't exist or the required fields don't lead to a uniquely
+identifiable workspace.
 }

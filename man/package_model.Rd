@@ -14,11 +14,14 @@ package_model(workspace, models, inference_config,
 \item{models}{A list of Model objects to include in the package. Can be an
 empty list.}
 
-\item{inference_config}{An InferenceConfig object to configure the operation
-of the models. This must include an Environment object.}
+\item{inference_config}{An InferenceConfig object to configure the
+operation of the models. This must include an Environment object.}
 
 \item{generate_dockerfile}{Whether to create a Dockerfile that can be run
 locally instead of building an image.}
+}
+\value{
+A ModelPackage object.
 }
 \description{
 Create a model package in the form of a Docker image or Dockerfile build

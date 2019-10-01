@@ -134,9 +134,11 @@
 
     <pre class="usage"><span class='fu'>estimator</span>(<span class='no'>source_directory</span>, <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>script_params</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_docker</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_run_duration_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,8 +150,8 @@ files.</p></td>
     </tr>
     <tr>
       <th>compute_target</th>
-      <td><p>The ComputeTarget where training will happen. This can
-either be an object or the string "local".</p></td>
+      <td><p>The ComputeTarget where training will happen.
+Currently only support AmlCompute type.</p></td>
     </tr>
     <tr>
       <th>vm_size</th>
@@ -175,11 +177,6 @@ to start training.</p></td>
       <td><p>A named list containing parameters to the entry_script.</p></td>
     </tr>
     <tr>
-      <th>use_docker</th>
-      <td><p>A bool value indicating if the environment to run the
-experiment should be docker-based.</p></td>
-    </tr>
-    <tr>
       <th>cran_packages</th>
       <td><p>character vector of cran packages to be installed.</p></td>
     </tr>
@@ -199,8 +196,8 @@ to use for training will be built. If not set, a default CPU based image will
 be used as the base image.</p></td>
     </tr>
     <tr>
-      <th>inputs</th>
-      <td><p>list of data references as input</p></td>
+      <th>image_registry_details</th>
+      <td><p>The details of the Docker image registry.</p></td>
     </tr>
     <tr>
       <th>use_gpu</th>
@@ -210,6 +207,29 @@ If TRUE, a GPU - based default Docker image will be used in the environment.
 If FALSE, a CPU - based image will be used. Default Docker images
 (CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
 set.</p></td>
+    </tr>
+    <tr>
+      <th>environment_variables</th>
+      <td><p>A dictionary of environment variables names 
+and values. These environment variables are set on the process where user 
+script is being executed.</p></td>
+    </tr>
+    <tr>
+      <th>shm_size</th>
+      <td><p>The size of the Docker container's shared memory block.</p></td>
+    </tr>
+    <tr>
+      <th>max_run_duration_seconds</th>
+      <td><p>The maximum allowed time for the run. 
+Azure ML will attempt to automatically cancel the run if it take longer 
+than this value.</p></td>
+    </tr>
+    <tr>
+      <th>environment</th>
+      <td><p>the R environment where the experiment is executed.
+Mutually exclusive with custom_docker_image, image_registry_details, use_gpu,
+environment_variables, shm_size, max_run_duration_seconds, cran_packages,
+github_packages and custom_url_packages.</p></td>
     </tr>
     </table>
     

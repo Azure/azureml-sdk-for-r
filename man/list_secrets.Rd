@@ -2,16 +2,17 @@
 % Please edit documentation in R/keyvault.R
 \name{list_secrets}
 \alias{list_secrets}
-\title{Return the list of secret names}
+\title{List the secrets in a keyvault}
 \usage{
 list_secrets(keyvault)
 }
 \arguments{
-\item{keyvault}{keyvault object}
+\item{keyvault}{The \code{Keyvault} object.}
 }
 \value{
-Returns secret names for a given keyvault
+A list of secret names.
 }
 \description{
-Return the list of secret names
+Returns the list of secret names for all the secrets in the keyvault
+associated with the workspace.
 }

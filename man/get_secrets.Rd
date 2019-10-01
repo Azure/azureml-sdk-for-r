@@ -2,18 +2,24 @@
 % Please edit documentation in R/keyvault.R
 \name{get_secrets}
 \alias{get_secrets}
-\title{Return the secret values for a given vector of secret names}
+\title{Get secrets from a keyvault}
 \usage{
 get_secrets(keyvault, secrets)
 }
 \arguments{
-\item{keyvault}{keyvault object}
+\item{keyvault}{The \code{Keyvault} object.}
 
-\item{secrets}{a vector of secret names}
+\item{secrets}{A vector of secret names.}
 }
 \value{
-Returns a list of found and not found secrets
+A named list of found and not found secrets, where element
+name corresponds to the secret name. If a secret was not found, the
+corresponding element will be \code{NULL}.
 }
 \description{
-Return the secret values for a given vector of secret names
+Returns the secret values from the keyvault associated with the
+workspace for a given set of secret names. For runs submitted using
+\code{submit_experiment()}, you can use \code{get_secrets_from_run()} instead,
+as that method shortcuts workspace instantiation (since a submitted
+run is aware of its workspace).
 }

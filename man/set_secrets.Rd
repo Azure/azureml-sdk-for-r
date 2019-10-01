@@ -2,15 +2,25 @@
 % Please edit documentation in R/keyvault.R
 \name{set_secrets}
 \alias{set_secrets}
-\title{Add a named list of secrets eg. list("name" = "value") into the keyvault}
+\title{Add secrets to a keyvault}
 \usage{
 set_secrets(keyvault, secrets)
 }
 \arguments{
-\item{keyvault}{keyvault object}
+\item{keyvault}{The \code{Keyvault} object.}
 
-\item{secrets}{list of secret names and values to be added}
+\item{secrets}{The named list of secrets to be added to the keyvault,
+where element name corresponds to the secret name.}
 }
 \description{
-Add a named list of secrets eg. list("name" = "value") into the keyvault
+Add a named list of secrets into the keyvault associated with the
+workspace.
 }
+\section{Usage}{
+\preformatted{ws <- load_workspace_from_config()
+my_secret <- Sys.getenv("MY_SECRET")
+keyvault <- get_default_keyvault(ws)
+set_secrets(list("mysecret" = my_secret))
+}
+}
+

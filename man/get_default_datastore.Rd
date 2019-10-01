@@ -2,16 +2,16 @@
 % Please edit documentation in R/workspace.R
 \name{get_default_datastore}
 \alias{get_default_datastore}
-\title{Get default datastore associated with a workspace}
+\title{Get the default datastore for a workspace}
 \usage{
 get_default_datastore(workspace)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 }
 \value{
-The default datastore
+The default \code{Datastore} object.
 }
 \description{
-Get default datastore associated with a workspace
+Returns the default datastore associated with the workspace.
 }

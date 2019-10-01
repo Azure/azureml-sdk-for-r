@@ -10,7 +10,7 @@ save_model_package_files(package, output_directory)
 \arguments{
 \item{package}{Package created with model(s) and dependencies.}
 
-\item{output_directory}{Local directory that will be created to contain 
+\item{output_directory}{Local directory that will be created to contain
 the contents of the package.}
 }
 \description{

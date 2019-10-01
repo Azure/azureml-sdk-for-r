@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return details of this workspace. — get_workspace_details • azureml</title>
+<title>Get the details of a workspace — get_workspace_details • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Return details of this workspace. — get_workspace_details" />
+<meta property="og:title" content="Get the details of a workspace — get_workspace_details" />
 
-<meta property="og:description" content="Return details of this workspace." />
+<meta property="og:description" content="Returns the details of the workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +121,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return details of this workspace.</h1>
+    <h1>Get the details of a workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
     <div class="hidden name"><code>get_workspace_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return details of this workspace.</p>
+    <p>Returns the details of the workspace.</p>
     
     </div>
 
@@ -139,13 +139,37 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Workspace details</p>
+    <p>A named list of the workspace details.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>The returned list contains the following named elements:</p><ul>
+<li><p><em>id</em>: URI pointing to the workspace resource, containing subscription ID,
+resource group, and workspace name.</p></li>
+<li><p><em>name</em>: Workspace name.</p></li>
+<li><p><em>location</em>: Workspace region.</p></li>
+<li><p><em>type</em>: URI of the format <code>"{providerName}/workspaces"</code>.</p></li>
+<li><p><em>workspaceid</em>: Workspace ID.</p></li>
+<li><p><em>description</em>: Workspace description.</p></li>
+<li><p><em>friendlyName</em>: Workspace friendly name.</p></li>
+<li><p><em>creationTime</em>: Time the workspace was created, in ISO8601.</p></li>
+<li><p><em>containerRegistry</em>: Workspace container registry.</p></li>
+<li><p><em>keyVault</em>: Workspace key vault.</p></li>
+<li><p><em>applicationInsights</em>: Workspace App Insights.</p></li>
+<li><p><em>identityPrincipalId</em>: Workspace identity principal ID.</p></li>
+<li><p><em>identityTenantId</em>: Workspace tenant ID.</p></li>
+<li><p><em>identityType</em>: Workspace identity type.</p></li>
+<li><p><em>storageAccount</em>: Workspace storage account.</p></li>
+</ul>
+
     
 
   </div>
@@ -155,6 +179,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

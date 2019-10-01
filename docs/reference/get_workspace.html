@@ -34,7 +34,9 @@
 
 <meta property="og:title" content="Get an existing workspace — get_workspace" />
 
-<meta property="og:description" content="Get an existing workspace" />
+<meta property="og:description" content="Returns a Workspace object for an existing Azure Machine Learning workspace. Throws an
+exception if the workpsace doesn't exist or the required fields don't lead to a uniquely
+identifiable workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +130,9 @@
 
     <div class="ref-description">
     
-    <p>Get an existing workspace</p>
+    <p>Returns a <code>Workspace</code> object for an existing Azure Machine Learning workspace. Throws an
+exception if the workpsace doesn't exist or the required fields don't lead to a uniquely
+identifiable workspace.</p>
     
     </div>
 
@@ -139,24 +143,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The workspace name to get.</p></td>
+      <td><p>A string of the workspace name to get.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>
-      <td><p>The subscription ID to use. The parameter is required
-if the user has access
-to more than one subscription.</p></td>
+      <td><p>A string of the subscription ID to use. The parameter is required
+if the user has access to more than one subscription.</p></td>
     </tr>
     <tr>
       <th>resource_group</th>
-      <td><p>The resource group to use. If NULL the method will
+      <td><p>A string of the resource group to use. If <code>NULL</code> the method will
 search all resource groups in the subscription.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>workspace object</p>
+    <p>The <code>Workspace</code> object.</p>
     
 
   </div>

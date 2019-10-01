@@ -2,15 +2,16 @@
 % Please edit documentation in R/keyvault.R
 \name{delete_secrets}
 \alias{delete_secrets}
-\title{Delete the secrets from the keyvault}
+\title{Delete secrets from a keyvault}
 \usage{
 delete_secrets(keyvault, secrets)
 }
 \arguments{
-\item{keyvault}{keyvault object}
+\item{keyvault}{The \code{Keyvault} object.}
 
-\item{secrets}{a vector of secret names}
+\item{secrets}{A vector of secret names.}
 }
 \description{
-Delete the secrets from the keyvault
+Delete secrets from the keyvault associated with the workspace for
+a specified set of secret names.
 }

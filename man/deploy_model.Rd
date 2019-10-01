@@ -28,6 +28,9 @@ Webservice to. As Azure Container Instances has no associated
 azureml.core.ComputeTarget, leave this parameter as None to deploy to Azure
 Container Instances.}
 }
+\value{
+A Webservice object corresponding to the deployed webservice
+}
 \description{
 Deploy a Webservice from zero or more model objects.
 }
