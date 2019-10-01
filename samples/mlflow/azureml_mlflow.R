@@ -15,9 +15,9 @@ get_tracking_uri <- function(region,
                              subscription_id,
                              resource_group,
                              workspace_name) {
-    sprintf(paste0('https://%s.experiments.azureml.net/history/v1.0/
-                   subscriptions/%s/resourceGroups/%s/providers/',
-                    'Microsoft.MachineLearningServices/workspaces/%s'),
+    sprintf(paste0('https://%s.experiments.azureml.net/history/v1.0/',
+                   'subscriptions/%s/resourceGroups/%s/providers/',
+                   'Microsoft.MachineLearningServices/workspaces/%s'),
             region,
             subscription_id,
             resource_group,
@@ -65,8 +65,6 @@ client <- mlflow_client(tracking_uri = tracking_uri)
 
 experiment_id <- mlflow_create_experiment('mlflow_experiment', client = client)
 run_id <- mlflow_start_run(experiment_id = experiment_id, client = client)
+
 mlflow_log_metric("key", 2, run_id = run_id$run_id, client = client)
-# hitting errors on windows running the following. Other people have also
-# reported the following:
-# https://github.com/mlflow/mlflow/issues/1009
 mlflow_get_metric_history("key", run_id = run_id$run_id)

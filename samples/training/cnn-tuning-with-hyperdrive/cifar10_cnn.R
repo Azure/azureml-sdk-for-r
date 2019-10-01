@@ -6,9 +6,10 @@
 #' It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50
 #' epochs, though it is still underfitting at that point.
 
-library(azureml)
-library(keras)
+library("keras")
 install_keras()
+
+library(azureml)
 
 # Parameters --------------------------------------------------------------
 
