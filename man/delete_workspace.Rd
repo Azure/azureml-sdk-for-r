@@ -4,10 +4,17 @@
 \alias{delete_workspace}
 \title{Delete workspace}
 \usage{
-delete_workspace(workspace)
+delete_workspace(workspace, delete_dependent_resources = FALSE,
+  no_wait = FALSE)
 }
 \arguments{
 \item{workspace}{The workspace to delete}
+
+\item{delete_dependent_resources}{Set delete_dependent_resources = TRUE for
+deleting workspace associated resources, i.e. container registry, storage
+account, key vault and application insights.}
+
+\item{no_wait}{Do not wait for the workspace deletion to complete.}
 }
 \description{
 Delete workspace
