@@ -1,7 +1,7 @@
 #!/usr/bin/env
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
-  stop("Please provide the direcotry path", call.=FALSE)
+  stop("Please provide the directory path", call.=FALSE)
 }
 
 validate_copyright_header <- function(directory) {
