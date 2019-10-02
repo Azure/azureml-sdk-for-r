@@ -77,18 +77,18 @@
 #' ```
 #' @md
 create_workspace <- function(
-    name,
-    subscription_id = NULL,
-    resource_group = NULL,
-    location = NULL,
-    create_resource_group = TRUE,
-    friendly_name = NULL,
-    storage_account = NULL,
-    key_vault = NULL,
-    app_insights = NULL,
-    container_registry = NULL,
-    exist_ok = FALSE,
-    show_output = TRUE)
+  name,
+  subscription_id = NULL,
+  resource_group = NULL,
+  location = NULL,
+  create_resource_group = TRUE,
+  friendly_name = NULL,
+  storage_account = NULL,
+  key_vault = NULL,
+  app_insights = NULL,
+  container_registry = NULL,
+  exist_ok = FALSE,
+  show_output = TRUE)
 {
   ws <- 
     azureml$core$Workspace$create(name = name,
@@ -122,9 +122,9 @@ create_workspace <- function(
 #' @md
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 {
-    azureml$core$Workspace$get(name, auth = NULL,
-                               subscription_id = subscription_id,
-                               resource_group = resource_group)
+  azureml$core$Workspace$get(name, auth = NULL,
+                             subscription_id = subscription_id,
+                             resource_group = resource_group)
 }
 
 #' Load workspace configuration details from a config file
@@ -146,15 +146,6 @@ load_workspace_from_config <- function(path = NULL)
   azureml$core$workspace$Workspace$from_config(path)
 }
 
-<<<<<<< HEAD
-#' Delete workspace
-#' @param workspace The workspace to delete
-#' @param delete_dependent_resources Set delete_dependent_resources = TRUE for
-#' deleting workspace associated resources, i.e. container registry, storage
-#' account, key vault and application insights.
-#' @param no_wait Do not wait for the workspace deletion to complete.
-#' @export
-=======
 #' Delete a workspace
 #' 
 #' @description 
@@ -167,7 +158,6 @@ load_workspace_from_config <- function(path = NULL)
 #' @param no_wait If `FALSE` do not wait for the workspace deletion to complete.
 #' @export
 #' @md
->>>>>>> master
 delete_workspace <- function(workspace,
                              delete_dependent_resources = FALSE,
                              no_wait = FALSE) {
