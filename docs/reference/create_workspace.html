@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Azure Machine Learning Workspace — create_workspace • azureml</title>
+<title>Create a new Azure Machine Learning workspace — create_workspace • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,21 @@
 
 
 
-<meta property="og:title" content="Create a new Azure Machine Learning Workspace — create_workspace" />
+<meta property="og:title" content="Create a new Azure Machine Learning workspace — create_workspace" />
 
-<meta property="og:description" content="Create a new Azure Machine Learning Workspace" />
+<meta property="og:description" content="Create a new Azure Machine Learning workspace. Throws an exception if the
+workspace already exists or any of the workspace requirements are not satisfied.
+When you create new workspace, it automatically creates several Azure resources
+that are used in the workspace:
+Azure Container Registry: Registers Docker containers that you use during
+training and when you deploy a model. To minimize costs, ACR is lazy-loaded
+until deployment images are created.
+Azure Storage account: Used as the default datastore for the workspace.
+Azure Application Insights: Stores monitoring information about your models.
+Azure Key Vault: Stores secrets that are used by compute targets and other
+sensitive information that's needed by the workspace.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +133,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Azure Machine Learning Workspace</h1>
+    <h1>Create a new Azure Machine Learning workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
     <div class="hidden name"><code>create_workspace.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a new Azure Machine Learning Workspace</p>
+    <p>Create a new Azure Machine Learning workspace. Throws an exception if the
+workspace already exists or any of the workspace requirements are not satisfied.
+When you create new workspace, it automatically creates several Azure resources
+that are used in the workspace:</p><ul>
+<li><p>Azure Container Registry: Registers Docker containers that you use during
+training and when you deploy a model. To minimize costs, ACR is lazy-loaded
+until deployment images are created.</p></li>
+<li><p>Azure Storage account: Used as the default datastore for the workspace.</p></li>
+<li><p>Azure Application Insights: Stores monitoring information about your models.</p></li>
+<li><p>Azure Key Vault: Stores secrets that are used by compute targets and other
+sensitive information that's needed by the workspace.</p></li>
+</ul>
+
     
     </div>
 
@@ -143,76 +167,103 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The new workspace name. Workspace name has to be between
+      <td><p>A string of the new workspace name. Workspace name has to be between
 2 and 32 characters of letters and numbers.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>
-      <td><p>The subscription ID of the containing subscription
-for the new workspace. The parameter is required if the user has access to
- more than one subscription.</p></td>
+      <td><p>A string of the subscription ID of the containing
+subscription for the new workspace. The parameter is required if the user has
+access to more than one subscription.</p></td>
     </tr>
     <tr>
       <th>resource_group</th>
-      <td><p>The Azure resource group that is containing the
+      <td><p>A string of the Azure resource group that is containing the
 workspace. The parameter defaults to a mutation of the workspace name.</p></td>
     </tr>
     <tr>
       <th>location</th>
-      <td><p>The location of the workspace. The parameter defaults to
-the resource group location. The location has to be a supported region for
+      <td><p>A string of the location of the workspace. The parameter defaults
+to the resource group location. The location has to be a supported region for
 Azure Machine Learning Services.</p></td>
     </tr>
     <tr>
       <th>create_resource_group</th>
-      <td><p>When true the resource group will be created
+      <td><p>If <code>TRUE</code> the resource group will be created
 if it doesn't exist.</p></td>
     </tr>
     <tr>
       <th>friendly_name</th>
-      <td><p>A friendly name for the workspace that can be displayed
-in the UI.</p></td>
+      <td><p>A string of the friendly name for the workspace that can be
+displayed in the UI.</p></td>
     </tr>
     <tr>
       <th>storage_account</th>
-      <td><p>An existing storage account in the Azure resource ID
-format. The storage will be used by the workspace to save run outputs, code,
- logs etc. If None a new storage will be created.</p></td>
+      <td><p>A string of an existing storage account in the Azure
+resource ID format. The storage will be used by the workspace to save run outputs,
+code, logs etc. If <code>NULL</code> a new storage will be created.</p></td>
     </tr>
     <tr>
       <th>key_vault</th>
-      <td><p>An existing key vault in the Azure resource ID format.
-The Key vault will be used by the workspace to store credentials added to
-the workspace by the users. If None a new key vault will be created.</p></td>
+      <td><p>A string of an existing key vault in the Azure resource ID
+format. The key vault will be used by the workspace to store credentials added to
+the workspace by the users. If <code>NULL</code> a new key vault will be created.</p></td>
     </tr>
     <tr>
       <th>app_insights</th>
-      <td><p>An existing Application Insights in the Azure resource
-ID format. The Application Insights will be used by the workspace to log
-webservices events. If None a new Application Insights will be created.</p></td>
+      <td><p>A string of an existing Application Insights in the Azure
+resource ID format. The Application Insights will be used by the workspace to log
+webservices events. If <code>NULL</code> a new Application Insights will be created.</p></td>
     </tr>
     <tr>
       <th>container_registry</th>
-      <td><p>An existing Container registery in the Azure
-resource ID format. The Container registery will be used by the workspace
-to pull and push both experimentation and webservices images. If None a new
-Container registery will be created.</p></td>
+      <td><p>A string of an existing container registry in the Azure
+resource ID format. The container registry will be used by the workspace to pull
+and push both experimentation and webservices images. If <code>NULL</code> a new container
+registry will be created.</p></td>
     </tr>
     <tr>
       <th>exist_ok</th>
-      <td><p>If TRUE the method will not fail if the workspace already
+      <td><p>If <code>TRUE</code> the method will not fail if the workspace already
 exists.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>If TRUE the method will print out incremental progress of
+      <td><p>If <code>TRUE</code> the method will print out incremental progress of
 method.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The workspace object.</p>
+    <p>The <code>Workspace</code> object.</p>
+    
+    <h2 class="hasAnchor" id="usage"><a class="anchor" href="#usage"></a>Usage</h2>
+
+    
+
+<p>The first example requires only minimal specification, and all dependent resources
+as well as the resource group will be created automatically.</p><pre>ws &lt;- create_workspace(name = 'myworkspace', 
+                       subscription_id = '&lt;azure-subscription-id&gt;', 
+                       resource_group = 'myresourcegroup', 
+                       location = 'eastus2')
+</pre>
+
+<p>The following example shows how to reuse existing Azure resources by making use of
+all parameters utilizing the Azure resource ID format. The specific Azure resource
+IDs can be retrieved through the Azure Portal or SDK. This assumes that the resource
+group, storage account, key vault, App Insights and container registry already exist.</p><pre>ws &lt;- create_workspace(name = 'myworkspace', 
+                       subscription_id = '&lt;azure-subscription-id&gt;', 
+                       resource_group = 'myresourcegroup', 
+                       create_resource_group = FALSE, 
+                       location = 'eastus2', 
+                       friendly_name = 'My workspace', 
+                       storage_account = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.storage/storageaccounts/mystorageaccount', 
+                       key_vault = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault', 
+                       app_insights = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights', 
+                       container_registry = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
+</pre>
+
     
 
   </div>
@@ -222,6 +273,8 @@ method.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#usage">Usage</a></li>
           </ul>
 
   </div>

@@ -10,21 +10,24 @@ get_model(workspace, name = NULL, id = NULL, tags = NULL,
 \arguments{
 \item{workspace}{The workspace object containing the Model to retrieve}
 
-\item{name}{Will retrieve the latest model with the corresponding name, if it
-exists}
+\item{name}{Will retrieve the latest model with the corresponding name, if
+it exists}
 
 \item{id}{Will retrieve the model with the corresponding ID, if it exists}
 
 \item{tags}{Optional, will filter based on the provided list, searching by
 either 'key' or '[key, value]'.}
 
-\item{properties}{Optional, will filter based on the provided list, searching
-by either 'key' or '[key, value]'.}
+\item{properties}{Optional, will filter based on the provided list,
+searching by either 'key' or '[key, value]'.}
 
 \item{version}{When provided along with name, will get the specific version
 of the specified named model, if it exists}
 
 \item{run_id}{Optional, will filter based on the provided ID.}
+}
+\value{
+A model object, if one is found in the provided workspace
 }
 \description{
 Retrieve the Model object from the cloud.

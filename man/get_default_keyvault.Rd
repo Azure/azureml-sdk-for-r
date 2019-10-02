@@ -2,16 +2,20 @@
 % Please edit documentation in R/workspace.R
 \name{get_default_keyvault}
 \alias{get_default_keyvault}
-\title{Get the default keyvault object for the workspace.}
+\title{Get the default keyvault for a workspace}
 \usage{
 get_default_keyvault(workspace)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 }
 \value{
-The keyvault object associated with your workspace
+The \code{Keyvault} object.
 }
 \description{
-Get the default keyvault object for the workspace.
+Returns a \code{Keyvault} object representing the default \href{https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview}{Azure Key Vault}
+associated with the workspace.
+}
+\seealso{
+\code{set_secrets()}, \code{get_secrets()}, \code{list_secrets()}, \code{delete_secrets()}
 }

@@ -2,8 +2,8 @@
 % Please edit documentation in R/model.R
 \name{get_model_package_container_registry}
 \alias{get_model_package_container_registry}
-\title{Return a ContainerRegistry object for where the image (or base image, for
-Dockerfile packages) is stored.}
+\title{Return a ContainerRegistry object for where the image
+(or base image, for Dockerfile packages) is stored.}
 \usage{
 get_model_package_container_registry(package)
 }
@@ -14,6 +14,6 @@ get_model_package_container_registry(package)
 ContainerRegistry object
 }
 \description{
-Return a ContainerRegistry object for where the image (or base image, for
-Dockerfile packages) is stored.
+Return a ContainerRegistry object for where the image
+(or base image, for Dockerfile packages) is stored.
 }

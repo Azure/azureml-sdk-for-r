@@ -28,7 +28,10 @@ steps:
         echo GIT STATUS
         git status
         echo UPDATE DOCS
-        R -e 'unlink("man", recursive=TRUE, force=TRUE);
+        R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
+              .libPaths(Sys.getenv("R_LIBS_USER"));
+              devtools::install_deps(upgrade = FALSE);
+              unlink("man", recursive=TRUE, force=TRUE);
               roxygen2::roxygenise();
               unlink("docs", recursive=TRUE, force=TRUE);
               pkgdown::build_site();'

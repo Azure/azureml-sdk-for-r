@@ -2,16 +2,39 @@
 % Please edit documentation in R/workspace.R
 \name{get_workspace_details}
 \alias{get_workspace_details}
-\title{Return details of this workspace.}
+\title{Get the details of a workspace}
 \usage{
 get_workspace_details(workspace)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 }
 \value{
-Workspace details
+A named list of the workspace details.
 }
 \description{
-Return details of this workspace.
+Returns the details of the workspace.
 }
+\section{Details}{
+
+The returned list contains the following named elements:
+\itemize{
+\item \emph{id}: URI pointing to the workspace resource, containing subscription ID,
+resource group, and workspace name.
+\item \emph{name}: Workspace name.
+\item \emph{location}: Workspace region.
+\item \emph{type}: URI of the format \code{"{providerName}/workspaces"}.
+\item \emph{workspaceid}: Workspace ID.
+\item \emph{description}: Workspace description.
+\item \emph{friendlyName}: Workspace friendly name.
+\item \emph{creationTime}: Time the workspace was created, in ISO8601.
+\item \emph{containerRegistry}: Workspace container registry.
+\item \emph{keyVault}: Workspace key vault.
+\item \emph{applicationInsights}: Workspace App Insights.
+\item \emph{identityPrincipalId}: Workspace identity principal ID.
+\item \emph{identityTenantId}: Workspace tenant ID.
+\item \emph{identityType}: Workspace identity type.
+\item \emph{storageAccount}: Workspace storage account.
+}
+}
+

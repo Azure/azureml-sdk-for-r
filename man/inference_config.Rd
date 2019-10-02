@@ -16,11 +16,11 @@ the image.}
 
 \item{description}{A description to give this image.}
 
-\item{environment}{An environment object to use for the deployment. Doesn't
-have to be registered. A user should provide either this, or the other
-parameters, not both. The individual parameters will NOT serve as an override
-for the environment object. Exceptions include `entry_script`,
-`source_directory` and `description`.}
+\item{environment}{An environment object to use for the deployment.
+Doesn't have to be registered. A user should provide either this, or the
+other parameters, not both. The individual parameters will NOT serve
+as an override for the environment object. Exceptions include
+`entry_script`, `source_directory` and `description`.}
 }
 \value{
 An InferenceConfig object

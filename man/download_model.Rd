@@ -9,11 +9,14 @@ download_model(model, target_dir = ".", exist_ok = FALSE)
 \arguments{
 \item{model}{The model to download}
 
-\item{target_dir}{Path to directory for where to download the model. Defaults
-to "."}
+\item{target_dir}{Path to directory for where to download the model.
+Defaults to "."}
 
-\item{exist_ok}{Boolean to replace downloaded dir/files if exists. Defaults
-to False}
+\item{exist_ok}{Boolean to replace downloaded dir/files if exists.
+Defaults to FALSE}
+}
+\value{
+string path to file or folder of model
 }
 \description{
 Download model to target_dir of local file system.

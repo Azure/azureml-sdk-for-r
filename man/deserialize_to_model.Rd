@@ -11,6 +11,9 @@ deserialize_to_model(workspace, model_payload)
 
 \item{model_payload}{A json object to convert to a Model object}
 }
+\value{
+The Model representation of the provided json object
+}
 \description{
 Convert a json object into a Model object.
 }

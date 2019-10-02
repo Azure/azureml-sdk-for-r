@@ -155,7 +155,7 @@
         <td>
           <p><code><a href="create_workspace.html">create_workspace()</a></code> </p>
         </td>
-        <td><p>Create a new Azure Machine Learning Workspace</p></td>
+        <td><p>Create a new Azure Machine Learning workspace</p></td>
       </tr><tr>
         
         <td>
@@ -167,45 +167,73 @@
         <td>
           <p><code><a href="load_workspace_from_config.html">load_workspace_from_config()</a></code> </p>
         </td>
-        <td><p>Load workspace from config</p></td>
+        <td><p>Load workspace configuration details from a config file</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="write_workspace_config.html">write_workspace_config()</a></code> </p>
         </td>
-        <td><p>Write out the Workspace ARM properties to a config file</p></td>
+        <td><p>Write out the workspace configuration details to a config file</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_default_datastore.html">get_default_datastore()</a></code> </p>
         </td>
-        <td><p>Get default datastore associated with a workspace</p></td>
+        <td><p>Get the default datastore for a workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="set_default_datastore.html">set_default_datastore()</a></code> </p>
         </td>
-        <td><p>Set the default datastore for the workspace.</p></td>
+        <td><p>Set the default datastore for a workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="delete_workspace.html">delete_workspace()</a></code> </p>
         </td>
-        <td><p>Delete workspace</p></td>
+        <td><p>Delete a workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="list_workspaces.html">list_workspaces()</a></code> </p>
         </td>
-        <td><p>List all workspaces that the user has access to in the specified
-subscription_id parameter.The list of workspaces can be filtered based on the
-resource group.</p></td>
+        <td><p>List all workspaces that the user has access to in a subscription ID</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_workspace_details.html">get_workspace_details()</a></code> </p>
         </td>
-        <td><p>Return details of this workspace.</p></td>
+        <td><p>Get the details of a workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_default_keyvault.html">get_default_keyvault()</a></code> </p>
+        </td>
+        <td><p>Get the default keyvault for a workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_secrets.html">set_secrets()</a></code> </p>
+        </td>
+        <td><p>Add secrets to a keyvault</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_secrets.html">get_secrets()</a></code> </p>
+        </td>
+        <td><p>Get secrets from a keyvault</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_secrets.html">delete_secrets()</a></code> </p>
+        </td>
+        <td><p>Delete secrets from a keyvault</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="list_secrets.html">list_secrets()</a></code> </p>
+        </td>
+        <td><p>List the secrets in a keyvault</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -405,6 +433,12 @@ be deleted.</p></td>
         </td>
         <td><p>Download files from a given storage prefix (folder name) or 
 the entire container if prefix is unspecified.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run.html">get_run()</a></code> </p>
+        </td>
+        <td><p>Gets the Run object from a given run id</p></td>
       </tr><tr>
         
         <td>
@@ -673,8 +707,8 @@ context</p></td>
         <td>
           <p><code><a href="get_model_package_container_registry.html">get_model_package_container_registry()</a></code> </p>
         </td>
-        <td><p>Return a ContainerRegistry object for where the image (or base image, for
-Dockerfile packages) is stored.</p></td>
+        <td><p>Return a ContainerRegistry object for where the image
+(or base image, for Dockerfile packages) is stored.</p></td>
       </tr><tr>
         
         <td>
@@ -782,6 +816,63 @@ the specific type of the retrieved Webservice object.</p></td>
           <p><code><a href="delete_webservice.html">delete_webservice()</a></code> </p>
         </td>
         <td><p>Delete this Webservice from its associated workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="aci_webservice_deployment_config.html">aci_webservice_deployment_config()</a></code> </p>
+        </td>
+        <td><p>Create a configuration object for deploying an ACI Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_aci_webservice.html">update_aci_webservice()</a></code> </p>
+        </td>
+        <td><p>Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code> </p>
+        </td>
+        <td><p>Create a configuration object for deploying to an AKS compute target.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_aks_webservice.html">update_aks_webservice()</a></code> </p>
+        </td>
+        <td><p>Update the Webservice with provided properties.
+Values left as None will remain unchanged in this Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="local_webservice_deployment_config.html">local_webservice_deployment_config()</a></code> </p>
+        </td>
+        <td><p>Create a configuration object for deploying a local Webservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_local_webservice.html">update_local_webservice()</a></code> </p>
+        </td>
+        <td><p>Update the LocalWebservice with provided properties.
+Values left as None will remain unchanged in this LocalWebservice.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_local_webservice.html">delete_local_webservice()</a></code> </p>
+        </td>
+        <td><p>Delete this LocalWebservice from the local machine.
+This function call is not asynchronous; it runs until the service is deleted.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reload_local_webservice_assets.html">reload_local_webservice_assets()</a></code> </p>
+        </td>
+        <td><p>Reload the LocalWebservice's execution script and dependencies.
+This restarts the service's container with copies of updated assets, 
+including the execution script and local dependencies, but it does not 
+rebuild the underlying image. Accordingly, changes to Conda/pip dependencies 
+or custom Docker steps will not be reflected in the reloaded LocalWebservice. 
+To handle those changes call LocalWebservice.update(), instead.</p></td>
       </tr>
     </tbody>
     </table>

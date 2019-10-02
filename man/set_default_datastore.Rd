@@ -2,15 +2,15 @@
 % Please edit documentation in R/workspace.R
 \name{set_default_datastore}
 \alias{set_default_datastore}
-\title{Set the default datastore for the workspace.}
+\title{Set the default datastore for a workspace}
 \usage{
 set_default_datastore(workspace, datastore_name)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{datastore_name}{The name of the datastore to be set as default}
+\item{datastore_name}{The name of the datastore to be set as default.}
 }
 \description{
-Set the default datastore for the workspace.
+Set the default datastore associated with the workspace.
 }

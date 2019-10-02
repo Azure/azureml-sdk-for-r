@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the default keyvault object for the workspace. — get_default_keyvault • azureml</title>
+<title>Get the default keyvault for a workspace — get_default_keyvault • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Get the default keyvault object for the workspace. — get_default_keyvault" />
+<meta property="og:title" content="Get the default keyvault for a workspace — get_default_keyvault" />
 
-<meta property="og:description" content="Get the default keyvault object for the workspace." />
+<meta property="og:description" content="Returns a Keyvault object representing the default Azure Key Vault
+associated with the workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the default keyvault object for the workspace.</h1>
+    <h1>Get the default keyvault for a workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
     <div class="hidden name"><code>get_default_keyvault.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the default keyvault object for the workspace.</p>
+    <p>Returns a <code>Keyvault</code> object representing the default <a href='https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview'>Azure Key Vault</a>
+associated with the workspace.</p>
     
     </div>
 
@@ -139,13 +141,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The keyvault object associated with your workspace</p>
+    <p>The <code>Keyvault</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='set_secrets.html'>set_secrets()</a></code>, <code><a href='get_secrets.html'>get_secrets()</a></code>, <code><a href='list_secrets.html'>list_secrets()</a></code>, <code><a href='delete_secrets.html'>delete_secrets()</a></code></p></div>
     
 
   </div>
@@ -155,6 +161,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

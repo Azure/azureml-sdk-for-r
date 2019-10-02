@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete workspace — delete_workspace • azureml</title>
+<title>Delete a workspace — delete_workspace • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Delete workspace — delete_workspace" />
+<meta property="og:title" content="Delete a workspace — delete_workspace" />
 
-<meta property="og:description" content="Delete workspace" />
+<meta property="og:description" content="Delete the Azure Machine Learning workspace resource. delete_workspace() can
+also delete the workspace's associated resources." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,14 +118,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete workspace</h1>
+    <h1>Delete a workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
     <div class="hidden name"><code>delete_workspace.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Delete workspace</p>
+    <p>Delete the Azure Machine Learning workspace resource. <code>delete_workspace()</code> can
+also delete the workspace's associated resources.</p>
     
     </div>
 
@@ -136,7 +138,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace to delete</p></td>
+      <td><p>The <code>Workspace</code> object of the workspace to delete.</p></td>
+    </tr>
+    <tr>
+      <th>delete_dependent_resources</th>
+      <td><p>If <code>TRUE</code> the workspace's associated resources,
+i.e. ACR, storage account, key value, and application insights will also be
+deleted.</p></td>
+    </tr>
+    <tr>
+      <th>no_wait</th>
+      <td><p>If <code>FALSE</code> do not wait for the workspace deletion to complete.</p></td>
     </tr>
     <tr>
       <th>delete_dependent_resources</th>
