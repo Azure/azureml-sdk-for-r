@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' @importFrom reticulate import py_discover_config py_str
+#' @importFrom reticulate import use_condaenv py_str
 
 .onLoad <- function(libname, pkgname) {
   use_condaenv("r-azureml")
