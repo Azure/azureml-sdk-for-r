@@ -77,18 +77,18 @@
 #' ```
 #' @md
 create_workspace <- function(
-    name,
-    subscription_id = NULL,
-    resource_group = NULL,
-    location = NULL,
-    create_resource_group = TRUE,
-    friendly_name = NULL,
-    storage_account = NULL,
-    key_vault = NULL,
-    app_insights = NULL,
-    container_registry = NULL,
-    exist_ok = FALSE,
-    show_output = TRUE)
+  name,
+  subscription_id = NULL,
+  resource_group = NULL,
+  location = NULL,
+  create_resource_group = TRUE,
+  friendly_name = NULL,
+  storage_account = NULL,
+  key_vault = NULL,
+  app_insights = NULL,
+  container_registry = NULL,
+  exist_ok = FALSE,
+  show_output = TRUE)
 {
   ws <- 
     azureml$core$Workspace$create(name = name,
@@ -122,9 +122,9 @@ create_workspace <- function(
 #' @md
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL)
 {
-    azureml$core$Workspace$get(name, auth = NULL,
-                               subscription_id = subscription_id,
-                               resource_group = resource_group)
+  azureml$core$Workspace$get(name, auth = NULL,
+                             subscription_id = subscription_id,
+                             resource_group = resource_group)
 }
 
 #' Load workspace configuration details from a config file
