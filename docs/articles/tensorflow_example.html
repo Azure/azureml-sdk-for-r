@@ -115,11 +115,11 @@
 <p>Or load an existing workspace from your Azure Machine Learning account</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
-<div id="create-a-deep-learning-experiment" class="section level3">
+<div id="create-an-experiment" class="section level3">
 <h3 class="hasAnchor">
-<a href="#create-a-deep-learning-experiment" class="anchor"></a>Create a deep learning experiment</h3>
+<a href="#create-an-experiment" class="anchor"></a>Create an experiment</h3>
 <p>For this example, we will create an <code>Experiment</code> called “tf-mnist”.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw">Experiment</span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'tf-mnist'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'tf-mnist'</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="create-a-compute-target" class="section level2">
