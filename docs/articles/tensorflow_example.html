@@ -104,73 +104,73 @@
 <div id="import-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#import-package" class="anchor"></a>Import package</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
 </div>
 <div id="initialize-a-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#initialize-a-workspace" class="anchor"></a>Initialize a workspace</h3>
 <p>The <code>Workspace</code> is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create.</p>
 <p>You can create a <code>Workspace</code> object from a local <code>config.json</code> file</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>Or load an existing workspace from your Azure Machine Learning account</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
 <div id="create-an-experiment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-an-experiment" class="anchor"></a>Create an experiment</h3>
 <p>For this example, we will create an <code>Experiment</code> called “tf-mnist”.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'tf-mnist'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'tf-mnist'</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="create-a-compute-target" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-compute-target" class="anchor"></a>2. Create a compute target</h2>
 <p>Now, we will create a compute target for our TensorFlow job to run on. In this example, we are creating a CPU-enabled compute cluster.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">{</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">  vm_size &lt;-<span class="st"> "STANDARD_D2_V2"</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
+<a class="sourceLine" id="cb5-5" title="5">{</a>
+<a class="sourceLine" id="cb5-6" title="6">  vm_size &lt;-<span class="st"> "STANDARD_D2_V2"</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
+<a class="sourceLine" id="cb5-8" title="8">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-9" title="9">}</a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="kw"><a href="../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
 </div>
 <div id="prepare-training-script" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prepare-training-script" class="anchor"></a>3. Prepare training script</h2>
 <p>In order to collect and upload run metrics, we need to import the <code>azureml</code> package at the top of our training script, <a href="../../samples/training/train-with-tensorflow/tf_mnist.R">“tf_mnist.R”</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
 <p>Then, we need to add the <code>log_metric_to_run</code> function to track our primary metric, “accuracy”, for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">current_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"accuracy"</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                  sess<span class="op">$</span><span class="kw">run</span>(accuracy,</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">                  <span class="dt">feed_dict =</span> <span class="kw">dict</span>(<span class="dt">x =</span> mnist<span class="op">$</span>test<span class="op">$</span>images, <span class="dt">y_ =</span> mnist<span class="op">$</span>test<span class="op">$</span>labels)),</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">                  current_run)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">current_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"accuracy"</span>,</a>
+<a class="sourceLine" id="cb7-3" title="3">                  sess<span class="op">$</span><span class="kw">run</span>(accuracy,</a>
+<a class="sourceLine" id="cb7-4" title="4">                  <span class="dt">feed_dict =</span> <span class="kw">dict</span>(<span class="dt">x =</span> mnist<span class="op">$</span>test<span class="op">$</span>images, <span class="dt">y_ =</span> mnist<span class="op">$</span>test<span class="op">$</span>labels)),</a>
+<a class="sourceLine" id="cb7-5" title="5">                  current_run)</a></code></pre></div>
 </div>
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-an-estimator" class="anchor"></a>4. Create an estimator</h2>
 <p>An <code>Estimator</code> offers a simple way to launch a training job on a compute target. Our training script will need the TensorFlow package to run, and we can have it installed in the Docker container where our job will run by passing the package name to the <code>cran_packages</code> parameter.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">                 <span class="dt">entry_script =</span> <span class="st">"tf_mnist.R"</span>,</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">                 <span class="dt">compute_target =</span> compute_target,</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">                 <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"tensorflow"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<a class="sourceLine" id="cb8-2" title="2">                 <span class="dt">entry_script =</span> <span class="st">"tf_mnist.R"</span>,</a>
+<a class="sourceLine" id="cb8-3" title="3">                 <span class="dt">compute_target =</span> compute_target,</a>
+<a class="sourceLine" id="cb8-4" title="4">                 <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"tensorflow"</span>))</a></code></pre></div>
 </div>
 <div id="submit-a-run" class="section level2">
 <h2 class="hasAnchor">
 <a href="#submit-a-run" class="anchor"></a>5. Submit a run</h2>
 <p>Submitting our experiment will return a <code>Run</code> object that we will use to interface with the run history during and after the job.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <div id="view-metrics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#view-metrics" class="anchor"></a>6. View metrics</h3>
 <p>Finally, we can view the metrics collected during our TensorFlow run!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">metrics</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
+<a class="sourceLine" id="cb10-2" title="2">metrics</a></code></pre></div>
 </div>
 </div>
   </div>

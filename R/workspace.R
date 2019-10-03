@@ -209,10 +209,32 @@ write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
 #' Get the default datastore for a workspace
 #' 
 #' @description 
-#' Returns the default datastore associated with the workspace.
+#' Returns the default datastore associated with the workspace. 
+#' 
+#' When you create a workspace, an Azure blob container and Azure file share 
+#' are registered to the workspace with the names `workspaceblobstore` and 
+#' `workspacefilestore`, respectively. They store the connection information 
+#' of the blob container and the file share that is provisioned in the storage 
+#' account attached to the workspace. The `workspaceblobstore` is set as the 
+#' default datastore, and remains the default datastore unless you set a new 
+#' datastore as the default with `set_default_datastore()`.
 #' @param workspace The `Workspace` object.
 #' @return The default `Datastore` object.
 #' @export
+#' @section Examples:
+#' Get the default datastore for the datastore:
+#' ```
+#' ws <- load_workspace_from_config()
+#' ds <- get_default_datastore(ws)
+#' ```
+#' 
+#' If you have not changed the default datastore for the workspace, the 
+#' following code will return the same datastore object as the above 
+#' example:
+#' ```
+#' ws <- load_workspace_from_config()
+#' ds <- get_datastore(ws, datastore_name = 'workspaceblobstore')
+#' ```
 #' @md 
 get_default_datastore <- function(workspace) {
   workspace$get_default_datastore()

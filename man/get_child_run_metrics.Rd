@@ -2,16 +2,18 @@
 % Please edit documentation in R/hyperdrive.R
 \name{get_child_run_metrics}
 \alias{get_child_run_metrics}
-\title{Return metrics from all child runs}
+\title{Get the metrics from all child runs}
 \usage{
 get_child_run_metrics(hyperdrive_run)
 }
 \arguments{
-\item{hyperdrive_run}{HyperDriveRun object}
+\item{hyperdrive_run}{The \code{HyperDriveRun} object.}
 }
 \value{
-name list of metrics grouped by run_id
+The named list of metrics where element name is
+the run_id, e.g. \code{list("run_id" = metrics)}.
 }
 \description{
-Return metrics from all child runs
+Return the metrics from all the child runs of the
+HyperDrive run.
 }

@@ -2,17 +2,27 @@
 % Please edit documentation in R/environment.R
 \name{get_environment}
 \alias{get_environment}
-\title{Return the environment object.}
+\title{Get an existing environment}
 \usage{
 get_environment(workspace, name, version = NULL)
 }
 \arguments{
-\item{workspace}{The workspace}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{name}{The name of the environment}
+\item{name}{A string of the name of the environment.}
 
-\item{version}{The version of the environment}
+\item{version}{A string of the version of the environment.}
+}
+\value{
+The \code{Environment} object.
 }
 \description{
-Return the environment object.
+Returns an \code{Environment} object for an existing environment in
+the workspace.
 }
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+env <- get_environment(ws, name = 'myenv', version = '1')
+}
+}
+

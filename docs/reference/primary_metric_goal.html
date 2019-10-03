@@ -34,7 +34,12 @@
 
 <meta property="og:title" content="Define supported metric goals for hyperparameter tuning — primary_metric_goal" />
 
-<meta property="og:description" content="Define supported metric goals for hyperparameter tuning" />
+<meta property="og:description" content="A metric goal is used to determine whether a higher value for a metric
+is better or worse. Metric goals are used when comparing runs based on
+the primary metric. For example, you may want to maximize accuracy or
+minimize error.
+The primary metric name and goal are specified to hyperdrive_config()
+when you configure a HyperDrive run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +133,12 @@
 
     <div class="ref-description">
     
-    <p>Define supported metric goals for hyperparameter tuning</p>
+    <p>A metric goal is used to determine whether a higher value for a metric
+is better or worse. Metric goals are used when comparing runs based on
+the primary metric. For example, you may want to maximize accuracy or
+minimize error.</p>
+<p>The primary metric name and goal are specified to <code><a href='hyperdrive_config.html'>hyperdrive_config()</a></code>
+when you configure a HyperDrive run.</p>
     
     </div>
 
@@ -139,13 +149,13 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>goal</th>
-      <td><p>string name of the goal ("MAXIMIZE" or "MINIMIZE")</p></td>
+      <td><p>A string of the metric goal (either "MAXIMIZE" or "MINIMIZE").</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>PrimaryMetricGoal object</p>
+    <p>The <code>PrimaryMetricGoal</code> object.</p>
     
 
   </div>

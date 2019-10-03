@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unregisters the datastore. the underlying storage service will not 
-be deleted. — unregister_datastore • azureml</title>
+<title>Unregister a datastore from its associated workspace — unregister_datastore • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,10 @@ be deleted. — unregister_datastore • azureml</title>
 
 
 
-<meta property="og:title" content="Unregisters the datastore. the underlying storage service will not 
-be deleted. — unregister_datastore" />
+<meta property="og:title" content="Unregister a datastore from its associated workspace — unregister_datastore" />
 
-<meta property="og:description" content="Unregisters the datastore. the underlying storage service will not 
-be deleted." />
+<meta property="og:description" content="Unregister the datastore from its associated workspace. The
+underlying Azure storage will not be deleted." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,16 +122,15 @@ be deleted." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Unregisters the datastore. the underlying storage service will not 
-be deleted.</h1>
+    <h1>Unregister a datastore from its associated workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
     <div class="hidden name"><code>unregister_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Unregisters the datastore. the underlying storage service will not 
-be deleted.</p>
+    <p>Unregister the datastore from its associated workspace. The
+underlying Azure storage will not be deleted.</p>
     
     </div>
 
@@ -144,7 +141,7 @@ be deleted.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>datastore</th>
-      <td><p>datastore object</p></td>
+      <td><p>The <code>AzureBlobDatastore</code> or <code>AzureFileDatastore</code> object.</p></td>
     </tr>
     </table>
     

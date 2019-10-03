@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specify a set of random integers in the range [0, upper) — randint • azureml</title>
+<title>Specify a set of random integers in the range <code>[0, upper)</code> — randint • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,18 @@
 
 
 
-<meta property="og:title" content="Specify a set of random integers in the range [0, upper) — randint" />
+<meta property="og:title" content="Specify a set of random integers in the range <code>[0, upper)</code> — randint" />
 
-<meta property="og:description" content="Specify a set of random integers in the range [0, upper)" />
+<meta property="og:description" content="Specify a set of random integers in the range [0, upper)
+to sample the hyperparameters from.
+The semantics of this distribution is that there is no more
+correlation in the loss function between nearby integer values,
+as compared with more distant integer values. This is an
+appropriate distribution for describing random seeds, for example.
+If the loss function is probably more correlated for nearby integer
+values, then you should probably use one of the &quot;quantized&quot; continuous
+distributions, such as either quniform(), qloguniform(), qnormal(),
+or qlognormal()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +130,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Specify a set of random integers in the range [0, upper)</h1>
+    <h1>Specify a set of random integers in the range <code>[0, upper)</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>randint.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Specify a set of random integers in the range [0, upper)</p>
+    <p>Specify a set of random integers in the range <code>[0, upper)</code>
+to sample the hyperparameters from.</p>
+<p>The semantics of this distribution is that there is no more
+correlation in the loss function between nearby integer values,
+as compared with more distant integer values. This is an
+appropriate distribution for describing random seeds, for example.
+If the loss function is probably more correlated for nearby integer
+values, then you should probably use one of the "quantized" continuous
+distributions, such as either <code><a href='quniform.html'>quniform()</a></code>, <code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>,
+or <code><a href='qlognormal.html'>qlognormal()</a></code>.</p>
     
     </div>
 
@@ -139,13 +157,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>upper</th>
-      <td><p>upper bound for the range of integers (exclusive)</p></td>
+      <td><p>An integer of the upper bound for the range of
+integers (exclusive).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the stochastic expression</p>
+    <p>A list of the stochastic expression.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='random_parameter_sampling.html'>random_parameter_sampling()</a></code>, <code><a href='grid_parameter_sampling.html'>grid_parameter_sampling()</a></code>,
+<code><a href='bayesian_parameter_sampling.html'>bayesian_parameter_sampling()</a></code></p></div>
     
 
   </div>
@@ -155,6 +179,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

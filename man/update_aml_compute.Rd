@@ -2,21 +2,35 @@
 % Please edit documentation in R/compute.R
 \name{update_aml_compute}
 \alias{update_aml_compute}
-\title{Update Scale settings for AmlCompute target.}
+\title{Update scale settings for an AmlCompute cluster}
 \usage{
+update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
+  idle_seconds_before_scaledown = NULL)
+
 update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
   idle_seconds_before_scaledown = NULL)
 }
 \arguments{
-\item{cluster}{cluster object}
+\item{cluster}{The \code{AmlCompute} cluster.}
 
-\item{min_nodes}{Minimum number of nodes to use on the cluster}
+\item{min_nodes}{An integer of the minimum number of nodes to use on
+the cluster.}
 
-\item{max_nodes}{Maximum number of nodes to use on the cluster}
+\item{max_nodes}{An integer of the maximum number of nodes to use on
+the cluster.}
 
-\item{idle_seconds_before_scaledown}{Node idle time in seconds before 
-scaling down the cluster}
+\item{idle_seconds_before_scaledown}{An integer of the node idle time
+in seconds before scaling down the cluster.}
+
+\item{cluster}{The \code{AmlCompute} object}
+
+\item{min_nodes}{An integer of the minimum number of nodes to use on the cluster.}
+
+\item{max_nodes}{An ingeter of the maximum number of nodes to use on the cluster.}
+
+\item{idle_seconds_before_scaledown}{An integer of the node idle time in seconds
+before scaling down the cluster.}
 }
 \description{
-Update Scale settings for AmlCompute target.
+Update the scale settings for an existing AmlCompute cluster.
 }

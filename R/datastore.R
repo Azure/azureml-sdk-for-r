@@ -1,22 +1,28 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Upload the data from the local file system to the Azure storage this
+#' Upload files to the Azure storage a datastore points to
+#' 
+#' @description 
+#' Upload the data from the local file system to the Azure storage that the 
 #' datastore points to.
-#' @param datastore datastore object
-#' @param files list of absolute path to files to upload
-#' @param relative_root the base path from which is used to determine the path
-#' of the files in the file share. For example, if we upload /path/to/file.txt,
-#' and we define base path to be /path, when file.txt is uploaded to the file
-#' share, it will have the path of /to/file.txt. If target_path is also given,
-#' then it will be used as the prefix for the derived path from above. The base
-#' path must be a common path of all of the files, otherwise an exception will
-#' be thrown, defaults to None, which will find the common path.
-#' @param target_path location in the file share to upload the data to, defaults
-#' to None, the root
-#' @param overwrite overwrites, defaults to FALSE
-#' @param show_progress progress of upload in the console, defaults to TRUE
+#' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @param files A list of strings of the absolute path to files to upload.
+#' @param relative_root A string of the base path from which is used to 
+#' determine the path of the files in the Azure storage. For example, if 
+#' we upload `/path/to/file.txt`, and we define the base path to be `/path`, 
+#' when `file.txt` is uploaded to the blob storage or file share, it will 
+#' have the path of `/to/file.txt`. If `target_path` is also given, then it 
+#' will be used as the prefix for the derived path from above. The base path 
+#' must be a common path of all of the files, otherwise an exception will be thrown.
+#' @param target_path A string of the location in the blob container or file share 
+#' to upload the data to. Defaults to `NULL`, in which case the data is 
+#' uploaded to the root.
+#' @param overwrite If `TRUE`, overwrites any existing data at `target_path`.
+#' @param show_progress If `TRUE`, show progress of upload in the console.
+#' @return The `DataReference` object for the target path uploaded.
 #' @export
+#' @md
 upload_files_to_datastore <- function(datastore, files,
                                       relative_root = NULL,
                                       target_path = NULL, 
@@ -30,15 +36,20 @@ upload_files_to_datastore <- function(datastore, files,
   invisible(NULL)
 }
 
-#' Upload the data from the local file system to the Azure storage this
-#' datastore points to.
-#' @param datastore datastore object
-#' @param src_dir the local directory to upload
-#' @param target_path location in the file share to upload the data to, defaults
-#' to None, the root
-#' @param overwrite overwrites, defaults to FALSE
-#' @param show_progress progress of upload in the console, defaults to TRUE
+#' Upload a local directory to the Azure storage a datastore points to
+#' 
+#' @description 
+#' Upload a local directory to the Azure storage the datastore points to.
+#' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @param src_dir A string of the local directory to upload.
+#' @param target_path A string of the location in the blob container or 
+#' file share to upload the data to. Defaults to `NULL`, in which case the data 
+#' is uploaded to the root.
+#' @param overwrite If `TRUE`, overwrites any existing data at `target_path`.
+#' @param show_progress If `TRUE`, show progress of upload in the console.
+#' @return The `DataReference` object for the target path uploaded.
 #' @export
+#' @md
 upload_to_datastore <- function(datastore,
                                 src_dir,
                                 target_path = NULL, 
@@ -48,15 +59,20 @@ upload_to_datastore <- function(datastore,
   invisible(NULL)
 }
 
-#' Download the data from the datastore to the local file system
-#' @param datastore datastore object
-#' @param target_path the local directory to download the file to
-#' @param prefix path to the folder in the blob container to download. If set to
-#' NULL, will download everything in the blob defaults to NULL
-#' @param overwrite overwrite existing file, defaults to FALSE
-#' @param show_progress show progress of download in the console, defaults to
-#' TRUE
+#' Download data from a datastore to the local file system
+#' 
+#' @description 
+#' Download data from the datastore to the local file system.
+#' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @param target_path A string of the local directory to download the file to.
+#' @param prefix A string of the path to the folder in the blob container 
+#' or file store to download. If `NULL`, will download everything in the blob 
+#' container or file share
+#' @param overwrite If `TRUE`, overwrites any existing data at `target_path`.
+#' @param show_progress If `TRUE`, show progress of upload in the console.
+#' @return An integer of the number of files successfully downloaded.
 #' @export
+#' @md
 download_from_datastore <- function(datastore,
                                     target_path,
                                     prefix = NULL,
@@ -69,48 +85,70 @@ download_from_datastore <- function(datastore,
   invisible(NULL)
 }
 
-#' Get a datastore by name
-#' @param workspace The workspace object
-#' @param datastore_name The name of the datastore.
-#' @return The corresponding datastore for that name.
+#' Get an existing datastore
+#' 
+#' @description 
+#' Get the corresponding datastore object for an existing 
+#' datastore by name from the given workspace.
+#' @param workspace The `Workspace` object.
+#' @param datastore_name A string of the name of the datastore.
+#' @return The `AzureBlobDatastore` or `AzureFileDatastore` object.
 #' @export
+#' @md
 get_datastore <- function(workspace, datastore_name)
 {
   azureml$core$Datastore$get(workspace, datastore_name)
 }
 
-#' Register an Azure Blob Container to the datastore.
-#' You can choose to use SAS Token or Storage Account Key
-#' @param workspace The workspace object
-#' @param datastore_name The name of the datastore, case insensitive, can only 
-#' contain alphanumeric characters and _
-#' @param container_name The name of the azure blob container.
-#' @param account_name The storage account name.
-#' @param sas_token An account SAS token, defaults to NULL.
-#' @param account_key A storage account key, defaults to NULL.
-#' @param protocol Protocol to use to connect to the blob container. If NULL, 
-#' defaults to https.
-#' @param endpoint The endpoint of the blob container. If NULL, defaults to 
-#' core.windows.net.
-#' @param overwrite overwrites an existing datastore. If the datastore does not 
-#' exist, it will create one, defaults to FALSE
-#' @param create_if_not_exists create the file share if it does not exists, 
-#' defaults to FALSE
-#' @param skip_validation skips validation of storage keys, defaults to FALSE
-#' @param blob_cache_timeout When this blob is mounted, set the cache timeout 
-#' to this many seconds. If NULL, defaults to no timeout (i.e. blobs will be 
-#' cached for the duration of the job when read).
-#' @param grant_workspace_access grants Workspace Managed Identities(MSI) access 
-#' to the user storage account, defaults to FALSE This should be set if the 
-#' Storage account is in VNET. If set to TRUE, we will use the Workspace MSI 
+#' Register an Azure blob container as a datastore
+#' 
+#' @description 
+#' Register an Azure blob container as a datastore. You can choose to use 
+#' either the SAS token or the storage account key.
+#' @param workspace The `Workspace` object.
+#' @param datastore_name A string of the name of the datastore. The name 
+#' must be case insensitive and can only contain alphanumeric characters and 
+#' underscores.
+#' @param container_name A string of the name of the Azure blob container.
+#' @param account_name A string of the storage account name.
+#' @param sas_token A string of the account SAS token.
+#' @param account_key A string of the storage account key.
+#' @param protocol A string of the protocol to use to connect to the 
+#' blob container. If `NULL`, defaults to `'https'`.
+#' @param endpoint A string of the endpoint of the blob container. 
+#' If `NULL`, defaults to `'core.windows.net'`.
+#' @param overwrite If `TRUE`, overwrites an existing datastore. If 
+#' the datastore does not exist, it will create one.
+#' @param create_if_not_exists If `TRUE`, creates the blob container 
+#' if it does not exists.
+#' @param skip_validation If `TRUE`, skips validation of storage keys.
+#' @param blob_cache_timeout An integer of the cache timeout in seconds 
+#' when this blob is mounted. If `NULL`, defaults to no timeout (i.e. 
+#' blobs will be cached for the duration of the job when read).
+#' @param grant_workspace_access If `TRUE`, grants workspace Managed Identities (MSI) 
+#' access to the user storage account. This should be set to `TRUE` if the 
+#' storage account is in VNET. If `TRUE`, Azure ML will use the workspace MSI 
 #' token to grant access to the user storage account. It may take a while for 
 #' the granted access to reflect.
-#' @param subscription_id The subscription id of the storage account, defaults 
-#' to NULL.
-#' @param resource_group The resource group of the storage account, defaults 
-#' to NULL.
-#' @return The blob datastore.
+#' @param subscription_id A string of the subscription id of the storage account.
+#' @param resource_group A string of the resource group of the storage account.
+#' @return The `AzureBlobDatastore` object.
 #' @export
+#' @section Details:
+#' In general we recommend Azure Blob storage over Azure File storage. Both standard and 
+#' premium storage are available for blobs. Although more expensive, we suggest 
+#' premium storage due to faster throughput speeds that may improve the speed 
+#' of your training runs, particularly if you train against a large dataset. 
+#' @section Examples:
+#' ```
+#' ws <- load_workspace_from_config()
+#' ds <- register_azure_blob_container_datastore(ws, 
+#'                                               datastore_name = 'mydatastore',
+#'                                               container_name = 'myazureblobcontainername',
+#'                                               account_name = 'mystorageaccoutname',
+#'                                               account_key = 'mystorageaccountkey')
+#' ```
+#' @md
 register_azure_blob_container_datastore <- function(
                                                 workspace, 
                                                 datastore_name, 
@@ -145,26 +183,45 @@ register_azure_blob_container_datastore <- function(
                                  resource_group=resource_group)
 }
 
-#' Register an Azure File Share to the datastore.
-#' You can choose to use SAS Token or Storage Account Key
-#' @param workspace The workspace object
-#' @param datastore_name The name of the datastore, case insensitive, can only 
-#' contain alphanumeric characters and _
-#' @param file_share_name The name of the azure file container.
-#' @param account_name The storage account name.
-#' @param sas_token An account SAS token, defaults to NULL.
-#' @param account_key A storage account key, defaults to NULL.
-#' @param protocol Protocol to use to connect to the blob container. 
-#' If NULL, defaults to https.
-#' @param endpoint The endpoint of the blob container. 
-#' If NULL, defaults to core.windows.net.
-#' @param overwrite overwrites an existing datastore. If the datastore does not 
-#' exist, it will create one, defaults to FALSE
-#' @param create_if_not_exists create the file share if it does not exists, 
-#' defaults to FALSE
-#' @param skip_validation skips validation of storage keys, defaults to FALSE
-#' @return The file datastore.
+#' Register an Azure file share as a datastore
+#' 
+#' @description 
+#' Register an Azure file share as a datastore. You can choose to use 
+#' either the SAS token or the storage account key.
+#' @param workspace The `Workspace` object.
+#' @param datastore_name A string of the name of the datastore. The name 
+#' must be case insensitive and can only contain alphanumeric characters and 
+#' underscores.
+#' @param file_share_name A string of the name of the Azure file share.
+#' @param account_name A string of the storage account name.
+#' @param sas_token A string of the account SAS token.
+#' @param account_key A string of the storage account key.
+#' @param protocol A string of the protocol to use to connect to the 
+#' file store. If `NULL`, defaults to `'https'`.
+#' @param endpoint A string of the endpoint of the file store. 
+#' If `NULL`, defaults to `'core.windows.net'`.
+#' @param overwrite If `TRUE`, overwrites an existing datastore. If 
+#' the datastore does not exist, it will create one.
+#' @param create_if_not_exists If `TRUE`, creates the file share 
+#' if it does not exists.
+#' @param skip_validation If `TRUE`, skips validation of storage keys.
+#' @return The `AzureFileDatastore` object.
 #' @export
+#' @section Details:
+#' In general we recommend Azure Blob storage over Azure File storage. Both standard and 
+#' premium storage are available for blobs. Although more expensive, we suggest 
+#' premium storage due to faster throughput speeds that may improve the speed 
+#' of your training runs, particularly if you train against a large dataset. 
+#' @section Examples:
+#' ```
+#' ws <- load_workspace_from_config()
+#' ds <- register_azure_file_share_datastore(ws, 
+#'                                           datastore_name = 'mydatastore',
+#'                                           file_share_name = 'myazurefilesharename',
+#'                                           account_name = 'mystorageaccoutname',
+#'                                           account_key = 'mystorageaccountkey')
+#' ```
+#' @md 
 register_azure_file_share_datastore <- function(workspace, 
                                                 datastore_name, 
                                                 file_share_name, 
@@ -190,10 +247,14 @@ register_azure_file_share_datastore <- function(workspace,
                                      skip_validation=skip_validation)
 }
 
-#' Unregisters the datastore. the underlying storage service will not 
-#' be deleted.
-#' @param datastore datastore object
+#' Unregister a datastore from its associated workspace
+#' 
+#' @description
+#' Unregister the datastore from its associated workspace. The 
+#' underlying Azure storage will not be deleted.
+#' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
 #' @export
+#' @md
 unregister_datastore <- function(datastore) {
   datastore$unregister()
   invisible(NULL)

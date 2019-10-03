@@ -2,13 +2,15 @@
 % Please edit documentation in R/compute.R
 \name{detach_aks_compute}
 \alias{detach_aks_compute}
-\title{Detach the AksCompute object from its associated workspace}
+\title{Detach an AksCompute cluster from its associated workspace}
 \usage{
 detach_aks_compute(cluster)
 }
 \arguments{
-\item{cluster}{cluster object}
+\item{cluster}{The \code{AksCompute} object.}
 }
 \description{
-Detach the AksCompute object from its associated workspace
+Detach the AksCompute cluster from its associated workspace. No
+underlying cloud resource will be deleted; the association will
+just be removed.
 }

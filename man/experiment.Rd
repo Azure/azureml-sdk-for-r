@@ -2,18 +2,29 @@
 % Please edit documentation in R/experiment.R
 \name{experiment}
 \alias{experiment}
-\title{Create an Azure Machine Learning Experiment}
+\title{Create an Azure Machine Learning experiment}
 \usage{
 experiment(workspace, name)
 }
 \arguments{
-\item{workspace}{The workspace object that would contain the experiment.}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{name}{The experiment name.}
+\item{name}{A string of the experiment name. The name must be between
+3-36 characters, start with a letter or number, and can only contain
+letters, numbers, underscores, and dashes.}
 }
 \value{
-experiment object
+The \code{Experiment} object.
 }
 \description{
-Create an Azure Machine Learning Experiment
+An experiment is a grouping of many runs from a specified script.
+}
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+exp <- experiment(ws, name = 'myexperiment')
+}
+}
+
+\seealso{
+\code{submit_experiment()}
 }

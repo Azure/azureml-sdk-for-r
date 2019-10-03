@@ -2,18 +2,25 @@
 % Please edit documentation in R/hyperdrive.R
 \name{lognormal}
 \alias{lognormal}
-\title{Specify a normal distribution of the form exp(normal(mu, sigma))}
+\title{Specify a normal distribution of the form \code{exp(normal(mu, sigma))}}
 \usage{
 lognormal(mu, sigma)
 }
 \arguments{
-\item{mu}{mean of the normal distribution}
+\item{mu}{A double of the mean of the normal distribution.}
 
-\item{sigma}{standard deviation of the normal distribution}
+\item{sigma}{A double of the standard deviation of the normal distribution.}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a normal distribution of the form exp(normal(mu, sigma))
+Specify a normal distribution of the form \code{exp(normal(mu, sigma))}.
+
+The logarithm of the return value is normally distributed. When optimizing,
+this variable is constrained to be positive.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

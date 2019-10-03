@@ -2,22 +2,64 @@
 % Please edit documentation in R/hyperdrive.R
 \name{truncation_selection_policy}
 \alias{truncation_selection_policy}
-\title{Create Truncation Selection policy for HyperDrive runs}
+\title{Define a truncation selection policy for early termination of HyperDrive runs}
 \usage{
 truncation_selection_policy(truncation_percentage,
   evaluation_interval = 1L, delay_evaluation = 0L)
 }
 \arguments{
-\item{truncation_percentage}{percentage of lowest performing runs to
-terminate at each interval}
+\item{truncation_percentage}{An integer of the percentage of lowest
+performing runs to terminate at each interval.}
 
-\item{evaluation_interval}{frequency for applying policy}
+\item{evaluation_interval}{An integer of the frequency for applying policy.}
 
-\item{delay_evaluation}{how many intervals to delay the first evaluation}
+\item{delay_evaluation}{An integer of the number of intervals for which to
+delay the first evaluation.}
 }
 \value{
-EarlyTerminationPolicy object
+The \code{TruncationSelectionPolicy} object.
 }
 \description{
-Create Truncation Selection policy for HyperDrive runs
+Truncation selection cancels a given percentage of lowest performing runs at
+each evaluation interval. Runs are compared based on their performance on the
+primary metric and the lowest X% are terminated.
 }
+\section{Details}{
+
+This policy periodically cancels the given percentage of runs that rank the
+lowest for their performance on the primary metric. The policy strives for
+fairness in ranking the runs by accounting for improving model performance
+with training time. When ranking a relatively young run, the policy uses the
+corresponding (and earlier) performance of older runs for comparison. Therefore,
+runs aren't terminated for having a lower performance because they have run for
+less time than other runs.
+
+The truncation selection policy takes the following configuration parameters:
+\itemize{
+\item \code{truncation_percentage}: An integer of the percentage of lowest performing
+runs to terminate at each evaluation interval.
+\item \code{evaluation_interval}: Optional. The frequency for applying the policy.
+Each time the training script logs the primary metric counts as one
+interval.
+\item \code{delay_evaluation}: Optional. The number of intervals to delay the
+policy evaluation. Use this parameter to avoid premature termination
+of training runs. If specified, the policy applies every multiple of
+\code{evaluation_interval} that is greater than or equal to \code{delay_evaluation}.
+}
+
+For example, when evaluating a run at a interval N, its performance is only
+compared with the performance of other runs up to interval N even if they
+reported metrics for intervals greater than N.
+}
+
+\section{Examples}{
+
+In this example, the early termination policy is applied at every interval
+starting at evaluation interval 5. A run will be terminated at interval 5
+if its performance at interval 5 is in the lowest 20% of performance of all
+runs at interval 5.\preformatted{early_termination_policy = truncation_selection_policy(truncation_percentage = 20L,
+                                                       evaluation_interval = 1L,
+                                                       delay_evaluation = 5L)
+}
+}
+

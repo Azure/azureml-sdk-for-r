@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the child runs sorted in descending order by best primary metric — get_child_runs_sorted_by_primary_metric • azureml</title>
+<title>Get the child runs sorted in descending order by
+best primary metric — get_child_runs_sorted_by_primary_metric • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,19 @@
 
 
 
-<meta property="og:title" content="Return the child runs sorted in descending order by best primary metric — get_child_runs_sorted_by_primary_metric" />
+<meta property="og:title" content="Get the child runs sorted in descending order by
+best primary metric — get_child_runs_sorted_by_primary_metric" />
 
-<meta property="og:description" content="Return the child runs sorted in descending order by best primary metric" />
+<meta property="og:description" content="Return a list of child runs of the HyperDrive run sorted by their best
+primary metric. The sorting is done according to the primary metric and
+its goal: if it is maximize, then the child runs are returned in descending
+order of their best primary metric. If reverse = TRUE, the order is reversed.
+Each child in the result has run id, hyperparameters, best primary metric value,
+and status.
+Child runs without the primary metric are discarded when
+discard_no_metric = TRUE. Otherwise, they are appended to the list behind
+other child runs with the primary metric. Note that the reverse option has no
+impact on them." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +132,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the child runs sorted in descending order by best primary metric</h1>
+    <h1>Get the child runs sorted in descending order by
+best primary metric</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>get_child_runs_sorted_by_primary_metric.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return the child runs sorted in descending order by best primary metric</p>
+    <p>Return a list of child runs of the HyperDrive run sorted by their best
+primary metric. The sorting is done according to the primary metric and
+its goal: if it is maximize, then the child runs are returned in descending
+order of their best primary metric. If <code>reverse = TRUE</code>, the order is reversed.
+Each child in the result has run id, hyperparameters, best primary metric value,
+and status.</p>
+<p>Child runs without the primary metric are discarded when
+<code>discard_no_metric = TRUE</code>. Otherwise, they are appended to the list behind
+other child runs with the primary metric. Note that the reverse option has no
+impact on them.</p>
     
     </div>
 
@@ -140,27 +161,28 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hyperdrive_run</th>
-      <td><p>HyperDriveRun object</p></td>
+      <td><p>The <code>HyperDriveRun</code> object.</p></td>
     </tr>
     <tr>
       <th>top</th>
-      <td><p>number of top children to be returned, default value of 0 will
-return all</p></td>
+      <td><p>An integer of the number of top child runs to be returned. If <code>0</code>
+(the default value), all child runs will be returned.</p></td>
     </tr>
     <tr>
       <th>reverse</th>
-      <td><p>reverse the sorting order</p></td>
+      <td><p>If <code>TRUE</code>, the order will be reversed. This sorting only
+impacts child runs with the primary metric.</p></td>
     </tr>
     <tr>
       <th>discard_no_metric</th>
-      <td><p>whether to include children without the primary
-metric</p></td>
+      <td><p>If <code>FALSE</code>, child runs without the primary metric
+will be appended to the list returned.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>named list of child runs</p>
+    <p>The named list of child runs.</p>
     
 
   </div>

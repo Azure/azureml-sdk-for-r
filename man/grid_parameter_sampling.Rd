@@ -2,17 +2,31 @@
 % Please edit documentation in R/hyperdrive.R
 \name{grid_parameter_sampling}
 \alias{grid_parameter_sampling}
-\title{Define Grid Parameter sampling over hyperparameter search space}
+\title{Define grid sampling over a hyperparameter search space}
 \usage{
 grid_parameter_sampling(parameter_space)
 }
 \arguments{
-\item{parameter_space}{a named list containing each parameter and its
-distribution}
+\item{parameter_space}{A named list containing each parameter and its
+distribution, e.g. \code{list("parameter" = distribution)}.}
 }
 \value{
-HyperParameterSampling object
+The \code{GridParameterSampling} object.
 }
 \description{
-Define Grid Parameter sampling over hyperparameter search space
+Grid sampling performs a simple grid search over all feasible values in
+the defined search space. It can only be used with hyperparameters
+specified using \code{choice()}.
+}
+\section{Examples}{
+\preformatted{param_sampling <- grid_parameter_sampling( {
+        'num_hidden_layers': choice(1, 2, 3), 
+        'batch_size': choice(16, 32)
+    }
+)
+}
+}
+
+\seealso{
+\code{choice()}
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Azure Container Registry. — container_registry • azureml</title>
+<title>Specify Azure Container Registry details — container_registry • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,14 @@
 
 
 
-<meta property="og:title" content="Get Azure Container Registry. — container_registry" />
+<meta property="og:title" content="Specify Azure Container Registry details — container_registry" />
 
-<meta property="og:description" content="Get Azure Container Registry." />
+<meta property="og:description" content="Returns a ContainerRegistry object with the details for an
+Azure Container Registry (ACR). This is needed when a custom
+Docker image used for training or deployment is located in
+a private image registry. Provide a ContainerRegistry object
+to the image_registry_details parameter of either r_environment()
+or estimator()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +126,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Azure Container Registry.</h1>
+    <h1>Specify Azure Container Registry details</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
     <div class="hidden name"><code>container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get Azure Container Registry.</p>
+    <p>Returns a <code>ContainerRegistry</code> object with the details for an
+Azure Container Registry (ACR). This is needed when a custom
+Docker image used for training or deployment is located in
+a private image registry. Provide a <code>ContainerRegistry</code> object
+to the <code>image_registry_details</code> parameter of either <code><a href='r_environment.html'>r_environment()</a></code>
+or <code><a href='estimator.html'>estimator()</a></code>.</p>
     
     </div>
 
@@ -139,17 +149,26 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>address</th>
-      <td><p>DNS name or IP address of azure container registry(ACR)</p></td>
+      <td><p>A string of the DNS name or IP address of the
+Azure Container Registry (ACR).</p></td>
     </tr>
     <tr>
       <th>username</th>
-      <td><p>The username for ACR</p></td>
+      <td><p>A string of the username for ACR.</p></td>
     </tr>
     <tr>
       <th>password</th>
-      <td><p>The password for ACR</p></td>
+      <td><p>A string of the password for ACR.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The <code>ContainerRegistry</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='r_environment.html'>r_environment()</a></code>, <code><a href='estimator.html'>estimator()</a></code></p></div>
     
 
   </div>
@@ -157,7 +176,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
