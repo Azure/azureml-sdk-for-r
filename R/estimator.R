@@ -119,7 +119,7 @@ create_launch_script <- function(source_directory,
                                  cran_packages = NULL,
                                  github_packages = NULL,
                                  custom_url_packages = NULL) {
-  launch_file_name <- "auto_generated_launcher.R"
+  launch_file_name <- "_generated_launcher.R"
   launch_file_conn <- file(file.path(source_directory, launch_file_name),
                            open = "w")
   
