@@ -1,18 +1,17 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' @importFrom reticulate import py_discover_config py_str
+#' @importFrom reticulate import use_condaenv py_str
 
 .onLoad <- function(libname, pkgname) {
-  # conda doesnt find the environment if not activated, therefore calling
-  # py_discover_config to prepend the conda scripts path to path.
-  py_discover_config('azureml', 'r-azureml')
+  use_condaenv("r-azureml")
   
   # delay load azureml
   azureml <<- import('azureml', delay_load = list(
     environment = "r-azureml",
     
     on_load = function() {
+      # This function will be called on successful load
       ver <- toString(utils::packageVersion("azureml"))
       azureml$"_base_sdk_common"$user_agent$append("azureml-r-sdk", ver)
     },

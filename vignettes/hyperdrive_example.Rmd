@@ -25,7 +25,7 @@ First, we will prepare for training by loading the required package, initializin
 
 ### Import package
 
-```R
+```{r Import package, eval=FALSE}
 library("azureml")
 ```
 
@@ -34,12 +34,12 @@ library("azureml")
 The `Workspace` is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create. 
 
 You can create a `Workspace` object from a local `config.json` file
-```R
+```{r Initialize a workspace, eval=FALSE}
 ws <- load_workspace_from_config()
 ```
 
 Or load an existing workspace from your Azure Machine Learning account
-```R
+```{r Load a workspace, eval=FALSE}
 ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your resource group>")
 ```
 
@@ -47,14 +47,14 @@ ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your re
 
 For this example, we will create an experiment named "hyperdrive-cifar10".
 
-```R
+```{r Create a deep learning experiment, eval=FALSE}
 exp <- experiment(workspace = ws, name = 'hyperdrive-cifar10')
 ```
 
 ## 2. Create a compute target
 
 Now, we will create a compute target for our job to run on. In this example, we are creating a GPU-enabled compute cluster.
-```R
+```{r Create a compute target, eval=FALSE}
 cluster_name <- "rcluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
@@ -70,13 +70,13 @@ wait_for_provisioning_completion(compute_target)
 
 In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["cifar10_cnn.R"](../../samples/training/cnn-tuning-with-hyperdrive/cifar10_cnn.R).
 
-```R
+```r
 library("azureml")
 ```
 
 Then, we need to edit our script so that it can log our parameters. We will use the `log_metric_to_run` function to log our hyperparameters at the top of the script and to log our primary metric at the bottom of the script.
 
-```R
+```r
 current_run <- get_current_run()
 ...
 log_metric_to_run("batch_size", batch_size, current_run)
@@ -88,7 +88,7 @@ log_metric_to_run("lr", lr, current_run)
 log_metric_to_run("decay", decay, current_run)
 ```
 
-```R
+```r
 log_metric_to_run("Loss", results[[1]], current_run)
 ```
 
@@ -97,7 +97,7 @@ log_metric_to_run("Loss", results[[1]], current_run)
 An `Estimator` offers a simple way to launch a training job on a compute target. 
 
 Our training script will need the Keras package to run, and we can have it installed in the Docker container where our job will run by passing the package name via the `cran_packages` parameter.
-```R
+```{r Create an estimator, eval=FALSE}
 est <- estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
                  compute_target = compute_target, cran_packages = c("keras"))
 ```
@@ -131,7 +131,7 @@ Other sampling function options are:
  * `grid_parameter_sampling(parameter_space)`
  * `bayesian_parameter_sampling(parameter_space)`
 
-```R
+```{r Define search space, eval=FALSE}
 sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
                                            epochs = choice(c(200, 350, 500)),
                                            lr = normal(0.0001, 0.005),
@@ -144,7 +144,7 @@ To prevent resource waste, we should detect and terminate poorly performing runs
 
 Here, we will use the `bandit_policy` which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
 
-```R
+```{r Define termination policy, eval=FALSE}
 policy <- bandit_policy(slack_factor = 0.15)
 ```
 
@@ -159,7 +159,7 @@ If no policy is provided, all runs will continue to completion regardless of per
 
 Now, we can create a `HyperDriveConfig` object to define our group of jobs. Along with our sampling and policy definitions, we need to specify the name of the primary metric that we want to track and whether we want to maximize it or minimize it.
 
-```R
+```{r Create Hyperdrive run configuration, eval=FALSE}
 hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
                                        primary_metric_goal("MINIMIZE"),
                                        primary_metric_name = "Loss",
@@ -172,7 +172,7 @@ hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
 
 Submitting our experiment will start multiple simultaneous runs and return a `HyperDriveRun` object that we will use to interface with the run history during and after the job.
 
-```R
+```{r Submit HyperDrive run, eval=FALSE}
 hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 ```
@@ -181,7 +181,7 @@ wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 
 Finally, we can view and compare the metrics collected during our all of our child runs!
 
-```R
+```{r Analyse runs by performance, eval=FALSE}
 child_run_metrics <- get_child_run_metrics(hyperdrive_run)
 child_run_metrics
 
