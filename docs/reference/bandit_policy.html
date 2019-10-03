@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Bandit policy for HyperDrive runs — bandit_policy • azureml</title>
+<title>Define a Bandit policy for early termination of HyperDrive runs — bandit_policy • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="Create Bandit policy for HyperDrive runs — bandit_policy" />
+<meta property="og:title" content="Define a Bandit policy for early termination of HyperDrive runs — bandit_policy" />
 
-<meta property="og:description" content="Create Bandit policy for HyperDrive runs" />
+<meta property="og:description" content="Bandit is an early termination policy based on slack factor/slack amount
+and evaluation interval. The policy early terminates any runs where the
+primary metric is not within the specified slack factor/slack amount with
+respect to the best performing training run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +124,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Bandit policy for HyperDrive runs</h1>
+    <h1>Define a Bandit policy for early termination of HyperDrive runs</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>bandit_policy.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create Bandit policy for HyperDrive runs</p>
+    <p>Bandit is an early termination policy based on slack factor/slack amount
+and evaluation interval. The policy early terminates any runs where the
+primary metric is not within the specified slack factor/slack amount with
+respect to the best performing training run.</p>
     
     </div>
 
@@ -140,25 +146,73 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>slack_factor</th>
-      <td><p>ratio of the allowed distance from best-performing run</p></td>
+      <td><p>A double of the ratio of the allowed distance from
+the best performing run.</p></td>
     </tr>
     <tr>
       <th>slack_amount</th>
-      <td><p>absolute allowed distance from the best-performing run</p></td>
+      <td><p>A double of the absolute distance allowed from the
+best performing run.</p></td>
     </tr>
     <tr>
       <th>evaluation_interval</th>
-      <td><p>frequency for applying policy</p></td>
+      <td><p>An integer of the frequency for applying policy.</p></td>
     </tr>
     <tr>
       <th>delay_evaluation</th>
-      <td><p>how many intervals to delay the first evaluation</p></td>
+      <td><p>An integer of the number of intervals for which to
+delay the first evaluation.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>EarlyTerminationPolicy object</p>
+    <p>The <code>BanditPolicy</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>The Bandit policy takes the following configuration parameters:</p><ul>
+<li><p><code>slack_factor</code> or <code>slack_amount</code>: The slack allowed with respect to
+the best performing training run. <code>slack_factor</code> specifies the
+allowable slack as a ration. <code>slack_amount</code> specifies the allowable
+slack as an absolute amount, instead of a ratio.</p></li>
+<li><p><code>evaluation_interval</code>: Optional. The frequency for applying the policy.
+Each time the training script logs the primary metric counts as one
+interval.</p></li>
+<li><p><code>delay_evaluation</code>: Optional. The number of intervals to delay the
+policy evaluation. Use this parameter to avoid premature termination
+of training runs. If specified, the policy applies every multiple of
+<code>evaluation_interval</code> that is greater than or equal to <code>delay_evaluation</code>.</p></li>
+</ul>
+
+<p>Any run that doesn't fall within the slack factor or slack amount of the
+evaluation metric with respect to the best performing run will be
+terminated.</p>
+<p>Consider a Bandit policy with <code>slack_factor = 0.2</code> and <code>evaluation_interval = 100</code>.
+Assume that run X is the currently best performing run with an AUC (performance metric)
+of 0.8 after 100 intervals. Further, assume the best AUC reported for a run is Y.
+This policy compares the value <code>(Y + Y * 0.2)</code> to 0.8, and if smaller, cancels the run.
+If <code>delay_evaluation = 200</code>, then the first time the policy will be applied is at
+interval 200.</p>
+<p>Now, consider a Bandit policy with <code>slack_amount = 0.2</code> and <code>evaluation_interval = 100</code>.
+If run 3 is the currently best performing run with an AUC (performance metric) of 0.8
+after 100 intervals, then any run with an AUC less than 0.6 (<code>0.8 - 0.2</code>) after 100 iterations
+will be terminated. Similarly, the <code>delay_evaluation</code> can also be used to delay the first
+termination policy evaluation for a specific number of sequences.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>In this example, the early termination policy is applied at every interval when metrics
+are reported, starting at evaluation interval 5. Any run whose best metric is less than
+<code>1 / (1 + 0.1)</code> or 91% of the best performing run will be terminated.</p><pre>early_termination_policy = bandit_policy(slack_factor = 0.1, 
+                                         evaluation_interval = 1L,
+                                         delay_evaluation = 5L)
+</pre>
+
     
 
   </div>
@@ -168,6 +222,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

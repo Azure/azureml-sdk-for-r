@@ -2,16 +2,18 @@
 % Please edit documentation in R/hyperdrive.R
 \name{get_child_run_hyperparameters}
 \alias{get_child_run_hyperparameters}
-\title{Return hyperparameters for all child runs}
+\title{Get the hyperparameters for all child runs}
 \usage{
 get_child_run_hyperparameters(hyperdrive_run)
 }
 \arguments{
-\item{hyperdrive_run}{HyperDriveRun object}
+\item{hyperdrive_run}{The \code{HyperDriveRun} object.}
 }
 \value{
-named list of hyperparameters grouped by run_id
+The named list of hyperparameters where element name
+is the run_id, e.g. \code{list("run_id" = hyperparameters)}.
 }
 \description{
-Return hyperparameters for all child runs
+Return the hyperparameters for all the child runs of the
+HyperDrive run.
 }

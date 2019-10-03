@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return a generator of the runs for this experiment — get_runs_in_experiment • azureml</title>
+<title>Return a generator of the runs for an experiment — get_runs_in_experiment • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Return a generator of the runs for this experiment — get_runs_in_experiment" />
+<meta property="og:title" content="Return a generator of the runs for an experiment — get_runs_in_experiment" />
 
-<meta property="og:description" content="Return a generator of the runs for this experiment" />
+<meta property="og:description" content="Return a generator of the runs for an experiment, in reverse
+chronological order." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return a generator of the runs for this experiment</h1>
+    <h1>Return a generator of the runs for an experiment</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/experiment.R'><code>R/experiment.R</code></a></small>
     <div class="hidden name"><code>get_runs_in_experiment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return a generator of the runs for this experiment</p>
+    <p>Return a generator of the runs for an experiment, in reverse
+chronological order.</p>
     
     </div>
 
@@ -140,7 +142,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>experiment</th>
-      <td><p>experiment object</p></td>
+      <td><p>The <code>Experiment</code> object.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -148,23 +150,23 @@
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Filter runs by tags. A named list eg. list("tag" = "value")</p></td>
+      <td><p>Filter runs by tags. A named list eg. list("tag" = "value").</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Filter runs by properties. A named list 
-eg. list("property" = "value")</p></td>
+      <td><p>Filter runs by properties. A named list
+eg. list("property" = "value").</p></td>
     </tr>
     <tr>
       <th>include_children</th>
-      <td><p>By default, fetch only top-level runs. 
-Set to TRUE to list all runs</p></td>
+      <td><p>By default, fetch only top-level runs.
+Set to TRUE to list all runs.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The list of runs matching supplied filters</p>
+    <p>The list of runs matching supplied filters.</p>
     
 
   </div>

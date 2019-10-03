@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute.R
 \name{create_aks_compute}
 \alias{create_aks_compute}
-\title{Create AksCompute}
+\title{Create an AksCompute cluster}
 \usage{
 create_aks_compute(workspace, cluster_name, agent_count = NULL,
   vm_size = NULL, ssl_cname = NULL, ssl_cert_pem_file = NULL,
@@ -12,49 +12,70 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
   docker_bridge_cidr = NULL)
 }
 \arguments{
-\item{workspace}{workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{cluster_name}{cluster name}
+\item{cluster_name}{A string of the name of the cluster.}
 
-\item{agent_count}{Number of agents (VMs) to host containers. Defaults to 3}
+\item{agent_count}{An integer of the number of agents (VMs) to host containers.
+Defaults to \code{3}.}
 
-\item{vm_size}{Size of agent VMs. More details can be found here:
-https://aka.ms/azureml-vm-details. Defaults to Standard_D3_v2}
+\item{vm_size}{A string of the size of agent VMs. More details can be found \href{https://aka.ms/azureml-vm-details}{here}.
+Note that not all sizes are available in all regions, as detailed in the
+aformentioned link. Defaults to \code{'Standard_D3_v2'}.}
 
-\item{ssl_cname}{A CName to use if enabling SSL validation on the cluster.
-Must provide all three CName, cert file, and key file to enable SSL
-validation}
+\item{ssl_cname}{A string of a CName to use if enabling SSL validation on the
+cluster. Must provide all three - CName, cert file, and key file - to enable SSL
+validation.}
 
-\item{ssl_cert_pem_file}{A file path to a file containing cert information
-for SSL validation. Must provide all three CName, cert file, and key file to
-enable SSL validation}
+\item{ssl_cert_pem_file}{A string of a file path to a file containing cert
+information for SSL validation. Must provide all three - CName, cert file, and
+key file - to enable SSL validation.}
 
-\item{ssl_key_pem_file}{A file path to a file containing key information for
-SSL validation. Must provide all three CName, cert file, and key file to
-enable SSL validation}
+\item{ssl_key_pem_file}{A string of a file path to a file containing key
+information for SSL validation. Must provide all three - CName, cert file, and
+key file - to enable SSL validation.}
 
-\item{location}{Location to provision cluster in. If not specified, will
-default to workspace location. Available regions for this compute can be
-found here: "https://azure.microsoft.com/global-infrastructure/services/?
-regions=all&products=kubernetes-service"}
+\item{location}{A string of the location to provision the cluster in. If not
+specified, defaults to the workspace location. Available regions for this compute can be
+found here: "https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=kubernetes-service".}
 
-\item{vnet_resourcegroup_name}{Name of the resource group where the virtual
-network is located}
+\item{vnet_resourcegroup_name}{A string of the name of the resource group where
+the virtual network is located.}
 
-\item{vnet_name}{Name of the virtual network}
+\item{vnet_name}{A string of the name of the virtual network.}
 
-\item{subnet_name}{Name of the subnet inside the vnet}
+\item{subnet_name}{A string of the name of the subnet inside the vnet.}
 
-\item{service_cidr}{A CIDR notation IP range from which to assign service
-cluster IPs.}
+\item{service_cidr}{A string of a CIDR notation IP range from which to assign
+service cluster IPs.}
 
-\item{dns_service_ip}{Containers DNS server IP address.}
+\item{dns_service_ip}{A string of the container's DNS server IP address.}
 
-\item{docker_bridge_cidr}{A CIDR notation IP for Docker bridge.}
+\item{docker_bridge_cidr}{A string of a CIDR notation IP for Docker bridge.}
 }
 \value{
-An AksCompute object representation of the compute object
+An \code{AksCompute} object.
 }
 \description{
-Create AksCompute
+Provision an Azure Kubernetes Service instance (AksCompute) as a compute target
+for web service deployment. AksCompute is recommended for high-scale production
+deployments and provides fast response time and autoscaling of the deployed service.
+Cluster autoscaling isn't supported through the Azure ML R SDK. To change the nodes
+in the AksCompute cluster, use the UI for the cluster in the Azure portal. Once
+created, the cluster can be reused for multiple deployments.
 }
+\section{Details}{
+
+For more information on using an AksCompute resource within a virtual network, see
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
+}
+
+\section{Examples}{
+
+Create an AksCompute cluster using the default configuration (you can also
+provide parameters to customize this).\preformatted{ws <- load_workspace_from_config()
+compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
+wait_for_provisioning_completion(compute_target)
+}
+}
+

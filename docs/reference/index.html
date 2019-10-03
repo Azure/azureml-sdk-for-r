@@ -245,70 +245,70 @@
       <tr>
         
         <td>
-          <p><code><a href="get_compute.html">get_compute()</a></code> </p>
-        </td>
-        <td><p>Get compute. Returns NULL if compute is not found on workspace.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wait_for_provisioning_completion.html">wait_for_provisioning_completion()</a></code> </p>
-        </td>
-        <td><p>Wait for cluster's instantiation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_compute.html">delete_compute()</a></code> </p>
-        </td>
-        <td><p>Delete compute</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="create_aml_compute.html">create_aml_compute()</a></code> </p>
         </td>
-        <td><p>Create AmlCompute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_aks_compute.html">create_aks_compute()</a></code> </p>
-        </td>
-        <td><p>Create AksCompute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aks_compute_credentials.html">get_aks_compute_credentials()</a></code> </p>
-        </td>
-        <td><p>Retrieve the credentials for the AKS target</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="attach_aks_compute.html">attach_aks_compute()</a></code> </p>
-        </td>
-        <td><p>Attach an already existing AKS compute resource with the provided workspace</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
-        </td>
-        <td><p>Detach the AksCompute object from its associated workspace</p></td>
+        <td><p>Create an AmlCompute cluster</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="list_nodes_in_aml_compute.html">list_nodes_in_aml_compute()</a></code> </p>
         </td>
-        <td><p>Get the details (e.g IP address, port etc) of all the compute nodes in the 
-compute.</p></td>
+        <td><p>Get the details (e.g IP address, port etc) of all the compute nodes in the
+compute target</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update_aml_compute.html">update_aml_compute()</a></code> <code><a href="update_aml_compute.html">update_aml_compute()</a></code> </p>
+        </td>
+        <td><p>Update scale settings for an AmlCompute cluster</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_aks_compute.html">create_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Create an AksCompute cluster</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aks_compute_credentials.html">get_aks_compute_credentials()</a></code> </p>
+        </td>
+        <td><p>Get the credentials for an AksCompute cluster</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="attach_aks_compute.html">attach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Attach an existing AKS cluster to a workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="detach_aks_compute.html">detach_aks_compute()</a></code> </p>
+        </td>
+        <td><p>Detach an AksCompute cluster from its associated workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_compute.html">get_compute()</a></code> </p>
+        </td>
+        <td><p>Get an existing compute cluster</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wait_for_provisioning_completion.html">wait_for_provisioning_completion()</a></code> </p>
+        </td>
+        <td><p>Wait for a cluster to finish provisioning</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="list_supported_vm_sizes.html">list_supported_vm_sizes()</a></code> </p>
         </td>
-        <td><p>List the supported VM sizes in a region.</p></td>
+        <td><p>List the supported VM sizes in a region</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="update_aml_compute.html">update_aml_compute()</a></code> </p>
+          <p><code><a href="delete_compute.html">delete_compute()</a></code> </p>
         </td>
-        <td><p>Update Scale settings for AmlCompute target.</p></td>
+        <td><p>Delete a cluster</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -322,48 +322,81 @@ compute.</p></td>
         <td>
           <p><code><a href="upload_files_to_datastore.html">upload_files_to_datastore()</a></code> </p>
         </td>
-        <td><p>Upload the data from the local file system to the Azure storage this
-datastore points to.</p></td>
+        <td><p>Upload files to the Azure storage a datastore points to</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="upload_to_datastore.html">upload_to_datastore()</a></code> </p>
         </td>
-        <td><p>Upload the data from the local file system to the Azure storage this
-datastore points to.</p></td>
+        <td><p>Upload a local directory to the Azure storage a datastore points to</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_from_datastore.html">download_from_datastore()</a></code> </p>
+        </td>
+        <td><p>Download data from a datastore to the local file system</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_datastore.html">get_datastore()</a></code> </p>
         </td>
-        <td><p>Get a datastore by name</p></td>
+        <td><p>Get an existing datastore</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="register_azure_blob_container_datastore.html">register_azure_blob_container_datastore()</a></code> </p>
         </td>
-        <td><p>Register an Azure Blob Container to the datastore.
-You can choose to use SAS Token or Storage Account Key</p></td>
+        <td><p>Register an Azure blob container as a datastore</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="register_azure_file_share_datastore.html">register_azure_file_share_datastore()</a></code> </p>
         </td>
-        <td><p>Register an Azure File Share to the datastore.
-You can choose to use SAS Token or Storage Account Key</p></td>
+        <td><p>Register an Azure file share as a datastore</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="unregister_datastore.html">unregister_datastore()</a></code> </p>
         </td>
-        <td><p>Unregisters the datastore. the underlying storage service will not 
-be deleted.</p></td>
+        <td><p>Unregister a datastore from its associated workspace</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-environments" class="hasAnchor"><a href="#section-environments" class="anchor"></a>Environments</h2>
+          <p class="section-desc"><p>Functions for managing environments. An Azure Machine Learning <strong>Environment</strong> allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see <code><a href="../reference/r_environment.html">r_environment()</a></code>.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="r_environment.html">r_environment()</a></code> </p>
+        </td>
+        <td><p>Create an environment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_environment.html">register_environment()</a></code> </p>
+        </td>
+        <td><p>Register an environment in the workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_environment.html">get_environment()</a></code> </p>
+        </td>
+        <td><p>Get an existing environment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="container_registry.html">container_registry()</a></code> </p>
+        </td>
+        <td><p>Specify Azure Container Registry details</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-training-experimentation" class="hasAnchor"><a href="#section-training-experimentation" class="anchor"></a>Training &amp; experimentation</h2>
-          <p class="section-desc"><p>Functions for managing experiments and runs. An <strong>Experiment</strong> is a grouping of the collection of runs from a specified script. A <strong>Run</strong> represents a single trial of an experiment. A run is the object used to monitor the asynchronous execution of a trial, log metrics and store output of the trial, and to analyze results and access artifacts generated by the trial. The following run types are supported - <code>ScriptRun</code> (for Estimator experiments), <code>HyperDriveRun</code> (for HyperDrive experiments), and <code>PipelineRun</code> (for Pipeline experiments). For functions that are specific only to HyperDriveRuns and PipelineRuns, see the respective <strong>Hyperparameter tuning</strong> and <strong>ML pipelines</strong> reference sections. An <strong>Estimator</strong> wraps run configuration information for specifying details of executing an R script. Running an Estimator experiment (using <code><a href="../reference/submit_experiment.html">submit_experiment()</a></code>) will return a <code>ScriptRun</code> object and execute your training script on the specified compute target.</p></p>
+          <p class="section-desc"><p>Functions for managing experiments and runs. An <strong>Experiment</strong> is a grouping of the collection of runs from a specified script. A <strong>Run</strong> represents a single trial of an experiment. A run is the object used to monitor the asynchronous execution of a trial, log metrics and store output of the trial, and to analyze results and access artifacts generated by the trial. The following run types are supported - <code>ScriptRun</code> (for Estimator experiments) and <code>HyperDriveRun</code> (for HyperDrive experiments). For functions that are specific only to HyperDriveRuns, see the <strong>Hyperparameter tuning</strong> reference sections. An <strong>Estimator</strong> wraps run configuration information for specifying details of executing an R script. Running an Estimator experiment (using <code><a href="../reference/submit_experiment.html">submit_experiment()</a></code>) will return a <code>ScriptRun</code> object and execute your training script on the specified compute target.</p></p>
         </th>
       </tr>
       <tr>
@@ -371,7 +404,7 @@ be deleted.</p></td>
         <td>
           <p><code><a href="experiment.html">experiment()</a></code> </p>
         </td>
-        <td><p>Create an Azure Machine Learning Experiment</p></td>
+        <td><p>Create an Azure Machine Learning experiment</p></td>
       </tr><tr>
         
         <td>
@@ -383,13 +416,13 @@ be deleted.</p></td>
         <td>
           <p><code><a href="get_runs_in_experiment.html">get_runs_in_experiment()</a></code> </p>
         </td>
-        <td><p>Return a generator of the runs for this experiment</p></td>
+        <td><p>Return a generator of the runs for an experiment</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="estimator.html">estimator()</a></code> </p>
         </td>
-        <td><p>Create Estimator</p></td>
+        <td><p>Create an estimator</p></td>
       </tr><tr>
         
         <td>
@@ -527,25 +560,25 @@ provided.</p></td>
         <td>
           <p><code><a href="hyperdrive_config.html">hyperdrive_config()</a></code> </p>
         </td>
-        <td><p>Create configuration for a HyperDrive run</p></td>
+        <td><p>Create a configuration for a HyperDrive run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="random_parameter_sampling.html">random_parameter_sampling()</a></code> </p>
         </td>
-        <td><p>Define Random Parameter sampling over hyperparameter search space</p></td>
+        <td><p>Define random sampling over a hyperparameter search space</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="grid_parameter_sampling.html">grid_parameter_sampling()</a></code> </p>
         </td>
-        <td><p>Define Grid Parameter sampling over hyperparameter search space</p></td>
+        <td><p>Define grid sampling over a hyperparameter search space</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="bayesian_parameter_sampling.html">bayesian_parameter_sampling()</a></code> </p>
         </td>
-        <td><p>Define Bayesian Parameter sampling over hyperparameter search space</p></td>
+        <td><p>Define Bayesian sampling over a hyperparameter search space</p></td>
       </tr><tr>
         
         <td>
@@ -557,20 +590,20 @@ provided.</p></td>
         <td>
           <p><code><a href="randint.html">randint()</a></code> </p>
         </td>
-        <td><p>Specify a set of random integers in the range [0, upper)</p></td>
+        <td><p>Specify a set of random integers in the range <code>[0, upper)</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="uniform.html">uniform()</a></code> </p>
         </td>
-        <td><p>Specify a uniform distribution from which samples are taken</p></td>
+        <td><p>Specify a uniform distribution of options to sample from</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="quniform.html">quniform()</a></code> </p>
         </td>
-        <td><p>Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q</p></td>
+        <td><p>Specify a uniform distribution of the form
+<code>round(uniform(min_value, max_value) / q) * q</code></p></td>
       </tr><tr>
         
         <td>
@@ -582,33 +615,33 @@ max_value) / q) * q</p></td>
         <td>
           <p><code><a href="qloguniform.html">qloguniform()</a></code> </p>
         </td>
-        <td><p>Specify a uniform distribution of the form round(exp(uniform(min_value,
-max_value) / q) * q</p></td>
+        <td><p>Specify a uniform distribution of the form
+<code>round(exp(uniform(min_value, max_value) / q) * q</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="normal.html">normal()</a></code> </p>
         </td>
-        <td><p>Specify a real value that is normally-distributed with mean mu and standard
-deviation sigma</p></td>
+        <td><p>Specify a real value that is normally-distributed with mean <code>mu</code> and standard
+deviation <code>sigma</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="qnormal.html">qnormal()</a></code> </p>
         </td>
-        <td><p>Specify a normal distribution of the form round(normal(mu, sigma) / q) * q</p></td>
+        <td><p>Specify a normal distribution of the <code>form round(normal(mu, sigma) / q) * q</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="lognormal.html">lognormal()</a></code> </p>
         </td>
-        <td><p>Specify a normal distribution of the form exp(normal(mu, sigma))</p></td>
+        <td><p>Specify a normal distribution of the form <code>exp(normal(mu, sigma))</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
         </td>
-        <td><p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q</p></td>
+        <td><p>Specify a normal distribution of the form <code>round(exp(normal(mu, sigma)) / q) * q</code></p></td>
       </tr><tr>
         
         <td>
@@ -620,19 +653,19 @@ deviation sigma</p></td>
         <td>
           <p><code><a href="bandit_policy.html">bandit_policy()</a></code> </p>
         </td>
-        <td><p>Create Bandit policy for HyperDrive runs</p></td>
+        <td><p>Define a Bandit policy for early termination of HyperDrive runs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="median_stopping_policy.html">median_stopping_policy()</a></code> </p>
         </td>
-        <td><p>Create Median Stopping policy for HyperDrive runs</p></td>
+        <td><p>Define a median stopping policy for early termination of HyperDrive runs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="truncation_selection_policy.html">truncation_selection_policy()</a></code> </p>
         </td>
-        <td><p>Create Truncation Selection policy for HyperDrive runs</p></td>
+        <td><p>Define a truncation selection policy for early termination of HyperDrive runs</p></td>
       </tr><tr>
         
         <td>
@@ -644,19 +677,20 @@ deviation sigma</p></td>
         <td>
           <p><code><a href="get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric()</a></code> </p>
         </td>
-        <td><p>Return the child runs sorted in descending order by best primary metric</p></td>
+        <td><p>Get the child runs sorted in descending order by
+best primary metric</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_child_run_hyperparameters.html">get_child_run_hyperparameters()</a></code> </p>
         </td>
-        <td><p>Return hyperparameters for all child runs</p></td>
+        <td><p>Get the hyperparameters for all child runs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_child_run_metrics.html">get_child_run_metrics()</a></code> </p>
         </td>
-        <td><p>Return metrics from all child runs</p></td>
+        <td><p>Get the metrics from all child runs</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -741,30 +775,6 @@ This can only be used with a Dockerfile package.</p></td>
           <p><code><a href="inference_config.html">inference_config()</a></code> </p>
         </td>
         <td><p>Creates the Model deployment config specific to model deployments.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="r_environment.html">r_environment()</a></code> </p>
-        </td>
-        <td><p>Configure the R environment where the experiment is executed.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="register_environment.html">register_environment()</a></code> </p>
-        </td>
-        <td><p>Register the environment object in your workspace.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_environment.html">get_environment()</a></code> </p>
-        </td>
-        <td><p>Return the environment object.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="container_registry.html">container_registry()</a></code> </p>
-        </td>
-        <td><p>Get Azure Container Registry.</p></td>
       </tr><tr>
         
         <td>
@@ -885,6 +895,7 @@ To handle those changes call LocalWebservice.update(), instead.</p></td>
       <li><a href="#section-workspaces">Workspaces</a></li>
       <li><a href="#section-compute-targets">Compute targets</a></li>
       <li><a href="#section-working-with-data">Working with data</a></li>
+      <li><a href="#section-environments">Environments</a></li>
       <li><a href="#section-training-experimentation">Training &amp; experimentation</a></li>
       <li><a href="#section-hyperparameter-tuning">Hyperparameter tuning</a></li>
       <li><a href="#section-model-management-deployment">Model management &amp; deployment</a></li>

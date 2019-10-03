@@ -7,15 +7,23 @@
 loguniform(min_value, max_value)
 }
 \arguments{
-\item{min_value}{minimum value in the range will be exp(min_value)
-(inclusive)}
+\item{min_value}{A double where the minimum value in the range will be
+\code{exp(min_value)} (inclusive).}
 
-\item{max_value}{maximum value in the range will be exp(min_value)
-(inclusive)}
+\item{max_value}{A double where the maximum value in the range will be
+\code{exp(min_value)} (inclusive).}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a log uniform distribution
+Specify a log uniform distribution.
+
+A value is drawn according to \code{exp(uniform(min_value, max_value))} so that
+the logarithm of the return value is uniformly distributed. When optimizing,
+this variable is constrained to the interval \code{[exp(min_value), exp(max_value)]}.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

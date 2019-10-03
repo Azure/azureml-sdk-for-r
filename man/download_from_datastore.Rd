@@ -2,24 +2,27 @@
 % Please edit documentation in R/datastore.R
 \name{download_from_datastore}
 \alias{download_from_datastore}
-\title{Download the data from the datastore to the local file system}
+\title{Download data from a datastore to the local file system}
 \usage{
 download_from_datastore(datastore, target_path, prefix = NULL,
   overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{datastore}{datastore object}
+\item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
 
-\item{target_path}{the local directory to download the file to}
+\item{target_path}{A string of the local directory to download the file to.}
 
-\item{prefix}{path to the folder in the blob container to download. If set to
-NULL, will download everything in the blob defaults to NULL}
+\item{prefix}{A string of the path to the folder in the blob container
+or file store to download. If \code{NULL}, will download everything in the blob
+container or file share}
 
-\item{overwrite}{overwrite existing file, defaults to FALSE}
+\item{overwrite}{If \code{TRUE}, overwrites any existing data at \code{target_path}.}
 
-\item{show_progress}{show progress of download in the console, defaults to
-TRUE}
+\item{show_progress}{If \code{TRUE}, show progress of upload in the console.}
+}
+\value{
+An integer of the number of files successfully downloaded.
 }
 \description{
-Download the data from the datastore to the local file system
+Download data from the datastore to the local file system.
 }

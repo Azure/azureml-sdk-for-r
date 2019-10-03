@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a datastore by name — get_datastore • azureml</title>
+<title>Get an existing datastore — get_datastore • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Get a datastore by name — get_datastore" />
+<meta property="og:title" content="Get an existing datastore — get_datastore" />
 
-<meta property="og:description" content="Get a datastore by name" />
+<meta property="og:description" content="Get the corresponding datastore object for an existing
+datastore by name from the given workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a datastore by name</h1>
+    <h1>Get an existing datastore</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
     <div class="hidden name"><code>get_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get a datastore by name</p>
+    <p>Get the corresponding datastore object for an existing
+datastore by name from the given workspace.</p>
     
     </div>
 
@@ -139,17 +141,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>datastore_name</th>
-      <td><p>The name of the datastore.</p></td>
+      <td><p>A string of the name of the datastore.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The corresponding datastore for that name.</p>
+    <p>The <code>AzureBlobDatastore</code> or <code>AzureFileDatastore</code> object.</p>
     
 
   </div>

@@ -2,22 +2,30 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qloguniform}
 \alias{qloguniform}
-\title{Specify a uniform distribution of the form round(exp(uniform(min_value,
-max_value) / q) * q}
+\title{Specify a uniform distribution of the form
+\code{round(exp(uniform(min_value, max_value) / q) * q}}
 \usage{
 qloguniform(min_value, max_value, q)
 }
 \arguments{
-\item{min_value}{minimum value in the range (inclusive)}
+\item{min_value}{A double of the minimum value in the range (inclusive).}
 
-\item{max_value}{maximum value in the range (inclusive)}
+\item{max_value}{A double of the maximum value in the range (inclusive).}
 
-\item{q}{smoothing factor}
+\item{q}{An integer of the smoothing factor.}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a uniform distribution of the form round(exp(uniform(min_value,
-max_value) / q) * q
+Specify a uniform distribution of the form
+\code{round(exp(uniform(min_value, max_value) / q) * q}.
+
+This is suitable for a discrete variable with respect to which the objective
+is "smooth", and gets smoother with the size of the value, but which should be
+bounded both above and below.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/datastore.R
 \name{register_azure_file_share_datastore}
 \alias{register_azure_file_share_datastore}
-\title{Register an Azure File Share to the datastore.
-You can choose to use SAS Token or Storage Account Key}
+\title{Register an Azure file share as a datastore}
 \usage{
 register_azure_file_share_datastore(workspace, datastore_name,
   file_share_name, account_name, sas_token = NULL, account_key = NULL,
@@ -11,37 +10,56 @@ register_azure_file_share_datastore(workspace, datastore_name,
   create_if_not_exists = FALSE, skip_validation = FALSE)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{datastore_name}{The name of the datastore, case insensitive, can only 
-contain alphanumeric characters and _}
+\item{datastore_name}{A string of the name of the datastore. The name
+must be case insensitive and can only contain alphanumeric characters and
+underscores.}
 
-\item{file_share_name}{The name of the azure file container.}
+\item{file_share_name}{A string of the name of the Azure file share.}
 
-\item{account_name}{The storage account name.}
+\item{account_name}{A string of the storage account name.}
 
-\item{sas_token}{An account SAS token, defaults to NULL.}
+\item{sas_token}{A string of the account SAS token.}
 
-\item{account_key}{A storage account key, defaults to NULL.}
+\item{account_key}{A string of the storage account key.}
 
-\item{protocol}{Protocol to use to connect to the blob container. 
-If NULL, defaults to https.}
+\item{protocol}{A string of the protocol to use to connect to the
+file store. If \code{NULL}, defaults to \code{'https'}.}
 
-\item{endpoint}{The endpoint of the blob container. 
-If NULL, defaults to core.windows.net.}
+\item{endpoint}{A string of the endpoint of the file store.
+If \code{NULL}, defaults to \code{'core.windows.net'}.}
 
-\item{overwrite}{overwrites an existing datastore. If the datastore does not 
-exist, it will create one, defaults to FALSE}
+\item{overwrite}{If \code{TRUE}, overwrites an existing datastore. If
+the datastore does not exist, it will create one.}
 
-\item{create_if_not_exists}{create the file share if it does not exists, 
-defaults to FALSE}
+\item{create_if_not_exists}{If \code{TRUE}, creates the file share
+if it does not exists.}
 
-\item{skip_validation}{skips validation of storage keys, defaults to FALSE}
+\item{skip_validation}{If \code{TRUE}, skips validation of storage keys.}
 }
 \value{
-The file datastore.
+The \code{AzureFileDatastore} object.
 }
 \description{
-Register an Azure File Share to the datastore.
-You can choose to use SAS Token or Storage Account Key
+Register an Azure file share as a datastore. You can choose to use
+either the SAS token or the storage account key.
 }
+\section{Details}{
+
+In general we recommend Azure Blob storage over Azure File storage. Both standard and
+premium storage are available for blobs. Although more expensive, we suggest
+premium storage due to faster throughput speeds that may improve the speed
+of your training runs, particularly if you train against a large dataset.
+}
+
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+ds <- register_azure_file_share_datastore(ws, 
+                                          datastore_name = 'mydatastore',
+                                          file_share_name = 'myazurefilesharename',
+                                          account_name = 'mystorageaccoutname',
+                                          account_key = 'mystorageaccountkey')
+}
+}
+

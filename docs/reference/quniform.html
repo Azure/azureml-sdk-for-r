@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q — quniform • azureml</title>
+<title>Specify a uniform distribution of the form
+<code>round(uniform(min_value, max_value) / q) * q</code> — quniform • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +33,13 @@ max_value) / q) * q — quniform • azureml</title>
 
 
 
-<meta property="og:title" content="Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q — quniform" />
+<meta property="og:title" content="Specify a uniform distribution of the form
+<code>round(uniform(min_value, max_value) / q) * q</code> — quniform" />
 
-<meta property="og:description" content="Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q" />
+<meta property="og:description" content="Specify a uniform distribution of the form
+round(uniform(min_value, max_value) / q) * q.
+This is suitable for a discrete value with respect to which the objective
+is still somewhat &quot;smooth&quot;, but which should be bounded both above and below." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,16 +126,18 @@ max_value) / q) * q" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q</h1>
+    <h1>Specify a uniform distribution of the form
+<code>round(uniform(min_value, max_value) / q) * q</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>quniform.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Specify a uniform distribution of the form round(uniform(min_value,
-max_value) / q) * q</p>
+    <p>Specify a uniform distribution of the form
+<code>round(uniform(min_value, max_value) / q) * q</code>.</p>
+<p>This is suitable for a discrete value with respect to which the objective
+is still somewhat "smooth", but which should be bounded both above and below.</p>
     
     </div>
 
@@ -144,21 +148,26 @@ max_value) / q) * q</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>min_value</th>
-      <td><p>minimum value in the range (inclusive)</p></td>
+      <td><p>A double of the minimum value in the range (inclusive).</p></td>
     </tr>
     <tr>
       <th>max_value</th>
-      <td><p>maximum value in the range (inclusive)</p></td>
+      <td><p>A double of the maximum value in the range (inclusive).</p></td>
     </tr>
     <tr>
       <th>q</th>
-      <td><p>smoothing factor</p></td>
+      <td><p>An integer of the smoothing factor.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the stochastic expression</p>
+    <p>A list of the stochastic expression.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='random_parameter_sampling.html'>random_parameter_sampling()</a></code>, <code><a href='grid_parameter_sampling.html'>grid_parameter_sampling()</a></code>,
+<code><a href='bayesian_parameter_sampling.html'>bayesian_parameter_sampling()</a></code></p></div>
     
 
   </div>
@@ -168,6 +177,8 @@ max_value) / q) * q</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

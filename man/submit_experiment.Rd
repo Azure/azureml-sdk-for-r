@@ -7,16 +7,44 @@
 submit_experiment(experiment, config, tags = NULL)
 }
 \arguments{
-\item{experiment}{experiment object}
+\item{experiment}{The \code{Experiment} object.}
 
-\item{config}{runconfig or estimator}
+\item{config}{The \code{Estimator} or \code{HyperDriveConfig} object.}
 
-\item{tags}{Tags to be added to the submitted run. A named list
-eg. list("tag" = "value")}
+\item{tags}{A named list of tags for the submitted run, e.g.
+\code{list("tag" = "value")}.}
 }
 \value{
-run object
+The \code{ScriptRun} or \code{HyperDriveRun} object.
 }
 \description{
-Submit an experiment and return the active created run
+\code{submit_experiment()} is an asynchronous call to Azure Machine Learning
+service to execute a trial on local or remote compute. Depending on the
+configuration, \code{submit_experiment()} will automatically prepare your
+execution environments, execute your code, and capture your source code
+and results in the experiment's run history.
+
+To submit an experiment you first need to create a configuration object
+describing how the experiment is to be run. The configuration depends on
+the type of trial required. For a script run, provide an \code{Estimator} object
+to the \code{config} parameter. For a HyperDrive run for hyperparameter tuning,
+provide a \code{HyperDriveConfig} to \code{config}.
+}
+\section{Examples}{
+
+The following example submits an Estimator experiment.\preformatted{ws <- load_workspace_from_config()
+compute_target <- get_compute(ws, cluster_name = 'mycluster')
+exp <- experiment(ws, name = 'myexperiment')
+est <- estimator(source_directory = '.', 
+                 entry_script = 'train.R',
+                 compute_target = compute_target)
+run <- submit_experiment(exp, est)
+}
+
+For an example of submitting a HyperDrive experiment, see the
+"Examples" section of \code{hyperdrive_config()}.
+}
+
+\seealso{
+\code{estimator()}, \code{hyperdrive_config()}
 }

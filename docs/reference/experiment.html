@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an Azure Machine Learning Experiment — experiment • azureml</title>
+<title>Create an Azure Machine Learning experiment — experiment • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Create an Azure Machine Learning Experiment — experiment" />
+<meta property="og:title" content="Create an Azure Machine Learning experiment — experiment" />
 
-<meta property="og:description" content="Create an Azure Machine Learning Experiment" />
+<meta property="og:description" content="An experiment is a grouping of many runs from a specified script." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +121,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an Azure Machine Learning Experiment</h1>
+    <h1>Create an Azure Machine Learning experiment</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/experiment.R'><code>R/experiment.R</code></a></small>
     <div class="hidden name"><code>experiment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create an Azure Machine Learning Experiment</p>
+    <p>An experiment is a grouping of many runs from a specified script.</p>
     
     </div>
 
@@ -139,17 +139,31 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object that would contain the experiment.</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The experiment name.</p></td>
+      <td><p>A string of the experiment name. The name must be between
+3-36 characters, start with a letter or number, and can only contain
+letters, numbers, underscores, and dashes.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>experiment object</p>
+    <p>The <code>Experiment</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='submit_experiment.html'>submit_experiment()</a></code></p></div>
     
 
   </div>
@@ -159,6 +173,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

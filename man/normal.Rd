@@ -2,20 +2,26 @@
 % Please edit documentation in R/hyperdrive.R
 \name{normal}
 \alias{normal}
-\title{Specify a real value that is normally-distributed with mean mu and standard
-deviation sigma}
+\title{Specify a real value that is normally-distributed with mean \code{mu} and standard
+deviation \code{sigma}}
 \usage{
 normal(mu, sigma)
 }
 \arguments{
-\item{mu}{mean of the normal distribution}
+\item{mu}{A double of the mean of the normal distribution.}
 
-\item{sigma}{standard deviation of the normal distribution}
+\item{sigma}{A double of the standard deviation of the normal distribution.}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a real value that is normally-distributed with mean mu and standard
-deviation sigma
+Specify a real value that is normally-distributed with mean \code{mu} and standard
+deviation \code{sigma}.
+
+When optimizing, this is an unconstrained variable.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

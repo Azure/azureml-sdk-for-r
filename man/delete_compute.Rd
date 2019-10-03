@@ -2,13 +2,21 @@
 % Please edit documentation in R/compute.R
 \name{delete_compute}
 \alias{delete_compute}
-\title{Delete compute}
+\title{Delete a cluster}
 \usage{
 delete_compute(cluster)
 }
 \arguments{
-\item{cluster}{cluster object}
+\item{cluster}{The \code{AmlCompute} or \code{AksCompute} object.}
 }
 \description{
-Delete compute
+Remove the compute object from its associated workspace and delete the
+corresponding cloud-based resource.
 }
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+compute_target <- get_compute(ws, cluster_name = 'mycluster')
+delete_compute(compute_target)
+}
+}
+

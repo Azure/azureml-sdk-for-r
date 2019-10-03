@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specify a uniform distribution from which samples are taken — uniform • azureml</title>
+<title>Specify a uniform distribution of options to sample from — uniform • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Specify a uniform distribution from which samples are taken — uniform" />
+<meta property="og:title" content="Specify a uniform distribution of options to sample from — uniform" />
 
-<meta property="og:description" content="Specify a uniform distribution from which samples are taken" />
+<meta property="og:description" content="Specify a uniform distribution of options to sample the
+hyperparameters from." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Specify a uniform distribution from which samples are taken</h1>
+    <h1>Specify a uniform distribution of options to sample from</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>uniform.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Specify a uniform distribution from which samples are taken</p>
+    <p>Specify a uniform distribution of options to sample the
+hyperparameters from.</p>
     
     </div>
 
@@ -139,17 +141,24 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>min_value</th>
-      <td><p>minimum value in the range (inclusive)</p></td>
+      <td><p>A double of the minimum value in the range
+(inclusive).</p></td>
     </tr>
     <tr>
       <th>max_value</th>
-      <td><p>maximum value in the range (inclusive)</p></td>
+      <td><p>A double of the maximum value in the range
+(inclusive).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the stochastic expression</p>
+    <p>A list of the stochastic expression.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='random_parameter_sampling.html'>random_parameter_sampling()</a></code>, <code><a href='grid_parameter_sampling.html'>grid_parameter_sampling()</a></code>,
+<code><a href='bayesian_parameter_sampling.html'>bayesian_parameter_sampling()</a></code></p></div>
     
 
   </div>
@@ -159,6 +168,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

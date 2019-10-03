@@ -10,7 +10,7 @@
 #' @param secrets The named list of secrets to be added to the keyvault, 
 #' where element name corresponds to the secret name.
 #' @export
-#' @section Usage:
+#' @section Examples:
 #' ```
 #' ws <- load_workspace_from_config()
 #' my_secret <- Sys.getenv("MY_SECRET")
