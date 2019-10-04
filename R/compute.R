@@ -361,21 +361,3 @@ list_supported_vm_sizes <- function(workspace, location = NULL) {
                                                                 location)
   plyr::ldply(vm_sizes, data.frame)
 }
-
-#' Update scale settings for an AmlCompute cluster
-#' 
-#' @param cluster The `AmlCompute` object
-#' @param min_nodes An integer of the minimum number of nodes to use on the cluster.
-#' @param max_nodes An ingeter of the maximum number of nodes to use on the cluster.
-#' @param idle_seconds_before_scaledown An integer of the node idle time in seconds 
-#' before scaling down the cluster.
-#' @export
-#' @md
-update_aml_compute <- function(cluster, min_nodes = NULL, max_nodes = NULL, 
-                               idle_seconds_before_scaledown = NULL) {
-  cluster$update(cluster = cluster,
-                 min_nodes = min_nodes,
-                 max_nodes = max_nodes,
-                 idle_seconds_before_scaledown = idle_seconds_before_scaledown)
-  invisible(NULL)
-}
