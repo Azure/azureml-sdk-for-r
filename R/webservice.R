@@ -51,7 +51,7 @@ delete_webservice <- function(webservice) {
 #' @param webservice The webservice object.
 #' @param input_data The input data to call the Webservice with. This is the
 #' data your machine learning model expects as an input to run predictions.
-#' @return The result of calling the Webservice. This will return predictions 
+#' @return The result of calling the Webservice. This will return predictions
 #' run from your machine learning model.
 #' @export
 invoke_webservice <- function(webservice, input_data) {
@@ -61,7 +61,7 @@ invoke_webservice <- function(webservice, input_data) {
 #' Regenerate one of the Webservice's keys. Must specify either 'Primary' or
 #' 'Secondary' key.
 #' @param webservice The webservice object.
-#' @param key_type Which key to regenerate. Options are 'Primary' or 
+#' @param key_type Which key to regenerate. Options are 'Primary' or
 #' 'Secondary'
 #' @export
 generate_new_webservice_key <- function(webservice, key_type) {
@@ -71,7 +71,7 @@ generate_new_webservice_key <- function(webservice, key_type) {
 
 #' Retrieve auth token for this Webservice, scoped to the current user.
 #' @param webservice The webservice object.
-#' @return The auth token for this Webservice and when it should be 
+#' @return The auth token for this Webservice and when it should be
 #' refreshed after.
 #' @export
 get_webservice_token <- function(webservice) {

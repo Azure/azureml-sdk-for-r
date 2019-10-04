@@ -2,61 +2,65 @@
 # Licensed under the MIT license.
 
 #' Create an environment
-#' 
-#' @description 
-#' Configure the R environment to be used for training or web service deployments. 
-#' When you submit a run or deploy a model, Azure ML builds a Docker image and 
-#' creates a conda environment with your specifications from your `Environment` 
-#' object within that Docker container. 
-#' 
-#' If the `custom_docker_image` parameter 
-#' is not set, Azure ML automatically uses a default base image (CPU or GPU 
-#' depending on the `use_gpu` flag) and installs any R packages specified in the 
-#' `cran_packages`, `github_packages`, or `custom_url_packages` parameters. 
+#'
+#' @description
+#' Configure the R environment to be used for training or web service
+#' deployments. When you submit a run or deploy a model, Azure ML builds a
+#' Docker image and creates a conda environment with your specifications from
+#' your `Environment` object within that Docker container.
+#'
+#' If the `custom_docker_image` parameter
+#' is not set, Azure ML automatically uses a default base image (CPU or GPU
+#' depending on the `use_gpu` flag) and installs any R packages specified in the
+#' `cran_packages`, `github_packages`, or `custom_url_packages` parameters.
 #' TODO: link to the Dockerfiles of the default base images.
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
-#' @param environment_variables A named list of environment variables names 
-#' and values. These environment variables are set on the process where the user 
+#' @param environment_variables A named list of environment variables names
+#' and values. These environment variables are set on the process where the user
 #' script is being executed.
 #' @param cran_packages A character vector of CRAN packages to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
-#' @param custom_url_packages A character vector of packages to be installed from 
-#' local directory or custom URL.
-#' @param custom_docker_image A string of the name of the Docker image from which 
-#' the image to use for training or deployment will be built. If not set, a default 
-#' CPU-based image will be used as the base image. To use an image from a private Docker 
-#' repository, you will also have to specify the `image_registry_details` parameter.
-#' @param image_registry_details A `ContainerRegistry` object of the details of 
+#' @param custom_url_packages A character vector of packages to be installed
+#' from local directory or custom URL.
+#' @param custom_docker_image A string of the name of the Docker image from
+#' which the image to use for training or deployment will be built. If not set,
+#' a default CPU-based image will be used as the base image. To use an image
+#' from a private Docker repository, you will also have to specify the
+#' `image_registry_details` parameter.
+#' @param image_registry_details A `ContainerRegistry` object of the details of
 #' the Docker image registry for the custom Docker image.
-#' @param use_gpu Indicates whether the environment should support GPUs. If `TRUE`, 
-#' a GPU-based default Docker image will be used in the environment. If `FALSE`, 
-#' a CPU-based image will be used. Default Docker images (CPU or GPU) will only be 
-#' used if the `custom_docker_image` parameter is not set.
-#' @param shm_size A string for the size of the Docker container's shared memory block. 
-#' For more information, see [Docker run reference](https://docs.docker.com/engine/reference/run/). 
+#' @param use_gpu Indicates whether the environment should support GPUs.
+#' If `TRUE`, a GPU-based default Docker image will be used in the environment.
+#' If `FALSE`, a CPU-based image will be used. Default Docker images (CPU or
+#' GPU) will only be used if the `custom_docker_image` parameter is not set.
+#' @param shm_size A string for the size of the Docker container's shared
+#' memory block. For more information, see [Docker run reference]
+#' (https://docs.docker.com/engine/reference/run/).
 #' If not set, a default value of `'2g'` is used.
 #' @return The `Environment` object.
 #' @export
 #' @section Details:
-#' Once built, the Docker image appears in the Azure Container Registry associated with 
-#' your workspace, by default. The repository name has the form *azureml/azureml_<uuid>*. 
-#' The unique identifier (*uuid*) part corresponds to a hash computed from the environment 
-#' configuration. This allows the service to determine whether an image corresponding to 
-#' the given environment already exists for reuse. 
-#' 
-#' If you make changes to an existing environment, such as adding an R package, a new version of 
-#' the environment is created when you either submit a run, deploy a model, or manually register the 
-#' environment. The versioning allows you to view changes to the environment over time.
+#' Once built, the Docker image appears in the Azure Container Registry
+#' associated with your workspace, by default. The repository name has the form
+#' *azureml/azureml_<uuid>*. The unique identifier (*uuid*) part corresponds to
+#' a hash computed from the environment configuration. This allows the service
+#' to determine whether an image corresponding to the given environment already
+#' exists for reuse.
+#'
+#' If you make changes to an existing environment, such as adding an R package,
+#' a new version of the environment is created when you either submit a run,
+#' deploy a model, or manually register the environment. The versioning allows
+#' you to view changes to the environment over time.
 #' @section Examples:
-#' The following example defines an environment that will use the default 
+#' The following example defines an environment that will use the default
 #' base CPU image and install the additional e1071 package from CRAN.
 #' ```
-#' r_env <- r_environment(name = 'myr_env', 
-#'                        version = '1', 
+#' r_env <- r_environment(name = 'myr_env',
+#'                        version = '1',
 #'                        cran_packages = c('e1071'))
 #' ```
-#' @seealso 
+#' @seealso
 #' `estimator()`, `inference_config()`
 #' @md
 r_environment <- function(name, version = NULL,
@@ -79,7 +83,7 @@ r_environment <- function(name, version = NULL,
     env$docker$base_image_registry <- image_registry_details
   }
   if (!is.null(shm_size)) {
-    env$docker$shm_size = shm_size
+    env$docker$shm_size <- shm_size
   }
 
   if (is.null(custom_docker_image)) {
@@ -116,17 +120,17 @@ r_environment <- function(name, version = NULL,
 }
 
 #' Register an environment in the workspace
-#' 
-#' @description 
-#' The environment is automatically registered with your workspace when you 
-#' submit an experiment or deploy a web service. You can also manually register 
-#' the environment with `register_environment()`. This operation makes the 
-#' environment into an entity that is tracked and versioned in the cloud, and 
-#' can be shared between workspace users. 
-#' 
-#' Whe used for the first time in training or deployment, the environment is 
-#' registered with the workspace, built, and deployed on the compute target. 
-#' The environments are cached by the service. Reusing a cached environment 
+#'
+#' @description
+#' The environment is automatically registered with your workspace when you
+#' submit an experiment or deploy a web service. You can also manually register
+#' the environment with `register_environment()`. This operation makes the
+#' environment into an entity that is tracked and versioned in the cloud, and
+#' can be shared between workspace users.
+#'
+#' Whe used for the first time in training or deployment, the environment is
+#' registered with the workspace, built, and deployed on the compute target.
+#' The environments are cached by the service. Reusing a cached environment
 #' takes much less time than using a new service or one that has bee updated.
 #' @param workspace The `Workspace` object.
 #' @param environment The `Environment` object.
@@ -139,9 +143,9 @@ register_environment <- function(environment, workspace) {
 }
 
 #' Get an existing environment
-#' 
-#' @description 
-#' Returns an `Environment` object for an existing environment in 
+#'
+#' @description
+#' Returns an `Environment` object for an existing environment in
 #' the workspace.
 #' @param workspace The `Workspace` object.
 #' @param name A string of the name of the environment.
@@ -159,21 +163,21 @@ get_environment <- function(workspace, name, version = NULL) {
 }
 
 #' Specify Azure Container Registry details
-#' 
-#' @description 
-#' Returns a `ContainerRegistry` object with the details for an 
-#' Azure Container Registry (ACR). This is needed when a custom 
-#' Docker image used for training or deployment is located in 
-#' a private image registry. Provide a `ContainerRegistry` object 
-#' to the `image_registry_details` parameter of either `r_environment()` 
+#'
+#' @description
+#' Returns a `ContainerRegistry` object with the details for an
+#' Azure Container Registry (ACR). This is needed when a custom
+#' Docker image used for training or deployment is located in
+#' a private image registry. Provide a `ContainerRegistry` object
+#' to the `image_registry_details` parameter of either `r_environment()`
 #' or `estimator()`.
-#' @param address A string of the DNS name or IP address of the 
+#' @param address A string of the DNS name or IP address of the
 #' Azure Container Registry (ACR).
 #' @param username A string of the username for ACR.
 #' @param password A string of the password for ACR.
 #' @return The `ContainerRegistry` object.
 #' @export
-#' @seealso 
+#' @seealso
 #' `r_environment()`, `estimator()`
 #' @md
 container_registry <- function(address = NULL,
@@ -224,7 +228,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
     for (package in custom_url_packages) {
       base_dockerfile <- paste0(
           base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', repos = NULL)\"\n", 
+          sprintf("RUN R -e \"install.packages(\'%s\', repos = NULL)\"\n",
                   package))
     }
   }
