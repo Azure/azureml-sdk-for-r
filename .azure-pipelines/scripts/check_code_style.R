@@ -29,4 +29,4 @@ check_code_style <- function(directory) {
   }
 }
 
-validate_copyright_header(directory = args[1])
+check_code_style(directory = args[1])
