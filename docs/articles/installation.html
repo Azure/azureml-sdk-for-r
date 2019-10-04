@@ -134,7 +134,37 @@
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
-<li>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</li>
+<li><p>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
+<li>
+<p>If installation fails due to this error:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">Error <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/strptime.html">strptime</a></span>(xx, f, <span class="dt">tz =</span> tz) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span>(converted from warning) unable to identify current timezone <span class="st">'C'</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">please set environment variable <span class="st">'TZ'</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">In R CMD INSTALL</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span>(converted from warning) installation of package ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>azureml_<span class="dv">0</span>.<span class="dv">4</span>.<span class="fl">0.</span>tar.gz’ had non<span class="op">-</span>zero exit</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">  status</a></code></pre></div>
+<p>You will need to set your time zone environment variable to GMT and restart the installation process.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">TZ=</span><span class="st">'GMT'</span>)</a></code></pre></div>
+</li>
+<li>
+<p>If the following permission error occurs while installing in RStudio, change your RStudio session to administrator mode, and re-run the installation command.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">Downloading GitHub repo Azure<span class="op">/</span>azureml<span class="op">-</span>sdk<span class="op">-</span><span class="cf">for</span><span class="op">-</span>r<span class="op">@</span>master</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">Skipping <span class="dv">2</span> packages ahead of CRAN<span class="op">:</span><span class="st"> </span>reticulate, rlang</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">Running <span class="st">`</span><span class="dt">R CMD build</span><span class="st">`</span>...</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">Error<span class="op">:</span><span class="st"> </span>(converted from warning) invalid package</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">'C:/.../file2b441bf23631'</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">In R CMD INSTALL</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  </span>(converted from warning) installation of package</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">  ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>file2b441bf23631’ had non<span class="op">-</span>zero exit status</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">In addition<span class="op">:</span><span class="st"> </span>Warning messages<span class="op">:</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b44144a540f'</span><span class="op">:</span><span class="st"> </span>Permission denied</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b4463c21577'</span><span class="op">:</span><span class="st"> </span>Permission denied</a></code></pre></div>
+</li>
 </ul>
 </div>
   </div>
