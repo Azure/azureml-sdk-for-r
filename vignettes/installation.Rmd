@@ -46,3 +46,43 @@ get_current_run()
 -   In step 3 of the installation, if you get ssl errors on windows, it is due to an
 outdated openssl binary. Install the latest openssl binaries from
 [here](https://wiki.openssl.org/index.php/Binaries).
+
+- If installation fails due to this error:
+
+  ```R
+  Error in strptime(xx, f, tz = tz) : 
+    (converted from warning) unable to identify current timezone 'C':
+  please set environment variable 'TZ'
+  In R CMD INSTALL
+  Error in i.p(...) : 
+    (converted from warning) installation of package ‘C:/.../azureml_0.4.0.tar.gz’ had non-zero exit
+    status
+  ```
+  
+  You will need to set your time zone environment variable to GMT and restart the installation process.
+  
+  ```R
+  Sys.setenv(TZ='GMT')
+  ```
+
+- If the following permission error occurs while installing in RStudio,
+  change your RStudio session to administrator mode, and re-run the installation command.
+
+  ```R
+  Downloading GitHub repo Azure/azureml-sdk-for-r@master
+  Skipping 2 packages ahead of CRAN: reticulate, rlang
+  Running `R CMD build`...
+  
+  Error: (converted from warning) invalid package
+  'C:/.../file2b441bf23631'
+  In R CMD INSTALL
+  Error in i.p(...) : 
+    (converted from warning) installation of package
+    ‘C:/.../file2b441bf23631’ had non-zero exit status
+  In addition: Warning messages:
+  1: In file(con, "r") :
+    cannot open file 'C:...\file2b44144a540f': Permission denied
+  2: In file(con, "r") :
+    cannot open file 'C:...\file2b4463c21577': Permission denied
+  ```
+  
