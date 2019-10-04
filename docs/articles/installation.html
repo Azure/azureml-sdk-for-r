@@ -87,7 +87,7 @@
     <div class="page-header toc-ignore">
       <h1>Installing AzureML SDK for R</h1>
             
-            <h4 class="date">2019-10-03</h4>
+            <h4 class="date">2019-10-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
@@ -106,28 +106,28 @@
 <a href="#install-azureml-r-package-with-remotes" class="anchor"></a>2. Install <code>azureml</code> R package with <code>remotes</code>
 </h2>
 <p>As the <code>azureml</code> package is not available on CRAN, you will need <code>remotes</code> to install from the GitHub repo.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'remotes'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'remotes'</span>)</a></code></pre></div>
 <p>Then, you can use the <code>install_github</code> function to install the package. Until the current repo is opened to the public, you will need to use a <a href="https://github.com/settings/tokens">generated personal access token</a>. When generating the token, make sure to select the “repo” scope.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
-<a class="sourceLine" id="cb2-2" title="2">                        <span class="dt">auth_token =</span> <span class="st">'&lt;your personal access token&gt;'</span>,</a>
-<a class="sourceLine" id="cb2-3" title="3">                        <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>),</a>
-<a class="sourceLine" id="cb2-4" title="4">                        <span class="dt">build_vignettes =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">                        <span class="dt">auth_token =</span> <span class="st">'&lt;your personal access token&gt;'</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">                        <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>),</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">                        <span class="dt">build_vignettes =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Set <code>build_vignettes</code> to TRUE if you would like the vignettes to be downloaded along with the main package.</p>
 </div>
 <div id="install-azureml-python-sdk" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-azureml-python-sdk" class="anchor"></a>3. Install AzureML Python SDK</h2>
 <p>Lastly, use the <code>azureml</code> R library to install the compiled code. By default, <code>install_azureml</code> will install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the AzureML Python SDK</a> in a conda environment called <code>r-azureml</code>. If you would like to override the default version, environment name, or python version, you can pass in those arguments:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">azureml<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azureml/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb3-2" title="2">                         <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</a>
-<a class="sourceLine" id="cb3-3" title="3">                         <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">azureml<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azureml/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                         <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                         <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>)</a></code></pre></div>
 </div>
 <div id="test-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-installation" class="anchor"></a>4. Test installation</h2>
 <p>You can confirm your installation worked by loading the library and successfully retrieving a run.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azureml)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azureml)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
 <pre><code>## &lt;azureml.core.run._OfflineRun&gt;</code></pre>
 </div>
 <div id="troubleshooting" class="section level2">

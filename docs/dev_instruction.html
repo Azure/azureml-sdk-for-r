@@ -128,13 +128,13 @@
 </li>
 <li>
 <p>Run the following to build the code. The R package file will be created at <code>package_location</code>. We can now either upload it to a blob store, publish it to CRAN or install directly from the file.</p>
-<pre><code>setwd('&lt;repo_root&gt;')
+<pre><code><a href="https://rdrr.io/r/base/getwd.html">setwd('&lt;repo_root&gt;')
 
 # Generate .Rd files in man/ and NAMESPACE
 roxygen2::roxygenise()
 
 # Build the R package
-package_location &lt;- devtools::build()</code></pre>
+package_location &lt;- devtools::build()</a></code></pre>
 </li>
 <li>
 <p>To install the package from the <code>.tar.gz</code> file in the filesystem, do:</p>
