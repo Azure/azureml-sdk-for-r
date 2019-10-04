@@ -87,7 +87,7 @@
     <div class="page-header toc-ignore">
       <h1>Hyperparameter Tuning a Keras Model with HyperDrive</h1>
             
-            <h4 class="date">2019-10-03</h4>
+            <h4 class="date">2019-10-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/hyperdrive_example.Rmd"><code>vignettes/hyperdrive_example.Rmd</code></a></small>
       <div class="hidden name"><code>hyperdrive_example.Rmd</code></div>
@@ -111,62 +111,62 @@
 <div id="import-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#import-package" class="anchor"></a>Import package</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
 </div>
 <div id="initialize-a-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#initialize-a-workspace" class="anchor"></a>Initialize a workspace</h3>
 <p>The <code>Workspace</code> is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create.</p>
 <p>You can create a <code>Workspace</code> object from a local <code>config.json</code> file</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>Or load an existing workspace from your Azure Machine Learning account</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
 <div id="create-a-deep-learning-experiment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-a-deep-learning-experiment" class="anchor"></a>Create a deep learning experiment</h3>
 <p>For this example, we will create an experiment named “hyperdrive-cifar10”.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'hyperdrive-cifar10'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'hyperdrive-cifar10'</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="create-a-compute-target" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-compute-target" class="anchor"></a>2. Create a compute target</h2>
 <p>Now, we will create a compute target for our job to run on. In this example, we are creating a GPU-enabled compute cluster.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
-<a class="sourceLine" id="cb5-2" title="2">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
-<a class="sourceLine" id="cb5-4" title="4">{</a>
-<a class="sourceLine" id="cb5-5" title="5">  vm_size &lt;-<span class="st"> "STANDARD_NC6"</span></a>
-<a class="sourceLine" id="cb5-6" title="6">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
-<a class="sourceLine" id="cb5-7" title="7">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-8" title="8">}</a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="kw"><a href="../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">{</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  vm_size &lt;-<span class="st"> "STANDARD_NC6"</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="kw"><a href="../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
 </div>
 <div id="prepare-training-script" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prepare-training-script" class="anchor"></a>3. Prepare training script</h2>
 <p>In order to collect and upload run metrics, we need to import the <code>azureml</code> package at the top of our training script, <a href="../../samples/training/cnn-tuning-with-hyperdrive/cifar10_cnn.R">“cifar10_cnn.R”</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
 <p>Then, we need to edit our script so that it can log our parameters. We will use the <code>log_metric_to_run</code> function to log our hyperparameters at the top of the script and to log our primary metric at the bottom of the script.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">current_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a>
-<a class="sourceLine" id="cb7-2" title="2">...</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"batch_size"</span>, batch_size, current_run)</a>
-<a class="sourceLine" id="cb7-4" title="4">...</a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"epochs"</span>, epochs, current_run)</a>
-<a class="sourceLine" id="cb7-6" title="6">...</a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"lr"</span>, lr, current_run)</a>
-<a class="sourceLine" id="cb7-8" title="8">...</a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"decay"</span>, decay, current_run)</a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"Loss"</span>, results[[<span class="dv">1</span>]], current_run)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">current_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">...</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"batch_size"</span>, batch_size, current_run)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">...</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"epochs"</span>, epochs, current_run)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">...</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"lr"</span>, lr, current_run)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">...</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"decay"</span>, decay, current_run)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"Loss"</span>, results[[<span class="dv">1</span>]], current_run)</a></code></pre></div>
 </div>
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-an-estimator" class="anchor"></a>4. Create an estimator</h2>
 <p>An <code>Estimator</code> offers a simple way to launch a training job on a compute target.</p>
 <p>Our training script will need the Keras package to run, and we can have it installed in the Docker container where our job will run by passing the package name via the <code>cran_packages</code> parameter.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>, <span class="dt">entry_script =</span> <span class="st">"cifar10_cnn.R"</span>,</a>
-<a class="sourceLine" id="cb9-2" title="2">                 <span class="dt">compute_target =</span> compute_target, <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"keras"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>, <span class="dt">entry_script =</span> <span class="st">"cifar10_cnn.R"</span>,</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">                 <span class="dt">compute_target =</span> compute_target, <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"keras"</span>))</a></code></pre></div>
 </div>
 <div id="set-hyperdrive-configuration" class="section level2">
 <h2 class="hasAnchor">
@@ -196,17 +196,17 @@
 <li><code><a href="../reference/grid_parameter_sampling.html">grid_parameter_sampling(parameter_space)</a></code></li>
 <li><code><a href="../reference/bayesian_parameter_sampling.html">bayesian_parameter_sampling(parameter_space)</a></code></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">sampling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/random_parameter_sampling.html">random_parameter_sampling</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">batch_size =</span> <span class="kw"><a href="../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>)),</a>
-<a class="sourceLine" id="cb10-2" title="2">                                           <span class="dt">epochs =</span> <span class="kw"><a href="../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>)),</a>
-<a class="sourceLine" id="cb10-3" title="3">                                           <span class="dt">lr =</span> <span class="kw"><a href="../reference/normal.html">normal</a></span>(<span class="fl">0.0001</span>, <span class="fl">0.005</span>),</a>
-<a class="sourceLine" id="cb10-4" title="4">                                           <span class="dt">decay =</span> <span class="kw"><a href="../reference/uniform.html">uniform</a></span>(<span class="fl">1e-6</span>, <span class="fl">3e-6</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">sampling &lt;-<span class="st"> </span><span class="kw"><a href="../reference/random_parameter_sampling.html">random_parameter_sampling</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">batch_size =</span> <span class="kw"><a href="../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>)),</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">                                           <span class="dt">epochs =</span> <span class="kw"><a href="../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>)),</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">                                           <span class="dt">lr =</span> <span class="kw"><a href="../reference/normal.html">normal</a></span>(<span class="fl">0.0001</span>, <span class="fl">0.005</span>),</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">                                           <span class="dt">decay =</span> <span class="kw"><a href="../reference/uniform.html">uniform</a></span>(<span class="fl">1e-6</span>, <span class="fl">3e-6</span>)))</a></code></pre></div>
 </div>
 <div id="define-termination-policy" class="section level3">
 <h3 class="hasAnchor">
 <a href="#define-termination-policy" class="anchor"></a>Define termination policy</h3>
 <p>To prevent resource waste, we should detect and terminate poorly performing runs. HyperDrive will do this automatically if we set up an early termination policy.</p>
 <p>Here, we will use the <code>bandit_policy</code> which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">policy &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bandit_policy.html">bandit_policy</a></span>(<span class="dt">slack_factor =</span> <span class="fl">0.15</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">policy &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bandit_policy.html">bandit_policy</a></span>(<span class="dt">slack_factor =</span> <span class="fl">0.15</span>)</a></code></pre></div>
 <p>Other termination policy options are:</p>
 <ul>
 <li><code><a href="../reference/median_stopping_policy.html">median_stopping_policy(evaluation_interval, delay_evaluation)</a></code></li>
@@ -218,35 +218,35 @@
 <h3 class="hasAnchor">
 <a href="#finalize-configuration" class="anchor"></a>Finalize configuration</h3>
 <p>Now, we can create a <code>HyperDriveConfig</code> object to define our group of jobs. Along with our sampling and policy definitions, we need to specify the name of the primary metric that we want to track and whether we want to maximize it or minimize it.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">hyperdrive_config &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hyperdrive_config.html">hyperdrive_config</a></span>(<span class="dt">hyperparameter_sampling =</span> sampling,</a>
-<a class="sourceLine" id="cb12-2" title="2">                                       <span class="kw"><a href="../reference/primary_metric_goal.html">primary_metric_goal</a></span>(<span class="st">"MINIMIZE"</span>),</a>
-<a class="sourceLine" id="cb12-3" title="3">                                       <span class="dt">primary_metric_name =</span> <span class="st">"Loss"</span>,</a>
-<a class="sourceLine" id="cb12-4" title="4">                                       <span class="dt">max_total_runs =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb12-5" title="5">                                       <span class="dt">policy =</span> policy,</a>
-<a class="sourceLine" id="cb12-6" title="6">                                       <span class="dt">estimator =</span> est)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">hyperdrive_config &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hyperdrive_config.html">hyperdrive_config</a></span>(<span class="dt">hyperparameter_sampling =</span> sampling,</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">                                       <span class="kw"><a href="../reference/primary_metric_goal.html">primary_metric_goal</a></span>(<span class="st">"MINIMIZE"</span>),</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">                                       <span class="dt">primary_metric_name =</span> <span class="st">"Loss"</span>,</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">                                       <span class="dt">max_total_runs =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">                                       <span class="dt">policy =</span> policy,</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">                                       <span class="dt">estimator =</span> est)</a></code></pre></div>
 </div>
 </div>
 <div id="submit-hyperdrive-run" class="section level2">
 <h2 class="hasAnchor">
 <a href="#submit-hyperdrive-run" class="anchor"></a>6. Submit HyperDrive run</h2>
 <p>Submitting our experiment will start multiple simultaneous runs and return a <code>HyperDriveRun</code> object that we will use to interface with the run history during and after the job.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">hyperdrive_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submit_experiment.html">submit_experiment</a></span>(exp, hyperdrive_config)</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(hyperdrive_run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">hyperdrive_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submit_experiment.html">submit_experiment</a></span>(exp, hyperdrive_config)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(hyperdrive_run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="analyse-runs-by-performance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analyse-runs-by-performance" class="anchor"></a>7. Analyse runs by performance</h2>
 <p>Finally, we can view and compare the metrics collected during our all of our child runs!</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">child_run_metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_child_run_metrics.html">get_child_run_metrics</a></span>(hyperdrive_run)</a>
-<a class="sourceLine" id="cb14-2" title="2">child_run_metrics</a>
-<a class="sourceLine" id="cb14-3" title="3"></a>
-<a class="sourceLine" id="cb14-4" title="4">child_runs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric</a></span>(hyperdrive_run)</a>
-<a class="sourceLine" id="cb14-5" title="5">child_runs</a>
-<a class="sourceLine" id="cb14-6" title="6"></a>
-<a class="sourceLine" id="cb14-7" title="7">best_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_best_run_by_primary_metric.html">get_best_run_by_primary_metric</a></span>(hyperdrive_run)</a>
-<a class="sourceLine" id="cb14-8" title="8"></a>
-<a class="sourceLine" id="cb14-9" title="9">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_run_metrics.html">get_run_metrics</a></span>(best_run)</a>
-<a class="sourceLine" id="cb14-10" title="10">metrics</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">child_run_metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_child_run_metrics.html">get_child_run_metrics</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">child_run_metrics</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">child_runs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">child_runs</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">best_run &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_best_run_by_primary_metric.html">get_best_run_by_primary_metric</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_run_metrics.html">get_run_metrics</a></span>(best_run)</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">metrics</a></code></pre></div>
 </div>
   </div>
 

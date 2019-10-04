@@ -6,9 +6,6 @@
 \usage{
 update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
   idle_seconds_before_scaledown = NULL)
-
-update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
-  idle_seconds_before_scaledown = NULL)
 }
 \arguments{
 \item{cluster}{The \code{AmlCompute} cluster.}
@@ -21,15 +18,6 @@ the cluster.}
 
 \item{idle_seconds_before_scaledown}{An integer of the node idle time
 in seconds before scaling down the cluster.}
-
-\item{cluster}{The \code{AmlCompute} object}
-
-\item{min_nodes}{An integer of the minimum number of nodes to use on the cluster.}
-
-\item{max_nodes}{An ingeter of the maximum number of nodes to use on the cluster.}
-
-\item{idle_seconds_before_scaledown}{An integer of the node idle time in seconds
-before scaling down the cluster.}
 }
 \description{
 Update the scale settings for an existing AmlCompute cluster.
