@@ -4,7 +4,6 @@ if (length(args) == 0) {
   stop("Please provide the directory path", call.=FALSE)
 }
 
-install.packages("lintr", repos = "http://cran.us.r-project.org")
 library("lintr")
 
 check_code_style <- function(directory) {
