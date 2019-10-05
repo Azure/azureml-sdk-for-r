@@ -74,7 +74,7 @@ register_model <- function(workspace,
 #' Defaults to FALSE
 #' @return string path to file or folder of model
 #' @export
-download_model <- function(model, target_dir = '.', exist_ok = FALSE) {
+download_model <- function(model, target_dir = ".", exist_ok = FALSE) {
   model_path <- model$download(target_dir, exist_ok)
   invisible(model_path)
 }
@@ -224,7 +224,7 @@ inference_config <- function(entry_script,
                              environment = NULL) {
   generate_score_python_wrapper(entry_script, source_directory)
   if (!is.null(environment)) {
-      environment$inferencing_stack_version <- 'latest'
+      environment$inferencing_stack_version <- "latest"
   }
 
   inference_config <- azureml$core$model$InferenceConfig(

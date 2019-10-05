@@ -3,7 +3,7 @@
 
 #' Create a configuration object for deploying a local Webservice.
 #' @param port The local port on which to expose the service's HTTP endpoint.
-#' @return LocalWebserviceDeploymentConfiguration object to use when deploying 
+#' @return LocalWebserviceDeploymentConfiguration object to use when deploying
 #' a Webservice object.
 #' @export
 local_webservice_deployment_config <- function(port = NULL) {
@@ -15,19 +15,19 @@ local_webservice_deployment_config <- function(port = NULL) {
 #' Values left as None will remain unchanged in this LocalWebservice.
 #' @param webservice LocalWebservice object.
 #' @param models A new list of models contained in the LocalWebservice.
-#' @param deployment_config Deployment configuration options to apply to the 
+#' @param deployment_config Deployment configuration options to apply to the
 #' LocalWebservice.
 #' @param wait Wait for the service's container to reach a healthy state.
-#' @param inference_config An InferenceConfig object used to provide the 
+#' @param inference_config An InferenceConfig object used to provide the
 #' required model deployment properties.
 #' @export
-update_local_webservice <- function(webservice, models = NULL, 
-                                    deployment_config = NULL, 
-                                    wait = FALSE, 
+update_local_webservice <- function(webservice, models = NULL,
+                                    deployment_config = NULL,
+                                    wait = FALSE,
                                     inference_config = NULL) {
-  webservice$update(models = models, 
+  webservice$update(models = models,
                     deployment_config = deployment_config,
-                    wait = wait, 
+                    wait = wait,
                     inference_config = inference_config)
   invisible(NULL)
 }
@@ -38,19 +38,19 @@ update_local_webservice <- function(webservice, models = NULL,
 #' @param delete_cache Delete temporary files cached for the service.
 #' @param delete_image Delete the service's Docker image.
 #' @export
-delete_local_webservice <- function(webservice, 
+delete_local_webservice <- function(webservice,
                                     delete_cache = TRUE,
                                     delete_image = FALSE) {
-  webservice$delete(delete_cache = delete_cache, 
+  webservice$delete(delete_cache = delete_cache,
                     delete_image = delete_image)
   invisible(NULL)
 }
 
 #' Reload the LocalWebservice's execution script and dependencies.
-#' This restarts the service's container with copies of updated assets, 
-#' including the execution script and local dependencies, but it does not 
-#' rebuild the underlying image. Accordingly, changes to Conda/pip dependencies 
-#' or custom Docker steps will not be reflected in the reloaded LocalWebservice. 
+#' This restarts the service's container with copies of updated assets,
+#' including the execution script and local dependencies, but it does not
+#' rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
+#' or custom Docker steps will not be reflected in the reloaded LocalWebservice.
 #' To handle those changes call LocalWebservice.update(), instead.
 #' @param webservice LocalWebservice object.
 #' @param wait Wait for the service's container to reach a healthy state.

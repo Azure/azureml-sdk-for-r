@@ -22,4 +22,4 @@ RUN conda install -c r -y r-essentials r-devtools r-testthat r-reticulate && con
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 # Install R packages from CRAN
-RUN R -e 'install.packages(c("roxygen2", "pkgdown", "rcmdcheck", "fs"), repos = "http://cran.us.r-project.org")'
+RUN R -e 'install.packages(c("roxygen2", "pkgdown", "rcmdcheck", "fs", "lintr"), repos = "http://cran.us.r-project.org")'
