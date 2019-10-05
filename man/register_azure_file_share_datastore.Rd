@@ -47,19 +47,21 @@ either the SAS token or the storage account key.
 }
 \section{Details}{
 
-In general we recommend Azure Blob storage over Azure File storage. Both standard and
-premium storage are available for blobs. Although more expensive, we suggest
-premium storage due to faster throughput speeds that may improve the speed
-of your training runs, particularly if you train against a large dataset.
+In general we recommend Azure Blob storage over Azure File storage. Both
+standard and premium storage are available for blobs. Although more
+expensive, we suggest premium storage due to faster throughput speeds that
+may improve the speed of your training runs, particularly if you train
+against a large dataset.
 }
 
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()
-ds <- register_azure_file_share_datastore(ws, 
-                                          datastore_name = 'mydatastore',
-                                          file_share_name = 'myazurefilesharename',
-                                          account_name = 'mystorageaccoutname',
-                                          account_key = 'mystorageaccountkey')
+ds <- register_azure_file_share_datastore(
+                                   ws,
+                                   datastore_name = 'mydatastore',
+                                   file_share_name = 'myazurefilesharename',
+                                   account_name = 'mystorageaccoutname',
+                                   account_key = 'mystorageaccountkey')
 }
 }
 

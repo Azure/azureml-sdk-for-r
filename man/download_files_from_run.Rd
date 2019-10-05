@@ -2,7 +2,7 @@
 % Please edit documentation in R/run.R
 \name{download_files_from_run}
 \alias{download_files_from_run}
-\title{Download files from a given storage prefix (folder name) or 
+\title{Download files from a given storage prefix (folder name) or
 the entire container if prefix is unspecified.}
 \usage{
 download_files_from_run(run, prefix = NULL, output_directory = NULL,
@@ -11,18 +11,18 @@ download_files_from_run(run, prefix = NULL, output_directory = NULL,
 \arguments{
 \item{run}{the run object}
 
-\item{prefix}{the filepath prefix within the container from 
+\item{prefix}{the filepath prefix within the container from
 which to download all artifacts}
 
-\item{output_directory}{optional directory that all artifact paths use 
+\item{output_directory}{optional directory that all artifact paths use
 as a prefix}
 
-\item{output_paths}{optional filepaths in which to store the downloaded 
+\item{output_paths}{optional filepaths in which to store the downloaded
 artifacts. Should be unique and match length of paths.}
 
 \item{batch_size}{number of files to download per batch}
 }
 \description{
-Download files from a given storage prefix (folder name) or 
+Download files from a given storage prefix (folder name) or
 the entire container if prefix is unspecified.
 }

@@ -35,7 +35,7 @@ provide a \code{HyperDriveConfig} to \code{config}.
 The following example submits an Estimator experiment.\preformatted{ws <- load_workspace_from_config()
 compute_target <- get_compute(ws, cluster_name = 'mycluster')
 exp <- experiment(ws, name = 'myexperiment')
-est <- estimator(source_directory = '.', 
+est <- estimator(source_directory = '.',
                  entry_script = 'train.R',
                  compute_target = compute_target)
 run <- submit_experiment(exp, est)

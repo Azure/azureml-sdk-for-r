@@ -11,32 +11,32 @@ aci_webservice_deployment_config(cpu_cores = NULL, memory_gb = NULL,
   ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)
 }
 \arguments{
-\item{cpu_cores}{The number of cpu cores to allocate for this Webservice. 
+\item{cpu_cores}{The number of cpu cores to allocate for this Webservice.
 Can be a decimal.}
 
-\item{memory_gb}{The amount of memory (in GB) to allocate for this 
+\item{memory_gb}{The amount of memory (in GB) to allocate for this
 Webservice. Can be a decimal. Defaults to 0.5}
 
 \item{tags}{Dictionary of key value tags to give this Webservice}
 
-\item{properties}{Dictionary of key value properties to give this 
-Webservice. These properties cannot be changed after deployment, however 
+\item{properties}{Dictionary of key value properties to give this
+Webservice. These properties cannot be changed after deployment, however
 new key value pairs can be added}
 
 \item{description}{A description to give this Webservice}
 
-\item{location}{The Azure region to deploy this Webservice to. If not 
-specified the Workspace location will be used. More details on available 
+\item{location}{The Azure region to deploy this Webservice to. If not
+specified the Workspace location will be used. More details on available
 regions can be found here:
 https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances}
 
-\item{auth_enabled}{Whether or not to enable auth for this Webservice. 
+\item{auth_enabled}{Whether or not to enable auth for this Webservice.
 Defaults to FALSE}
 
-\item{ssl_enabled}{Whether or not to enable SSL for this Webservice. 
+\item{ssl_enabled}{Whether or not to enable SSL for this Webservice.
 Defaults to FALSE}
 
-\item{enable_app_insights}{Whether or not to enable AppInsights for this 
+\item{enable_app_insights}{Whether or not to enable AppInsights for this
 Webservice. Defaults to FALSE}
 
 \item{ssl_cert_pem_file}{The cert file needed if SSL is enabled}
@@ -46,11 +46,11 @@ Webservice. Defaults to FALSE}
 \item{ssl_cname}{The cname for if SSL is enabled}
 
 \item{dns_name_label}{The dns name label for the scoring endpoint.
-If not specified a unique dns name label will be generated for the scoring 
+If not specified a unique dns name label will be generated for the scoring
 endpoint.}
 }
 \value{
-AciServiceDeploymentConfiguration object to use when deploying a 
+AciServiceDeploymentConfiguration object to use when deploying a
 Webservice object
 }
 \description{

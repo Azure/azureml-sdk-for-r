@@ -22,8 +22,8 @@ Specify a uniform distribution of the form
 \code{round(exp(uniform(min_value, max_value) / q) * q}.
 
 This is suitable for a discrete variable with respect to which the objective
-is "smooth", and gets smoother with the size of the value, but which should be
-bounded both above and below.
+is "smooth", and gets smoother with the size of the value, but which should
+be bounded both above and below.
 }
 \seealso{
 \code{random_parameter_sampling()}, \code{grid_parameter_sampling()},

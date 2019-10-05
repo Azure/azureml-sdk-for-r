@@ -202,20 +202,22 @@ if it does not exists.</p></td>
 
     
 
-<p>In general we recommend Azure Blob storage over Azure File storage. Both standard and
-premium storage are available for blobs. Although more expensive, we suggest
-premium storage due to faster throughput speeds that may improve the speed
-of your training runs, particularly if you train against a large dataset.</p>
+<p>In general we recommend Azure Blob storage over Azure File storage. Both
+standard and premium storage are available for blobs. Although more
+expensive, we suggest premium storage due to faster throughput speeds that
+may improve the speed of your training runs, particularly if you train
+against a large dataset.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
 <pre>ws &lt;- load_workspace_from_config()
-ds &lt;- register_azure_file_share_datastore(ws, 
-                                          datastore_name = 'mydatastore',
-                                          file_share_name = 'myazurefilesharename',
-                                          account_name = 'mystorageaccoutname',
-                                          account_key = 'mystorageaccountkey')
+ds &lt;- register_azure_file_share_datastore(
+                                   ws,
+                                   datastore_name = 'mydatastore',
+                                   file_share_name = 'myazurefilesharename',
+                                   account_name = 'mystorageaccoutname',
+                                   account_key = 'mystorageaccountkey')
 </pre>
 
     

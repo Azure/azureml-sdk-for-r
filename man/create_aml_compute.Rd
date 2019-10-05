@@ -16,20 +16,22 @@ create_aml_compute(workspace, cluster_name, vm_size,
 
 \item{cluster_name}{A string of the name of the cluster.}
 
-\item{vm_size}{A string of the size of agent VMs. More details can be found \href{https://aka.ms/azureml-vm-details}{here}.
+\item{vm_size}{A string of the size of agent VMs. More details can be found
+\href{https://aka.ms/azureml-vm-details}{here}.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to \code{'Standard_NC6'}.}
 
-\item{vm_priority}{A string of either \code{'dedicated'} or \code{'lowpriority'} to use
-either dedicated or low-priority VMs. Defaults to \code{'dedicated'}.}
+\item{vm_priority}{A string of either \code{'dedicated'} or \code{'lowpriority'} to
+use either dedicated or low-priority VMs. Defaults to \code{'dedicated'}.}
 
-\item{min_nodes}{An integer of the minimum number of nodes to use on the cluster.
-If not specified, will default to \code{0}.}
+\item{min_nodes}{An integer of the minimum number of nodes to use on the
+cluster. If not specified, will default to \code{0}.}
 
-\item{max_nodes}{An integer of the maximum number of nodes to use on the cluster.}
+\item{max_nodes}{An integer of the maximum number of nodes to use on the
+cluster.}
 
-\item{idle_seconds_before_scaledown}{An integer of the node idle time in seconds
-before scaling down the cluster. Defaults to \code{120}.}
+\item{idle_seconds_before_scaledown}{An integer of the node idle time in
+seconds before scaling down the cluster. Defaults to \code{120}.}
 
 \item{admin_username}{A string of the name of the administrator user account
 that can be used to SSH into nodes.}
@@ -47,7 +49,8 @@ where the virtual network is located.}
 
 \item{subnet_name}{A string of the name of the subnet inside the vnet.}
 
-\item{tags}{A named list of tags for the cluster, e.g. \code{list("tag" = "value")}.`}
+\item{tags}{A named list of tags for the cluster, e.g.
+\code{list("tag" = "value")}.`}
 
 \item{description}{A string of the description for the cluster.}
 }
@@ -55,28 +58,31 @@ where the virtual network is located.}
 The \code{AmlCompute} object.
 }
 \description{
-Provision Azure Machine Learning Compute (AmlCompute) as a compute target for
-training. AmlCompute is a managed-compute infrastructure that allows the user
-to easily create a single or multi-node compute. To create a persistent
+Provision Azure Machine Learning Compute (AmlCompute) as a compute target
+for training. AmlCompute is a managed-compute infrastructure that allows the
+user to easily create a single or multi-node compute. To create a persistent
 AmlCompute resource that can be reused across jobs, make sure to specify the
-\code{vm_size} and \code{max_nodes} parameters. The compute can then be shared with other
-users in the workspace and is kept between jobs. If \code{min_nodes = 0}, the compute
-autoscales down to zero nodes when it isn't used, and scales up automatically
-when a job is submitted.
+\code{vm_size} and \code{max_nodes} parameters. The compute can then be shared with
+other users in the workspace and is kept between jobs. If \code{min_nodes = 0},
+the compute autoscales down to zero nodes when it isn't used, and scales up
+automatically when a job is submitted.
 
-AmlCompute has default limits, such as the number of cores that can be allocated.
-For more information, see \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas}{Manage and request quotas for Azure resources}.
+AmlCompute has default limits, such as the number of cores that can be
+allocated. For more information, see
+\link{Manage and request quotas for Azure resources}
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).
 }
 \section{Details}{
 
 For more information on using an Azure Machine Learning Compute resource
 in a virtual network, see
-\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
+\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).
 }
 
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()
-compute_target <- create_aml_compute(ws, 
+compute_target <- create_aml_compute(ws,
                                      cluster_name = 'mycluster',
                                      vm_size = 'STANDARD_D2_V2',
                                      max_nodes = 1)

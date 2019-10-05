@@ -2,7 +2,7 @@
 % Please edit documentation in R/run.R
 \name{get_run_details}
 \alias{get_run_details}
-\title{Get the definition, status information, current log files and other details 
+\title{Get the definition, status information, current log files and other details
 of the run.}
 \usage{
 get_run_details(run)
@@ -14,6 +14,6 @@ get_run_details(run)
 Return the details for the run
 }
 \description{
-Get the definition, status information, current log files and other details 
+Get the definition, status information, current log files and other details
 of the run.
 }

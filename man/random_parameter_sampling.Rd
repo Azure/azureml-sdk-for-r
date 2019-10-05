@@ -22,15 +22,16 @@ both discrete and continuous hyperparameters.
 }
 \section{Details}{
 
-In this sampling algorithm, parameter values are chosen from a set of discrete
-values or a distribution over a continuous range. Functions you can use include:
+In this sampling algorithm, parameter values are chosen from a set of
+discrete values or a distribution over a continuous range. Functions you can
+use include:
 \code{choice()}, \code{randint()}, \code{uniform()}, \code{quniform()}, \code{loguniform()},
 \code{qloguniform()}, \code{normal()}, \code{qnormal()}, \code{lognormal()}, and \code{qlognormal()}.
 }
 
 \section{Examples}{
 \preformatted{param_sampling <- random_parameter_sampling( {
-        'learning_rate': normal(10, 3), 
+        'learning_rate': normal(10, 3),
         'keep_probability': uniform(0.05, 0.1),
         'batch_size': choice(16, 32, 64, 128)
     }

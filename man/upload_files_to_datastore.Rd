@@ -18,10 +18,11 @@ we upload \code{/path/to/file.txt}, and we define the base path to be \code{/pat
 when \code{file.txt} is uploaded to the blob storage or file share, it will
 have the path of \code{/to/file.txt}. If \code{target_path} is also given, then it
 will be used as the prefix for the derived path from above. The base path
-must be a common path of all of the files, otherwise an exception will be thrown.}
+must be a common path of all of the files, otherwise an exception will be
+thrown.}
 
-\item{target_path}{A string of the location in the blob container or file share
-to upload the data to. Defaults to \code{NULL}, in which case the data is
+\item{target_path}{A string of the location in the blob container or file
+share to upload the data to. Defaults to \code{NULL}, in which case the data is
 uploaded to the root.}
 
 \item{overwrite}{If \code{TRUE}, overwrites any existing data at \code{target_path}.}

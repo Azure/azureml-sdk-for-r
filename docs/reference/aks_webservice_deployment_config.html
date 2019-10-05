@@ -151,69 +151,69 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>autoscale_enabled</th>
-      <td><p>Whether or not to enable autoscaling for this 
+      <td><p>Whether or not to enable autoscaling for this
 Webservice. Defaults to True if num_replicas is None</p></td>
     </tr>
     <tr>
       <th>autoscale_min_replicas</th>
-      <td><p>The minimum number of containers to use when 
+      <td><p>The minimum number of containers to use when
 autoscaling this Webservice. Defaults to 1</p></td>
     </tr>
     <tr>
       <th>autoscale_max_replicas</th>
-      <td><p>The maximum number of containers to use when 
+      <td><p>The maximum number of containers to use when
 autoscaling this Webservice. Defaults to 10</p></td>
     </tr>
     <tr>
       <th>autoscale_refresh_seconds</th>
-      <td><p>How often the autoscaler should attempt to 
+      <td><p>How often the autoscaler should attempt to
 scale this Webservice. Defaults to 1</p></td>
     </tr>
     <tr>
       <th>autoscale_target_utilization</th>
-      <td><p>The target utilization (in percent out 
-of 100) the autoscaler should attempt to maintain for this Webservice. 
+      <td><p>The target utilization (in percent out
+of 100) the autoscaler should attempt to maintain for this Webservice.
 Defaults to 70</p></td>
     </tr>
     <tr>
       <th>auth_enabled</th>
-      <td><p>Whether or not to enable key auth for this Webservice. 
+      <td><p>Whether or not to enable key auth for this Webservice.
 Defaults to TRUE</p></td>
     </tr>
     <tr>
       <th>cpu_cores</th>
-      <td><p>The number of cpu cores to allocate for this Webservice. 
+      <td><p>The number of cpu cores to allocate for this Webservice.
 Can be a decimal. Defaults to 0.1</p></td>
     </tr>
     <tr>
       <th>memory_gb</th>
-      <td><p>The amount of memory (in GB) to allocate for this 
+      <td><p>The amount of memory (in GB) to allocate for this
 Webservice. Can be a decimal. Defaults to 0.5</p></td>
     </tr>
     <tr>
       <th>enable_app_insights</th>
-      <td><p>Whether or not to enable Application Insights 
+      <td><p>Whether or not to enable Application Insights
 logging for this Webservice. Defaults to FALSE</p></td>
     </tr>
     <tr>
       <th>scoring_timeout_ms</th>
-      <td><p>A timeout to enforce for scoring calls to this 
+      <td><p>A timeout to enforce for scoring calls to this
 Webservice. Defaults to 60000</p></td>
     </tr>
     <tr>
       <th>replica_max_concurrent_requests</th>
-      <td><p>The number of maximum concurrent 
+      <td><p>The number of maximum concurrent
 requests per node to allow for this Webservice. Defaults to 1</p></td>
     </tr>
     <tr>
       <th>max_request_wait_time</th>
-      <td><p>The maximum amount of time a request will stay 
+      <td><p>The maximum amount of time a request will stay
 in the queue (in milliseconds) before returning a 503 error. Defaults to 500</p></td>
     </tr>
     <tr>
       <th>num_replicas</th>
-      <td><p>The number of containers to allocate for this 
-Webservice. No default, if this parameter is not set then the autoscaler is 
+      <td><p>The number of containers to allocate for this
+Webservice. No default, if this parameter is not set then the autoscaler is
 enabled by default.</p></td>
     </tr>
     <tr>
@@ -230,8 +230,8 @@ enabled by default.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Dictionary of key value properties to give this 
-Webservice. These properties cannot be changed after deployment, however new 
+      <td><p>Dictionary of key value properties to give this
+Webservice. These properties cannot be changed after deployment, however new
 key value pairs can be added</p></td>
     </tr>
     <tr>
@@ -240,47 +240,47 @@ key value pairs can be added</p></td>
     </tr>
     <tr>
       <th>gpu_cores</th>
-      <td><p>The number of gpu cores to allocate for this Webservice. 
+      <td><p>The number of gpu cores to allocate for this Webservice.
 Default is 1</p></td>
     </tr>
     <tr>
       <th>period_seconds</th>
-      <td><p>How often (in seconds) to perform the liveness probe. 
+      <td><p>How often (in seconds) to perform the liveness probe.
 Default to 10 seconds. Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>initial_delay_seconds</th>
-      <td><p>Number of seconds after the container has 
+      <td><p>Number of seconds after the container has
 started before liveness probes are initiated. Defaults to 310</p></td>
     </tr>
     <tr>
       <th>timeout_seconds</th>
-      <td><p>Number of seconds after which the liveness probe 
+      <td><p>Number of seconds after which the liveness probe
 times out. Defaults to 2 second. Minimum value is 1</p></td>
     </tr>
     <tr>
       <th>success_threshold</th>
-      <td><p>Minimum consecutive successes for the liveness 
-probe to be considered successful after having failed. Defaults to 1. 
+      <td><p>Minimum consecutive successes for the liveness
+probe to be considered successful after having failed. Defaults to 1.
 Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>failure_threshold</th>
-      <td><p>When a Pod starts and the liveness probe fails, 
-Kubernetes will try failureThreshold times before giving up. Defaults to 3. 
+      <td><p>When a Pod starts and the liveness probe fails,
+Kubernetes will try failureThreshold times before giving up. Defaults to 3.
 Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>namespace</th>
-      <td><p>The Kubernetes namespace in which to deploy this 
-Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen 
+      <td><p>The Kubernetes namespace in which to deploy this
+Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen
 ('-') characters. The first and last characters cannot be hyphens.</p></td>
     </tr>
     <tr>
       <th>token_auth_enabled</th>
-      <td><p>Whether or not to enable Token auth for this 
-Webservice. If this is enabled, users can access this Webservice by fetching 
-access token using their Azure Active Directory credentials. 
+      <td><p>Whether or not to enable Token auth for this
+Webservice. If this is enabled, users can access this Webservice by fetching
+access token using their Azure Active Directory credentials.
 Defaults to FALSE</p></td>
     </tr>
     </table>

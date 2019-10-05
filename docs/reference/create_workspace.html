@@ -35,14 +35,15 @@
 <meta property="og:title" content="Create a new Azure Machine Learning workspace — create_workspace" />
 
 <meta property="og:description" content="Create a new Azure Machine Learning workspace. Throws an exception if the
-workspace already exists or any of the workspace requirements are not satisfied.
-When you create new workspace, it automatically creates several Azure resources
-that are used in the workspace:
+workspace already exists or any of the workspace requirements are not
+satisfied. When you create new workspace, it automatically creates several
+Azure resources that are used in the workspace:
 Azure Container Registry: Registers Docker containers that you use during
-training and when you deploy a model. To minimize costs, ACR is lazy-loaded
-until deployment images are created.
+training and when you deploy a model. To minimize costs, ACR is
+lazy-loaded until deployment images are created.
 Azure Storage account: Used as the default datastore for the workspace.
-Azure Application Insights: Stores monitoring information about your models.
+Azure Application Insights: Stores monitoring information about your
+models.
 Azure Key Vault: Stores secrets that are used by compute targets and other
 sensitive information that's needed by the workspace.
 
@@ -141,14 +142,15 @@ sensitive information that's needed by the workspace.
     <div class="ref-description">
     
     <p>Create a new Azure Machine Learning workspace. Throws an exception if the
-workspace already exists or any of the workspace requirements are not satisfied.
-When you create new workspace, it automatically creates several Azure resources
-that are used in the workspace:</p><ul>
+workspace already exists or any of the workspace requirements are not
+satisfied. When you create new workspace, it automatically creates several
+Azure resources that are used in the workspace:</p><ul>
 <li><p>Azure Container Registry: Registers Docker containers that you use during
-training and when you deploy a model. To minimize costs, ACR is lazy-loaded
-until deployment images are created.</p></li>
+training and when you deploy a model. To minimize costs, ACR is
+lazy-loaded until deployment images are created.</p></li>
 <li><p>Azure Storage account: Used as the default datastore for the workspace.</p></li>
-<li><p>Azure Application Insights: Stores monitoring information about your models.</p></li>
+<li><p>Azure Application Insights: Stores monitoring information about your
+models.</p></li>
 <li><p>Azure Key Vault: Stores secrets that are used by compute targets and other
 sensitive information that's needed by the workspace.</p></li>
 </ul>
@@ -167,8 +169,8 @@ sensitive information that's needed by the workspace.</p></li>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>A string of the new workspace name. Workspace name has to be between
-2 and 32 characters of letters and numbers.</p></td>
+      <td><p>A string of the new workspace name. Workspace name has to be
+between 2 and 32 characters of letters and numbers.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>
@@ -178,14 +180,14 @@ access to more than one subscription.</p></td>
     </tr>
     <tr>
       <th>resource_group</th>
-      <td><p>A string of the Azure resource group that is containing the
-workspace. The parameter defaults to a mutation of the workspace name.</p></td>
+      <td><p>A string of the Azure resource group that is containing
+the workspace. The parameter defaults to a mutation of the workspace name.</p></td>
     </tr>
     <tr>
       <th>location</th>
-      <td><p>A string of the location of the workspace. The parameter defaults
-to the resource group location. The location has to be a supported region for
-Azure Machine Learning Services.</p></td>
+      <td><p>A string of the location of the workspace. The parameter
+defaults to the resource group location. The location has to be a supported
+region for Azure Machine Learning Services.</p></td>
     </tr>
     <tr>
       <th>create_resource_group</th>
@@ -194,33 +196,34 @@ if it doesn't exist.</p></td>
     </tr>
     <tr>
       <th>friendly_name</th>
-      <td><p>A string of the friendly name for the workspace that can be
-displayed in the UI.</p></td>
+      <td><p>A string of the friendly name for the workspace that
+can be displayed in the UI.</p></td>
     </tr>
     <tr>
       <th>storage_account</th>
       <td><p>A string of an existing storage account in the Azure
-resource ID format. The storage will be used by the workspace to save run outputs,
-code, logs etc. If <code>NULL</code> a new storage will be created.</p></td>
+resource ID format. The storage will be used by the workspace to save run
+outputs, code, logs etc. If <code>NULL</code> a new storage will be created.</p></td>
     </tr>
     <tr>
       <th>key_vault</th>
       <td><p>A string of an existing key vault in the Azure resource ID
-format. The key vault will be used by the workspace to store credentials added to
-the workspace by the users. If <code>NULL</code> a new key vault will be created.</p></td>
+format. The key vault will be used by the workspace to store credentials
+added to the workspace by the users. If <code>NULL</code> a new key vault will be
+created.</p></td>
     </tr>
     <tr>
       <th>app_insights</th>
       <td><p>A string of an existing Application Insights in the Azure
-resource ID format. The Application Insights will be used by the workspace to log
-webservices events. If <code>NULL</code> a new Application Insights will be created.</p></td>
+resource ID format. The Application Insights will be used by the workspace to
+log webservices events. If <code>NULL</code> a new Application Insights will be created.</p></td>
     </tr>
     <tr>
       <th>container_registry</th>
-      <td><p>A string of an existing container registry in the Azure
-resource ID format. The container registry will be used by the workspace to pull
-and push both experimentation and webservices images. If <code>NULL</code> a new container
-registry will be created.</p></td>
+      <td><p>A string of an existing container registry in the
+Azure resource ID format. The container registry will be used by the
+workspace to pull and push both experimentation and webservices images. If
+<code>NULL</code> a new container registry will be created.</p></td>
     </tr>
     <tr>
       <th>exist_ok</th>
@@ -229,8 +232,8 @@ exists.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>If <code>TRUE</code> the method will print out incremental progress of
-method.</p></td>
+      <td><p>If <code>TRUE</code> the method will print out incremental progress
+of method.</p></td>
     </tr>
     </table>
     
@@ -242,26 +245,28 @@ method.</p></td>
 
     
 
-<p>The first example requires only minimal specification, and all dependent resources
-as well as the resource group will be created automatically.</p><pre>ws &lt;- create_workspace(name = 'myworkspace', 
-                       subscription_id = '&lt;azure-subscription-id&gt;', 
-                       resource_group = 'myresourcegroup', 
+<p>The first example requires only minimal specification, and all dependent
+resources as well as the resource group will be created automatically.</p><pre>ws &lt;- create_workspace(name = 'myworkspace',
+                       subscription_id = '&lt;azure-subscription-id&gt;',
+                       resource_group = 'myresourcegroup',
                        location = 'eastus2')
 </pre>
 
-<p>The following example shows how to reuse existing Azure resources by making use of
-all parameters utilizing the Azure resource ID format. The specific Azure resource
-IDs can be retrieved through the Azure Portal or SDK. This assumes that the resource
-group, storage account, key vault, App Insights and container registry already exist.</p><pre>ws &lt;- create_workspace(name = 'myworkspace', 
-                       subscription_id = '&lt;azure-subscription-id&gt;', 
-                       resource_group = 'myresourcegroup', 
-                       create_resource_group = FALSE, 
-                       location = 'eastus2', 
-                       friendly_name = 'My workspace', 
-                       storage_account = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.storage/storageaccounts/mystorageaccount', 
-                       key_vault = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault', 
-                       app_insights = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights', 
-                       container_registry = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
+<p>The following example shows how to reuse existing Azure resources by making
+use of all parameters utilizing the Azure resource ID format. The specific
+Azure resource IDs can be retrieved through the Azure Portal or SDK. This
+assumes that the resource group, storage account, key vault, App Insights
+and container registry already exist.</p><pre>ws &lt;- create_workspace(
+       name = 'myworkspace',
+       subscription_id = '&lt;azure-subscription-id&gt;',
+       resource_group = 'myresourcegroup',
+       create_resource_group = FALSE,
+       location = 'eastus2',
+       friendly_name = 'My workspace',
+       storage_account = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.storage/storageaccounts/mystorageaccount',
+       key_vault = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault',
+       app_insights = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights',
+       container_registry = 'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
 </pre>
 
     

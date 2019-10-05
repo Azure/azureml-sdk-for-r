@@ -34,16 +34,18 @@
 
 <meta property="og:title" content="Create an AmlCompute cluster — create_aml_compute" />
 
-<meta property="og:description" content="Provision Azure Machine Learning Compute (AmlCompute) as a compute target for
-training. AmlCompute is a managed-compute infrastructure that allows the user
-to easily create a single or multi-node compute. To create a persistent
+<meta property="og:description" content="Provision Azure Machine Learning Compute (AmlCompute) as a compute target
+for training. AmlCompute is a managed-compute infrastructure that allows the
+user to easily create a single or multi-node compute. To create a persistent
 AmlCompute resource that can be reused across jobs, make sure to specify the
-vm_size and max_nodes parameters. The compute can then be shared with other
-users in the workspace and is kept between jobs. If min_nodes = 0, the compute
-autoscales down to zero nodes when it isn't used, and scales up automatically
-when a job is submitted.
-AmlCompute has default limits, such as the number of cores that can be allocated.
-For more information, see Manage and request quotas for Azure resources." />
+vm_size and max_nodes parameters. The compute can then be shared with
+other users in the workspace and is kept between jobs. If min_nodes = 0,
+the compute autoscales down to zero nodes when it isn't used, and scales up
+automatically when a job is submitted.
+AmlCompute has default limits, such as the number of cores that can be
+allocated. For more information, see
+Manage and request quotas for Azure resources
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -137,16 +139,18 @@ For more information, see Manage and request quotas for Azure resources." />
 
     <div class="ref-description">
     
-    <p>Provision Azure Machine Learning Compute (AmlCompute) as a compute target for
-training. AmlCompute is a managed-compute infrastructure that allows the user
-to easily create a single or multi-node compute. To create a persistent
+    <p>Provision Azure Machine Learning Compute (AmlCompute) as a compute target
+for training. AmlCompute is a managed-compute infrastructure that allows the
+user to easily create a single or multi-node compute. To create a persistent
 AmlCompute resource that can be reused across jobs, make sure to specify the
-<code>vm_size</code> and <code>max_nodes</code> parameters. The compute can then be shared with other
-users in the workspace and is kept between jobs. If <code>min_nodes = 0</code>, the compute
-autoscales down to zero nodes when it isn't used, and scales up automatically
-when a job is submitted.</p>
-<p>AmlCompute has default limits, such as the number of cores that can be allocated.
-For more information, see <a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas'>Manage and request quotas for Azure resources</a>.</p>
+<code>vm_size</code> and <code>max_nodes</code> parameters. The compute can then be shared with
+other users in the workspace and is kept between jobs. If <code>min_nodes = 0</code>,
+the compute autoscales down to zero nodes when it isn't used, and scales up
+automatically when a job is submitted.</p>
+<p>AmlCompute has default limits, such as the number of cores that can be
+allocated. For more information, see
+Manage and request quotas for Azure resources
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).</p>
     
     </div>
 
@@ -170,28 +174,30 @@ For more information, see <a href='https://docs.microsoft.com/en-us/azure/machin
     </tr>
     <tr>
       <th>vm_size</th>
-      <td><p>A string of the size of agent VMs. More details can be found <a href='https://aka.ms/azureml-vm-details'>here</a>.
+      <td><p>A string of the size of agent VMs. More details can be found
+<a href='https://aka.ms/azureml-vm-details'>here</a>.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to <code>'Standard_NC6'</code>.</p></td>
     </tr>
     <tr>
       <th>vm_priority</th>
-      <td><p>A string of either <code>'dedicated'</code> or <code>'lowpriority'</code> to use
-either dedicated or low-priority VMs. Defaults to <code>'dedicated'</code>.</p></td>
+      <td><p>A string of either <code>'dedicated'</code> or <code>'lowpriority'</code> to
+use either dedicated or low-priority VMs. Defaults to <code>'dedicated'</code>.</p></td>
     </tr>
     <tr>
       <th>min_nodes</th>
-      <td><p>An integer of the minimum number of nodes to use on the cluster.
-If not specified, will default to <code>0</code>.</p></td>
+      <td><p>An integer of the minimum number of nodes to use on the
+cluster. If not specified, will default to <code>0</code>.</p></td>
     </tr>
     <tr>
       <th>max_nodes</th>
-      <td><p>An integer of the maximum number of nodes to use on the cluster.</p></td>
+      <td><p>An integer of the maximum number of nodes to use on the
+cluster.</p></td>
     </tr>
     <tr>
       <th>idle_seconds_before_scaledown</th>
-      <td><p>An integer of the node idle time in seconds
-before scaling down the cluster. Defaults to <code>120</code>.</p></td>
+      <td><p>An integer of the node idle time in
+seconds before scaling down the cluster. Defaults to <code>120</code>.</p></td>
     </tr>
     <tr>
       <th>admin_username</th>
@@ -223,7 +229,8 @@ where the virtual network is located.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>A named list of tags for the cluster, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("tag" = "value")</a></code>.`</p></td>
+      <td><p>A named list of tags for the cluster, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list("tag" = "value")</a></code>.`</p></td>
     </tr>
     <tr>
       <th>description</th>
@@ -241,13 +248,14 @@ where the virtual network is located.</p></td>
 
 <p>For more information on using an Azure Machine Learning Compute resource
 in a virtual network, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
 <pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- create_aml_compute(ws, 
+compute_target &lt;- create_aml_compute(ws,
                                      cluster_name = 'mycluster',
                                      vm_size = 'STANDARD_D2_V2',
                                      max_nodes = 1)

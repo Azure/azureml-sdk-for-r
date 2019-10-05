@@ -2,7 +2,8 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qlognormal}
 \alias{qlognormal}
-\title{Specify a normal distribution of the form \code{round(exp(normal(mu, sigma)) / q) * q}}
+\title{Specify a normal distribution of the form
+\code{round(exp(normal(mu, sigma)) / q) * q}}
 \usage{
 qlognormal(mu, sigma, q)
 }
@@ -17,10 +18,12 @@ qlognormal(mu, sigma, q)
 A list of the stochastic expression.
 }
 \description{
-Specify a normal distribution of the form \code{round(exp(normal(mu, sigma)) / q) * q}.
+Specify a normal distribution of the form
+\code{round(exp(normal(mu, sigma)) / q) * q}.
 
-Suitable for a discrete variable with respect to which the objective is smooth
-and gets smoother with the size of the variable, which is bounded from one side.
+Suitable for a discrete variable with respect to which the objective is
+smooth and gets smoother with the size of the variable, which is bounded
+from one side.
 }
 \seealso{
 \code{random_parameter_sampling()}, \code{grid_parameter_sampling()},

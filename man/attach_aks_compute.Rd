@@ -12,7 +12,8 @@ attach_aks_compute(workspace, cluster_name, resource_id = NULL,
 
 \item{cluster_name}{A string of the name for the cluster.}
 
-\item{resource_id}{A string of the resource ID for the AKS cluster being attached.}
+\item{resource_id}{A string of the resource ID for the AKS cluster being
+attached.}
 
 \item{resource_group}{A string of the resource group in which the AKS cluster
 is located.}
@@ -21,19 +22,21 @@ is located.}
 The \code{AksCompute} object.
 }
 \description{
-If you already have an AKS cluster in your Azure subscription, and it is version
-1.12.##, you can attach it to your workspace to use for deployments. The existing
-AKS cluster can be in a different Azure region than your workspace.
+If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.
 
-If you want to secure your AKS cluster using an Azure Virtual Network, you must
-create the virtual network first. For more information, see
-\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
+If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).
 }
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()
-compute_target <- attach_aks_compute(ws, 
+compute_target <- attach_aks_compute(ws,
                                      cluster_name = 'mycluster',
-                                     resource_id = 'myresourceid', 
+                                     resource_id = 'myresourceid',
                                      resource_group = 'myresourcegroup')
 }
 }

@@ -13,7 +13,8 @@ get_default_keyvault(workspace)
 The \code{Keyvault} object.
 }
 \description{
-Returns a \code{Keyvault} object representing the default \href{https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview}{Azure Key Vault}
+Returns a \code{Keyvault} object representing the default
+\href{https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview}{Azure Key Vault}
 associated with the workspace.
 }
 \seealso{

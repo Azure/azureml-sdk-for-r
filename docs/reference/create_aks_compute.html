@@ -34,12 +34,13 @@
 
 <meta property="og:title" content="Create an AksCompute cluster — create_aks_compute" />
 
-<meta property="og:description" content="Provision an Azure Kubernetes Service instance (AksCompute) as a compute target
-for web service deployment. AksCompute is recommended for high-scale production
-deployments and provides fast response time and autoscaling of the deployed service.
-Cluster autoscaling isn't supported through the Azure ML R SDK. To change the nodes
-in the AksCompute cluster, use the UI for the cluster in the Azure portal. Once
-created, the cluster can be reused for multiple deployments." />
+<meta property="og:description" content="Provision an Azure Kubernetes Service instance (AksCompute) as a compute
+target for web service deployment. AksCompute is recommended for high-scale
+production deployments and provides fast response time and autoscaling of
+the deployed service. Cluster autoscaling isn't supported through the Azure
+ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
+cluster in the Azure portal. Once created, the cluster can be reused for
+multiple deployments." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,12 +134,13 @@ created, the cluster can be reused for multiple deployments." />
 
     <div class="ref-description">
     
-    <p>Provision an Azure Kubernetes Service instance (AksCompute) as a compute target
-for web service deployment. AksCompute is recommended for high-scale production
-deployments and provides fast response time and autoscaling of the deployed service.
-Cluster autoscaling isn't supported through the Azure ML R SDK. To change the nodes
-in the AksCompute cluster, use the UI for the cluster in the Azure portal. Once
-created, the cluster can be reused for multiple deployments.</p>
+    <p>Provision an Azure Kubernetes Service instance (AksCompute) as a compute
+target for web service deployment. AksCompute is recommended for high-scale
+production deployments and provides fast response time and autoscaling of
+the deployed service. Cluster autoscaling isn't supported through the Azure
+ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
+cluster in the Azure portal. Once created, the cluster can be reused for
+multiple deployments.</p>
     
     </div>
 
@@ -162,43 +164,45 @@ created, the cluster can be reused for multiple deployments.</p>
     </tr>
     <tr>
       <th>agent_count</th>
-      <td><p>An integer of the number of agents (VMs) to host containers.
-Defaults to <code>3</code>.</p></td>
+      <td><p>An integer of the number of agents (VMs) to host
+containers. Defaults to <code>3</code>.</p></td>
     </tr>
     <tr>
       <th>vm_size</th>
-      <td><p>A string of the size of agent VMs. More details can be found <a href='https://aka.ms/azureml-vm-details'>here</a>.
+      <td><p>A string of the size of agent VMs. More details can be found
+<a href='https://aka.ms/azureml-vm-details'>here</a>.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to <code>'Standard_D3_v2'</code>.</p></td>
     </tr>
     <tr>
       <th>ssl_cname</th>
-      <td><p>A string of a CName to use if enabling SSL validation on the
-cluster. Must provide all three - CName, cert file, and key file - to enable SSL
-validation.</p></td>
+      <td><p>A string of a CName to use if enabling SSL validation on
+the cluster. Must provide all three - CName, cert file, and key file - to
+enable SSL validation.</p></td>
     </tr>
     <tr>
       <th>ssl_cert_pem_file</th>
       <td><p>A string of a file path to a file containing cert
-information for SSL validation. Must provide all three - CName, cert file, and
-key file - to enable SSL validation.</p></td>
+information for SSL validation. Must provide all three - CName, cert file,
+and key file - to enable SSL validation.</p></td>
     </tr>
     <tr>
       <th>ssl_key_pem_file</th>
       <td><p>A string of a file path to a file containing key
-information for SSL validation. Must provide all three - CName, cert file, and
-key file - to enable SSL validation.</p></td>
+information for SSL validation. Must provide all three - CName, cert file,
+and key file - to enable SSL validation.</p></td>
     </tr>
     <tr>
       <th>location</th>
       <td><p>A string of the location to provision the cluster in. If not
-specified, defaults to the workspace location. Available regions for this compute can be
-found here: "https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=kubernetes-service".</p></td>
+specified, defaults to the workspace location. Available regions for this
+compute can be found here:
+"https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=kubernetes-service".</p></td>
     </tr>
     <tr>
       <th>vnet_resourcegroup_name</th>
-      <td><p>A string of the name of the resource group where
-the virtual network is located.</p></td>
+      <td><p>A string of the name of the resource group
+where the virtual network is located.</p></td>
     </tr>
     <tr>
       <th>vnet_name</th>
@@ -231,8 +235,10 @@ service cluster IPs.</p></td>
 
     
 
-<p>For more information on using an AksCompute resource within a virtual network, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
+<p>For more information on using an AksCompute resource within a virtual
+network, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 

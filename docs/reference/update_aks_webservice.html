@@ -163,22 +163,22 @@ Values left as None will remain unchanged in this Webservice.</p>
     </tr>
     <tr>
       <th>autoscale_min_replicas</th>
-      <td><p>The minimum number of containers to use when 
+      <td><p>The minimum number of containers to use when
 autoscaling this Webservice</p></td>
     </tr>
     <tr>
       <th>autoscale_max_replicas</th>
-      <td><p>The maximum number of containers to use when 
+      <td><p>The maximum number of containers to use when
 autoscaling this Webservice</p></td>
     </tr>
     <tr>
       <th>autoscale_refresh_seconds</th>
-      <td><p>How often the autoscaler should attempt to 
+      <td><p>How often the autoscaler should attempt to
 scale this Webservice</p></td>
     </tr>
     <tr>
       <th>autoscale_target_utilization</th>
-      <td><p>The target utilization (in percent out 
+      <td><p>The target utilization (in percent out
 of 100) the autoscaler should attempt to maintain for this Webservice</p></td>
     </tr>
     <tr>
@@ -187,32 +187,32 @@ of 100) the autoscaler should attempt to maintain for this Webservice</p></td>
     </tr>
     <tr>
       <th>cpu_cores</th>
-      <td><p>The number of cpu cores to allocate for this Webservice. 
+      <td><p>The number of cpu cores to allocate for this Webservice.
 Can be a decimal</p></td>
     </tr>
     <tr>
       <th>memory_gb</th>
-      <td><p>The amount of memory (in GB) to allocate for this 
+      <td><p>The amount of memory (in GB) to allocate for this
 Webservice. Can be a decimal</p></td>
     </tr>
     <tr>
       <th>enable_app_insights</th>
-      <td><p>Whether or not to enable Application Insights 
+      <td><p>Whether or not to enable Application Insights
 logging for this Webservice</p></td>
     </tr>
     <tr>
       <th>scoring_timeout_ms</th>
-      <td><p>A timeout to enforce for scoring calls to this 
+      <td><p>A timeout to enforce for scoring calls to this
 Webservice</p></td>
     </tr>
     <tr>
       <th>replica_max_concurrent_requests</th>
-      <td><p>The number of maximum concurrent 
+      <td><p>The number of maximum concurrent
 requests per node to allow for this Webservice</p></td>
     </tr>
     <tr>
       <th>max_request_wait_time</th>
-      <td><p>The maximum amount of time a request will stay 
+      <td><p>The maximum amount of time a request will stay
 in the queue (in milliseconds) before returning a 503 error</p></td>
     </tr>
     <tr>
@@ -221,12 +221,12 @@ in the queue (in milliseconds) before returning a 503 error</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Dictionary of key value tags to give this Webservice. Will 
+      <td><p>Dictionary of key value tags to give this Webservice. Will
 replace existing tags.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Dictionary of key value properties to add to existing 
+      <td><p>Dictionary of key value properties to add to existing
 properties dictionary</p></td>
     </tr>
     <tr>
@@ -239,7 +239,7 @@ properties dictionary</p></td>
     </tr>
     <tr>
       <th>inference_config</th>
-      <td><p>An InferenceConfig object used to provide the 
+      <td><p>An InferenceConfig object used to provide the
 required model deployment properties.</p></td>
     </tr>
     <tr>
@@ -248,42 +248,42 @@ required model deployment properties.</p></td>
     </tr>
     <tr>
       <th>period_seconds</th>
-      <td><p>How often (in seconds) to perform the liveness probe. 
+      <td><p>How often (in seconds) to perform the liveness probe.
 Default to 10 seconds. Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>initial_delay_seconds</th>
-      <td><p>Number of seconds after the container has 
+      <td><p>Number of seconds after the container has
 started before liveness probes are initiated.</p></td>
     </tr>
     <tr>
       <th>timeout_seconds</th>
-      <td><p>Number of seconds after which the liveness probe 
+      <td><p>Number of seconds after which the liveness probe
 times out. Defaults to 1 second. Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>success_threshold</th>
-      <td><p>Minimum consecutive successes for the liveness 
-probe to be considered successful after having failed. Defaults to 1. 
+      <td><p>Minimum consecutive successes for the liveness
+probe to be considered successful after having failed. Defaults to 1.
 Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>failure_threshold</th>
-      <td><p>When a Pod starts and the liveness probe fails, 
-Kubernetes will try failureThreshold times before giving up. Defaults to 3. 
+      <td><p>When a Pod starts and the liveness probe fails,
+Kubernetes will try failureThreshold times before giving up. Defaults to 3.
 Minimum value is 1.</p></td>
     </tr>
     <tr>
       <th>namespace</th>
-      <td><p>The Kubernetes namespace in which to deploy this 
-Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen 
+      <td><p>The Kubernetes namespace in which to deploy this
+Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen
 ('-') characters. The first and last characters cannot be hyphens.</p></td>
     </tr>
     <tr>
       <th>token_auth_enabled</th>
-      <td><p>Whether or not to enable Token auth for this 
-Webservice. If this is enabled, users can access this Webservice by fetching 
-access token using their Azure Active Directory credentials. 
+      <td><p>Whether or not to enable Token auth for this
+Webservice. If this is enabled, users can access this Webservice by fetching
+access token using their Azure Active Directory credentials.
 Defaults to FALSE</p></td>
     </tr>
     </table>

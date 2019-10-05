@@ -35,47 +35,50 @@ training job. Defaults to \code{'dedicated'}. This takes effect only when the
 \item{entry_script}{A string representing the relative path to the file used
 to start training.}
 
-\item{script_params}{A named list of the command-line arguments to pass to the
-training script specified in \code{entry_script}.}
+\item{script_params}{A named list of the command-line arguments to pass to
+the training script specified in \code{entry_script}.}
 
 \item{cran_packages}{A character vector of CRAN packages to be installed.}
 
 \item{github_packages}{A character vector of GitHub packages to be installed.}
 
-\item{custom_url_packages}{A character vector of packages to be installed from
-local directory or custom URL.}
+\item{custom_url_packages}{A character vector of packages to be installed
+from local directory or custom URL.}
 
-\item{custom_docker_image}{A string of the name of the Docker image from which
-the image to use for training will be built. If not set, a default CPU-based image
-will be used as the base image. To use an image from a private Docker
-repository, you will also have to specify the \code{image_registry_details} parameter.}
+\item{custom_docker_image}{A string of the name of the Docker image from
+which the image to use for training will be built. If not set, a default
+CPU-based image will be used as the base image. To use an image from a
+private Docker repository, you will also have to specify the
+\code{image_registry_details} parameter.}
 
 \item{image_registry_details}{A \code{ContainerRegistry} object of the details of
 the Docker image registry for the custom Docker image.}
 
 \item{use_gpu}{Indicates whether the environment to run the experiment should
 support GPUs. If \code{TRUE}, a GPU-based default Docker image will be used in the
-environment. If \code{FALSE}, a CPU-based image will be used. Default Docker images
-(CPU or GPU) will only be used if the \code{custom_docker_image} parameter is not
-set.}
+environment. If \code{FALSE}, a CPU-based image will be used. Default Docker
+images (CPU or GPU) will only be used if the \code{custom_docker_image} parameter
+is not set.}
 
 \item{environment_variables}{A named list of environment variables names
 and values. These environment variables are set on the process where the user
 script is being executed.}
 
-\item{shm_size}{A string for the size of the Docker container's shared memory block.
-For more information, see \href{https://docs.docker.com/engine/reference/run/}{Docker run reference}.
+\item{shm_size}{A string for the size of the Docker container's shared
+memory block. For more information, see
+\href{https://docs.docker.com/engine/reference/run/}{Docker run reference}.
 If not set, a default value of \code{'2g'} is used.}
 
-\item{max_run_duration_seconds}{An integer of the maximum allowed time for the run.
-Azure ML will attempt to automatically cancel the run if it takes longer
-than this value.}
+\item{max_run_duration_seconds}{An integer of the maximum allowed time for
+the run. Azure ML will attempt to automatically cancel the run if it takes
+longer than this value.}
 
-\item{environment}{The \code{Environment} object that configures the R environment where
-the experiment is executed. This parameter is mutually exclusive with the other
-environment-related parameters \code{custom_docker_image}, \code{image_registry_details},
-\code{use_gpu}, \code{environment_variables}, \code{shm_size}, \code{cran_packages}, \code{github_packages}, and
-\code{custom_url_packages} and if set will take precedence over those parameters.}
+\item{environment}{The \code{Environment} object that configures the R
+environment where the experiment is executed. This parameter is mutually
+exclusive with the other environment-related parameters \code{custom_docker_image}
+, \code{image_registry_details}, \code{use_gpu}, \code{environment_variables}, \code{shm_size},
+\code{cran_packages}, \code{github_packages}, and \code{custom_url_packages} and if set
+will take precedence over those parameters.}
 }
 \value{
 The \code{Estimator} object.

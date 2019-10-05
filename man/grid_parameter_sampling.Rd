@@ -20,7 +20,7 @@ specified using \code{choice()}.
 }
 \section{Examples}{
 \preformatted{param_sampling <- grid_parameter_sampling( {
-        'num_hidden_layers': choice(1, 2, 3), 
+        'num_hidden_layers': choice(1, 2, 3),
         'batch_size': choice(16, 32)
     }
 )

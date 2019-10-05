@@ -183,8 +183,8 @@ to start training.</p></td>
     </tr>
     <tr>
       <th>script_params</th>
-      <td><p>A named list of the command-line arguments to pass to the
-training script specified in <code>entry_script</code>.</p></td>
+      <td><p>A named list of the command-line arguments to pass to
+the training script specified in <code>entry_script</code>.</p></td>
     </tr>
     <tr>
       <th>cran_packages</th>
@@ -196,15 +196,16 @@ training script specified in <code>entry_script</code>.</p></td>
     </tr>
     <tr>
       <th>custom_url_packages</th>
-      <td><p>A character vector of packages to be installed from
-local directory or custom URL.</p></td>
+      <td><p>A character vector of packages to be installed
+from local directory or custom URL.</p></td>
     </tr>
     <tr>
       <th>custom_docker_image</th>
-      <td><p>A string of the name of the Docker image from which
-the image to use for training will be built. If not set, a default CPU-based image
-will be used as the base image. To use an image from a private Docker
-repository, you will also have to specify the <code>image_registry_details</code> parameter.</p></td>
+      <td><p>A string of the name of the Docker image from
+which the image to use for training will be built. If not set, a default
+CPU-based image will be used as the base image. To use an image from a
+private Docker repository, you will also have to specify the
+<code>image_registry_details</code> parameter.</p></td>
     </tr>
     <tr>
       <th>image_registry_details</th>
@@ -215,9 +216,9 @@ the Docker image registry for the custom Docker image.</p></td>
       <th>use_gpu</th>
       <td><p>Indicates whether the environment to run the experiment should
 support GPUs. If <code>TRUE</code>, a GPU-based default Docker image will be used in the
-environment. If <code>FALSE</code>, a CPU-based image will be used. Default Docker images
-(CPU or GPU) will only be used if the <code>custom_docker_image</code> parameter is not
-set.</p></td>
+environment. If <code>FALSE</code>, a CPU-based image will be used. Default Docker
+images (CPU or GPU) will only be used if the <code>custom_docker_image</code> parameter
+is not set.</p></td>
     </tr>
     <tr>
       <th>environment_variables</th>
@@ -227,23 +228,25 @@ script is being executed.</p></td>
     </tr>
     <tr>
       <th>shm_size</th>
-      <td><p>A string for the size of the Docker container's shared memory block.
-For more information, see <a href='https://docs.docker.com/engine/reference/run/'>Docker run reference</a>.
+      <td><p>A string for the size of the Docker container's shared
+memory block. For more information, see
+<a href='https://docs.docker.com/engine/reference/run/'>Docker run reference</a>.
 If not set, a default value of <code>'2g'</code> is used.</p></td>
     </tr>
     <tr>
       <th>max_run_duration_seconds</th>
-      <td><p>An integer of the maximum allowed time for the run.
-Azure ML will attempt to automatically cancel the run if it takes longer
-than this value.</p></td>
+      <td><p>An integer of the maximum allowed time for
+the run. Azure ML will attempt to automatically cancel the run if it takes
+longer than this value.</p></td>
     </tr>
     <tr>
       <th>environment</th>
-      <td><p>The <code>Environment</code> object that configures the R environment where
-the experiment is executed. This parameter is mutually exclusive with the other
-environment-related parameters <code>custom_docker_image</code>, <code>image_registry_details</code>,
-<code>use_gpu</code>, <code>environment_variables</code>, <code>shm_size</code>, <code>cran_packages</code>, <code>github_packages</code>, and
-<code>custom_url_packages</code> and if set will take precedence over those parameters.</p></td>
+      <td><p>The <code>Environment</code> object that configures the R
+environment where the experiment is executed. This parameter is mutually
+exclusive with the other environment-related parameters <code>custom_docker_image</code>
+, <code>image_registry_details</code>, <code>use_gpu</code>, <code>environment_variables</code>, <code>shm_size</code>,
+<code>cran_packages</code>, <code>github_packages</code>, and <code>custom_url_packages</code> and if set
+will take precedence over those parameters.</p></td>
     </tr>
     </table>
     

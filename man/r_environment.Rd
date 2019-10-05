@@ -22,34 +22,36 @@ script is being executed.}
 
 \item{github_packages}{A character vector of GitHub packages to be installed.}
 
-\item{custom_url_packages}{A character vector of packages to be installed from
-local directory or custom URL.}
+\item{custom_url_packages}{A character vector of packages to be installed
+from local directory or custom URL.}
 
-\item{custom_docker_image}{A string of the name of the Docker image from which
-the image to use for training or deployment will be built. If not set, a default
-CPU-based image will be used as the base image. To use an image from a private Docker
-repository, you will also have to specify the \code{image_registry_details} parameter.}
+\item{custom_docker_image}{A string of the name of the Docker image from
+which the image to use for training or deployment will be built. If not set,
+a default CPU-based image will be used as the base image. To use an image
+from a private Docker repository, you will also have to specify the
+\code{image_registry_details} parameter.}
 
 \item{image_registry_details}{A \code{ContainerRegistry} object of the details of
 the Docker image registry for the custom Docker image.}
 
-\item{use_gpu}{Indicates whether the environment should support GPUs. If \code{TRUE},
-a GPU-based default Docker image will be used in the environment. If \code{FALSE},
-a CPU-based image will be used. Default Docker images (CPU or GPU) will only be
-used if the \code{custom_docker_image} parameter is not set.}
+\item{use_gpu}{Indicates whether the environment should support GPUs.
+If \code{TRUE}, a GPU-based default Docker image will be used in the environment.
+If \code{FALSE}, a CPU-based image will be used. Default Docker images (CPU or
+GPU) will only be used if the \code{custom_docker_image} parameter is not set.}
 
-\item{shm_size}{A string for the size of the Docker container's shared memory block.
-For more information, see \href{https://docs.docker.com/engine/reference/run/}{Docker run reference}.
+\item{shm_size}{A string for the size of the Docker container's shared
+memory block. For more information, see \link{Docker run reference}
+(https://docs.docker.com/engine/reference/run/).
 If not set, a default value of \code{'2g'} is used.}
 }
 \value{
 The \code{Environment} object.
 }
 \description{
-Configure the R environment to be used for training or web service deployments.
-When you submit a run or deploy a model, Azure ML builds a Docker image and
-creates a conda environment with your specifications from your \code{Environment}
-object within that Docker container.
+Configure the R environment to be used for training or web service
+deployments. When you submit a run or deploy a model, Azure ML builds a
+Docker image and creates a conda environment with your specifications from
+your \code{Environment} object within that Docker container.
 
 If the \code{custom_docker_image} parameter
 is not set, Azure ML automatically uses a default base image (CPU or GPU
@@ -59,22 +61,24 @@ TODO: link to the Dockerfiles of the default base images.
 }
 \section{Details}{
 
-Once built, the Docker image appears in the Azure Container Registry associated with
-your workspace, by default. The repository name has the form \emph{azureml/azureml_<uuid>}.
-The unique identifier (\emph{uuid}) part corresponds to a hash computed from the environment
-configuration. This allows the service to determine whether an image corresponding to
-the given environment already exists for reuse.
+Once built, the Docker image appears in the Azure Container Registry
+associated with your workspace, by default. The repository name has the form
+\emph{azureml/azureml_<uuid>}. The unique identifier (\emph{uuid}) part corresponds to
+a hash computed from the environment configuration. This allows the service
+to determine whether an image corresponding to the given environment already
+exists for reuse.
 
-If you make changes to an existing environment, such as adding an R package, a new version of
-the environment is created when you either submit a run, deploy a model, or manually register the
-environment. The versioning allows you to view changes to the environment over time.
+If you make changes to an existing environment, such as adding an R package,
+a new version of the environment is created when you either submit a run,
+deploy a model, or manually register the environment. The versioning allows
+you to view changes to the environment over time.
 }
 
 \section{Examples}{
 
 The following example defines an environment that will use the default
-base CPU image and install the additional e1071 package from CRAN.\preformatted{r_env <- r_environment(name = 'myr_env', 
-                       version = '1', 
+base CPU image and install the additional e1071 package from CRAN.\preformatted{r_env <- r_environment(name = 'myr_env',
+                       version = '1',
                        cran_packages = c('e1071'))
 }
 }

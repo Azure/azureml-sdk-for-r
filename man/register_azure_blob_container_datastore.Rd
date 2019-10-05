@@ -44,13 +44,14 @@ if it does not exists.}
 when this blob is mounted. If \code{NULL}, defaults to no timeout (i.e.
 blobs will be cached for the duration of the job when read).}
 
-\item{grant_workspace_access}{If \code{TRUE}, grants workspace Managed Identities (MSI)
-access to the user storage account. This should be set to \code{TRUE} if the
+\item{grant_workspace_access}{If \code{TRUE}, grants workspace Managed Identities
+(MSI) access to the user storage account. This should be set to \code{TRUE} if the
 storage account is in VNET. If \code{TRUE}, Azure ML will use the workspace MSI
 token to grant access to the user storage account. It may take a while for
 the granted access to reflect.}
 
-\item{subscription_id}{A string of the subscription id of the storage account.}
+\item{subscription_id}{A string of the subscription id of the storage
+account.}
 
 \item{resource_group}{A string of the resource group of the storage account.}
 }
@@ -63,19 +64,21 @@ either the SAS token or the storage account key.
 }
 \section{Details}{
 
-In general we recommend Azure Blob storage over Azure File storage. Both standard and
-premium storage are available for blobs. Although more expensive, we suggest
-premium storage due to faster throughput speeds that may improve the speed
-of your training runs, particularly if you train against a large dataset.
+In general we recommend Azure Blob storage over Azure File storage. Both
+standard and premium storage are available for blobs. Although more
+expensive, we suggest premium storage due to faster throughput speeds that
+may improve the speed of your training runs, particularly if you train
+against a large dataset.
 }
 
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()
-ds <- register_azure_blob_container_datastore(ws, 
-                                              datastore_name = 'mydatastore',
-                                              container_name = 'myazureblobcontainername',
-                                              account_name = 'mystorageaccoutname',
-                                              account_key = 'mystorageaccountkey')
+ds <- register_azure_blob_container_datastore(
+                               ws,
+                               datastore_name = 'mydatastore',
+                               container_name = 'myazureblobcontainername',
+                               account_name = 'mystorageaccoutname',
+                               account_key = 'mystorageaccountkey')
 }
 }
 

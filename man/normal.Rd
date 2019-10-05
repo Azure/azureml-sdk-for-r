@@ -16,8 +16,8 @@ normal(mu, sigma)
 A list of the stochastic expression.
 }
 \description{
-Specify a real value that is normally-distributed with mean \code{mu} and standard
-deviation \code{sigma}.
+Specify a real value that is normally-distributed with mean \code{mu} and
+standard deviation \code{sigma}.
 
 When optimizing, this is an unconstrained variable.
 }

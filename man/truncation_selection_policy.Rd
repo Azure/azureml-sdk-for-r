@@ -30,9 +30,9 @@ This policy periodically cancels the given percentage of runs that rank the
 lowest for their performance on the primary metric. The policy strives for
 fairness in ranking the runs by accounting for improving model performance
 with training time. When ranking a relatively young run, the policy uses the
-corresponding (and earlier) performance of older runs for comparison. Therefore,
-runs aren't terminated for having a lower performance because they have run for
-less time than other runs.
+corresponding (and earlier) performance of older runs for comparison.
+Therefore, runs aren't terminated for having a lower performance because they
+have run for less time than other runs.
 
 The truncation selection policy takes the following configuration parameters:
 \itemize{
@@ -57,9 +57,10 @@ reported metrics for intervals greater than N.
 In this example, the early termination policy is applied at every interval
 starting at evaluation interval 5. A run will be terminated at interval 5
 if its performance at interval 5 is in the lowest 20% of performance of all
-runs at interval 5.\preformatted{early_termination_policy = truncation_selection_policy(truncation_percentage = 20L,
-                                                       evaluation_interval = 1L,
-                                                       delay_evaluation = 5L)
+runs at interval 5.\preformatted{early_termination_policy = truncation_selection_policy(
+                                                 truncation_percentage = 20L,
+                                                 evaluation_interval = 1L,
+                                                 delay_evaluation = 5L)
 }
 }
 

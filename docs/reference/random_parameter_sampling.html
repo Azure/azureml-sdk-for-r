@@ -160,8 +160,9 @@ distribution, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("parame
 
     
 
-<p>In this sampling algorithm, parameter values are chosen from a set of discrete
-values or a distribution over a continuous range. Functions you can use include:
+<p>In this sampling algorithm, parameter values are chosen from a set of
+discrete values or a distribution over a continuous range. Functions you can
+use include:
 <code><a href='choice.html'>choice()</a></code>, <code><a href='randint.html'>randint()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code>, <code><a href='loguniform.html'>loguniform()</a></code>,
 <code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='normal.html'>normal()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>, <code><a href='lognormal.html'>lognormal()</a></code>, and <code><a href='qlognormal.html'>qlognormal()</a></code>.</p>
     
@@ -169,7 +170,7 @@ values or a distribution over a continuous range. Functions you can use include:
 
     
 <pre>param_sampling &lt;- random_parameter_sampling( {
-        'learning_rate': normal(10, 3), 
+        'learning_rate': normal(10, 3),
         'keep_probability': uniform(0.05, 0.1),
         'batch_size': choice(16, 32, 64, 128)
     }

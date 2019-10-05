@@ -154,7 +154,7 @@ create_aml_compute() or create_aks_compute() call." />
     
 
 <p>Wait for an AmlCompute cluster to finish provisioning.</p><pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- create_aml_compute(ws, 
+compute_target &lt;- create_aml_compute(ws,
                                      cluster_name = 'mycluster',
                                      vm_size = 'STANDARD_D2_V2',
                                      max_nodes = 1)

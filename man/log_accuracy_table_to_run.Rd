@@ -13,7 +13,7 @@ log_accuracy_table_to_run(name, value, description = "", run = NULL)
 
 \item{description}{An optional metric description}
 
-\item{run}{Run object. If not specified, will default to current run from 
+\item{run}{Run object. If not specified, will default to current run from
 service context.}
 }
 \description{

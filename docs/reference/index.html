@@ -464,7 +464,7 @@ compute target</p></td>
         <td>
           <p><code><a href="download_files_from_run.html">download_files_from_run()</a></code> </p>
         </td>
-        <td><p>Download files from a given storage prefix (folder name) or 
+        <td><p>Download files from a given storage prefix (folder name) or
 the entire container if prefix is unspecified.</p></td>
       </tr><tr>
         
@@ -477,7 +477,7 @@ the entire container if prefix is unspecified.</p></td>
         <td>
           <p><code><a href="get_run_details.html">get_run_details()</a></code> </p>
         </td>
-        <td><p>Get the definition, status information, current log files and other details 
+        <td><p>Get the definition, status information, current log files and other details
 of the run.</p></td>
       </tr><tr>
         
@@ -497,7 +497,7 @@ of the run.</p></td>
           <p><code><a href="get_secrets_from_run.html">get_secrets_from_run()</a></code> </p>
         </td>
         <td><p>Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names 
+Get a dictionary of found and not found secrets for the list of names
 provided.</p></td>
       </tr><tr>
         
@@ -641,7 +641,8 @@ deviation <code>sigma</code></p></td>
         <td>
           <p><code><a href="qlognormal.html">qlognormal()</a></code> </p>
         </td>
-        <td><p>Specify a normal distribution of the form <code>round(exp(normal(mu, sigma)) / q) * q</code></p></td>
+        <td><p>Specify a normal distribution of the form
+<code>round(exp(normal(mu, sigma)) / q) * q</code></p></td>
       </tr><tr>
         
         <td>
@@ -878,10 +879,10 @@ This function call is not asynchronous; it runs until the service is deleted.</p
           <p><code><a href="reload_local_webservice_assets.html">reload_local_webservice_assets()</a></code> </p>
         </td>
         <td><p>Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets, 
-including the execution script and local dependencies, but it does not 
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies 
-or custom Docker steps will not be reflected in the reloaded LocalWebservice. 
+This restarts the service's container with copies of updated assets,
+including the execution script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
+or custom Docker steps will not be reflected in the reloaded LocalWebservice.
 To handle those changes call LocalWebservice.update(), instead.</p></td>
       </tr>
     </tbody>

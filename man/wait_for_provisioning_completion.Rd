@@ -18,7 +18,7 @@ Wait for a cluster to finish provisioning. Typically invoked after a
 \section{Examples}{
 
 Wait for an AmlCompute cluster to finish provisioning.\preformatted{ws <- load_workspace_from_config()
-compute_target <- create_aml_compute(ws, 
+compute_target <- create_aml_compute(ws,
                                      cluster_name = 'mycluster',
                                      vm_size = 'STANDARD_D2_V2',
                                      max_nodes = 1)

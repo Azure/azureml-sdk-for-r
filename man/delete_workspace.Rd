@@ -10,13 +10,13 @@ delete_workspace(workspace, delete_dependent_resources = FALSE,
 \arguments{
 \item{workspace}{The \code{Workspace} object of the workspace to delete.}
 
-\item{delete_dependent_resources}{If \code{TRUE} the workspace's associated resources,
-i.e. ACR, storage account, key value, and application insights will also be
-deleted.}
+\item{delete_dependent_resources}{If \code{TRUE} the workspace's associated
+resources, i.e. ACR, storage account, key value, and application insights
+will also be deleted.}
 
 \item{no_wait}{If \code{FALSE} do not wait for the workspace deletion to complete.}
 }
 \description{
-Delete the Azure Machine Learning workspace resource. \code{delete_workspace()} can
-also delete the workspace's associated resources.
+Delete the Azure Machine Learning workspace resource. \code{delete_workspace()}
+can also delete the workspace's associated resources.
 }

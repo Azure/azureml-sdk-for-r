@@ -3,7 +3,7 @@
 \name{get_secrets_from_run}
 \alias{get_secrets_from_run}
 \title{Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names 
+Get a dictionary of found and not found secrets for the list of names
 provided.}
 \usage{
 get_secrets_from_run(run, secrets)
@@ -18,6 +18,6 @@ Returns a dictionary of found and not found secrets
 }
 \description{
 Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names 
+Get a dictionary of found and not found secrets for the list of names
 provided.
 }

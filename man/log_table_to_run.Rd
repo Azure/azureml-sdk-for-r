@@ -9,12 +9,12 @@ log_table_to_run(name, value, description = "", run = NULL)
 \arguments{
 \item{name}{The name of metric}
 
-\item{value}{The table value of the metric (dictionary where keys are 
+\item{value}{The table value of the metric (dictionary where keys are
 columns to be posted to the service)}
 
 \item{description}{An optional metric description}
 
-\item{run}{Run object. If not specified, will default to current run from 
+\item{run}{Run object. If not specified, will default to current run from
 service context.}
 }
 \description{

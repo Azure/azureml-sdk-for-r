@@ -190,25 +190,28 @@ of training runs. If specified, the policy applies every multiple of
 <p>Any run that doesn't fall within the slack factor or slack amount of the
 evaluation metric with respect to the best performing run will be
 terminated.</p>
-<p>Consider a Bandit policy with <code>slack_factor = 0.2</code> and <code>evaluation_interval = 100</code>.
-Assume that run X is the currently best performing run with an AUC (performance metric)
-of 0.8 after 100 intervals. Further, assume the best AUC reported for a run is Y.
-This policy compares the value <code>(Y + Y * 0.2)</code> to 0.8, and if smaller, cancels the run.
-If <code>delay_evaluation = 200</code>, then the first time the policy will be applied is at
-interval 200.</p>
-<p>Now, consider a Bandit policy with <code>slack_amount = 0.2</code> and <code>evaluation_interval = 100</code>.
-If run 3 is the currently best performing run with an AUC (performance metric) of 0.8
-after 100 intervals, then any run with an AUC less than 0.6 (<code>0.8 - 0.2</code>) after 100 iterations
-will be terminated. Similarly, the <code>delay_evaluation</code> can also be used to delay the first
-termination policy evaluation for a specific number of sequences.</p>
+<p>Consider a Bandit policy with <code>slack_factor = 0.2</code> and
+<code>evaluation_interval = 100</code>. Assume that run X is the currently best
+performing run with an AUC (performance metric) of 0.8 after 100 intervals.
+Further, assume the best AUC reported for a run is Y. This policy compares
+the value <code>(Y + Y * 0.2)</code> to 0.8, and if smaller, cancels the run.
+If <code>delay_evaluation = 200</code>, then the first time the policy will be applied
+is at interval 200.</p>
+<p>Now, consider a Bandit policy with <code>slack_amount = 0.2</code> and
+<code>evaluation_interval = 100</code>. If run 3 is the currently best performing run
+with an AUC (performance metric) of 0.8 after 100 intervals, then any run
+with an AUC less than 0.6 (<code>0.8 - 0.2</code>) after 100 iterations will be
+terminated. Similarly, the <code>delay_evaluation</code> can also be used to delay the
+first termination policy evaluation for a specific number of sequences.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
 
-<p>In this example, the early termination policy is applied at every interval when metrics
-are reported, starting at evaluation interval 5. Any run whose best metric is less than
-<code>1 / (1 + 0.1)</code> or 91% of the best performing run will be terminated.</p><pre>early_termination_policy = bandit_policy(slack_factor = 0.1, 
+<p>In this example, the early termination policy is applied at every interval
+when metrics are reported, starting at evaluation interval 5. Any run whose
+best metric is less than
+<code>1 / (1 + 0.1)</code> or 91% of the best performing run will be terminated.</p><pre>early_termination_policy = bandit_policy(slack_factor = 0.1,
                                          evaluation_interval = 1L,
                                          delay_evaluation = 5L)
 </pre>

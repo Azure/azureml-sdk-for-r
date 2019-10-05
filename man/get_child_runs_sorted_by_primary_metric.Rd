@@ -27,9 +27,9 @@ The named list of child runs.
 Return a list of child runs of the HyperDrive run sorted by their best
 primary metric. The sorting is done according to the primary metric and
 its goal: if it is maximize, then the child runs are returned in descending
-order of their best primary metric. If \code{reverse = TRUE}, the order is reversed.
-Each child in the result has run id, hyperparameters, best primary metric value,
-and status.
+order of their best primary metric. If \code{reverse = TRUE}, the order is
+reversed. Each child in the result has run id, hyperparameters, best primary
+metric value, and status.
 
 Child runs without the primary metric are discarded when
 \code{discard_no_metric = TRUE}. Otherwise, they are appended to the list behind

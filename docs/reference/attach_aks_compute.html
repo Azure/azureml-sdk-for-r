@@ -34,12 +34,14 @@
 
 <meta property="og:title" content="Attach an existing AKS cluster to a workspace — attach_aks_compute" />
 
-<meta property="og:description" content="If you already have an AKS cluster in your Azure subscription, and it is version
-1.12.##, you can attach it to your workspace to use for deployments. The existing
-AKS cluster can be in a different Azure region than your workspace.
-If you want to secure your AKS cluster using an Azure Virtual Network, you must
-create the virtual network first. For more information, see
-Secure Azure ML experimentation and inference jobs within an Azure Virtual Network." />
+<meta property="og:description" content="If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.
+If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,12 +135,14 @@ Secure Azure ML experimentation and inference jobs within an Azure Virtual Netwo
 
     <div class="ref-description">
     
-    <p>If you already have an AKS cluster in your Azure subscription, and it is version
-1.12.##, you can attach it to your workspace to use for deployments. The existing
-AKS cluster can be in a different Azure region than your workspace.</p>
-<p>If you want to secure your AKS cluster using an Azure Virtual Network, you must
-create the virtual network first. For more information, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
+    <p>If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.</p>
+<p>If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).</p>
     
     </div>
 
@@ -158,7 +162,8 @@ create the virtual network first. For more information, see
     </tr>
     <tr>
       <th>resource_id</th>
-      <td><p>A string of the resource ID for the AKS cluster being attached.</p></td>
+      <td><p>A string of the resource ID for the AKS cluster being
+attached.</p></td>
     </tr>
     <tr>
       <th>resource_group</th>
@@ -175,9 +180,9 @@ is located.</p></td>
 
     
 <pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- attach_aks_compute(ws, 
+compute_target &lt;- attach_aks_compute(ws,
                                      cluster_name = 'mycluster',
-                                     resource_id = 'myresourceid', 
+                                     resource_id = 'myresourceid',
                                      resource_group = 'myresourcegroup')
 </pre>
 
