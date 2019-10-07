@@ -34,7 +34,11 @@
 
 <meta property="og:title" content="Specify a log uniform distribution — loguniform" />
 
-<meta property="og:description" content="Specify a log uniform distribution" />
+<meta property="og:description" content="Specify a log uniform distribution.
+A value is drawn according to exp(uniform(min_value, max_value)) so that
+the logarithm of the return value is uniformly distributed. When optimizing,
+this variable is constrained to the interval
+[exp(min_value), exp(max_value)]." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +132,11 @@
 
     <div class="ref-description">
     
-    <p>Specify a log uniform distribution</p>
+    <p>Specify a log uniform distribution.</p>
+<p>A value is drawn according to <code><a href='https://rdrr.io/r/base/Log.html'>exp(uniform(min_value, max_value))</a></code> so that
+the logarithm of the return value is uniformly distributed. When optimizing,
+this variable is constrained to the interval
+<code>[exp(min_value), exp(max_value)]</code>.</p>
     
     </div>
 
@@ -139,19 +147,24 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>min_value</th>
-      <td><p>minimum value in the range will be exp(min_value)
-(inclusive)</p></td>
+      <td><p>A double where the minimum value in the range will be
+<code><a href='https://rdrr.io/r/base/Log.html'>exp(min_value)</a></code> (inclusive).</p></td>
     </tr>
     <tr>
       <th>max_value</th>
-      <td><p>maximum value in the range will be exp(min_value)
-(inclusive)</p></td>
+      <td><p>A double where the maximum value in the range will be
+<code><a href='https://rdrr.io/r/base/Log.html'>exp(min_value)</a></code> (inclusive).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the stochastic expression</p>
+    <p>A list of the stochastic expression.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='random_parameter_sampling.html'>random_parameter_sampling()</a></code>, <code><a href='grid_parameter_sampling.html'>grid_parameter_sampling()</a></code>,
+<code><a href='bayesian_parameter_sampling.html'>bayesian_parameter_sampling()</a></code></p></div>
     
 
   </div>
@@ -161,6 +174,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

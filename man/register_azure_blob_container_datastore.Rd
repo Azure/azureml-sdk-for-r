@@ -2,8 +2,7 @@
 % Please edit documentation in R/datastore.R
 \name{register_azure_blob_container_datastore}
 \alias{register_azure_blob_container_datastore}
-\title{Register an Azure Blob Container to the datastore.
-You can choose to use SAS Token or Storage Account Key}
+\title{Register an Azure blob container as a datastore}
 \usage{
 register_azure_blob_container_datastore(workspace, datastore_name,
   container_name, account_name, sas_token = NULL, account_key = NULL,
@@ -13,53 +12,73 @@ register_azure_blob_container_datastore(workspace, datastore_name,
   subscription_id = NULL, resource_group = NULL)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{datastore_name}{The name of the datastore, case insensitive, can only 
-contain alphanumeric characters and _}
+\item{datastore_name}{A string of the name of the datastore. The name
+must be case insensitive and can only contain alphanumeric characters and
+underscores.}
 
-\item{container_name}{The name of the azure blob container.}
+\item{container_name}{A string of the name of the Azure blob container.}
 
-\item{account_name}{The storage account name.}
+\item{account_name}{A string of the storage account name.}
 
-\item{sas_token}{An account SAS token, defaults to NULL.}
+\item{sas_token}{A string of the account SAS token.}
 
-\item{account_key}{A storage account key, defaults to NULL.}
+\item{account_key}{A string of the storage account key.}
 
-\item{protocol}{Protocol to use to connect to the blob container. If NULL, 
-defaults to https.}
+\item{protocol}{A string of the protocol to use to connect to the
+blob container. If \code{NULL}, defaults to \code{'https'}.}
 
-\item{endpoint}{The endpoint of the blob container. If NULL, defaults to 
-core.windows.net.}
+\item{endpoint}{A string of the endpoint of the blob container.
+If \code{NULL}, defaults to \code{'core.windows.net'}.}
 
-\item{overwrite}{overwrites an existing datastore. If the datastore does not 
-exist, it will create one, defaults to FALSE}
+\item{overwrite}{If \code{TRUE}, overwrites an existing datastore. If
+the datastore does not exist, it will create one.}
 
-\item{create_if_not_exists}{create the file share if it does not exists, 
-defaults to FALSE}
+\item{create_if_not_exists}{If \code{TRUE}, creates the blob container
+if it does not exists.}
 
-\item{skip_validation}{skips validation of storage keys, defaults to FALSE}
+\item{skip_validation}{If \code{TRUE}, skips validation of storage keys.}
 
-\item{blob_cache_timeout}{When this blob is mounted, set the cache timeout 
-to this many seconds. If NULL, defaults to no timeout (i.e. blobs will be 
-cached for the duration of the job when read).}
+\item{blob_cache_timeout}{An integer of the cache timeout in seconds
+when this blob is mounted. If \code{NULL}, defaults to no timeout (i.e.
+blobs will be cached for the duration of the job when read).}
 
-\item{grant_workspace_access}{grants Workspace Managed Identities(MSI) access 
-to the user storage account, defaults to FALSE This should be set if the 
-Storage account is in VNET. If set to TRUE, we will use the Workspace MSI 
-token to grant access to the user storage account. It may take a while for 
+\item{grant_workspace_access}{If \code{TRUE}, grants workspace Managed Identities
+(MSI) access to the user storage account. This should be set to \code{TRUE} if the
+storage account is in VNET. If \code{TRUE}, Azure ML will use the workspace MSI
+token to grant access to the user storage account. It may take a while for
 the granted access to reflect.}
 
-\item{subscription_id}{The subscription id of the storage account, defaults 
-to NULL.}
+\item{subscription_id}{A string of the subscription id of the storage
+account.}
 
-\item{resource_group}{The resource group of the storage account, defaults 
-to NULL.}
+\item{resource_group}{A string of the resource group of the storage account.}
 }
 \value{
-The blob datastore.
+The \code{AzureBlobDatastore} object.
 }
 \description{
-Register an Azure Blob Container to the datastore.
-You can choose to use SAS Token or Storage Account Key
+Register an Azure blob container as a datastore. You can choose to use
+either the SAS token or the storage account key.
 }
+\section{Details}{
+
+In general we recommend Azure Blob storage over Azure File storage. Both
+standard and premium storage are available for blobs. Although more
+expensive, we suggest premium storage due to faster throughput speeds that
+may improve the speed of your training runs, particularly if you train
+against a large dataset.
+}
+
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+ds <- register_azure_blob_container_datastore(
+                               ws,
+                               datastore_name = 'mydatastore',
+                               container_name = 'myazureblobcontainername',
+                               account_name = 'mystorageaccoutname',
+                               account_key = 'mystorageaccountkey')
+}
+}
+

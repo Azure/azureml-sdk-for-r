@@ -7,11 +7,17 @@
 primary_metric_goal(goal)
 }
 \arguments{
-\item{goal}{string name of the goal ("MAXIMIZE" or "MINIMIZE")}
+\item{goal}{A string of the metric goal (either "MAXIMIZE" or "MINIMIZE").}
 }
 \value{
-PrimaryMetricGoal object
+The \code{PrimaryMetricGoal} object.
 }
 \description{
-Define supported metric goals for hyperparameter tuning
+A metric goal is used to determine whether a higher value for a metric
+is better or worse. Metric goals are used when comparing runs based on
+the primary metric. For example, you may want to maximize accuracy or
+minimize error.
+
+The primary metric name and goal are specified to \code{hyperdrive_config()}
+when you configure a HyperDrive run.
 }

@@ -2,25 +2,37 @@
 % Please edit documentation in R/hyperdrive.R
 \name{get_child_runs_sorted_by_primary_metric}
 \alias{get_child_runs_sorted_by_primary_metric}
-\title{Return the child runs sorted in descending order by best primary metric}
+\title{Get the child runs sorted in descending order by
+best primary metric}
 \usage{
 get_child_runs_sorted_by_primary_metric(hyperdrive_run, top = 0L,
   reverse = FALSE, discard_no_metric = FALSE)
 }
 \arguments{
-\item{hyperdrive_run}{HyperDriveRun object}
+\item{hyperdrive_run}{The \code{HyperDriveRun} object.}
 
-\item{top}{number of top children to be returned, default value of 0 will
-return all}
+\item{top}{An integer of the number of top child runs to be returned. If \code{0}
+(the default value), all child runs will be returned.}
 
-\item{reverse}{reverse the sorting order}
+\item{reverse}{If \code{TRUE}, the order will be reversed. This sorting only
+impacts child runs with the primary metric.}
 
-\item{discard_no_metric}{whether to include children without the primary
-metric}
+\item{discard_no_metric}{If \code{FALSE}, child runs without the primary metric
+will be appended to the list returned.}
 }
 \value{
-named list of child runs
+The named list of child runs.
 }
 \description{
-Return the child runs sorted in descending order by best primary metric
+Return a list of child runs of the HyperDrive run sorted by their best
+primary metric. The sorting is done according to the primary metric and
+its goal: if it is maximize, then the child runs are returned in descending
+order of their best primary metric. If \code{reverse = TRUE}, the order is
+reversed. Each child in the result has run id, hyperparameters, best primary
+metric value, and status.
+
+Child runs without the primary metric are discarded when
+\code{discard_no_metric = TRUE}. Otherwise, they are appended to the list behind
+other child runs with the primary metric. Note that the reverse option has no
+impact on them.
 }

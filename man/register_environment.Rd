@@ -2,15 +2,27 @@
 % Please edit documentation in R/environment.R
 \name{register_environment}
 \alias{register_environment}
-\title{Register the environment object in your workspace.}
+\title{Register an environment in the workspace}
 \usage{
 register_environment(environment, workspace)
 }
 \arguments{
-\item{environment}{The python environment where the experiment is executed.}
+\item{environment}{The \code{Environment} object.}
 
-\item{workspace}{The workspace}
+\item{workspace}{The \code{Workspace} object.}
+}
+\value{
+The \code{Environment} object.
 }
 \description{
-Register the environment object in your workspace.
+The environment is automatically registered with your workspace when you
+submit an experiment or deploy a web service. You can also manually register
+the environment with \code{register_environment()}. This operation makes the
+environment into an entity that is tracked and versioned in the cloud, and
+can be shared between workspace users.
+
+Whe used for the first time in training or deployment, the environment is
+registered with the workspace, built, and deployed on the compute target.
+The environments are cached by the service. Reusing a cached environment
+takes much less time than using a new service or one that has bee updated.
 }

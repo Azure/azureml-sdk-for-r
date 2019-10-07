@@ -2,7 +2,7 @@
 % Please edit documentation in R/estimator.R
 \name{estimator}
 \alias{estimator}
-\title{Create Estimator}
+\title{Create an estimator}
 \usage{
 estimator(source_directory, compute_target = NULL, vm_size = NULL,
   vm_priority = NULL, entry_script = NULL, script_params = NULL,
@@ -13,62 +13,82 @@ estimator(source_directory, compute_target = NULL, vm_size = NULL,
   max_run_duration_seconds = NULL, environment = NULL)
 }
 \arguments{
-\item{source_directory}{A local directory containing experiment configuration
-files.}
+\item{source_directory}{A string of the local directory containing
+experiment configuration and code files needed for the training job.}
 
-\item{compute_target}{The ComputeTarget where training will happen.
-Currently only support AmlCompute type.}
+\item{compute_target}{The \code{AmlCompute} object for the compute target
+where training will happen.}
 
-\item{vm_size}{The VM size of the compute target that will be created for the
-training. Supported values: Any Azure VM size. The list of available VM sizes
-are listed here:
-https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs}
+\item{vm_size}{A string of the VM size of the compute target that will be
+created for the training job. The list of available VM sizes
+are listed \href{https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs}{here}.
+Provide this parameter if you want to create AmlCompute as the compute target
+at run time, instead of providing an existing cluster to the \code{compute_target}
+parameter. If \code{vm_size} is specified, a single-node cluster is automatically
+created for your run and is deleted automatically once the run completes.}
 
-\item{vm_priority}{The VM priority of the compute target that will be created
-for the training. If not specified, it will be defaulted to 'dedicated'.
-Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
-the vm_size param is specified in the input.}
+\item{vm_priority}{A string of either \code{'dedicated'} or \code{'lowpriority'} to
+specify the VM priority of the compute target that will be created for the
+training job. Defaults to \code{'dedicated'}. This takes effect only when the
+\code{vm_size} parameter is specified.}
 
 \item{entry_script}{A string representing the relative path to the file used
 to start training.}
 
-\item{script_params}{A named list containing parameters to the entry_script.}
+\item{script_params}{A named list of the command-line arguments to pass to
+the training script specified in \code{entry_script}.}
 
-\item{cran_packages}{character vector of cran packages to be installed.}
+\item{cran_packages}{A character vector of CRAN packages to be installed.}
 
-\item{github_packages}{character vector of github packages to be installed.}
+\item{github_packages}{A character vector of GitHub packages to be installed.}
 
-\item{custom_url_packages}{character vector of packages to be installed from
-local, directory or custom url.}
+\item{custom_url_packages}{A character vector of packages to be installed
+from local directory or custom URL.}
 
-\item{custom_docker_image}{The name of the docker image from which the image
-to use for training will be built. If not set, a default CPU based image will
-be used as the base image.}
+\item{custom_docker_image}{A string of the name of the Docker image from
+which the image to use for training will be built. If not set, a default
+CPU-based image will be used as the base image. To use an image from a
+private Docker repository, you will also have to specify the
+\code{image_registry_details} parameter.}
 
-\item{image_registry_details}{The details of the Docker image registry.}
+\item{image_registry_details}{A \code{ContainerRegistry} object of the details of
+the Docker image registry for the custom Docker image.}
 
 \item{use_gpu}{Indicates whether the environment to run the experiment should
-support GPUs.
-If TRUE, a GPU - based default Docker image will be used in the environment.
-If FALSE, a CPU - based image will be used. Default Docker images
-(CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
-set.}
+support GPUs. If \code{TRUE}, a GPU-based default Docker image will be used in the
+environment. If \code{FALSE}, a CPU-based image will be used. Default Docker
+images (CPU or GPU) will only be used if the \code{custom_docker_image} parameter
+is not set.}
 
-\item{environment_variables}{A dictionary of environment variables names 
-and values. These environment variables are set on the process where user 
+\item{environment_variables}{A named list of environment variables names
+and values. These environment variables are set on the process where the user
 script is being executed.}
 
-\item{shm_size}{The size of the Docker container's shared memory block.}
+\item{shm_size}{A string for the size of the Docker container's shared
+memory block. For more information, see
+\href{https://docs.docker.com/engine/reference/run/}{Docker run reference}.
+If not set, a default value of \code{'2g'} is used.}
 
-\item{max_run_duration_seconds}{The maximum allowed time for the run. 
-Azure ML will attempt to automatically cancel the run if it take longer 
-than this value.}
+\item{max_run_duration_seconds}{An integer of the maximum allowed time for
+the run. Azure ML will attempt to automatically cancel the run if it takes
+longer than this value.}
 
-\item{environment}{the R environment where the experiment is executed.
-Mutually exclusive with custom_docker_image, image_registry_details, use_gpu,
-environment_variables, shm_size, max_run_duration_seconds, cran_packages,
-github_packages and custom_url_packages.}
+\item{environment}{The \code{Environment} object that configures the R
+environment where the experiment is executed. This parameter is mutually
+exclusive with the other environment-related parameters \code{custom_docker_image}
+, \code{image_registry_details}, \code{use_gpu}, \code{environment_variables}, \code{shm_size},
+\code{cran_packages}, \code{github_packages}, and \code{custom_url_packages} and if set
+will take precedence over those parameters.}
+}
+\value{
+The \code{Estimator} object.
 }
 \description{
-Create Estimator
+An Estimator wraps run configuration information for specifying details
+of executing an R script. Running an Estimator experiment
+(using \code{submit_experiment()}) will return a \code{ScriptRun} object and
+execute your training script on the specified compute target.
+}
+\seealso{
+\code{r_environment()}, \code{container_registry()}, \code{submit_experiment()}
 }

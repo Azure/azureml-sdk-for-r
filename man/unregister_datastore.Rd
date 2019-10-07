@@ -2,15 +2,14 @@
 % Please edit documentation in R/datastore.R
 \name{unregister_datastore}
 \alias{unregister_datastore}
-\title{Unregisters the datastore. the underlying storage service will not 
-be deleted.}
+\title{Unregister a datastore from its associated workspace}
 \usage{
 unregister_datastore(datastore)
 }
 \arguments{
-\item{datastore}{datastore object}
+\item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
 }
 \description{
-Unregisters the datastore. the underlying storage service will not 
-be deleted.
+Unregister the datastore from its associated workspace. The
+underlying Azure storage will not be deleted.
 }

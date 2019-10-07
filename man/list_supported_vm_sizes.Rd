@@ -2,20 +2,20 @@
 % Please edit documentation in R/compute.R
 \name{list_supported_vm_sizes}
 \alias{list_supported_vm_sizes}
-\title{List the supported VM sizes in a region.}
+\title{List the supported VM sizes in a region}
 \usage{
 list_supported_vm_sizes(workspace, location = NULL)
 }
 \arguments{
-\item{workspace}{workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{location}{Location of cluster. If not specified, will default to 
-workspace location.}
+\item{location}{A string of the location of the cluster. If not specified,
+will default to the workspace location.}
 }
 \value{
-List of supported VM sizes in a region with name of the VM, VCPUs, 
+List of supported VM sizes in a region with name of the VM, VCPUs,
 RAM in data frame
 }
 \description{
-List the supported VM sizes in a region.
+List the supported VM sizes in a region
 }

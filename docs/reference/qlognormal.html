@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q — qlognormal • azureml</title>
+<title>Specify a normal distribution of the form
+<code>round(exp(normal(mu, sigma)) / q) * q</code> — qlognormal • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +33,14 @@
 
 
 
-<meta property="og:title" content="Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q — qlognormal" />
+<meta property="og:title" content="Specify a normal distribution of the form
+<code>round(exp(normal(mu, sigma)) / q) * q</code> — qlognormal" />
 
-<meta property="og:description" content="Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q" />
+<meta property="og:description" content="Specify a normal distribution of the form
+round(exp(normal(mu, sigma)) / q) * q.
+Suitable for a discrete variable with respect to which the objective is
+smooth and gets smoother with the size of the variable, which is bounded
+from one side." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +127,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q</h1>
+    <h1>Specify a normal distribution of the form
+<code>round(exp(normal(mu, sigma)) / q) * q</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>qlognormal.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Specify a normal distribution of the form round(exp(normal(mu, sigma)) / q)*q</p>
+    <p>Specify a normal distribution of the form
+<code>round(exp(normal(mu, sigma)) / q) * q</code>.</p>
+<p>Suitable for a discrete variable with respect to which the objective is
+smooth and gets smoother with the size of the variable, which is bounded
+from one side.</p>
     
     </div>
 
@@ -139,21 +150,26 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mu</th>
-      <td><p>mean of the normal distribution</p></td>
+      <td><p>A double of the mean of the normal distribution.</p></td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td><p>standard deviation of the normal distribution</p></td>
+      <td><p>A double of the standard deviation of the normal distribution.</p></td>
     </tr>
     <tr>
       <th>q</th>
-      <td><p>smoothing factor</p></td>
+      <td><p>An integer of the smoothing factor.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the stochastic expression</p>
+    <p>A list of the stochastic expression.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='random_parameter_sampling.html'>random_parameter_sampling()</a></code>, <code><a href='grid_parameter_sampling.html'>grid_parameter_sampling()</a></code>,
+<code><a href='bayesian_parameter_sampling.html'>bayesian_parameter_sampling()</a></code></p></div>
     
 
   </div>
@@ -163,6 +179,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

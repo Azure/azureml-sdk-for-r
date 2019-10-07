@@ -10,7 +10,7 @@ get_webservice_token(webservice)
 \item{webservice}{The webservice object.}
 }
 \value{
-The auth token for this Webservice and when it should be 
+The auth token for this Webservice and when it should be
 refreshed after.
 }
 \description{

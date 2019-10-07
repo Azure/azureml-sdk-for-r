@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the environment object. — get_environment • azureml</title>
+<title>Get an existing environment — get_environment • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Return the environment object. — get_environment" />
+<meta property="og:title" content="Get an existing environment — get_environment" />
 
-<meta property="og:description" content="Return the environment object." />
+<meta property="og:description" content="Returns an Environment object for an existing environment in
+the workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the environment object.</h1>
+    <h1>Get an existing environment</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
     <div class="hidden name"><code>get_environment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return the environment object.</p>
+    <p>Returns an <code>Environment</code> object for an existing environment in
+the workspace.</p>
     
     </div>
 
@@ -139,17 +141,29 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name of the environment</p></td>
+      <td><p>A string of the name of the environment.</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>The version of the environment</p></td>
+      <td><p>A string of the version of the environment.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The <code>Environment</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+env &lt;- get_environment(ws, name = 'myenv', version = '1')
+</pre>
+
     
 
   </div>
@@ -157,7 +171,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>

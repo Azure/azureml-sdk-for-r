@@ -34,7 +34,16 @@
 
 <meta property="og:title" content="Submit an experiment and return the active created run — submit_experiment" />
 
-<meta property="og:description" content="Submit an experiment and return the active created run" />
+<meta property="og:description" content="submit_experiment() is an asynchronous call to Azure Machine Learning
+service to execute a trial on local or remote compute. Depending on the
+configuration, submit_experiment() will automatically prepare your
+execution environments, execute your code, and capture your source code
+and results in the experiment's run history.
+To submit an experiment you first need to create a configuration object
+describing how the experiment is to be run. The configuration depends on
+the type of trial required. For a script run, provide an Estimator object
+to the config parameter. For a HyperDrive run for hyperparameter tuning,
+provide a HyperDriveConfig to config." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +137,16 @@
 
     <div class="ref-description">
     
-    <p>Submit an experiment and return the active created run</p>
+    <p><code>submit_experiment()</code> is an asynchronous call to Azure Machine Learning
+service to execute a trial on local or remote compute. Depending on the
+configuration, <code>submit_experiment()</code> will automatically prepare your
+execution environments, execute your code, and capture your source code
+and results in the experiment's run history.</p>
+<p>To submit an experiment you first need to create a configuration object
+describing how the experiment is to be run. The configuration depends on
+the type of trial required. For a script run, provide an <code>Estimator</code> object
+to the <code>config</code> parameter. For a HyperDrive run for hyperparameter tuning,
+provide a <code>HyperDriveConfig</code> to <code>config</code>.</p>
     
     </div>
 
@@ -139,22 +157,42 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>experiment</th>
-      <td><p>experiment object</p></td>
+      <td><p>The <code>Experiment</code> object.</p></td>
     </tr>
     <tr>
       <th>config</th>
-      <td><p>runconfig or estimator</p></td>
+      <td><p>The <code>Estimator</code> or <code>HyperDriveConfig</code> object.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Tags to be added to the submitted run. A named list
-eg. list("tag" = "value")</p></td>
+      <td><p>A named list of tags for the submitted run, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list("tag" = "value")</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>run object</p>
+    <p>The <code>ScriptRun</code> or <code>HyperDriveRun</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>The following example submits an Estimator experiment.</p><pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- get_compute(ws, cluster_name = 'mycluster')
+exp &lt;- experiment(ws, name = 'myexperiment')
+est &lt;- estimator(source_directory = '.',
+                 entry_script = 'train.R',
+                 compute_target = compute_target)
+run &lt;- submit_experiment(exp, est)
+</pre>
+
+<p>For an example of submitting a HyperDrive experiment, see the
+"Examples" section of <code><a href='hyperdrive_config.html'>hyperdrive_config()</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='estimator.html'>estimator()</a></code>, <code><a href='hyperdrive_config.html'>hyperdrive_config()</a></code></p></div>
     
 
   </div>
@@ -164,6 +202,10 @@ eg. list("tag" = "value")</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

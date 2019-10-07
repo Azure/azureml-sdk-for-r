@@ -2,20 +2,27 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qnormal}
 \alias{qnormal}
-\title{Specify a normal distribution of the form round(normal(mu, sigma) / q) * q}
+\title{Specify a normal distribution of the \code{form round(normal(mu, sigma) / q) * q}}
 \usage{
 qnormal(mu, sigma, q)
 }
 \arguments{
-\item{mu}{mean of the normal distribution}
+\item{mu}{A double of the mean of the normal distribution.}
 
-\item{sigma}{standard deviation of the normal distribution}
+\item{sigma}{A double of the standard deviation of the normal distribution.}
 
-\item{q}{smoothing factor}
+\item{q}{An integer of the smoothing factor.}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a normal distribution of the form round(normal(mu, sigma) / q) * q
+Specify a normal distribution of the form \code{round(normal(mu, sigma) / q) * q}.
+
+Suitable for a discrete variable that probably takes a value around \code{mu},
+but is fundamentally unbounded.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

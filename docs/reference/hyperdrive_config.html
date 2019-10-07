@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create configuration for a HyperDrive run — hyperdrive_config • azureml</title>
+<title>Create a configuration for a HyperDrive run — hyperdrive_config • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Create configuration for a HyperDrive run — hyperdrive_config" />
+<meta property="og:title" content="Create a configuration for a HyperDrive run — hyperdrive_config" />
 
-<meta property="og:description" content="Create configuration for a HyperDrive run" />
+<meta property="og:description" content="The HyperDrive configuration includes information about hyperparameter
+space sampling, termination policy, primary metric, estimator, and
+the compute target to execute the experiment runs on.
+To submit the HyperDrive experiment, pass the HyperDriveConfig object
+returned from this method to submit_experiment()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +125,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create configuration for a HyperDrive run</h1>
+    <h1>Create a configuration for a HyperDrive run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>hyperdrive_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create configuration for a HyperDrive run</p>
+    <p>The HyperDrive configuration includes information about hyperparameter
+space sampling, termination policy, primary metric, estimator, and
+the compute target to execute the experiment runs on.</p>
+<p>To submit the HyperDrive experiment, pass the <code>HyperDriveConfig</code> object
+returned from this method to <code><a href='submit_experiment.html'>submit_experiment()</a></code>.</p>
     
     </div>
 
@@ -141,41 +149,105 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hyperparameter_sampling</th>
-      <td><p>hyperparameter sampling option</p></td>
+      <td><p>The hyperparameter sampling space.
+Can be a <code>RandomParameterSampling</code>, <code>GridParameterSampling</code>, or
+<code>BayesianParameterSampling</code> object.</p></td>
     </tr>
     <tr>
       <th>primary_metric_name</th>
-      <td><p>name of primary metric</p></td>
+      <td><p>A string of the name of the primary metric
+reported by the experiment runs.</p></td>
     </tr>
     <tr>
       <th>primary_metric_goal</th>
-      <td><p>goal of primary metric</p></td>
+      <td><p>The <code>PrimaryMetricGoal</code> object. This
+parameter determines if the primary metric is to be minimized or
+maximized when evaluating runs.</p></td>
     </tr>
     <tr>
       <th>max_total_runs</th>
-      <td><p>maximum number of runs to queue</p></td>
+      <td><p>An integer of the maximum total number of runs
+to create. This is the upper bound; there may be fewer runs when the
+sample space is smaller than this value. If both <code>max_total_runs</code> and
+<code>max_duration_minutes</code> are specified, the hyperparameter tuning experiment
+terminates when the first of these two thresholds is reached.</p></td>
     </tr>
     <tr>
       <th>max_concurrent_runs</th>
-      <td><p>maximum number of runs to start concurrently</p></td>
+      <td><p>An integer of the maximum number of runs to
+execute concurrently. If <code>NULL</code>, all runs are launched in parallel.
+The number of concurrent runs is gated on the resources available in the
+specified compute target. Hence, you need to ensure that the compute target
+has the available resources for the desired concurrency.</p></td>
     </tr>
     <tr>
       <th>max_duration_minutes</th>
-      <td><p>maximum time to allow runs</p></td>
+      <td><p>An integer of the maximum duration of the
+HyperDrive run. Once this time is exceeded, any runs still executing are
+cancelled. If both <code>max_total_runs</code> and <code>max_duration_minutes</code> are specified,
+the hyperparameter tuning experiment terminates when the first of these two
+thresholds is reached.</p></td>
     </tr>
     <tr>
       <th>policy</th>
-      <td><p>termination policy</p></td>
+      <td><p>The early termination policy to use. Can be either a
+<code>BanditPolicy</code>, <code>MedianStoppingPolicy</code>, or <code>TruncationSelectionPolicy</code>
+object. If <code>NULL</code> (the default), no early termination policy will be used.</p>
+<p>The <code>MedianStoppingPolicy</code> with <code>delay_evaluation of = 5</code> is a good
+termination policy to start with. These are conservative settings that can
+provide 25<!-- %-35% savings with no loss on primary metric -->
+(based on our evaluation data).</p></td>
     </tr>
     <tr>
       <th>estimator</th>
-      <td><p>Estimator object</p></td>
+      <td><p>The <code>Estimator</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>HyperDriveConfig object</p>
+    <p>The <code>HyperDriveConfig</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre># Load the workspace
+ws &lt;- load_workspace_from_config()
+
+# Get the compute target
+compute_target &lt;- get_compute(ws, cluster_name = 'mycluster')
+
+# Define the primary metric goal
+goal = primary_metric_goal("MAXIMIZE")
+
+# Define the early termination policy
+early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
+                                                  delay_evaluation = 5L)
+
+# Create the estimator
+est &lt;- estimator(source_directory = '.',
+                 entry_script = 'train.R',
+                 compute_target = compute_target)
+
+# Create the HyperDrive configuration
+hyperdrive_run_config = hyperdrive_config(
+                                   hyperparameter_sampling = param_sampling,
+                                   primary_metric_name = 'accuracy',
+                                   primary_metric_goal = goal,
+                                   max_total_runs = 100,
+                                   max_concurrent_runs = 4,
+                                   policy = early_termination_policy,
+                                   estimator = est)
+
+# Submit the HyperDrive experiment
+exp &lt;- experiment(ws, name = 'myexperiment')
+run = submit_experiment(exp, hyperdrive_run_config)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='submit_experiment.html'>submit_experiment()</a></code></p></div>
     
 
   </div>
@@ -185,6 +257,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

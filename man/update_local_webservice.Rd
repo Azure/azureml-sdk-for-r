@@ -13,12 +13,12 @@ update_local_webservice(webservice, models = NULL,
 
 \item{models}{A new list of models contained in the LocalWebservice.}
 
-\item{deployment_config}{Deployment configuration options to apply to the 
+\item{deployment_config}{Deployment configuration options to apply to the
 LocalWebservice.}
 
 \item{wait}{Wait for the service's container to reach a healthy state.}
 
-\item{inference_config}{An InferenceConfig object used to provide the 
+\item{inference_config}{An InferenceConfig object used to provide the
 required model deployment properties.}
 }
 \description{

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Detach the AksCompute object from its associated workspace — detach_aks_compute • azureml</title>
+<title>Detach an AksCompute cluster from its associated workspace — detach_aks_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,11 @@
 
 
 
-<meta property="og:title" content="Detach the AksCompute object from its associated workspace — detach_aks_compute" />
+<meta property="og:title" content="Detach an AksCompute cluster from its associated workspace — detach_aks_compute" />
 
-<meta property="og:description" content="Detach the AksCompute object from its associated workspace" />
+<meta property="og:description" content="Detach the AksCompute cluster from its associated workspace. No
+underlying cloud resource will be deleted; the association will
+just be removed." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +123,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Detach the AksCompute object from its associated workspace</h1>
+    <h1>Detach an AksCompute cluster from its associated workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>detach_aks_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Detach the AksCompute object from its associated workspace</p>
+    <p>Detach the AksCompute cluster from its associated workspace. No
+underlying cloud resource will be deleted; the association will
+just be removed.</p>
     
     </div>
 
@@ -139,7 +143,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cluster</th>
-      <td><p>cluster object</p></td>
+      <td><p>The <code>AksCompute</code> object.</p></td>
     </tr>
     </table>
     

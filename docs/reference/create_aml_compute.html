@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create AmlCompute — create_aml_compute • azureml</title>
+<title>Create an AmlCompute cluster — create_aml_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,20 @@
 
 
 
-<meta property="og:title" content="Create AmlCompute — create_aml_compute" />
+<meta property="og:title" content="Create an AmlCompute cluster — create_aml_compute" />
 
-<meta property="og:description" content="Create AmlCompute" />
+<meta property="og:description" content="Provision Azure Machine Learning Compute (AmlCompute) as a compute target
+for training. AmlCompute is a managed-compute infrastructure that allows the
+user to easily create a single or multi-node compute. To create a persistent
+AmlCompute resource that can be reused across jobs, make sure to specify the
+vm_size and max_nodes parameters. The compute can then be shared with
+other users in the workspace and is kept between jobs. If min_nodes = 0,
+the compute autoscales down to zero nodes when it isn't used, and scales up
+automatically when a job is submitted.
+AmlCompute has default limits, such as the number of cores that can be
+allocated. For more information, see
+Manage and request quotas for Azure resources
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +132,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create AmlCompute</h1>
+    <h1>Create an AmlCompute cluster</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>create_aml_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create AmlCompute</p>
+    <p>Provision Azure Machine Learning Compute (AmlCompute) as a compute target
+for training. AmlCompute is a managed-compute infrastructure that allows the
+user to easily create a single or multi-node compute. To create a persistent
+AmlCompute resource that can be reused across jobs, make sure to specify the
+<code>vm_size</code> and <code>max_nodes</code> parameters. The compute can then be shared with
+other users in the workspace and is kept between jobs. If <code>min_nodes = 0</code>,
+the compute autoscales down to zero nodes when it isn't used, and scales up
+automatically when a job is submitted.</p>
+<p>AmlCompute has default limits, such as the number of cores that can be
+allocated. For more information, see
+Manage and request quotas for Azure resources
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).</p>
     
     </div>
 
@@ -144,76 +166,106 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>workspace object</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>cluster_name</th>
-      <td><p>cluster name</p></td>
+      <td><p>A string of the name of the cluster.</p></td>
     </tr>
     <tr>
       <th>vm_size</th>
-      <td><p>Size of agent VMs. More details can be found here:
-https://aka.ms/azureml-vm-details. Note that not all sizes are available in
-all regions, as detailed in the previous link.</p></td>
+      <td><p>A string of the size of agent VMs. More details can be found
+<a href='https://aka.ms/azureml-vm-details'>here</a>.
+Note that not all sizes are available in all regions, as detailed in the
+aformentioned link. Defaults to <code>'Standard_NC6'</code>.</p></td>
     </tr>
     <tr>
       <th>vm_priority</th>
-      <td><p>dedicated or lowpriority VMs. If not specified, will
-default to dedicated.</p></td>
+      <td><p>A string of either <code>'dedicated'</code> or <code>'lowpriority'</code> to
+use either dedicated or low-priority VMs. Defaults to <code>'dedicated'</code>.</p></td>
     </tr>
     <tr>
       <th>min_nodes</th>
-      <td><p>Minimum number of nodes to use on the cluster. If not
-specified, will default to 0</p></td>
+      <td><p>An integer of the minimum number of nodes to use on the
+cluster. If not specified, will default to <code>0</code>.</p></td>
     </tr>
     <tr>
       <th>max_nodes</th>
-      <td><p>Maximum number of nodes to use on the cluster</p></td>
+      <td><p>An integer of the maximum number of nodes to use on the
+cluster.</p></td>
     </tr>
     <tr>
       <th>idle_seconds_before_scaledown</th>
-      <td><p>Node idle time in seconds before scaling
-down the cluster</p></td>
+      <td><p>An integer of the node idle time in
+seconds before scaling down the cluster. Defaults to <code>120</code>.</p></td>
     </tr>
     <tr>
       <th>admin_username</th>
-      <td><p>Name of the administrator user account which can be
-used to SSH into nodes</p></td>
+      <td><p>A string of the name of the administrator user account
+that can be used to SSH into nodes.</p></td>
     </tr>
     <tr>
       <th>admin_user_password</th>
-      <td><p>Password of the administrator user account</p></td>
+      <td><p>A string of the password of the administrator user
+account.</p></td>
     </tr>
     <tr>
       <th>admin_user_ssh_key</th>
-      <td><p>SSH public key of the administrator user account</p></td>
+      <td><p>A string of the SSH public key of the administrator
+user account.</p></td>
     </tr>
     <tr>
       <th>vnet_resourcegroup_name</th>
-      <td><p>Name of the resource group where the virtual
-network is located</p></td>
+      <td><p>A string of the name of the resource group
+where the virtual network is located.</p></td>
     </tr>
     <tr>
       <th>vnet_name</th>
-      <td><p>Name of the virtual network</p></td>
+      <td><p>A string of the name of the virtual network.</p></td>
     </tr>
     <tr>
       <th>subnet_name</th>
-      <td><p>Name of the subnet inside the vnet</p></td>
+      <td><p>A string of the name of the subnet inside the vnet.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>A dictionary of key value tags to provide to the compute object</p></td>
+      <td><p>A named list of tags for the cluster, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list("tag" = "value")</a></code>.`</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>A description to provide to the compute object</p></td>
+      <td><p>A string of the description for the cluster.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An AmlCompute object representation of the compute object</p>
+    <p>The <code>AmlCompute</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>For more information on using an Azure Machine Learning Compute resource
+in a virtual network, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- create_aml_compute(ws,
+                                     cluster_name = 'mycluster',
+                                     vm_size = 'STANDARD_D2_V2',
+                                     max_nodes = 1)
+wait_for_provisioning_completion(compute_target, show_output = TRUE)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='wait_for_provisioning_completion.html'>wait_for_provisioning_completion()</a></code></p></div>
     
 
   </div>
@@ -223,6 +275,12 @@ network is located</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define Random Parameter sampling over hyperparameter search space — random_parameter_sampling • azureml</title>
+<title>Define random sampling over a hyperparameter search space — random_parameter_sampling • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,11 @@
 
 
 
-<meta property="og:title" content="Define Random Parameter sampling over hyperparameter search space — random_parameter_sampling" />
+<meta property="og:title" content="Define random sampling over a hyperparameter search space — random_parameter_sampling" />
 
-<meta property="og:description" content="Define Random Parameter sampling over hyperparameter search space" />
+<meta property="og:description" content="In random sampling, hyperparameter values are randomly selected from the
+defined search space. Random sampling allows the search space to include
+both discrete and continuous hyperparameters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +123,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define Random Parameter sampling over hyperparameter search space</h1>
+    <h1>Define random sampling over a hyperparameter search space</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>random_parameter_sampling.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Define Random Parameter sampling over hyperparameter search space</p>
+    <p>In random sampling, hyperparameter values are randomly selected from the
+defined search space. Random sampling allows the search space to include
+both discrete and continuous hyperparameters.</p>
     
     </div>
 
@@ -139,18 +143,45 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>parameter_space</th>
-      <td><p>a named list containing each parameter and its
-distribution</p></td>
+      <td><p>A named list containing each parameter and its
+distribution, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("parameter" = distribution)</a></code>.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>a named list of additional properties for the algorithm</p></td>
+      <td><p>A named list of additional properties for the algorithm.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>HyperParameterSampling object</p>
+    <p>The <code>RandomParameterSampling</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>In this sampling algorithm, parameter values are chosen from a set of
+discrete values or a distribution over a continuous range. Functions you can
+use include:
+<code><a href='choice.html'>choice()</a></code>, <code><a href='randint.html'>randint()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code>, <code><a href='loguniform.html'>loguniform()</a></code>,
+<code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='normal.html'>normal()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>, <code><a href='lognormal.html'>lognormal()</a></code>, and <code><a href='qlognormal.html'>qlognormal()</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>param_sampling &lt;- random_parameter_sampling( {
+        'learning_rate': normal(10, 3),
+        'keep_probability': uniform(0.05, 0.1),
+        'batch_size': choice(16, 32, 64, 128)
+    }
+)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='choice.html'>choice()</a></code>, <code><a href='randint.html'>randint()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code>, <code><a href='loguniform.html'>loguniform()</a></code>,
+<code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='normal.html'>normal()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>, <code><a href='lognormal.html'>lognormal()</a></code>, <code><a href='qlognormal.html'>qlognormal()</a></code></p></div>
     
 
   </div>
@@ -160,6 +191,12 @@ distribution</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

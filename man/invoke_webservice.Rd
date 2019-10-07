@@ -13,7 +13,7 @@ invoke_webservice(webservice, input_data)
 data your machine learning model expects as an input to run predictions.}
 }
 \value{
-The result of calling the Webservice. This will return predictions 
+The result of calling the Webservice. This will return predictions
 run from your machine learning model.
 }
 \description{

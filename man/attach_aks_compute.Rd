@@ -2,24 +2,42 @@
 % Please edit documentation in R/compute.R
 \name{attach_aks_compute}
 \alias{attach_aks_compute}
-\title{Attach an already existing AKS compute resource with the provided workspace}
+\title{Attach an existing AKS cluster to a workspace}
 \usage{
-attach_aks_compute(workspace, cluster_name, resource_id,
+attach_aks_compute(workspace, cluster_name, resource_id = NULL,
   resource_group = NULL)
 }
 \arguments{
-\item{workspace}{The workspace object to attach the Compute object to.}
+\item{workspace}{The \code{Workspace} object to attach the AKS cluster to.}
 
-\item{cluster_name}{The AKS cluster name}
+\item{cluster_name}{A string of the name for the cluster.}
 
-\item{resource_id}{The Azure resource ID for the compute resource being
-attached}
+\item{resource_id}{A string of the resource ID for the AKS cluster being
+attached.}
 
-\item{resource_group}{Name of the resource group in which the AKS is located.}
+\item{resource_group}{A string of the resource group in which the AKS cluster
+is located.}
 }
 \value{
-An AksCompute object representation of the compute object
+The \code{AksCompute} object.
 }
 \description{
-Attach an already existing AKS compute resource with the provided workspace
+If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.
+
+If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).
 }
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+compute_target <- attach_aks_compute(ws,
+                                     cluster_name = 'mycluster',
+                                     resource_id = 'myresourceid',
+                                     resource_group = 'myresourcegroup')
+}
+}
+

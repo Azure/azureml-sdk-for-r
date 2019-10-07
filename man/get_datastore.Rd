@@ -2,18 +2,19 @@
 % Please edit documentation in R/datastore.R
 \name{get_datastore}
 \alias{get_datastore}
-\title{Get a datastore by name}
+\title{Get an existing datastore}
 \usage{
 get_datastore(workspace, datastore_name)
 }
 \arguments{
-\item{workspace}{The workspace object}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{datastore_name}{The name of the datastore.}
+\item{datastore_name}{A string of the name of the datastore.}
 }
 \value{
-The corresponding datastore for that name.
+The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.
 }
 \description{
-Get a datastore by name
+Get the corresponding datastore object for an existing
+datastore by name from the given workspace.
 }

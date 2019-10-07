@@ -34,7 +34,16 @@
 
 <meta property="og:title" content="Return the best performing run amongst all completed runs — get_best_run_by_primary_metric" />
 
-<meta property="og:description" content="Return the best performing run amongst all completed runs" />
+<meta property="og:description" content="Find and return the run that corresponds to the best performing run
+amongst all the completed runs.
+The best performing run is identified solely based on the primary metric
+parameter specified in the HyperDriveConfig (primary_metric_name).
+The PrimaryMetricGoal governs whether the minimum or maximum of the
+primary metric is used. To do a more detailed analysis of all the
+run metrics launched by this HyperDrive run, use get_child_run_metrics().
+Only one of the runs is returned from get_best_run_by_primary_metric(),
+even if several of the runs launched by this HyperDrive run reached
+the same best metric." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +137,16 @@
 
     <div class="ref-description">
     
-    <p>Return the best performing run amongst all completed runs</p>
+    <p>Find and return the run that corresponds to the best performing run
+amongst all the completed runs.</p>
+<p>The best performing run is identified solely based on the primary metric
+parameter specified in the <code>HyperDriveConfig</code> (<code>primary_metric_name</code>).
+The <code>PrimaryMetricGoal</code> governs whether the minimum or maximum of the
+primary metric is used. To do a more detailed analysis of all the
+run metrics launched by this HyperDrive run, use <code><a href='get_child_run_metrics.html'>get_child_run_metrics()</a></code>.
+Only one of the runs is returned from <code>get_best_run_by_primary_metric()</code>,
+even if several of the runs launched by this HyperDrive run reached
+the same best metric.</p>
     
     </div>
 
@@ -140,21 +158,21 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hyperdrive_run</th>
-      <td><p>HyperDriveRun object</p></td>
+      <td><p>The <code>HyperDriveRun</code> object.</p></td>
     </tr>
     <tr>
       <th>include_failed</th>
-      <td><p>whether to include failed runs</p></td>
+      <td><p>If <code>TRUE</code>, include the failed runs.</p></td>
     </tr>
     <tr>
       <th>include_canceled</th>
-      <td><p>whether to include canceled runs</p></td>
+      <td><p>If <code>TRUE</code>, include the canceled runs.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Run object</p>
+    <p>The <code>Run</code> object.</p>
     
 
   </div>

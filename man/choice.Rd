@@ -7,11 +7,17 @@
 choice(options)
 }
 \arguments{
-\item{options}{list of options to choose from}
+\item{options}{A list of discrete values to choose from, or
+one or more comma-separated discrete values to choose from.}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a discrete set of options to sample from
+Specify a discrete set of options to sample the hyperparameters
+from.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

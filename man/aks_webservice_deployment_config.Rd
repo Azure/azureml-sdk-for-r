@@ -19,45 +19,45 @@ aks_webservice_deployment_config(autoscale_enabled = NULL,
   token_auth_enabled = NULL)
 }
 \arguments{
-\item{autoscale_enabled}{Whether or not to enable autoscaling for this 
+\item{autoscale_enabled}{Whether or not to enable autoscaling for this
 Webservice. Defaults to True if num_replicas is None}
 
-\item{autoscale_min_replicas}{The minimum number of containers to use when 
+\item{autoscale_min_replicas}{The minimum number of containers to use when
 autoscaling this Webservice. Defaults to 1}
 
-\item{autoscale_max_replicas}{The maximum number of containers to use when 
+\item{autoscale_max_replicas}{The maximum number of containers to use when
 autoscaling this Webservice. Defaults to 10}
 
-\item{autoscale_refresh_seconds}{How often the autoscaler should attempt to 
+\item{autoscale_refresh_seconds}{How often the autoscaler should attempt to
 scale this Webservice. Defaults to 1}
 
-\item{autoscale_target_utilization}{The target utilization (in percent out 
-of 100) the autoscaler should attempt to maintain for this Webservice. 
+\item{autoscale_target_utilization}{The target utilization (in percent out
+of 100) the autoscaler should attempt to maintain for this Webservice.
 Defaults to 70}
 
-\item{auth_enabled}{Whether or not to enable key auth for this Webservice. 
+\item{auth_enabled}{Whether or not to enable key auth for this Webservice.
 Defaults to TRUE}
 
-\item{cpu_cores}{The number of cpu cores to allocate for this Webservice. 
+\item{cpu_cores}{The number of cpu cores to allocate for this Webservice.
 Can be a decimal. Defaults to 0.1}
 
-\item{memory_gb}{The amount of memory (in GB) to allocate for this 
+\item{memory_gb}{The amount of memory (in GB) to allocate for this
 Webservice. Can be a decimal. Defaults to 0.5}
 
-\item{enable_app_insights}{Whether or not to enable Application Insights 
+\item{enable_app_insights}{Whether or not to enable Application Insights
 logging for this Webservice. Defaults to FALSE}
 
-\item{scoring_timeout_ms}{A timeout to enforce for scoring calls to this 
+\item{scoring_timeout_ms}{A timeout to enforce for scoring calls to this
 Webservice. Defaults to 60000}
 
-\item{replica_max_concurrent_requests}{The number of maximum concurrent 
+\item{replica_max_concurrent_requests}{The number of maximum concurrent
 requests per node to allow for this Webservice. Defaults to 1}
 
-\item{max_request_wait_time}{The maximum amount of time a request will stay 
+\item{max_request_wait_time}{The maximum amount of time a request will stay
 in the queue (in milliseconds) before returning a 503 error. Defaults to 500}
 
-\item{num_replicas}{The number of containers to allocate for this 
-Webservice. No default, if this parameter is not set then the autoscaler is 
+\item{num_replicas}{The number of containers to allocate for this
+Webservice. No default, if this parameter is not set then the autoscaler is
 enabled by default.}
 
 \item{primary_key}{A primary auth key to use for this Webservice}
@@ -66,39 +66,39 @@ enabled by default.}
 
 \item{tags}{Dictionary of key value tags to give this Webservice}
 
-\item{properties}{Dictionary of key value properties to give this 
-Webservice. These properties cannot be changed after deployment, however new 
+\item{properties}{Dictionary of key value properties to give this
+Webservice. These properties cannot be changed after deployment, however new
 key value pairs can be added}
 
 \item{description}{A description to give this Webservice}
 
-\item{gpu_cores}{The number of gpu cores to allocate for this Webservice. 
+\item{gpu_cores}{The number of gpu cores to allocate for this Webservice.
 Default is 1}
 
-\item{period_seconds}{How often (in seconds) to perform the liveness probe. 
+\item{period_seconds}{How often (in seconds) to perform the liveness probe.
 Default to 10 seconds. Minimum value is 1.}
 
-\item{initial_delay_seconds}{Number of seconds after the container has 
+\item{initial_delay_seconds}{Number of seconds after the container has
 started before liveness probes are initiated. Defaults to 310}
 
-\item{timeout_seconds}{Number of seconds after which the liveness probe 
+\item{timeout_seconds}{Number of seconds after which the liveness probe
 times out. Defaults to 2 second. Minimum value is 1}
 
-\item{success_threshold}{Minimum consecutive successes for the liveness 
-probe to be considered successful after having failed. Defaults to 1. 
+\item{success_threshold}{Minimum consecutive successes for the liveness
+probe to be considered successful after having failed. Defaults to 1.
 Minimum value is 1.}
 
-\item{failure_threshold}{When a Pod starts and the liveness probe fails, 
-Kubernetes will try failureThreshold times before giving up. Defaults to 3. 
+\item{failure_threshold}{When a Pod starts and the liveness probe fails,
+Kubernetes will try failureThreshold times before giving up. Defaults to 3.
 Minimum value is 1.}
 
-\item{namespace}{The Kubernetes namespace in which to deploy this 
-Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen 
+\item{namespace}{The Kubernetes namespace in which to deploy this
+Webservice: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen
 ('-') characters. The first and last characters cannot be hyphens.}
 
-\item{token_auth_enabled}{Whether or not to enable Token auth for this 
-Webservice. If this is enabled, users can access this Webservice by fetching 
-access token using their Azure Active Directory credentials. 
+\item{token_auth_enabled}{Whether or not to enable Token auth for this
+Webservice. If this is enabled, users can access this Webservice by fetching
+access token using their Azure Active Directory credentials.
 Defaults to FALSE}
 }
 \value{

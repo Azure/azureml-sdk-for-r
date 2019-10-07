@@ -10,7 +10,7 @@ generate_new_webservice_key(webservice, key_type)
 \arguments{
 \item{webservice}{The webservice object.}
 
-\item{key_type}{Which key to regenerate. Options are 'Primary' or 
+\item{key_type}{Which key to regenerate. Options are 'Primary' or
 'Secondary'}
 }
 \description{

@@ -16,7 +16,7 @@
 
 
 library("tensorflow")
-install_tensorflow(version = "gpu")
+install_tensorflow(version = "1.13.2-gpu")
 
 library("azureml")
 

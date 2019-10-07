@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Attach an already existing AKS compute resource with the provided workspace — attach_aks_compute • azureml</title>
+<title>Attach an existing AKS cluster to a workspace — attach_aks_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,16 @@
 
 
 
-<meta property="og:title" content="Attach an already existing AKS compute resource with the provided workspace — attach_aks_compute" />
+<meta property="og:title" content="Attach an existing AKS cluster to a workspace — attach_aks_compute" />
 
-<meta property="og:description" content="Attach an already existing AKS compute resource with the provided workspace" />
+<meta property="og:description" content="If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.
+If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,18 +128,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Attach an already existing AKS compute resource with the provided workspace</h1>
+    <h1>Attach an existing AKS cluster to a workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>attach_aks_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Attach an already existing AKS compute resource with the provided workspace</p>
+    <p>If you already have an AKS cluster in your Azure subscription, and it is
+version 1.12.##, you can attach it to your workspace to use for deployments.
+The existing AKS cluster can be in a different Azure region than your
+workspace.</p>
+<p>If you want to secure your AKS cluster using an Azure Virtual Network, you
+must create the virtual network first. For more information, see
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='no'>resource_id</span>,
+    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='kw'>resource_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,26 +154,38 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object to attach the Compute object to.</p></td>
+      <td><p>The <code>Workspace</code> object to attach the AKS cluster to.</p></td>
     </tr>
     <tr>
       <th>cluster_name</th>
-      <td><p>The AKS cluster name</p></td>
+      <td><p>A string of the name for the cluster.</p></td>
     </tr>
     <tr>
       <th>resource_id</th>
-      <td><p>The Azure resource ID for the compute resource being
-attached</p></td>
+      <td><p>A string of the resource ID for the AKS cluster being
+attached.</p></td>
     </tr>
     <tr>
       <th>resource_group</th>
-      <td><p>Name of the resource group in which the AKS is located.</p></td>
+      <td><p>A string of the resource group in which the AKS cluster
+is located.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An AksCompute object representation of the compute object</p>
+    <p>The <code>AksCompute</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- attach_aks_compute(ws,
+                                     cluster_name = 'mycluster',
+                                     resource_id = 'myresourceid',
+                                     resource_group = 'myresourcegroup')
+</pre>
+
     
 
   </div>
@@ -169,6 +195,8 @@ attached</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

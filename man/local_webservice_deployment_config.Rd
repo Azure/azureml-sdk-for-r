@@ -10,7 +10,7 @@ local_webservice_deployment_config(port = NULL)
 \item{port}{The local port on which to expose the service's HTTP endpoint.}
 }
 \value{
-LocalWebserviceDeploymentConfiguration object to use when deploying 
+LocalWebserviceDeploymentConfiguration object to use when deploying
 a Webservice object.
 }
 \description{

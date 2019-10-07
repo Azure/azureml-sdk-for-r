@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define Bayesian Parameter sampling over hyperparameter search space — bayesian_parameter_sampling • azureml</title>
+<title>Define Bayesian sampling over a hyperparameter search space — bayesian_parameter_sampling • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="Define Bayesian Parameter sampling over hyperparameter search space — bayesian_parameter_sampling" />
+<meta property="og:title" content="Define Bayesian sampling over a hyperparameter search space — bayesian_parameter_sampling" />
 
-<meta property="og:description" content="Define Bayesian Parameter sampling over hyperparameter search space" />
+<meta property="og:description" content="Bayesian sampling is based on the Bayesian optimization algorithm and makes
+intelligent choices on the hyperparameter values to sample next. It picks
+the sample based on how the previous samples performed, such that the new
+sample improves the reported primary metric." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +124,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define Bayesian Parameter sampling over hyperparameter search space</h1>
+    <h1>Define Bayesian sampling over a hyperparameter search space</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>bayesian_parameter_sampling.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Define Bayesian Parameter sampling over hyperparameter search space</p>
+    <p>Bayesian sampling is based on the Bayesian optimization algorithm and makes
+intelligent choices on the hyperparameter values to sample next. It picks
+the sample based on how the previous samples performed, such that the new
+sample improves the reported primary metric.</p>
     
     </div>
 
@@ -139,14 +145,44 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>parameter_space</th>
-      <td><p>a named list containing each parameter and its
-distribution</p></td>
+      <td><p>A named list containing each parameter and its
+distribution, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("parameter" = distribution)</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>HyperParameterSampling object</p>
+    <p>The <code>BayesianParameterSampling</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>When you use Bayesian sampling, the number of concurrent runs has an impact
+on the effectiveness of the tuning process. Typically, a smaller number of
+concurrent runs can lead to better sampling convergence, since the smaller
+degree of parallelism increases the number of runs that benefit from
+previously completed runs.</p>
+<p>Bayesian sampling only supports <code><a href='choice.html'>choice()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, and <code><a href='quniform.html'>quniform()</a></code>
+distributions over the search space.</p>
+<p>Bayesian sampling does not support any early termination policy. When
+using Bayesian parameter sampling, <code>early_termination_policy</code> must be
+<code>NULL</code>.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>param_sampling &lt;- bayesian_parameter_sampling( {
+        'learning_rate': uniform(0.05, 0.1),
+        'batch_size': choice(16, 32, 64, 128)
+    }
+)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='choice.html'>choice()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code></p></div>
     
 
   </div>
@@ -156,6 +192,12 @@ distribution</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

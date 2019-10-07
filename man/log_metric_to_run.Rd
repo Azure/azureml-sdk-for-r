@@ -11,7 +11,7 @@ log_metric_to_run(name, value, run = NULL)
 
 \item{value}{value of the metric}
 
-\item{run}{Run object. If not specified, will default to current run from 
+\item{run}{Run object. If not specified, will default to current run from
 service context.}
 }
 \description{

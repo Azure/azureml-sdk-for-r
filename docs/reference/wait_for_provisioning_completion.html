@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait for cluster's instantiation — wait_for_provisioning_completion • azureml</title>
+<title>Wait for a cluster to finish provisioning — wait_for_provisioning_completion • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Wait for cluster's instantiation — wait_for_provisioning_completion" />
+<meta property="og:title" content="Wait for a cluster to finish provisioning — wait_for_provisioning_completion" />
 
-<meta property="og:description" content="Wait for cluster's instantiation" />
+<meta property="og:description" content="Wait for a cluster to finish provisioning. Typically invoked after a
+create_aml_compute() or create_aks_compute() call." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,31 +122,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wait for cluster's instantiation</h1>
+    <h1>Wait for a cluster to finish provisioning</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>wait_for_provisioning_completion.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Wait for cluster's instantiation</p>
+    <p>Wait for a cluster to finish provisioning. Typically invoked after a
+<code><a href='create_aml_compute.html'>create_aml_compute()</a></code> or <code><a href='create_aks_compute.html'>create_aks_compute()</a></code> call.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wait_for_provisioning_completion</span>(<span class='no'>cluster</span>, <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>wait_for_provisioning_completion</span>(<span class='no'>cluster</span>, <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cluster</th>
-      <td><p>cluster object</p></td>
+      <td><p>The <code>AmlCompute</code> or <code>AksCompute</code> object.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>show output on console</p></td>
+      <td><p>If <code>TRUE</code>, more verbose output will be provided.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>Wait for an AmlCompute cluster to finish provisioning.</p><pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- create_aml_compute(ws,
+                                     cluster_name = 'mycluster',
+                                     vm_size = 'STANDARD_D2_V2',
+                                     max_nodes = 1)
+wait_for_provisioning_completion(compute_target)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='create_aml_compute.html'>create_aml_compute()</a></code>, <code><a href='create_aks_compute.html'>create_aks_compute()</a></code></p></div>
     
 
   </div>
@@ -153,7 +172,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

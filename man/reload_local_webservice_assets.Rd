@@ -3,10 +3,10 @@
 \name{reload_local_webservice_assets}
 \alias{reload_local_webservice_assets}
 \title{Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets, 
-including the execution script and local dependencies, but it does not 
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies 
-or custom Docker steps will not be reflected in the reloaded LocalWebservice. 
+This restarts the service's container with copies of updated assets,
+including the execution script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
+or custom Docker steps will not be reflected in the reloaded LocalWebservice.
 To handle those changes call LocalWebservice.update(), instead.}
 \usage{
 reload_local_webservice_assets(webservice, wait = FALSE)
@@ -18,9 +18,9 @@ reload_local_webservice_assets(webservice, wait = FALSE)
 }
 \description{
 Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets, 
-including the execution script and local dependencies, but it does not 
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies 
-or custom Docker steps will not be reflected in the reloaded LocalWebservice. 
+This restarts the service's container with copies of updated assets,
+including the execution script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
+or custom Docker steps will not be reflected in the reloaded LocalWebservice.
 To handle those changes call LocalWebservice.update(), instead.
 }

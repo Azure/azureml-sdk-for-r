@@ -11,7 +11,7 @@ log_row_to_run(name, description = "", run = NULL, ...)
 
 \item{description}{An optional metric description}
 
-\item{run}{Run object. If not specified, will default to current run from 
+\item{run}{Run object. If not specified, will default to current run from
 service context.}
 
 \item{...}{Each named parameter generates a column with the value specified.}

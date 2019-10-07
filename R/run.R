@@ -14,7 +14,7 @@ get_run_metrics <- function(run) {
 #' @param show_output print verbose output to console
 #' @export
 wait_for_run_completion <- function(run, show_output = TRUE) {
-  tryCatch( {
+  tryCatch({
     run$wait_for_completion(show_output)
   },
   error = function(e) {
@@ -58,8 +58,7 @@ cancel_run <- function(run) {
 #' @param run_id The run id for the run.
 #' @return The run object.
 #' @export
-get_run <- function(experiment, run_id)
-{
+get_run <- function(experiment, run_id) {
   run <- azureml$core$run$Run(experiment, run_id)
   invisible(run)
 }
@@ -74,18 +73,18 @@ download_file_from_run <- function(run, name, output_file_path = NULL) {
   invisible(NULL)
 }
 
-#' Download files from a given storage prefix (folder name) or 
+#' Download files from a given storage prefix (folder name) or
 #' the entire container if prefix is unspecified.
 #' @param run the run object
-#' @param prefix the filepath prefix within the container from 
+#' @param prefix the filepath prefix within the container from
 #' which to download all artifacts
-#' @param output_directory optional directory that all artifact paths use 
+#' @param output_directory optional directory that all artifact paths use
 #' as a prefix
-#' @param output_paths optional filepaths in which to store the downloaded 
+#' @param output_paths optional filepaths in which to store the downloaded
 #' artifacts. Should be unique and match length of paths.
 #' @param batch_size number of files to download per batch
 #' @export
-download_files_from_run <- function(run, prefix = NULL, output_directory = NULL, 
+download_files_from_run <- function(run, prefix = NULL, output_directory = NULL,
                                     output_paths = NULL, batch_size = 100L) {
   run$download_files(prefix = prefix,
                      output_directory = output_directory,
@@ -94,7 +93,7 @@ download_files_from_run <- function(run, prefix = NULL, output_directory = NULL,
   invisible(NULL)
 }
 
-#' Get the definition, status information, current log files and other details 
+#' Get the definition, status information, current log files and other details
 #' of the run.
 #' @param run the run object
 #' @return Return the details for the run
@@ -120,7 +119,7 @@ get_run_file_names <- function(run) {
 }
 
 #' Get the secret values for a given list of secret names.
-#' Get a dictionary of found and not found secrets for the list of names 
+#' Get a dictionary of found and not found secrets for the list of names
 #' provided.
 #' @param run the run object
 #' @param secrets List of secret names to retrieve the values for
@@ -133,7 +132,7 @@ get_secrets_from_run <- function(run, secrets) {
 #' Log metric to run
 #' @param name name of the metric
 #' @param value value of the metric
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
 log_metric_to_run <- function(name, value, run = NULL) {
@@ -149,10 +148,10 @@ log_metric_to_run <- function(name, value, run = NULL) {
 #' @param name The name of the accuracy table
 #' @param value json containing name, version, and data properties
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_accuracy_table_to_run <- function(name, value, description = '', 
+log_accuracy_table_to_run <- function(name, value, description = "",
                                       run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
@@ -166,10 +165,10 @@ log_accuracy_table_to_run <- function(name, value, description = '',
 #' @param name The name of the confusion matrix
 #' @param value json containing name, version, and data properties
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_confusion_matrix_to_run <- function(name, value, description = '', 
+log_confusion_matrix_to_run <- function(name, value, description = "",
                                         run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
@@ -184,15 +183,15 @@ log_confusion_matrix_to_run <- function(name, value, description = '',
 #' @param path The path or stream of the image
 #' @param plot The plot to log as an image
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_image_to_run <- function(name, path = NULL, plot = NULL, 
-                             description = '', run = NULL) {
+log_image_to_run <- function(name, path = NULL, plot = NULL,
+                             description = "", run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
-  run$log_image(name, path = path, plot =plot, description = description)
+  run$log_image(name, path = path, plot = plot, description = description)
   run$flush()
   invisible(NULL)
 }
@@ -201,10 +200,10 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
 #' @param name The name of metric
 #' @param value The value of the metric
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_list_to_run <- function(name, value, description = '', run = NULL) {
+log_list_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
@@ -217,65 +216,65 @@ log_list_to_run <- function(name, value, description = '', run = NULL) {
 #' @param name The name of the predictions
 #' @param value json containing name, version, and data properties
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_predictions_to_run <- function(name, value, description = '', run = NULL) {
+log_predictions_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
   run$log_predictions(name, value, description)
   run$flush()
-  invisible(NULL) 
+  invisible(NULL)
 }
 
 #' Log a residuals to the artifact store.
 #' @param name The name of the predictions
 #' @param value json containing name, version, and data properties
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_residuals_to_run <- function(name, value, description = '', run = NULL) {
+log_residuals_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
   run$log_residuals(name, value, description)
   run$flush()
-  invisible(NULL)  
+  invisible(NULL)
 }
 
 #' Log a row metric to the run with the given name.
 #' @param name The name of metric
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @param ... Each named parameter generates a column with the value specified.
 #' @export
-log_row_to_run <- function(name, description = '', run = NULL, ...) {
+log_row_to_run <- function(name, description = "", run = NULL, ...) {
   if (is.null(run)) {
     run <- get_current_run()
   }
   run$log_row(name, description = description, ...)
   run$flush()
-  invisible(NULL)  
+  invisible(NULL)
 }
 
 #' Log a table metric to the run with the given name.
 #' @param name The name of metric
-#' @param value The table value of the metric (dictionary where keys are 
+#' @param value The table value of the metric (dictionary where keys are
 #' columns to be posted to the service)
 #' @param description An optional metric description
-#' @param run Run object. If not specified, will default to current run from 
+#' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
-log_table_to_run <- function(name, value, description = '', run = NULL) {
+log_table_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
   run$log_table(name, value, description)
   run$flush()
-  invisible(NULL)   
+  invisible(NULL)
 }
 
 #' Plot table of run details in Viewer
@@ -284,18 +283,18 @@ log_table_to_run <- function(name, value, description = '', run = NULL) {
 view_run_details <- function(run) {
   status <- run$get_status()
   details <- run$get_details()
-  web_view_link <- paste0('<a href="', run$get_portal_url(),'">',
+  web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
                           "Link", "</a>")
-  
-  if (status == "Completed" || status == "Failed"){
-    diff <- (parse_iso_8601(details$endTimeUtc) - 
+
+  if (status == "Completed" || status == "Failed") {
+    diff <- (parse_iso_8601(details$endTimeUtc) -
                parse_iso_8601(details$startTimeUtc))
     duration <- paste(as.numeric(diff), "mins")
   }
   else {
     duration <- "-"
   }
-  
+
   df <- matrix(list("Run Id",
                     "Status",
                     "Start Time",
@@ -307,16 +306,16 @@ view_run_details <- function(run) {
                     run$id,
                     status,
                     format(parsedate::parse_iso_8601(details$startTimeUtc),
-                           format='%B %d %Y %H:%M:%S'),
+                           format = "%B %d %Y %H:%M:%S"),
                     duration,
                     details$runDefinition$target,
                     details$runDefinition$script,
                     toString(details$runDefinition$arguments),
                     web_view_link),
                nrow = 8,
-               ncol = 2) 
-  
-  DT::datatable(df, escape=FALSE, rownames=FALSE, colnames=c(" ", " "),
-                caption = paste(unlist(details$warnings), collapse='\r\n'),
-                options = list(dom = 't', scrollY = TRUE))
+               ncol = 2)
+
+  DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
+                caption = paste(unlist(details$warnings), collapse = "\r\n"),
+                options = list(dom = "t", scrollY = TRUE))
 }

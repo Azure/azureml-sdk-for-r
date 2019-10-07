@@ -2,25 +2,27 @@
 % Please edit documentation in R/datastore.R
 \name{upload_to_datastore}
 \alias{upload_to_datastore}
-\title{Upload the data from the local file system to the Azure storage this
-datastore points to.}
+\title{Upload a local directory to the Azure storage a datastore points to}
 \usage{
 upload_to_datastore(datastore, src_dir, target_path = NULL,
   overwrite = FALSE, show_progress = TRUE)
 }
 \arguments{
-\item{datastore}{datastore object}
+\item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
 
-\item{src_dir}{the local directory to upload}
+\item{src_dir}{A string of the local directory to upload.}
 
-\item{target_path}{location in the file share to upload the data to, defaults
-to None, the root}
+\item{target_path}{A string of the location in the blob container or
+file share to upload the data to. Defaults to \code{NULL}, in which case the data
+is uploaded to the root.}
 
-\item{overwrite}{overwrites, defaults to FALSE}
+\item{overwrite}{If \code{TRUE}, overwrites any existing data at \code{target_path}.}
 
-\item{show_progress}{progress of upload in the console, defaults to TRUE}
+\item{show_progress}{If \code{TRUE}, show progress of upload in the console.}
+}
+\value{
+The \code{DataReference} object for the target path uploaded.
 }
 \description{
-Upload the data from the local file system to the Azure storage this
-datastore points to.
+Upload a local directory to the Azure storage the datastore points to.
 }

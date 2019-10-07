@@ -2,8 +2,8 @@
 % Please edit documentation in R/compute.R
 \name{list_nodes_in_aml_compute}
 \alias{list_nodes_in_aml_compute}
-\title{Get the details (e.g IP address, port etc) of all the compute nodes in the 
-compute.}
+\title{Get the details (e.g IP address, port etc) of all the compute nodes in the
+compute target}
 \usage{
 list_nodes_in_aml_compute(cluster)
 }
@@ -14,6 +14,6 @@ list_nodes_in_aml_compute(cluster)
 Details of all the compute nodes in the cluster in data frame
 }
 \description{
-Get the details (e.g IP address, port etc) of all the compute nodes in the 
-compute.
+Get the details (e.g IP address, port etc) of all the compute nodes in the
+compute target
 }

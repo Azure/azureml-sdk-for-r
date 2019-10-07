@@ -14,10 +14,10 @@ update_aci_webservice(webservice, tags = NULL, properties = NULL,
 \arguments{
 \item{webservice}{AciWebservice object.}
 
-\item{tags}{Dictionary of key value tags to give this Webservice. 
+\item{tags}{Dictionary of key value tags to give this Webservice.
 Will replace existing tags.}
 
-\item{properties}{Dictionary of key value properties to add to existing 
+\item{properties}{Dictionary of key value properties to add to existing
 properties dictionary.}
 
 \item{description}{A description to give this Webservice.}
@@ -32,12 +32,12 @@ properties dictionary.}
 
 \item{ssl_cname}{The cname for if SSL is enabled.}
 
-\item{enable_app_insights}{Whether or not to enable AppInsights for this 
+\item{enable_app_insights}{Whether or not to enable AppInsights for this
 Webservice.}
 
 \item{models}{A list of Model objects to package into the updated service.}
 
-\item{inference_config}{An InferenceConfig object used to provide the 
+\item{inference_config}{An InferenceConfig object used to provide the
 required model deployment properties.}
 }
 \description{

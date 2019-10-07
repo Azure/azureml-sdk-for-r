@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update Scale settings for AmlCompute target. — update_aml_compute • azureml</title>
+<title>Update scale settings for an AmlCompute cluster — update_aml_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Update Scale settings for AmlCompute target. — update_aml_compute" />
+<meta property="og:title" content="Update scale settings for an AmlCompute cluster — update_aml_compute" />
 
-<meta property="og:description" content="Update Scale settings for AmlCompute target." />
+<meta property="og:description" content="Update the scale settings for an existing AmlCompute cluster." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +121,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update Scale settings for AmlCompute target.</h1>
+    <h1>Update scale settings for an AmlCompute cluster</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>update_aml_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Update Scale settings for AmlCompute target.</p>
+    <p>Update the scale settings for an existing AmlCompute cluster.</p>
     
     </div>
 
@@ -140,20 +140,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cluster</th>
-      <td><p>cluster object</p></td>
+      <td><p>The <code>AmlCompute</code> cluster.</p></td>
     </tr>
     <tr>
       <th>min_nodes</th>
-      <td><p>Minimum number of nodes to use on the cluster</p></td>
+      <td><p>An integer of the minimum number of nodes to use on
+the cluster.</p></td>
     </tr>
     <tr>
       <th>max_nodes</th>
-      <td><p>Maximum number of nodes to use on the cluster</p></td>
+      <td><p>An integer of the maximum number of nodes to use on
+the cluster.</p></td>
     </tr>
     <tr>
       <th>idle_seconds_before_scaledown</th>
-      <td><p>Node idle time in seconds before 
-scaling down the cluster</p></td>
+      <td><p>An integer of the node idle time
+in seconds before scaling down the cluster.</p></td>
     </tr>
     </table>
     

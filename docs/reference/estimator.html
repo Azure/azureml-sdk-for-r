@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Estimator — estimator • azureml</title>
+<title>Create an estimator — estimator • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="Create Estimator — estimator" />
+<meta property="og:title" content="Create an estimator — estimator" />
 
-<meta property="og:description" content="Create Estimator" />
+<meta property="og:description" content="An Estimator wraps run configuration information for specifying details
+of executing an R script. Running an Estimator experiment
+(using submit_experiment()) will return a ScriptRun object and
+execute your training script on the specified compute target." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +124,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Estimator</h1>
+    <h1>Create an estimator</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/estimator.R'><code>R/estimator.R</code></a></small>
     <div class="hidden name"><code>estimator.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create Estimator</p>
+    <p>An Estimator wraps run configuration information for specifying details
+of executing an R script. Running an Estimator experiment
+(using <code><a href='submit_experiment.html'>submit_experiment()</a></code>) will return a <code>ScriptRun</code> object and
+execute your training script on the specified compute target.</p>
     
     </div>
 
@@ -145,27 +151,30 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>source_directory</th>
-      <td><p>A local directory containing experiment configuration
-files.</p></td>
+      <td><p>A string of the local directory containing
+experiment configuration and code files needed for the training job.</p></td>
     </tr>
     <tr>
       <th>compute_target</th>
-      <td><p>The ComputeTarget where training will happen.
-Currently only support AmlCompute type.</p></td>
+      <td><p>The <code>AmlCompute</code> object for the compute target
+where training will happen.</p></td>
     </tr>
     <tr>
       <th>vm_size</th>
-      <td><p>The VM size of the compute target that will be created for the
-training. Supported values: Any Azure VM size. The list of available VM sizes
-are listed here:
-https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs</p></td>
+      <td><p>A string of the VM size of the compute target that will be
+created for the training job. The list of available VM sizes
+are listed <a href='https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs'>here</a>.
+Provide this parameter if you want to create AmlCompute as the compute target
+at run time, instead of providing an existing cluster to the <code>compute_target</code>
+parameter. If <code>vm_size</code> is specified, a single-node cluster is automatically
+created for your run and is deleted automatically once the run completes.</p></td>
     </tr>
     <tr>
       <th>vm_priority</th>
-      <td><p>The VM priority of the compute target that will be created
-for the training. If not specified, it will be defaulted to 'dedicated'.
-Supported values: 'dedicated' and 'lowpriority'. This takes effect only when
-the vm_size param is specified in the input.</p></td>
+      <td><p>A string of either <code>'dedicated'</code> or <code>'lowpriority'</code> to
+specify the VM priority of the compute target that will be created for the
+training job. Defaults to <code>'dedicated'</code>. This takes effect only when the
+<code>vm_size</code> parameter is specified.</p></td>
     </tr>
     <tr>
       <th>entry_script</th>
@@ -174,64 +183,80 @@ to start training.</p></td>
     </tr>
     <tr>
       <th>script_params</th>
-      <td><p>A named list containing parameters to the entry_script.</p></td>
+      <td><p>A named list of the command-line arguments to pass to
+the training script specified in <code>entry_script</code>.</p></td>
     </tr>
     <tr>
       <th>cran_packages</th>
-      <td><p>character vector of cran packages to be installed.</p></td>
+      <td><p>A character vector of CRAN packages to be installed.</p></td>
     </tr>
     <tr>
       <th>github_packages</th>
-      <td><p>character vector of github packages to be installed.</p></td>
+      <td><p>A character vector of GitHub packages to be installed.</p></td>
     </tr>
     <tr>
       <th>custom_url_packages</th>
-      <td><p>character vector of packages to be installed from
-local, directory or custom url.</p></td>
+      <td><p>A character vector of packages to be installed
+from local directory or custom URL.</p></td>
     </tr>
     <tr>
       <th>custom_docker_image</th>
-      <td><p>The name of the docker image from which the image
-to use for training will be built. If not set, a default CPU based image will
-be used as the base image.</p></td>
+      <td><p>A string of the name of the Docker image from
+which the image to use for training will be built. If not set, a default
+CPU-based image will be used as the base image. To use an image from a
+private Docker repository, you will also have to specify the
+<code>image_registry_details</code> parameter.</p></td>
     </tr>
     <tr>
       <th>image_registry_details</th>
-      <td><p>The details of the Docker image registry.</p></td>
+      <td><p>A <code>ContainerRegistry</code> object of the details of
+the Docker image registry for the custom Docker image.</p></td>
     </tr>
     <tr>
       <th>use_gpu</th>
       <td><p>Indicates whether the environment to run the experiment should
-support GPUs.
-If TRUE, a GPU - based default Docker image will be used in the environment.
-If FALSE, a CPU - based image will be used. Default Docker images
-(CPU orGPU) will be used only if the 'custom_docker_image' parameter is not
-set.</p></td>
+support GPUs. If <code>TRUE</code>, a GPU-based default Docker image will be used in the
+environment. If <code>FALSE</code>, a CPU-based image will be used. Default Docker
+images (CPU or GPU) will only be used if the <code>custom_docker_image</code> parameter
+is not set.</p></td>
     </tr>
     <tr>
       <th>environment_variables</th>
-      <td><p>A dictionary of environment variables names 
-and values. These environment variables are set on the process where user 
+      <td><p>A named list of environment variables names
+and values. These environment variables are set on the process where the user
 script is being executed.</p></td>
     </tr>
     <tr>
       <th>shm_size</th>
-      <td><p>The size of the Docker container's shared memory block.</p></td>
+      <td><p>A string for the size of the Docker container's shared
+memory block. For more information, see
+<a href='https://docs.docker.com/engine/reference/run/'>Docker run reference</a>.
+If not set, a default value of <code>'2g'</code> is used.</p></td>
     </tr>
     <tr>
       <th>max_run_duration_seconds</th>
-      <td><p>The maximum allowed time for the run. 
-Azure ML will attempt to automatically cancel the run if it take longer 
-than this value.</p></td>
+      <td><p>An integer of the maximum allowed time for
+the run. Azure ML will attempt to automatically cancel the run if it takes
+longer than this value.</p></td>
     </tr>
     <tr>
       <th>environment</th>
-      <td><p>the R environment where the experiment is executed.
-Mutually exclusive with custom_docker_image, image_registry_details, use_gpu,
-environment_variables, shm_size, max_run_duration_seconds, cran_packages,
-github_packages and custom_url_packages.</p></td>
+      <td><p>The <code>Environment</code> object that configures the R
+environment where the experiment is executed. This parameter is mutually
+exclusive with the other environment-related parameters <code>custom_docker_image</code>
+, <code>image_registry_details</code>, <code>use_gpu</code>, <code>environment_variables</code>, <code>shm_size</code>,
+<code>cran_packages</code>, <code>github_packages</code>, and <code>custom_url_packages</code> and if set
+will take precedence over those parameters.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The <code>Estimator</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='r_environment.html'>r_environment()</a></code>, <code><a href='container_registry.html'>container_registry()</a></code>, <code><a href='submit_experiment.html'>submit_experiment()</a></code></p></div>
     
 
   </div>
@@ -239,7 +264,11 @@ github_packages and custom_url_packages.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

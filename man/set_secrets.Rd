@@ -16,7 +16,7 @@ where element name corresponds to the secret name.}
 Add a named list of secrets into the keyvault associated with the
 workspace.
 }
-\section{Usage}{
+\section{Examples}{
 \preformatted{ws <- load_workspace_from_config()
 my_secret <- Sys.getenv("MY_SECRET")
 keyvault <- get_default_keyvault(ws)

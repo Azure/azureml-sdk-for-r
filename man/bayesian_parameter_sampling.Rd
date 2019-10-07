@@ -2,17 +2,48 @@
 % Please edit documentation in R/hyperdrive.R
 \name{bayesian_parameter_sampling}
 \alias{bayesian_parameter_sampling}
-\title{Define Bayesian Parameter sampling over hyperparameter search space}
+\title{Define Bayesian sampling over a hyperparameter search space}
 \usage{
 bayesian_parameter_sampling(parameter_space)
 }
 \arguments{
-\item{parameter_space}{a named list containing each parameter and its
-distribution}
+\item{parameter_space}{A named list containing each parameter and its
+distribution, e.g. \code{list("parameter" = distribution)}.}
 }
 \value{
-HyperParameterSampling object
+The \code{BayesianParameterSampling} object.
 }
 \description{
-Define Bayesian Parameter sampling over hyperparameter search space
+Bayesian sampling is based on the Bayesian optimization algorithm and makes
+intelligent choices on the hyperparameter values to sample next. It picks
+the sample based on how the previous samples performed, such that the new
+sample improves the reported primary metric.
+}
+\section{Details}{
+
+When you use Bayesian sampling, the number of concurrent runs has an impact
+on the effectiveness of the tuning process. Typically, a smaller number of
+concurrent runs can lead to better sampling convergence, since the smaller
+degree of parallelism increases the number of runs that benefit from
+previously completed runs.
+
+Bayesian sampling only supports \code{choice()}, \code{uniform()}, and \code{quniform()}
+distributions over the search space.
+
+Bayesian sampling does not support any early termination policy. When
+using Bayesian parameter sampling, \code{early_termination_policy} must be
+\code{NULL}.
+}
+
+\section{Examples}{
+\preformatted{param_sampling <- bayesian_parameter_sampling( {
+        'learning_rate': uniform(0.05, 0.1),
+        'batch_size': choice(16, 32, 64, 128)
+    }
+)
+}
+}
+
+\seealso{
+\code{choice()}, \code{uniform()}, \code{quniform()}
 }

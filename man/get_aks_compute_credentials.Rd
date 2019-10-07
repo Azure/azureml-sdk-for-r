@@ -2,16 +2,16 @@
 % Please edit documentation in R/compute.R
 \name{get_aks_compute_credentials}
 \alias{get_aks_compute_credentials}
-\title{Retrieve the credentials for the AKS target}
+\title{Get the credentials for an AksCompute cluster}
 \usage{
 get_aks_compute_credentials(cluster)
 }
 \arguments{
-\item{cluster}{cluster object}
+\item{cluster}{The \code{AksCompute} object.}
 }
 \value{
-Credentials for the AKS target
+A named list of the cluster credentials.
 }
 \description{
-Retrieve the credentials for the AKS target
+Retrieved the credentials for an AksCompute cluster.
 }

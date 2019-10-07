@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Median Stopping policy for HyperDrive runs — median_stopping_policy • azureml</title>
+<title>Define a median stopping policy for early termination of HyperDrive runs — median_stopping_policy • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,14 @@
 
 
 
-<meta property="og:title" content="Create Median Stopping policy for HyperDrive runs — median_stopping_policy" />
+<meta property="og:title" content="Define a median stopping policy for early termination of HyperDrive runs — median_stopping_policy" />
 
-<meta property="og:description" content="Create Median Stopping policy for HyperDrive runs" />
+<meta property="og:description" content="Median stopping is an early termination policy based on running averages of
+primary metrics reported by the runs. This policy computes running averages
+across all training runs and terminates runs whose performance is worse than
+the median of the running averages. Specifically, a run will be canceled at
+interval N if its best primary metric reported up to interval N is worse than
+the median of the running averages for intervals 1:N across all runs." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +126,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Median Stopping policy for HyperDrive runs</h1>
+    <h1>Define a median stopping policy for early termination of HyperDrive runs</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/hyperdrive.R'><code>R/hyperdrive.R</code></a></small>
     <div class="hidden name"><code>median_stopping_policy.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create Median Stopping policy for HyperDrive runs</p>
+    <p>Median stopping is an early termination policy based on running averages of
+primary metrics reported by the runs. This policy computes running averages
+across all training runs and terminates runs whose performance is worse than
+the median of the running averages. Specifically, a run will be canceled at
+interval N if its best primary metric reported up to interval N is worse than
+the median of the running averages for intervals 1:N across all runs.</p>
     
     </div>
 
@@ -139,17 +149,53 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>evaluation_interval</th>
-      <td><p>frequency for applying policy</p></td>
+      <td><p>An integer of the frequency for applying policy.</p></td>
     </tr>
     <tr>
       <th>delay_evaluation</th>
-      <td><p>how many intervals to delay the first evaluation</p></td>
+      <td><p>An integer of the number of intervals for which to
+delay the first evaluation.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>EarlyTerminationPolicy object</p>
+    <p>The <code>MedianStoppingPolicy</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>The median stopping policy takes the following optional configuration
+parameters:</p><ul>
+<li><p><code>evaluation_interval</code>: Optional. The frequency for applying the policy.
+Each time the training script logs the primary metric counts as one
+interval.</p></li>
+<li><p><code>delay_evaluation</code>: Optional. The number of intervals to delay the
+policy evaluation. Use this parameter to avoid premature termination
+of training runs. If specified, the policy applies every multiple of
+<code>evaluation_interval</code> that is greater than or equal to <code>delay_evaluation</code>.</p></li>
+</ul>
+
+<p>This policy is inspired from the research publication
+<a href='https://ai.google/research/pubs/pub46180'>Google Vizier: A Service for Black-Box Optimization</a>.</p>
+<p>If you are looking for a conservative policy that provides savings without
+terminating promising jobs, you can use a <code>MedianStoppingPolicy</code> with
+<code>evaluation_interval = 1</code> and <code>delay_evaluation = 5</code>. These are conservative
+settings that can provide approximately 25<!-- %-35% savings with no loss on -->
+the primary metric (based on our evaluation data).</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>In this example, the early termination policy is applied at every
+interval starting at evaluation interval 5. A run will be terminated at
+interval 5 if its best primary metric is worse than the median of the
+running averages over intervals 1:5 across all training runs.</p><pre>early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
+                                                  delay_evaluation = 5L)
+</pre>
+
     
 
   </div>
@@ -159,6 +205,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

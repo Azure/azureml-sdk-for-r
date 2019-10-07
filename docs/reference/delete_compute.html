@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete compute — delete_compute • azureml</title>
+<title>Delete a cluster — delete_compute • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Delete compute — delete_compute" />
+<meta property="og:title" content="Delete a cluster — delete_compute" />
 
-<meta property="og:description" content="Delete compute" />
+<meta property="og:description" content="Remove the compute object from its associated workspace and delete the
+corresponding cloud-based resource." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +122,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete compute</h1>
+    <h1>Delete a cluster</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
     <div class="hidden name"><code>delete_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Delete compute</p>
+    <p>Remove the compute object from its associated workspace and delete the
+corresponding cloud-based resource.</p>
     
     </div>
 
@@ -139,9 +141,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cluster</th>
-      <td><p>cluster object</p></td>
+      <td><p>The <code>AmlCompute</code> or <code>AksCompute</code> object.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- get_compute(ws, cluster_name = 'mycluster')
+delete_compute(compute_target)
+</pre>
+
     
 
   </div>
@@ -149,7 +160,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>

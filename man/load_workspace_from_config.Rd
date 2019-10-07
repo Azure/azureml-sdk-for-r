@@ -7,17 +7,18 @@
 load_workspace_from_config(path = NULL)
 }
 \arguments{
-\item{path}{A string of the path to the config file or starting directory for search.
-The parameter defaults to starting the search in the current directory.}
+\item{path}{A string of the path to the config file or starting directory
+for search. The parameter defaults to starting the search in the current
+directory.}
 }
 \value{
 The \code{Workspace} object.
 }
 \description{
-Returns a \code{Workspace} object for an existing Azure Machine Learning workspace by
-reading the workspace configuration from a file. The method provides a simple way of
-reusing the same workspace across multiple files or projects. Users can save the
-workspace ARM properties using \code{write_workspace_config()}, and use this method to
-load the same workspace in different files or projects without retyping the workspace
-ARM properties.
+Returns a \code{Workspace} object for an existing Azure Machine Learning
+workspace by reading the workspace configuration from a file. The method
+provides a simple way of reusing the same workspace across multiple files or
+projects. Users can save the workspace ARM properties using
+\code{write_workspace_config()}, and use this method to load the same workspace
+in different files or projects without retyping the workspace ARM properties.
 }

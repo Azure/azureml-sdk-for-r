@@ -2,18 +2,25 @@
 % Please edit documentation in R/hyperdrive.R
 \name{uniform}
 \alias{uniform}
-\title{Specify a uniform distribution from which samples are taken}
+\title{Specify a uniform distribution of options to sample from}
 \usage{
 uniform(min_value, max_value)
 }
 \arguments{
-\item{min_value}{minimum value in the range (inclusive)}
+\item{min_value}{A double of the minimum value in the range
+(inclusive).}
 
-\item{max_value}{maximum value in the range (inclusive)}
+\item{max_value}{A double of the maximum value in the range
+(inclusive).}
 }
 \value{
-the stochastic expression
+A list of the stochastic expression.
 }
 \description{
-Specify a uniform distribution from which samples are taken
+Specify a uniform distribution of options to sample the
+hyperparameters from.
+}
+\seealso{
+\code{random_parameter_sampling()}, \code{grid_parameter_sampling()},
+\code{bayesian_parameter_sampling()}
 }

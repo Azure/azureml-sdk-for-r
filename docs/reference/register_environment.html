@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Register the environment object in your workspace. — register_environment • azureml</title>
+<title>Register an environment in the workspace — register_environment • azureml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,17 @@
 
 
 
-<meta property="og:title" content="Register the environment object in your workspace. — register_environment" />
+<meta property="og:title" content="Register an environment in the workspace — register_environment" />
 
-<meta property="og:description" content="Register the environment object in your workspace." />
+<meta property="og:description" content="The environment is automatically registered with your workspace when you
+submit an experiment or deploy a web service. You can also manually register
+the environment with register_environment(). This operation makes the
+environment into an entity that is tracked and versioned in the cloud, and
+can be shared between workspace users.
+Whe used for the first time in training or deployment, the environment is
+registered with the workspace, built, and deployed on the compute target.
+The environments are cached by the service. Reusing a cached environment
+takes much less time than using a new service or one that has bee updated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,14 +129,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Register the environment object in your workspace.</h1>
+    <h1>Register an environment in the workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
     <div class="hidden name"><code>register_environment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Register the environment object in your workspace.</p>
+    <p>The environment is automatically registered with your workspace when you
+submit an experiment or deploy a web service. You can also manually register
+the environment with <code>register_environment()</code>. This operation makes the
+environment into an entity that is tracked and versioned in the cloud, and
+can be shared between workspace users.</p>
+<p>Whe used for the first time in training or deployment, the environment is
+registered with the workspace, built, and deployed on the compute target.
+The environments are cached by the service. Reusing a cached environment
+takes much less time than using a new service or one that has bee updated.</p>
     
     </div>
 
@@ -139,13 +155,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>environment</th>
-      <td><p>The python environment where the experiment is executed.</p></td>
+      <td><p>The <code>Environment</code> object.</p></td>
     </tr>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The <code>Environment</code> object.</p>
     
 
   </div>
@@ -153,7 +173,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
