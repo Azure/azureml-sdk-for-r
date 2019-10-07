@@ -3,7 +3,7 @@
 |:------|:-----|
 | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7523&branchName=master) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master)](https://msdata.visualstudio.com/Vienna/_build/latest?definitionId=7950&branchName=master) |
 
-Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the  Azure Machine Learning service. 
+Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service. 
 
 Azure Machine Learning SDK for R uses the reticulate package to bind to [Azure Machine Learning's Python SDK](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.
 
@@ -11,6 +11,7 @@ Main capabilities of the SDK include:
 
 -   Manage cloud resources for monitoring, logging, and organizing your machine learning experiments.
 -   Train models using cloud resources, including GPU-accelerated model training.
+-   Deploy your models as webservices on Azure Container Instances (ACI) and Azure Kubernetes Service (AKS).
 
 Please take a look at the package website https://azure.github.io/azureml-sdk-for-r for complete documentation.
 
@@ -20,7 +21,7 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 
 | Features | Description | Status |
 |----------|-------------|--------|
-[Workspace](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#workspaces)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: |                     |
+[Workspace](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#workspaces)                     | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: | 
 [Data Plane Resources](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores)     | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
 [Compute](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#compute-targets) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
 [Experiment](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#experiments) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
@@ -29,13 +30,13 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 [HyperDrive](https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
 [Models](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_check_mark: |
 [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
-[Pipeline](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines) | Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A `Pipeline` represents a collection of steps which can be executed as a workflow. | :clipboard: |
+[Datasets](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :clipboard: |
 
 ## Installation
 
 Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
-To get started, use the `remotes` package to install AzureML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
+To get started, use the `remotes` package to install Azure ML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
 
 ```R
 > remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
@@ -49,7 +50,7 @@ Then, use `install_azureml()` to install the compiled code from the AzureML Pyth
 
 Now, you're ready to get started!
 
-For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](./docs/articles/installation.html).
+For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](https://azure.github.io/azureml-sdk-for-r/articles/installation.html).
 
 ## Getting Started
 
@@ -89,7 +90,11 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R.
 
 Take a look at our [code samples](samples/) and [end-to-end vignettes](vignettes/) for examples of what's possible with the SDK!
-  
+ 
+## Resources
+* R SDK package documentation: https://azure.github.io/azureml-sdk-for-r/reference/index.html
+* Azure Machine Learning service: https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml
+
 ## Contribute
 We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](CONTRIBUTING.md).
 
