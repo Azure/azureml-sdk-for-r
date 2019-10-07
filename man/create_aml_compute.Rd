@@ -69,15 +69,13 @@ automatically when a job is submitted.
 
 AmlCompute has default limits, such as the number of cores that can be
 allocated. For more information, see
-\link{Manage and request quotas for Azure resources}
-(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas}{Manage and request quotas for Azure resources}.
 }
 \section{Details}{
 
 For more information on using an Azure Machine Learning Compute resource
 in a virtual network, see
-\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
-(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
 }
 
 \section{Examples}{

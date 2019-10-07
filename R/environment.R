@@ -35,8 +35,8 @@
 #' If `FALSE`, a CPU-based image will be used. Default Docker images (CPU or
 #' GPU) will only be used if the `custom_docker_image` parameter is not set.
 #' @param shm_size A string for the size of the Docker container's shared
-#' memory block. For more information, see [Docker run reference]
-#' (https://docs.docker.com/engine/reference/run/).
+#' memory block. For more information, see
+#' [Docker run reference](https://docs.docker.com/engine/reference/run/)
 #' If not set, a default value of `'2g'` is used.
 #' @return The `Environment` object.
 #' @export
