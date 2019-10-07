@@ -135,8 +135,7 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
     } else {
       stop(message(e))
     }
-  }
-  )
+  })
 }
 
 #' Load workspace configuration details from a config file

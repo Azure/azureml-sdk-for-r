@@ -40,8 +40,8 @@ If \code{FALSE}, a CPU-based image will be used. Default Docker images (CPU or
 GPU) will only be used if the \code{custom_docker_image} parameter is not set.}
 
 \item{shm_size}{A string for the size of the Docker container's shared
-memory block. For more information, see \link{Docker run reference}
-(https://docs.docker.com/engine/reference/run/).
+memory block. For more information, see
+\href{https://docs.docker.com/engine/reference/run/}{Docker run reference}
 If not set, a default value of \code{'2g'} is used.}
 }
 \value{

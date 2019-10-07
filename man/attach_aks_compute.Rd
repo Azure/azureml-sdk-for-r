@@ -29,8 +29,7 @@ workspace.
 
 If you want to secure your AKS cluster using an Azure Virtual Network, you
 must create the virtual network first. For more information, see
-\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
-(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
 }
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()

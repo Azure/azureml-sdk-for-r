@@ -71,8 +71,7 @@ multiple deployments.
 
 For more information on using an AksCompute resource within a virtual
 network, see
-\link{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
-(https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
 }
 
 \section{Examples}{
