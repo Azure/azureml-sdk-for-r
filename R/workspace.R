@@ -124,9 +124,19 @@ create_workspace <- function(
 #' @export
 #' @md
 get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
-  azureml$core$Workspace$get(name, auth = NULL,
-                             subscription_id = subscription_id,
-                             resource_group = resource_group)
+  tryCatch({
+    azureml$core$Workspace$get(name, auth = NULL,
+                               subscription_id = subscription_id,
+                               resource_group = resource_group)
+  },
+  error = function(e) {
+    if (grepl("No workspaces found with name=", e$message, )) {
+      NULL
+    } else {
+      stop(message(e))
+    }
+  }
+  )
 }
 
 #' Load workspace configuration details from a config file
