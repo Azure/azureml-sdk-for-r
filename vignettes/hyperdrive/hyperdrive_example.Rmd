@@ -68,7 +68,7 @@ wait_for_provisioning_completion(compute_target)
 
 ## 3. Prepare training script
 
-In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["cifar10_cnn.R"](../../samples/training/cnn-tuning-with-hyperdrive/cifar10_cnn.R).
+In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["cifar10_cnn.R"](cifar10_cnn.R).
 
 ```r
 library("azureml")
