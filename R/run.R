@@ -288,7 +288,7 @@ view_run_details <- function(run) {
 
   if (status == "Completed" || status == "Failed") {
     diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
-               parsedate::parse_iso_8601(details$startTimeUtc))
+             parsedate::parse_iso_8601(details$startTimeUtc))
     duration <- paste(as.numeric(diff), "mins")
   }
   else {
