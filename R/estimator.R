@@ -83,7 +83,8 @@ estimator <- function(source_directory,
 
   if (is.null(environment)) {
     environment <- r_environment(
-      name = "",
+      name = NULL,
+      environment_variables = environment_variables,
       cran_packages = cran_packages,
       github_packages = github_packages,
       custom_url_packages = custom_url_packages,
@@ -98,7 +99,7 @@ estimator <- function(source_directory,
     compute_target = compute_target,
     vm_size = vm_size,
     vm_priority = vm_priority,
-    entry_script = launch_script,
+    entry_script = entry_script,
     script_params = script_params,
     max_run_duration_seconds = max_run_duration_seconds,
     environment_definition = environment)
