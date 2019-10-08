@@ -2,7 +2,7 @@ pandoc: 2.2.3.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  hyperdrive_example: hyperdrive_example.html
+  cnn-tuning-with-hyperdrive: cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html
   installation: installation.html
-  tensorflow_example: tensorflow_example.html
+  train-with-tensorflow: train-with-tensorflow/train-with-tensorflow.html
 

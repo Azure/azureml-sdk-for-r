@@ -60,7 +60,7 @@ wait_for_provisioning_completion(compute_target)
 
 ## 3. Prepare training script
 
-In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["tf_mnist.R"](../../samples/training/train-with-tensorflow/tf_mnist.R).
+In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["tf_mnist.R"](tf_mnist.R).
 
 ```r
 library("azureml")
@@ -84,7 +84,8 @@ An `Estimator` offers a simple way to launch a training job on a compute target.
 est <- estimator(source_directory = ".",
                  entry_script = "tf_mnist.R",
                  compute_target = compute_target,
-                 cran_packages = c("tensorflow"))
+                 cran_packages = c("tensorflow"),
+                 use_gpu = TRUE)
 ```
 
 ## 5. Submit a run
