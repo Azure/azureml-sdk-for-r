@@ -103,6 +103,7 @@
 <ul>
 <li>Manage cloud resources for monitoring, logging, and organizing your machine learning experiments.</li>
 <li>Train models using cloud resources, including GPU-accelerated model training.</li>
+<li>Deploy your models as webservices on Azure Container Instances (ACI) and Azure Kubernetes Service (AKS).</li>
 </ul>
 <p>Please take a look at the package website <a href="https://azure.github.io/azureml-sdk-for-r" class="uri">https://azure.github.io/azureml-sdk-for-r</a> for complete documentation.</p>
 <div id="key-features-and-roadmap" class="section level2">
@@ -158,7 +159,7 @@
 <td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models">Models</a></td>
+<td><a href="https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models">Model</a></td>
 <td>Cloud representations of machine learning models that help you transfer models between local development environments and the <code>Workspace</code> object in the cloud.</td>
 <td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
 </tr>
@@ -168,8 +169,8 @@
 <td><span class="emoji" data-emoji="heavy_check_mark">✔️</span></td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-ml-pipelines">Pipeline</a></td>
-<td>Machine learning pipelines optimize your workflow with speed, portability, and reuse. Pipelines are constructed from multiple steps, which are distinct computational units in the pipeline. Each step can run independently and use isolated compute resources. A <code>Pipeline</code> represents a collection of steps which can be executed as a workflow.</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores">Dataset</a></td>
+<td>An Azure Machine Learning <code>Dataset</code> allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities.</td>
 <td><span class="emoji" data-emoji="clipboard">📋</span></td>
 </tr>
 </tbody>
@@ -179,14 +180,14 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install <a href="https://docs.conda.io/en/latest/miniconda.html">Conda</a> if not already installed. Choose Python 3.5 or later.</p>
-<p>To get started, use the <code>remotes</code> package to install AzureML SDK for R from GitHub. As the current repo is not yet public, you will need to <a href="https://github.com/settings/tokens">generate a personal access token</a> and supply to auth_token argument. When generating the token, make sure to select the “repo” scope.</p>
+<p>To get started, use the <code>remotes</code> package to install Azure ML SDK for R from GitHub. As the current repo is not yet public, you will need to <a href="https://github.com/settings/tokens">generate a personal access token</a> and supply to auth_token argument. When generating the token, make sure to select the “repo” scope.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">                           <span class="dt">auth_token =</span> <span class="st">'&lt;your personal access token&gt;'</span>,</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">                           <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
 <p>Then, use <code><a href="reference/install_azureml.html">install_azureml()</a></code> to install the compiled code from the AzureML Python SDK.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>azureml<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azureml/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
 <p>Now, you’re ready to get started!</p>
-<p>For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our <a href="./docs/articles/installation.html">Installation Guide</a>.</p>
+<p>For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our <a href="https://azure.github.io/azureml-sdk-for-r/articles/installation.html">Installation Guide</a>.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -217,6 +218,16 @@
 </li>
 </ol>
 <p>Take a look at our <a href="samples/">code samples</a> and <a href="vignettes/">end-to-end vignettes</a> for examples of what’s possible with the SDK!</p>
+</div>
+<div id="resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h2>
+<ul>
+<li>R SDK package documentation: <a href="https://azure.github.io/azureml-sdk-for-r/reference/index.html" class="uri">https://azure.github.io/azureml-sdk-for-r/reference/index.html</a>
+</li>
+<li>Azure Machine Learning service: <a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml" class="uri">https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml</a>
+</li>
+</ul>
 </div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
