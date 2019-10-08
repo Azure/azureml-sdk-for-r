@@ -81,12 +81,18 @@ estimator <- function(source_directory,
                       max_run_duration_seconds = NULL,
                       environment = NULL) {
 
-  launch_script <- create_launch_script(source_directory,
-                                        entry_script,
-                                        cran_packages,
-                                        github_packages,
-                                        custom_url_packages)
-
+  if (is.null(environment)) {
+    environment <- r_environment(
+      name = "",
+      cran_packages = cran_packages,
+      github_packages = github_packages,
+      custom_url_packages = custom_url_packages,
+      image_registry_details = image_registry_details,
+      use_gpu = use_gpu,
+      shm_size = shm_size,
+      custom_docker_image = custom_docker_image)
+  }
+  
   est <- azureml$train$estimator$Estimator(
                             source_directory,
                             compute_target = compute_target,
@@ -94,82 +100,10 @@ estimator <- function(source_directory,
                             vm_priority = vm_priority,
                             entry_script = launch_script,
                             script_params = script_params,
-                            custom_docker_image = custom_docker_image,
-                            image_registry_details = image_registry_details,
-                            environment_variables = environment_variables,
-                            shm_size = shm_size,
                             max_run_duration_seconds = max_run_duration_seconds,
-                            environment_definition = environment)
+                            environment_definition = environment
 
   run_config <- est$run_config
   run_config$framework <- "R"
-
-  if (is.null(environment)) {
-
-    run_config$environment$python$user_managed_dependencies <- TRUE
-
-    if (is.null(custom_docker_image)) {
-      processor <- "cpu"
-      if (use_gpu) {
-        processor <- "gpu"
-      }
-
-      run_config$environment$docker$base_image <- paste("r-base",
-                                                        processor,
-                                                        sep = ":")
-      run_config$environment$docker$base_image_registry$address <-
-        "viennaprivate.azurecr.io"
-    }
-  }
-
   invisible(est)
-}
-
-#' Creates a R launch script which contains all the packages to be installed
-#' before running entry_script
-#' @param source_directory A local directory containing experiment configuration
-#' files.
-#' @param entry_script A string representing the relative path to the file used
-#' to start training.
-#' @param cran_packages character vector of cran packages to be installed.
-#' @param github_packages character vector of github packages to be installed.
-#' @param custom_url_packages character vector of packages to be installed from
-#' local, directory or custom url.
-create_launch_script <- function(source_directory,
-                                 entry_script,
-                                 cran_packages = NULL,
-                                 github_packages = NULL,
-                                 custom_url_packages = NULL) {
-  launch_file_name <- "_generated_launcher.R"
-  launch_file_conn <- file(file.path(source_directory, launch_file_name),
-                           open = "w")
-
-  writeLines(
-    c("# This is the auto-generated launcher file.",
-      "# It installs the packages specified in the estimator.",
-      "# Once all the packages are successfully installed, ",
-      "# it will execute the entry script."),
-    launch_file_conn)
-
-  if (!is.null(cran_packages)) {
-    writeLines(sprintf("install.packages(\"%s\", repos = \"%s\")\n",
-                       cran_packages,
-                       "http://cran.us.r-project.org"),
-               launch_file_conn)
-  }
-
-  if (!is.null(github_packages)) {
-    writeLines(sprintf("devtools::install_github(\"%s\")\n", github_packages),
-               launch_file_conn)
-  }
-
-  if (!is.null(custom_url_packages)) {
-    writeLines(sprintf("install.packages(\"%s\", repos = NULL)\n",
-                       custom_url_packages), launch_file_conn)
-  }
-
-  writeLines(sprintf("source(\"%s\")", entry_script), launch_file_conn)
-
-  close(launch_file_conn)
-  invisible(launch_file_name)
 }
