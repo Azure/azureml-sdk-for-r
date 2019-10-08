@@ -14,7 +14,7 @@ upload_files_to_datastore(ds,
                           overwrite = TRUE)
 
 # create aml compute
-cluster_name <- "rcluster"
+cluster_name <- "gpu-std-nc6"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"
@@ -30,6 +30,16 @@ est <- estimator(source_directory = ".",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target,
                  cran_packages = c("caret", "optparse", "e1071"))
+
+run_config <- est$run_config
+run_config$environment$python$conda_dependencies$set_python_version("3.6.9")
+run_config$environment$python$conda_dependencies$add_channel("r")
+#run_config$environment$python$conda_dependencies$add_conda_package("r-essentials")
+#run_config$environment$python$conda_dependencies$add_conda_package("r-remotes")
+run_config$environment$python$user_managed_dependencies <- FALSE
+run_config$environment$docker$base_image <- "ninhu/r-base:cpu"
+run_config$environment$docker$base_image_registry$address <- NULL
+
 
 experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
