@@ -16,7 +16,7 @@ check_code_style <- function(directory) {
     file <- file.path(".", "R", filename)
 
     style_issues <- lintr::lint(file, linters = with_defaults(
-      line_length_linter = line_length_linter(172L),
+      line_length_linter = line_length_linter(240L),
       object_length_linter = object_length_linter(40L)
       )
     )

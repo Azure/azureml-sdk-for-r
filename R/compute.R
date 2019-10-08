@@ -15,8 +15,7 @@
 #'
 #' AmlCompute has default limits, such as the number of cores that can be
 #' allocated. For more information, see
-#' [Manage and request quotas for Azure resources]
-#' (https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).
+#' [Manage and request quotas for Azure resources](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas).
 #' @param workspace The `Workspace` object.
 #' @param cluster_name A string of the name of the cluster.
 #' @param vm_size A string of the size of agent VMs. More details can be found
@@ -49,8 +48,7 @@
 #' @section Details:
 #' For more information on using an Azure Machine Learning Compute resource
 #' in a virtual network, see
-#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network]
-#' (https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).
+#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).
 #' @section Examples:
 #' ```
 #' ws <- load_workspace_from_config()
@@ -250,8 +248,7 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' @section Details:
 #' For more information on using an AksCompute resource within a virtual
 #' network, see
-#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network]
-#' (https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).
+#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks)
 #' @section Examples:
 #' Create an AksCompute cluster using the default configuration (you can also
 #' provide parameters to customize this).
@@ -316,8 +313,7 @@ get_aks_compute_credentials <- function(cluster) {
 #'
 #' If you want to secure your AKS cluster using an Azure Virtual Network, you
 #' must create the virtual network first. For more information, see
-#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network]
-#' (https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet).
+#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet)
 #' @param workspace The `Workspace` object to attach the AKS cluster to.
 #' @param cluster_name A string of the name for the cluster.
 #' @param resource_id A string of the resource ID for the AKS cluster being

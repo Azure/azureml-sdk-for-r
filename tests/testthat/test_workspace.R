@@ -30,4 +30,8 @@ test_that("create, get, save, load and delete workspace", {
     
     # delete workspace
     delete_workspace(existing_ws)
+    
+    # negative testing
+    ws <- get_workspace("random", subscription_id = subscription_id)
+    expect_equal(ws, NULL)
 })
