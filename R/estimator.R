@@ -101,7 +101,7 @@ estimator <- function(source_directory,
                             entry_script = launch_script,
                             script_params = script_params,
                             max_run_duration_seconds = max_run_duration_seconds,
-                            environment_definition = environment
+                            environment_definition = environment)
 
   run_config <- est$run_config
   run_config$framework <- "R"
