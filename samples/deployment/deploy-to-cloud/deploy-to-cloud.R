@@ -2,6 +2,7 @@
 # Licensed under the MIT license.
 
 library("azureml")
+library("jsonlite")
 
 ws <- load_workspace_from_config()
 
@@ -48,3 +49,5 @@ plant <- data.frame(Sepal.Length = 6.7,
                     Petal.Width = 2.3)
 
 predicted_val <- invoke_webservice(service, toJSON(plant))
+predicted_val
+
