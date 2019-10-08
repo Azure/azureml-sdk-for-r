@@ -287,8 +287,8 @@ view_run_details <- function(run) {
                           "Link", "</a>")
 
   if (status == "Completed" || status == "Failed") {
-    diff <- (parse_iso_8601(details$endTimeUtc) -
-               parse_iso_8601(details$startTimeUtc))
+    diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
+               parsedate::parse_iso_8601(details$startTimeUtc))
     duration <- paste(as.numeric(diff), "mins")
   }
   else {
