@@ -92,16 +92,16 @@ estimator <- function(source_directory,
       shm_size = shm_size,
       custom_docker_image = custom_docker_image)
   }
-  
+
   est <- azureml$train$estimator$Estimator(
-                            source_directory,
-                            compute_target = compute_target,
-                            vm_size = vm_size,
-                            vm_priority = vm_priority,
-                            entry_script = launch_script,
-                            script_params = script_params,
-                            max_run_duration_seconds = max_run_duration_seconds,
-                            environment_definition = environment)
+    source_directory,
+    compute_target = compute_target,
+    vm_size = vm_size,
+    vm_priority = vm_priority,
+    entry_script = launch_script,
+    script_params = script_params,
+    max_run_duration_seconds = max_run_duration_seconds,
+    environment_definition = environment)
 
   run_config <- est$run_config
   run_config$framework <- "R"
