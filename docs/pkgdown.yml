@@ -1,0 +1,8 @@
+pandoc: 2.2.3.2
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  cnn-tuning-with-hyperdrive: cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html
+  installation: installation.html
+  train-with-tensorflow: train-with-tensorflow/train-with-tensorflow.html
+
