@@ -226,10 +226,10 @@ inference_config <- function(entry_script,
   generate_score_python_wrapper(entry_script, source_directory)
   if (!is.null(environment)) {
       environment$inferencing_stack_version <- "latest"
-      if (is.null(environment$docker$base_image))
-        environment$docker$base_image <- "r:base"
-      else
-        saved_image <- environment$docker$base_image
+      
+      # this is a temporary fix for github issue #101
+      saved_image <- environment$docker$base_image
+      environment$docker$base_image <- "temp_image"
   }
 
   inference_config <- azureml$core$model$InferenceConfig(
