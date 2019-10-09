@@ -222,9 +222,14 @@ inference_config <- function(entry_script,
                              source_directory = NULL,
                              description = NULL,
                              environment = NULL) {
+  saved_image <- NULL
   generate_score_python_wrapper(entry_script, source_directory)
   if (!is.null(environment)) {
       environment$inferencing_stack_version <- "latest"
+      if (is.null(environment$docker$base_image))
+        environment$docker$base_image <- "r:base"
+      else
+        saved_image <- environment$docker$base_image
   }
 
   inference_config <- azureml$core$model$InferenceConfig(
@@ -233,6 +238,7 @@ inference_config <- function(entry_script,
     description = description,
     environment = environment)
 
+  inference_config$environment$docker$base_image <- saved_image
   invisible(inference_config)
 }
 
