@@ -226,7 +226,7 @@ inference_config <- function(entry_script,
   generate_score_python_wrapper(entry_script, source_directory)
   if (!is.null(environment)) {
       environment$inferencing_stack_version <- "latest"
-      
+
       # this is a temporary fix for github issue #101
       saved_image <- environment$docker$base_image
       environment$docker$base_image <- "temp_image"
