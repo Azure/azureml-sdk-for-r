@@ -1,6 +1,6 @@
 # skip the lines before `subscription_id <- ...` if azureml R package and its
 # python sdk is already installed.
-devtools::install_github('https://github.com/Azure/azureml-sdk-for-r')
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
 library(azureml)
 install_azureml()
