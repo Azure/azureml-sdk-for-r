@@ -17,11 +17,10 @@ As the `azureml` package is not available on CRAN, you will need `remotes` to in
 ``` {r Install Remotes, eval=FALSE}
 install.packages('remotes')
 ``` 
-Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to use a [generated personal access token](https://github.com/settings/tokens). When generating the token, make sure to select the "repo" scope.
+Then, you can use the `install_github` function to install the package.
 
 ``` {r Install Azureml, eval=FALSE}
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                        auth_token = '<your personal access token>',
                         INSTALL_opts=c("--no-multiarch"),
                         build_vignettes = FALSE)
 ```
