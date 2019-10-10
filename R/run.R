@@ -279,8 +279,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Plot table of run details in Viewer
 #' @param run run used for plotting
-#' @export
-view_run_details <- function(run) {
+plot_run_details <- function(run) {
   status <- run$get_status()
   details <- run$get_details()
   web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
@@ -306,7 +305,7 @@ view_run_details <- function(run) {
                     run$id,
                     status,
                     format(parsedate::parse_iso_8601(details$startTimeUtc),
-                           format = "%B %d %Y %H:%M:%S"),
+                           format = "%B %d, %Y %H:%M:%S"),
                     duration,
                     details$runDefinition$target,
                     details$runDefinition$script,
@@ -318,4 +317,30 @@ view_run_details <- function(run) {
   DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
                 caption = paste(unlist(details$warnings), collapse = "\r\n"),
                 options = list(dom = "t", scrollY = TRUE))
+}
+
+#' Show run details in viewer pane
+#' @param run Run object
+#' @export
+view_run_details <- function(run) {
+  if (rstudioapi::isAvailable()) {
+    library(here)
+    path <- here("R", "app", "app.R")
+    
+    run_url <- run$get_portal_url()
+    assign("run_url", run_url, envir=globalenv())
+    
+    rstudioapi::jobRunScript(path,
+                             importEnv = TRUE)
+
+    Sys.sleep(5)
+    viewer <- getOption("viewer")
+    if (!is.null(viewer)) {
+      viewer("http://localhost:8000")
+    } else {
+      utils::browseURL("http://localhost:8000")
+    }
+  } else {
+    plot_run_details()
+  }
 }

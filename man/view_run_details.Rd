@@ -2,13 +2,13 @@
 % Please edit documentation in R/run.R
 \name{view_run_details}
 \alias{view_run_details}
-\title{Plot table of run details in Viewer}
+\title{Show run details in viewer pane}
 \usage{
 view_run_details(run)
 }
 \arguments{
-\item{run}{run used for plotting}
+\item{run}{Run object}
 }
 \description{
-Plot table of run details in Viewer
+Show run details in viewer pane
 }
