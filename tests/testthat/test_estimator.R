@@ -48,13 +48,6 @@ test_that("create, submit experiment, run in default amlcompute,
   expect_true("dummy_data" %in% files)
   expect_true("folder1/train_dummy.R" %in% files)
   
-  workspaces <- list_workspaces(subscription_id)
-  workspaces
-  get_workspace_details(ws)
-  x <- plyr::ldply(get_workspace_details(ws), data.frame)
-  
-  get_run_details(run)
-  
   # tear down resources
   unlink(tmp_dir_name, recursive = TRUE)
 })
