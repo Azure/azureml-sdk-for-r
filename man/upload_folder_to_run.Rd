@@ -4,14 +4,14 @@
 \alias{upload_folder_to_run}
 \title{Upload the specified folder to the given prefix name.}
 \usage{
-upload_folder_to_run(run, name, path)
+upload_folder_to_run(name, path, run = NULL)
 }
 \arguments{
-\item{run}{Run object.}
-
 \item{name}{The name of the folder of files to upload.}
 
 \item{path}{The relative local path to the folder to upload.}
+
+\item{run}{Run object.}
 }
 \description{
 Upload the specified folder to the given prefix name.

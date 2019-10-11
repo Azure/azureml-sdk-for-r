@@ -321,14 +321,15 @@ view_run_details <- function(run) {
 }
 
 #' Upload files to the run record.
-#' @param run Run object.
 #' @param names The names of the files to upload. If set, paths must also be
 #' set.
 #' @param paths The relative local paths to the files to upload. If set, names
 #' is required.
 #' @param timeout_seconds The timeout for uploading files.
+#' @param run Run object.
 #' @export
-upload_files_to_run <- function(run, names, paths, timeout_seconds = NULL) {
+upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
+                                run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
@@ -342,11 +343,11 @@ upload_files_to_run <- function(run, names, paths, timeout_seconds = NULL) {
 }
 
 #' Upload the specified folder to the given prefix name.
-#' @param run Run object.
 #' @param name The name of the folder of files to upload.
 #' @param path The relative local path to the folder to upload.
+#' @param run Run object.
 #' @export
-upload_folder_to_run <- function(run, name, path) {
+upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }

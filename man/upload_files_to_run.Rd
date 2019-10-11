@@ -4,18 +4,18 @@
 \alias{upload_files_to_run}
 \title{Upload files to the run record.}
 \usage{
-upload_files_to_run(run, names, paths, timeout_seconds = NULL)
+upload_files_to_run(names, paths, timeout_seconds = NULL, run = NULL)
 }
 \arguments{
-\item{run}{Run object.}
-
-\item{names}{The names of the files to upload. If set, paths must also be 
+\item{names}{The names of the files to upload. If set, paths must also be
 set.}
 
-\item{paths}{The relative local paths to the files to upload. If set, names 
+\item{paths}{The relative local paths to the files to upload. If set, names
 is required.}
 
 \item{timeout_seconds}{The timeout for uploading files.}
+
+\item{run}{Run object.}
 }
 \description{
 Upload files to the run record.
