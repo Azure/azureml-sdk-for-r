@@ -291,6 +291,9 @@ plot_run_details <- function(run) {
   diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
            parsedate::parse_iso_8601(details$startTimeUtc))
   duration <- paste(as.numeric(diff), "mins")
+  
+  link_warn <- paste("Ctrl + click here to view run details in the Web Portal:",
+                     web_view_link, collapse = "\r\n")
 
   df <- matrix(list("Run Id",
                     "Status",
