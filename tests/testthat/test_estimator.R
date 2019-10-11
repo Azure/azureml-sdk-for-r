@@ -27,8 +27,13 @@ test_that("create, submit experiment, run in default amlcompute,
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
   
+  log_image_to_run("myplot", plot = ggplot(), run = run)
+  
   run <- get_run(exp, run$id)
   metrics <- get_run_metrics(run)
+  
+  files <- get_run_file_names(run)
+  expect_equal(is.element("_generated_rplot.png", files), TRUE)
   
   expected_metrics <- list("test_metric" = 0.5)
   expect_equal(length(setdiff(metrics, expected_metrics)), 0)
