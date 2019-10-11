@@ -5,6 +5,7 @@ resource_group <- Sys.getenv("TEST_RESOURCE_GROUP")
 location <- Sys.getenv("TEST_LOCATION")
 
 test_that("create, get, save, load and delete workspace", {
+    skip('skip')
     # create workspace
     workspace_name <- paste0("test_ws", build_num)
     existing_ws <- create_workspace(workspace_name,

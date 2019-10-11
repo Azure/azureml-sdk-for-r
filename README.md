@@ -36,12 +36,10 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 
 Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
-To get started, use the `remotes` package to install Azure ML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
+To get started, use the `remotes` package to install Azure ML SDK for R from GitHub.
 
 ```R
-> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           auth_token = '<your personal access token>',
-                           INSTALL_opts=c("--no-multiarch"))
+> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
 Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 ```R
