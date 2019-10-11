@@ -2,7 +2,7 @@
 % Please edit documentation in R/run.R
 \name{view_run_details}
 \alias{view_run_details}
-\title{Show run details in viewer pane}
+\title{Show run details in viewer pane or browser}
 \usage{
 view_run_details(run)
 }
@@ -10,5 +10,5 @@ view_run_details(run)
 \item{run}{Run object}
 }
 \description{
-Show run details in viewer pane
+Show run details in viewer pane or browser
 }

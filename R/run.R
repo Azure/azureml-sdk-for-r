@@ -316,10 +316,12 @@ plot_run_details <- function(run) {
                 options = list(dom = "t", scrollY = TRUE))
 }
 
-#' Show run details in viewer pane
+#' Show run details in viewer pane or browser
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
+  
+  # Run widget unless in Notebook VM
   if (!grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH")) &&
       rstudioapi::isAvailable()) {
     library(here)
