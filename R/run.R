@@ -191,6 +191,11 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
   if (is.null(run)) {
     run <- get_current_run()
   }
+  if (!is.null(plot)) {
+    path <- "_generated_rplot.png"
+    ggsave(filename = path, plot = plot)
+    plot <- NULL
+  }
   run$log_image(name, path = path, plot = plot, description = description)
   run$flush()
   invisible(NULL)
