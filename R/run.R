@@ -321,10 +321,10 @@ view_run_details <- function(run) {
 }
 
 #' Upload files to the run record.
-#' @param names The names of the files to upload. If set, paths must also be
-#' set.
-#' @param paths The relative local paths to the files to upload. If set, names
-#' is required.
+#' @param names A character vector of file names to upload. If set,
+#' paths must also be set.
+#' @param paths A character vector of relative local paths to the files to
+#' upload. If set, names is required.
 #' @param timeout_seconds The timeout for uploading files.
 #' @param run Run object.
 #' @export
