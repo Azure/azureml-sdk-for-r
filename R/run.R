@@ -285,14 +285,12 @@ plot_run_details <- function(run) {
   web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
                           "Link", "</a>")
 
-  if (status == "Completed" || status == "Failed") {
-    diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
-             parsedate::parse_iso_8601(details$startTimeUtc))
-    duration <- paste(as.numeric(diff), "mins")
-  }
-  else {
-    duration <- "-"
-  }
+  start_time <- format(parsedate::parse_iso_8601(start_time),
+                       format = "%B %d, %Y %H:%M:%S")
+
+  diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
+           parsedate::parse_iso_8601(details$startTimeUtc))
+  duration <- paste(as.numeric(diff), "mins")
 
   df <- matrix(list("Run Id",
                     "Status",
@@ -304,8 +302,7 @@ plot_run_details <- function(run) {
                     "Web View",
                     run$id,
                     status,
-                    format(parsedate::parse_iso_8601(details$startTimeUtc),
-                           format = "%B %d, %Y %H:%M:%S"),
+                    start_time,
                     duration,
                     details$runDefinition$target,
                     details$runDefinition$script,
@@ -323,17 +320,16 @@ plot_run_details <- function(run) {
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
-  if (rstudioapi::isAvailable()) {
+  if (!grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH")) &&
+      rstudioapi::isAvailable()) {
     library(here)
     path <- here("R", "app", "app.R")
     
     run_url <- run$get_portal_url()
     assign("run_url", run_url, envir=globalenv())
     
-    rstudioapi::jobRunScript(path,
-                             importEnv = TRUE)
+    rstudioapi::jobRunScript(path, importEnv = TRUE)
 
-    Sys.sleep(5)
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer("http://localhost:8000")
