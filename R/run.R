@@ -356,3 +356,13 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 
   invisible(NULL)
 }
+
+#' Mark the run as completed. This is typically used in interactive logging
+#' scenarios.
+#' @param run Run object.
+#' @export
+complete_run <- function(run) {
+  run$complete()
+
+  invisible(NULL)
+}
