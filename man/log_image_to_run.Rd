@@ -12,7 +12,7 @@ log_image_to_run(name, path = NULL, plot = NULL, description = "",
 
 \item{path}{The path or stream of the image}
 
-\item{plot}{The plot to log as an image}
+\item{plot}{The ggplot to log as an image.}
 
 \item{description}{An optional metric description}
 
