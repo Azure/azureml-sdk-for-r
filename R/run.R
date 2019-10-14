@@ -188,9 +188,9 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' @export
 log_image_to_run <- function(name, path = NULL, plot = NULL,
                              description = "", run = NULL) {
-  if (!is.null(path) && !is.null(plot) {
-    stop(paste("Invalid parameters, path and plot were both provided,",
-               " only one at a time is supported", sep = "")
+  if (!is.null(path) && !is.null(plot)) {
+    stop(paste0("Invalid parameters, path and plot were both provided,",
+               " only one at a time is supported")
   }
 
   delete_path <- FALSE
@@ -198,7 +198,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
     run <- get_current_run()
   }
   if (!is.null(plot)) {
-    path <- paste(name, "_", as.integer(Sys.time()), ".png", sep = "")
+    path <- paste0(name, "_", as.integer(Sys.time()), ".png")
     ggplot2::ggsave(filename = path, plot = plot)
     plot <- NULL
     delete_path <- TRUE
