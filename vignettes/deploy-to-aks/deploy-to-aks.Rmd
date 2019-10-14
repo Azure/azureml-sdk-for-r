@@ -1,0 +1,144 @@
+---
+title: "Deploying to AKS with Azure ML SDK for R"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deploying to AKS with Azure ML SDK for R}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This article demonstrates how to deploy a model and conduct inferencing in the model using AzureML SDK for R. We will take a previously saved [model](https://github.com/Azure/azureml-sdk-for-r/blob/master/samples/training/train-on-amlcompute/train-on-amlcompute.R). The saved model was trained with the Iris Dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica).
+
+We will show you how to:
+
+0. Set up the experiment
+
+1. Register a model on Azure ML
+
+2. Create the deployment environment
+
+3. Create the inferencing configurations
+
+4. Provision an AKS cluster 
+
+5. Deploy the model as a service to the AKS cluster
+
+6. Conduct inferencing on the deployed service.
+
+## 0. Set up the experiment
+
+Let's prepare for training by loading the required package, initializing a workspace, and creating an experiment.
+
+### Import package
+```{r Import package, eval=FALSE}
+library("azureml")
+```
+
+### Initialize a workspace
+
+The `Workspace` is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create. 
+
+You can create a `Workspace` object from a local `config.json` file
+```{r Load a workspace, eval=FALSE}
+ws <- load_workspace_from_config()
+```
+
+Or load an existing workspace from your Azure Machine Learning account
+```{r Initialize a workspace, eval=FALSE}
+ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your resource group>")
+```
+
+## 1. Register the model
+
+For this example, register an existing trained model, add name and description.
+
+```{r Register the model, eval=FALSE}
+model <- register_model(ws, 
+                        model_path = "model.rds", 
+                        model_name = "iris_model",
+                        description = "Predict an Iris flower type")
+```
+
+## 2. Create environment
+Create an environment that the model will be deployed with
+```{r Create environment, eval=FALSE}
+r_env <- r_environment(name = "r_env")
+```
+
+## 3. Create inference config
+Create the inference config that will be used when deploying the model.
+
+``` {r Create inference config, eval=FALSE}
+inference_config <- inference_config(
+  entry_script = "score.R",
+  source_directory = ".",
+  environment = r_env)
+
+```
+
+## 4. Provision AKS cluster
+This is a one time setup. You can reuse this cluster for multiple deployments after it has been created. If you delete the cluster or the resource group that contains it, then you would have to recreate it.
+
+``` {r Provision AKS cluster, eval=FALSE}
+aks_target <- create_aks_compute(ws, cluster_name = 'my-new-cluster')
+wait_for_provisioning_completion(aks_target)
+```
+
+## 5. Deploy the model to AKS and waiting for deployment
+
+Set the web service configuration.
+
+``` {r Web service configuration, eval=FALSE}
+aks_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+```
+
+Deploy web service to AKS Cluster
+```{r Deploy web service to AKS, eval=FALSE}
+aks_service <- deploy_model(ws, 
+                        'my-new-aksrservice', 
+                        list(model), 
+                        inference_config, 
+                        aks_config,
+                        aks_target)
+wait_for_deployment(aks_service, show_output = TRUE)
+```
+
+## 6. Test Inferencing on deployed service
+
+We test the web service by passing data for a specific type of Iris.
+
+``` {r Test Inferencing on deployed service, eval=FALSE}
+# If you encounter any issue in deploying the webservice, please visit
+# https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment
+
+# Inferencing
+# versicolor
+plant <- data.frame(Sepal.Length = 6.4,
+                    Sepal.Width = 2.8,
+                    Petal.Length = 4.6,
+                    Petal.Width = 1.8)
+# setosa
+# plant <- data.frame(Sepal.Length = 5.1,
+#                    Sepal.Width = 3.5,
+#                    Petal.Length = 1.4,
+#                    Petal.Width = 0.2)
+
+# virginica
+# plant <- data.frame(Sepal.Length = 6.7,
+#                    Sepal.Width = 3.3,
+#                    Petal.Length = 5.2,
+#                    Petal.Width = 2.3)
+
+predicted_val <- invoke_webservice(aks_service, toJSON(plant))
+message(predicted_val)
+```
+
+The result is "versicolor", the model was able to predict the correct type of Iris.
+
+## 6. Service clean up
+Delete the service and model.
+``` {r Service clean up, eval=FALSE}
+delete_webservice(aks_service)
+delete_model(model)
+```
