@@ -190,7 +190,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
                              description = "", run = NULL) {
   if (!is.null(path) && !is.null(plot)) {
     stop(paste0("Invalid parameters, path and plot were both provided,",
-               " only one at a time is supported")
+                " only one at a time is supported"))
   }
 
   delete_path <- FALSE
