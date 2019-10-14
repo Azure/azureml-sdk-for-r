@@ -27,7 +27,7 @@ test_that("create, submit experiment, run in default amlcompute,
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
   
-  log_image_to_run("myplot", plot = ggplot(), run = run)
+  log_image_to_run("myplot", plot = ggplot2::ggplot(), run = run)
   
   run <- get_run(exp, run$id)
   metrics <- get_run_metrics(run)
