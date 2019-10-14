@@ -192,7 +192,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
     run <- get_current_run()
   }
   if (!is.null(plot)) {
-    path <- "_generated_rplot.png"
+    path <- paste(name, "_", as.integer(Sys.time()), ".png", sep = "")
     ggsave(filename = path, plot = plot)
     plot <- NULL
   }
@@ -323,4 +323,41 @@ view_run_details <- function(run) {
   DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
                 caption = paste(unlist(details$warnings), collapse = "\r\n"),
                 options = list(dom = "t", scrollY = TRUE))
+}
+
+#' Upload files to the run record.
+#' @param names A character vector of file names to upload. If set,
+#' paths must also be set.
+#' @param paths A character vector of relative local paths to the files to
+#' upload. If set, names is required.
+#' @param timeout_seconds The timeout for uploading files.
+#' @param run Run object.
+#' @export
+upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
+                                run = NULL) {
+  if (is.null(run)) {
+    run <- get_current_run()
+  }
+
+  run$upload_files(
+    names = names,
+    paths = paths,
+    timeout_seconds = timeout_seconds)
+
+  invisible(NULL)
+}
+
+#' Upload the specified folder to the given prefix name.
+#' @param name The name of the folder of files to upload.
+#' @param path The relative local path to the folder to upload.
+#' @param run Run object.
+#' @export
+upload_folder_to_run <- function(name, path, run = NULL) {
+  if (is.null(run)) {
+    run <- get_current_run()
+  }
+
+  run$upload_folder(name, path)
+
+  invisible(NULL)
 }
