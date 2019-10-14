@@ -181,7 +181,7 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' Log an image metric to the run record.
 #' @param name The name of metric
 #' @param path The path or stream of the image
-#' @param plot The plot to log as an image. It can be a ggplot or a matplotlib.pyplot
+#' @param plot The ggplot to log as an image.
 #' @param description An optional metric description
 #' @param run Run object. If not specified, will default to current run from
 #' service context.
@@ -193,7 +193,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
   }
   if (!is.null(plot)) {
     path <- paste(name, "_", as.integer(Sys.time()), ".png", sep = "")
-    ggsave(filename = path, plot = plot)
+    ggplot2::ggsave(filename = path, plot = plot)
     plot <- NULL
   }
   run$log_image(name, path = path, plot = plot, description = description)
