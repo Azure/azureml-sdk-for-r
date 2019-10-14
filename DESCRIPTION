@@ -18,6 +18,7 @@ RoxygenNote: 6.1.1
 Depends: 
     R (>= 3.5.0)
 Imports:
+    ggplot2,
     reticulate (>= 1.12),
     R6 (>= 2.4.0),
     plyr (>= 1.8),

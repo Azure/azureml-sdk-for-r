@@ -27,11 +27,17 @@ test_that("create, submit experiment, run in default amlcompute,
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
   
+  log_image_to_run("myplot", plot = ggplot2::ggplot(), run = run)
+  
   run <- get_run(exp, run$id)
   metrics <- get_run_metrics(run)
   
+  files <- get_run_file_names(run)
+  image_found <- grep("myplot", files)
+  assertthat::assert_that(length(image_found) > 0)
+
   expect_equal(metrics$test_metric, 0.5)
-  
+
   expected_list <- c(1, 2, 3)
   expect_equal(length(setdiff(metrics$test_list, expected_list)), 0)
 
