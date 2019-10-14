@@ -3,6 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   cnn-tuning-with-hyperdrive: cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html
+  deploy-to-aks: deploy-to-aks/deploy-to-aks.html
   installation: installation.html
   train-with-tensorflow: train-with-tensorflow/train-with-tensorflow.html
 
