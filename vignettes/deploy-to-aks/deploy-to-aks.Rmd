@@ -1,14 +1,14 @@
 ---
-title: "Deploying to AKS with Azure ML SDL for R"
+title: "Deploying to AKS with Azure ML SDK for R"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Deploying to AKS with Azure ML SDL for R}
+  %\VignetteIndexEntry{Deploying to AKS with Azure ML SDK for R}
   %\VignetteEngine{knitr::rmarkdown}
   \use_package{UTF-8}
 ---
 
-This article demonstrates how to deploy a model and conduct inferencing in the model using AzureML SDK for R. We will take a previous saved model. The saved model was trained with the Iris Dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica).
+This article demonstrates how to deploy a model and conduct inferencing in the model using AzureML SDK for R. We will take a previously saved [model](https://github.com/Azure/azureml-sdk-for-r/blob/master/samples/training/train-on-amlcompute/train-on-amlcompute.R). The saved model was trained with the Iris Dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica).
 
 We will show you how to:
 
@@ -87,10 +87,10 @@ wait_for_provisioning_completion(aks_target)
 
 ## 5. Deploy the model to AKS and waiting for deployment
 
-Set the web service configuration (using default here)
+Set the web service configuration.
 
 ``` {r Web service configuration, eval=FALSE}
-aks_config <- aks_webservice_deployment_config()
+aks_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
 ```
 
 Deploy web service to AKS Cluster
@@ -137,7 +137,7 @@ message(predicted_val)
 The result is "versicolor", the model was able to predict the correct type of Iris.
 
 ## 6. Service clean up
-Delete the service, image and model.
+Delete the service and model.
 ``` {r Service clean up, eval=FALSE}
 delete_webservice(aks_service)
 delete_model(model)
