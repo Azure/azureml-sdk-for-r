@@ -279,6 +279,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Plot table of run details in Viewer
 #' @param run run used for plotting
+#' @export
 plot_run_details <- function(run) {
   status <- run$get_status()
   details <- run$get_details()
@@ -310,7 +311,7 @@ plot_run_details <- function(run) {
                     details$runDefinition$target,
                     details$runDefinition$script,
                     toString(details$runDefinition$arguments),
-                    web_view_link),
+                    link_warn),
                nrow = 8,
                ncol = 2)
 
@@ -323,18 +324,18 @@ plot_run_details <- function(run) {
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
+  rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
   
   # Run widget unless in Notebook VM
-  if (!grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH")) &&
-      rstudioapi::isAvailable()) {
+  if (!rstudio_server && rstudioapi::isAvailable()) {
     library(here)
     path <- here("R", "app", "app.R")
     
-    run_url <- run$get_portal_url()
-    assign("run_url", run_url, envir=globalenv())
+    assign("run_url", run$get_portal_url(), envir=globalenv())
     
-    rstudioapi::jobRunScript(path, importEnv = TRUE)
+    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run.id)
 
+    # use viewer if available, else browser
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer("http://localhost:8000")
