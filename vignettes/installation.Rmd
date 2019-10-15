@@ -17,18 +17,16 @@ As the `azureml` package is not available on CRAN, you will need `remotes` to in
 ``` {r Install Remotes, eval=FALSE}
 install.packages('remotes')
 ``` 
-Then, you can use the `install_github` function to install the package. Until the current repo is opened to the public, you will need to use a [generated personal access token](https://github.com/settings/tokens). When generating the token, make sure to select the "repo" scope.
+Then, you can use the `install_github` function to install the package.
 
 ``` {r Install Azureml, eval=FALSE}
-remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                        auth_token = '<your personal access token>',
-                        INSTALL_opts=c("--no-multiarch"),
-                        build_vignettes = FALSE)
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
-Set `build_vignettes` to TRUE if you would like the vignettes to be downloaded along with the main package.
 
 ## 3. Install AzureML Python SDK
-Lastly, use the `azureml` R library to install the compiled code. By default, `install_azureml` will install the [latest version of the AzureML Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`. If you would like to override the default version, environment name, or python version, you can pass in those arguments: 
+Lastly, use the `azureml` R library to install the compiled code. By default, `azureml::install_azureml` will install the [latest version of the AzureML Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`.
+
+If you would like to override the default version, environment name, or python version, you can pass in those arguments: 
 ``` {r Install AzureML Python SDK, eval=FALSE}
 azureml::install_azureml(version = NULL, 
                          envname = "<your conda environment name>",

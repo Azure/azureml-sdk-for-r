@@ -21,27 +21,25 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 
 | Features | Description | Status |
 |----------|-------------|--------|
-| [Workspace](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#workspaces) | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: | 
-| [Data Plane Resources](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
-| [Compute](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#compute-targets) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
-| [Experiment](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#experiments) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
-| [Run](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#runs) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
-| [Estimator](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#estimators) | A generic estimator to train data using any supplied training script. | :heavy_check_mark: |
-| [HyperDrive](https://docs.microsoft.com/azure/machine-learning/service/how-to-tune-hyperparameters) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
-| [Model](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#models) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_check_mark: |
-| [Webservice](https://docs.microsoft.com/azure/machine-learning/service/concept-azure-machine-learning-architecture#web-service-deployments) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
+| [Workspace](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-workspaces) | The `Workspace` class is a foundational resource in the cloud that you use to experiment, train, and deploy machine learning models | :heavy_check_mark: | 
+| [Compute](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-compute-targets) | Cloud resources where you can train your machine learning models.| :heavy_check_mark: |
+| [Data Plane Resources](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-working-with-data) | `Datastore`, which stores connection information to an Azure storage service, and `DataReference`, which describes how and where data should be made available in a run. | :heavy_check_mark: |
+| [Experiment](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) | A foundational cloud resource that represents a collection of trials (individual model runs).| :heavy_check_mark: |
+| [Run](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) | A `Run` object represents a single trial of an experiment, and is the object that you use to monitor the asynchronous execution of a trial, store the output of the trial, analyze results, and access generated artifacts. You use `Run` inside your experimentation code to log metrics and artifacts to the Run History service. | :heavy_check_mark: |
+| [Estimator](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) | A generic estimator to train data using any supplied training script. | :heavy_check_mark: |
+| [HyperDrive](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-hyperparameter-tuning) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
+| [Model](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_check_mark: |
+| [Webservice](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
 | [Dataset](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :clipboard: |
 
 ## Installation
 
 Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
-To get started, use the `remotes` package to install Azure ML SDK for R from GitHub. As the current repo is not yet public, you will need to [generate a personal access token](https://github.com/settings/tokens) and supply to auth_token argument. When generating the token, make sure to select the "repo" scope.
+To get started, use the `remotes` package to install Azure ML SDK for R from GitHub.
 
 ```R
-> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r',
-                           auth_token = '<your personal access token>',
-                           INSTALL_opts=c("--no-multiarch"))
+> remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
 Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 ```R
