@@ -9,7 +9,7 @@
 library("keras")
 install_keras()
 
-library(azureml)
+library(azuremlsdk)
 
 # Parameters --------------------------------------------------------------
 

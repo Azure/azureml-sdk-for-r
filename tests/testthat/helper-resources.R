@@ -8,7 +8,7 @@ test_env <- paste0('test_', as.integer(Sys.time()))
 build_num <- Sys.getenv('TEST_BUILD_NUMBER')
 build_num <- gsub('[.]', '-', build_num)
 
-library(azureml)
+library(azuremlsdk)
 library(ggplot2)
 
 if (is.na(Sys.getenv("AZUREML_PYTHON_INSTALLED", unset = NA))) {

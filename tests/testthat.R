@@ -1,4 +1,4 @@
 library(testthat)
-library(azureml)
+library(azuremlsdk)
 
-test_check("azureml")
+test_check("azuremlsdk")

@@ -2,7 +2,7 @@
 # python sdk is already installed.
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
-library(azureml)
+library(azuremlsdk)
 install_azureml()
 
 subscription_id <- Sys.getenv("SUBSCRIPTION_ID", unset = "<my-subscription-id>")

@@ -26,5 +26,5 @@
    remove it from the session to use the new one. This can be done by the
    following:
    ```
-   detach("package:azureml", unload = TRUE)
+   detach("package:azuremlsdk", unload = TRUE)
     ```
