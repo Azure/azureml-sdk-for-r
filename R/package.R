@@ -1,11 +1,9 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' @importFrom reticulate import use_condaenv py_str
+#' @importFrom reticulate import py_str
 
 .onLoad <- function(libname, pkgname) {
-  use_condaenv("r-azureml")
-
   # delay load azureml
   azureml <<- import("azureml", delay_load = list(
     environment = "r-azureml",
