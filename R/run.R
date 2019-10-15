@@ -279,22 +279,32 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Plot table of run details in Viewer
 #' @param run run used for plotting
-#' @export
 plot_run_details <- function(run) {
   status <- run$get_status()
   details <- run$get_details()
   web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
-                          "Link", "</a>")
+                          "here", "</a>")
 
-  start_time <- format(parsedate::parse_iso_8601(start_time),
-                       format = "%B %d, %Y %H:%M:%S")
+  if (status == "Queued") {
+    start_time <- "-"
+  }
+  else {
+    start_time <- format(parsedate::parse_iso_8601(details$startTimeUtc, ""),
+                         format = "%B %d, %Y %I:%M:%S %p")
+  }
 
-  diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
-           parsedate::parse_iso_8601(details$startTimeUtc))
-  duration <- paste(as.numeric(diff), "mins")
+  if (status == "Completed" || status == "Failed") {
+    diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
+               parsedate::parse_iso_8601(details$startTimeUtc))
+    duration <- paste(round(as.numeric(diff), digits = 2), "mins")
+  }
+  else {
+    duration <- "-"
+  }
   
-  link_warn <- paste("Ctrl + click here to view run details in the Web Portal:",
-                     web_view_link, collapse = "\r\n")
+  link_warn <- paste("Ctrl + click", web_view_link,
+                     "to view run details in the Web Portal",
+                     collapse = "\r\n")
 
   df <- matrix(list("Run Id",
                     "Status",
@@ -316,7 +326,7 @@ plot_run_details <- function(run) {
                ncol = 2)
 
   DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
-                caption = paste(unlist(details$warnings), collapse = "\r\n"),
+                caption = "Run Details",
                 options = list(dom = "t", scrollY = TRUE))
 }
 
@@ -333,7 +343,7 @@ view_run_details <- function(run) {
     
     assign("run_url", run$get_portal_url(), envir=globalenv())
     
-    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run.id)
+    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
 
     # use viewer if available, else browser
     viewer <- getOption("viewer")
