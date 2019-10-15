@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.azure-pipelines$
+^\.github$
 ^cran-comments\.md$
