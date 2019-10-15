@@ -23,7 +23,10 @@ Imports:
     plyr (>= 1.8),
     DT,
     parsedate,
-    rstudioapi (>= 0.7)
+    rstudioapi (>= 0.7),
+    shiny,
+    here,
+    utils
 Suggests: rmarkdown,
     knitr,
     testthat
