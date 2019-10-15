@@ -13,14 +13,13 @@ URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
 Description: Provides an R interface to the AzureML Service.
 Encoding: UTF-8
-License: MIT
+License: MIT + file LICENSE
 RoxygenNote: 6.1.1
 Depends: 
     R (>= 3.5.0)
 Imports:
     ggplot2,
     reticulate (>= 1.12),
-    R6 (>= 2.4.0),
     plyr (>= 1.8),
     DT,
     parsedate,
