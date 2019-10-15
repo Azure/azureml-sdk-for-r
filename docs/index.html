@@ -57,6 +57,9 @@
       <a href="articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
@@ -180,12 +183,10 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install <a href="https://docs.conda.io/en/latest/miniconda.html">Conda</a> if not already installed. Choose Python 3.5 or later.</p>
-<p>To get started, use the <code>remotes</code> package to install Azure ML SDK for R from GitHub. As the current repo is not yet public, you will need to <a href="https://github.com/settings/tokens">generate a personal access token</a> and supply to auth_token argument. When generating the token, make sure to select the “repo” scope.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>,</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">                           <span class="dt">auth_token =</span> <span class="st">'&lt;your personal access token&gt;'</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">                           <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
+<p>To get started, use the <code>remotes</code> package to install Azure ML SDK for R from GitHub.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>)</a></code></pre></div>
 <p>Then, use <code><a href="reference/install_azureml.html">install_azureml()</a></code> to install the compiled code from the AzureML Python SDK.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>azureml<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azureml/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">azureml<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azureml/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
 <p>Now, you’re ready to get started!</p>
 <p>For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our <a href="https://azure.github.io/azureml-sdk-for-r/articles/installation.html">Installation Guide</a>.</p>
 </div>
