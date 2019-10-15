@@ -13,9 +13,21 @@ server <- function(input, output){
   exp <- azureml$core$Experiment(ws, parsed_url[14])
   run <- azureml$core$run$Run(exp, parsed_url[16])
 
-  details = run$get_details()
-  web_view_link = paste0('<a href="', run$get_portal_url(),'">', "Link", "</a>")
-  
+  details <- run$get_details()
+  web_view_link <- paste0('<a href="',
+                          run$get_portal_url(), '">',
+                          "here", "</a>")
+
+  if (rstudio_server) {
+    link_caption <- paste("Ctrl + click", web_view_link,
+                           "to view run details in the Web Portal",
+                           collapse = "\r\n")
+  } else {
+    link_caption <- paste("Click", web_view_link,
+                           "to view run details in the Web Portal",
+                           collapse = "\r\n")
+  }
+
   output$runDetails <- renderDataTable({
     
     invalidateLater(2000)
@@ -54,7 +66,7 @@ server <- function(input, output){
                       details$runDefinition$target,
                       details$runDefinition$script,
                       toString(details$runDefinition$arguments),
-                      web_view_link),
+                      link_caption),
                  nrow = 8,
                  ncol = 2) 
     

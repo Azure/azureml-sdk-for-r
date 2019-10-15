@@ -349,11 +349,13 @@ plot_run_details <- function(run) {
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
-
+  rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
+  
   if (rstudioapi::isAvailable()) {
     path <- here::here("widget", "app.R")
     
     assign("run_url", run$get_portal_url(), envir=globalenv())
+    assign("rstudio_server", rstudio_server, envir=globalenv())
     
     rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
 
