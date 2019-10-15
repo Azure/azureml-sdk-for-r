@@ -1,12 +1,13 @@
-Package: azureml
+Package: azuremlsdk
 Type: Package
 Title: R interface to AzureML SDK
 Version: 0.4.0
 Authors@R: c(
     person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
-    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut", "cre")),
+    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("aut")),
     person("Diondra", "Peck", email = "Diondra.Peck@microsoft.com", role = c("aut")),
+    person("AzureML R SDK Team", email = "amlrsdk@microsoft.com", role = c("cre")),
     person("Microsoft", role = c("cph", "fnd"))
     )
 URL: https://github.com/azure/azureml-sdk-for-r

@@ -1,4 +1,4 @@
-library(azureml)
+library(azuremlsdk)
 
 run <- get_current_run()
 

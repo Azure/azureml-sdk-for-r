@@ -24,19 +24,19 @@ remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
 
 ## 3. Install AzureML Python SDK
-Lastly, use the `azureml` R library to install the compiled code. By default, `azureml::install_azureml` will install the [latest version of the AzureML Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`.
+Lastly, use the `azureml` R library to install the compiled code. By default, `azuremlsdk::install_azureml()` will install the [latest version of the AzureML Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`.
 
 If you would like to override the default version, environment name, or python version, you can pass in those arguments: 
 ``` {r Install AzureML Python SDK, eval=FALSE}
-azureml::install_azureml(version = NULL, 
-                         envname = "<your conda environment name>",
-                         conda_python_version = "<desired python version>")
+azuremlsdk::install_azureml(version = NULL, 
+                            envname = "<your conda environment name>",
+                            conda_python_version = "<desired python version>")
 ```
 
 ## 4. Test installation
 You can confirm your installation worked by loading the library and successfully retrieving a run.
-``` {r Test installation, echo=TRUE}
-library(azureml)
+``` {r Test installation, eval=FALSE}
+library(azuremlsdk)
 get_current_run()
 ```
 

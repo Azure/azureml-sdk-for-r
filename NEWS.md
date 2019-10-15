@@ -1,4 +1,4 @@
-# azureml (0.5.2)
+# azuremlsdk (0.4.0)
 Initial CRAN release
 
 ## Initial features
