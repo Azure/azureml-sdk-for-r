@@ -339,7 +339,7 @@ view_run_details <- function(run) {
   # Run widget unless in Notebook VM
   if (!rstudio_server && rstudioapi::isAvailable()) {
     library(here)
-    path <- here("R", "app", "app.R")
+    path <- here("R", "app", "widget.R")
     
     assign("run_url", run$get_portal_url(), envir=globalenv())
     
