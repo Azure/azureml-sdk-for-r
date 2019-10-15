@@ -15,19 +15,17 @@ library(azureml)
 
 args <- commandArgs(trailingOnly = TRUE)
 
-current_run <- get_current_run()
-
 batch_size <- as.numeric(args[2])
-log_metric_to_run("batch_size", batch_size, current_run)
+log_metric_to_run("batch_size", batch_size)
 
 epochs <- as.numeric(args[4])
-log_metric_to_run("epochs", epochs, current_run)
+log_metric_to_run("epochs", epochs)
 
 lr <- as.numeric(args[6])
-log_metric_to_run("lr", lr, current_run)
+log_metric_to_run("lr", lr)
 
 decay <- as.numeric(args[8])
-log_metric_to_run("decay", decay, current_run)
+log_metric_to_run("decay", decay)
 
 data_augmentation <- TRUE
 
@@ -120,7 +118,7 @@ if (!data_augmentation){
   datagen %>% fit_image_data_generator(x_train)
   
   results <- evaluate(model, x_train, y_train, batch_size)
-  log_metric_to_run("Loss", results[[1]], current_run)
+  log_metric_to_run("Loss", results[[1]])
   cat("Loss: ", results[[1]], "\n")
   cat("Accuracy: ", results[[2]], "\n")
 }

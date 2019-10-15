@@ -5,9 +5,6 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
               
               ws <- existing_ws
               
-              # get offline run
-              run <- get_current_run()
-              
               # create experiment
               exp <- experiment(ws, experiment_name)
               expect_equal(exp$name, experiment_name)
