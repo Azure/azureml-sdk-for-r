@@ -43,7 +43,7 @@ remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
 Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 ```R
-azureml::install_azureml()
+azuremlsdk::install_azureml()
 ```
 
 Now, you're ready to get started!
