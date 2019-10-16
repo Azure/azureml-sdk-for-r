@@ -1,7 +1,9 @@
 context("estimator")
+source("utils.R")
 
 test_that("create, submit experiment, run in default amlcompute,
           get run metrics", {
+  skip_if_no_azureml()
   experiment_name <- "estimator_run"
   
   ws <- existing_ws
@@ -34,7 +36,7 @@ test_that("create, submit experiment, run in default amlcompute,
   
   files <- get_run_file_names(run)
   image_found <- grep("myplot", files)
-  assertthat::assert_that(length(image_found) > 0)
+  expect_true(length(image_found) > 0)
 
   expect_equal(metrics$test_metric, 0.5)
 
@@ -59,6 +61,7 @@ test_that("create, submit experiment, run in default amlcompute,
 })
 
 test_that("submit experiment through a custom environment", {
+  skip_if_no_azureml()
   ws <- existing_ws
   
   # start a remote job and get the run, wait for it to finish

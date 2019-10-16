@@ -1,6 +1,6 @@
 Package: azuremlsdk
 Type: Package
-Title: R interface to AzureML SDK
+Title: R Interface to AzureML SDK
 Version: 0.5.2
 Authors@R: c(
     person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
