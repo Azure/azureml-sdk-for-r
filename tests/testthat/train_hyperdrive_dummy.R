@@ -1,4 +1,4 @@
-library(azureml)
+library(azuremlsdk)
 
 args <- commandArgs(trailingOnly = TRUE)
 number_1 <- args[2]

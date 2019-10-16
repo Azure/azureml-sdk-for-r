@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-library("azureml")
+library("azuremlsdk")
 library("jsonlite")
 
 ws <- load_workspace_from_config()

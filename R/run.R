@@ -181,17 +181,32 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' Log an image metric to the run record.
 #' @param name The name of metric
 #' @param path The path or stream of the image
-#' @param plot The plot to log as an image
+#' @param plot The ggplot to log as an image.
 #' @param description An optional metric description
 #' @param run Run object. If not specified, will default to current run from
 #' service context.
 #' @export
 log_image_to_run <- function(name, path = NULL, plot = NULL,
                              description = "", run = NULL) {
+  if (!is.null(path) && !is.null(plot)) {
+    stop(paste0("Invalid parameters, path and plot were both provided,",
+                " only one at a time is supported"))
+  }
+
+  delete_path <- FALSE
   if (is.null(run)) {
     run <- get_current_run()
   }
+  if (!is.null(plot)) {
+    path <- paste0(name, "_", as.integer(Sys.time()), ".png")
+    ggplot2::ggsave(filename = path, plot = plot)
+    plot <- NULL
+    delete_path <- TRUE
+  }
   run$log_image(name, path = path, plot = plot, description = description)
+  if (delete_path) {
+    unlink(path)
+  }
   run$flush()
   invisible(NULL)
 }
