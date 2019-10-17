@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve the package creation logs. — get_model_package_creation_logs • azuremlsdk</title>
+<title>Get the model package creation logs — get_model_package_creation_logs • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Retrieve the package creation logs. — get_model_package_creation_logs" />
+<meta property="og:title" content="Get the model package creation logs — get_model_package_creation_logs" />
 
-<meta property="og:description" content="Retrieve the package creation logs." />
+<meta property="og:description" content="Retrieve the creation logs from packaging a model with
+package_model()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve the package creation logs.</h1>
+    <h1>Get the model package creation logs</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>get_model_package_creation_logs.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve the package creation logs.</p>
+    <p>Retrieve the creation logs from packaging a model with
+<code><a href='package_model.html'>package_model()</a></code>.</p>
     
     </div>
 
@@ -145,21 +147,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>package</th>
-      <td><p>Package created with model(s) and dependencies.</p></td>
+      <td><p>The <code>ModelPackage</code> object.</p></td>
     </tr>
     <tr>
       <th>decode</th>
-      <td><p>Whether to decode the raw log bytes to a string.</p></td>
+      <td><p>If <code>TRUE</code>, decode the raw log bytes to a string.</p></td>
     </tr>
     <tr>
       <th>offset</th>
-      <td><p>Byte offset from which to start reading the logs.</p></td>
+      <td><p>An int of the byte offset from which to start
+reading the logs.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Package creation logs.</p>
+    <p>A string or character vector of package creation logs.</p>
     
 
   </div>

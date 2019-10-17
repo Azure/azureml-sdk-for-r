@@ -2,20 +2,22 @@
 % Please edit documentation in R/model.R
 \name{get_model_package_creation_logs}
 \alias{get_model_package_creation_logs}
-\title{Retrieve the package creation logs.}
+\title{Get the model package creation logs}
 \usage{
 get_model_package_creation_logs(package, decode = TRUE, offset = 0)
 }
 \arguments{
-\item{package}{Package created with model(s) and dependencies.}
+\item{package}{The \code{ModelPackage} object.}
 
-\item{decode}{Whether to decode the raw log bytes to a string.}
+\item{decode}{If \code{TRUE}, decode the raw log bytes to a string.}
 
-\item{offset}{Byte offset from which to start reading the logs.}
+\item{offset}{An int of the byte offset from which to start
+reading the logs.}
 }
 \value{
-Package creation logs.
+A string or character vector of package creation logs.
 }
 \description{
-Retrieve the package creation logs.
+Retrieve the creation logs from packaging a model with
+\code{package_model()}.
 }

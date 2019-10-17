@@ -2,23 +2,19 @@
 % Please edit documentation in R/webservice.R
 \name{get_webservice}
 \alias{get_webservice}
-\title{Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding to
-the specific type of the retrieved Webservice object.}
+\title{Get a deployed web service}
 \usage{
 get_webservice(workspace, name)
 }
 \arguments{
-\item{workspace}{The workspace object containing the Webservice object to
-retrieve}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{name}{The name of the of the Webservice object to retrieve}
+\item{name}{A string of the name of the web service to retrieve.}
 }
 \value{
-The webservice object
+The \code{LocalWebservice}, \code{AciWebservice}, or \code{AksWebservice} object.
 }
 \description{
-Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding to
-the specific type of the retrieved Webservice object.
+Return the corresponding Webservice object of a deployed web service from
+a given workspace.
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/webservice-local.R
 \name{delete_local_webservice}
 \alias{delete_local_webservice}
-\title{Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted.}
+\title{Delete a local web service from the local machine}
 \usage{
 delete_local_webservice(webservice, delete_cache = TRUE,
   delete_image = FALSE)
 }
 \arguments{
-\item{webservice}{LocalWebservice object.}
+\item{webservice}{The \code{LocalWebservice} object.}
 
-\item{delete_cache}{Delete temporary files cached for the service.}
+\item{delete_cache}{If \code{TRUE}, delete the temporary files cached for
+the service.}
 
-\item{delete_image}{Delete the service's Docker image.}
+\item{delete_image}{If \code{TRUE}, delete the service's Docker image.}
 }
 \description{
-Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted.
+Delete a local web service from the local machine. This function call
+is not asynchronous; it runs until the service is deleted.
 }

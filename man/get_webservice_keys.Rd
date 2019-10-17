@@ -2,16 +2,35 @@
 % Please edit documentation in R/webservice.R
 \name{get_webservice_keys}
 \alias{get_webservice_keys}
-\title{Retrieve auth keys for this Webservice.}
+\title{Retrieve auth keys for a web service}
 \usage{
 get_webservice_keys(webservice)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{AciWebservice} or \code{AksWebservice} object.}
 }
 \value{
-The auth keys for this Webservice
+A list of two strings corresponding to the primary and
+secondary authentication keys.
 }
 \description{
-Retrieve auth keys for this Webservice.
+Get the authentication keys for a web service that is deployed
+with key-based authentication enabled. In order to enable
+key-based authentication, set the \code{auth_enabled = TRUE} parameter
+when you are creating or updating a deployment (either
+\code{aci_webservice_deployment_config()} or
+\code{aks_webservice_deployment_config()} for creation and
+\code{update_aci_webservice()} or \code{update_aks_webservice()} for updating).
+Note that key-based auth is enabled by default for \code{AksWebservice}
+but not for \code{AciWebservice}.
+
+To check if a web service has key-based auth enabled, you can
+access the following boolean property from the Webservice object:
+
+\code{service$auth_enabled}
+
+Not supported for \code{LocalWebservice} deployments.
+}
+\seealso{
+\code{generate_new_webservice_key()}
 }

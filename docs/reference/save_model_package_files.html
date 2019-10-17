@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save the package output to a local directory.
-This can only be used with a Dockerfile package. — save_model_package_files • azuremlsdk</title>
+<title>Save a Dockerfile and dependencies from a <code>ModelPackage</code> to
+your local file system — save_model_package_files • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +33,20 @@ This can only be used with a Dockerfile package. — save_model_package_files �
 
 
 
-<meta property="og:title" content="Save the package output to a local directory.
-This can only be used with a Dockerfile package. — save_model_package_files" />
+<meta property="og:title" content="Save a Dockerfile and dependencies from a <code>ModelPackage</code> to
+your local file system — save_model_package_files" />
 
-<meta property="og:description" content="Save the package output to a local directory.
-This can only be used with a Dockerfile package." />
+<meta property="og:description" content="Download the Dockerfile, model, and other assets needed to build
+an image locally from a created ModelPackage.
+This can only be used with a Dockerfile ModelPackage (where
+package_model() was called with generate_dockerfile = TRUE to
+indicated that you wanted only the files and not a fully built image).
+save_model_package_files() downloads the files needed to build the
+image to the output_directory. The Dockerfile included in the saved
+files references a base image stored in an Azure container registry.
+When you build the image on your local Docker installation, you will
+need the address, username, and password to authenticate to the registry.
+You can get this information using get_model_package_container_registry()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,16 +139,25 @@ This can only be used with a Dockerfile package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save the package output to a local directory.
-This can only be used with a Dockerfile package.</h1>
+    <h1>Save a Dockerfile and dependencies from a <code>ModelPackage</code> to
+your local file system</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>save_model_package_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Save the package output to a local directory.
-This can only be used with a Dockerfile package.</p>
+    <p>Download the Dockerfile, model, and other assets needed to build
+an image locally from a created <code>ModelPackage</code>.</p>
+<p>This can only be used with a Dockerfile <code>ModelPackage</code> (where
+<code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = TRUE</code> to
+indicated that you wanted only the files and not a fully built image).</p>
+<p><code>save_model_package_files()</code> downloads the files needed to build the
+image to the <code>output_directory</code>. The Dockerfile included in the saved
+files references a base image stored in an Azure container registry.
+When you build the image on your local Docker installation, you will
+need the address, username, and password to authenticate to the registry.
+You can get this information using <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code>.</p>
     
     </div>
 
@@ -150,14 +168,18 @@ This can only be used with a Dockerfile package.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>package</th>
-      <td><p>Package created with model(s) and dependencies.</p></td>
+      <td><p>The <code>ModelPackage</code> object.</p></td>
     </tr>
     <tr>
       <th>output_directory</th>
-      <td><p>Local directory that will be created to contain
-the contents of the package.</p></td>
+      <td><p>A string of the local directory that
+will be created to contain the contents of the package.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='package_model.html'>package_model()</a></code>, <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code></p></div>
     
 
   </div>
@@ -165,7 +187,9 @@ the contents of the package.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

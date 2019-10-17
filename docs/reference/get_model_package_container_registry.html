@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored. — get_model_package_container_registry • azuremlsdk</title>
+<title>Get the Azure container registry that a packaged model uses — get_model_package_container_registry • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,11 @@
 
 
 
-<meta property="og:title" content="Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored. — get_model_package_container_registry" />
+<meta property="og:title" content="Get the Azure container registry that a packaged model uses — get_model_package_container_registry" />
 
 <meta property="og:description" content="Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored." />
+(or base image, for Dockerfile packages) is stored in an
+Azure container registry." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,16 +129,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored.</h1>
+    <h1>Get the Azure container registry that a packaged model uses</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>get_model_package_container_registry.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored.</p>
+    <p>Return a <code>ContainerRegistry</code> object for where the image
+(or base image, for Dockerfile packages) is stored in an
+Azure container registry.</p>
     
     </div>
 
@@ -150,13 +149,35 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>package</th>
-      <td><p>Package created with model(s) and dependencies.</p></td>
+      <td><p>The <code>ModelPackage</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>ContainerRegistry object</p>
+    <p>The <code>ContainerRegistry</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>Given a <code>ModelPackage</code> object (see <code><a href='package_model.html'>package_model()</a></code>'s "Examples" section),
+get the container registry information:</p><pre>container_registry &lt;- get_model_package_container_registry(package)
+address &lt;- container_registry$address
+username &lt;- container_registry$username
+password &lt;- container_registry$password
+</pre>
+
+<p>To then authenticate Docker with the Azure container registry from
+a shell or command-line session, use the following command, replacing
+<code>&lt;addres&gt;</code>, <code>&lt;username&gt;</code>, and <code>&lt;password&gt;</code> with the values retrieved
+from above:</p><pre>docker login &lt;address&gt; -u &lt;username&gt; -p &lt;password&gt;
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='container_registry.html'>container_registry()</a></code></p></div>
     
 
   </div>
@@ -166,6 +187,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

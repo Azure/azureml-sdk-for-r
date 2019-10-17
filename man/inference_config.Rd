@@ -2,29 +2,96 @@
 % Please edit documentation in R/model.R
 \name{inference_config}
 \alias{inference_config}
-\title{Creates the Model deployment config specific to model deployments.}
+\title{Create an inference configuration for model deployments}
 \usage{
 inference_config(entry_script, source_directory = NULL,
   description = NULL, environment = NULL)
 }
 \arguments{
-\item{entry_script}{Path to local file that contains the code to run for the
-image.}
+\item{entry_script}{A string of the path to the local file that contains
+the code to run for making predictions.}
 
-\item{source_directory}{paths to folders that contains all files to create
-the image.}
+\item{source_directory}{(Optional) A string of the path to the local folder
+that contains the files to package and deploy alongside your model, such as
+helper files for your scoring script (\code{entry_script}). The folder must
+contain the \code{entry_script}.}
 
-\item{description}{A description to give this image.}
+\item{description}{(Optional) A string of the description to give this
+configuration.}
 
-\item{environment}{An environment object to use for the deployment.
-Doesn't have to be registered. A user should provide either this, or the
-other parameters, not both. The individual parameters will NOT serve
-as an override for the environment object. Exceptions include
-`entry_script`, `source_directory` and `description`.}
+\item{environment}{An \code{Environment} object to use for the deployment. The
+environment does not have to be registered.}
 }
 \value{
-An InferenceConfig object
+The \code{InferenceConfig} object.
 }
 \description{
-Creates the Model deployment config specific to model deployments.
+The inference configuration describes how to configure the model to make
+predictions. It references your scoring script (\code{entry_script}) and is
+used to locate all the resources required for the deployment. Inference
+configurations use Azure Machine Learning environments (see \code{r_environment()})
+to define the software dependencies needed for your deployment.
+}
+\details{
+\subsection{Defining the entry script}{
+To deploy a model, you must provide an entry script that accepts requests,
+scores the requests by using the model, and returns the results. The
+entry script is specific to your model. It must understand the format of
+the incoming request data, the format of the data expected by your model,
+and the format of the data returned to clients. If the request data is in a
+format that is not usable by your model, the script can transform it into
+an acceptable format. It can also transform the response before returning
+it to the client.
+
+The entry script must contain an \code{init()} method that loads your model and
+then returns a function that uses the model to make a prediction based on
+the input data passed to the function. Azure ML runs the \code{init()} method
+once, when the Docker container for your web service is started. The
+prediction function returned by \code{init()} will be run every time the service
+is invoked to make a prediction on some input data. The inputs and outputs
+of this prediction function typically use JSON for serialization and
+deserialization.
+
+To locate the model in your entry script (when you load the model in the
+script's \code{init()} method), use \code{AZUREML_MODEL_DIR}, an environment variable
+containing the path to the model location. The environment variable is
+created during service deployment, and you can use it to find the location
+of your deployed model(s).
+
+The following table describes the value of \code{AZUREML_MODEL_DIR} depending
+on the number of models deployed:
+
+\tabular{rr}{
+\strong{Deployment} \tab \strong{Environment variable value}\cr
+Single model \tab The path to the folder containing the model\cr
+Multiple models \tab The path to the folder containing all models. Models are located by name and version in this folder (\code{$MODEL_NAME/$VERSION})
+}
+
+To get the path to a file in a model, combine the environment variable
+with the filename you're looking for. The filenames of the model files
+are preserved during registration and deployment.
+
+Single model example:\preformatted{model_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")
+}
+
+Multiple model example:\preformatted{model1_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
+}
+
+}
+}
+\section{Examples}{
+
+The following example loads a previously registered environment from
+your workspace and uses it for defining the inference config:\preformatted{ws <- load_workspace_from_config()
+deploy_env = get_environment(ws, name = "my_env", version = "1")
+inference_config = inference_config(entry_script = "score.R", 
+                                    environment = deploy_env)
+}
+
+You can then specify the inference config to \code{deploy_model()} to
+deploy a web service.
+}
+
+\seealso{
+\code{r_environment()}, \code{deploy_model()}
 }

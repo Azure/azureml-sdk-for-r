@@ -2,18 +2,20 @@
 % Please edit documentation in R/webservice.R
 \name{generate_new_webservice_key}
 \alias{generate_new_webservice_key}
-\title{Regenerate one of the Webservice's keys. Must specify either 'Primary' or
-'Secondary' key.}
+\title{Regenerate one of a web service's keys}
 \usage{
 generate_new_webservice_key(webservice, key_type)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{AciWebservice} or \code{AksWebservice} object.}
 
-\item{key_type}{Which key to regenerate. Options are 'Primary' or
-'Secondary'}
+\item{key_type}{A string of which key to regenerate. Options are
+"Primary" or "Secondary".}
 }
 \description{
-Regenerate one of the Webservice's keys. Must specify either 'Primary' or
-'Secondary' key.
+Regenerate either the primary or secondary authentication key for
+an \code{AciWebservice} or \code{AksWebservice}.The web service must have
+been deployed with key-based authentication enabled.
+
+Not supported for \code{LocalWebservice} deployments.
 }

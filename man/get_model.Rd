@@ -2,33 +2,36 @@
 % Please edit documentation in R/model.R
 \name{get_model}
 \alias{get_model}
-\title{Retrieve the Model object from the cloud.}
+\title{Get a registered model}
 \usage{
 get_model(workspace, name = NULL, id = NULL, tags = NULL,
   properties = NULL, version = NULL, run_id = NULL)
 }
 \arguments{
-\item{workspace}{The workspace object containing the Model to retrieve}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{name}{Will retrieve the latest model with the corresponding name, if
-it exists}
+\item{name}{Retrieve the latest model with the corresponding name (a string),
+if it exists.}
 
-\item{id}{Will retrieve the model with the corresponding ID, if it exists}
+\item{id}{Retrieve the model with the corresponding ID (a string), if it exists.}
 
-\item{tags}{Optional, will filter based on the provided list, searching by
-either 'key' or '[key, value]'.}
+\item{tags}{(Optional) Retrieve the model filtered based on the provided tags
+(a list), searching by either 'key' or 'list(key, value)'.}
 
-\item{properties}{Optional, will filter based on the provided list,
-searching by either 'key' or '[key, value]'.}
+\item{properties}{(Optional) Retrieve the model filter based on the provided
+properties (a list), searching by either 'key' or 'list(key, value)'.}
 
-\item{version}{When provided along with name, will get the specific version
-of the specified named model, if it exists}
+\item{version}{(Optional) An int of the version of a model to retrieve,
+when provided along with \code{name}. The specific version of the specified named
+model will be returned, if it exists.}
 
-\item{run_id}{Optional, will filter based on the provided ID.}
+\item{run_id}{(Optional) Retrieve the model filterd by the provided run ID
+(a string) the model was registered from, if it exists.}
 }
 \value{
-A model object, if one is found in the provided workspace
+The \code{Model} object.
 }
 \description{
-Retrieve the Model object from the cloud.
+Returns a \code{Model} object for an existing model that has been previously
+registered to the given workspace.
 }

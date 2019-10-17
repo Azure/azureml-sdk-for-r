@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download model to target_dir of local file system. — download_model • azuremlsdk</title>
+<title>Download a model to the local file system — download_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Download model to target_dir of local file system. — download_model" />
+<meta property="og:title" content="Download a model to the local file system — download_model" />
 
-<meta property="og:description" content="Download model to target_dir of local file system." />
+<meta property="og:description" content="Download a registered model to the target_dir of your local file
+system." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download model to target_dir of local file system.</h1>
+    <h1>Download a model to the local file system</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>download_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Download model to target_dir of local file system.</p>
+    <p>Download a registered model to the <code>target_dir</code> of your local file
+system.</p>
     
     </div>
 
@@ -145,23 +147,33 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>The model to download</p></td>
+      <td><p>The <code>Model</code> object.</p></td>
     </tr>
     <tr>
       <th>target_dir</th>
-      <td><p>Path to directory for where to download the model.
-Defaults to "."</p></td>
+      <td><p>A string of the path to the directory on your local
+file system for where to download the model to. Defaults to ".".</p></td>
     </tr>
     <tr>
       <th>exist_ok</th>
-      <td><p>Boolean to replace downloaded dir/files if exists.
-Defaults to FALSE</p></td>
+      <td><p>If <code>FALSE</code>, replace the downloaded folder/file if they
+already exist.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>string path to file or folder of model</p>
+    <p>A string of the path to the file or folder of the downloaded
+model.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+model &lt;- get_model(ws, name = "my_model", version = 2)
+download_model(model, exist_ok = TRUE)
+</pre>
+
     
 
   </div>
@@ -171,6 +183,8 @@ Defaults to FALSE</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

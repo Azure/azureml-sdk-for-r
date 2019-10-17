@@ -2,22 +2,31 @@
 % Please edit documentation in R/model.R
 \name{download_model}
 \alias{download_model}
-\title{Download model to target_dir of local file system.}
+\title{Download a model to the local file system}
 \usage{
 download_model(model, target_dir = ".", exist_ok = FALSE)
 }
 \arguments{
-\item{model}{The model to download}
+\item{model}{The \code{Model} object.}
 
-\item{target_dir}{Path to directory for where to download the model.
-Defaults to "."}
+\item{target_dir}{A string of the path to the directory on your local
+file system for where to download the model to. Defaults to ".".}
 
-\item{exist_ok}{Boolean to replace downloaded dir/files if exists.
-Defaults to FALSE}
+\item{exist_ok}{If \code{FALSE}, replace the downloaded folder/file if they
+already exist.}
 }
 \value{
-string path to file or folder of model
+A string of the path to the file or folder of the downloaded
+model.
 }
 \description{
-Download model to target_dir of local file system.
+Download a registered model to the \code{target_dir} of your local file
+system.
 }
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+model <- get_model(ws, name = "my_model", version = 2)
+download_model(model, exist_ok = TRUE)
+}
+}
+

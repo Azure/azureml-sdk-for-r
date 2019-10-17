@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve logs for the Webservice. — get_webservice_logs • azuremlsdk</title>
+<title>Retrieve the logs for a web service — get_webservice_logs • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Retrieve logs for the Webservice. — get_webservice_logs" />
+<meta property="og:title" content="Retrieve the logs for a web service — get_webservice_logs" />
 
-<meta property="og:description" content="Retrieve logs for the Webservice." />
+<meta property="og:description" content="You can get the detailed Docker engine log messages from your
+web service deployment. You can view the logs for local, ACI,
+and AKS deployments.
+For example, if your web service deployment fails, you can
+inspect the logs to help troubleshoot." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve logs for the Webservice.</h1>
+    <h1>Retrieve the logs for a web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>get_webservice_logs.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve logs for the Webservice.</p>
+    <p>You can get the detailed Docker engine log messages from your
+web service deployment. You can view the logs for local, ACI,
+and AKS deployments.</p>
+<p>For example, if your web service deployment fails, you can
+inspect the logs to help troubleshoot.</p>
     
     </div>
 
@@ -145,17 +153,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or
+<code>AksWebservice</code> object.</p></td>
     </tr>
     <tr>
       <th>num_lines</th>
-      <td><p>The maximum number of log lines to retrieve.</p></td>
+      <td><p>An int of the maximum number of log lines to
+retrieve.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The logs for this Webservice</p>
+    <p>A string of the logs for the web service.</p>
     
 
   </div>

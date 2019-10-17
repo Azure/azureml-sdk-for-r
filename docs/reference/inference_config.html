@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creates the Model deployment config specific to model deployments. — inference_config • azuremlsdk</title>
+<title>Create an inference configuration for model deployments — inference_config • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Creates the Model deployment config specific to model deployments. — inference_config" />
+<meta property="og:title" content="Create an inference configuration for model deployments — inference_config" />
 
-<meta property="og:description" content="Creates the Model deployment config specific to model deployments." />
+<meta property="og:description" content="The inference configuration describes how to configure the model to make
+predictions. It references your scoring script (entry_script) and is
+used to locate all the resources required for the deployment. Inference
+configurations use Azure Machine Learning environments (see r_environment())
+to define the software dependencies needed for your deployment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Creates the Model deployment config specific to model deployments.</h1>
+    <h1>Create an inference configuration for model deployments</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>inference_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Creates the Model deployment config specific to model deployments.</p>
+    <p>The inference configuration describes how to configure the model to make
+predictions. It references your scoring script (<code>entry_script</code>) and is
+used to locate all the resources required for the deployment. Inference
+configurations use Azure Machine Learning environments (see <code><a href='r_environment.html'>r_environment()</a></code>)
+to define the software dependencies needed for your deployment.</p>
     
     </div>
 
@@ -146,31 +154,95 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>entry_script</th>
-      <td><p>Path to local file that contains the code to run for the
-image.</p></td>
+      <td><p>A string of the path to the local file that contains
+the code to run for making predictions.</p></td>
     </tr>
     <tr>
       <th>source_directory</th>
-      <td><p>paths to folders that contains all files to create
-the image.</p></td>
+      <td><p>(Optional) A string of the path to the local folder
+that contains the files to package and deploy alongside your model, such as
+helper files for your scoring script (<code>entry_script</code>). The folder must
+contain the <code>entry_script</code>.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>A description to give this image.</p></td>
+      <td><p>(Optional) A string of the description to give this
+configuration.</p></td>
     </tr>
     <tr>
       <th>environment</th>
-      <td><p>An environment object to use for the deployment.
-Doesn't have to be registered. A user should provide either this, or the
-other parameters, not both. The individual parameters will NOT serve
-as an override for the environment object. Exceptions include
-`entry_script`, `source_directory` and `description`.</p></td>
+      <td><p>An <code>Environment</code> object to use for the deployment. The
+environment does not have to be registered.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An InferenceConfig object</p>
+    <p>The <code>InferenceConfig</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<h3>Defining the entry script</h3>
+<p>To deploy a model, you must provide an entry script that accepts requests,
+scores the requests by using the model, and returns the results. The
+entry script is specific to your model. It must understand the format of
+the incoming request data, the format of the data expected by your model,
+and the format of the data returned to clients. If the request data is in a
+format that is not usable by your model, the script can transform it into
+an acceptable format. It can also transform the response before returning
+it to the client.</p>
+<p>The entry script must contain an <code>init()</code> method that loads your model and
+then returns a function that uses the model to make a prediction based on
+the input data passed to the function. Azure ML runs the <code>init()</code> method
+once, when the Docker container for your web service is started. The
+prediction function returned by <code>init()</code> will be run every time the service
+is invoked to make a prediction on some input data. The inputs and outputs
+of this prediction function typically use JSON for serialization and
+deserialization.</p>
+<p>To locate the model in your entry script (when you load the model in the
+script's <code>init()</code> method), use <code>AZUREML_MODEL_DIR</code>, an environment variable
+containing the path to the model location. The environment variable is
+created during service deployment, and you can use it to find the location
+of your deployed model(s).</p>
+<p>The following table describes the value of <code>AZUREML_MODEL_DIR</code> depending
+on the number of models deployed:</p>
+<table class='table'>
+<tr><td><strong>Deployment</strong></td><td><strong>Environment variable value</strong></td></tr>
+<tr><td>Single model</td><td>The path to the folder containing the model</td></tr>
+<tr><td>Multiple models</td><td>The path to the folder containing all models. Models are located by name and version in this folder (<code>$MODEL_NAME/$VERSION</code>)</td></tr>
+</table>
+
+
+<p>To get the path to a file in a model, combine the environment variable
+with the filename you're looking for. The filenames of the model files
+are preserved during registration and deployment.</p>
+<p>Single model example:</p><pre>model_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")
+</pre>
+
+<p>Multiple model example:</p><pre>model1_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
+</pre>
+
+
+
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>The following example loads a previously registered environment from
+your workspace and uses it for defining the inference config:</p><pre>ws &lt;- load_workspace_from_config()
+deploy_env = get_environment(ws, name = "my_env", version = "1")
+inference_config = inference_config(entry_script = "score.R", 
+                                    environment = deploy_env)
+</pre>
+
+<p>You can then specify the inference config to <code><a href='deploy_model.html'>deploy_model()</a></code> to
+deploy a web service.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='r_environment.html'>r_environment()</a></code>, <code><a href='deploy_model.html'>deploy_model()</a></code></p></div>
     
 
   </div>
@@ -180,6 +252,12 @@ as an override for the environment object. Exceptions include
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

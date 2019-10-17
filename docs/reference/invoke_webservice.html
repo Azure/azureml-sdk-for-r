@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Call this Webservice with the provided input. — invoke_webservice • azuremlsdk</title>
+<title>Call a web service with the provided input — invoke_webservice • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Call this Webservice with the provided input. — invoke_webservice" />
+<meta property="og:title" content="Call a web service with the provided input — invoke_webservice" />
 
-<meta property="og:description" content="Call this Webservice with the provided input." />
+<meta property="og:description" content="Invoke the web service with the provided input and to receive
+predictions from the deployed model. The structure of the
+provided input data needs to match what the service's scoring
+script and model expect. See the &quot;Details&quot; section of
+inference_config()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Call this Webservice with the provided input.</h1>
+    <h1>Call a web service with the provided input</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>invoke_webservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Call this Webservice with the provided input.</p>
+    <p>Invoke the web service with the provided input and to receive
+predictions from the deployed model. The structure of the
+provided input data needs to match what the service's scoring
+script and model expect. See the "Details" section of
+<code><a href='inference_config.html'>inference_config()</a></code>.</p>
     
     </div>
 
@@ -145,19 +153,32 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or
+<code>AksWebservice</code> object.</p></td>
     </tr>
     <tr>
       <th>input_data</th>
-      <td><p>The input data to call the Webservice with. This is the
-data your machine learning model expects as an input to run predictions.</p></td>
+      <td><p>The input data to invoke the web service with. This is
+the data your model expects as an input to run predictions.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The result of calling the Webservice. This will return predictions
-run from your machine learning model.</p>
+    <p>A named list of the result of calling the web service. This will
+return the predictions run from your model.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Instead of invoking the web service using <code>invoke_webservice()</code>, you can
+also consume the web service using the service's REST API. If you've
+enabled key-based authentication for your service, you will need to provide
+a service key as a token in your request header (see <code><a href='get_webservice_keys.html'>get_webservice_keys()</a></code>). If you've
+enabled token-based authentication, you will need to provide an JWT token as a
+bearer token in your request header (see <code><a href='get_webservice_token.html'>get_webservice_token()</a></code>).</p>
+<p>To get the REST API address for the service's scoring endpoint, you can
+access the following property from the Webservice object:</p>
+<p><code>service$scoring_uri</code></p>
     
 
   </div>
@@ -167,6 +188,8 @@ run from your machine learning model.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

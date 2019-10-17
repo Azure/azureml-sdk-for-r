@@ -2,18 +2,37 @@
 % Please edit documentation in R/model.R
 \name{get_model_package_container_registry}
 \alias{get_model_package_container_registry}
-\title{Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored.}
+\title{Get the Azure container registry that a packaged model uses}
 \usage{
 get_model_package_container_registry(package)
 }
 \arguments{
-\item{package}{Package created with model(s) and dependencies.}
+\item{package}{The \code{ModelPackage} object.}
 }
 \value{
-ContainerRegistry object
+The \code{ContainerRegistry} object.
 }
 \description{
-Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored.
+Return a \code{ContainerRegistry} object for where the image
+(or base image, for Dockerfile packages) is stored in an
+Azure container registry.
+}
+\section{Examples}{
+
+Given a \code{ModelPackage} object (see \code{package_model()}'s "Examples" section),
+get the container registry information:\preformatted{container_registry <- get_model_package_container_registry(package)
+address <- container_registry$address
+username <- container_registry$username
+password <- container_registry$password
+}
+
+To then authenticate Docker with the Azure container registry from
+a shell or command-line session, use the following command, replacing
+\code{<addres>}, \code{<username>}, and \code{<password>} with the values retrieved
+from above:\preformatted{docker login <address> -u <username> -p <password>
+}
+}
+
+\seealso{
+\code{container_registry()}
 }
