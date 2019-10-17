@@ -123,6 +123,7 @@ download_model <- function(model, target_dir = ".", exist_ok = FALSE) {
 #' Convert a `Model` object into a json serialized dictionary
 #' @param model The `Model` object.
 #' @return The json representation of the `model`.
+#' @noRd
 serialize_model <- function(model) {
   result <- model$serialize()
   invisible(result)
@@ -132,6 +133,7 @@ serialize_model <- function(model) {
 #' @param workspace The `Workspace` object the model is registered in.
 #' @param model_payload A json object to convert to a `Model` object.
 #' @return The `Model` object representation of the provided json object.
+#' @noRd
 deserialize_to_model <- function(workspace, model_payload) {
   model <- azureml$core$Model$deserialize(workspace, model_payload)
   invisible(model)
@@ -519,6 +521,7 @@ inference_config <- function(entry_script,
 #' the image.
 #' @param source_directory paths to folders that contains all files to
 #' create the image.
+#' @noRd
 generate_score_python_wrapper <- function(entry_script, source_directory) {
   score_py_template <- sprintf("# This is auto-generated python wrapper.
 import rpy2.robjects as robjects
