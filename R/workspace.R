@@ -51,7 +51,7 @@
 #' of method.
 #' @return The `Workspace` object.
 #' @export
-#' @section Usage:
+#' @section Examples:
 #' The first example requires only minimal specification, and all dependent
 #' resources as well as the resource group will be created automatically.
 #' ```
