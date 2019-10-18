@@ -32,32 +32,24 @@ test_that("create dockerfile", {
   # cran packages
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
                                      cran_packages = c("ggplot2", "dplyr"))
-  expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
-    "RUN R -e \"install.packages(\'ggplot2\', ",
-    "repos = \'http://cran.us.r-project.org\')\"\n",
-    "RUN R -e \"install.packages(\'dplyr\', ",
-    "repos = \'http://cran.us.r-project.org\')\"\n")
-  expect_equal(dockerfile, expected_dockerfile)
-  
+  expect_equal(dockerfile, "FROM ubuntu-18.04\n")
+
   # github packages
-  dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     github_packages = c(
+  dockerfile <- generate_docker_file(github_packages = c(
                                        "https://github/user/repo1", 
                                        "https://github/user/repo2"))
   expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
+    "FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
   expect_equal(dockerfile, expected_dockerfile)
   
   # custom url
-  dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     custom_url_packages = c(
+  dockerfile <- generate_docker_file(custom_url_packages = c(
                                        "https://url/pak1.tar", 
                                        "https://url/pak2.tar"))
   expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
+    "FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04\n",
     "RUN R -e \"install.packages(\'https://url/pak1.tar\', repos = NULL)\"\n",
     "RUN R -e \"install.packages(\'https://url/pak2.tar\', repos = NULL)\"\n")
   expect_equal(dockerfile, expected_dockerfile)
