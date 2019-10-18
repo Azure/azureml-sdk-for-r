@@ -192,7 +192,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
     stop(paste0("Invalid parameters, path and plot were both provided,",
                 " only one at a time is supported"))
   }
-
+  
   delete_path <- FALSE
   if (is.null(run)) {
     run <- get_current_run()
@@ -292,60 +292,121 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
   invisible(NULL)
 }
 
-#' Plot table of run details in Viewer
+#' Create run details plot
 #' @param run run used for plotting
-plot_run_details <- function(run) {
-  status <- run$get_status()
+#' @export
+create_run_details_plot <- function(run, rstudio_server) {
   details <- run$get_details()
-  web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
+  
+  # create web portal link
+  web_view_link <- paste0('<a href="',
+                          run$get_portal_url(), '">',
                           "here", "</a>")
-
+  
+  if (rstudio_server) {
+    link_caption <- paste("Ctrl + click", web_view_link,
+                          "to view run details in the Web Portal",
+                          collapse = "\r\n")
+  } else {
+    link_caption <- paste("Click", web_view_link,
+                          "to view run details in the Web Portal",
+                          collapse = "\r\n")
+  }
+  
+  # get run time details based on status
+  status <- run$get_status()
+  
   if (status == "Queued") {
     start_time <- "-"
   }
   else {
-    start_time <- format(parsedate::parse_iso_8601(details$startTimeUtc, ""),
-                         format = "%B %d, %Y %I:%M:%S %p")
+    pb.date <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S", tz="UTC")
+    start_time <- format(pb.date, "%B %d, %Y %I:%M %p", tz = Sys.timezone(),
+                         use_tz = TRUE)
   }
-
+  
   if (status == "Completed" || status == "Failed") {
-    diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
-               parsedate::parse_iso_8601(details$startTimeUtc))
+    start <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S", tz="UTC")
+    end <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S", tz="UTC")
+    diff <- end - start
     duration <- paste(round(as.numeric(diff), digits = 2), "mins")
   }
   else {
     duration <- "-"
   }
   
-  link_warn <- paste("Ctrl + click", web_view_link,
-                     "to view run details in the Web Portal",
-                     collapse = "\r\n")
-
-  df <- matrix(list("Run Id",
-                    "Status",
-                    "Start Time",
-                    "Duration",
-                    "Target",
-                    "Script Name",
-                    "Arguments",
-                    "Web View",
-                    run$id,
-                    status,
-                    start_time,
-                    duration,
-                    details$runDefinition$target,
-                    details$runDefinition$script,
-                    toString(details$runDefinition$arguments),
-                    link_warn),
-               nrow = 8,
+  if (!is.null(details$runDefinition)) {
+    target <- details$runDefinition$target
+    script_name <- details$runDefinition$script
+  } else {
+    target <- details$target
+    script_name <- "-"
+  }
+  
+  df_keys <- list()
+  df_values <- list()
+  
+  # add general run properties
+  df_keys <- c(df_keys, list("Run Id",
+                             "Status",
+                             "Start Time",
+                             "Duration",
+                             "Target",
+                             "Script Name",
+                             "Arguments"))
+  df_values <- c(df_values, list(run$id,
+                                 status,
+                                 start_time,
+                                 duration,
+                                 target,
+                                 script_name,
+                                 toString(details$runDefinition$arguments)))
+  
+  # add hyperdrive run properties
+  if (!is.null(details$properties$runTemplate)) {
+    if (details$properties$runTemplate == "HyperDrive") {
+      pmc <- details$properties$primary_metric_config
+      pmc <- strsplit(gsub("[^A-Za-z0-9 :,]", "", pmc), ",")
+      primary_metric <- substr(pmc[[1]][1], 7, nchar(pmc[[1]][1]))
+      goal <- substr(pmc[[1]][2], 8, nchar(pmc[[1]][2]))
+      
+      if (status == "Completed" || status == "Failed") {
+        best_child_run_id <- details$properties$best_child_run_id
+        best_run_metric <- details$properties$score
+      }
+      else {
+        best_child_run_id <- "-"
+        best_run_metric <- "-"
+      }
+      
+      df_keys <- c(df_keys, list("Primary Metric",
+                                 "Primary Metric Goal",
+                                 "Best Run Id",
+                                 "Best Run Metric"))
+      df_values <- c(df_values, list(primary_metric,
+                                     toupper(goal),
+                                     best_child_run_id,
+                                     best_run_metric))
+    }
+  }
+  
+  # add web view link in last row
+  df_keys <- c(df_keys, "Web View")
+  df_values <- c(df_values, link_caption)
+  
+  df <- matrix(c(df_keys, df_values),
+               nrow = length(df_keys),
                ncol = 2)
-
-  DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
+  
+  DT::datatable(df,
+                escape = FALSE,
+                rownames = FALSE,
+                colnames = c(" ", " "),
                 caption = "Run Details",
-                options = list(dom = "t", scrollY = TRUE))
+                options = list(dom = 't', scrollY = '800px', pageLength = 1000))
 }
 
-#' Show run details in viewer pane or browser
+#' Show run details in browser
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
@@ -356,19 +417,12 @@ view_run_details <- function(run) {
     
     assign("run_url", run$get_portal_url(), envir=globalenv())
     assign("rstudio_server", rstudio_server, envir=globalenv())
-    
-    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
 
-    # use viewer if available, else browser
-    viewer <- getOption("viewer")
-    if (!is.null(viewer)) {
-      viewer("http://localhost:8000")
-    } else {
-      utils::browseURL("http://localhost:8000")
-    }
+    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
   } else {
-    plot_run_details()
+    create_run_details_plot(run, rstudio_server)
   }
+
 }
 
 #' Upload files to the run record.
@@ -384,12 +438,12 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
   if (is.null(run)) {
     run <- get_current_run()
   }
-
+  
   run$upload_files(
     names = names,
     paths = paths,
     timeout_seconds = timeout_seconds)
-
+  
   invisible(NULL)
 }
 
@@ -402,8 +456,8 @@ upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
-
+  
   run$upload_folder(name, path)
-
+  
   invisible(NULL)
 }
