@@ -12,7 +12,7 @@ Authors@R: c(
     )
 URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
-Description: Provides an R interface to the AzureML Service.
+Description: Provides an R interface to the Azure ML Service.
 Encoding: UTF-8
 License: MIT + file LICENSE
 RoxygenNote: 6.1.1
@@ -28,6 +28,6 @@ Imports:
 Suggests: rmarkdown,
     knitr,
     testthat,
-    plyr,
+    dplyr,
     jsonlite
 VignetteBuilder: knitr
