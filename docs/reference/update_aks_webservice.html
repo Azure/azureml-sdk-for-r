@@ -225,6 +225,12 @@ requests per node to allow for the web service.</p></td>
 will stay in the queue (in milliseconds) before returning a 503 error.</p></td>
     </tr>
     <tr>
+      <th>num_replicas</th>
+      <td><p>An int of the number of containers to allocate for the
+web service. If this parameter is not set then the autoscaler is enabled by
+default.</p></td>
+    </tr>
+    <tr>
       <th>tags</th>
       <td><p>A named list of key-value tags for the web service,
 e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>. Will replace existing tags.</p></td>
