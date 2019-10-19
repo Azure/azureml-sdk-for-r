@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted. — delete_local_webservice • azuremlsdk</title>
+<title>Delete a local web service from the local machine — delete_local_webservice • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,10 @@ This function call is not asynchronous; it runs until the service is deleted. �
 
 
 
-<meta property="og:title" content="Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted. — delete_local_webservice" />
+<meta property="og:title" content="Delete a local web service from the local machine — delete_local_webservice" />
 
-<meta property="og:description" content="Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted." />
+<meta property="og:description" content="Delete a local web service from the local machine. This function call
+is not asynchronous; it runs until the service is deleted." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +67,7 @@ This function call is not asynchronous; it runs until the service is deleted." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -130,16 +128,15 @@ This function call is not asynchronous; it runs until the service is deleted." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted.</h1>
+    <h1>Delete a local web service from the local machine</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
     <div class="hidden name"><code>delete_local_webservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted.</p>
+    <p>Delete a local web service from the local machine. This function call
+is not asynchronous; it runs until the service is deleted.</p>
     
     </div>
 
@@ -151,15 +148,16 @@ This function call is not asynchronous; it runs until the service is deleted.</p
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>LocalWebservice object.</p></td>
+      <td><p>The <code>LocalWebservice</code> object.</p></td>
     </tr>
     <tr>
       <th>delete_cache</th>
-      <td><p>Delete temporary files cached for the service.</p></td>
+      <td><p>If <code>TRUE</code>, delete the temporary files cached for
+the service.</p></td>
     </tr>
     <tr>
       <th>delete_image</th>
-      <td><p>Delete the service's Docker image.</p></td>
+      <td><p>If <code>TRUE</code>, delete the service's Docker image.</p></td>
     </tr>
     </table>
     

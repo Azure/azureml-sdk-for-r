@@ -2,18 +2,25 @@
 % Please edit documentation in R/webservice.R
 \name{get_webservice_logs}
 \alias{get_webservice_logs}
-\title{Retrieve logs for the Webservice.}
+\title{Retrieve the logs for a web service}
 \usage{
 get_webservice_logs(webservice, num_lines = 5000L)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{LocalWebservice}, \code{AciWebservice}, or
+\code{AksWebservice} object.}
 
-\item{num_lines}{The maximum number of log lines to retrieve.}
+\item{num_lines}{An int of the maximum number of log lines to
+retrieve.}
 }
 \value{
-The logs for this Webservice
+A string of the logs for the web service.
 }
 \description{
-Retrieve logs for the Webservice.
+You can get the detailed Docker engine log messages from your
+web service deployment. You can view the logs for local, ACI,
+and AKS deployments.\cr
+\cr
+For example, if your web service deployment fails, you can
+inspect the logs to help troubleshoot.
 }

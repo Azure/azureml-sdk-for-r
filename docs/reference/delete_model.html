@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete this model from its associated workspace. — delete_model • azuremlsdk</title>
+<title>Delete a model from its associated workspace — delete_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,11 @@
 
 
 
-<meta property="og:title" content="Delete this model from its associated workspace. — delete_model" />
+<meta property="og:title" content="Delete a model from its associated workspace — delete_model" />
 
-<meta property="og:description" content="Delete this model from its associated workspace." />
+<meta property="og:description" content="Delete the registered model from its associated workspace. Note that
+you cannot delete a registered model that is being used by an active
+web service deployment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -127,14 +129,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete this model from its associated workspace.</h1>
+    <h1>Delete a model from its associated workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>delete_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Delete this model from its associated workspace.</p>
+    <p>Delete the registered model from its associated workspace. Note that
+you cannot delete a registered model that is being used by an active
+web service deployment.</p>
     
     </div>
 
@@ -145,7 +149,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>The model to download</p></td>
+      <td><p>The <code>Model</code> object.</p></td>
     </tr>
     </table>
     

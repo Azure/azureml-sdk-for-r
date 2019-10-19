@@ -1,4 +1,5 @@
 context("webservice tests")
+source("utils.R")
 
 test_that("create, get, generate keys of, and delete webservice", {
   skip('skip')

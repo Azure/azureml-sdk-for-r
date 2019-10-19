@@ -2,20 +2,38 @@
 % Please edit documentation in R/webservice.R
 \name{invoke_webservice}
 \alias{invoke_webservice}
-\title{Call this Webservice with the provided input.}
+\title{Call a web service with the provided input}
 \usage{
 invoke_webservice(webservice, input_data)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{LocalWebservice}, \code{AciWebservice}, or
+\code{AksWebservice} object.}
 
-\item{input_data}{The input data to call the Webservice with. This is the
-data your machine learning model expects as an input to run predictions.}
+\item{input_data}{The input data to invoke the web service with. This is
+the data your model expects as an input to run predictions.}
 }
 \value{
-The result of calling the Webservice. This will return predictions
-run from your machine learning model.
+A named list of the result of calling the web service. This will
+return the predictions run from your model.
 }
 \description{
-Call this Webservice with the provided input.
+Invoke the web service with the provided input and to receive
+predictions from the deployed model. The structure of the
+provided input data needs to match what the service's scoring
+script and model expect. See the "Details" section of
+\code{inference_config()}.
+}
+\details{
+Instead of invoking the web service using \code{invoke_webservice()}, you can
+also consume the web service using the service's REST API. If you've
+enabled key-based authentication for your service, you will need to provide
+a service key as a token in your request header
+(see \code{get_webservice_keys()}). If you've enabled token-based
+authentication, you will need to provide an JWT token as a bearer
+token in your request header (see \code{get_webservice_token()}).\cr
+\cr
+To get the REST API address for the service's scoring endpoint, you can
+access the following property from the Webservice object:
+\code{service$scoring_uri}
 }

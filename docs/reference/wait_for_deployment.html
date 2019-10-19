@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Automatically poll on the running Webservice deployment. — wait_for_deployment • azuremlsdk</title>
+<title>Wait for a web service to finish deploying — wait_for_deployment • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Automatically poll on the running Webservice deployment. — wait_for_deployment" />
+<meta property="og:title" content="Wait for a web service to finish deploying — wait_for_deployment" />
 
-<meta property="og:description" content="Automatically poll on the running Webservice deployment." />
+<meta property="og:description" content="Automatically poll on the running web service deployment and
+wait for the web service to reach a terminal state. Will throw
+an exception if it reaches a non-successful terminal state.
+
+Typically called after running deploy_model()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Automatically poll on the running Webservice deployment.</h1>
+    <h1>Wait for a web service to finish deploying</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>wait_for_deployment.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Automatically poll on the running Webservice deployment.</p>
+    <p>Automatically poll on the running web service deployment and
+wait for the web service to reach a terminal state. Will throw
+an exception if it reaches a non-successful terminal state.<br />
+<br />
+Typically called after running <code><a href='deploy_model.html'>deploy_model()</a></code>.</p>
     
     </div>
 
@@ -145,13 +153,25 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or
+<code>AksWebservice</code> object.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>Option to print more verbose output.</p></td>
+      <td><p>If <code>TRUE</code>, print more verbose output. Defaults
+to <code>FALSE</code>.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>See "Examples" section of <code><a href='deploy_model.html'>deploy_model()</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='deploy_model.html'>deploy_model()</a></code></p></div>
     
 
   </div>
@@ -159,7 +179,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

@@ -2,17 +2,26 @@
 % Please edit documentation in R/webservice-local.R
 \name{local_webservice_deployment_config}
 \alias{local_webservice_deployment_config}
-\title{Create a configuration object for deploying a local Webservice.}
+\title{Create a deployment config for deploying a local web service}
 \usage{
 local_webservice_deployment_config(port = NULL)
 }
 \arguments{
-\item{port}{The local port on which to expose the service's HTTP endpoint.}
+\item{port}{An int of the local port on which to expose the service's
+HTTP endpoint.}
 }
 \value{
-LocalWebserviceDeploymentConfiguration object to use when deploying
-a Webservice object.
+The \code{LocalWebserviceDeploymentConfiguration} object.
 }
 \description{
-Create a configuration object for deploying a local Webservice.
+You can deploy a model locally for limited testing and troubleshooting.
+To do so, you will need to have Docker installed on your local machine.\cr
+\cr
+If you are using an Azure Machine Learning Compute Instance for
+development, you can also deploy locally on your compute instance.
 }
+\section{Examples}{
+\preformatted{deployment_config <- local_webservice_deployment_config(port = 8890)
+}
+}
+

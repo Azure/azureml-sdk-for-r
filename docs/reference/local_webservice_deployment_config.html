@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config • azuremlsdk</title>
+<title>Create a deployment config for deploying a local web service — local_webservice_deployment_config • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config" />
+<meta property="og:title" content="Create a deployment config for deploying a local web service — local_webservice_deployment_config" />
 
-<meta property="og:description" content="Create a configuration object for deploying a local Webservice." />
+<meta property="og:description" content="You can deploy a model locally for limited testing and troubleshooting.
+To do so, you will need to have Docker installed on your local machine.
+
+If you are using an Azure Machine Learning Compute Instance for
+development, you can also deploy locally on your compute instance." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a configuration object for deploying a local Webservice.</h1>
+    <h1>Create a deployment config for deploying a local web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
     <div class="hidden name"><code>local_webservice_deployment_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a configuration object for deploying a local Webservice.</p>
+    <p>You can deploy a model locally for limited testing and troubleshooting.
+To do so, you will need to have Docker installed on your local machine.<br />
+<br />
+If you are using an Azure Machine Learning Compute Instance for
+development, you can also deploy locally on your compute instance.</p>
     
     </div>
 
@@ -145,14 +153,21 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>port</th>
-      <td><p>The local port on which to expose the service's HTTP endpoint.</p></td>
+      <td><p>An int of the local port on which to expose the service's
+HTTP endpoint.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>LocalWebserviceDeploymentConfiguration object to use when deploying
-a Webservice object.</p>
+    <p>The <code>LocalWebserviceDeploymentConfiguration</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>deployment_config &lt;- local_webservice_deployment_config(port = 8890)
+</pre>
+
     
 
   </div>
@@ -162,6 +177,8 @@ a Webservice object.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

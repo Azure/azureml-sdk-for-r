@@ -74,7 +74,7 @@ models.
 sensitive information that's needed by the workspace.
 }
 }
-\section{Usage}{
+\section{Examples}{
 
 The first example requires only minimal specification, and all dependent
 resources as well as the resource group will be created automatically.\preformatted{ws <- create_workspace(name = 'myworkspace',

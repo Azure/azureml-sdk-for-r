@@ -2,15 +2,29 @@
 % Please edit documentation in R/webservice.R
 \name{wait_for_deployment}
 \alias{wait_for_deployment}
-\title{Automatically poll on the running Webservice deployment.}
+\title{Wait for a web service to finish deploying}
 \usage{
 wait_for_deployment(webservice, show_output = FALSE)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{LocalWebservice}, \code{AciWebservice}, or
+\code{AksWebservice} object.}
 
-\item{show_output}{Option to print more verbose output.}
+\item{show_output}{If \code{TRUE}, print more verbose output. Defaults
+to \code{FALSE}.}
 }
 \description{
-Automatically poll on the running Webservice deployment.
+Automatically poll on the running web service deployment and
+wait for the web service to reach a terminal state. Will throw
+an exception if it reaches a non-successful terminal state.\cr
+\cr
+Typically called after running \code{deploy_model()}.
+}
+\section{Examples}{
+
+See "Examples" section of \code{deploy_model()}.
+}
+
+\seealso{
+\code{deploy_model()}
 }

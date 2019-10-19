@@ -1,35 +1,52 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Create a configuration object for deploying an ACI Webservice.
-#' @param cpu_cores The number of cpu cores to allocate for this Webservice.
-#' Can be a decimal.
-#' @param memory_gb The amount of memory (in GB) to allocate for this
-#' Webservice. Can be a decimal. Defaults to 0.5
-#' @param tags Dictionary of key value tags to give this Webservice
-#' @param properties Dictionary of key value properties to give this
-#' Webservice. These properties cannot be changed after deployment, however
-#' new key value pairs can be added
-#' @param description A description to give this Webservice
-#' @param location The Azure region to deploy this Webservice to. If not
-#' specified the Workspace location will be used. More details on available
-#' regions can be found here:
-#' https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances
-#' @param auth_enabled Whether or not to enable auth for this Webservice.
-#' Defaults to FALSE
-#' @param ssl_enabled Whether or not to enable SSL for this Webservice.
-#' Defaults to FALSE
-#' @param enable_app_insights Whether or not to enable AppInsights for this
-#' Webservice. Defaults to FALSE
-#' @param ssl_cert_pem_file The cert file needed if SSL is enabled
-#' @param ssl_key_pem_file The key file needed if SSL is enabled
-#' @param ssl_cname The cname for if SSL is enabled
-#' @param dns_name_label The dns name label for the scoring endpoint.
+#' Create a deployment config for deploying an ACI web service
+#' @description
+#' Deploy a web service to Azure Container Instances for testing or
+#' debugging. Use ACI for low-scale CPU-based workloads that
+#' require less than 48 GB of RAM.\cr
+#' \cr
+#' Deploy to ACI if one of the following conditions is true:
+#' * You need to quickly deploy and validate your model. You do not need
+#' to create ACI containers ahead of time. They are created as part of
+#' the deployment process.
+#' * You are testing a model that is under development.
+#' @param cpu_cores The number of cpu cores to allocate for
+#' the web service. Can be a decimal. Defaults to `0.1`.
+#' @param memory_gb The amount of memory (in GB) to allocate for
+#' the web service. Can be a decimal. Defaults to `0.5`.
+#' @param tags A named list of key-value tags for the web service,
+#' e.g. `list("key" = "value")`.
+#' @param properties A named list of key-value properties for the web
+#' service, e.g. `list("key" = "value")`. These properties cannot
+#' be changed after deployment, but new key-value pairs can be added.
+#' @param description A string of the description to give the web service.
+#' @param location A string of the Azure region to deploy the web service
+#' to. If not specified the workspace location will be used. More details
+#' on available regions can be found [here](https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances).
+#' @param auth_enabled If `TRUE` enable key-based authentication for the
+#' web service. Defaults to `FALSE`.
+#' @param ssl_enabled If `TRUE` enable SSL for the web service. Defaults
+#' to `FALSE`.
+#' @param enable_app_insights If `TRUE` enable AppInsights for the web service.
+#' Defaults to `FALSE`.
+#' @param ssl_cert_pem_file A string of the cert file needed if SSL is enabled.
+#' @param ssl_key_pem_file A string of the key file needed if SSL is enabled.
+#' @param ssl_cname A string of the cname if SSL is enabled.
+#' @param dns_name_label A string of the dns name label for the scoring
+#' endpoint.
 #' If not specified a unique dns name label will be generated for the scoring
 #' endpoint.
-#' @return AciServiceDeploymentConfiguration object to use when deploying a
-#' Webservice object
+#' @return The `AciServiceDeploymentConfiguration` object.
 #' @export
+#' @section Examples:
+#' ```
+#' deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+#' ```
+#' @seealso
+#' `deploy_model()`
+#' @md
 aci_webservice_deployment_config <- function(cpu_cores = NULL,
                                              memory_gb = NULL,
                                              tags = NULL,
@@ -59,25 +76,49 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
                                              dns_name_label)
 }
 
-#' Update the Webservice with provided properties.
-#' Values left as None will remain unchanged in this Webservice.
-#' @param webservice AciWebservice object.
-#' @param tags Dictionary of key value tags to give this Webservice.
-#' Will replace existing tags.
-#' @param properties Dictionary of key value properties to add to existing
-#' properties dictionary.
-#' @param description A description to give this Webservice.
-#' @param auth_enabled Enable or disable auth for this Webservice.
+#' Update a deployed ACI web service
+#' @description
+#' Update an ACI web service with the provided properties. You can update the
+#' web service to use a new model, a new entry script, or new dependencies
+#' that can be specified in an inference configuration.\cr
+#' \cr
+#' Values left as `NULL` will remain unchanged in the web service.
+#' @param webservice The `AciWebservice` object.
+#' @param tags A named list of key-value tags for the web service,
+#' e.g. `list("key" = "value")`. Will replace existing tags.
+#' @param properties A named list of key-value properties to add for the web
+#' service, e.g. `list("key" = "value")`.
+#' @param description A string of the description to give the web service.
+#' @param auth_enabled If `TRUE` enable key-based authentication for the
+#' web service.
 #' @param ssl_enabled Whether or not to enable SSL for this Webservice.
-#' @param ssl_cert_pem_file The cert file needed if SSL is enabled.
-#' @param ssl_key_pem_file The key file needed if SSL is enabled.
-#' @param ssl_cname The cname for if SSL is enabled.
-#' @param enable_app_insights Whether or not to enable AppInsights for this
-#' Webservice.
-#' @param models A list of Model objects to package into the updated service.
-#' @param inference_config An InferenceConfig object used to provide the
-#' required model deployment properties.
+#' @param ssl_cert_pem_file A string of the cert file needed if SSL is enabled.
+#' @param ssl_key_pem_file A string of the key file needed if SSL is enabled.
+#' @param ssl_cname A string of the cname if SSL is enabled.
+#' @param enable_app_insights If `TRUE` enable AppInsights for the web service.
+#' @param models A list of `Model` objects to package into the updated service.
+#' @param inference_config An `InferenceConfig` object.
 #' @export
+#' @section Examples:
+#' Updating a web service to use a new model, entry script, and environment:
+#' ```
+#' ws <- load_workspace_from_config()
+#' # Register a new version of the model
+#' new_model <- register_model(ws,
+#'                             model_path = "my_model.rds"
+#'                             model_name = "my_model")
+#' # Use version 3 of a registered environment
+#' deploy_env <- get_environment(ws, name = "my_env", version = "3")
+#' inference_config = inference_config(entry_script = "score.R",
+#'                                     environment = deploy_env)
+#' # Retrieve existing web service
+#' service <- get_webservice(ws, name = "my_service")
+#' # Update the web service
+#' update_aci_webservice(service,
+#'                       models = list(new_model),
+#'                       inference_config = inference_config)
+#' ```
+#' @md
 update_aci_webservice <- function(webservice,
                                   tags = NULL,
                                   properties = NULL,
