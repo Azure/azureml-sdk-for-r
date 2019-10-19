@@ -297,7 +297,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
   details <- run$get_details()
-
+  
   web_view_link <- paste0('<a href="',
                           run$get_portal_url(), '">',
                           "here", "</a>")
@@ -343,29 +343,29 @@ create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
   
   # add hyperdrive-specific values
   if (run$type == "hyperdrive") {
-      target <- details$target
-      pmc <- details$properties$primary_metric_config
-      pmc <- strsplit(gsub("[^A-Za-z0-9 :,]", "", pmc), ",")[[1]]
-      primary_metric <- sub(".*name: *(.*?) ", "\\1", pmc[1])
-      goal <- toupper(sub(".*goal: *(.*?) ", "\\1", pmc[2]))
-      
-      if (status == "Completed" || status == "Failed") {
-        best_child_run_id <- details$properties$best_child_run_id
-        best_run_metric <- details$properties$score
-      }
-      else {
-        best_child_run_id <- "-"
-        best_run_metric <- "-"
-      }
-      
-      hd_df_keys <- list("Primary Metric",
-                         "Primary Metric Goal",
-                         "Best Run Id",
-                         "Best Run Metric")
-      hd_df_values <- list(primary_metric,
-                           goal,
-                           best_child_run_id,
-                           best_run_metric)
+    target <- details$target
+    pmc <- details$properties$primary_metric_config
+    pmc <- strsplit(gsub("[^A-Za-z0-9 :,]", "", pmc), ",")[[1]]
+    primary_metric <- sub(".*name: *(.*?) ", "\\1", pmc[1])
+    goal <- toupper(sub(".*goal: *(.*?) ", "\\1", pmc[2]))
+    
+    if (status == "Completed" || status == "Failed") {
+      best_child_run_id <- details$properties$best_child_run_id
+      best_run_metric <- details$properties$score
+    }
+    else {
+      best_child_run_id <- "-"
+      best_run_metric <- "-"
+    }
+    
+    hd_df_keys <- list("Primary Metric",
+                       "Primary Metric Goal",
+                       "Best Run Id",
+                       "Best Run Metric")
+    hd_df_values <- list(primary_metric,
+                         goal,
+                         best_child_run_id,
+                         best_run_metric)
   }
   
   # add general run properties
@@ -387,17 +387,17 @@ create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
     df_keys <- c(df_keys, c("Script Name",
                             "Arguments"))
     df_values <- c(df_values, c(details$runDefinition$script),
-                                toString(details$runDefinition$arguments))
+                   toString(details$runDefinition$arguments))
   }
   
   # add web view link in last row
   df_keys <- c(df_keys, "Web View")
   df_values <- c(df_values, link_caption)
-
+  
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
                              ncol = 2)
-
+  
   if (widget) {
     run_details_plot
   } else {
@@ -424,11 +424,11 @@ create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
 view_run_details <- function(run) {
   # check if in notebook vm
   rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
-
+  
   if (rstudioapi::isAvailable()) {
     run_details_plot <- create_run_details_plot(run, rstudio_server)
     assign("run_details_plot", run_details_plot, envir=globalenv())
-
+    
     path <- here::here("widget", "app.R")
     rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
     
@@ -440,7 +440,7 @@ view_run_details <- function(run) {
     } else {
       utils::browseURL("http://localhost:1234")
     }
-
+    
   } else {
     create_run_details_plot(run, rstudio_server, widget = FALSE)
   }
