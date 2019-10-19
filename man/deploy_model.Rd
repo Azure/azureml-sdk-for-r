@@ -11,37 +11,40 @@ deploy_model(workspace, name, models, inference_config,
 \item{workspace}{The \code{Workspace} object.}
 
 \item{name}{A string of the name to give the deployed service. Must be
-unique to the workspace, only consist of lowercase letters, numbers, or dashes,
-start with a letter, and be between 3 and 32 characters long.}
+unique to the workspace, only consist of lowercase letters, numbers, or
+dashes, start with a letter, and be between 3 and 32 characters long.}
 
 \item{models}{A list of \code{Model} objects. Can be an empty list.}
 
-\item{inference_config}{The \code{InferenceConfig} object used to describe how to
-configure the model to make predictions.}
+\item{inference_config}{The \code{InferenceConfig} object used to describe
+how to configure the model to make predictions.}
 
 \item{deployment_config}{The deployment configuration of type
-\code{LocalWebserviceDeploymentConfiguration}, \code{AciServiceDeploymentConfiguration}, or
-\code{AksServiceDeploymentConfiguration} used to configure the web service. The
-deployment configuration is specific to the compute target that will host the web
-service. For example, when you deploy a model locally, you must specify the port
-where the service accepts requests. If \code{NULL}, an empty configuration
-object will be used based on the desired target specified by \code{deployment_target}.}
+\code{LocalWebserviceDeploymentConfiguration},
+\code{AciServiceDeploymentConfiguration}, or
+\code{AksServiceDeploymentConfiguration} used to configure the web service.
+The deployment configuration is specific to the compute target that will
+host the web service. For example, when you deploy a model locally, you
+must specify the port where the service accepts requests. If \code{NULL}, an
+empty configuration object will be used based on the desired target
+specified by \code{deployment_target}.}
 
-\item{deployment_target}{The compute target to deploy the model to. You will only
-need to specify this parameter if you are deploy to AKS, in which case provide an
-\code{AksCompute} object. If you are deploying locally or to ACI, leave this parameter
-as \code{NULL}.}
+\item{deployment_target}{The compute target to deploy the model to.
+You will only need to specify this parameter if you are deploy to AKS,
+in which case provide an \code{AksCompute} object. If you are deploying locally
+or to ACI, leave this parameter as \code{NULL}.}
 }
 \value{
 The \code{LocalWebservice}, \code{AciWebservice}, or \code{AksWebservice} object.
 }
 \description{
 Deploy a web service from zero or more registered models. Types of web
-services that can be deployed are \code{LocalWebservice}, which will deploy a model
-locally, and \code{AciWebservice} and \code{AksWebservice}, which will deploy a model to
-Azure Container Instances (ACI) and Azure Kubernetes Service (ACI), respectively.
-The type of web service deployed will be determined by the \code{deployment_config}
-specified. Returns a \code{Webservice} object corresponding to the deployed web service.
+services that can be deployed are \code{LocalWebservice}, which will deploy
+a model locally, and \code{AciWebservice} and \code{AksWebservice}, which will
+deploy a model to Azure Container Instances (ACI) and Azure Kubernetes
+Service (AKS), respectively.The type of web service deployed will be
+determined by the \code{deployment_config} specified. Returns a \code{Webservice}
+object corresponding to the deployed web service.
 }
 \section{Details}{
 
@@ -52,22 +55,17 @@ If you encounter any issue in deploying your web service, please visit this
 \section{Examples}{
 
 Deploying a model as a web service on ACI:\preformatted{ws <- load_workspace_from_config()
-
 model <- get_model(ws, name = "my_model")
 r_env <- r_environment(name = "r_env")
-
-inference_config <- inference_config(entry_script = "score.R", 
-                                     source_directory = ".", 
+inference_config <- inference_config(entry_script = "score.R",
+                                     source_directory = ".",
                                      environment = r_env)
-                                     
 deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
-
-service <- deploy_model(ws, 
-                        name = "my_webservice", 
-                        models = list(model), 
-                        inference_config = inference_config, 
+service <- deploy_model(ws,
+                        name = "my_webservice",
+                        models = list(model),
+                        inference_config = inference_config,
                         deployment_config = deployment_config)
-                        
 wait_for_deployment(service, show_output = TRUE)
 }
 }
