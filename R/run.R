@@ -294,6 +294,11 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Create run details plot
 #' @param run run used for plotting
+#' @param rstudio_server boolean indicating whether or not notebook vm is being
+#' used
+#' @param widget boolean indicating whether live widget or static plot will be
+#' returned
+#' @return dataframe or datatable containing run details
 create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
   details <- run$get_details()
   
