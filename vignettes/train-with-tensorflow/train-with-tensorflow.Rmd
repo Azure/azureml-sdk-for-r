@@ -94,6 +94,7 @@ Submitting our experiment will return a `Run` object that we will use to interfa
 
 ```{r Submit a run, eval=FALSE}
 run <- submit_experiment(exp, est)
+view_run_details(run)
 wait_for_run_completion(run, show_output = TRUE)
 ```
 
