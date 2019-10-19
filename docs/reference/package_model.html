@@ -41,6 +41,7 @@ the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
 them, modify them, and build the image manually.
+
 Model packaging enables you to do these things. package_model() packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
@@ -51,10 +52,10 @@ Generate a Dockerfile: Download the Dockerfile, model, entry script, and
 other assets needed to build a Docker image. You can then inspect the files or
 make changes before you build the image locally. To use this method, make sure
 to set generate_dockerfile = TRUE.
-
-
 With either scenario, you will need to have Docker installed in your
-development environment." />
+development environment.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,8 +160,9 @@ model as a web service</h1>
 the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
-them, modify them, and build the image manually.</p>
-<p>Model packaging enables you to do these things. <code>package_model()</code> packages all
+them, modify them, and build the image manually.<br />
+<br />
+Model packaging enables you to do these things. <code>package_model()</code> packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
 two ways to use model packaging:</p><ul>
@@ -169,11 +171,11 @@ and other files needed to host it as a web service.</p></li>
 <li><p><strong>Generate a Dockerfile</strong>: Download the Dockerfile, model, entry script, and
 other assets needed to build a Docker image. You can then inspect the files or
 make changes before you build the image locally. To use this method, make sure
-to set <code>generate_dockerfile = TRUE</code>.</p></li>
+to set <code>generate_dockerfile = TRUE</code>.<br />
+With either scenario, you will need to have Docker installed in your
+development environment.</p></li>
 </ul>
 
-<p>With either scenario, you will need to have Docker installed in your
-development environment.</p>
     
     </div>
 
@@ -213,18 +215,14 @@ can be run locally instead of building an image.</p></td>
     
 
 <p>Package a registered model:</p><pre>ws &lt;- load_workspace_from_config()
-
 model &lt;- get_model(ws, name = "my_model")
 r_env &lt;- r_environment(name = "r_env")
-
-inference_config &lt;- inference_config(entry_script = "score.R", 
-                                     source_directory = ".", 
+inference_config &lt;- inference_config(entry_script = "score.R",
+                                     source_directory = ".",
                                      environment = r_env)
-                                     
-package &lt;- package_model(ws, 
-                         models = list(model), 
+package &lt;- package_model(ws,
+                         models = list(model),
                          inference_config = inference_config)
-                         
 wait_for_model_package_creation(show_output = TRUE)
 </pre>
 

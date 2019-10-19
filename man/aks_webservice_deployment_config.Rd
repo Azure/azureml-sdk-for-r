@@ -28,12 +28,12 @@ to use when autoscaling the web service. Defaults to \code{1}.}
 \item{autoscale_max_replicas}{An int of the maximum number of containers
 to use when autoscaling the web service. Defaults to \code{10}.}
 
-\item{autoscale_refresh_seconds}{An int of how often in seconds the autoscaler
-should attempt to scale the web service. Defaults to \code{1}.}
+\item{autoscale_refresh_seconds}{An int of how often in seconds the
+autoscaler should attempt to scale the web service. Defaults to \code{1}.}
 
 \item{autoscale_target_utilization}{An int of the target utilization
-(in percent out of 100) the autoscaler should attempt to maintain for the
-web service. Defaults to \code{70}.}
+(in percent out of 100) the autoscaler should attempt to maintain for
+the web service. Defaults to \code{70}.}
 
 \item{auth_enabled}{If \code{TRUE} enable key-based authentication for the
 web service. Defaults to \code{TRUE}.}
@@ -47,15 +47,15 @@ the web service. Can be a decimal. Defaults to \code{0.5}.}
 \item{enable_app_insights}{If \code{TRUE} enable AppInsights for the web service.
 Defaults to \code{FALSE}.}
 
-\item{scoring_timeout_ms}{An int of the timeout (in milliseconds) to enforce for
-scoring calls to the web service. Defaults to \code{60000}.}
+\item{scoring_timeout_ms}{An int of the timeout (in milliseconds) to
+enforce for scoring calls to the web service. Defaults to \code{60000}.}
 
-\item{replica_max_concurrent_requests}{An int of the number of maximum concurrent
-requests per node to allow for the web service. Defaults to \code{1}.}
+\item{replica_max_concurrent_requests}{An int of the number of maximum
+concurrent requests per node to allow for the web service. Defaults to \code{1}.}
 
 \item{max_request_wait_time}{An int of the maximum amount of time a request
-will stay in the queue (in milliseconds) before returning a 503 error. Defaults
-to \code{500}.}
+will stay in the queue (in milliseconds) before returning a 503 error.
+Defaults to \code{500}.}
 
 \item{num_replicas}{An int of the number of containers to allocate for the
 web service. If this parameter is not set then the autoscaler is enabled by
@@ -112,8 +112,8 @@ The \code{AksServiceDeploymentConfiguration} object.
 Deploy a web service to Azure Kubernetes Service for high-scale
 prodution deployments. Provides fast response time and autoscaling
 of the deployed service. Using GPU for inference when deployed as a
-web service is only supported on AKS.
-
+web service is only supported on AKS.\cr
+\cr
 Deploy to AKS if you need one or more of the following capabilities:
 \itemize{
 \item Fast response time
@@ -127,9 +127,8 @@ When deploying to AKS, you deploy to an AKS cluster that is connected to your wo
 There are two ways to connect an AKS cluster to your workspace:
 \itemize{
 \item Create the AKS cluster using Azure ML (see \code{create_aks_compute()}).
-\item Attach an existing AKS cluster to your workspace (see \code{attach_aks_compute()}).
-}
-
+\item Attach an existing AKS cluster to your workspace (see \code{attach_aks_compute()}).\cr
+\cr
 Pass the \code{AksCompute} object to the \code{deployment_target} parameter of \code{deploy_model()}.
 }
 \subsection{Token-based authentication}{
@@ -140,6 +139,7 @@ not be able to fetch a token for your web service, even if your cluster is in a 
 than your workspace. This effectively results in token-based auth being unavailable until your
 workspace's region is available again. In addition, the greater the distance between your
 cluster's region and your workspace's region, the longer it will take to fetch a token.
+}
 }
 }
 \section{Examples}{

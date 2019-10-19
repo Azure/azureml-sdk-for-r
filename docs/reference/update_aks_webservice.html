@@ -37,6 +37,7 @@
 <meta property="og:description" content="Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
 that can be specified in an inference configuration.
+
 Values left as NULL will remain unchanged in the web service." />
 <meta name="twitter:card" content="summary" />
 
@@ -139,8 +140,9 @@ Values left as NULL will remain unchanged in the web service." />
     
     <p>Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
-that can be specified in an inference configuration.</p>
-<p>Values left as <code>NULL</code> will remain unchanged in the web service.</p>
+that can be specified in an inference configuration.<br />
+<br />
+Values left as <code>NULL</code> will remain unchanged in the web service.</p>
     
     </div>
 
@@ -286,16 +288,16 @@ Minimum value is <code>1</code>.</p></td>
     </tr>
     <tr>
       <th>namespace</th>
-      <td><p>A string of the Kubernetes namespace in which to deploy the web service:
-up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen ('-') characters. The first
-last characters cannot be hyphens.</p></td>
+      <td><p>A string of the Kubernetes namespace in which to deploy the
+web service: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and
+hyphen ('-') characters. The first last characters cannot be hyphens.</p></td>
     </tr>
     <tr>
       <th>token_auth_enabled</th>
-      <td><p>If <code>TRUE</code>, enable token-based authentication for the web service.
-If enabled, users can access the web service by fetching an access token using their Azure
-Active Directory credentials. Both <code>token_auth_enabled</code> and <code>auth_enabled</code> cannot be set to
-<code>TRUE</code>.</p></td>
+      <td><p>If <code>TRUE</code>, enable token-based authentication for
+the web service. If enabled, users can access the web service by fetching
+an access token using their Azure Active Directory credentials.
+Both <code>token_auth_enabled</code> and <code>auth_enabled</code> cannot be set to <code>TRUE</code>.</p></td>
     </tr>
     </table>
     

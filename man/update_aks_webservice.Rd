@@ -92,19 +92,19 @@ Minimum value is \code{1}.}
 the liveness probe when a Pod starts and the probe fails, before giving up.
 Minimum value is \code{1}.}
 
-\item{namespace}{A string of the Kubernetes namespace in which to deploy the web service:
-up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen ('-') characters. The first
-last characters cannot be hyphens.}
+\item{namespace}{A string of the Kubernetes namespace in which to deploy the
+web service: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and
+hyphen ('-') characters. The first last characters cannot be hyphens.}
 
-\item{token_auth_enabled}{If \code{TRUE}, enable token-based authentication for the web service.
-If enabled, users can access the web service by fetching an access token using their Azure
-Active Directory credentials. Both \code{token_auth_enabled} and \code{auth_enabled} cannot be set to
-\code{TRUE}.}
+\item{token_auth_enabled}{If \code{TRUE}, enable token-based authentication for
+the web service. If enabled, users can access the web service by fetching
+an access token using their Azure Active Directory credentials.
+Both \code{token_auth_enabled} and \code{auth_enabled} cannot be set to \code{TRUE}.}
 }
 \description{
 Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
-that can be specified in an inference configuration.
-
+that can be specified in an inference configuration.\cr
+\cr
 Values left as \code{NULL} will remain unchanged in the web service.
 }

@@ -10,25 +10,26 @@ register_model(workspace, model_path, model_name, tags = NULL,
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
 
-\item{model_path}{A string of the path on the local file system where the
-model assets are located. This can be a direct pointer to a single file or
-folder. If pointing to a folder, the \code{child_paths} parameter can be used to
-specify individual files to bundle together as the \code{Model} object, as opposed
-to using the entire contents of the folder.}
+\item{model_path}{A string of the path on the local file system where
+the model assets are located. This can be a direct pointer to a single
+file or folder. If pointing to a folder, the \code{child_paths} parameter can
+be used to specify individual files to bundle together as the \code{Model}
+object, as opposed to using the entire contents of the folder.}
 
 \item{model_name}{A string of the name to register the model with.}
 
 \item{tags}{A named list of key-value tags to give the model, e.g.
 \code{list("key" = "value")}}
 
-\item{properties}{A named list of key-value properties to give the model, e.g.
-\code{list("key" = "value")}.}
+\item{properties}{A named list of key-value properties to give the model,
+e.g. \code{list("key" = "value")}.}
 
 \item{description}{A string of the text description of the model.}
 
-\item{child_paths}{A list of strings of child paths of a folder specified by
-\code{model_name}. Must be provided in conjunction with a \code{model_path} pointing to
-a folder; only the specified files will be bundled into the \code{Model} object.}
+\item{child_paths}{A list of strings of child paths of a folder specified
+by \code{model_name}. Must be provided in conjunction with a \code{model_path}
+pointing to a folder; only the specified files will be bundled into the
+\code{Model} object.}
 }
 \value{
 The \code{Model} object.
@@ -39,8 +40,8 @@ container for one or more files that make up your model. For example, if
 you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
-were registered.
-
+were registered.\cr
+\cr
 Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
@@ -49,7 +50,9 @@ and the new model is registered under the same name.
 \section{Examples}{
 
 Registering a model from a single file:\preformatted{ws <- load_workspace_from_config()
-model <- register_model(ws, model_path = "my_model.rds", model_name = "my_model")
+model <- register_model(ws,
+                        model_path = "my_model.rds",
+                        model_name = "my_model")
 }
 }
 

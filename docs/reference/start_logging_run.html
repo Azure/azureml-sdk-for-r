@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth keys for a web service — get_webservice_keys • azuremlsdk</title>
+<title>Start an interactive logging session in the specified experiment. — start_logging_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,23 +32,13 @@
 
 
 
-<meta property="og:title" content="Retrieve auth keys for a web service — get_webservice_keys" />
+<meta property="og:title" content="Start an interactive logging session in the specified experiment. — start_logging_run" />
 
-<meta property="og:description" content="Get the authentication keys for a web service that is deployed
-with key-based authentication enabled. In order to enable
-key-based authentication, set the auth_enabled = TRUE parameter
-when you are creating or updating a deployment (either
-aci_webservice_deployment_config() or
-aks_webservice_deployment_config() for creation and
-update_aci_webservice() or update_aks_webservice() for updating).
-Note that key-based auth is enabled by default for AksWebservice
-but not for AciWebservice.
-
-To check if a web service has key-based auth enabled, you can
-access the following boolean property from the Webservice object:
-service$auth_enabled
-
-Not supported for LocalWebservice deployments." />
+<meta property="og:description" content="Create an interactive run that allows the user to log
+metrics &amp;amp; artifacts to a run record in an experiment locally.
+Any metrics that are logged during the session are added to the run
+record in the experiment. If an output directory is specified, the contents
+of that directory is uploaded as run artifacts upon run completion." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -141,50 +131,45 @@ Not supported for LocalWebservice deployments." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth keys for a web service</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
-    <div class="hidden name"><code>get_webservice_keys.Rd</code></div>
+    <h1>Start an interactive logging session in the specified experiment.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/experiment.R'><code>R/experiment.R</code></a></small>
+    <div class="hidden name"><code>start_logging_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the authentication keys for a web service that is deployed
-with key-based authentication enabled. In order to enable
-key-based authentication, set the <code>auth_enabled = TRUE</code> parameter
-when you are creating or updating a deployment (either
-<code><a href='aci_webservice_deployment_config.html'>aci_webservice_deployment_config()</a></code> or
-<code><a href='aks_webservice_deployment_config.html'>aks_webservice_deployment_config()</a></code> for creation and
-<code><a href='update_aci_webservice.html'>update_aci_webservice()</a></code> or <code><a href='update_aks_webservice.html'>update_aks_webservice()</a></code> for updating).
-Note that key-based auth is enabled by default for <code>AksWebservice</code>
-but not for <code>AciWebservice</code>.<br />
-<br />
-To check if a web service has key-based auth enabled, you can
-access the following boolean property from the Webservice object:
-<code>service$auth_enabled</code><br />
-<br />
-Not supported for <code>LocalWebservice</code> deployments.</p>
+    <p>Create an interactive run that allows the user to log
+metrics &amp; artifacts to a run record in an experiment locally.</p>
+<p>Any metrics that are logged during the session are added to the run
+record in the experiment. If an output directory is specified, the contents
+of that directory is uploaded as run artifacts upon run completion.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_webservice_keys</span>(<span class='no'>webservice</span>)</pre>
+    <pre class="usage"><span class='fu'>start_logging_run</span>(<span class='no'>experiment</span>, <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>snapshot_directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>webservice</th>
-      <td><p>The <code>AciWebservice</code> or <code>AksWebservice</code> object.</p></td>
+      <th>experiment</th>
+      <td><p>The <code>Experiment</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>outputs</th>
+      <td><p>Optional outputs directory to track.</p></td>
+    </tr>
+    <tr>
+      <th>snapshot_directory</th>
+      <td><p>Optional directory to take snapshot of. Setting to
+NULL will take no snapshot.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of two strings corresponding to the primary and
-secondary authentication keys.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='generate_new_webservice_key.html'>generate_new_webservice_key()</a></code></p></div>
+    <p>Return a started run.</p>
     
 
   </div>
@@ -194,8 +179,6 @@ secondary authentication keys.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

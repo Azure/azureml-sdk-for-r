@@ -77,19 +77,15 @@ library("azureml")
 Then, we need to edit our script so that it can log our parameters. We will use the `log_metric_to_run` function to log our hyperparameters at the top of the script and to log our primary metric at the bottom of the script.
 
 ```r
-current_run <- get_current_run()
+log_metric_to_run("batch_size", batch_size)
 ...
-log_metric_to_run("batch_size", batch_size, current_run)
+log_metric_to_run("epochs", epochs)
 ...
-log_metric_to_run("epochs", epochs, current_run)
+log_metric_to_run("lr", lr)
 ...
-log_metric_to_run("lr", lr, current_run)
+log_metric_to_run("decay", decay)
 ...
-log_metric_to_run("decay", decay, current_run)
-```
-
-```r
-log_metric_to_run("Loss", results[[1]], current_run)
+log_metric_to_run("Loss", results[[1]])
 ```
 
 ## 4. Create an estimator
