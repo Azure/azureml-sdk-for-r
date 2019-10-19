@@ -227,6 +227,10 @@ generate_docker_file <- function(custom_docker_image = NULL,
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"install.packages(",
                               "c(\'remotes\', \'e1071\', \'optparse\'), repos",
                               " = \'http://cran.us.r-project.org\')\"\n")
+
+    # this is required as remotes is unable to untar the package sometimes
+    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"Sys.setenv(TAR ",
+                              "= \'/bin/tar\')\"\n")
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_github(repo = 'https://github.com/",
                               "Azure/azureml-sdk-for-r')\"\n")

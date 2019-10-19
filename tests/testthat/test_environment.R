@@ -41,7 +41,7 @@ test_that("create dockerfile", {
                                      cran_packages = c("ggplot2"),
                                      install_extra_packages = FALSE)
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
-                                  "packages('ggplot2'), repos = \'http://cran",
+                                  "packages('ggplot2', repos = \'http://cran",
                                   ".us.r-project.org\')\"\n"))
 
   # github packages
