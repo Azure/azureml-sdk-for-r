@@ -96,19 +96,19 @@ get_runs_in_experiment <- function(experiment,
 #' @description
 #' Create an interactive run that allows the user to log
 #' metrics & artifacts to a run record in an experiment locally.
-#' 
-#' Any metrics that are logged during the session are added to the run 
-#' record in the experiment. If an output directory is specified, the contents 
+#'
+#' Any metrics that are logged during the session are added to the run
+#' record in the experiment. If an output directory is specified, the contents
 #' of that directory is uploaded as run artifacts upon run completion.
 #' @param experiment The `Experiment` object.
 #' @param outputs Optional outputs directory to track.
-#' @param snapshot_directory Optional directory to take snapshot of. Setting to 
+#' @param snapshot_directory Optional directory to take snapshot of. Setting to
 #' NULL will take no snapshot.
 #' @return Return a started run.
 #' @export
 #' @md
-start_logging_run <- function(experiment, 
-                              outputs = NULL, 
+start_logging_run <- function(experiment,
+                              outputs = NULL,
                               snapshot_directory = NULL) {
   experiment$start_logging(outputs = outputs,
                            snapshot_directory = snapshot_directory)
