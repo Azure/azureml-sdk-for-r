@@ -40,6 +40,7 @@ you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
 were registered.
+
 Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
@@ -75,7 +76,7 @@ and the new model is registered under the same name." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -148,8 +149,9 @@ container for one or more files that make up your model. For example, if
 you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
-were registered.</p>
-<p>Models are identified by name and version. Each time you register a
+were registered.<br />
+<br />
+Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.</p>
@@ -168,11 +170,11 @@ and the new model is registered under the same name.</p>
     </tr>
     <tr>
       <th>model_path</th>
-      <td><p>A string of the path on the local file system where the
-model assets are located. This can be a direct pointer to a single file or
-folder. If pointing to a folder, the <code>child_paths</code> parameter can be used to
-specify individual files to bundle together as the <code>Model</code> object, as opposed
-to using the entire contents of the folder.</p></td>
+      <td><p>A string of the path on the local file system where
+the model assets are located. This can be a direct pointer to a single
+file or folder. If pointing to a folder, the <code>child_paths</code> parameter can
+be used to specify individual files to bundle together as the <code>Model</code>
+object, as opposed to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>model_name</th>
@@ -185,8 +187,8 @@ to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>A named list of key-value properties to give the model, e.g.
-<code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>.</p></td>
+      <td><p>A named list of key-value properties to give the model,
+e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>.</p></td>
     </tr>
     <tr>
       <th>description</th>
@@ -194,9 +196,10 @@ to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>child_paths</th>
-      <td><p>A list of strings of child paths of a folder specified by
-<code>model_name</code>. Must be provided in conjunction with a <code>model_path</code> pointing to
-a folder; only the specified files will be bundled into the <code>Model</code> object.</p></td>
+      <td><p>A list of strings of child paths of a folder specified
+by <code>model_name</code>. Must be provided in conjunction with a <code>model_path</code>
+pointing to a folder; only the specified files will be bundled into the
+<code>Model</code> object.</p></td>
     </tr>
     </table>
     
@@ -209,7 +212,9 @@ a folder; only the specified files will be bundled into the <code>Model</code> o
     
 
 <p>Registering a model from a single file:</p><pre>ws &lt;- load_workspace_from_config()
-model &lt;- register_model(ws, model_path = "my_model.rds", model_name = "my_model")
+model &lt;- register_model(ws,
+                        model_path = "my_model.rds",
+                        model_name = "my_model")
 </pre>
 
     

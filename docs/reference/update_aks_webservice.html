@@ -37,6 +37,7 @@
 <meta property="og:description" content="Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
 that can be specified in an inference configuration.
+
 Values left as NULL will remain unchanged in the web service." />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +70,7 @@ Values left as NULL will remain unchanged in the web service." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -139,8 +140,9 @@ Values left as NULL will remain unchanged in the web service." />
     
     <p>Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
-that can be specified in an inference configuration.</p>
-<p>Values left as <code>NULL</code> will remain unchanged in the web service.</p>
+that can be specified in an inference configuration.<br />
+<br />
+Values left as <code>NULL</code> will remain unchanged in the web service.</p>
     
     </div>
 
@@ -225,6 +227,12 @@ requests per node to allow for the web service.</p></td>
 will stay in the queue (in milliseconds) before returning a 503 error.</p></td>
     </tr>
     <tr>
+      <th>num_replicas</th>
+      <td><p>An int of the number of containers to allocate for the
+web service. If this parameter is not set then the autoscaler is enabled by
+default.</p></td>
+    </tr>
+    <tr>
       <th>tags</th>
       <td><p>A named list of key-value tags for the web service,
 e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>. Will replace existing tags.</p></td>
@@ -280,16 +288,16 @@ Minimum value is <code>1</code>.</p></td>
     </tr>
     <tr>
       <th>namespace</th>
-      <td><p>A string of the Kubernetes namespace in which to deploy the web service:
-up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and hyphen ('-') characters. The first
-last characters cannot be hyphens.</p></td>
+      <td><p>A string of the Kubernetes namespace in which to deploy the
+web service: up to 63 lowercase alphanumeric ('a'-'z', '0'-'9') and
+hyphen ('-') characters. The first last characters cannot be hyphens.</p></td>
     </tr>
     <tr>
       <th>token_auth_enabled</th>
-      <td><p>If <code>TRUE</code>, enable token-based authentication for the web service.
-If enabled, users can access the web service by fetching an access token using their Azure
-Active Directory credentials. Both <code>token_auth_enabled</code> and <code>auth_enabled</code> cannot be set to
-<code>TRUE</code>.</p></td>
+      <td><p>If <code>TRUE</code>, enable token-based authentication for
+the web service. If enabled, users can access the web service by fetching
+an access token using their Azure Active Directory credentials.
+Both <code>token_auth_enabled</code> and <code>auth_enabled</code> cannot be set to <code>TRUE</code>.</p></td>
     </tr>
     </table>
     

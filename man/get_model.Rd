@@ -10,28 +10,31 @@ get_model(workspace, name = NULL, id = NULL, tags = NULL,
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
 
-\item{name}{Retrieve the latest model with the corresponding name (a string),
+\item{name}{Retrieve the latest model with the corresponding
+name (a string), if it exists.}
+
+\item{id}{Retrieve the model with the corresponding ID (a string),
 if it exists.}
 
-\item{id}{Retrieve the model with the corresponding ID (a string), if it exists.}
+\item{tags}{(Optional) Retrieve the model filtered based on the
+provided tags (a list), searching by either 'key' or
+'list(key, value)'.}
 
-\item{tags}{(Optional) Retrieve the model filtered based on the provided tags
-(a list), searching by either 'key' or 'list(key, value)'.}
+\item{properties}{(Optional) Retrieve the model filter based on the
+provided properties (a list), searching by either 'key' or
+'list(key, value)'.}
 
-\item{properties}{(Optional) Retrieve the model filter based on the provided
-properties (a list), searching by either 'key' or 'list(key, value)'.}
+\item{version}{(Optional) An int of the version of a model to
+retrieve, when provided along with \code{name}. The specific version of
+the specified named model will be returned, if it exists.}
 
-\item{version}{(Optional) An int of the version of a model to retrieve,
-when provided along with \code{name}. The specific version of the specified named
-model will be returned, if it exists.}
-
-\item{run_id}{(Optional) Retrieve the model filterd by the provided run ID
-(a string) the model was registered from, if it exists.}
+\item{run_id}{(Optional) Retrieve the model filterd by the provided
+run ID (a string) the model was registered from, if it exists.}
 }
 \value{
 The \code{Model} object.
 }
 \description{
-Returns a \code{Model} object for an existing model that has been previously
-registered to the given workspace.
+Returns a \code{Model} object for an existing model that has been
+previously registered to the given workspace.
 }

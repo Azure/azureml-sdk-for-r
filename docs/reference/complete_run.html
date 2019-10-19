@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a deployed web service — get_webservice • azuremlsdk</title>
+<title>Mark the run as completed. This is typically used in interactive logging
+scenarios. — complete_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +33,11 @@
 
 
 
-<meta property="og:title" content="Get a deployed web service — get_webservice" />
+<meta property="og:title" content="Mark the run as completed. This is typically used in interactive logging
+scenarios. — complete_run" />
 
-<meta property="og:description" content="Return the corresponding Webservice object of a deployed web service from
-a given workspace." />
+<meta property="og:description" content="Mark the run as completed. This is typically used in interactive logging
+scenarios." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,36 +130,29 @@ a given workspace." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a deployed web service</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
-    <div class="hidden name"><code>get_webservice.Rd</code></div>
+    <h1>Mark the run as completed. This is typically used in interactive logging
+scenarios.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
+    <div class="hidden name"><code>complete_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return the corresponding Webservice object of a deployed web service from
-a given workspace.</p>
+    <p>Mark the run as completed. This is typically used in interactive logging
+scenarios.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_webservice</span>(<span class='no'>workspace</span>, <span class='no'>name</span>)</pre>
+    <pre class="usage"><span class='fu'>complete_run</span>(<span class='no'>run</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>A string of the name of the web service to retrieve.</p></td>
+      <th>run</th>
+      <td><p>Run object.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or <code>AksWebservice</code> object.</p>
     
 
   </div>
@@ -165,9 +160,7 @@ a given workspace.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

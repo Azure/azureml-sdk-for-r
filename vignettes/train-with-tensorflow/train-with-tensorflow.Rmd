@@ -69,11 +69,9 @@ library("azureml")
 Then, we need to add the `log_metric_to_run` function to track our primary metric,  "accuracy", for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.
 
 ```r
-current_run <- get_current_run()
 log_metric_to_run("accuracy",
                   sess$run(accuracy,
-                  feed_dict = dict(x = mnist$test$images, y_ = mnist$test$labels)),
-                  current_run)
+                  feed_dict = dict(x = mnist$test$images, y_ = mnist$test$labels)))
 ```
 
 ## 4. Create an estimator

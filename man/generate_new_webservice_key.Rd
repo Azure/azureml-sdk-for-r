@@ -15,7 +15,7 @@ generate_new_webservice_key(webservice, key_type)
 \description{
 Regenerate either the primary or secondary authentication key for
 an \code{AciWebservice} or \code{AksWebservice}.The web service must have
-been deployed with key-based authentication enabled.
-
+been deployed with key-based authentication enabled.\cr
+\cr
 Not supported for \code{LocalWebservice} deployments.
 }

@@ -21,17 +21,16 @@ for a web service that was deployed with token-based authentication
 enabled. Token-based authentication requires clients to use an Azure
 Active Directory account to request an authentication token, which is
 used to make requests to the deployed service. Only available for
-AKS deployments.
-
+AKS deployments.\cr
+\cr
 In order to enable token-based authentication, set the
 \code{token_auth_enabled = TRUE} parameter when you are creating or
 updating a deployment (\code{aks_webservice_deployment_config()} for creation
 or \code{update_aks_webservice()} for updating). Note that you cannot have both
 key-based authentication and token-based authentication enabled.
-Token-based authentication is not enabled by default.
-
+Token-based authentication is not enabled by default.\cr
+\cr
 To check if a web service has token-based auth enabled, you can
 access the following boolean property from the Webservice object:
-
 \code{service$token_auth_enabled}
 }

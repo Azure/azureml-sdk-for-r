@@ -37,10 +37,11 @@
 <meta property="og:description" content="Deploy a web service to Azure Container Instances for testing or
 debugging. Use ACI for low-scale CPU-based workloads that
 require less than 48 GB of RAM.
+
 Deploy to ACI if one of the following conditions is true:
 You need to quickly deploy and validate your model. You do not need
-to create ACI containers ahead of time. They are created as part of the
-deployment process.
+to create ACI containers ahead of time. They are created as part of
+the deployment process.
 You are testing a model that is under development.
 
 " />
@@ -75,7 +76,7 @@ You are testing a model that is under development.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -145,11 +146,12 @@ You are testing a model that is under development.
     
     <p>Deploy a web service to Azure Container Instances for testing or
 debugging. Use ACI for low-scale CPU-based workloads that
-require less than 48 GB of RAM.</p>
-<p>Deploy to ACI if one of the following conditions is true:</p><ul>
+require less than 48 GB of RAM.<br />
+<br />
+Deploy to ACI if one of the following conditions is true:</p><ul>
 <li><p>You need to quickly deploy and validate your model. You do not need
-to create ACI containers ahead of time. They are created as part of the
-deployment process.</p></li>
+to create ACI containers ahead of time. They are created as part of
+the deployment process.</p></li>
 <li><p>You are testing a model that is under development.</p></li>
 </ul>
 
@@ -225,7 +227,8 @@ Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>dns_name_label</th>
-      <td><p>A string of the dns name label for the scoring endpoint.
+      <td><p>A string of the dns name label for the scoring
+endpoint.
 If not specified a unique dns name label will be generated for the scoring
 endpoint.</p></td>
     </tr>

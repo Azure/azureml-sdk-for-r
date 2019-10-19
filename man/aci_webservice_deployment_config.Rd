@@ -45,7 +45,8 @@ Defaults to \code{FALSE}.}
 
 \item{ssl_cname}{A string of the cname if SSL is enabled.}
 
-\item{dns_name_label}{A string of the dns name label for the scoring endpoint.
+\item{dns_name_label}{A string of the dns name label for the scoring
+endpoint.
 If not specified a unique dns name label will be generated for the scoring
 endpoint.}
 }
@@ -55,13 +56,13 @@ The \code{AciServiceDeploymentConfiguration} object.
 \description{
 Deploy a web service to Azure Container Instances for testing or
 debugging. Use ACI for low-scale CPU-based workloads that
-require less than 48 GB of RAM.
-
+require less than 48 GB of RAM.\cr
+\cr
 Deploy to ACI if one of the following conditions is true:
 \itemize{
 \item You need to quickly deploy and validate your model. You do not need
-to create ACI containers ahead of time. They are created as part of the
-deployment process.
+to create ACI containers ahead of time. They are created as part of
+the deployment process.
 \item You are testing a model that is under development.
 }
 }

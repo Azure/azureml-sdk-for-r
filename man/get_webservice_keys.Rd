@@ -22,13 +22,12 @@ when you are creating or updating a deployment (either
 \code{aks_webservice_deployment_config()} for creation and
 \code{update_aci_webservice()} or \code{update_aks_webservice()} for updating).
 Note that key-based auth is enabled by default for \code{AksWebservice}
-but not for \code{AciWebservice}.
-
+but not for \code{AciWebservice}.\cr
+\cr
 To check if a web service has key-based auth enabled, you can
 access the following boolean property from the Webservice object:
-
-\code{service$auth_enabled}
-
+\code{service$auth_enabled}\cr
+\cr
 Not supported for \code{LocalWebservice} deployments.
 }
 \seealso{
