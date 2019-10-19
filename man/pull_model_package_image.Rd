@@ -14,11 +14,11 @@ pull_model_package_image(package)
 Pull the Docker image from a created \code{ModelPackage} to your
 local Docker environment. The output of this call will
 display the name of the image. For example:
-\code{Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338}.
-
+\code{Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338}.\cr
+\cr
 This can only be used with a Docker image \code{ModelPackage} (where
-\code{package_model()} was called with \code{generate_dockerfile = FALSE}).
-
+\code{package_model()} was called with \code{generate_dockerfile = FALSE}).\cr
+\cr
 After you've pulled the image, you can start a local container based
 on this image using Docker commands.
 }
