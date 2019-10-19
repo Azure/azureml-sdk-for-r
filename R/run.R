@@ -294,7 +294,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Create run details plot
 #' @param run run used for plotting
-#' @export
 create_run_details_plot <- function(run, rstudio_server, widget = TRUE) {
   details <- run$get_details()
   
