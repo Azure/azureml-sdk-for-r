@@ -1,7 +1,7 @@
 Package: azuremlsdk
 Type: Package
 Title: R Interface to Azure ML SDK
-Version: 0.5.2
+Version: 0.5.6
 Authors@R: c(
     person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
     person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
@@ -12,7 +12,7 @@ Authors@R: c(
     )
 URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
-Description: Provides an R interface to the AzureML Service.
+Description: Provides an R interface to the Azure ML Service.
 Encoding: UTF-8
 License: MIT + file LICENSE
 RoxygenNote: 6.1.1
@@ -27,5 +27,7 @@ Imports:
     rstudioapi (>= 0.7)
 Suggests: rmarkdown,
     knitr,
-    testthat
+    testthat,
+    dplyr,
+    jsonlite
 VignetteBuilder: knitr

@@ -56,6 +56,10 @@ requests per node to allow for the web service.}
 \item{max_request_wait_time}{An int of the maximum amount of time a request
 will stay in the queue (in milliseconds) before returning a 503 error.}
 
+\item{num_replicas}{An int of the number of containers to allocate for the
+web service. If this parameter is not set then the autoscaler is enabled by
+default.}
+
 \item{tags}{A named list of key-value tags for the web service,
 e.g. \code{list("key" = "value")}. Will replace existing tags.}
 
