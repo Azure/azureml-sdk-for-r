@@ -2,15 +2,26 @@
 % Please edit documentation in R/model.R
 \name{pull_model_package_image}
 \alias{pull_model_package_image}
-\title{Pull the package output to the local machine.
-This can only be used with a Docker image package.}
+\title{Pull the Docker image from a \code{ModelPackage} to your local
+Docker environment}
 \usage{
 pull_model_package_image(package)
 }
 \arguments{
-\item{package}{Package created with model(s) and dependencies.}
+\item{package}{The \code{ModelPackage} object.}
 }
 \description{
-Pull the package output to the local machine.
-This can only be used with a Docker image package.
+Pull the Docker image from a created \code{ModelPackage} to your
+local Docker environment. The output of this call will
+display the name of the image. For example:
+\code{Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338}.\cr
+\cr
+This can only be used with a Docker image \code{ModelPackage} (where
+\code{package_model()} was called with \code{generate_dockerfile = FALSE}).\cr
+\cr
+After you've pulled the image, you can start a local container based
+on this image using Docker commands.
+}
+\seealso{
+\code{package_model()}
 }

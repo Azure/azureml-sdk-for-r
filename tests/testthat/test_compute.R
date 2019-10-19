@@ -1,6 +1,8 @@
 context("compute tests")
+source("utils.R")
 
 test_that("create amlcompute", {
+  skip_if_no_azureml()
   ws <- existing_ws
 
   vm_size <- "STANDARD_D2_V2"

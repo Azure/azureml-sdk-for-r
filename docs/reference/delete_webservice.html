@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete this Webservice from its associated workspace. — delete_webservice • azureml</title>
+<title>Delete a web service from a given workspace — delete_webservice • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Delete this Webservice from its associated workspace. — delete_webservice" />
+<meta property="og:title" content="Delete a web service from a given workspace — delete_webservice" />
 
-<meta property="og:description" content="Delete this Webservice from its associated workspace." />
+<meta property="og:description" content="Delete a deployed ACI or AKS web service from the given workspace.
+This function call is not asynchronous; it runs until the resource is
+deleted.
+
+To delete a LocalWebservice see delete_local_webservice()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +69,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -92,12 +96,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -121,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete this Webservice from its associated workspace.</h1>
+    <h1>Delete a web service from a given workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>delete_webservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Delete this Webservice from its associated workspace.</p>
+    <p>Delete a deployed ACI or AKS web service from the given workspace.
+This function call is not asynchronous; it runs until the resource is
+deleted.<br />
+<br />
+To delete a <code>LocalWebservice</code> see <code><a href='delete_local_webservice.html'>delete_local_webservice()</a></code>.</p>
     
     </div>
 
@@ -139,7 +153,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>AciWebservice</code> or <code>AksWebservice</code> object.</p></td>
     </tr>
     </table>
     
@@ -157,7 +171,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

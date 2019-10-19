@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait for the package to finish creating. — wait_for_model_package_creation • azureml</title>
+<title>Wait for a model package to finish creating — wait_for_model_package_creation • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Wait for the package to finish creating. — wait_for_model_package_creation" />
+<meta property="og:title" content="Wait for a model package to finish creating — wait_for_model_package_creation" />
 
-<meta property="og:description" content="Wait for the package to finish creating." />
+<meta property="og:description" content="Wait for a model package creation to reach a terminal state." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +65,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -92,12 +92,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -121,14 +127,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wait for the package to finish creating.</h1>
+    <h1>Wait for a model package to finish creating</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>wait_for_model_package_creation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Wait for the package to finish creating.</p>
+    <p>Wait for a model package creation to reach a terminal state.</p>
     
     </div>
 
@@ -139,14 +145,20 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>package</th>
-      <td><p>Package created with model(s) and dependencies.</p></td>
+      <td><p>The <code>ModelPackage</code> object.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>Boolean option to print more verbose output. Defaults to
-FALSE.</p></td>
+      <td><p>If <code>TRUE</code>, print more verbose output. Defaults to
+<code>FALSE</code>.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>See "Examples" section of <code><a href='package_model.html'>package_model()</a></code>.</p>
     
 
   </div>
@@ -154,7 +166,9 @@ FALSE.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>
@@ -162,7 +176,7 @@ FALSE.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

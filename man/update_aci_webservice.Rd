@@ -2,8 +2,7 @@
 % Please edit documentation in R/webservice-aci.R
 \name{update_aci_webservice}
 \alias{update_aci_webservice}
-\title{Update the Webservice with provided properties.
-Values left as None will remain unchanged in this Webservice.}
+\title{Update a deployed ACI web service}
 \usage{
 update_aci_webservice(webservice, tags = NULL, properties = NULL,
   description = NULL, auth_enabled = NULL, ssl_enabled = NULL,
@@ -12,35 +11,57 @@ update_aci_webservice(webservice, tags = NULL, properties = NULL,
   inference_config = NULL)
 }
 \arguments{
-\item{webservice}{AciWebservice object.}
+\item{webservice}{The \code{AciWebservice} object.}
 
-\item{tags}{Dictionary of key value tags to give this Webservice.
-Will replace existing tags.}
+\item{tags}{A named list of key-value tags for the web service,
+e.g. \code{list("key" = "value")}. Will replace existing tags.}
 
-\item{properties}{Dictionary of key value properties to add to existing
-properties dictionary.}
+\item{properties}{A named list of key-value properties to add for the web
+service, e.g. \code{list("key" = "value")}.}
 
-\item{description}{A description to give this Webservice.}
+\item{description}{A string of the description to give the web service.}
 
-\item{auth_enabled}{Enable or disable auth for this Webservice.}
+\item{auth_enabled}{If \code{TRUE} enable key-based authentication for the
+web service.}
 
 \item{ssl_enabled}{Whether or not to enable SSL for this Webservice.}
 
-\item{ssl_cert_pem_file}{The cert file needed if SSL is enabled.}
+\item{ssl_cert_pem_file}{A string of the cert file needed if SSL is enabled.}
 
-\item{ssl_key_pem_file}{The key file needed if SSL is enabled.}
+\item{ssl_key_pem_file}{A string of the key file needed if SSL is enabled.}
 
-\item{ssl_cname}{The cname for if SSL is enabled.}
+\item{ssl_cname}{A string of the cname if SSL is enabled.}
 
-\item{enable_app_insights}{Whether or not to enable AppInsights for this
-Webservice.}
+\item{enable_app_insights}{If \code{TRUE} enable AppInsights for the web service.}
 
-\item{models}{A list of Model objects to package into the updated service.}
+\item{models}{A list of \code{Model} objects to package into the updated service.}
 
-\item{inference_config}{An InferenceConfig object used to provide the
-required model deployment properties.}
+\item{inference_config}{An \code{InferenceConfig} object.}
 }
 \description{
-Update the Webservice with provided properties.
-Values left as None will remain unchanged in this Webservice.
+Update an ACI web service with the provided properties. You can update the
+web service to use a new model, a new entry script, or new dependencies
+that can be specified in an inference configuration.\cr
+\cr
+Values left as \code{NULL} will remain unchanged in the web service.
 }
+\section{Examples}{
+
+Updating a web service to use a new model, entry script, and environment:\preformatted{ws <- load_workspace_from_config()
+# Register a new version of the model
+new_model <- register_model(ws,
+                            model_path = "my_model.rds"
+                            model_name = "my_model")
+# Use version 3 of a registered environment
+deploy_env <- get_environment(ws, name = "my_env", version = "3")
+inference_config = inference_config(entry_script = "score.R",
+                                    environment = deploy_env)
+# Retrieve existing web service
+service <- get_webservice(ws, name = "my_service")
+# Update the web service
+update_aci_webservice(service,
+                      models = list(new_model),
+                      inference_config = inference_config)
+}
+}
+

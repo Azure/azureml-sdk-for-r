@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deploy a Webservice from zero or more model objects. — deploy_model • azureml</title>
+<title>Deploy a web service from registered model(s) — deploy_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,15 @@
 
 
 
-<meta property="og:title" content="Deploy a Webservice from zero or more model objects. — deploy_model" />
+<meta property="og:title" content="Deploy a web service from registered model(s) — deploy_model" />
 
-<meta property="og:description" content="Deploy a Webservice from zero or more model objects." />
+<meta property="og:description" content="Deploy a web service from zero or more registered models. Types of web
+services that can be deployed are LocalWebservice, which will deploy
+a model locally, and AciWebservice and AksWebservice, which will
+deploy a model to Azure Container Instances (ACI) and Azure Kubernetes
+Service (AKS), respectively.The type of web service deployed will be
+determined by the deployment_config specified. Returns a Webservice
+object corresponding to the deployed web service." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +71,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -92,12 +98,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -121,14 +133,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deploy a Webservice from zero or more model objects.</h1>
+    <h1>Deploy a web service from registered model(s)</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>deploy_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Deploy a Webservice from zero or more model objects.</p>
+    <p>Deploy a web service from zero or more registered models. Types of web
+services that can be deployed are <code>LocalWebservice</code>, which will deploy
+a model locally, and <code>AciWebservice</code> and <code>AksWebservice</code>, which will
+deploy a model to Azure Container Instances (ACI) and Azure Kubernetes
+Service (AKS), respectively.The type of web service deployed will be
+determined by the <code>deployment_config</code> specified. Returns a <code>Webservice</code>
+object corresponding to the deployed web service.</p>
     
     </div>
 
@@ -140,41 +158,79 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>A Workspace object to associate the Webservice with</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name to give the deployed service. Must be unique to the
-workspace, only consist of lowercase letters, numbers, or dashes, start with
-a letter, and be between 3 and 32 characters long.</p></td>
+      <td><p>A string of the name to give the deployed service. Must be
+unique to the workspace, only consist of lowercase letters, numbers, or
+dashes, start with a letter, and be between 3 and 32 characters long.</p></td>
     </tr>
     <tr>
       <th>models</th>
-      <td><p>A list of model objects. Can be an empty list.</p></td>
+      <td><p>A list of <code>Model</code> objects. Can be an empty list.</p></td>
     </tr>
     <tr>
       <th>inference_config</th>
-      <td><p>An InferenceConfig object used to determine required
-model properties.</p></td>
+      <td><p>The <code>InferenceConfig</code> object used to describe
+how to configure the model to make predictions.</p></td>
     </tr>
     <tr>
       <th>deployment_config</th>
-      <td><p>A WebserviceDeploymentConfiguration used to
-configure the webservice. If one is not provided, an empty configuration
-object will be used based on the desired target.</p></td>
+      <td><p>The deployment configuration of type
+<code>LocalWebserviceDeploymentConfiguration</code>,
+<code>AciServiceDeploymentConfiguration</code>, or
+<code>AksServiceDeploymentConfiguration</code> used to configure the web service.
+The deployment configuration is specific to the compute target that will
+host the web service. For example, when you deploy a model locally, you
+must specify the port where the service accepts requests. If <code>NULL</code>, an
+empty configuration object will be used based on the desired target
+specified by <code>deployment_target</code>.</p></td>
     </tr>
     <tr>
       <th>deployment_target</th>
-      <td><p>A azureml.core.ComputeTarget to deploy the
-Webservice to. As Azure Container Instances has no associated
-azureml.core.ComputeTarget, leave this parameter as None to deploy to Azure
-Container Instances.</p></td>
+      <td><p>The compute target to deploy the model to.
+You will only need to specify this parameter if you are deploy to AKS,
+in which case provide an <code>AksCompute</code> object. If you are deploying locally
+or to ACI, leave this parameter as <code>NULL</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Webservice object corresponding to the deployed webservice</p>
+    <p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or <code>AksWebservice</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+
+<p>If you encounter any issue in deploying your web service, please visit this
+<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment'>troubleshooting guide</a>.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>Deploying a model as a web service on ACI:</p><pre>ws &lt;- load_workspace_from_config()
+model &lt;- get_model(ws, name = "my_model")
+r_env &lt;- r_environment(name = "r_env")
+inference_config &lt;- inference_config(entry_script = "score.R",
+                                     source_directory = ".",
+                                     environment = r_env)
+deployment_config &lt;- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+service &lt;- deploy_model(ws,
+                        name = "my_webservice",
+                        models = list(model),
+                        inference_config = inference_config,
+                        deployment_config = deployment_config)
+wait_for_deployment(service, show_output = TRUE)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='inference_config.html'>inference_config()</a></code>, <code><a href='aci_webservice_deployment_config.html'>aci_webservice_deployment_config()</a></code>,
+<code><a href='aks_webservice_deployment_config.html'>aks_webservice_deployment_config()</a></code>, <code><a href='local_webservice_deployment_config.html'>local_webservice_deployment_config()</a></code></p></div>
     
 
   </div>
@@ -184,6 +240,12 @@ Container Instances.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
@@ -192,7 +254,7 @@ Container Instances.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

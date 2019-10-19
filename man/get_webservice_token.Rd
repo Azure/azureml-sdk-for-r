@@ -2,17 +2,35 @@
 % Please edit documentation in R/webservice.R
 \name{get_webservice_token}
 \alias{get_webservice_token}
-\title{Retrieve auth token for this Webservice, scoped to the current user.}
+\title{Retrieve the auth token for a web service}
 \usage{
 get_webservice_token(webservice)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{AksWebservice} object.}
 }
 \value{
-The auth token for this Webservice and when it should be
-refreshed after.
+A list of string and datetime corresponding to the auth token
+and the token's expiration time. You will need to request a new
+token using \code{get_webservice_token()} after the token's expiration
+time.
 }
 \description{
-Retrieve auth token for this Webservice, scoped to the current user.
+Get the authentication token, scoped to the current user,
+for a web service that was deployed with token-based authentication
+enabled. Token-based authentication requires clients to use an Azure
+Active Directory account to request an authentication token, which is
+used to make requests to the deployed service. Only available for
+AKS deployments.\cr
+\cr
+In order to enable token-based authentication, set the
+\code{token_auth_enabled = TRUE} parameter when you are creating or
+updating a deployment (\code{aks_webservice_deployment_config()} for creation
+or \code{update_aks_webservice()} for updating). Note that you cannot have both
+key-based authentication and token-based authentication enabled.
+Token-based authentication is not enabled by default.\cr
+\cr
+To check if a web service has token-based auth enabled, you can
+access the following boolean property from the Webservice object:
+\code{service$token_auth_enabled}
 }

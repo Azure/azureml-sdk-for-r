@@ -2,7 +2,7 @@
 % Please edit documentation in R/webservice-aci.R
 \name{aci_webservice_deployment_config}
 \alias{aci_webservice_deployment_config}
-\title{Create a configuration object for deploying an ACI Webservice.}
+\title{Create a deployment config for deploying an ACI web service}
 \usage{
 aci_webservice_deployment_config(cpu_cores = NULL, memory_gb = NULL,
   tags = NULL, properties = NULL, description = NULL,
@@ -11,48 +11,66 @@ aci_webservice_deployment_config(cpu_cores = NULL, memory_gb = NULL,
   ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)
 }
 \arguments{
-\item{cpu_cores}{The number of cpu cores to allocate for this Webservice.
-Can be a decimal.}
+\item{cpu_cores}{The number of cpu cores to allocate for
+the web service. Can be a decimal. Defaults to \code{0.1}.}
 
-\item{memory_gb}{The amount of memory (in GB) to allocate for this
-Webservice. Can be a decimal. Defaults to 0.5}
+\item{memory_gb}{The amount of memory (in GB) to allocate for
+the web service. Can be a decimal. Defaults to \code{0.5}.}
 
-\item{tags}{Dictionary of key value tags to give this Webservice}
+\item{tags}{A named list of key-value tags for the web service,
+e.g. \code{list("key" = "value")}.}
 
-\item{properties}{Dictionary of key value properties to give this
-Webservice. These properties cannot be changed after deployment, however
-new key value pairs can be added}
+\item{properties}{A named list of key-value properties for the web
+service, e.g. \code{list("key" = "value")}. These properties cannot
+be changed after deployment, but new key-value pairs can be added.}
 
-\item{description}{A description to give this Webservice}
+\item{description}{A string of the description to give the web service.}
 
-\item{location}{The Azure region to deploy this Webservice to. If not
-specified the Workspace location will be used. More details on available
-regions can be found here:
-https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances}
+\item{location}{A string of the Azure region to deploy the web service
+to. If not specified the workspace location will be used. More details
+on available regions can be found \href{https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances}{here}.}
 
-\item{auth_enabled}{Whether or not to enable auth for this Webservice.
-Defaults to FALSE}
+\item{auth_enabled}{If \code{TRUE} enable key-based authentication for the
+web service. Defaults to \code{FALSE}.}
 
-\item{ssl_enabled}{Whether or not to enable SSL for this Webservice.
-Defaults to FALSE}
+\item{ssl_enabled}{If \code{TRUE} enable SSL for the web service. Defaults
+to \code{FALSE}.}
 
-\item{enable_app_insights}{Whether or not to enable AppInsights for this
-Webservice. Defaults to FALSE}
+\item{enable_app_insights}{If \code{TRUE} enable AppInsights for the web service.
+Defaults to \code{FALSE}.}
 
-\item{ssl_cert_pem_file}{The cert file needed if SSL is enabled}
+\item{ssl_cert_pem_file}{A string of the cert file needed if SSL is enabled.}
 
-\item{ssl_key_pem_file}{The key file needed if SSL is enabled}
+\item{ssl_key_pem_file}{A string of the key file needed if SSL is enabled.}
 
-\item{ssl_cname}{The cname for if SSL is enabled}
+\item{ssl_cname}{A string of the cname if SSL is enabled.}
 
-\item{dns_name_label}{The dns name label for the scoring endpoint.
+\item{dns_name_label}{A string of the dns name label for the scoring
+endpoint.
 If not specified a unique dns name label will be generated for the scoring
 endpoint.}
 }
 \value{
-AciServiceDeploymentConfiguration object to use when deploying a
-Webservice object
+The \code{AciServiceDeploymentConfiguration} object.
 }
 \description{
-Create a configuration object for deploying an ACI Webservice.
+Deploy a web service to Azure Container Instances for testing or
+debugging. Use ACI for low-scale CPU-based workloads that
+require less than 48 GB of RAM.\cr
+\cr
+Deploy to ACI if one of the following conditions is true:
+\itemize{
+\item You need to quickly deploy and validate your model. You do not need
+to create ACI containers ahead of time. They are created as part of
+the deployment process.
+\item You are testing a model that is under development.
+}
+}
+\section{Examples}{
+\preformatted{deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+}
+}
+
+\seealso{
+\code{deploy_model()}
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • azureml</title>
+<title>Function reference • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -62,8 +62,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -89,12 +89,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -705,185 +711,172 @@ best primary metric</p></td>
         <td>
           <p><code><a href="get_model.html">get_model()</a></code> </p>
         </td>
-        <td><p>Retrieve the Model object from the cloud.</p></td>
+        <td><p>Get a registered model</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="register_model.html">register_model()</a></code> </p>
         </td>
-        <td><p>Register a model with the provided workspace.</p></td>
+        <td><p>Register a model to a given workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="download_model.html">download_model()</a></code> </p>
         </td>
-        <td><p>Download model to target_dir of local file system.</p></td>
+        <td><p>Download a model to the local file system</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="deploy_model.html">deploy_model()</a></code> </p>
         </td>
-        <td><p>Deploy a Webservice from zero or more model objects.</p></td>
+        <td><p>Deploy a web service from registered model(s)</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="package_model.html">package_model()</a></code> </p>
         </td>
-        <td><p>Create a model package in the form of a Docker image or Dockerfile build
-context</p></td>
+        <td><p>Create a model package that packages all the assets needed to host a
+model as a web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="delete_model.html">delete_model()</a></code> </p>
         </td>
-        <td><p>Delete this model from its associated workspace.</p></td>
+        <td><p>Delete a model from its associated workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_model_package_container_registry.html">get_model_package_container_registry()</a></code> </p>
         </td>
-        <td><p>Return a ContainerRegistry object for where the image
-(or base image, for Dockerfile packages) is stored.</p></td>
+        <td><p>Get the Azure container registry that a packaged model uses</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_model_package_creation_logs.html">get_model_package_creation_logs()</a></code> </p>
         </td>
-        <td><p>Retrieve the package creation logs.</p></td>
+        <td><p>Get the model package creation logs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="pull_model_package_image.html">pull_model_package_image()</a></code> </p>
         </td>
-        <td><p>Pull the package output to the local machine.
-This can only be used with a Docker image package.</p></td>
+        <td><p>Pull the Docker image from a <code>ModelPackage</code> to your local
+Docker environment</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="save_model_package_files.html">save_model_package_files()</a></code> </p>
         </td>
-        <td><p>Save the package output to a local directory.
-This can only be used with a Dockerfile package.</p></td>
+        <td><p>Save a Dockerfile and dependencies from a <code>ModelPackage</code> to
+your local file system</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="wait_for_model_package_creation.html">wait_for_model_package_creation()</a></code> </p>
         </td>
-        <td><p>Wait for the package to finish creating.</p></td>
+        <td><p>Wait for a model package to finish creating</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="inference_config.html">inference_config()</a></code> </p>
         </td>
-        <td><p>Creates the Model deployment config specific to model deployments.</p></td>
+        <td><p>Create an inference configuration for model deployments</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_webservice.html">get_webservice()</a></code> </p>
         </td>
-        <td><p>Retrieve a cloud representation of a Webservice object associated with the
-provided workspace. Will return an instance of a child class corresponding to
-the specific type of the retrieved Webservice object.</p></td>
+        <td><p>Get a deployed web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="wait_for_deployment.html">wait_for_deployment()</a></code> </p>
         </td>
-        <td><p>Automatically poll on the running Webservice deployment.</p></td>
+        <td><p>Wait for a web service to finish deploying</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_webservice_logs.html">get_webservice_logs()</a></code> </p>
         </td>
-        <td><p>Retrieve logs for the Webservice.</p></td>
+        <td><p>Retrieve the logs for a web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_webservice_keys.html">get_webservice_keys()</a></code> </p>
         </td>
-        <td><p>Retrieve auth keys for this Webservice.</p></td>
+        <td><p>Retrieve auth keys for a web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="generate_new_webservice_key.html">generate_new_webservice_key()</a></code> </p>
         </td>
-        <td><p>Regenerate one of the Webservice's keys. Must specify either 'Primary' or
-'Secondary' key.</p></td>
+        <td><p>Regenerate one of a web service's keys</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_webservice_token.html">get_webservice_token()</a></code> </p>
         </td>
-        <td><p>Retrieve auth token for this Webservice, scoped to the current user.</p></td>
+        <td><p>Retrieve the auth token for a web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="invoke_webservice.html">invoke_webservice()</a></code> </p>
         </td>
-        <td><p>Call this Webservice with the provided input.</p></td>
+        <td><p>Call a web service with the provided input</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="delete_webservice.html">delete_webservice()</a></code> </p>
         </td>
-        <td><p>Delete this Webservice from its associated workspace.</p></td>
+        <td><p>Delete a web service from a given workspace</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="aci_webservice_deployment_config.html">aci_webservice_deployment_config()</a></code> </p>
         </td>
-        <td><p>Create a configuration object for deploying an ACI Webservice.</p></td>
+        <td><p>Create a deployment config for deploying an ACI web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="update_aci_webservice.html">update_aci_webservice()</a></code> </p>
         </td>
-        <td><p>Update the Webservice with provided properties.
-Values left as None will remain unchanged in this Webservice.</p></td>
+        <td><p>Update a deployed ACI web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code> </p>
         </td>
-        <td><p>Create a configuration object for deploying to an AKS compute target.</p></td>
+        <td><p>Create a deployment config for deploying an AKS web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="update_aks_webservice.html">update_aks_webservice()</a></code> </p>
         </td>
-        <td><p>Update the Webservice with provided properties.
-Values left as None will remain unchanged in this Webservice.</p></td>
+        <td><p>Update a deployed AKS web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="local_webservice_deployment_config.html">local_webservice_deployment_config()</a></code> </p>
         </td>
-        <td><p>Create a configuration object for deploying a local Webservice.</p></td>
+        <td><p>Create a deployment config for deploying a local web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="update_local_webservice.html">update_local_webservice()</a></code> </p>
         </td>
-        <td><p>Update the LocalWebservice with provided properties.
-Values left as None will remain unchanged in this LocalWebservice.</p></td>
+        <td><p>Update a local web service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="delete_local_webservice.html">delete_local_webservice()</a></code> </p>
         </td>
-        <td><p>Delete this LocalWebservice from the local machine.
-This function call is not asynchronous; it runs until the service is deleted.</p></td>
+        <td><p>Delete a local web service from the local machine</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="reload_local_webservice_assets.html">reload_local_webservice_assets()</a></code> </p>
         </td>
-        <td><p>Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead.</p></td>
+        <td><p>Reload a local web service's entry script and dependencies</p></td>
       </tr>
     </tbody>
     </table>
@@ -907,7 +900,7 @@ To handle those changes call LocalWebservice.update(), instead.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,26 +1,43 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-#' Create a configuration object for deploying a local Webservice.
-#' @param port The local port on which to expose the service's HTTP endpoint.
-#' @return LocalWebserviceDeploymentConfiguration object to use when deploying
-#' a Webservice object.
+#' Create a deployment config for deploying a local web service
+#' @description
+#' You can deploy a model locally for limited testing and troubleshooting.
+#' To do so, you will need to have Docker installed on your local machine.\cr
+#' \cr
+#' If you are using an Azure Machine Learning Compute Instance for
+#' development, you can also deploy locally on your compute instance.
+#' @param port An int of the local port on which to expose the service's
+#' HTTP endpoint.
+#' @return The `LocalWebserviceDeploymentConfiguration` object.
 #' @export
+#' @section Examples:
+#' ```
+#' deployment_config <- local_webservice_deployment_config(port = 8890)
+#' ```
+#' @md
 local_webservice_deployment_config <- function(port = NULL) {
   config <- azureml$core$webservice$LocalWebservice$deploy_configuration(port)
   invisible(config)
 }
 
-#' Update the LocalWebservice with provided properties.
-#' Values left as None will remain unchanged in this LocalWebservice.
-#' @param webservice LocalWebservice object.
-#' @param models A new list of models contained in the LocalWebservice.
-#' @param deployment_config Deployment configuration options to apply to the
-#' LocalWebservice.
-#' @param wait Wait for the service's container to reach a healthy state.
-#' @param inference_config An InferenceConfig object used to provide the
-#' required model deployment properties.
+#' Update a local web service
+#' @description
+#' Update a local web service with the provided properties. You can update the
+#' web service to use a new model, a new entry script, or new dependencies
+#' that can be specified in an inference configuration.\cr
+#' \cr
+#' Values left as `NULL` will remain unchanged in the service.
+#' @param webservice The `LocalWebservice` object.
+#' @param models A list of `Model` objects to package into the updated service.
+#' @param deployment_config A `LocalWebserviceDeploymentConfiguration` to
+#' apply to the web service.
+#' @param wait If `TRUE`, wait for the service's container to reach a
+#' healthy state. Defaults to `FALSE`.
+#' @param inference_config An `InferenceConfig` object.
 #' @export
+#' @md
 update_local_webservice <- function(webservice, models = NULL,
                                     deployment_config = NULL,
                                     wait = FALSE,
@@ -32,12 +49,16 @@ update_local_webservice <- function(webservice, models = NULL,
   invisible(NULL)
 }
 
-#' Delete this LocalWebservice from the local machine.
-#' This function call is not asynchronous; it runs until the service is deleted.
-#' @param webservice LocalWebservice object.
-#' @param delete_cache Delete temporary files cached for the service.
-#' @param delete_image Delete the service's Docker image.
+#' Delete a local web service from the local machine
+#' @description
+#' Delete a local web service from the local machine. This function call
+#' is not asynchronous; it runs until the service is deleted.
+#' @param webservice The `LocalWebservice` object.
+#' @param delete_cache If `TRUE`, delete the temporary files cached for
+#' the service.
+#' @param delete_image If `TRUE`, delete the service's Docker image.
 #' @export
+#' @md
 delete_local_webservice <- function(webservice,
                                     delete_cache = TRUE,
                                     delete_image = FALSE) {
@@ -46,15 +67,18 @@ delete_local_webservice <- function(webservice,
   invisible(NULL)
 }
 
-#' Reload the LocalWebservice's execution script and dependencies.
+#' Reload a local web service's entry script and dependencies
+#' @description
 #' This restarts the service's container with copies of updated assets,
-#' including the execution script and local dependencies, but it does not
-#' rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-#' or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-#' To handle those changes call LocalWebservice.update(), instead.
-#' @param webservice LocalWebservice object.
-#' @param wait Wait for the service's container to reach a healthy state.
+#' including the entry script and local dependencies, but it does not
+#' rebuild the underlying image. Accordingly, changes to the environment
+#' will not be reflected in the reloaded local web service. To handle those
+#' changes call `update_local_webservice()` instead.
+#' @param webservice The `LocalWebservice` object.
+#' @param wait If `TRUE`, wait for the service's container to reach a
+#' healthy state. Defaults to `FALSE`.
 #' @export
+#' @md
 reload_local_webservice_assets <- function(webservice, wait = FALSE) {
   webservice$reload(wait)
   invisible(NULL)

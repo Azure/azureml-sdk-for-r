@@ -16,7 +16,7 @@ Let's prepare for training by loading the required package, initializing a works
 
 ### Import package
 ```{r Import package, eval=FALSE}
-library("azureml")
+library("azuremlsdk")
 ```
 
 ### Initialize a workspace

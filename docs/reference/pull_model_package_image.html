@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pull the package output to the local machine.
-This can only be used with a Docker image package. — pull_model_package_image • azureml</title>
+<title>Pull the Docker image from a <code>ModelPackage</code> to your local
+Docker environment — pull_model_package_image • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +33,19 @@ This can only be used with a Docker image package. — pull_model_package_image 
 
 
 
-<meta property="og:title" content="Pull the package output to the local machine.
-This can only be used with a Docker image package. — pull_model_package_image" />
+<meta property="og:title" content="Pull the Docker image from a <code>ModelPackage</code> to your local
+Docker environment — pull_model_package_image" />
 
-<meta property="og:description" content="Pull the package output to the local machine.
-This can only be used with a Docker image package." />
+<meta property="og:description" content="Pull the Docker image from a created ModelPackage to your
+local Docker environment. The output of this call will
+display the name of the image. For example:
+Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338.
+
+This can only be used with a Docker image ModelPackage (where
+package_model() was called with generate_dockerfile = FALSE).
+
+After you've pulled the image, you can start a local container based
+on this image using Docker commands." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -68,8 +76,8 @@ This can only be used with a Docker image package." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -95,12 +103,18 @@ This can only be used with a Docker image package." />
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -124,16 +138,24 @@ This can only be used with a Docker image package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pull the package output to the local machine.
-This can only be used with a Docker image package.</h1>
+    <h1>Pull the Docker image from a <code>ModelPackage</code> to your local
+Docker environment</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>pull_model_package_image.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Pull the package output to the local machine.
-This can only be used with a Docker image package.</p>
+    <p>Pull the Docker image from a created <code>ModelPackage</code> to your
+local Docker environment. The output of this call will
+display the name of the image. For example:
+<code>Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338</code>.<br />
+<br />
+This can only be used with a Docker image <code>ModelPackage</code> (where
+<code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = FALSE</code>).<br />
+<br />
+After you've pulled the image, you can start a local container based
+on this image using Docker commands.</p>
     
     </div>
 
@@ -144,9 +166,13 @@ This can only be used with a Docker image package.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>package</th>
-      <td><p>Package created with model(s) and dependencies.</p></td>
+      <td><p>The <code>ModelPackage</code> object.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='package_model.html'>package_model()</a></code></p></div>
     
 
   </div>
@@ -154,7 +180,9 @@ This can only be used with a Docker image package.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -162,7 +190,7 @@ This can only be used with a Docker image package.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

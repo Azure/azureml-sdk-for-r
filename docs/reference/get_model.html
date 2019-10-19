@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve the Model object from the cloud. — get_model • azureml</title>
+<title>Get a registered model — get_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Retrieve the Model object from the cloud. — get_model" />
+<meta property="og:title" content="Get a registered model — get_model" />
 
-<meta property="og:description" content="Retrieve the Model object from the cloud." />
+<meta property="og:description" content="Returns a Model object for an existing model that has been
+previously registered to the given workspace." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +66,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -92,12 +93,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -121,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve the Model object from the cloud.</h1>
+    <h1>Get a registered model</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>get_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve the Model object from the cloud.</p>
+    <p>Returns a <code>Model</code> object for an existing model that has been
+previously registered to the given workspace.</p>
     
     </div>
 
@@ -140,41 +148,46 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace object containing the Model to retrieve</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>Will retrieve the latest model with the corresponding name, if
-it exists</p></td>
+      <td><p>Retrieve the latest model with the corresponding
+name (a string), if it exists.</p></td>
     </tr>
     <tr>
       <th>id</th>
-      <td><p>Will retrieve the model with the corresponding ID, if it exists</p></td>
+      <td><p>Retrieve the model with the corresponding ID (a string),
+if it exists.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Optional, will filter based on the provided list, searching by
-either 'key' or '[key, value]'.</p></td>
+      <td><p>(Optional) Retrieve the model filtered based on the
+provided tags (a list), searching by either 'key' or
+'list(key, value)'.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Optional, will filter based on the provided list,
-searching by either 'key' or '[key, value]'.</p></td>
+      <td><p>(Optional) Retrieve the model filter based on the
+provided properties (a list), searching by either 'key' or
+'list(key, value)'.</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>When provided along with name, will get the specific version
-of the specified named model, if it exists</p></td>
+      <td><p>(Optional) An int of the version of a model to
+retrieve, when provided along with <code>name</code>. The specific version of
+the specified named model will be returned, if it exists.</p></td>
     </tr>
     <tr>
       <th>run_id</th>
-      <td><p>Optional, will filter based on the provided ID.</p></td>
+      <td><p>(Optional) Retrieve the model filterd by the provided
+run ID (a string) the model was registered from, if it exists.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A model object, if one is found in the provided workspace</p>
+    <p>The <code>Model</code> object.</p>
     
 
   </div>
@@ -192,7 +205,7 @@ of the specified named model, if it exists</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

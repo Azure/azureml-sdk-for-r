@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a configuration object for deploying an ACI Webservice. — aci_webservice_deployment_config • azureml</title>
+<title>Create a deployment config for deploying an ACI web service — aci_webservice_deployment_config • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,19 @@
 
 
 
-<meta property="og:title" content="Create a configuration object for deploying an ACI Webservice. — aci_webservice_deployment_config" />
+<meta property="og:title" content="Create a deployment config for deploying an ACI web service — aci_webservice_deployment_config" />
 
-<meta property="og:description" content="Create a configuration object for deploying an ACI Webservice." />
+<meta property="og:description" content="Deploy a web service to Azure Container Instances for testing or
+debugging. Use ACI for low-scale CPU-based workloads that
+require less than 48 GB of RAM.
+
+Deploy to ACI if one of the following conditions is true:
+You need to quickly deploy and validate your model. You do not need
+to create ACI containers ahead of time. They are created as part of
+the deployment process.
+You are testing a model that is under development.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +75,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -92,12 +102,18 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+    </li>
+    <li>
       <a href="../articles/installation.html">Installing AzureML SDK for R</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -121,14 +137,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a configuration object for deploying an ACI Webservice.</h1>
+    <h1>Create a deployment config for deploying an ACI web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-aci.R'><code>R/webservice-aci.R</code></a></small>
     <div class="hidden name"><code>aci_webservice_deployment_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a configuration object for deploying an ACI Webservice.</p>
+    <p>Deploy a web service to Azure Container Instances for testing or
+debugging. Use ACI for low-scale CPU-based workloads that
+require less than 48 GB of RAM.<br />
+<br />
+Deploy to ACI if one of the following conditions is true:</p><ul>
+<li><p>You need to quickly deploy and validate your model. You do not need
+to create ACI containers ahead of time. They are created as part of
+the deployment process.</p></li>
+<li><p>You are testing a model that is under development.</p></li>
+</ul>
+
     
     </div>
 
@@ -143,65 +169,66 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cpu_cores</th>
-      <td><p>The number of cpu cores to allocate for this Webservice.
-Can be a decimal.</p></td>
+      <td><p>The number of cpu cores to allocate for
+the web service. Can be a decimal. Defaults to <code>0.1</code>.</p></td>
     </tr>
     <tr>
       <th>memory_gb</th>
-      <td><p>The amount of memory (in GB) to allocate for this
-Webservice. Can be a decimal. Defaults to 0.5</p></td>
+      <td><p>The amount of memory (in GB) to allocate for
+the web service. Can be a decimal. Defaults to <code>0.5</code>.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Dictionary of key value tags to give this Webservice</p></td>
+      <td><p>A named list of key-value tags for the web service,
+e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>.</p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Dictionary of key value properties to give this
-Webservice. These properties cannot be changed after deployment, however
-new key value pairs can be added</p></td>
+      <td><p>A named list of key-value properties for the web
+service, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>. These properties cannot
+be changed after deployment, but new key-value pairs can be added.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>A description to give this Webservice</p></td>
+      <td><p>A string of the description to give the web service.</p></td>
     </tr>
     <tr>
       <th>location</th>
-      <td><p>The Azure region to deploy this Webservice to. If not
-specified the Workspace location will be used. More details on available
-regions can be found here:
-https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&amp;products=container-instances</p></td>
+      <td><p>A string of the Azure region to deploy the web service
+to. If not specified the workspace location will be used. More details
+on available regions can be found <a href='https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&amp;products=container-instances'>here</a>.</p></td>
     </tr>
     <tr>
       <th>auth_enabled</th>
-      <td><p>Whether or not to enable auth for this Webservice.
-Defaults to FALSE</p></td>
+      <td><p>If <code>TRUE</code> enable key-based authentication for the
+web service. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>ssl_enabled</th>
-      <td><p>Whether or not to enable SSL for this Webservice.
-Defaults to FALSE</p></td>
+      <td><p>If <code>TRUE</code> enable SSL for the web service. Defaults
+to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>enable_app_insights</th>
-      <td><p>Whether or not to enable AppInsights for this
-Webservice. Defaults to FALSE</p></td>
+      <td><p>If <code>TRUE</code> enable AppInsights for the web service.
+Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>ssl_cert_pem_file</th>
-      <td><p>The cert file needed if SSL is enabled</p></td>
+      <td><p>A string of the cert file needed if SSL is enabled.</p></td>
     </tr>
     <tr>
       <th>ssl_key_pem_file</th>
-      <td><p>The key file needed if SSL is enabled</p></td>
+      <td><p>A string of the key file needed if SSL is enabled.</p></td>
     </tr>
     <tr>
       <th>ssl_cname</th>
-      <td><p>The cname for if SSL is enabled</p></td>
+      <td><p>A string of the cname if SSL is enabled.</p></td>
     </tr>
     <tr>
       <th>dns_name_label</th>
-      <td><p>The dns name label for the scoring endpoint.
+      <td><p>A string of the dns name label for the scoring
+endpoint.
 If not specified a unique dns name label will be generated for the scoring
 endpoint.</p></td>
     </tr>
@@ -209,8 +236,18 @@ endpoint.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>AciServiceDeploymentConfiguration object to use when deploying a
-Webservice object</p>
+    <p>The <code>AciServiceDeploymentConfiguration</code> object.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>deployment_config &lt;- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='deploy_model.html'>deploy_model()</a></code></p></div>
     
 
   </div>
@@ -220,6 +257,10 @@ Webservice object</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
@@ -228,7 +269,7 @@ Webservice object</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

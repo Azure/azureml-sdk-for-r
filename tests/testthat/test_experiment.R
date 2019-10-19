@@ -1,7 +1,9 @@
 context("experiment")
+source("utils.R")
 
 test_that("create, submit experiment, run in default amlcompute,
           get run metrics", {
+  skip_if_no_azureml()
   experiment_name <- "estimator_run"
   
   ws <- existing_ws
@@ -26,7 +28,7 @@ test_that("create, submit experiment, run in default amlcompute,
   
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
-  
+
   run <- get_run(exp, run$id)
   metrics <- get_run_metrics(run)
   expect_equal(metrics$test_metric, 0.5)
@@ -43,6 +45,7 @@ test_that("create, submit experiment, run in default amlcompute,
 })
 
 test_that("submit experiment through a custom environment", {
+  skip_if_no_azureml()
   ws <- existing_ws
   
   # start a remote job and get the run, wait for it to finish
@@ -68,7 +71,7 @@ test_that("submit experiment through a custom environment", {
 })
 
 test_that("Create an interactive run, log metrics locally.", {
-  
+  skip_if_no_azureml()
   ws <- existing_ws
   exp <- experiment(ws, "interactive_logging")
 
@@ -90,6 +93,7 @@ test_that("Create an interactive run, log metrics locally.", {
                       }
                   }'
   log_predictions_to_run("test_predictions", predict_json, run = run)
+  log_image_to_run("myplot", plot = ggplot2::ggplot(), run = run)
   
   # complete the run
   complete_run(run)
@@ -110,4 +114,8 @@ test_that("Create an interactive run, log metrics locally.", {
   expect(startsWith(metrics$test_predictions, "aml://artifactId") &&
          endsWith(metrics$test_predictions, "test_predictions"),
          "invalid predictions uri returned")
+  
+  files <- get_run_file_names(run)
+  image_found <- grep("myplot", files)
+  expect_true(length(image_found) > 0)
 })

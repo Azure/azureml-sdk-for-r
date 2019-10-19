@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.azure-pipelines$
+^\.github$
+^cran-comments\.md$
+^CRAN-RELEASE$
+^\.vs$
+^\.azureml$
