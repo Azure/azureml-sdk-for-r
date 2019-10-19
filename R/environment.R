@@ -93,8 +93,8 @@ r_environment <- function(name, version = NULL,
                                         "ubuntu16.04")
     }
     else {
-      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base:openmpi",
-                                        "3.1.2-ubuntu16.04")
+      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base:",
+                                        "openmpi3.1.2-ubuntu16.04")
     }
 
     env$docker$base_dockerfile <- generate_docker_file(base_image_with_address,
@@ -102,6 +102,27 @@ r_environment <- function(name, version = NULL,
                                                        github_packages,
                                                        custom_url_packages)
     env$docker$base_image <- NULL
+  }
+  else {
+    # if extra package is specified, generate dockerfile
+    if (!is.null(cran_packages) ||
+        !is.null(github_packages) ||
+        !is.null(custom_url_packages)) {
+      base_image_with_address <- NULL
+      registry_address <- env$docker$base_image_registry$address
+      if (!is.null(env$docker$base_image_registry$address)) {
+        base_image_with_address <- paste(registry_address,
+                                         env$docker$base_image,
+                                         sep = "/")
+      }
+      env$docker$base_dockerfile <- generate_docker_file(
+        base_image_with_address,
+        cran_packages,
+        github_packages,
+        custom_url_packages,
+        FALSE)
+      env$docker$base_image <- NULL
+    }
   }
 
   invisible(env)
@@ -187,27 +208,29 @@ container_registry <- function(address = NULL,
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
+#' @param install_extra_packages logical parameter to specify if extra packages
+#' should be installed at runtime.
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,
-                                 custom_url_packages = NULL) {
+                                 custom_url_packages = NULL,
+                                 install_extra_packages = TRUE) {
   base_dockerfile <- NULL
   base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
                                                      custom_docker_image))
+
+  if (install_extra_packages) {
+    base_dockerfile <- paste0(base_dockerfile, "RUN conda install -c r -y ",
+                              "r-essentials=3.6.0 && conda clean -ay && pip ",
+                              "install --no-cache-dir azureml-defaults\n")
   
-  base_dockerfile <- paste0(base_dockerfile, "RUN conda install -c r -y ",
-                            "r-essentials && conda clean -ay\n")
-  
-  base_dockerfile <- paste0(base_dockerfile, "RUN pip install --no-cache-dir ",
-                            "azureml-defaults\n")
-  
-  
-  base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"install.packages(",
-                            "c(\"remotes\", \"e1071\", \"optparse\"), repos =",
-                            " \'http://cran.us.r-project.org\')\"\n")
-  base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
-                            "install_github(repo = 'https://github.com/Azure/",
-                            "azureml-sdk-for-r')\"\n")
+    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"install.packages(",
+                              "c(\"remotes\", \"e1071\", \"optparse\"), repos =",
+                              " \'http://cran.us.r-project.org\')\"\n")
+    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
+                              "install_github(repo = 'https://github.com/Azure/",
+                              "azureml-sdk-for-r')\"\n")
+  }
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {
