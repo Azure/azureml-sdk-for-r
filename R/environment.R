@@ -225,7 +225,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
                               "install --no-cache-dir azureml-defaults\n")
 
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"install.packages(",
-                              "c(\"remotes\", \"e1071\", \"optparse\"), repos",
+                              "c(\'remotes\', \'e1071\', \'optparse\'), repos",
                               " = \'http://cran.us.r-project.org\')\"\n")
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_github(repo = 'https://github.com/",

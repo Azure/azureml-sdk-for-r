@@ -13,8 +13,7 @@ test_that("create, register, and get environment", {
   expect_equal(env$version, "1")
   
   expect_equal(env$docker$enabled, TRUE)
-  expect_equal(env$docker$base_dockerfile, NULL)
-  expect_equal(env$docker$base_image, "r-base:cpu")
+  expect_equal(env$docker$base_image, NULL)
 
   # Register environment
   register_environment(env, ws)
@@ -31,7 +30,7 @@ test_that("create dockerfile", {
                                   " -y r-essentials=3.6.0 && conda clean -ay",
                                   " && pip install --no-cache-dir azureml-",
                                   "defaults\nRUN R -e \"install.packages(c",
-                                  "(\"remotes\", \"e1071\", \"optparse\"), ",
+                                  "(\'remotes\', \'e1071\', \'optparse\'), ",
                                   "repos = 'http://cran.us.r-project.org')",
                                   "\"\nRUN R -e \"remotes::install_github(",
                                   "repo = 'https://github.com/Azure/azureml-",
@@ -42,9 +41,8 @@ test_that("create dockerfile", {
                                      cran_packages = c("ggplot2"),
                                      install_extra_packages = FALSE)
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
-                                  "packages(c(\"remotes\", \"e1071\", \"optpa",
-                                  "rse\"), repos = \'http://cran.us.r-project",
-                                  ".org\')\"\n"))
+                                  "packages('ggplot2'), repos = \'http://cran",
+                                  ".us.r-project.org\')\"\n"))
 
   # github packages
   dockerfile <- generate_docker_file(github_packages = c(
@@ -52,7 +50,6 @@ test_that("create dockerfile", {
                                        "https://github/user/repo2"),
                                      install_extra_packages = FALSE)
   expected_dockerfile <- paste0(
-    "FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
   expect_equal(dockerfile, expected_dockerfile)
@@ -63,7 +60,6 @@ test_that("create dockerfile", {
                                        "https://url/pak2.tar"),
                                      install_extra_packages = FALSE)
   expected_dockerfile <- paste0(
-    "FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04\n",
     "RUN R -e \"install.packages(\'https://url/pak1.tar\', repos = NULL)\"\n",
     "RUN R -e \"install.packages(\'https://url/pak2.tar\', repos = NULL)\"\n")
   expect_equal(dockerfile, expected_dockerfile)
