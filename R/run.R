@@ -30,7 +30,7 @@ get_run_metrics <- function(run) {
 #' @param show_output If `TRUE`, print verbose output to console.
 #' @export
 #' @md
-wait_for_run_completion <- function(run, show_output = FALSE) {
+wait_for_run_completion <- function(run, show_output = TRUE) {
   tryCatch({
     run$wait_for_completion(show_output)
   },
