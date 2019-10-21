@@ -79,10 +79,6 @@ cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 # 
 # NOTE:
 # To test the service locally use the https://localhost:<local_service$port> URL. 
-# To test from a remote client, get the public URL of the service running on the Notebook VM 
-# The public URL can be determined use the following formula; 
-# https://<notebookvm_name>-<local_service_port>.<azure_region_of_notebook>.notebooks.azureml.net/score. 
-# For example, https://mynotebookvm-6789.eastus2.notebooks.azureml.net/score.
 
 # Import the request library
 library(httr)
