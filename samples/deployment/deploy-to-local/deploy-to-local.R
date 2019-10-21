@@ -1,7 +1,7 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-library("azureml")
+library("azuremlsdk")
 library("jsonlite")
 
 
@@ -10,35 +10,34 @@ library("jsonlite")
 #   
 # 1) Register model
 # 2) Deploy the image as a web service in a local Docker container.
-# 3) Quickly test changes to your entry script by reloading the local service.
-# 4) Optionally, you can also make changes to model, conda or extra_docker_file_steps and update local service
+# 3) Call web service with AzureML service call function or call web service with raw HTTP call.
+# 4) Quickly test changes to your entry script by reloading the local service.
+# 5) Optionally, you can also make changes to model, conda and update local service
 
-#Initialize a workspace object from persisted configuration.
+# Initialize a workspace object from persisted configuration.
 ws <- load_workspace_from_config()
 
-# register the model. we are using model.rds file in the current directory 
+# Register the model. we are using model.rds file in the current directory 
 # as a model with the same name model.rds in the workspace.
 model <- register_model(ws, model_path = "model.rds", model_name = "model.rds")
 
-#create environment
+# Create environment
 r_env <- r_environment(name = "r_env")
 
-# create inference config
+# Create inference config
 inference_config <- inference_config(
   entry_script = "score.R",
   source_directory = ".",
   environment = r_env)
 
-# create ACI deployment config, deploy Model as a local docker Web service
+# Create ACI deployment config, deploy Model as a local docker Web service
 local_deployment_config <- local_webservice_deployment_config()
 
-# deploy the webservice
+# Deploy the webservice
 # NOTE:
-
 # The Docker image runs as a Linux container. If you are running Docker for Windows, you need to ensure the Linux Engine is running:
 # # PowerShell command to switch to Linux engine
 # & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchLinuxEngine
-
 service <- deploy_model(ws, 
                         'rservice-local', 
                         list(model), 
@@ -47,7 +46,7 @@ service <- deploy_model(ws,
 # Wait for deployment
 wait_for_deployment(service, show_output = TRUE)
 
-#show the port of local service
+# Show the port of local service
 message(service$port)
 
 # If you encounter any issue in deploying the webservice, please visit
@@ -76,10 +75,37 @@ invoke_webservice(service, toJSON(plant))
 ## The last few lines of the logs should have the correct prediction and should display -> R[write to console]: "setosa" 
 cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 
-##Optional, Reload the service as you make a change.
+## Test the web service with a HTTP Raw requests.
+# 
+# NOTE:
+# To test the service locally use the https://localhost:<local_service$port> URL. 
+# To test from a remote client, get the public URL of the service running on the Notebook VM 
+# The public URL can be determined use the following formula; 
+# https://<notebookvm_name>-<local_service_port>.<azure_region_of_notebook>.notebooks.azureml.net/score. 
+# For example, https://mynotebookvm-6789.eastus2.notebooks.azureml.net/score.
+
+# Import the request library
+library(httr)
+# Get the service scoring URL from the service object, it URL is for testing locally
+local_service_url <- service$scoring_uri #Same as https://localhost:<local_service$port>
+
+#POST request to web service
+resp <- POST(local_service_url, body = plant, encode = "json", verbose())
+
+## The last few lines of the logs should have the correct prediction and should display -> R[write to console]: "setosa" 
+cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
+
+
+##Optional, use a new inference config with new scoring script.
+inference_config <- inference_config(
+  entry_script = "score_new.R",
+  source_directory = ".",
+  environment = r_env)
+
+##Optional, reload the service to see the changes made.
 reload_local_webservice_assets(service)
 
-# Check updated service
+# Check updated service, you will see the last line will say "this is a new scoring script! I was reloaded"
 invoke_webservice(service, toJSON(plant))
 cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 
