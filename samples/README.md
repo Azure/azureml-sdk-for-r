@@ -6,7 +6,7 @@ The examples assume that the data and scripts are in the current directory.
 1. [setup.R](setup.R): Setup workspace before running samples.
 2. [Train on ML Compute](training/train-on-amlcompute): Train a model using an ML Compute cluster as compute target.
 3. [Deploying a model to Cloud](deployment/deploy-to-cloud): Deploy a model as a Webservice.
-3. [Deploying a model to Local](deployment/deploy-to-local): Deploy a model as a local Webservice.
+4. [Deploying a model to Local](deployment/deploy-to-local): Deploy a model as a local Webservice.
 
 ### Troubleshooting
 
