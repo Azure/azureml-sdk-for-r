@@ -108,7 +108,7 @@ r_environment <- function(name, version = NULL,
     if (!is.null(cran_packages) ||
         !is.null(github_packages) ||
         !is.null(custom_url_packages)) {
-      base_image_with_address <- NULL
+      base_image_with_address <- env$docker$base_image
       registry_address <- env$docker$base_image_registry$address
       if (!is.null(env$docker$base_image_registry$address)) {
         base_image_with_address <- paste(registry_address,
