@@ -61,7 +61,7 @@ Some invariants of the accuracy table:
 \item TP + FP + TN + FN = N for all thresholds for all classes
 \item TP + FN is the same at all thresholds for any class
 \item TN + FP is the same at all thresholds for any class
-\item Probability tables and percentile tables have shape \link{C, M, 4}
+\item Probability tables and percentile tables have shape (C, M, 4)
 }
 
 Note: M can be any value and controls the resolution of the charts.
