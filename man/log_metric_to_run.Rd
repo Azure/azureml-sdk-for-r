@@ -2,18 +2,27 @@
 % Please edit documentation in R/run.R
 \name{log_metric_to_run}
 \alias{log_metric_to_run}
-\title{Log metric to run}
+\title{Log a metric to a run}
 \usage{
 log_metric_to_run(name, value, run = NULL)
 }
 \arguments{
-\item{name}{name of the metric}
+\item{name}{A string of the name of the metric.}
 
-\item{value}{value of the metric}
+\item{value}{The value of the metric.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
 }
 \description{
-Log metric to run
+Log a numerical or string value with the given metric name
+to the run. Logging a metric to a run causes that metric to
+be stored in the run record in the experiment. You can log
+the same metric multiple times within a run, the result being
+considered a vector of that metric.
 }
+\section{Examples}{
+\preformatted{log_metric_to_run("Accuracy", 0.95)
+}
+}
+

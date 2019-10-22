@@ -2,16 +2,27 @@
 % Please edit documentation in R/run.R
 \name{get_run_metrics}
 \alias{get_run_metrics}
-\title{Get the metrics for run}
+\title{Get the metrics logged to a run}
 \usage{
 get_run_metrics(run)
 }
 \arguments{
-\item{run}{Run object}
+\item{run}{The \code{tRun} object.}
 }
 \value{
-named list containing metrics associated with the run.
+A named list of the metrics associated with the run,
+e.g. \code{list("metric_name" = metric)}.
 }
 \description{
-Get the metrics for run
+Retrieve the metrics logged to a run that were logged with
+the \code{log_*()} methods.
 }
+\section{Examples}{
+
+Retrieve a run from the workspace and get its metrics:\preformatted{ws <- load_workspace_from_config()
+exp <- experiment(ws, name = 'myexperiment')
+run <- get_run(exp, run_id = "myrunid")
+metrics <- get_run_metrics(run)
+}
+}
+

@@ -2,16 +2,20 @@
 % Please edit documentation in R/run.R
 \name{get_run_file_names}
 \alias{get_run_file_names}
-\title{List the files that are stored in association with the run.}
+\title{List the files that are stored in association with a run}
 \usage{
 get_run_file_names(run)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 }
 \value{
-The list of paths for existing artifacts
+A list of strings of the paths for existing artifacts
+in the run record.
 }
 \description{
-List the files that are stored in association with the run.
+Get the list of files stored in a run record.
+}
+\seealso{
+\code{download_file_from_run()}, \code{download_files_from_run()}
 }

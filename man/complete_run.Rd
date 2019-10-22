@@ -2,15 +2,21 @@
 % Please edit documentation in R/run.R
 \name{complete_run}
 \alias{complete_run}
-\title{Mark the run as completed. This is typically used in interactive logging
-scenarios.}
+\title{Mark a run as completed.}
 \usage{
 complete_run(run)
 }
 \arguments{
-\item{run}{Run object.}
+\item{run}{The \code{Run} object.}
 }
 \description{
-Mark the run as completed. This is typically used in interactive logging
-scenarios.
+Mark the run as completed. Use for an interactive logging run.
+}
+\section{Examples}{
+
+See "Examples" section of \code{start_logging_run()}.
+}
+
+\seealso{
+\code{start_logging_run()}
 }
