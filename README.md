@@ -87,14 +87,14 @@ To begin running experiments with Azure Machine Learning, you must establish a c
 	```
 Once you've accessed your workspace, you can begin running and tracking your own experiments with Azure Machine Learning SDK for R.
 
-Take a look at our [code samples](samples/) and [end-to-end vignettes](vignettes/) for examples of what's possible with the SDK!
+Take a look at our [code samples](https://github.com/Azure/azureml-sdk-for-r/tree/master/samples) and [end-to-end vignettes](https://github.com/Azure/azureml-sdk-for-r/tree/master/vignettes) for examples of what's possible with the SDK!
  
 ## Resources
 * R SDK package documentation: https://azure.github.io/azureml-sdk-for-r/reference/index.html
 * Azure Machine Learning service: https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml
 
 ## Contribute
-We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](CONTRIBUTING.md).
+We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](https://github.com/Azure/azureml-sdk-for-r/blob/master/CONTRIBUTING.md).
 
 ## Code of Conduct
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).

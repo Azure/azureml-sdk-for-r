@@ -48,8 +48,8 @@ get_model <- function(workspace,
 #' you have a model that's stored in multiple files, you can register them
 #' as a single model in your workspace. After registration, you can then
 #' download or deploy the registered model and receive all the files that
-#' were registered.\cr
-#' \cr
+#' were registered.
+#' 
 #' Models are identified by name and version. Each time you register a
 #' model with the same name as an existing one, your workspace's model
 #' registry assumes that it's a new version. The version is incremented,
@@ -230,8 +230,8 @@ deploy_model <- function(workspace,
 #' the model (for example, if you plan to deploy to Azure App Service). Or
 #' you might want to download the image and run it on a local Docker installation.
 #' You might even want to download the files used to build the image, inspect
-#' them, modify them, and build the image manually.\cr
-#' \cr
+#' them, modify them, and build the image manually.
+#' 
 #' Model packaging enables you to do these things. `package_model()` packages all
 #' the assets needed to host a model as a web service and allows you to download
 #' either a fully built Docker image or the files needed to build one. There are
@@ -241,7 +241,7 @@ deploy_model <- function(workspace,
 #' * **Generate a Dockerfile**: Download the Dockerfile, model, entry script, and
 #' other assets needed to build a Docker image. You can then inspect the files or
 #' make changes before you build the image locally. To use this method, make sure
-#' to set `generate_dockerfile = TRUE`.\cr
+#' to set `generate_dockerfile = TRUE`.
 #' With either scenario, you will need to have Docker installed in your
 #' development environment.
 #' @param workspace The `Workspace` object.
@@ -300,7 +300,7 @@ package_model <- function(workspace,
 #' username <- container_registry$username
 #' password <- container_registry$password
 #' ```
-#' \cr
+#'
 #' To then authenticate Docker with the Azure container registry from
 #' a shell or command-line session, use the following command, replacing
 #' `<address>`, `<username>`, and `<password>` with the values retrieved
@@ -338,11 +338,11 @@ get_model_package_creation_logs <- function(package,
 #' Pull the Docker image from a created `ModelPackage` to your
 #' local Docker environment. The output of this call will
 #' display the name of the image. For example:
-#' `Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`.\cr
-#' \cr
+#' `Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`.
+#' 
 #' This can only be used with a Docker image `ModelPackage` (where
-#' `package_model()` was called with `generate_dockerfile = FALSE`).\cr
-#' \cr
+#' `package_model()` was called with `generate_dockerfile = FALSE`).
+#' 
 #' After you've pulled the image, you can start a local container based
 #' on this image using Docker commands.
 #' @param package The `ModelPackage` object.
@@ -358,12 +358,12 @@ pull_model_package_image <- function(package) {
 #' your local file system
 #' @description
 #' Download the Dockerfile, model, and other assets needed to build
-#' an image locally from a created `ModelPackage`.\cr
-#' \cr
+#' an image locally from a created `ModelPackage`.
+#' 
 #' This can only be used with a Dockerfile `ModelPackage` (where
 #' `package_model()` was called with `generate_dockerfile = TRUE` to
-#' indicated that you wanted only the files and not a fully built image).\cr
-#' \cr
+#' indicated that you wanted only the files and not a fully built image).
+#' 
 #' `save_model_package_files()` downloads the files needed to build the
 #' image to the `output_directory`. The Dockerfile included in the saved
 #' files references a base image stored in an Azure container registry.
@@ -423,8 +423,8 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' and the format of the data returned to clients. If the request data is in a
 #' format that is not usable by your model, the script can transform it into
 #' an acceptable format. It can also transform the response before returning
-#' it to the client.\cr
-#' \cr
+#' it to the client.
+#' 
 #' The entry script must contain an `init()` method that loads your model and
 #' then returns a function that uses the model to make a prediction based on
 #' the input data passed to the function. Azure ML runs the `init()` method
@@ -432,25 +432,18 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' prediction function returned by `init()` will be run every time the service
 #' is invoked to make a prediction on some input data. The inputs and outputs
 #' of this prediction function typically use JSON for serialization and
-#' deserialization.\cr
-#' \cr
+#' deserialization.
+#' 
 #' To locate the model in your entry script (when you load the model in the
 #' script's `init()` method), use `AZUREML_MODEL_DIR`, an environment variable
 #' containing the path to the model location. The environment variable is
 #' created during service deployment, and you can use it to find the location
-#' of your deployed model(s).\cr
-#' \cr
-#' The following table describes the value of `AZUREML_MODEL_DIR` depending
-#' on the number of models deployed:
-#' \tabular{rr}{
-#' **Deployment** \tab **Environment variable value**\cr
-#' Single model \tab The path to the folder containing the model\cr
-#' Multiple models \tab The path to the folder containing all models. Models are located by name and version in this folder (`$MODEL_NAME/$VERSION`)
-#' }
+#' of your deployed model(s).
+#' 
 #' To get the path to a file in a model, combine the environment variable
 #' with the filename you're looking for. The filenames of the model files
-#' are preserved during registration and deployment.\cr
-#' \cr
+#' are preserved during registration and deployment.
+#' 
 #' Single model example:
 #' ```
 #' model_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")

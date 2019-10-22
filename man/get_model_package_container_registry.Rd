@@ -26,7 +26,6 @@ username <- container_registry$username
 password <- container_registry$password
 }
 
-\cr
 To then authenticate Docker with the Azure container registry from
 a shell or command-line session, use the following command, replacing
 \code{<address>}, \code{<username>}, and \code{<password>} with the values retrieved

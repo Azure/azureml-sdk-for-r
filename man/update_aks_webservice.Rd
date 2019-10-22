@@ -104,7 +104,7 @@ Both \code{token_auth_enabled} and \code{auth_enabled} cannot be set to \code{TR
 \description{
 Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies
-that can be specified in an inference configuration.\cr
-\cr
+that can be specified in an inference configuration.
+
 Values left as \code{NULL} will remain unchanged in the web service.
 }
