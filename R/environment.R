@@ -208,18 +208,18 @@ container_registry <- function(address = NULL,
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
-#' @param install_extra_packages logical parameter to specify if extra packages
-#' should be installed at runtime.
+#' @param install_system_packages logical parameter to specify if system
+#' packages should be installed at runtime.
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,
                                  custom_url_packages = NULL,
-                                 install_extra_packages = TRUE) {
+                                 install_system_packages = TRUE) {
   base_dockerfile <- NULL
   base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
                                                      custom_docker_image))
 
-  if (install_extra_packages) {
+  if (install_system_packages) {
     base_dockerfile <- paste0(base_dockerfile, "RUN conda install -c r -y ",
                               "r-essentials=3.6.0 && conda clean -ay && pip ",
                               "install --no-cache-dir azureml-defaults\n")
