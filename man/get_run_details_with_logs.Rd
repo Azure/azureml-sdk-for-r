@@ -2,16 +2,19 @@
 % Please edit documentation in R/run.R
 \name{get_run_details_with_logs}
 \alias{get_run_details_with_logs}
-\title{Return run status including log file content.}
+\title{Get the details of a run along with the log files' contents}
 \usage{
 get_run_details_with_logs(run)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 }
 \value{
-Returns the status for the run with log file contents
+A named list of the run details and log file contents.
 }
 \description{
-Return run status including log file content.
+Get the details of a run along with the log files' contents
+}
+\seealso{
+\code{get_run_details()}
 }

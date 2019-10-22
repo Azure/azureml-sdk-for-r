@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gets the Run object from a given run id — get_run • azuremlsdk</title>
+<title>Get an experiment run — get_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Gets the Run object from a given run id — get_run" />
+<meta property="og:title" content="Get an experiment run — get_run" />
 
-<meta property="og:description" content="Gets the Run object from a given run id" />
+<meta property="og:description" content="Given the associated experiment and run ID, return the
+run object for a previously submitted/tracked run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gets the Run object from a given run id</h1>
+    <h1>Get an experiment run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>get_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the Run object from a given run id</p>
+    <p>Given the associated experiment and run ID, return the
+run object for a previously submitted/tracked run.</p>
     
     </div>
 
@@ -145,17 +147,17 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>experiment</th>
-      <td><p>The containing experiment.</p></td>
+      <td><p>The <code>Experiment</code> object.</p></td>
     </tr>
     <tr>
       <th>run_id</th>
-      <td><p>The run id for the run.</p></td>
+      <td><p>A string of the run ID for the run.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The run object.</p>
+    <p>The <code>Run</code> object.</p>
     
 
   </div>

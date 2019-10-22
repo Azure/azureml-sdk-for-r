@@ -2,16 +2,16 @@
 % Please edit documentation in R/run.R
 \name{cancel_run}
 \alias{cancel_run}
-\title{Cancel run}
+\title{Cancel a run}
 \usage{
 cancel_run(run)
 }
 \arguments{
-\item{run}{run to be cancelled}
+\item{run}{The \code{Run} object.}
 }
 \value{
-TRUE if cancellation was successful, else FALSE
+\code{TRUE} if cancellation was successful, else \code{FALSE}.
 }
 \description{
-Cancel run
+Cancel an ongoing run.
 }

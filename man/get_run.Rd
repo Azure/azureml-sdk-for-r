@@ -2,18 +2,19 @@
 % Please edit documentation in R/run.R
 \name{get_run}
 \alias{get_run}
-\title{Gets the Run object from a given run id}
+\title{Get an experiment run}
 \usage{
 get_run(experiment, run_id)
 }
 \arguments{
-\item{experiment}{The containing experiment.}
+\item{experiment}{The \code{Experiment} object.}
 
-\item{run_id}{The run id for the run.}
+\item{run_id}{A string of the run ID for the run.}
 }
 \value{
-The run object.
+The \code{Run} object.
 }
 \description{
-Gets the Run object from a given run id
+Given the associated experiment and run ID, return the
+run object for a previously submitted/tracked run.
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait for the completion of this run — wait_for_run_completion • azuremlsdk</title>
+<title>Wait for the completion of a run — wait_for_run_completion • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Wait for the completion of this run — wait_for_run_completion" />
+<meta property="og:title" content="Wait for the completion of a run — wait_for_run_completion" />
 
-<meta property="og:description" content="Wait for the completion of this run" />
+<meta property="og:description" content="Wait for the run to reach a terminal state. Typically called
+after submitting an experiment run with submit_experiment()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wait for the completion of this run</h1>
+    <h1>Wait for the completion of a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>wait_for_run_completion.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Wait for the completion of this run</p>
+    <p>Wait for the run to reach a terminal state. Typically called
+after submitting an experiment run with <code><a href='submit_experiment.html'>submit_experiment()</a></code>.</p>
     
     </div>
 
@@ -145,11 +147,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>Run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     <tr>
       <th>show_output</th>
-      <td><p>print verbose output to console</p></td>
+      <td><p>If <code>TRUE</code>, print verbose output to console.</p></td>
     </tr>
     </table>
     

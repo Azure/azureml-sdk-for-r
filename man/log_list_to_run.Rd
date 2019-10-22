@@ -2,20 +2,25 @@
 % Please edit documentation in R/run.R
 \name{log_list_to_run}
 \alias{log_list_to_run}
-\title{Log a list metric value to the run with the given name.}
+\title{Log a vector metric value to a run}
 \usage{
 log_list_to_run(name, value, description = "", run = NULL)
 }
 \arguments{
-\item{name}{The name of metric}
+\item{name}{A string of the name of metric.}
 
-\item{value}{The value of the metric}
+\item{value}{The vector of elements to log.}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
 }
 \description{
-Log a list metric value to the run with the given name.
+Log a vector with the given metric name to the run.
 }
+\section{Examples}{
+\preformatted{log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
+}
+}
+

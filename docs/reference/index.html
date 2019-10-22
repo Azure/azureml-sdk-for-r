@@ -414,15 +414,21 @@ compute target</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="get_runs_in_experiment.html">get_runs_in_experiment()</a></code> </p>
+        </td>
+        <td><p>Return a generator of the runs for an experiment</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="submit_experiment.html">submit_experiment()</a></code> </p>
         </td>
         <td><p>Submit an experiment and return the active created run</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_runs_in_experiment.html">get_runs_in_experiment()</a></code> </p>
+          <p><code><a href="wait_for_run_completion.html">wait_for_run_completion()</a></code> </p>
         </td>
-        <td><p>Return a generator of the runs for an experiment</p></td>
+        <td><p>Wait for the completion of a run</p></td>
       </tr><tr>
         
         <td>
@@ -432,127 +438,147 @@ compute target</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="wait_for_run_completion.html">wait_for_run_completion()</a></code> </p>
+          <p><code><a href="start_logging_run.html">start_logging_run()</a></code> </p>
         </td>
-        <td><p>Wait for the completion of this run</p></td>
+        <td><p>Create an interactive logging run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="complete_run.html">complete_run()</a></code> </p>
+        </td>
+        <td><p>Mark a run as completed.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_current_run.html">get_current_run()</a></code> </p>
         </td>
-        <td><p>Gets the context object for a run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="log_metric_to_run.html">log_metric_to_run()</a></code> </p>
-        </td>
-        <td><p>Log metric to run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_run_metrics.html">get_run_metrics()</a></code> </p>
-        </td>
-        <td><p>Get the metrics for run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
-        </td>
-        <td><p>Cancel run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_file_from_run.html">download_file_from_run()</a></code> </p>
-        </td>
-        <td><p>Download an associated file from storage.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_files_from_run.html">download_files_from_run()</a></code> </p>
-        </td>
-        <td><p>Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified.</p></td>
+        <td><p>Get the context object for a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_run.html">get_run()</a></code> </p>
         </td>
-        <td><p>Gets the Run object from a given run id</p></td>
+        <td><p>Get an experiment run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_run_details.html">get_run_details()</a></code> </p>
         </td>
-        <td><p>Get the definition, status information, current log files and other details
-of the run.</p></td>
+        <td><p>Get the details of a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_run_details_with_logs.html">get_run_details_with_logs()</a></code> </p>
         </td>
-        <td><p>Return run status including log file content.</p></td>
+        <td><p>Get the details of a run along with the log files' contents</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_run_file_names.html">get_run_file_names()</a></code> </p>
+          <p><code><a href="get_run_metrics.html">get_run_metrics()</a></code> </p>
         </td>
-        <td><p>List the files that are stored in association with the run.</p></td>
+        <td><p>Get the metrics logged to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_secrets_from_run.html">get_secrets_from_run()</a></code> </p>
         </td>
-        <td><p>Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names
-provided.</p></td>
+        <td><p>Get secrets from the keyvault associated with a run's workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cancel_run.html">cancel_run()</a></code> </p>
+        </td>
+        <td><p>Cancel a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_run_file_names.html">get_run_file_names()</a></code> </p>
+        </td>
+        <td><p>List the files that are stored in association with a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_file_from_run.html">download_file_from_run()</a></code> </p>
+        </td>
+        <td><p>Download a file from a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_files_from_run.html">download_files_from_run()</a></code> </p>
+        </td>
+        <td><p>Download files from a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="upload_files_to_run.html">upload_files_to_run()</a></code> </p>
+        </td>
+        <td><p>Upload files to a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="upload_folder_to_run.html">upload_folder_to_run()</a></code> </p>
+        </td>
+        <td><p>Upload a folder to a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="log_metric_to_run.html">log_metric_to_run()</a></code> </p>
+        </td>
+        <td><p>Log a metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_accuracy_table_to_run.html">log_accuracy_table_to_run()</a></code> </p>
         </td>
-        <td><p>Log a accuracy table to the artifact store.</p></td>
+        <td><p>Log an accuracy table metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_confusion_matrix_to_run.html">log_confusion_matrix_to_run()</a></code> </p>
         </td>
-        <td><p>Log a confusion matrix to the artifact store.</p></td>
+        <td><p>Log a confusion matrix metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_image_to_run.html">log_image_to_run()</a></code> </p>
         </td>
-        <td><p>Log an image metric to the run record.</p></td>
+        <td><p>Log an image metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_list_to_run.html">log_list_to_run()</a></code> </p>
         </td>
-        <td><p>Log a list metric value to the run with the given name.</p></td>
+        <td><p>Log a vector metric value to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_predictions_to_run.html">log_predictions_to_run()</a></code> </p>
         </td>
-        <td><p>Log a predictions to the artifact store.</p></td>
+        <td><p>Log a predictions metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_residuals_to_run.html">log_residuals_to_run()</a></code> </p>
         </td>
-        <td><p>Log a residuals to the artifact store.</p></td>
+        <td><p>Log a residuals metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_row_to_run.html">log_row_to_run()</a></code> </p>
         </td>
-        <td><p>Log a row metric to the run with the given name.</p></td>
+        <td><p>Log a row metric to a run</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="log_table_to_run.html">log_table_to_run()</a></code> </p>
         </td>
-        <td><p>Log a table metric to the run with the given name.</p></td>
+        <td><p>Log a table metric to a run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="view_run_details.html">view_run_details()</a></code> </p>
+        </td>
+        <td><p>Plot table of run details in RStudio Viewer</p></td>
       </tr>
     </tbody><tbody>
       <tr>

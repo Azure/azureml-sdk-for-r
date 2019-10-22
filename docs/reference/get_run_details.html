@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the definition, status information, current log files and other details
-of the run. — get_run_details • azuremlsdk</title>
+<title>Get the details of a run — get_run_details • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,10 @@ of the run. — get_run_details • azuremlsdk</title>
 
 
 
-<meta property="og:title" content="Get the definition, status information, current log files and other details
-of the run. — get_run_details" />
+<meta property="og:title" content="Get the details of a run — get_run_details" />
 
-<meta property="og:description" content="Get the definition, status information, current log files and other details
-of the run." />
+<meta property="og:description" content="Get the definition, status information, current log files, and
+other details of the run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,16 +128,15 @@ of the run." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the definition, status information, current log files and other details
-of the run.</h1>
+    <h1>Get the details of a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>get_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the definition, status information, current log files and other details
-of the run.</p>
+    <p>Get the definition, status information, current log files, and
+other details of the run.</p>
     
     </div>
 
@@ -150,13 +147,28 @@ of the run.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>the run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Return the details for the run</p>
+    <p>A named list of the details for the run.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The returned list contains the following named elements:</p><ul>
+<li><p><em>runId</em>: ID of the run.</p></li>
+<li><p><em>target</em>: The compute target of the run.</p></li>
+<li><p><em>status</em>: The run's current status.</p></li>
+<li><p><em>startTimeUtc</em>: UTC time of when the run was started, in ISO8601.</p></li>
+<li><p><em>endTimeUtc</em>: UTC time of when the run was finished (either
+Completed or Failed), in ISO8601. This element does not exist if
+the run is still in progress.</p></li>
+<li><p><em>properties</em>: Immutable key-value pairs associated with the run.</p></li>
+<li><p><em>logFiles</em>: Log files from the run.</p></li>
+</ul>
+
     
 
   </div>
@@ -166,6 +178,8 @@ of the run.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

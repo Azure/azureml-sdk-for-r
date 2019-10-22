@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log metric to run — log_metric_to_run • azuremlsdk</title>
+<title>Log a metric to a run — log_metric_to_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Log metric to run — log_metric_to_run" />
+<meta property="og:title" content="Log a metric to a run — log_metric_to_run" />
 
-<meta property="og:description" content="Log metric to run" />
+<meta property="og:description" content="Log a numerical or string value with the given metric name
+to the run. Logging a metric to a run causes that metric to
+be stored in the run record in the experiment. You can log
+the same metric multiple times within a run, the result being
+considered a vector of that metric." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log metric to run</h1>
+    <h1>Log a metric to a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>log_metric_to_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Log metric to run</p>
+    <p>Log a numerical or string value with the given metric name
+to the run. Logging a metric to a run causes that metric to
+be stored in the run record in the experiment. You can log
+the same metric multiple times within a run, the result being
+considered a vector of that metric.</p>
     
     </div>
 
@@ -145,18 +153,25 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>name of the metric</p></td>
+      <td><p>A string of the name of the metric.</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>value of the metric</p></td>
+      <td><p>The value of the metric.</p></td>
     </tr>
     <tr>
       <th>run</th>
-      <td><p>Run object. If not specified, will default to current run from
-service context.</p></td>
+      <td><p>The <code>Run</code> object. If not specified, will default
+to the current run from the service context.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>log_metric_to_run("Accuracy", 0.95)
+</pre>
+
     
 
   </div>
@@ -164,7 +179,9 @@ service context.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>
