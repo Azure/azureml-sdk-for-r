@@ -11,6 +11,8 @@ The following vignettes are included:
 
 Note: If you are running these examples on an Azure Machine Learning Compute Instance, skip the installation and configuration vignettes (#1 and #2), as the compute instance has the **azuremlsdk** package pre-installed and your workspace details pre-configured.
 
+For additional examples on using the R SDK, see the [samples](../samples) folder.
+
 ### Troubleshooting
 
 - If the following error occurs when submitting an experiment using RStudio:
