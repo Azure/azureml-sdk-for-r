@@ -3,7 +3,7 @@ source("utils.R")
 
 test_that("create, submit experiment, run in default amlcompute,
           get run metrics", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   experiment_name <- "estimator_run"
   
   ws <- existing_ws
@@ -45,7 +45,7 @@ test_that("create, submit experiment, run in default amlcompute,
 })
 
 test_that("submit experiment through a custom environment", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   
   # start a remote job and get the run, wait for it to finish
@@ -71,7 +71,7 @@ test_that("submit experiment through a custom environment", {
 })
 
 test_that("Create an interactive run, log metrics locally.", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   exp <- experiment(ws, "interactive_logging")
 

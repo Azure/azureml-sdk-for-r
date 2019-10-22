@@ -2,7 +2,7 @@ context("model tests")
 source("utils.R")
 
 test_that("get, register, download, serialize, deserialize and delete model", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"
@@ -34,7 +34,7 @@ test_that("get, register, download, serialize, deserialize and delete model", {
 })
 
 test_that("create, check container registry and save model package", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"

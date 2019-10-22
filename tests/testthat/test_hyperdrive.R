@@ -2,7 +2,7 @@ context("hyperdrive")
 source("utils.R")
 
 test_that("create hyperdrive config, launch runs, get run metrics", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   experiment_name <- "test_experiment"
   
   ws <- existing_ws
