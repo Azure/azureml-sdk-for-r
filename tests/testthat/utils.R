@@ -6,5 +6,5 @@ skip_if_no_azureml <- function() {
 skip_if_no_subscription <- function() {
   subscription_id <- Sys.getenv("TEST_SUBSCRIPTION_ID", unset = NA)
   if (is.na(subscription_id))
-    skip("azureml not available for testing")
+    skip("subscription not available for testing")
 }
