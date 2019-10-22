@@ -539,6 +539,8 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
+  library(dplyr)
+  
   rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
 
   details <- run$get_details()
@@ -636,8 +638,10 @@ view_run_details <- function(run) {
   }
   
   # add web view link in last row
-  df_keys <- c(df_keys, "Web View")
-  df_values <- c(df_values, link_caption)
+  df_keys <- c(df_keys, c("Web View",
+                          "Warnings"))
+  df_values <- c(df_values, c(link_caption,
+                              paste(unlist(details$warnings), collapse='\r\n')))
   
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
@@ -656,7 +660,7 @@ view_run_details <- function(run) {
                 options = list(dom = 't',
                                scrollY = '800px',
                                pageLength = 1000)) %>% 
-  formatStyle(columns = c("V1"), fontWeight = "bold")
+  DT::formatStyle(columns = c("V1"), fontWeight = "bold")
 }
 
 #' Upload files to a run
