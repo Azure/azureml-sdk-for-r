@@ -40,7 +40,7 @@ test_that("create dockerfile", {
   # cran packages
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
                                      cran_packages = c("ggplot2"),
-                                     install_extra_packages = FALSE)
+                                     install_system_packages = FALSE)
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
                                   "packages('ggplot2', repos = \'http://cran",
                                   ".us.r-project.org\')\"\n"))
@@ -49,7 +49,7 @@ test_that("create dockerfile", {
   dockerfile <- generate_docker_file(github_packages = c(
                                        "https://github/user/repo1", 
                                        "https://github/user/repo2"),
-                                     install_extra_packages = FALSE)
+                                     install_system_packages = FALSE)
   expected_dockerfile <- paste0(
     "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
@@ -59,7 +59,7 @@ test_that("create dockerfile", {
   dockerfile <- generate_docker_file(custom_url_packages = c(
                                        "https://url/pak1.tar", 
                                        "https://url/pak2.tar"),
-                                     install_extra_packages = FALSE)
+                                     install_system_packages = FALSE)
   expected_dockerfile <- paste0(
     "RUN R -e \"install.packages(\'https://url/pak1.tar\', repos = NULL)\"\n",
     "RUN R -e \"install.packages(\'https://url/pak2.tar\', repos = NULL)\"\n")
