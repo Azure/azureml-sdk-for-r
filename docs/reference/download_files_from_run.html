@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified. — download_files_from_run • azuremlsdk</title>
+<title>Download files from a run — download_files_from_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,12 @@ the entire container if prefix is unspecified. — download_files_from_run • a
 
 
 
-<meta property="og:title" content="Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified. — download_files_from_run" />
+<meta property="og:title" content="Download files from a run — download_files_from_run" />
 
-<meta property="og:description" content="Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified." />
+<meta property="og:description" content="Download files from the run record. You can download any files that
+were uploaded to the run record via upload_files_to_run() or
+upload_folder_to_run(), or any files that were written out to
+the ./outputs or ./logs folders during a run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,16 +130,17 @@ the entire container if prefix is unspecified." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified.</h1>
+    <h1>Download files from a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>download_files_from_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified.</p>
+    <p>Download files from the run record. You can download any files that
+were uploaded to the run record via <code><a href='upload_files_to_run.html'>upload_files_to_run()</a></code> or
+<code><a href='upload_folder_to_run.html'>upload_folder_to_run()</a></code>, or any files that were written out to
+the <code>./outputs</code> or <code>./logs</code> folders during a run.</p>
     
     </div>
 
@@ -151,26 +152,27 @@ the entire container if prefix is unspecified.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>the run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     <tr>
       <th>prefix</th>
-      <td><p>the filepath prefix within the container from
-which to download all artifacts</p></td>
+      <td><p>A string of the the filepath prefix (folder name) from
+which to download all artifacts. If not specified, all the artifacts
+in the run record will be downloaded.</p></td>
     </tr>
     <tr>
       <th>output_directory</th>
-      <td><p>optional directory that all artifact paths use
-as a prefix</p></td>
+      <td><p>(Optional) A string of the directory that all
+artifact paths use as a prefix.</p></td>
     </tr>
     <tr>
       <th>output_paths</th>
-      <td><p>optional filepaths in which to store the downloaded
-artifacts. Should be unique and match length of paths.</p></td>
+      <td><p>(Optional) A list of strings of the local filepaths
+where the artifacts will be downloaded to.</p></td>
     </tr>
     <tr>
       <th>batch_size</th>
-      <td><p>number of files to download per batch</p></td>
+      <td><p>An int of the number of files to download per batch.</p></td>
     </tr>
     </table>
     

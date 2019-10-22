@@ -2,18 +2,23 @@
 % Please edit documentation in R/run.R
 \name{get_current_run}
 \alias{get_current_run}
-\title{Gets the context object for a run}
+\title{Get the context object for a run}
 \usage{
 get_current_run(allow_offline = TRUE)
 }
 \arguments{
-\item{allow_offline}{Allow the service context to fall back to offline mode
-so that the training script can be tested locally without submitting a job
-with the SDK.}
+\item{allow_offline}{If \code{TRUE}, allow the service context to
+fall back to offline mode so that the training script can be
+tested locally without submitting a job with the SDK.}
 }
 \value{
-The run object.
+The \code{Run} object.
 }
 \description{
-Gets the context object for a run
+This function is commonly used to retrieve the authenticated
+run object inside of a script to be submitted for execution
+via \code{submit_experiment()}. Note that the logging functions
+(\code{log_*} methods, \code{upload_files_to_run()}, \code{upload_folder_to_run()})
+will by default log the specified metrics or files to the
+run returned from \code{get_current_run()}.
 }

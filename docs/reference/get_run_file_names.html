@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List the files that are stored in association with the run. — get_run_file_names • azuremlsdk</title>
+<title>List the files that are stored in association with a run — get_run_file_names • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="List the files that are stored in association with the run. — get_run_file_names" />
+<meta property="og:title" content="List the files that are stored in association with a run — get_run_file_names" />
 
-<meta property="og:description" content="List the files that are stored in association with the run." />
+<meta property="og:description" content="Get the list of files stored in a run record." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +127,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List the files that are stored in association with the run.</h1>
+    <h1>List the files that are stored in association with a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>get_run_file_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>List the files that are stored in association with the run.</p>
+    <p>Get the list of files stored in a run record.</p>
     
     </div>
 
@@ -145,13 +145,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>the run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The list of paths for existing artifacts</p>
+    <p>A list of strings of the paths for existing artifacts
+in the run record.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='download_file_from_run.html'>download_file_from_run()</a></code>, <code><a href='download_files_from_run.html'>download_files_from_run()</a></code></p></div>
     
 
   </div>
@@ -161,6 +166,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

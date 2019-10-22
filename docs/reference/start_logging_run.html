@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Start an interactive logging session in the specified experiment. — start_logging_run • azuremlsdk</title>
+<title>Create an interactive logging run — start_logging_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,13 +32,18 @@
 
 
 
-<meta property="og:title" content="Start an interactive logging session in the specified experiment. — start_logging_run" />
+<meta property="og:title" content="Create an interactive logging run — start_logging_run" />
 
 <meta property="og:description" content="Create an interactive run that allows the user to log
-metrics &amp;amp; artifacts to a run record in an experiment locally.
-Any metrics that are logged during the session are added to the run
-record in the experiment. If an output directory is specified, the contents
-of that directory is uploaded as run artifacts upon run completion." />
+metrics and artifacts to a run locally.
+Any metrics that are logged during the interactive run session
+are added to the run record in the experiment. If an output
+directory is specified, the contents of that directory is
+uploaded as run artifacts upon run completion.
+This method is useful if you would like to add experiment
+tracking and artifact logging to the corresponding run record
+in Azure ML for local runs without have to submit an experiment
+run to a compute target with submit_experiment()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -131,7 +136,7 @@ of that directory is uploaded as run artifacts upon run completion." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Start an interactive logging session in the specified experiment.</h1>
+    <h1>Create an interactive logging run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/experiment.R'><code>R/experiment.R</code></a></small>
     <div class="hidden name"><code>start_logging_run.Rd</code></div>
     </div>
@@ -139,10 +144,15 @@ of that directory is uploaded as run artifacts upon run completion." />
     <div class="ref-description">
     
     <p>Create an interactive run that allows the user to log
-metrics &amp; artifacts to a run record in an experiment locally.</p>
-<p>Any metrics that are logged during the session are added to the run
-record in the experiment. If an output directory is specified, the contents
-of that directory is uploaded as run artifacts upon run completion.</p>
+metrics and artifacts to a run locally.</p>
+<p>Any metrics that are logged during the interactive run session
+are added to the run record in the experiment. If an output
+directory is specified, the contents of that directory is
+uploaded as run artifacts upon run completion.</p>
+<p>This method is useful if you would like to add experiment
+tracking and artifact logging to the corresponding run record
+in Azure ML for local runs without have to submit an experiment
+run to a compute target with <code><a href='submit_experiment.html'>submit_experiment()</a></code>.</p>
     
     </div>
 
@@ -158,18 +168,34 @@ of that directory is uploaded as run artifacts upon run completion.</p>
     </tr>
     <tr>
       <th>outputs</th>
-      <td><p>Optional outputs directory to track.</p></td>
+      <td><p>(Optional) A string of the local path to an
+outputs directory to track.</p></td>
     </tr>
     <tr>
       <th>snapshot_directory</th>
-      <td><p>Optional directory to take snapshot of. Setting to
-NULL will take no snapshot.</p></td>
+      <td><p>(Optional) Directory to take snapshot of.
+Setting to <code>NULL</code> will take no snapshot.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Return a started run.</p>
+    <p>The <code>Run</code> object of the started run.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
+run &lt;- start_logging_run(exp)
+log_metric_to_run("Accuracy", 0.9)
+complete_run(run)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='complete_run.html'>complete_run()</a></code></p></div>
     
 
   </div>
@@ -179,6 +205,10 @@ NULL will take no snapshot.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

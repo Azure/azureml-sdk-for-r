@@ -2,27 +2,29 @@
 % Please edit documentation in R/run.R
 \name{download_files_from_run}
 \alias{download_files_from_run}
-\title{Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified.}
+\title{Download files from a run}
 \usage{
 download_files_from_run(run, prefix = NULL, output_directory = NULL,
   output_paths = NULL, batch_size = 100L)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 
-\item{prefix}{the filepath prefix within the container from
-which to download all artifacts}
+\item{prefix}{A string of the the filepath prefix (folder name) from
+which to download all artifacts. If not specified, all the artifacts
+in the run record will be downloaded.}
 
-\item{output_directory}{optional directory that all artifact paths use
-as a prefix}
+\item{output_directory}{(Optional) A string of the directory that all
+artifact paths use as a prefix.}
 
-\item{output_paths}{optional filepaths in which to store the downloaded
-artifacts. Should be unique and match length of paths.}
+\item{output_paths}{(Optional) A list of strings of the local filepaths
+where the artifacts will be downloaded to.}
 
-\item{batch_size}{number of files to download per batch}
+\item{batch_size}{An int of the number of files to download per batch.}
 }
 \description{
-Download files from a given storage prefix (folder name) or
-the entire container if prefix is unspecified.
+Download files from the run record. You can download any files that
+were uploaded to the run record via \code{upload_files_to_run()} or
+\code{upload_folder_to_run()}, or any files that were written out to
+the \code{./outputs} or \code{./logs} folders during a run.
 }

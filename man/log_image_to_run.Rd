@@ -2,23 +2,35 @@
 % Please edit documentation in R/run.R
 \name{log_image_to_run}
 \alias{log_image_to_run}
-\title{Log an image metric to the run record.}
+\title{Log an image metric to a run}
 \usage{
 log_image_to_run(name, path = NULL, plot = NULL, description = "",
   run = NULL)
 }
 \arguments{
-\item{name}{The name of metric}
+\item{name}{A string of the name of the metric.}
 
-\item{path}{The path or stream of the image}
+\item{path}{A string of the path or stream of the image.}
 
-\item{plot}{The ggplot to log as an image.}
+\item{plot}{The ggplot2 plot to log as an image.}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
 }
 \description{
-Log an image metric to the run record.
+Log an image to the run with the give metric name. Use
+\code{log_image_to_run()} to log an image file or ggplot2 plot to the
+run. These images will be visible and comparable in the run
+record.
 }
+\section{Examples}{
+
+Log an image file to the run:
+\code{log_image_to_run("myplot", "myplot.png")}
+Log a ggplot2 plot to the run:\preformatted{plot <- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
+log_image_to_run("myplot", plot)
+}
+}
+

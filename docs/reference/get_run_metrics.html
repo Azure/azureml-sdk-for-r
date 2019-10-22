@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the metrics for run — get_run_metrics • azuremlsdk</title>
+<title>Get the metrics logged to a run — get_run_metrics • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Get the metrics for run — get_run_metrics" />
+<meta property="og:title" content="Get the metrics logged to a run — get_run_metrics" />
 
-<meta property="og:description" content="Get the metrics for run" />
+<meta property="og:description" content="Retrieve the metrics logged to a run that were logged with
+the log_*() methods." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +128,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the metrics for run</h1>
+    <h1>Get the metrics logged to a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>get_run_metrics.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the metrics for run</p>
+    <p>Retrieve the metrics logged to a run that were logged with
+the <code>log_*()</code> methods.</p>
     
     </div>
 
@@ -145,13 +147,25 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>Run object</p></td>
+      <td><p>The <code>tRun</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>named list containing metrics associated with the run.</p>
+    <p>A named list of the metrics associated with the run,
+e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metric)</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+
+<p>Retrieve a run from the workspace and get its metrics:</p><pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
+run &lt;- get_run(exp, run_id = "myrunid")
+metrics &lt;- get_run_metrics(run)
+</pre>
+
     
 
   </div>
@@ -161,6 +175,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
           </ul>
 
   </div>

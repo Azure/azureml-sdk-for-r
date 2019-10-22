@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log a predictions to the artifact store. — log_predictions_to_run • azuremlsdk</title>
+<title>Log a predictions metric to a run — log_predictions_to_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Log a predictions to the artifact store. — log_predictions_to_run" />
+<meta property="og:title" content="Log a predictions metric to a run — log_predictions_to_run" />
 
-<meta property="og:description" content="Log a predictions to the artifact store." />
+<meta property="og:description" content="log_predictions_to_run() logs a metric score that can be used to
+compare the distributions of true target values to the distribution
+of predicted values for a regression task.
+The predictions are binned and standard deviations are calculated
+for error bars on a line chart." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,14 +131,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log a predictions to the artifact store.</h1>
+    <h1>Log a predictions metric to a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>log_predictions_to_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Log a predictions to the artifact store.</p>
+    <p><code>log_predictions_to_run()</code> logs a metric score that can be used to
+compare the distributions of true target values to the distribution
+of predicted values for a regression task.</p>
+<p>The predictions are binned and standard deviations are calculated
+for error bars on a line chart.</p>
     
     </div>
 
@@ -145,22 +153,36 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the predictions</p></td>
+      <td><p>A string of the name of the metric.</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>json containing name, version, and data properties</p></td>
+      <td><p>A named list containing name, version, and data properties.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>An optional metric description</p></td>
+      <td><p>(Optional) A string of the metric description.</p></td>
     </tr>
     <tr>
       <th>run</th>
-      <td><p>Run object. If not specified, will default to current run from
-service context.</p></td>
+      <td><p>The <code>Run</code> object. If not specified, will default
+to the current run from the service context.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>data &lt;- list("bin_averages" = c(0.25, 0.75),
+             "bin_errors" = c(0.013, 0.042),
+             "bin_counts" = c(56, 34),
+             "bin_edges" = c(0.0, 0.5, 1.0))
+predictions &lt;- list("schema_type" = "predictions",
+                    "schema_version" = "v1",
+                    "data" = data)
+log_predictions_to_run("mypredictions", predictions)
+</pre>
+
     
 
   </div>
@@ -168,7 +190,9 @@ service context.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>

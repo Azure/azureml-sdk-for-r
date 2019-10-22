@@ -2,20 +2,20 @@
 % Please edit documentation in R/run.R
 \name{log_confusion_matrix_to_run}
 \alias{log_confusion_matrix_to_run}
-\title{Log a confusion matrix to the artifact store.}
+\title{Log a confusion matrix metric to a run}
 \usage{
 log_confusion_matrix_to_run(name, value, description = "", run = NULL)
 }
 \arguments{
-\item{name}{The name of the confusion matrix}
+\item{name}{A string of the name of the metric.}
 
-\item{value}{json containing name, version, and data properties}
+\item{value}{A named list containing name, version, and data properties.}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
 }
 \description{
-Log a confusion matrix to the artifact store.
+Log a confusion matrix metric to a run
 }

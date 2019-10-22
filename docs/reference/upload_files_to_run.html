@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upload files to the run record. — upload_files_to_run • azuremlsdk</title>
+<title>Upload files to a run — upload_files_to_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Upload files to the run record. — upload_files_to_run" />
+<meta property="og:title" content="Upload files to a run — upload_files_to_run" />
 
-<meta property="og:description" content="Upload files to the run record." />
+<meta property="og:description" content="Upload files to the run record.
+Note: Runs automatically capture files in the specified output
+directory, which defaults to &quot;./outputs&quot;. Use upload_files_to_run()
+only when additional files need to be uploaded or an output directory
+is not specified." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,7 +131,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Upload files to the run record.</h1>
+    <h1>Upload files to a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>upload_files_to_run.Rd</code></div>
     </div>
@@ -135,6 +139,10 @@
     <div class="ref-description">
     
     <p>Upload files to the run record.</p>
+<p>Note: Runs automatically capture files in the specified output
+directory, which defaults to "./outputs". Use <code>upload_files_to_run()</code>
+only when additional files need to be uploaded or an output directory
+is not specified.</p>
     
     </div>
 
@@ -145,23 +153,43 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>names</th>
-      <td><p>A character vector of file names to upload. If set,
-paths must also be set.</p></td>
+      <td><p>A character vector of the names of the files to upload.</p></td>
     </tr>
     <tr>
       <th>paths</th>
-      <td><p>A character vector of relative local paths to the files to
-upload. If set, names is required.</p></td>
+      <td><p>A character vector of relative local paths to the files
+to be upload.</p></td>
     </tr>
     <tr>
       <th>timeout_seconds</th>
-      <td><p>The timeout for uploading files.</p></td>
+      <td><p>An int of the timeout in seconds for uploading
+the files.</p></td>
     </tr>
     <tr>
       <th>run</th>
-      <td><p>Run object.</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
+
+# Start an interactive logging run
+run &lt;- start_logging_run(exp)
+
+# Upload files to the run record
+filename1 &lt;- "important_file_1"
+filename2 &lt;- "important_file_2"
+upload_files_to_run(names = c(filename1, filename2),
+                    paths = c("path/on/disk/file_1.txt", "other/path/on/disk/file_2.txt"))
+
+# Download a file from the run record
+download_file_from_run(filename1, "file_1.txt")
+</pre>
+
     
 
   </div>
@@ -169,7 +197,9 @@ upload. If set, names is required.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+          </ul>
 
   </div>
 </div>

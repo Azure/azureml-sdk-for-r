@@ -2,21 +2,44 @@
 % Please edit documentation in R/run.R
 \name{upload_files_to_run}
 \alias{upload_files_to_run}
-\title{Upload files to the run record.}
+\title{Upload files to a run}
 \usage{
 upload_files_to_run(names, paths, timeout_seconds = NULL, run = NULL)
 }
 \arguments{
-\item{names}{A character vector of file names to upload. If set,
-paths must also be set.}
+\item{names}{A character vector of the names of the files to upload.}
 
-\item{paths}{A character vector of relative local paths to the files to
-upload. If set, names is required.}
+\item{paths}{A character vector of relative local paths to the files
+to be upload.}
 
-\item{timeout_seconds}{The timeout for uploading files.}
+\item{timeout_seconds}{An int of the timeout in seconds for uploading
+the files.}
 
-\item{run}{Run object.}
+\item{run}{The \code{Run} object.}
 }
 \description{
 Upload files to the run record.
+
+Note: Runs automatically capture files in the specified output
+directory, which defaults to "./outputs". Use \code{upload_files_to_run()}
+only when additional files need to be uploaded or an output directory
+is not specified.
 }
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
+exp <- experiment(ws, name = 'myexperiment')
+
+# Start an interactive logging run
+run <- start_logging_run(exp)
+
+# Upload files to the run record
+filename1 <- "important_file_1"
+filename2 <- "important_file_2"
+upload_files_to_run(names = c(filename1, filename2),
+                    paths = c("path/on/disk/file_1.txt", "other/path/on/disk/file_2.txt"))
+
+# Download a file from the run record
+download_file_from_run(filename1, "file_1.txt")
+}
+}
+

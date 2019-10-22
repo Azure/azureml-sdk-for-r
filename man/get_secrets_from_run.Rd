@@ -2,22 +2,36 @@
 % Please edit documentation in R/run.R
 \name{get_secrets_from_run}
 \alias{get_secrets_from_run}
-\title{Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names
-provided.}
+\title{Get secrets from the keyvault associated with a run's workspace}
 \usage{
 get_secrets_from_run(run, secrets)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 
-\item{secrets}{List of secret names to retrieve the values for}
+\item{secrets}{A vector of strings of secret names to retrieve
+the values for.}
 }
 \value{
-Returns a dictionary of found and not found secrets
+A named list of found and not found secrets, e.g.
+\code{list("secret_name" = secret)}. If a secret was not found, the
+corresponding element will be \code{NULL}.
 }
 \description{
-Get the secret values for a given list of secret names.
-Get a dictionary of found and not found secrets for the list of names
-provided.
+From within the script of a run submitted using
+\code{submit_experiment()}, you can use \code{get_secrets_from_run()}
+to get secrets that are stored in the keyvault of the associated
+workspace.
+
+Note that this method is slightly different than \code{get_secrets()},
+which first requires you to instantiate the workspace object.
+Since a submitted run is aware of its workspace,
+\code{get_secrets_from_run()} shortcuts workspace instantiation and
+returns the secret value directly.
+
+Be careful not to expose the secret(s) values by writing or
+printing them out.
+}
+\seealso{
+\code{set_secrets()}
 }
