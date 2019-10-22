@@ -540,15 +540,15 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @md
 view_run_details <- function(run) {
   library(dplyr)
-  
+
   rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
 
   details <- run$get_details()
-  
+
   web_view_link <- paste0('<a href="',
                           run$get_portal_url(), '">',
                           "here", "</a>")
-  
+
   if (rstudio_server) {
     link_caption <- paste("Ctrl + click", web_view_link,
                           "to view run details in the Web Portal",
@@ -558,44 +558,43 @@ view_run_details <- function(run) {
                           "to view run details in the Web Portal",
                           collapse = "\r\n")
   }
-  
+
   # get run time details based on status
   status <- run$get_status()
   date_time_format <- "%Y-%m-%dT%H:%M:%S"
-  
+
   if (status == "Queued") {
     start_time <- "-"
   }
   else {
-    pb.date <- as.POSIXct(details$startTimeUtc, date_time_format, tz="UTC")
-    start_time <- format(pb.date, "%B %d, %Y %I:%M %p", tz = Sys.timezone(),
+    date_time <- as.POSIXct(details$startTimeUtc, date_time_format, tz = "UTC")
+    start_time <- format(date_time, "%B %d, %Y %I:%M %p", tz = Sys.timezone(),
                          use_tz = TRUE)
   }
-  
+
   if (status == "Completed" || status == "Failed" || status == "Canceled") {
-    start <- as.POSIXct(details$startTimeUtc, date_time_format, tz="UTC")
-    end <- as.POSIXct(details$endTimeUtc, date_time_format, tz="UTC")
+    start <- as.POSIXct(details$startTimeUtc, date_time_format, tz = "UTC")
+    end <- as.POSIXct(details$endTimeUtc, date_time_format, tz = "UTC")
     duration <- paste(round(as.numeric(end - start), digits = 2), "mins")
   }
   else {
     duration <- "-"
   }
-  
-  
+
+
   df_keys <- list()
   df_values <- list()
   hd_df_keys <- list()
   hd_df_values <- list()
-  
-  
+
+
   # add hyperdrive-specific values
   if (run$type == "hyperdrive") {
-    target <- details$target
     pmc <- details$properties$primary_metric_config
     pmc <- strsplit(gsub("[^A-Za-z0-9 :,]", "", pmc), ",")[[1]]
     primary_metric <- sub(".*name: *(.*?) ", "\\1", pmc[1])
     goal <- toupper(sub(".*goal: *(.*?) ", "\\1", pmc[2]))
-    
+
     if (status == "Completed" || status == "Failed") {
       best_child_run_id <- details$properties$best_child_run_id
       best_run_metric <- details$properties$score
@@ -604,7 +603,7 @@ view_run_details <- function(run) {
       best_child_run_id <- "-"
       best_run_metric <- "-"
     }
-    
+
     hd_df_keys <- list("Primary Metric",
                        "Primary Metric Goal",
                        "Best Run Id",
@@ -614,7 +613,7 @@ view_run_details <- function(run) {
                          best_child_run_id,
                          best_run_metric)
   }
-  
+
   # add general run properties
   df_keys <- c(df_keys, list("Run Id",
                              "Status",
@@ -624,7 +623,7 @@ view_run_details <- function(run) {
                                  status,
                                  start_time,
                                  duration))
-  
+
   # hyperdrive runs don't have arguments or script logged
   if (run$type == "hyperdrive") {
     df_keys <- c(df_keys, hd_df_keys)
@@ -636,17 +635,18 @@ view_run_details <- function(run) {
     df_values <- c(df_values, c(details$runDefinition$script),
                    toString(details$runDefinition$arguments))
   }
-  
+
   # add web view link in last row
   df_keys <- c(df_keys, c("Web View",
                           "Warnings"))
   df_values <- c(df_values, c(link_caption,
-                              paste(unlist(details$warnings), collapse='\r\n')))
-  
+                              paste(unlist(details$warnings),
+                                    collapse = '\r\n')))
+
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
                              ncol = 2)
-  
+
   DT::datatable(run_details_plot,
                 escape = FALSE,
                 rownames = FALSE,
