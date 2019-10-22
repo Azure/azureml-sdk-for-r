@@ -7,7 +7,7 @@
 #' prodution deployments. Provides fast response time and autoscaling
 #' of the deployed service. Using GPU for inference when deployed as a
 #' web service is only supported on AKS.
-#' 
+#'
 #' Deploy to AKS if you need one or more of the following capabilities:
 #' * Fast response time
 #' * Autoscaling of the deployed service
@@ -80,7 +80,7 @@
 #' There are two ways to connect an AKS cluster to your workspace:
 #' * Create the AKS cluster using Azure ML (see `create_aks_compute()`).
 #' * Attach an existing AKS cluster to your workspace (see `attach_aks_compute()`).
-#' 
+#'
 #' Pass the `AksCompute` object to the `deployment_target` parameter of `deploy_model()`.
 #' }
 #' \subsection{Token-based authentication}{
@@ -162,7 +162,7 @@ aks_webservice_deployment_config <- function(
 #' Update an AKS web service with the provided properties. You can update the
 #' web service to use a new model, a new entry script, or new dependencies
 #' that can be specified in an inference configuration.
-#' 
+#'
 #' Values left as `NULL` will remain unchanged in the web service.
 #' @param webservice The `AksWebservice` object.
 #' @param autoscale_enabled If `TRUE` enable autoscaling for the web service.
