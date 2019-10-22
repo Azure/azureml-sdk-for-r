@@ -3,7 +3,7 @@ source("utils.R")
 
 test_that("keyvault tests, list/set/get/delete secrets",
 {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   kv <- get_default_keyvault(ws)
   expect_gte(length(list_secrets(kv)), 0)

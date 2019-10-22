@@ -2,7 +2,7 @@ context("environment")
 source("utils.R")
 
 test_that("create, register, and get environment", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   
   env_name <- "testenv"
@@ -25,7 +25,7 @@ test_that("create, register, and get environment", {
 })
 
 test_that("create dockerfile", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04")
   expect_equal(dockerfile, "FROM ubuntu-18.04\n")
 

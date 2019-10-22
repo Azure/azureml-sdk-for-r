@@ -2,7 +2,7 @@ context("datastore")
 source("utils.R")
 
 test_that("default datastore", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   ds <- get_default_datastore(ws)
   # upload files to datastore
@@ -38,7 +38,7 @@ test_that("default datastore", {
 })
 
 test_that("register azure blob/fileshare datastores", {
-  skip_if_no_azureml()
+  skip_if_no_subscription()
   ws <- existing_ws
   
   # register azure blob datastore

@@ -6,3 +6,11 @@
 ^CRAN-RELEASE$
 ^\.vs$
 ^\.azureml$
+^LICENSE\.md$
+^NEWS\.md$
+^CONTRIBUTING\.md$
+^dev_instruction\.md$
+^docs$
+^samples$
+^CODE_OF_CONDUCT\.md$
+^_pkgdown\.yml
