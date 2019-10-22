@@ -24,10 +24,10 @@ Imports:
     plyr (>= 1.8),
     DT,
     parsedate,
-    rstudioapi (>= 0.7)
+    rstudioapi (>= 0.7),
+    dplyr
 Suggests: rmarkdown,
     knitr,
     testthat,
-    dplyr,
     jsonlite
 VignetteBuilder: knitr
