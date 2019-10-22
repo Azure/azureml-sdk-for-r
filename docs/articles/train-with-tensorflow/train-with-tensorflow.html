@@ -93,7 +93,7 @@
     <div class="page-header toc-ignore">
       <h1>Training a TensorFlow Model on MNIST</h1>
             
-            <h4 class="date">2019-10-19</h4>
+            <h4 class="date">2019-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-with-tensorflow/train-with-tensorflow.Rmd"><code>vignettes/train-with-tensorflow/train-with-tensorflow.Rmd</code></a></small>
       <div class="hidden name"><code>train-with-tensorflow.Rmd</code></div>
@@ -150,11 +150,9 @@
 <p>In order to collect and upload run metrics, we need to import the <code>azureml</code> package at the top of our training script, <a href="tf_mnist.R">“tf_mnist.R”</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
 <p>Then, we need to add the <code>log_metric_to_run</code> function to track our primary metric, “accuracy”, for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">current_run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_current_run.html">get_current_run</a></span>()</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"accuracy"</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                  sess<span class="op">$</span><span class="kw">run</span>(accuracy,</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">                  <span class="dt">feed_dict =</span> <span class="kw">dict</span>(<span class="dt">x =</span> mnist<span class="op">$</span>test<span class="op">$</span>images, <span class="dt">y_ =</span> mnist<span class="op">$</span>test<span class="op">$</span>labels)),</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">                  current_run)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"accuracy"</span>,</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                  sess<span class="op">$</span><span class="kw">run</span>(accuracy,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">                  <span class="dt">feed_dict =</span> <span class="kw">dict</span>(<span class="dt">x =</span> mnist<span class="op">$</span>test<span class="op">$</span>images, <span class="dt">y_ =</span> mnist<span class="op">$</span>test<span class="op">$</span>labels)))</a></code></pre></div>
 </div>
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">

@@ -3,18 +3,8 @@
 
 library("azuremlsdk")
 library("caret")
-library("optparse")
 
-options <- list(
-    make_option(c("-d", "--data_folder"))
-)
-
-opt_parser <- OptionParser(option_list = options)
-opt <- parse_args(opt_parser)
-
-paste(opt$data_folder)
-
-all_data <- read.csv(file.path(opt$data_folder, "iris.csv"))
+all_data <- read.csv("iris.csv")
 summary(all_data)
 
 in_train <- createDataPartition(y = all_data$Species, p = .8, list = FALSE)
@@ -36,6 +26,3 @@ conf_matrix <- confusionMatrix(predictions, test_data$Species)
 message(conf_matrix)
 
 log_metric_to_run(metric, conf_matrix$overall["Accuracy"])
-
-saveRDS(model, file = "./outputs/model.rds")
-message("Model saved")
