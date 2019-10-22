@@ -1,4 +1,4 @@
-## This is a new release for Azure Machine Learning SDK in R.
+## This is a new release for Azure Machine Learning Software Development Kit in R.
 
 ## Test environments
 * local: windows-x86_64-devel

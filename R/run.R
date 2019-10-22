@@ -296,7 +296,7 @@ log_metric_to_run <- function(name, value, run = NULL) {
 #' * TP + FP + TN + FN = N for all thresholds for all classes
 #' * TP + FN is the same at all thresholds for any class
 #' * TN + FP is the same at all thresholds for any class
-#' * Probability tables and percentile tables have shape [C, M, 4]
+#' * Probability tables and percentile tables have shape (C, M, 4)
 #'
 #' Note: M can be any value and controls the resolution of the charts.
 #' This is independent of the dataset, is defined when calculating metrics,
