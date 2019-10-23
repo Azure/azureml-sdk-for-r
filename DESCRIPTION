@@ -11,7 +11,7 @@ Authors@R: c(
     )
 URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
-Description: An R interface to the Azure Machine Learning service to build and run machine learning workflows.
+Description: An R interface to the Azure Machine Learning service to build and run machine learning workloads.
 Encoding: UTF-8
 License: MIT + file LICENSE
 RoxygenNote: 6.1.1
