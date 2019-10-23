@@ -33,6 +33,12 @@ test_that("create, submit experiment, run in default amlcompute,
   metrics <- get_run_metrics(run)
   expect_equal(metrics$test_metric, 0.5)
   
+  keyvault <- ws$get_default_keyvault()
+  keyvault$set_secret(name="mysecret", value = "mtemp_secret")
+  secrets <- get_secrets_from_run(run, list("mysecret"))
+  expect_equal(nrow(secrets), 1)
+  expect_equal(length(secrets), 2)
+
   # upload files to the run
   upload_files_to_run(list("dummy_data"), list("dummy_data.txt"), run = run)
   upload_folder_to_run("folder1", tmp_dir_name, run = run)

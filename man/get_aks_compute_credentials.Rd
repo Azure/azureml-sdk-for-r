@@ -10,7 +10,7 @@ get_aks_compute_credentials(cluster)
 \item{cluster}{The \code{AksCompute} object.}
 }
 \value{
-A named list of the cluster credentials.
+Details of the cluster credentials as data frame.
 }
 \description{
 Retrieved the credentials for an AksCompute cluster.
