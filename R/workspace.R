@@ -49,8 +49,8 @@
 #' exists.
 #' @param show_output If `TRUE` the method will print out incremental progress
 #' of method.
-#' @param sku A string indicating if the workspace will be 'basic' or
-#' 'enterprise' edition.
+#' @param sku A string indicating if the workspace will be "basic" or
+#' "enterprise" edition.
 #' @return The `Workspace` object.
 #' @export
 #' @section Examples:

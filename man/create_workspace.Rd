@@ -55,8 +55,8 @@ exists.}
 \item{show_output}{If \code{TRUE} the method will print out incremental progress
 of method.}
 
-\item{sku}{A string indicating if the workspace will be 'basic' or
-'enterprise' edition.}
+\item{sku}{A string indicating if the workspace will be "basic" or
+"enterprise" edition.}
 }
 \value{
 The \code{Workspace} object.
