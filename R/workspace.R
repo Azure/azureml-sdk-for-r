@@ -95,7 +95,7 @@ create_workspace <- function(
   container_registry = NULL,
   exist_ok = FALSE,
   show_output = TRUE,
-  sku = 'basic') {
+  sku = "basic") {
   ws <-
     azureml$core$Workspace$create(name = name,
                                   subscription_id = subscription_id,
