@@ -50,9 +50,7 @@
 #' @param show_output If `TRUE` the method will print out incremental progress
 #' of method.
 #' @param sku A string indicating if the workspace will be 'basic' or
-#' 'enterprise' edition. For more information see [Azure Machine Learning SKUs]
-#' (https://docs.microsoft.com/azure/machine-learning/service/
-#' overview-what-is-azure-ml#sku).
+#' 'enterprise' edition.
 #' @return The `Workspace` object.
 #' @export
 #' @section Examples:
