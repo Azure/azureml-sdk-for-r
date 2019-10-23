@@ -535,113 +535,89 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Plot table of run details in RStudio Viewer or browser
+#' This table does not auto-refresh. To see current values, 
+#' re-run the command or click the web view link to view more
+#' details in real time.
 #' @param run The `Run` object.
 #' @export
 #' @md
 view_run_details <- function(run) {
   library(dplyr)
 
-  rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
+  check_null <- function(arg) {
+    if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
+      "-"
+    } else {
+      arg
+    }
+  }
 
-  details <- run$get_details()
+  rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
 
   web_view_link <- paste0('<a href="',
                           run$get_portal_url(), '">',
                           "here", "</a>")
-
   if (rstudio_server) {
     link_caption <- paste("Ctrl + click", web_view_link,
-                          "to view run details in the Web Portal",
+                          "to view all run details in the Web Portal",
                           collapse = "\r\n")
   } else {
     link_caption <- paste("Click", web_view_link,
-                          "to view run details in the Web Portal",
+                          "to view all run details in the Web Portal",
                           collapse = "\r\n")
   }
 
-  # get run time details based on status
-  status <- run$get_status()
-  date_time_format <- "%Y-%m-%dT%H:%M:%S"
+  details <- run$get_details()
 
-  if (status == "Queued") {
-    start_time <- "-"
-  }
-  else {
-    date_time <- as.POSIXct(details$startTimeUtc, date_time_format, tz = "UTC")
-    start_time <- format(date_time, "%B %d, %Y %I:%M %p", tz = Sys.timezone(),
+  # get general run properties
+  arguments <- check_null(toString(details$runDefinition$arguments))
+  script_name <- check_null(details$runDefinition$script)
+
+  # get run time details
+  start_time_utc <- check_null(details$startTimeUtc)
+  duration <- check_null(details$endTimeUtc)
+  
+  if (start_time_utc != "-") {
+    date_time_format <- "%Y-%m-%dT%H:%M:%S"
+  
+    date_time <- as.POSIXct(start_time_utc, date_time_format, tz = "UTC")
+    start_time <- format(date_time, "%B %d, %Y %I:%M %p",
+                         tz = Sys.timezone(),
                          use_tz = TRUE)
-  }
 
-  if (status == "Completed" || status == "Failed" || status == "Canceled") {
-    start <- as.POSIXct(details$startTimeUtc, date_time_format, tz = "UTC")
-    end <- as.POSIXct(details$endTimeUtc, date_time_format, tz = "UTC")
-    duration <- paste(round(as.numeric(end - start), digits = 2), "mins")
-  }
-  else {
-    duration <- "-"
-  }
+    end_time <- check_null(details$endTimeUtc)
 
-
-  df_keys <- list()
-  df_values <- list()
-  hd_df_keys <- list()
-  hd_df_values <- list()
-
-
-  # add hyperdrive-specific values
-  if (run$type == "hyperdrive") {
-    pmc <- details$properties$primary_metric_config
-    pmc <- strsplit(gsub("[^A-Za-z0-9 :,]", "", pmc), ",")[[1]]
-    primary_metric <- sub(".*name: *(.*?) ", "\\1", pmc[1])
-    goal <- toupper(sub(".*goal: *(.*?) ", "\\1", pmc[2]))
-
-    if (status == "Completed" || status == "Failed") {
-      best_child_run_id <- details$properties$best_child_run_id
-      best_run_metric <- details$properties$score
+    if (end_time != "-") {
+      start <- as.POSIXct(start_time_utc, date_time_format, tz = "UTC")
+      end <- as.POSIXct(end_time, date_time_format, tz = "UTC")
+      duration <- paste(round(as.numeric(end - start), digits = 2), "mins")
     }
-    else {
-      best_child_run_id <- "-"
-      best_run_metric <- "-"
-    }
-
-    hd_df_keys <- list("Primary Metric",
-                       "Primary Metric Goal",
-                       "Best Run Id",
-                       "Best Run Metric")
-    hd_df_values <- list(primary_metric,
-                         goal,
-                         best_child_run_id,
-                         best_run_metric)
   }
 
-  # add general run properties
-  df_keys <- c(df_keys, list("Run Id",
-                             "Status",
-                             "Start Time",
-                             "Duration"))
-  df_values <- c(df_values, list(run$id,
-                                 status,
-                                 start_time,
-                                 duration))
+  df_keys <- list("Run Id",
+                  "Status",
+                  "Start Time",
+                  "Duration",
+                  "Script Name",
+                  "Arguments",
+                  "Web View")
+  df_values <- list(run$id,
+                    run$get_status(),
+                    start_time,
+                    duration,
+                    script_name,
+                    arguments,
+                    link_caption)
 
-  # hyperdrive runs don't have arguments or script logged
-  if (run$type == "hyperdrive") {
-    df_keys <- c(df_keys, hd_df_keys)
-    df_values <- c(df_values, hd_df_values)
+  # add warnings and errors if applicable
+  if (check_null(details$warnings) != "-") {
+    df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = '\r\n'))
+    df_values <- c(df_values, "Warnings")
   }
-  else {
-    df_keys <- c(df_keys, c("Script Name",
-                            "Arguments"))
-    df_values <- c(df_values, c(details$runDefinition$script),
-                   toString(details$runDefinition$arguments))
+  if (check_null(details$errors) != "-") {
+    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = '\r\n'))
+    df_values <- c(df_values, "Errors")
   }
-
-  # add web view link in last row
-  df_keys <- c(df_keys, c("Web View",
-                          "Warnings"))
-  df_values <- c(df_values, c(link_caption,
-                              paste(unlist(details$warnings),
-                                    collapse = '\r\n')))
 
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
