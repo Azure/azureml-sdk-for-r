@@ -6,5 +6,6 @@ articles:
   configuration: configuration.html
   deploy-to-aks: deploy-to-aks/deploy-to-aks.html
   installation: installation.html
+  train-and-deploy-with-caret: train-and-deploy-with-caret/train-and-deploy-with-caret.html
   train-with-tensorflow: train-with-tensorflow/train-with-tensorflow.html
 
