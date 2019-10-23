@@ -209,15 +209,15 @@ get_run_file_names <- function(run) {
 #' @param run The `Run` object.
 #' @param secrets A vector of strings of secret names to retrieve
 #' the values for.
-#' @return A named list of found and not found secrets, e.g.
-#' `list("secret_name" = secret)`. If a secret was not found, the
-#' corresponding element will be `NULL`.
+#' @return A list of found and not found secrets as data frame.
+#' If a secret was not found, the corresponding element will be `NULL`.
 #' @export
 #' @seealso
 #' `set_secrets()`
 #' @md
 get_secrets_from_run <- function(run, secrets) {
-  run$get_secrets(secrets)
+  secrets <- run$get_secrets(secrets)
+  as.data.frame(secrets)
 }
 
 #' Log a metric to a run

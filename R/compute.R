@@ -296,11 +296,12 @@ create_aks_compute <- function(workspace,
 #' @description
 #' Retrieved the credentials for an AksCompute cluster.
 #' @param cluster The `AksCompute` object.
-#' @return A named list of the cluster credentials.
+#' @return Details of the cluster credentials as data frame.
 #' @export
 #' @md
 get_aks_compute_credentials <- function(cluster) {
-  cluster$get_credentials()
+  creds <- cluster$get_credentials()
+  as.data.frame(creds)
 }
 
 #' Attach an existing AKS cluster to a workspace
