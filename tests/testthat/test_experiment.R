@@ -37,7 +37,7 @@ test_that("create, submit experiment, run in default amlcompute,
   keyvault$set_secret(name="mysecret", value = "mtemp_secret")
   secrets <- get_secrets_from_run(run, list("mysecret"))
   expect_equal(nrow(secrets), 1)
-  expect_equal(length(secrets), 2)
+  expect_equal(any(secrets == "mysecret"), TRUE)
 
   # upload files to the run
   upload_files_to_run(list("dummy_data"), list("dummy_data.txt"), run = run)
