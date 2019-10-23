@@ -38,11 +38,9 @@ your local file system — save_model_package_files" />
 
 <meta property="og:description" content="Download the Dockerfile, model, and other assets needed to build
 an image locally from a created ModelPackage.
-
 This can only be used with a Dockerfile ModelPackage (where
 package_model() was called with generate_dockerfile = TRUE to
 indicated that you wanted only the files and not a fully built image).
-
 save_model_package_files() downloads the files needed to build the
 image to the output_directory. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.
@@ -150,13 +148,11 @@ your local file system</h1>
     <div class="ref-description">
     
     <p>Download the Dockerfile, model, and other assets needed to build
-an image locally from a created <code>ModelPackage</code>.<br />
-<br />
-This can only be used with a Dockerfile <code>ModelPackage</code> (where
+an image locally from a created <code>ModelPackage</code>.</p>
+<p>This can only be used with a Dockerfile <code>ModelPackage</code> (where
 <code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = TRUE</code> to
-indicated that you wanted only the files and not a fully built image).<br />
-<br />
-<code>save_model_package_files()</code> downloads the files needed to build the
+indicated that you wanted only the files and not a fully built image).</p>
+<p><code>save_model_package_files()</code> downloads the files needed to build the
 image to the <code>output_directory</code>. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.
 When you build the image on your local Docker installation, you will
