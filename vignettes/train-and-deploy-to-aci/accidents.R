@@ -1,9 +1,9 @@
 #' Copyright(c) Microsoft Corporation.
 #' Licensed under the MIT license.
 
-library("azuremlsdk")
-library("optparse")
-library("caret")
+library(azuremlsdk)
+library(optparse)
+library(caret)
 
 options <- list(
   make_option(c("-d", "--data_folder"))
@@ -23,8 +23,11 @@ predictions <- factor(ifelse(predict(mod)>0.1, "dead","alive"))
 conf_matrix <- confusionMatrix(predictions, accidents$dead)
 message(conf_matrix)
 
-current_run <- get_current_run()
-log_metric_to_run("Accuracy", conf_matrix$overall["Accuracy"], current_run)
+log_metric_to_run("Accuracy", conf_matrix$overall["Accuracy"])
 
+output_dir = "outputs"
+if (!dir.exists(output_dir)){
+  dir.create(output_dir)
+}
 saveRDS(mod, file = "./outputs/model.rds")
 message("Model saved")

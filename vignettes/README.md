@@ -4,12 +4,12 @@ These vignettes are end-to-end tutorials for using the Azure Machine Learning se
 The following vignettes are included:
 1. [installation](installation.Rmd): Install the Azure ML SDK for R.
 2. [configuration](configuration.Rmd): Set up an Azure ML workspace.
-3. [train-and-deploy-with-caret](): Train a caret model and deploy as a web service to Azure Container Instances (ACI).
+3. [train-and-deploy-with-caret](train-and-deploy-to-aci): Train a caret model and deploy as a web service to Azure Container Instances (ACI).
 4. [train-with-tensorflow](train-with-tensorflow/): Train a deep learning TensorFlow model with Azure ML.
 5. [hyperparameter-tune-with-keras](cnn-tuning-with-hyperdrive/): Hyperparameter tune a Keras model using HyperDrive, Azure ML's hyperparameter tuning functionality.
 6. [deploy-to-aks](deploy-to-aks/): Production deploy a model as a web service to Azure Kubernetes Service (AKS).
 
-Note: If you are running these examples on an Azure Machine Learning Compute Instance, skip the installation and configuration vignettes (#1 and #2), as the compute instance has the **azuremlsdk** package pre-installed and your workspace details pre-configured.
+Note: If you are running these examples on an Azure Machine Learning Compute Instance, skip the installation and configuration vignettes (#1 and #2), as the compute instance has the Azure ML SDK pre-installed and your workspace details pre-configured.
 
 For additional examples on using the R SDK, see the [samples](../samples) folder.
 
