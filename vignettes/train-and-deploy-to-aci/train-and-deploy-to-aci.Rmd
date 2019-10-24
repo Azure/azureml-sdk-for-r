@@ -319,5 +319,5 @@ delete_model(model)
 
 Delete the compute cluster:
 ```{r delete_compute, eval=FALSE}
-delete_compute(compute)
+delete_compute(compute_target)
 ```
