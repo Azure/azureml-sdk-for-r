@@ -23,9 +23,9 @@ Imports:
     reticulate (>= 1.12),
     plyr (>= 1.8),
     DT,
-    parsedate,
     rstudioapi (>= 0.7),
-    dplyr
+    htmltools,
+    magrittr
 Suggests: rmarkdown,
     knitr,
     testthat,

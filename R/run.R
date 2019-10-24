@@ -542,7 +542,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
-  library(dplyr)
+  library(magrittr)
 
   check_null <- function(arg) {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
