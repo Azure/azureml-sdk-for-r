@@ -552,45 +552,31 @@ view_run_details <- function(run) {
     }
   }
 
-  rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
-
-  web_view_link <- paste0('<a href="', run$get_portal_url(), '">here</a>')
-
-  if (rstudio_server) {
-    link_caption <- paste("Ctrl + click", web_view_link,
-                          "to view all run details in the Web Portal",
-                          collapse = "\r\n")
-  } else {
-    link_caption <- paste("Click", web_view_link,
-                          "to view all run details in the Web Portal",
-                          collapse = "\r\n")
-  }
+  web_portal_link <- paste0('<a href="',
+                            run$get_portal_url(),
+                            '">Link</a>')
 
   details <- run$get_details()
 
   # get general run properties
-  arguments <- check_null(toString(details$runDefinition$arguments))
   script_name <- check_null(details$runDefinition$script)
+  arguments <- check_null(toString(details$runDefinition$arguments))
+  start_time <- "-"
+  duration <- "-"
 
   # get run time details
-  start_time <- check_null(details$startTimeUtc)
-  duration <- check_null(details$endTimeUtc)
-
-  if (start_time != "-") {
-    start_time_utc <- start_time
-    date_time_format <- "%Y-%m-%dT%H:%M:%S"
-
-    date_time <- as.POSIXct(start_time_utc, date_time_format, tz = "UTC")
-    start_time <- format(date_time, "%B %d, %Y %I:%M %p",
+  if (check_null(details$startTimeUtc) != "-") {
+    start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
+                                  tz = "UTC")
+    start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
                          use_tz = TRUE)
 
-    end_time <- check_null(details$endTimeUtc)
-
-    if (end_time != "-") {
-      start <- as.POSIXct(start_time_utc, date_time_format, tz = "UTC")
-      end <- as.POSIXct(end_time, date_time_format, tz = "UTC")
-      duration <- paste(round(as.numeric(end - start), digits = 2), "mins")
+    if (check_null(details$endTimeUtc) != "-") {
+      end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
+                                  tz = "UTC")
+      duration <- paste(round(as.numeric(end_date_time - start_date_time),
+                              digits = 2), "mins")
     }
   }
 
@@ -607,12 +593,17 @@ view_run_details <- function(run) {
                     duration,
                     script_name,
                     arguments,
-                    link_caption)
+                    web_portal_link)
 
   # add warnings and errors if applicable
   if (check_null(details$warnings) != "-") {
     df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
+  }
+
+  if (check_null(details$errors) != "-") {
+    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = "\r\n"))
+    df_values <- c(df_values, "Errors")
   }
 
   run_details_plot <- matrix(c(df_keys, df_values),
@@ -624,13 +615,12 @@ view_run_details <- function(run) {
                 rownames = FALSE,
                 colnames = c(" ", " "),
                 caption = htmltools::tags$caption(
-                style = 'caption-side: top;
+                style = "caption-side: top;
                 text-align: center;
-                font-size: 125%;
-                color:#3490D7;
-                ','Run Details'),
-                options = list(dom = 't',
-                               scrollY = '800px',
+                font-size: 125%",
+                "Run Details"),
+                options = list(dom = "t",
+                               scrollY = "800px",
                                pageLength = 1000)) %>%
   DT::formatStyle(columns = c("V1"), fontWeight = "bold")
 }
