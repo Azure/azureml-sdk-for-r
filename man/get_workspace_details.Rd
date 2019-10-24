@@ -10,7 +10,7 @@ get_workspace_details(workspace)
 \item{workspace}{The \code{Workspace} object.}
 }
 \value{
-A named list of the workspace details.
+workspace details as data frame.
 }
 \description{
 Returns the details of the workspace.

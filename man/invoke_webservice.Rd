@@ -31,8 +31,8 @@ enabled key-based authentication for your service, you will need to provide
 a service key as a token in your request header
 (see \code{get_webservice_keys()}). If you've enabled token-based
 authentication, you will need to provide an JWT token as a bearer
-token in your request header (see \code{get_webservice_token()}).\cr
-\cr
+token in your request header (see \code{get_webservice_token()}).
+
 To get the REST API address for the service's scoring endpoint, you can
 access the following property from the Webservice object:
 \code{service$scoring_uri}

@@ -12,7 +12,7 @@ delete_webservice(webservice)
 \description{
 Delete a deployed ACI or AKS web service from the given workspace.
 This function call is not asynchronous; it runs until the resource is
-deleted.\cr
-\cr
+deleted.
+
 To delete a \code{LocalWebservice} see \code{delete_local_webservice()}.
 }

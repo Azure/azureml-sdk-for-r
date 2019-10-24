@@ -40,14 +40,12 @@ enabled. Token-based authentication requires clients to use an Azure
 Active Directory account to request an authentication token, which is
 used to make requests to the deployed service. Only available for
 AKS deployments.
-
 In order to enable token-based authentication, set the
 token_auth_enabled = TRUE parameter when you are creating or
 updating a deployment (aks_webservice_deployment_config() for creation
 or update_aks_webservice() for updating). Note that you cannot have both
 key-based authentication and token-based authentication enabled.
 Token-based authentication is not enabled by default.
-
 To check if a web service has token-based auth enabled, you can
 access the following boolean property from the Webservice object:
 service$token_auth_enabled" />
@@ -108,10 +106,16 @@ service$token_auth_enabled" />
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
+    </li>
+    <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
@@ -155,16 +159,14 @@ for a web service that was deployed with token-based authentication
 enabled. Token-based authentication requires clients to use an Azure
 Active Directory account to request an authentication token, which is
 used to make requests to the deployed service. Only available for
-AKS deployments.<br />
-<br />
-In order to enable token-based authentication, set the
+AKS deployments.</p>
+<p>In order to enable token-based authentication, set the
 <code>token_auth_enabled = TRUE</code> parameter when you are creating or
 updating a deployment (<code><a href='aks_webservice_deployment_config.html'>aks_webservice_deployment_config()</a></code> for creation
 or <code><a href='update_aks_webservice.html'>update_aks_webservice()</a></code> for updating). Note that you cannot have both
 key-based authentication and token-based authentication enabled.
-Token-based authentication is not enabled by default.<br />
-<br />
-To check if a web service has token-based auth enabled, you can
+Token-based authentication is not enabled by default.</p>
+<p>To check if a web service has token-based auth enabled, you can
 access the following boolean property from the Webservice object:
 <code>service$token_auth_enabled</code></p>
     

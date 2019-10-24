@@ -41,7 +41,6 @@ the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
 them, modify them, and build the image manually.
-
 Model packaging enables you to do these things. package_model() packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
@@ -113,10 +112,16 @@ development environment.
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
+    </li>
+    <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
@@ -160,9 +165,8 @@ model as a web service</h1>
 the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
-them, modify them, and build the image manually.<br />
-<br />
-Model packaging enables you to do these things. <code>package_model()</code> packages all
+them, modify them, and build the image manually.</p>
+<p>Model packaging enables you to do these things. <code>package_model()</code> packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
 two ways to use model packaging:</p><ul>
@@ -171,7 +175,7 @@ and other files needed to host it as a web service.</p></li>
 <li><p><strong>Generate a Dockerfile</strong>: Download the Dockerfile, model, entry script, and
 other assets needed to build a Docker image. You can then inspect the files or
 make changes before you build the image locally. To use this method, make sure
-to set <code>generate_dockerfile = TRUE</code>.<br />
+to set <code>generate_dockerfile = TRUE</code>.
 With either scenario, you will need to have Docker installed in your
 development environment.</p></li>
 </ul>

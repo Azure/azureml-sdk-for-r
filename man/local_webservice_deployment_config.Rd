@@ -15,8 +15,8 @@ The \code{LocalWebserviceDeploymentConfiguration} object.
 }
 \description{
 You can deploy a model locally for limited testing and troubleshooting.
-To do so, you will need to have Docker installed on your local machine.\cr
-\cr
+To do so, you will need to have Docker installed on your local machine.
+
 If you are using an Azure Machine Learning Compute Instance for
 development, you can also deploy locally on your compute instance.
 }

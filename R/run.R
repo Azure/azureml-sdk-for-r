@@ -209,15 +209,15 @@ get_run_file_names <- function(run) {
 #' @param run The `Run` object.
 #' @param secrets A vector of strings of secret names to retrieve
 #' the values for.
-#' @return A named list of found and not found secrets, e.g.
-#' `list("secret_name" = secret)`. If a secret was not found, the
-#' corresponding element will be `NULL`.
+#' @return A list of found and not found secrets as data frame.
+#' If a secret was not found, the corresponding element will be `NULL`.
 #' @export
 #' @seealso
 #' `set_secrets()`
 #' @md
 get_secrets_from_run <- function(run, secrets) {
-  run$get_secrets(secrets)
+  secrets <- run$get_secrets(secrets)
+  as.data.frame(secrets)
 }
 
 #' Log a metric to a run
@@ -534,48 +534,93 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
   invisible(NULL)
 }
 
-#' Plot table of run details in RStudio Viewer
+#' Plot table of run details in RStudio Viewer or browser
+#' This table does not auto-refresh. To see current values,
+#' re-run the command or click the web view link to view more
+#' details in real time.
 #' @param run The `Run` object.
 #' @export
 #' @md
 view_run_details <- function(run) {
-  status <- run$get_status()
+  check_null <- function(arg) {
+    if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
+      "-"
+    } else {
+      arg
+    }
+  }
+
+  web_portal_link <- paste0('<a href="',
+                            run$get_portal_url(),
+                            '">Link</a>')
+
   details <- run$get_details()
-  web_view_link <- paste0('<a href="', run$get_portal_url(), '">',
-                          "Link", "</a>")
 
-  if (status == "Completed" || status == "Failed") {
-    diff <- (parsedate::parse_iso_8601(details$endTimeUtc) -
-             parsedate::parse_iso_8601(details$startTimeUtc))
-    duration <- paste(as.numeric(diff), "mins")
-  }
-  else {
-    duration <- "-"
+  # get general run properties
+  script_name <- check_null(details$runDefinition$script)
+  arguments <- check_null(toString(details$runDefinition$arguments))
+  start_time <- "-"
+  duration <- "-"
+
+  # get run time details
+  if (check_null(details$startTimeUtc) != "-") {
+    start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
+                                  tz = "UTC")
+    start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
+                         tz = Sys.timezone(),
+                         use_tz = TRUE)
+
+    if (check_null(details$endTimeUtc) != "-") {
+      end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
+                                  tz = "UTC")
+      duration <- paste(round(as.numeric(end_date_time - start_date_time),
+                              digits = 2), "mins")
+    }
   }
 
-  df <- matrix(list("Run Id",
-                    "Status",
-                    "Start Time",
-                    "Duration",
-                    "Target",
-                    "Script Name",
-                    "Arguments",
-                    "Web View",
-                    run$id,
-                    status,
-                    format(parsedate::parse_iso_8601(details$startTimeUtc),
-                           format = "%B %d %Y %H:%M:%S"),
+  df_keys <- list("Run Id",
+                  "Status",
+                  "Start Time",
+                  "Duration",
+                  "Script Name",
+                  "Arguments",
+                  "Web View")
+  df_values <- list(run$id,
+                    run$get_status(),
+                    start_time,
                     duration,
-                    details$runDefinition$target,
-                    details$runDefinition$script,
-                    toString(details$runDefinition$arguments),
-                    web_view_link),
-               nrow = 8,
-               ncol = 2)
+                    script_name,
+                    arguments,
+                    web_portal_link)
 
-  DT::datatable(df, escape = FALSE, rownames = FALSE, colnames = c(" ", " "),
-                caption = paste(unlist(details$warnings), collapse = "\r\n"),
-                options = list(dom = "t", scrollY = TRUE))
+  # add warnings and errors if applicable
+  if (check_null(details$warnings) != "-") {
+    df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
+    df_values <- c(df_values, "Warnings")
+  }
+
+  if (check_null(details$errors) != "-") {
+    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = "\r\n"))
+    df_values <- c(df_values, "Errors")
+  }
+
+  run_details_plot <- matrix(c(df_keys, df_values),
+                             nrow = length(df_keys),
+                             ncol = 2)
+
+  dt <- DT::datatable(run_details_plot,
+                escape = FALSE,
+                rownames = FALSE,
+                colnames = c(" ", " "),
+                caption = htmltools::tags$caption(
+                style = "caption-side: top;
+                text-align: center;
+                font-size: 125%",
+                "Run Details"),
+                options = list(dom = "t",
+                               scrollY = "800px",
+                               pageLength = 1000))
+  DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 
 #' Upload files to a run

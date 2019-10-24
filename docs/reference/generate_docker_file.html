@@ -92,10 +92,16 @@
       <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
     </li>
     <li>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
+    </li>
+    <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
       <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
@@ -139,7 +145,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>generate_docker_file</span>(<span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>install_system_packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +169,11 @@ be used as the base image.</p></td>
       <th>custom_url_packages</th>
       <td><p>character vector of packages to be installed from
 local, directory or custom url.</p></td>
+    </tr>
+    <tr>
+      <th>install_system_packages</th>
+      <td><p>logical parameter to specify if system
+packages should be installed at runtime.</p></td>
     </tr>
     </table>
     
