@@ -1,15 +1,14 @@
 ---
-title: "Hyperparameter Tuning a Keras Model with HyperDrive"
+title: "Hyperparameter tune a Keras model"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Hyperparameter Tuning a Keras Mode with HyperDrive"l}
+  %\VignetteIndexEntry{Hyperparameter tune a Keras model}
   %\VignetteEngine{knitr::rmarkdown}
   \use_package{UTF-8}
 ---
 
-This article demonstrates how you can efficiently tune hyperparameters for a model using AzureML SDK for R. 
-We will train a Keras model on the CIFAR10 dataset, automate hyperparameter exploration, launch parallel jobs, log our results, and find the best run using AzureML's HyperDrive service.
+This tutorial demonstrates how you can efficiently tune hyperparameters for a model using HyperDrive, Azure ML's hyperparameter tuning functionality. You will train a Keras model on the CIFAR10 dataset, automate hyperparameter exploration, launch parallel jobs, log your results, and find the best run.
 
 ### What are hyperparameters?
 
@@ -19,64 +18,78 @@ Using brute-force methods to find the optimal values for parameters can be time-
 
 Let's get started with the example to see how it works!
 
-## 1. Set up the experiment
+## Prerequisites
 
-First, we will prepare for training by loading the required package, initializing a workspace, and creating an experiment.
+If you don’t have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/configuration.html) to configure and create a workspace.
 
-### Import package
+## Set up development environment
+The setup for your development work in this tutorial includes the following actions:
 
-```{r Import package, eval=FALSE}
-library("azureml")
+* Import required packages
+* Connect to a workspace
+* Create an experiment to track your runs
+* Create a remote compute target to use for training
+
+### Import **azuremlsdk** package
+```{r eval=FALSE}
+library(azuremlsdk)
 ```
 
-### Initialize a workspace
-
-The `Workspace` is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create. 
-
-You can create a `Workspace` object from a local `config.json` file
-```{r Initialize a workspace, eval=FALSE}
+### Load your workspace
+Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a **config.json** file if you previously wrote one out with [`write_workspace_config()`](https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html).
+```{r load_workpace, eval=FALSE}
 ws <- load_workspace_from_config()
 ```
 
-Or load an existing workspace from your Azure Machine Learning account
-```{r Load a workspace, eval=FALSE}
+Or, you can retrieve a workspace by directly specifying your workspace details:
+```{r get_workpace, eval=FALSE}
 ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your resource group>")
 ```
 
-### Create a deep learning experiment
+### Create an experiment
+An Azure ML **experiment** tracks a grouping of runs, typically from the same training script. Create an experiment to track hyperparameter tuning runs for the Keras model.
 
-For this example, we will create an experiment named "hyperdrive-cifar10".
-
-```{r Create a deep learning experiment, eval=FALSE}
+```{r create_experiment, eval=FALSE}
 exp <- experiment(workspace = ws, name = 'hyperdrive-cifar10')
 ```
 
-## 2. Create a compute target
+If you would like to track your runs in an existing experiment, simply specify that experiment's name to the `name` parameter of `experiment()`.
 
-Now, we will create a compute target for our job to run on. In this example, we are creating a GPU-enabled compute cluster.
-```{r Create a compute target, eval=FALSE}
+### Create a compute target
+By using Azure Machine Learning Compute (AmlCompute), a managed service, data scientists can train machine learning models on clusters of Azure virtual machines. In this tutorial, you create a GPU-enabled cluster as your training environment. The code below creates the compute cluster for you if it doesn't already exist in your workspace.
+
+You may need to wait a few minutes for your compute cluster to be provisioned if it doesn't already exist.
+
+```{r create_cluster, eval=FALSE}
 cluster_name <- "rcluster"
+
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
   vm_size <- "STANDARD_NC6"
   compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
-                                       vm_size = vm_size, max_nodes = 1)
+                                       vm_size = vm_size, max_nodes = 4)
 }
-wait_for_provisioning_completion(compute_target)
+
+wait_for_provisioning_completion(compute_target, show_output = TRUE)
 ```
 
-## 3. Prepare training script
+## Prepare the training script
+A training script called `cifar10_cnn.R` has been provided for you in the same directory as this tutorial.
 
-In order to collect and upload run metrics, we need to import the `azureml` package at the top of our training script, ["cifar10_cnn.R"](cifar10_cnn.R).
+In order to leverage HyperDrive, the training script for your model must log the relevant metrics during model training. When you configure the hyperparameter tuning run, you specify the primary metric to use for evaluating run performance. You must log this metric so it is available to the hyperparameter tuning process.
 
-```r
-library("azureml")
+In order to log the required metrics, you need to do the following **inside the training script**:
+
+* Import the **azuremlsdk** package
+```
+library(azuremlsdk)
 ```
 
-Then, we need to edit our script so that it can log our parameters. We will use the `log_metric_to_run` function to log our hyperparameters at the top of the script and to log our primary metric at the bottom of the script.
+* Take the hyperparameters as command-line arguments to the script. This is necessary so that when HyperDrive carries out the hyperparameter sweep, it can run the training script with different values to the hyperparameters as defined by the search space.
 
-```r
+* Use the [`log_metric_to_run()`](https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html) function to log the hyperparameters and the primary metric.
+```
 log_metric_to_run("batch_size", batch_size)
 ...
 log_metric_to_run("epochs", epochs)
@@ -88,21 +101,32 @@ log_metric_to_run("decay", decay)
 log_metric_to_run("Loss", results[[1]])
 ```
 
-## 4. Create an estimator
+## Create an estimator
 
-An `Estimator` offers a simple way to launch a training job on a compute target. 
+An Azure ML **estimator** encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here. The estimator is used to define the configuration for each of the child runs that the parent HyperDrive run will kick off.
 
-Our training script will need the Keras package to run, and we can have it installed in the Docker container where our job will run by passing the package name via the `cran_packages` parameter.
-```{r Create an estimator, eval=FALSE}
-est <- estimator(source_directory = ".", entry_script = "cifar10_cnn.R",
-                 compute_target = compute_target, cran_packages = c("keras"))
+To create the estimator, define the following:
+
+* The directory that contains your scripts needed for training (`source_directory`). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.
+* The training script that will be executed (`entry_script`).
+* The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
+* Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, pass the package name to the `cran_packages` parameter to have it installed in the Docker container where the job will run. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
+* Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
+
+```{r create_estimator, eval=FALSE}
+est <- estimator(source_directory = ".",
+                 entry_script = "cifar10_cnn.R",
+                 compute_target = compute_target,
+                 cran_packages = c("keras"),
+                 use_gpu = TRUE)
 ```
 
-## 5. Set HyperDrive configuration
+## Configure the HyperDrive run
+To kick off hyperparameter tuning in Azure ML, you will need to configure a HyperDrive run, which will in turn launch individual children runs of the training scripts with the corresponding hyperparameter values.
 
 ### Define search space
 
-In this experiment, we will use four hyperparameters: batch size, number of epochs, learning rate, and decay. In order to begin tuning, we must define the range of values we would like to pull from and how they will be distributed. This is called a parameter space definition and can be created with discrete or continuous ranges.
+In this experiment, we will use four hyperparameters: batch size, number of epochs, learning rate, and decay. In order to begin tuning, we must define the range of values we would like to explore from and how they will be distributed. This is called a parameter space definition and can be created with discrete or continuous ranges.
 
 __Discrete hyperparameters__ are specified as a choice among discrete values represented as a list.
 
@@ -120,14 +144,14 @@ __Continuous hyperparameters__ are specified as a distribution over a continuous
  * `normal(mu, sigma)`
  * `lognormal(mu, sigma)`
 
-Here, we will use the `random_parameter_sampling` function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
+Here, we will use the [`random_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html) function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
 
-Other sampling function options are:
+Other available sampling function options are:
 
- * `grid_parameter_sampling(parameter_space)`
- * `bayesian_parameter_sampling(parameter_space)`
+ * [`grid_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html)
+ * [`bayesian_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/bayesian_parameter_sampling.html)
 
-```{r Define search space, eval=FALSE}
+```{r search_space, eval=FALSE}
 sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
                                            epochs = choice(c(200, 350, 500)),
                                            lr = normal(0.0001, 0.005),
@@ -136,26 +160,26 @@ sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
 
 ### Define termination policy
 
-To prevent resource waste, we should detect and terminate poorly performing runs. HyperDrive will do this automatically if we set up an early termination policy.
+To prevent resource waste, Azure ML can detect and terminate poorly performing runs. HyperDrive will do this automatically if you specify an early termination policy.
 
-Here, we will use the `bandit_policy` which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
+Here, you will use the [`bandit_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/bandit_policy.html), which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
 
-```{r Define termination policy, eval=FALSE}
+```{r termination_policy, eval=FALSE}
 policy <- bandit_policy(slack_factor = 0.15)
 ```
 
 Other termination policy options are:
 
- * `median_stopping_policy(evaluation_interval, delay_evaluation)`
- * `truncation_selection_policy(truncation_percentage, evaluation_interval, delay_evaluation)`
+ * [`median_stopping_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/median_stopping_policy.html)
+ * [`truncation_selection_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/truncation_selection_policy.html)
  
 If no policy is provided, all runs will continue to completion regardless of performance.
 
 ### Finalize configuration
 
-Now, we can create a `HyperDriveConfig` object to define our group of jobs. Along with our sampling and policy definitions, we need to specify the name of the primary metric that we want to track and whether we want to maximize it or minimize it.
+Now, you can create a `HyperDriveConfig` object to define your HyperDrive run. Along with the sampling and policy definitions, you need to specify the name of the primary metric that you want to track and whether we want to maximize it or minimize it. The `primary_metric_name` must correspond with the name of the primary metric you logged in your training script. `max_total_runs` specifies the total number of child runs to launch. See the [hyperdrive_config()](https://azure.github.io/azureml-sdk-for-r/reference/hyperdrive_config.html) reference for the full set of configurable parameters.
 
-```{r Create Hyperdrive run configuration, eval=FALSE}
+```{r create_config, eval=FALSE}
 hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
                                        primary_metric_goal("MINIMIZE"),
                                        primary_metric_name = "Loss",
@@ -164,28 +188,53 @@ hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,
                                        estimator = est)
 ```
 
-## 6. Submit HyperDrive run
+## Submit the HyperDrive run
 
-Submitting our experiment will start multiple simultaneous runs and return a `HyperDriveRun` object that we will use to interface with the run history during and after the job.
+Finally submit the experiment to run on your cluster. The parent HyperDrive run will launch the individual child runs. `submit_experiment()` will return a `HyperDriveRun` object that you will use to interface with the run. In this tutorial, since the cluster we created scales to a max of `4` nodes, all 4 child runs will be launched in parallel.
 
-```{r Submit HyperDrive run, eval=FALSE}
+```{r submit_run, eval=FALSE}
 hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
+```
+
+You can view the HyperDrive run’s details in RStudio Viewer. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
+
+```{r eval=FALSE}
+view_run_details(hyperdrive_run)
+```
+
+Wait until hyperparameter tuning is complete before you run more code.
+
+```{r eval=FALSE}
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 ```
 
-## 7. Analyse runs by performance
+## Analyse runs by performance
 
-Finally, we can view and compare the metrics collected during our all of our child runs!
+Finally, you can view and compare the metrics collected during all of the child runs!
 
-```{r Analyse runs by performance, eval=FALSE}
+```{r analyse_runs, eval=FALSE}
+# Get the metrics of all the child runs
 child_run_metrics <- get_child_run_metrics(hyperdrive_run)
 child_run_metrics
 
+# Get the child run objects sorted in descending order by the best primary metric
 child_runs <- get_child_runs_sorted_by_primary_metric(hyperdrive_run)
 child_runs
 
+# Directly get the run object of the best performing run
 best_run <- get_best_run_by_primary_metric(hyperdrive_run)
 
+# Get the metrics of the best performing run
 metrics <- get_run_metrics(best_run)
 metrics
+```
+
+The `metrics` variable will include the values of the hyperparameters that resulted in the best performing run.
+
+## Clean up resources
+Delete the resources once you no longer need them. Don't delete any resource you plan to still use. 
+
+Delete the compute cluster:
+```{r delete_compute, eval=FALSE}
+delete_compute(compute_target)
 ```
