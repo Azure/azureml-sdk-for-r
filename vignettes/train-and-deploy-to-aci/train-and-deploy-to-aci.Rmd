@@ -23,7 +23,7 @@ In this tutorial, you learn the following tasks:
 
 ## Prerequisites
 
-If you don't have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/installation.html) to configure and create a workspace.
+If you don't have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/configuration.html) to configure and create a workspace.
 
 ## Set up your development environment
 The setup for your development work in this tutorial includes the following actions:
