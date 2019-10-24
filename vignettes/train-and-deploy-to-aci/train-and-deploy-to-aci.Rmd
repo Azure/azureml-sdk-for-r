@@ -112,7 +112,7 @@ upload_files_to_datastore(ds,
 
 ## Train a model
 
-For this tutorial, fit a logistic regression model on your uploaded data using your remote compute cluster. To submit a job you need to:
+For this tutorial, fit a logistic regression model on your uploaded data using your remote compute cluster. To submit a job, you need to:
 
 * Prepare the training script
 * Create an estimator
@@ -121,21 +121,21 @@ For this tutorial, fit a logistic regression model on your uploaded data using y
 ### Prepare the training script
 A training script called `accidents.R` has been provided for you in the same directory as this tutorial. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
 
-* The training script take an argument `-d` to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.
-* The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com). See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()`.
-* The training script saves your model into a directory named **outputs**. The `./outputs` folder receives special treatment by Azure ML. During training, files written to `./outputs` are automatically uploaded to your run record by Azure ML and persisted as artifacts. By saving the trained model to `./outputs`, you will be able to access and retrieve your model file even after the run is over and you no longer have access to your remote training environment.
+* The training script takes an argument `-d` to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.
+* The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com). See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()`.
+* The training script saves your model into a directory named **outputs**. The `./outputs` folder receives special treatment by Azure ML. During training, files written to `./outputs` are automatically uploaded to your run record by Azure ML and persisted as artifacts. By saving the trained model to `./outputs`, you'll be able to access and retrieve your model file even after the run is over and you no longer have access to your remote training environment.
 
 ### Create an estimator
 
 An Azure ML estimator encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here.
 
-To create the estimator, define the following:
+To create the estimator, define:
 
 * The directory that contains your scripts needed for training (`source_directory`). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
 * The parameters required from the training script (`script_params`). Azure ML will run your training script as a command-line script with `Rscript`. In this tutorial you specify one argument to the script, the data directory mounting point, which you can access with `ds$path(target_path)`.
-* Any environment dependencies required for training. Since the default Docker image that will be built for training will already contain the three packages (**caret**, **e1071**, and **optparse**) the training script needs, you do not need to specify any additional information. If you are using any R packages that are not included by default, you can specify them to be installed at runtime. For example, you can use the estimator's `cran_packages` parameter to specify additional CRAN packages to be installed. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
+* Any environment dependencies required for training. The default Docker image built for training already contains the three packages (`caret`, `e1071`, and `optparse`) needed in the training script.  So you don't need to specify additional information. If you are using R packages that are not included by default, use the estimator's `cran_packages` parameter to add additional CRAN packages. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
 
 ```{r create_estimator, eval=FALSE}
 est <- estimator(source_directory = ".",
@@ -147,7 +147,7 @@ est <- estimator(source_directory = ".",
 
 ### Submit the job on the remote cluster
 
-Finally submit the job to run on your cluster. `submit_experiment()` returns a Run object that you can then use to interface with the run. In total, the first run takes **about 10 minutes**. But for subsequent runs, as long as the script dependencies don't change, the same Docker image is reused (the image is cached), and the container startup time is much faster.
+Finally submit the job to run on your cluster. `submit_experiment()` returns a Run object that you then use to interface with the run. In total, the first run takes **about 10 minutes**. But for later runs, the same Docker image is reused as long as the script dependencies don't change.  In this case, the image is cached and the container startup time is much faster.
 
 ```{r submit_job, eval=FALSE}
 run <- submit_experiment(exp, est)
@@ -240,13 +240,13 @@ model <- register_model(ws,
 ### Define the inference dependencies
 To create a web service for your model, you first need to create a scoring script (`entry_script`), an R script that will take as input variable values (in JSON format) and output a prediction from your model. For this tutorial, use the provided scoring file `accident_predict.R`. The scoring script must contain an `init()` method that loads your model and returns a function that uses the model to make a prediction based on the input data. See the [documentation](https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html#details) for more details.
 
-Next, define an Azure ML **environment** for your script's package dependencies. With an environment, you specify R packages (from CRAN or elsewhere) that are needed for your script to run. You can also provide the values of environment variables that your script can reference to modify its behavior. By default, Azure ML will build the same default Docker image used with the estimator for training. Since the tutorial has no special requirements, simply create an environment with no special attributes.
+Next, define an Azure ML **environment** for your script's package dependencies. With an environment, you specify R packages (from CRAN or elsewhere) that are needed for your script to run. You can also provide the values of environment variables that your script can reference to modify its behavior. By default, Azure ML will build the same default Docker image used with the estimator for training. Since the tutorial has no special requirements, create an environment with no special attributes.
 
 ```{r create_environment, eval=FALSE}
 r_env <- r_environment(name = "basic_env")
 ```
 
-If you want to use your own Docker image for deployment instead, specify the `custom_docker_image` parameter. See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options for defining an environnment.
+If you want to use your own Docker image for deployment instead, specify the `custom_docker_image` parameter. See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options for defining an environment.
 
 Now you have everything you need to create an **inference config** for encapsulating your scoring script and environment dependencies.
 
@@ -257,13 +257,13 @@ inference_config <- inference_config(
 ```
 
 ### Deploy to ACI
-In this tutorial you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html).)
+In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html).)
 
 ``` {r create_aci_config, eval=FALSE}
 aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)
 ```
 
-Now you deploy your model as a web service. Note that deployment **can take several minutes**. 
+Now you deploy your model as a web service. Deployment **can take several minutes**. 
 
 ```{r deploy_service, eval=FALSE}
 aci_service <- deploy_model(ws, 
@@ -305,7 +305,7 @@ aci_service$scoring_uri
 
 ## Clean up resources
 
-Delete the resources once you no longer need them. Do not delete any resource you plan on still using. For example, the compute cluster created in this tutorial can be reused for other Azure ML tutorials and samples.
+Delete the resources once you no longer need them. Don't delete any resource you plan to still use. 
 
 Delete the web service:
 ```{r delete_service, eval=FALSE}
