@@ -487,7 +487,7 @@ inference_config <- function(entry_script,
     description = description,
     environment = environment)
 
-  inference_config$environment$python$conda_dependencies$add_pip_package(
+  inference_config$environment$python$conda_dependencies$add_conda_package(
     "rpy2"
   )
   inference_config$environment$docker$base_image <- saved_image
