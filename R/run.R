@@ -535,7 +535,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Plot table of run details in RStudio Viewer or browser
-#' This table does not auto-refresh. To see current values, 
+#' This table does not auto-refresh. To see current values,
 #' re-run the command or click the web view link to view more
 #' details in real time.
 #' @param run The `Run` object.
@@ -574,12 +574,13 @@ view_run_details <- function(run) {
   script_name <- check_null(details$runDefinition$script)
 
   # get run time details
-  start_time_utc <- check_null(details$startTimeUtc)
+  start_time <- check_null(details$startTimeUtc)
   duration <- check_null(details$endTimeUtc)
-  
-  if (start_time_utc != "-") {
+
+  if (start_time != "-") {
+    start_time_utc <- start_time
     date_time_format <- "%Y-%m-%dT%H:%M:%S"
-  
+
     date_time <- as.POSIXct(start_time_utc, date_time_format, tz = "UTC")
     start_time <- format(date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
@@ -611,12 +612,8 @@ view_run_details <- function(run) {
 
   # add warnings and errors if applicable
   if (check_null(details$warnings) != "-") {
-    df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = '\r\n'))
+    df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
-  }
-  if (check_null(details$errors) != "-") {
-    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = '\r\n'))
-    df_values <- c(df_values, "Errors")
   }
 
   run_details_plot <- matrix(c(df_keys, df_values),

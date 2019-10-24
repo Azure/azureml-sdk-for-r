@@ -5,7 +5,7 @@
 \title{Plot table of run details in RStudio Viewer or browser
 This table does not auto-refresh. To see current values,
 re-run the command or click the web view link to view more
-details in real time}
+details in real time.}
 \usage{
 view_run_details(run)
 }
@@ -16,5 +16,5 @@ view_run_details(run)
 Plot table of run details in RStudio Viewer or browser
 This table does not auto-refresh. To see current values,
 re-run the command or click the web view link to view more
-details in real time
+details in real time.
 }
