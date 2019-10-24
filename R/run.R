@@ -554,9 +554,8 @@ view_run_details <- function(run) {
 
   rstudio_server <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
 
-  web_view_link <- paste0('<a href="',
-                          run$get_portal_url(), '">',
-                          "here", "</a>")
+  web_view_link <- paste0('<a href="', run$get_portal_url(), '">here</a>')
+
   if (rstudio_server) {
     link_caption <- paste("Ctrl + click", web_view_link,
                           "to view all run details in the Web Portal",
@@ -632,7 +631,7 @@ view_run_details <- function(run) {
                 ','Run Details'),
                 options = list(dom = 't',
                                scrollY = '800px',
-                               pageLength = 1000)) %>% 
+                               pageLength = 1000)) %>%
   DT::formatStyle(columns = c("V1"), fontWeight = "bold")
 }
 
