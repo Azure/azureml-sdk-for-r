@@ -15,10 +15,10 @@
 # ==============================================================================
 
 
-library("tensorflow")
+library(tensorflow)
 install_tensorflow(version = "1.13.2-gpu")
 
-library("azuremlsdk")
+library(azuremlsdk)
 
 # Create the model
 x <- tf$placeholder(tf$float32, shape(NULL, 784L))
