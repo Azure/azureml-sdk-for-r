@@ -44,8 +44,12 @@ test_that("create, check container registry and save model package", {
   
   # register the model
   model <- register_model(ws, tmp_dir_name, model_name)
+
+  env <- r_environment("newenv")
+  register_environment(env, ws)
   
-  config <- inference_config(entry_script = "dummy_score.py")
+  config <- inference_config(entry_script = "dummy_score.py",
+                             environment = env)
 
   # Create ModelPackage with dockerfile
   model_package <- package_model(ws,
