@@ -49,6 +49,10 @@
 #' exists.
 #' @param show_output If `TRUE` the method will print out incremental progress
 #' of method.
+#' @param sku A string indicating if the workspace will be 'basic' or
+#' 'enterprise' edition. For more information see [Azure Machine Learning SKUs]
+#' (https://docs.microsoft.com/azure/machine-learning/service/
+#' overview-what-is-azure-ml#sku).
 #' @return The `Workspace` object.
 #' @export
 #' @section Examples:
@@ -92,7 +96,8 @@ create_workspace <- function(
   app_insights = NULL,
   container_registry = NULL,
   exist_ok = FALSE,
-  show_output = TRUE) {
+  show_output = TRUE,
+  sku = 'basic') {
   ws <-
     azureml$core$Workspace$create(name = name,
                                   subscription_id = subscription_id,
@@ -105,7 +110,8 @@ create_workspace <- function(
                                   app_insights = app_insights,
                                   container_registry = container_registry,
                                   exist_ok = exist_ok,
-                                  show_output = show_output)
+                                  show_output = show_output,
+                                  sku = sku)
   invisible(ws)
 }
 
