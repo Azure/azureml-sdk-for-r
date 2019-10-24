@@ -552,6 +552,7 @@ view_run_details <- function(run) {
 
   web_portal_link <- paste0('<a href="',
                             run$get_portal_url(),
+                            'target="_blank"',
                             '">Link</a>')
 
   details <- run$get_details()
