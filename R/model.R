@@ -475,7 +475,7 @@ inference_config <- function(entry_script,
   generate_score_python_wrapper(entry_script, source_directory)
 
   if (is.null(environment)) {
-    environment <- r_environment(NULL)
+    environment <- r_environment("inferenceenv")
   }
 
   environment$inferencing_stack_version <- "latest"

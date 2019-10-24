@@ -58,7 +58,7 @@
 #' ```
 #' r_env <- r_environment(name = 'myr_env',
 #'                        version = '1',
-#'                        cran_packages = c('e1071'))
+#'                        cran_packages = c('caret'))
 #' ```
 #' @seealso
 #' `estimator()`, `inference_config()`
