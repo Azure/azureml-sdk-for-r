@@ -542,8 +542,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
-  library(magrittr)
-
   check_null <- function(arg) {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       "-"
@@ -610,7 +608,7 @@ view_run_details <- function(run) {
                              nrow = length(df_keys),
                              ncol = 2)
 
-  DT::datatable(run_details_plot,
+  dt <- DT::datatable(run_details_plot,
                 escape = FALSE,
                 rownames = FALSE,
                 colnames = c(" ", " "),
@@ -621,8 +619,8 @@ view_run_details <- function(run) {
                 "Run Details"),
                 options = list(dom = "t",
                                scrollY = "800px",
-                               pageLength = 1000)) %>%
-  DT::formatStyle(columns = c("V1"), fontWeight = "bold")
+                               pageLength = 1000))
+  DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 
 #' Upload files to a run

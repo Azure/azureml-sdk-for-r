@@ -24,8 +24,7 @@ Imports:
     plyr (>= 1.8),
     DT,
     rstudioapi (>= 0.7),
-    htmltools,
-    magrittr
+    htmltools
 Suggests: rmarkdown,
     knitr,
     testthat,
