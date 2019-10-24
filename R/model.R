@@ -472,14 +472,17 @@ inference_config <- function(entry_script,
                              description = NULL,
                              environment = NULL) {
   saved_image <- NULL
-  generate_score_python_wrapper(entry_script, source_directory)
-  if (!is.null(environment)) {
-      environment$inferencing_stack_version <- "latest"
+  generate_score_python_wrapper(entry_script, source_directory)]
 
-      # this is a temporary fix for github issue #101
-      saved_image <- environment$docker$base_image
-      environment$docker$base_image <- "temp_image"
+  if (is.null(environment)) {
+    environment <- r_environment(NULL)
   }
+
+  environment$inferencing_stack_version <- "latest"
+
+  # this is a temporary fix for github issue #101
+  saved_image <- environment$docker$base_image
+  environment$docker$base_image <- "temp_image"
 
   inference_config <- azureml$core$model$InferenceConfig(
     entry_script = "_generated_score.py",
@@ -487,9 +490,6 @@ inference_config <- function(entry_script,
     description = description,
     environment = environment)
 
-  inference_config$environment$python$conda_dependencies$add_conda_package(
-    "rpy2"
-  )
   inference_config$environment$docker$base_image <- saved_image
   invisible(inference_config)
 }
