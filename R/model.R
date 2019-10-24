@@ -472,7 +472,7 @@ inference_config <- function(entry_script,
                              description = NULL,
                              environment = NULL) {
   saved_image <- NULL
-  generate_score_python_wrapper(entry_script, source_directory)]
+  generate_score_python_wrapper(entry_script, source_directory)
 
   if (is.null(environment)) {
     environment <- r_environment(NULL)
