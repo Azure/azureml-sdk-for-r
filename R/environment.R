@@ -58,7 +58,7 @@
 #' ```
 #' r_env <- r_environment(name = 'myr_env',
 #'                        version = '1',
-#'                        cran_packages = c('e1071'))
+#'                        cran_packages = c('caret'))
 #' ```
 #' @seealso
 #' `estimator()`, `inference_config()`
@@ -221,8 +221,8 @@ generate_docker_file <- function(custom_docker_image = NULL,
 
   if (install_system_packages) {
     base_dockerfile <- paste0(base_dockerfile, "RUN conda install -c r -y ",
-                              "r-essentials=3.6.0 && conda clean -ay && pip ",
-                              "install --no-cache-dir azureml-defaults\n")
+                              "r-essentials=3.6.0 rpy2 && conda clean -ay && ",
+                              "pip install --no-cache-dir azureml-defaults\n")
 
     base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
 

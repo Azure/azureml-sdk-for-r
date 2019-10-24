@@ -27,8 +27,8 @@ test_that("create dockerfile", {
   skip_if_no_subscription()
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04")
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN conda install -c r",
-                                  " -y r-essentials=3.6.0 && conda clean -ay",
-                                  " && pip install --no-cache-dir azureml-",
+                                  " -y r-essentials=3.6.0 rpy2 && conda clean",
+                                  " -ay && pip install --no-cache-dir azureml-",
                                   "defaults\nENV TAR=\"/bin/tar\"\nRUN R ",
                                   "-e \"install.packages(c(\'remotes\',",
                                   " \'e1071\', \'optparse\'), repos =",
