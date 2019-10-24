@@ -10,6 +10,8 @@ vignette: >
 
 This tutorial gets you started with the Azure Machine Learning service by walking through the requirements and instructions for setting up a workspace, the top-level resource for Azure ML.
 
+You do not need run this if you are working on an Azure Machine Learning Compute Instance, as the compute instance is already associated with an existing workspace.
+
 ## What is an Azure ML workspace?
 The workspace is the top-level resource for Azure ML, providing a centralized place to work with all the artifacts you create when you use Azure ML. The workspace keeps a history of all training runs, including logs, metrics, output, and a snapshot of your scripts.
 
