@@ -10,6 +10,8 @@ vignette: >
 
 This article covers the step-by-step instructions for installing the Azure ML SDK for R.
 
+You do not need run this if you are working on an Azure Machine Learning Compute Instance, as the compute instance already has the Azure ML SDK preinstalled.
+
 ## Install Conda
 
 If you do not have Conda already installed on your machine, you will first need to install it, since the Azure ML R SDK uses **reticulate** to bind to the Python SDK. We recommend installing [Miniconda](https://docs.conda.io/en/latest/miniconda.html), which is a smaller, lightweight version of Anaconda. Choose the 64-bit binary for Python 3.5 or later.
