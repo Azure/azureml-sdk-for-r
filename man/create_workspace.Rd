@@ -8,7 +8,7 @@ create_workspace(name, subscription_id = NULL, resource_group = NULL,
   location = NULL, create_resource_group = TRUE,
   friendly_name = NULL, storage_account = NULL, key_vault = NULL,
   app_insights = NULL, container_registry = NULL, exist_ok = FALSE,
-  show_output = TRUE, sku = "basic")
+  show_output = TRUE)
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be
@@ -54,11 +54,6 @@ exists.}
 
 \item{show_output}{If \code{TRUE} the method will print out incremental progress
 of method.}
-
-\item{sku}{A string indicating if the workspace will be 'basic' or
-'enterprise' edition. For more information see \link{Azure Machine Learning SKUs}
-(https://docs.microsoft.com/azure/machine-learning/service/
-overview-what-is-azure-ml#sku).}
 }
 \value{
 The \code{Workspace} object.
