@@ -5,6 +5,8 @@
 #' @param version azureml sdk package version
 #' @param envname name of environment to create
 #' @param conda_python_version version of python for conda environment
+#' @param restart_session restart R session after installation
+#' @param remove_existing_env delete the conda environment if already exists
 #' @export
 install_azureml <- function(version = NULL,
                             envname = "r-azureml",
