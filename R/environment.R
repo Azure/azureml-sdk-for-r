@@ -54,11 +54,10 @@
 #' you to view changes to the environment over time.
 #' @section Examples:
 #' The following example defines an environment that will use the default
-#' base CPU image and install the additional e1071 package from CRAN.
+#' base CPU image.
 #' ```
 #' r_env <- r_environment(name = 'myr_env',
-#'                        version = '1',
-#'                        cran_packages = c('caret'))
+#'                        version = '1')
 #' ```
 #' @seealso
 #' `estimator()`, `inference_config()`
