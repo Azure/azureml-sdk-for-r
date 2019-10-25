@@ -8,7 +8,7 @@ ws <- load_workspace_from_config()
 est <- estimator(source_directory = ".",
                  entry_script = "train.R",
                  compute_target = "local",
-                 cran_packages = c("caret", "optparse", "e1071"))
+                 cran_packages = c("caret"))
 
 # initialize experiment
 experiment_name <- "train-r-script-on-local"
