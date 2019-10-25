@@ -361,7 +361,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
     stop(paste0("Invalid parameters, path and plot were both provided,",
                 " only one at a time is supported"))
   }
-
+  
   delete_path <- FALSE
   if (is.null(run)) {
     run <- get_current_run()
@@ -549,19 +549,19 @@ view_run_details <- function(run) {
       arg
     }
   }
-
+  
   web_portal_link <- paste0('<a href="',
                             run$get_portal_url(),
                             '" target="_blank">Link</a>')
-
+  
   details <- run$get_details()
-
+  
   # get general run properties
   script_name <- check_null(details$runDefinition$script)
   arguments <- check_null(toString(details$runDefinition$arguments))
   start_time <- "-"
   duration <- "-"
-
+  
   # get run time details
   if (check_null(details$startTimeUtc) != "-") {
     start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
@@ -569,7 +569,7 @@ view_run_details <- function(run) {
     start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
                          use_tz = TRUE)
-
+    
     if (check_null(details$endTimeUtc) != "-") {
       end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
@@ -577,7 +577,7 @@ view_run_details <- function(run) {
                               digits = 2), "mins")
     }
   }
-
+  
   df_keys <- list("Run Id",
                   "Status",
                   "Start Time",
@@ -592,34 +592,38 @@ view_run_details <- function(run) {
                     script_name,
                     arguments,
                     web_portal_link)
-
+  
   # add warnings and errors if applicable
   if (check_null(details$warnings) != "-") {
     df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
   }
-
-  if (check_null(details$errors) != "-") {
-    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = "\r\n"))
-    df_values <- c(df_values, "Errors")
+  
+  if (run$get_status() == "Failed") {
+    error <- details$error$error$message
+    if (is.null(error)) {
+      error <- "Detailed error not set on the Run. Please check the logs for details."
+    }
+    df_keys <- c(df_keys, "Errors")
+    df_values <- c(df_values, error)
   }
-
+  
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
                              ncol = 2)
-
+  
   dt <- DT::datatable(run_details_plot,
-                escape = FALSE,
-                rownames = FALSE,
-                colnames = c(" ", " "),
-                caption = htmltools::tags$caption(
-                style = "caption-side: top;
+                      escape = FALSE,
+                      rownames = FALSE,
+                      colnames = c(" ", " "),
+                      caption = htmltools::tags$caption(
+                        style = "caption-side: top;
                 text-align: center;
                 font-size: 125%",
-                "Run Details"),
-                options = list(dom = "t",
-                               scrollY = "800px",
-                               pageLength = 1000))
+                        "Run Details"),
+                      options = list(dom = "t",
+                                     scrollY = "800px",
+                                     pageLength = 1000))
   DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 
@@ -661,12 +665,12 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
   if (is.null(run)) {
     run <- get_current_run()
   }
-
+  
   run$upload_files(
     names = names,
     paths = paths,
     timeout_seconds = timeout_seconds)
-
+  
   invisible(NULL)
 }
 
@@ -703,9 +707,9 @@ upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
-
+  
   run$upload_folder(name, path)
-
+  
   invisible(NULL)
 }
 
@@ -721,6 +725,6 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 #' @md
 complete_run <- function(run) {
   run$complete()
-
+  
   invisible(NULL)
 }
