@@ -542,9 +542,9 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
-  handle_null <- function(arg) {
+  handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
-      "-"
+      placeholder
     } else {
       arg
     }
@@ -601,9 +601,9 @@ view_run_details <- function(run) {
 
   if (run$get_status() == "Failed") {
     error <- details$error$error$message
-    if (is.null(error)) {
-      error <- "Detailed error not set on the Run. Please check the logs for details."
-    }
+    error <- handle_null(error,
+                         "Detailed error not set on the Run. Please check
+                         the logs for details.")
     df_keys <- c(df_keys, "Errors")
     df_values <- c(df_values, error)
   }
