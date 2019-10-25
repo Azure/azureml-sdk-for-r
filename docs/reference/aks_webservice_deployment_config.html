@@ -38,7 +38,6 @@
 prodution deployments. Provides fast response time and autoscaling
 of the deployed service. Using GPU for inference when deployed as a
 web service is only supported on AKS.
-
 Deploy to AKS if you need one or more of the following capabilities:
 Fast response time
 Autoscaling of the deployed service
@@ -99,16 +98,22 @@ Hardware acceleration options
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+    </li>
+    <li>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
   </ul>
 </li>
@@ -147,9 +152,8 @@ Hardware acceleration options
     <p>Deploy a web service to Azure Kubernetes Service for high-scale
 prodution deployments. Provides fast response time and autoscaling
 of the deployed service. Using GPU for inference when deployed as a
-web service is only supported on AKS.<br />
-<br />
-Deploy to AKS if you need one or more of the following capabilities:</p><ul>
+web service is only supported on AKS.</p>
+<p>Deploy to AKS if you need one or more of the following capabilities:</p><ul>
 <li><p>Fast response time</p></li>
 <li><p>Autoscaling of the deployed service</p></li>
 <li><p>Hardware acceleration options</p></li>
@@ -326,10 +330,10 @@ Active Directory credentials. Defaults to <code>FALSE</code>. Both <code>token_a
 <p>When deploying to AKS, you deploy to an AKS cluster that is connected to your workspace.
 There are two ways to connect an AKS cluster to your workspace:</p><ul>
 <li><p>Create the AKS cluster using Azure ML (see <code><a href='create_aks_compute.html'>create_aks_compute()</a></code>).</p></li>
-<li><p>Attach an existing AKS cluster to your workspace (see <code><a href='attach_aks_compute.html'>attach_aks_compute()</a></code>).<br />
-<br />
-Pass the <code>AksCompute</code> object to the <code>deployment_target</code> parameter of <code><a href='deploy_model.html'>deploy_model()</a></code>.</p></li>
+<li><p>Attach an existing AKS cluster to your workspace (see <code><a href='attach_aks_compute.html'>attach_aks_compute()</a></code>).</p></li>
 </ul>
+
+<p>Pass the <code>AksCompute</code> object to the <code>deployment_target</code> parameter of <code><a href='deploy_model.html'>deploy_model()</a></code>.</p>
 <h3>Token-based authentication</h3>
 <p>We strongly recommend that you create your Azure ML workspace in the same region as your
 AKS cluster. To authenticate with a token, the web service will make a call to the region
@@ -338,7 +342,6 @@ not be able to fetch a token for your web service, even if your cluster is in a 
 than your workspace. This effectively results in token-based auth being unavailable until your
 workspace's region is available again. In addition, the greater the distance between your
 cluster's region and your workspace's region, the longer it will take to fetch a token.</p>
-
 
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

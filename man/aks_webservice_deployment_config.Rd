@@ -112,8 +112,8 @@ The \code{AksServiceDeploymentConfiguration} object.
 Deploy a web service to Azure Kubernetes Service for high-scale
 prodution deployments. Provides fast response time and autoscaling
 of the deployed service. Using GPU for inference when deployed as a
-web service is only supported on AKS.\cr
-\cr
+web service is only supported on AKS.
+
 Deploy to AKS if you need one or more of the following capabilities:
 \itemize{
 \item Fast response time
@@ -127,8 +127,9 @@ When deploying to AKS, you deploy to an AKS cluster that is connected to your wo
 There are two ways to connect an AKS cluster to your workspace:
 \itemize{
 \item Create the AKS cluster using Azure ML (see \code{create_aks_compute()}).
-\item Attach an existing AKS cluster to your workspace (see \code{attach_aks_compute()}).\cr
-\cr
+\item Attach an existing AKS cluster to your workspace (see \code{attach_aks_compute()}).
+}
+
 Pass the \code{AksCompute} object to the \code{deployment_target} parameter of \code{deploy_model()}.
 }
 \subsection{Token-based authentication}{
@@ -139,7 +140,6 @@ not be able to fetch a token for your web service, even if your cluster is in a 
 than your workspace. This effectively results in token-based auth being unavailable until your
 workspace's region is available again. In addition, the greater the distance between your
 cluster's region and your workspace's region, the longer it will take to fetch a token.
-}
 }
 }
 \section{Examples}{

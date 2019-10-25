@@ -44,9 +44,9 @@ test_that("create, check container registry and save model package", {
   
   # register the model
   model <- register_model(ws, tmp_dir_name, model_name)
-  
-  env <- azureml$core$Environment(name = "newenv")
-  env$register(ws)
+
+  env <- r_environment("newenv")
+  register_environment(env, ws)
   
   config <- inference_config(entry_script = "dummy_score.py",
                              environment = env)

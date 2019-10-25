@@ -83,7 +83,7 @@ estimator <- function(source_directory,
 
   if (is.null(environment)) {
     environment <- r_environment(
-      name = NULL,
+      name = "estimatorenv",
       environment_variables = environment_variables,
       cran_packages = cran_packages,
       github_packages = github_packages,

@@ -5,8 +5,8 @@
 #' @description
 #' Deploy a web service to Azure Container Instances for testing or
 #' debugging. Use ACI for low-scale CPU-based workloads that
-#' require less than 48 GB of RAM.\cr
-#' \cr
+#' require less than 48 GB of RAM.
+#'
 #' Deploy to ACI if one of the following conditions is true:
 #' * You need to quickly deploy and validate your model. You do not need
 #' to create ACI containers ahead of time. They are created as part of
@@ -80,8 +80,8 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
 #' @description
 #' Update an ACI web service with the provided properties. You can update the
 #' web service to use a new model, a new entry script, or new dependencies
-#' that can be specified in an inference configuration.\cr
-#' \cr
+#' that can be specified in an inference configuration.
+#'
 #' Values left as `NULL` will remain unchanged in the web service.
 #' @param webservice The `AciWebservice` object.
 #' @param tags A named list of key-value tags for the web service,

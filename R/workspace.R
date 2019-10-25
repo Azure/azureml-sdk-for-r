@@ -272,7 +272,7 @@ get_default_keyvault <- function(workspace) {
 #' @description
 #' Returns the details of the workspace.
 #' @param workspace The `Workspace` object.
-#' @return A named list of the workspace details.
+#' @return workspace details as data frame.
 #' @export
 #' @section Details:
 #' The returned list contains the following named elements:
@@ -294,7 +294,8 @@ get_default_keyvault <- function(workspace) {
 #' * *storageAccount*: Workspace storage account.
 #' @md
 get_workspace_details <- function(workspace) {
-  workspace$get_details()
+  details <- workspace$get_details()
+  as.data.frame(details)
 }
 
 #' Set the default datastore for a workspace

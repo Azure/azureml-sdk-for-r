@@ -15,12 +15,12 @@ will be created to contain the contents of the package.}
 }
 \description{
 Download the Dockerfile, model, and other assets needed to build
-an image locally from a created \code{ModelPackage}.\cr
-\cr
+an image locally from a created \code{ModelPackage}.
+
 This can only be used with a Dockerfile \code{ModelPackage} (where
 \code{package_model()} was called with \code{generate_dockerfile = TRUE} to
-indicated that you wanted only the files and not a fully built image).\cr
-\cr
+indicated that you wanted only the files and not a fully built image).
+
 \code{save_model_package_files()} downloads the files needed to build the
 image to the \code{output_directory}. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.

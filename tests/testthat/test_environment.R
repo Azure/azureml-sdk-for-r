@@ -13,8 +13,7 @@ test_that("create, register, and get environment", {
   expect_equal(env$version, "1")
   
   expect_equal(env$docker$enabled, TRUE)
-  expect_equal(env$docker$base_dockerfile, NULL)
-  expect_equal(env$docker$base_image, "r-base:cpu")
+  expect_equal(env$docker$base_image, NULL)
 
   # Register environment
   register_environment(env, ws)
@@ -27,37 +26,41 @@ test_that("create, register, and get environment", {
 test_that("create dockerfile", {
   skip_if_no_subscription()
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04")
-  expect_equal(dockerfile, "FROM ubuntu-18.04\n")
+  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN conda install -c r",
+                                  " -y r-essentials=3.6.0 rpy2 && conda clean",
+                                  " -ay && pip install --no-cache-dir azureml-",
+                                  "defaults\nENV TAR=\"/bin/tar\"\nRUN R ",
+                                  "-e \"install.packages(c(\'remotes\',",
+                                  " \'e1071\', \'optparse\'), repos =",
+                                  " 'http://cran.us.r-project.org')",
+                                  "\"\nRUN R -e \"remotes::install_github(",
+                                  "repo = 'https://github.com/Azure/azureml-",
+                                  "sdk-for-r')\"\n"))
 
   # cran packages
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     cran_packages = c("ggplot2", "dplyr"))
-  expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
-    "RUN R -e \"install.packages(\'ggplot2\', ",
-    "repos = \'http://cran.us.r-project.org\')\"\n",
-    "RUN R -e \"install.packages(\'dplyr\', ",
-    "repos = \'http://cran.us.r-project.org\')\"\n")
-  expect_equal(dockerfile, expected_dockerfile)
-  
+                                     cran_packages = c("ggplot2"),
+                                     install_system_packages = FALSE)
+  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
+                                  "packages('ggplot2', repos = \'http://cran",
+                                  ".us.r-project.org\')\"\n"))
+
   # github packages
-  dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     github_packages = c(
+  dockerfile <- generate_docker_file(github_packages = c(
                                        "https://github/user/repo1", 
-                                       "https://github/user/repo2"))
+                                       "https://github/user/repo2"),
+                                     install_system_packages = FALSE)
   expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
     "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
   expect_equal(dockerfile, expected_dockerfile)
   
   # custom url
-  dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     custom_url_packages = c(
+  dockerfile <- generate_docker_file(custom_url_packages = c(
                                        "https://url/pak1.tar", 
-                                       "https://url/pak2.tar"))
+                                       "https://url/pak2.tar"),
+                                     install_system_packages = FALSE)
   expected_dockerfile <- paste0(
-    "FROM ubuntu-18.04\n",
     "RUN R -e \"install.packages(\'https://url/pak1.tar\', repos = NULL)\"\n",
     "RUN R -e \"install.packages(\'https://url/pak2.tar\', repos = NULL)\"\n")
   expect_equal(dockerfile, expected_dockerfile)

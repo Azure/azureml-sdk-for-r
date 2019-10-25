@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Training a TensorFlow Model on MNIST • azuremlsdk</title>
+<title>Train a TensorFlow model • azuremlsdk</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../pkgdown.js"></script><meta property="og:title" content="Training a TensorFlow Model on MNIST">
+<script src="../../pkgdown.js"></script><meta property="og:title" content="Train a TensorFlow model">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -54,16 +54,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li>
-      <a href="../../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+    </li>
+    <li>
+      <a href="../../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
   </ul>
 </li>
@@ -91,9 +97,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Training a TensorFlow Model on MNIST</h1>
+      <h1>Train a TensorFlow model</h1>
             
-            <h4 class="date">2019-10-22</h4>
+            <h4 class="date">2019-10-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-with-tensorflow/train-with-tensorflow.Rmd"><code>vignettes/train-with-tensorflow/train-with-tensorflow.Rmd</code></a></small>
       <div class="hidden name"><code>train-with-tensorflow.Rmd</code></div>
@@ -102,81 +108,118 @@
 
     
     
-<p>This article demonstrates how to run a TensorFlow training script at scale using AzureML SDK for R. We will train a TensorFlow model to classify handwritten digits using a deep neural network (DNN) and log our results to the Azure Machine Learning service.</p>
-<div id="set-up-the-experiment" class="section level2">
+<p>This tutorial demonstrates how run a TensorFlow job at scale using Azure ML. You will train a TensorFlow model to classify handwritten digits (MNIST) using a deep neural network (DNN) and log your results to the Azure ML service.</p>
+<div id="prerequisites" class="section level2">
 <h2 class="hasAnchor">
-<a href="#set-up-the-experiment" class="anchor"></a>1. Set up the experiment</h2>
-<p>Let’s prepare for training by loading the required package, initializing a workspace, and creating an experiment.</p>
-<div id="import-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#import-package" class="anchor"></a>Import package</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azuremlsdk"</span>)</a></code></pre></div>
+<a href="#prerequisites" class="anchor"></a>Prerequisites</h2>
+<p>If you don’t have access to an Azure ML workspace, follow the <a href="https://azure.github.io/azureml-sdk-for-r/articles/configuration.html">setup tutorial</a> to configure and create a workspace.</p>
 </div>
-<div id="initialize-a-workspace" class="section level3">
+<div id="set-up-development-environment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#set-up-development-environment" class="anchor"></a>Set up development environment</h2>
+<p>The setup for your development work in this tutorial includes the following actions:</p>
+<ul>
+<li>Import required packages</li>
+<li>Connect to a workspace</li>
+<li>Create an experiment to track your runs</li>
+<li>Create a remote compute target to use for training</li>
+</ul>
+<div id="import-azuremlsdk-package" class="section level3">
 <h3 class="hasAnchor">
-<a href="#initialize-a-workspace" class="anchor"></a>Initialize a workspace</h3>
-<p>The <code>Workspace</code> is the top-level resource for the service. It provides us with a centralized place to work with all the artifacts we will create.</p>
-<p>You can create a <code>Workspace</code> object from a local <code>config.json</code> file</p>
+<a href="#import-azuremlsdk-package" class="anchor"></a>Import <strong>azuremlsdk</strong> package</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a></code></pre></div>
+</div>
+<div id="load-your-workspace" class="section level3">
+<h3 class="hasAnchor">
+<a href="#load-your-workspace" class="anchor"></a>Load your workspace</h3>
+<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a <strong>config.json</strong> file if you previously wrote one out with <a href="https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html"><code><a href="../../reference/write_workspace_config.html">write_workspace_config()</a></code></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
-<p>Or load an existing workspace from your Azure Machine Learning account</p>
+<p>Or, you can retrieve a workspace by directly specifying your workspace details:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
 <div id="create-an-experiment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-an-experiment" class="anchor"></a>Create an experiment</h3>
-<p>For this example, we will create an <code>Experiment</code> called “tf-mnist”.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'tf-mnist'</span>)</a></code></pre></div>
+<p>An Azure ML <strong>experiment</strong> tracks a grouping of runs, typically from the same training script. Create an experiment to track the runs for training the TensorFlow model on the MNIST data.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">"tf-mnist"</span>)</a></code></pre></div>
+<p>If you would like to track your runs in an existing experiment, simply specify that experiment’s name to the <code>name</code> parameter of <code><a href="../../reference/experiment.html">experiment()</a></code>.</p>
 </div>
-</div>
-<div id="create-a-compute-target" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create-a-compute-target" class="anchor"></a>2. Create a compute target</h2>
-<p>Now, we will create a compute target for our TensorFlow job to run on. In this example, we are creating a CPU-enabled compute cluster.</p>
+<div id="create-a-compute-target" class="section level3">
+<h3 class="hasAnchor">
+<a href="#create-a-compute-target" class="anchor"></a>Create a compute target</h3>
+<p>By using Azure Machine Learning Compute (AmlCompute), a managed service, data scientists can train machine learning models on clusters of Azure virtual machines. In this tutorial, you create a GPU-enabled cluster as your training environment. The code below creates the compute cluster for you if it doesn’t already exist in your workspace.</p>
+<p>You may need to wait a few minutes for your compute cluster to be provisioned if it doesn’t already exist.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">{</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">  vm_size &lt;-<span class="st"> "STANDARD_D2_V2"</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  vm_size &lt;-<span class="st"> "STANDARD_NC6"</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">}</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
-<div id="prepare-training-script" class="section level2">
+</div>
+<div id="prepare-the-training-script" class="section level2">
 <h2 class="hasAnchor">
-<a href="#prepare-training-script" class="anchor"></a>3. Prepare training script</h2>
-<p>In order to collect and upload run metrics, we need to import the <code>azureml</code> package at the top of our training script, <a href="tf_mnist.R">“tf_mnist.R”</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"azureml"</span>)</a></code></pre></div>
-<p>Then, we need to add the <code>log_metric_to_run</code> function to track our primary metric, “accuracy”, for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../../reference/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"accuracy"</span>,</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                  sess<span class="op">$</span><span class="kw">run</span>(accuracy,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                  <span class="dt">feed_dict =</span> <span class="kw">dict</span>(<span class="dt">x =</span> mnist<span class="op">$</span>test<span class="op">$</span>images, <span class="dt">y_ =</span> mnist<span class="op">$</span>test<span class="op">$</span>labels)))</a></code></pre></div>
+<a href="#prepare-the-training-script" class="anchor"></a>Prepare the training script</h2>
+<p>A training script called <code>tf_mnist.R</code> has been provided for you in the same directory as this tutorial. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in <a href="http://ml.azure.com/">Azure Machine Learning studio</a>.</p>
+<p>In order to collect and upload run metrics, you need to do the following <strong>inside the training script</strong>:</p>
+<ul>
+<li>Import the <strong>azuremlsdk</strong> package</li>
+</ul>
+<pre><code><a href="https://rdrr.io/r/base/library.html">library(azuremlsdk)</a></code></pre>
+<ul>
+<li>Add the <a href="https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html"><code><a href="../../reference/log_metric_to_run.html">log_metric_to_run()</a></code></a> function to track our primary metric, “accuracy”, for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.</li>
+</ul>
+<pre><code><a href="../../reference/log_metric_to_run.html">log_metric_to_run("accuracy",
+                  sess$run(accuracy,
+                  feed_dict = dict(x = mnist$test$images, y_ = mnist$test$labels)))</a></code></pre>
+<p>See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation">reference</a> for the full set of logging methods <code>log_*()</code> available from the R SDK.</p>
 </div>
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">
-<a href="#create-an-estimator" class="anchor"></a>4. Create an estimator</h2>
-<p>An <code>Estimator</code> offers a simple way to launch a training job on a compute target. Our training script will need the TensorFlow package to run, and we can have it installed in the Docker container where our job will run by passing the package name to the <code>cran_packages</code> parameter.</p>
+<a href="#create-an-estimator" class="anchor"></a>Create an estimator</h2>
+<p>An Azure ML <strong>estimator</strong> encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here.</p>
+<p>To create the estimator, define the following:</p>
+<ul>
+<li>The directory that contains your scripts needed for training (<code>source_directory</code>). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.</li>
+<li>The training script that will be executed (<code>entry_script</code>).</li>
+<li>The compute target (<code>compute_target</code>), in this case the AmlCompute cluster you created earlier.</li>
+<li>Any environment dependencies required for training. Since the training script requires the TensorFlow package, which is not included in the image by default, pass the package name to the <code>cran_packages</code> parameter to have it installed in the Docker container where the job will run. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/estimator.html"><code><a href="../../reference/estimator.html">estimator()</a></code></a> reference for the full set of configurable options.</li>
+<li>Set the <code>use_gpu = TRUE</code> flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.</li>
+</ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">                 <span class="dt">entry_script =</span> <span class="st">"tf_mnist.R"</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">                 <span class="dt">compute_target =</span> compute_target,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                 <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"tensorflow"</span>),</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5">                 <span class="dt">use_gpu =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
-<div id="submit-a-run" class="section level2">
+<div id="submit-the-job" class="section level2">
 <h2 class="hasAnchor">
-<a href="#submit-a-run" class="anchor"></a>5. Submit a run</h2>
-<p>Submitting our experiment will return a <code>Run</code> object that we will use to interface with the run history during and after the job.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<div id="view-metrics" class="section level3">
-<h3 class="hasAnchor">
-<a href="#view-metrics" class="anchor"></a>6. View metrics</h3>
-<p>Finally, we can view the metrics collected during our TensorFlow run!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">metrics</a></code></pre></div>
+<a href="#submit-the-job" class="anchor"></a>Submit the job</h2>
+<p>Finally submit the job to run on your cluster. <a href="https://azure.github.io/azureml-sdk-for-r/reference/submit_experiment.html"><code><a href="../../reference/submit_experiment.html">submit_experiment()</a></code></a> returns a <code>Run</code> object that you can then use to interface with the run.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
+<p>You can view the run’s details in RStudio Viewer. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
+<p>Model training happens in the background. Wait until the model has finished training before you run more code.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
+<div id="view-run-metrics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#view-run-metrics" class="anchor"></a>View run metrics</h2>
+<p>Once your job has finished, you can view the metrics collected during your TensorFlow run.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">metrics</a></code></pre></div>
+</div>
+<div id="clean-up-resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#clean-up-resources" class="anchor"></a>Clean up resources</h2>
+<p>Delete the resources once you no longer need them. Don’t delete any resource you plan to still use.</p>
+<p>Delete the compute cluster:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_compute.html">delete_compute</a></span>(compute_target)</a></code></pre></div>
 </div>
   </div>
 
@@ -185,11 +228,13 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#set-up-the-experiment">1. Set up the experiment</a></li>
-      <li><a href="#create-a-compute-target">2. Create a compute target</a></li>
-      <li><a href="#prepare-training-script">3. Prepare training script</a></li>
-      <li><a href="#create-an-estimator">4. Create an estimator</a></li>
-      <li><a href="#submit-a-run">5. Submit a run</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#set-up-development-environment">Set up development environment</a></li>
+      <li><a href="#prepare-the-training-script">Prepare the training script</a></li>
+      <li><a href="#create-an-estimator">Create an estimator</a></li>
+      <li><a href="#submit-the-job">Submit the job</a></li>
+      <li><a href="#view-run-metrics">View run metrics</a></li>
+      <li><a href="#clean-up-resources">Clean up resources</a></li>
       </ul>
 </div>
       </div>

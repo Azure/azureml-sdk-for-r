@@ -19,8 +19,8 @@ A string of the logs for the web service.
 \description{
 You can get the detailed Docker engine log messages from your
 web service deployment. You can view the logs for local, ACI,
-and AKS deployments.\cr
-\cr
+and AKS deployments.
+
 For example, if your web service deployment fails, you can
 inspect the logs to help troubleshoot.
 }

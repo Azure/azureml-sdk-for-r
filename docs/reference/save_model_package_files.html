@@ -38,11 +38,9 @@ your local file system — save_model_package_files" />
 
 <meta property="og:description" content="Download the Dockerfile, model, and other assets needed to build
 an image locally from a created ModelPackage.
-
 This can only be used with a Dockerfile ModelPackage (where
 package_model() was called with generate_dockerfile = TRUE to
 indicated that you wanted only the files and not a fully built image).
-
 save_model_package_files() downloads the files needed to build the
 image to the output_directory. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.
@@ -103,16 +101,22 @@ You can get this information using get_model_package_container_registry()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+    </li>
+    <li>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
   </ul>
 </li>
@@ -150,13 +154,11 @@ your local file system</h1>
     <div class="ref-description">
     
     <p>Download the Dockerfile, model, and other assets needed to build
-an image locally from a created <code>ModelPackage</code>.<br />
-<br />
-This can only be used with a Dockerfile <code>ModelPackage</code> (where
+an image locally from a created <code>ModelPackage</code>.</p>
+<p>This can only be used with a Dockerfile <code>ModelPackage</code> (where
 <code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = TRUE</code> to
-indicated that you wanted only the files and not a fully built image).<br />
-<br />
-<code>save_model_package_files()</code> downloads the files needed to build the
+indicated that you wanted only the files and not a fully built image).</p>
+<p><code>save_model_package_files()</code> downloads the files needed to build the
 image to the <code>output_directory</code>. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.
 When you build the image on your local Docker installation, you will

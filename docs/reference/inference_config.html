@@ -93,16 +93,22 @@ to define the software dependencies needed for your deployment." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+    </li>
+    <li>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
   </ul>
 </li>
@@ -191,34 +197,24 @@ the incoming request data, the format of the data expected by your model,
 and the format of the data returned to clients. If the request data is in a
 format that is not usable by your model, the script can transform it into
 an acceptable format. It can also transform the response before returning
-it to the client.<br />
-<br />
-The entry script must contain an <code>init()</code> method that loads your model and
+it to the client.</p>
+<p>The entry script must contain an <code>init()</code> method that loads your model and
 then returns a function that uses the model to make a prediction based on
 the input data passed to the function. Azure ML runs the <code>init()</code> method
 once, when the Docker container for your web service is started. The
 prediction function returned by <code>init()</code> will be run every time the service
 is invoked to make a prediction on some input data. The inputs and outputs
 of this prediction function typically use JSON for serialization and
-deserialization.<br />
-<br />
-To locate the model in your entry script (when you load the model in the
+deserialization.</p>
+<p>To locate the model in your entry script (when you load the model in the
 script's <code>init()</code> method), use <code>AZUREML_MODEL_DIR</code>, an environment variable
 containing the path to the model location. The environment variable is
 created during service deployment, and you can use it to find the location
-of your deployed model(s).<br />
-<br />
-The following table describes the value of <code>AZUREML_MODEL_DIR</code> depending
-on the number of models deployed:</p><table class='table'>
-<tr><td><strong>Deployment</strong></td><td><strong>Environment variable value</strong></td></tr>
-<tr><td>Single model</td><td>The path to the folder containing the model</td></tr>
-<tr><td>Multiple models</td><td>The path to the folder containing all models. Models are located by name and version in this folder (<code>$MODEL_NAME/$VERSION</code>)</td></tr>
-</table>
+of your deployed model(s).</p>
 <p>To get the path to a file in a model, combine the environment variable
 with the filename you're looking for. The filenames of the model files
-are preserved during registration and deployment.<br />
-<br />
-Single model example:</p><pre>model_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")
+are preserved during registration and deployment.</p>
+<p>Single model example:</p><pre>model_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")
 </pre>
 
 <p>Multiple model example:</p><pre>model1_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")

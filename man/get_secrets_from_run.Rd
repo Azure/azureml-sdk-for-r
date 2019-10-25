@@ -13,9 +13,8 @@ get_secrets_from_run(run, secrets)
 the values for.}
 }
 \value{
-A named list of found and not found secrets, e.g.
-\code{list("secret_name" = secret)}. If a secret was not found, the
-corresponding element will be \code{NULL}.
+A list of found and not found secrets as data frame.
+If a secret was not found, the corresponding element will be \code{NULL}.
 }
 \description{
 From within the script of a run submitted using

@@ -43,11 +43,9 @@ aks_webservice_deployment_config() for creation and
 update_aci_webservice() or update_aks_webservice() for updating).
 Note that key-based auth is enabled by default for AksWebservice
 but not for AciWebservice.
-
 To check if a web service has key-based auth enabled, you can
 access the following boolean property from the Webservice object:
 service$auth_enabled
-
 Not supported for LocalWebservice deployments." />
 <meta name="twitter:card" content="summary" />
 
@@ -103,16 +101,22 @@ Not supported for LocalWebservice deployments." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+    </li>
+    <li>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
   </ul>
 </li>
@@ -156,13 +160,11 @@ when you are creating or updating a deployment (either
 <code><a href='aks_webservice_deployment_config.html'>aks_webservice_deployment_config()</a></code> for creation and
 <code><a href='update_aci_webservice.html'>update_aci_webservice()</a></code> or <code><a href='update_aks_webservice.html'>update_aks_webservice()</a></code> for updating).
 Note that key-based auth is enabled by default for <code>AksWebservice</code>
-but not for <code>AciWebservice</code>.<br />
-<br />
-To check if a web service has key-based auth enabled, you can
+but not for <code>AciWebservice</code>.</p>
+<p>To check if a web service has key-based auth enabled, you can
 access the following boolean property from the Webservice object:
-<code>service$auth_enabled</code><br />
-<br />
-Not supported for <code>LocalWebservice</code> deployments.</p>
+<code>service$auth_enabled</code></p>
+<p>Not supported for <code>LocalWebservice</code> deployments.</p>
     
     </div>
 
