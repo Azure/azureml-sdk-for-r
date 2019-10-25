@@ -28,8 +28,7 @@ if (is.null(compute_target)) {
 est <- estimator(source_directory = ".",
                  entry_script = "train.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
-                 compute_target = compute_target,
-                 cran_packages = c("caret"))
+                 compute_target = compute_target)
 
 experiment_name <- "train-r-script-on-amlcompute"
 exp <- experiment(ws, experiment_name)
