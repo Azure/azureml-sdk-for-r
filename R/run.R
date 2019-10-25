@@ -573,7 +573,9 @@ view_run_details <- function(run) {
     if (handle_null(details$endTimeUtc) != "-") {
       end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
-      duration <- paste(round(as.numeric(end_date_time - start_date_time),
+      duration <- paste(round(as.numeric(difftime(end_date_time,
+                                                  start_date_time,
+                                                  units="mins")),
                               digits = 2), "mins")
     }
   }
