@@ -361,7 +361,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
     stop(paste0("Invalid parameters, path and plot were both provided,",
                 " only one at a time is supported"))
   }
-  
+
   delete_path <- FALSE
   if (is.null(run)) {
     run <- get_current_run()
@@ -542,42 +542,42 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
-  check_null <- function(arg) {
+  handle_null <- function(arg) {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       "-"
     } else {
       arg
     }
   }
-  
+
   web_portal_link <- paste0('<a href="',
                             run$get_portal_url(),
                             '" target="_blank">Link</a>')
-  
+
   details <- run$get_details()
-  
+
   # get general run properties
-  script_name <- check_null(details$runDefinition$script)
-  arguments <- check_null(toString(details$runDefinition$arguments))
+  script_name <- handle_null(details$runDefinition$script)
+  arguments <- handle_null(toString(details$runDefinition$arguments))
   start_time <- "-"
   duration <- "-"
-  
+
   # get run time details
-  if (check_null(details$startTimeUtc) != "-") {
+  if (handle_null(details$startTimeUtc) != "-") {
     start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
     start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
                          use_tz = TRUE)
-    
-    if (check_null(details$endTimeUtc) != "-") {
+
+    if (handle_null(details$endTimeUtc) != "-") {
       end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
       duration <- paste(round(as.numeric(end_date_time - start_date_time),
                               digits = 2), "mins")
     }
   }
-  
+
   df_keys <- list("Run Id",
                   "Status",
                   "Start Time",
@@ -592,13 +592,13 @@ view_run_details <- function(run) {
                     script_name,
                     arguments,
                     web_portal_link)
-  
+
   # add warnings and errors if applicable
-  if (check_null(details$warnings) != "-") {
+  if (handle_null(details$warnings) != "-") {
     df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
   }
-  
+
   if (run$get_status() == "Failed") {
     error <- details$error$error$message
     if (is.null(error)) {
@@ -607,19 +607,19 @@ view_run_details <- function(run) {
     df_keys <- c(df_keys, "Errors")
     df_values <- c(df_values, error)
   }
-  
+
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
                              ncol = 2)
-  
+
   dt <- DT::datatable(run_details_plot,
                       escape = FALSE,
                       rownames = FALSE,
                       colnames = c(" ", " "),
                       caption = htmltools::tags$caption(
                         style = "caption-side: top;
-                text-align: center;
-                font-size: 125%",
+                                 text-align: center;
+                                 font-size: 125%",
                         "Run Details"),
                       options = list(dom = "t",
                                      scrollY = "800px",
