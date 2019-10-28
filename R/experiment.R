@@ -10,11 +10,11 @@
 #' letters, numbers, underscores, and dashes.
 #' @return The `Experiment` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
-#' ```
+#' }
 #' @seealso
 #' `submit_experiment()`
 #' @md
@@ -41,9 +41,9 @@ experiment <- function(workspace, name) {
 #' `list("tag" = "value")`.
 #' @return The `ScriptRun` or `HyperDriveRun` object.
 #' @export
-#' @section Examples:
-#' The following example submits an Estimator experiment.
-#' ```
+#' @examples
+#' # This example submits an Estimator experiment
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- get_compute(ws, cluster_name = 'mycluster')
 #' exp <- experiment(ws, name = 'myexperiment')
@@ -51,10 +51,7 @@ experiment <- function(workspace, name) {
 #'                  entry_script = 'train.R',
 #'                  compute_target = compute_target)
 #' run <- submit_experiment(exp, est)
-#' ```
-#'
-#' For an example of submitting a HyperDrive experiment, see the
-#' "Examples" section of `hyperdrive_config()`.
+#' }
 #' @seealso
 #' `estimator()`, `hyperdrive_config()`
 #' @md
@@ -108,14 +105,14 @@ get_runs_in_experiment <- function(experiment,
 #' Setting to `NULL` will take no snapshot.
 #' @return The `Run` object of the started run.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #' run <- start_logging_run(exp)
 #' log_metric_to_run("Accuracy", 0.9)
 #' complete_run(run)
-#' ```
+#' }
 #' @seealso
 #' `complete_run()`
 #' @md

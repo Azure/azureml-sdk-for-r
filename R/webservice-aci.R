@@ -40,10 +40,10 @@
 #' endpoint.
 #' @return The `AciServiceDeploymentConfiguration` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
-#' ```
+#' }
 #' @seealso
 #' `deploy_model()`
 #' @md
@@ -99,25 +99,6 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
 #' @param models A list of `Model` objects to package into the updated service.
 #' @param inference_config An `InferenceConfig` object.
 #' @export
-#' @section Examples:
-#' Updating a web service to use a new model, entry script, and environment:
-#' ```
-#' ws <- load_workspace_from_config()
-#' # Register a new version of the model
-#' new_model <- register_model(ws,
-#'                             model_path = "my_model.rds"
-#'                             model_name = "my_model")
-#' # Use version 3 of a registered environment
-#' deploy_env <- get_environment(ws, name = "my_env", version = "3")
-#' inference_config = inference_config(entry_script = "score.R",
-#'                                     environment = deploy_env)
-#' # Retrieve existing web service
-#' service <- get_webservice(ws, name = "my_service")
-#' # Update the web service
-#' update_aci_webservice(service,
-#'                       models = list(new_model),
-#'                       inference_config = inference_config)
-#' ```
 #' @md
 update_aci_webservice <- function(webservice,
                                   tags = NULL,

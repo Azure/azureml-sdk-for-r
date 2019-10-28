@@ -92,10 +92,10 @@
 #' workspace's region is available again. In addition, the greater the distance between your
 #' cluster's region and your workspace's region, the longer it will take to fetch a token.
 #' }
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' deployment_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
-#' ```
+#' }
 #' @seealso
 #' `deploy_model()`
 #' @md

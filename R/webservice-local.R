@@ -12,10 +12,10 @@
 #' HTTP endpoint.
 #' @return The `LocalWebserviceDeploymentConfiguration` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' deployment_config <- local_webservice_deployment_config(port = 8890)
-#' ```
+#' }
 #' @md
 local_webservice_deployment_config <- function(port = NULL) {
   config <- azureml$core$webservice$LocalWebservice$deploy_configuration(port)
