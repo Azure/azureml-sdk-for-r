@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -54,16 +54,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/configuration.html">Set up an Azure ML workspace</a>
-    </li>
-    <li>
-      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
-    </li>
-    <li>
-      <a href="../../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
-    </li>
-    <li>
       <a href="../../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
       <a href="../../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
@@ -71,10 +65,16 @@
     <li>
       <a href="../../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
+    <li>
+      <a href="../../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="../../news/index.html">Changelog</a>
+  <a href="../../news/index.html">News</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Train a TensorFlow model</h1>
             
-            <h4 class="date">2019-10-25</h4>
+            <h4 class="date">2019-10-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-with-tensorflow/train-with-tensorflow.Rmd"><code>vignettes/train-with-tensorflow/train-with-tensorflow.Rmd</code></a></small>
       <div class="hidden name"><code>train-with-tensorflow.Rmd</code></div>
@@ -149,17 +149,19 @@
 <a href="#create-a-compute-target" class="anchor"></a>Create a compute target</h3>
 <p>By using Azure Machine Learning Compute (AmlCompute), a managed service, data scientists can train machine learning models on clusters of Azure virtual machines. In this tutorial, you create a GPU-enabled cluster as your training environment. The code below creates the compute cluster for you if it doesn’t already exist in your workspace.</p>
 <p>You may need to wait a few minutes for your compute cluster to be provisioned if it doesn’t already exist.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "gpucluster"</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">{</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">  vm_size &lt;-<span class="st"> "STANDARD_NC6"</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">cluster_name =</span> cluster_name,</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">vm_size =</span> vm_size, <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">cluster_name =</span> cluster_name,</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">                                       <span class="dt">vm_size =</span> vm_size, </a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">                                       <span class="dt">max_nodes =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">  <span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">}</a></code></pre></div>
 </div>
 </div>
 <div id="prepare-the-training-script" class="section level2">

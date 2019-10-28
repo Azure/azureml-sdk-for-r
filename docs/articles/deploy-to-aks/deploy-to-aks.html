@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -54,16 +54,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/configuration.html">Set up an Azure ML workspace</a>
-    </li>
-    <li>
-      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
-    </li>
-    <li>
-      <a href="../../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
-    </li>
-    <li>
       <a href="../../articles/installation.html">Install the Azure ML SDK for R</a>
+    </li>
+    <li>
+      <a href="../../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
       <a href="../../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
@@ -71,10 +65,16 @@
     <li>
       <a href="../../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
+    <li>
+      <a href="../../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="../../news/index.html">Changelog</a>
+  <a href="../../news/index.html">News</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Deploy a web service to Azure Kubernetes Service</h1>
             
-            <h4 class="date">2019-10-25</h4>
+            <h4 class="date">2019-10-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/deploy-to-aks/deploy-to-aks.Rmd"><code>vignettes/deploy-to-aks/deploy-to-aks.Rmd</code></a></small>
       <div class="hidden name"><code>deploy-to-aks.Rmd</code></div>
@@ -184,7 +184,8 @@
 <p>Now you have everything you need to create an inference config for encapsulating your scoring script and environment dependencies.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/inference_config.html">inference_config</a></span>(</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"score.R"</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
 </div>
 <div id="deploy-to-aks" class="section level3">
 <h3 class="hasAnchor">

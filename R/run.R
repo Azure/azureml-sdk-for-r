@@ -542,9 +542,9 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @export
 #' @md
 view_run_details <- function(run) {
-  check_null <- function(arg) {
+  handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
-      "-"
+      placeholder
     } else {
       arg
     }
@@ -557,23 +557,25 @@ view_run_details <- function(run) {
   details <- run$get_details()
 
   # get general run properties
-  script_name <- check_null(details$runDefinition$script)
-  arguments <- check_null(toString(details$runDefinition$arguments))
+  script_name <- handle_null(details$runDefinition$script)
+  arguments <- handle_null(toString(details$runDefinition$arguments))
   start_time <- "-"
   duration <- "-"
 
   # get run time details
-  if (check_null(details$startTimeUtc) != "-") {
+  if (handle_null(details$startTimeUtc) != "-") {
     start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
     start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
                          use_tz = TRUE)
 
-    if (check_null(details$endTimeUtc) != "-") {
+    if (handle_null(details$endTimeUtc) != "-") {
       end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
-      duration <- paste(round(as.numeric(end_date_time - start_date_time),
+      duration <- paste(round(as.numeric(difftime(end_date_time,
+                                                  start_date_time,
+                                                  units = "mins")),
                               digits = 2), "mins")
     }
   }
@@ -594,14 +596,18 @@ view_run_details <- function(run) {
                     web_portal_link)
 
   # add warnings and errors if applicable
-  if (check_null(details$warnings) != "-") {
+  if (handle_null(details$warnings) != "-") {
     df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
   }
 
-  if (check_null(details$errors) != "-") {
-    df_keys <- c(df_keys, paste(unlist(details$errors), collapse = "\r\n"))
-    df_values <- c(df_values, "Errors")
+  if (run$get_status() == "Failed") {
+    error <- details$error$error$message
+    error <- handle_null(error,
+                         "Detailed error not set on the Run. Please check
+                         the logs for details.")
+    df_keys <- c(df_keys, "Errors")
+    df_values <- c(df_values, error)
   }
 
   run_details_plot <- matrix(c(df_keys, df_values),
@@ -609,17 +615,17 @@ view_run_details <- function(run) {
                              ncol = 2)
 
   dt <- DT::datatable(run_details_plot,
-                escape = FALSE,
-                rownames = FALSE,
-                colnames = c(" ", " "),
-                caption = htmltools::tags$caption(
-                style = "caption-side: top;
-                text-align: center;
-                font-size: 125%",
-                "Run Details"),
-                options = list(dom = "t",
-                               scrollY = "800px",
-                               pageLength = 1000))
+                      escape = FALSE,
+                      rownames = FALSE,
+                      colnames = c(" ", " "),
+                      caption = htmltools::tags$caption(
+                        style = "caption-side: top;
+                                 text-align: center;
+                                 font-size: 125%",
+                        "Run Details"),
+                      options = list(dom = "t",
+                                     scrollY = "800px",
+                                     pageLength = 1000))
   DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 

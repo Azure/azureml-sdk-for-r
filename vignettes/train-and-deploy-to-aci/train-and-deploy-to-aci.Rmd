@@ -77,9 +77,9 @@ if (is.null(compute_target)) {
                                        cluster_name = cluster_name,
                                        vm_size = vm_size,
                                        max_nodes = 1)
+  
+  wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
-
-wait_for_provisioning_completion(compute_target)
 ```
 
 ## Prepare data for training
@@ -253,6 +253,7 @@ Now you have everything you need to create an **inference config** for encapsula
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
   entry_script = "accident_predict.R",
+  source_directory = ".",
   environment = r_env)
 ```
 
