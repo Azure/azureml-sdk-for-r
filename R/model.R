@@ -72,14 +72,14 @@ get_model <- function(workspace,
 #' `Model` object.
 #' @return The `Model` object.
 #' @export
-#' @section Examples:
-#' Registering a model from a single file:
-#' ```
+#' @examples
+#' # Registering a model from a single file
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- register_model(ws,
 #'                         model_path = "my_model.rds",
 #'                         model_name = "my_model")
-#' ```
+#' }
 #' @md
 register_model <- function(workspace,
                            model_path,
@@ -110,12 +110,12 @@ register_model <- function(workspace,
 #' @return A string of the path to the file or folder of the downloaded
 #' model.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model", version = 2)
 #' download_model(model, exist_ok = TRUE)
-#' ```
+#' }
 #' @md
 download_model <- function(model, target_dir = ".", exist_ok = FALSE) {
   model_path <- model$download(target_dir, exist_ok)
@@ -187,9 +187,8 @@ delete_model <- function(model) {
 #' @section Details:
 #' If you encounter any issue in deploying your web service, please visit this
 #' [troubleshooting guide](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment).
-#' @section Examples:
-#' Deploying a model as a web service on ACI:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model")
 #' r_env <- r_environment(name = "r_env")
@@ -203,7 +202,7 @@ delete_model <- function(model) {
 #'                         inference_config = inference_config,
 #'                         deployment_config = deployment_config)
 #' wait_for_deployment(service, show_output = TRUE)
-#' ```
+#' }
 #' @seealso
 #' `inference_config()`, `aci_webservice_deployment_config()`,
 #' `aks_webservice_deployment_config()`, `local_webservice_deployment_config()`
@@ -253,9 +252,9 @@ deploy_model <- function(workspace,
 #' can be run locally instead of building an image.
 #' @return The `ModelPackage` object.
 #' @export
-#' @section Examples:
-#' Package a registered model:
-#' ```
+#' @examples
+#' # Package a registered model
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model")
 #' r_env <- r_environment(name = "r_env")
@@ -266,7 +265,7 @@ deploy_model <- function(workspace,
 #'                          models = list(model),
 #'                          inference_config = inference_config)
 #' wait_for_model_package_creation(show_output = TRUE)
-#' ```
+#' }
 #' @seealso
 #' `wait_for_model_package_creation()`, `get_model_package_container_registry()`,
 #' `get_model_package_creation_logs()`, `pull_model_package_image()`,
@@ -291,23 +290,23 @@ package_model <- function(workspace,
 #' @param package The `ModelPackage` object.
 #' @return The `ContainerRegistry` object.
 #' @export
-#' @section Examples:
-#' Given a `ModelPackage` object (see `package_model()`'s "Examples" section),
-#' get the container registry information:
-#' ```
+#' @examples
+#' # Given a ModelPackage object,
+#' # get the container registry information
+#' \dontrun{
 #' container_registry <- get_model_package_container_registry(package)
 #' address <- container_registry$address
 #' username <- container_registry$username
 #' password <- container_registry$password
-#' ```
+#' }
 #'
-#' To then authenticate Docker with the Azure container registry from
-#' a shell or command-line session, use the following command, replacing
-#' `<address>`, `<username>`, and `<password>` with the values retrieved
-#' from above:
-#' ```bash
-#' docker login <address> -u <username> -p <password>
-#' ```
+#' # To then authenticate Docker with the Azure container registry from
+#' # a shell or command-line session, use the following command, replacing
+#' # <address>, <username>, and <password> with the values retrieved
+#' # from above:
+#' # ```bash
+#' # docker login <address> -u <username> -p <password>
+#' # ```
 #' @seealso
 #' `container_registry()`
 #' @md
@@ -388,8 +387,6 @@ save_model_package_files <- function(package, output_directory) {
 #' @param show_output If `TRUE`, print more verbose output. Defaults to
 #' `FALSE`.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `package_model()`.
 #' @md
 wait_for_model_package_creation <- function(package, show_output = FALSE) {
   package$wait_for_creation(show_output)
@@ -404,7 +401,7 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' to define the software dependencies needed for your deployment.
 #' @param entry_script A string of the path to the local file that contains
 #' the code to run for making predictions.
-#' @param source_directory (Optional) A string of the path to the local folder
+#' @param source_directory A string of the path to the local folder
 #' that contains the files to package and deploy alongside your model, such as
 #' helper files for your scoring script (`entry_script`). The folder must
 #' contain the `entry_script`.
@@ -453,17 +450,6 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' model1_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 #' ```
 #' }
-#' @section Examples:
-#' The following example loads a previously registered environment from
-#' your workspace and uses it for defining the inference config:
-#' ```
-#' ws <- load_workspace_from_config()
-#' deploy_env = get_environment(ws, name = "my_env", version = "1")
-#' inference_config = inference_config(entry_script = "score.R",
-#'                                     environment = deploy_env)
-#' ```
-#' You can then specify the inference config to `deploy_model()` to
-#' deploy a web service.
 #' @seealso
 #' `r_environment()`, `deploy_model()`
 #' @md

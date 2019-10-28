@@ -9,14 +9,13 @@
 #' @return A named list of the metrics associated with the run,
 #' e.g. `list("metric_name" = metric)`.
 #' @export
-#' @section Examples:
-#' Retrieve a run from the workspace and get its metrics:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #' run <- get_run(exp, run_id = "myrunid")
 #' metrics <- get_run_metrics(run)
-#' ```
+#' }
 #' @md
 get_run_metrics <- function(run) {
   run$get_metrics()
@@ -109,8 +108,6 @@ get_run <- function(experiment, run_id) {
 #' @param output_file_path A string of the local path where to download
 #' the artifact to.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `upload_files_to_run()`.
 #' @md
 download_file_from_run <- function(run, name, output_file_path = NULL) {
   run$download_file(name, output_file_path)
@@ -232,10 +229,10 @@ get_secrets_from_run <- function(run, secrets) {
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' log_metric_to_run("Accuracy", 0.95)
-#' ```
+#' }
 #' @md
 log_metric_to_run <- function(name, value, run = NULL) {
   if (is.null(run)) {
@@ -346,14 +343,16 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' Log an image file to the run:
+#' @examples
+#' # Log an image file to the run
+#' \dontrun{
 #' `log_image_to_run("myplot", "myplot.png")`
-#' Log a ggplot2 plot to the run:
-#' ```
+#' }
+#' # Log a ggplot2 plot to the run
+#' \dontrun{
 #' plot <- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
 #' log_image_to_run("myplot", plot)
-#' ```
+#' }
 #' @md
 log_image_to_run <- function(name, path = NULL, plot = NULL,
                              description = "", run = NULL) {
@@ -389,10 +388,10 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
-#' ```
+#' }
 #' @md
 log_list_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -417,8 +416,8 @@ log_list_to_run <- function(name, value, description = "", run = NULL) {
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' data <- list("bin_averages" = c(0.25, 0.75),
 #'              "bin_errors" = c(0.013, 0.042),
 #'              "bin_counts" = c(56, 34),
@@ -427,7 +426,7 @@ log_list_to_run <- function(name, value, description = "", run = NULL) {
 #'                     "schema_version" = "v1",
 #'                     "data" = data)
 #' log_predictions_to_run("mypredictions", predictions)
-#' ```
+#' }
 #' @md
 log_predictions_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -450,15 +449,15 @@ log_predictions_to_run <- function(name, value, description = "", run = NULL) {
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' data <- list("bin_edges" = c(50, 100, 200, 300, 350),
 #'              "bin_counts" = c(0.88, 20, 30, 50.99))
 #' residuals <- list("schema_type" = "residuals",
 #'                     "schema_version" = "v1",
 #'                     "data" = data)
 #' log_predictions_to_run("myresiduals", predictions)
-#' ```
+#' }
 #' @md
 log_residuals_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -483,19 +482,20 @@ log_residuals_to_run <- function(name, value, description = "", run = NULL) {
 #' @param ... Each named parameter generates a column with the value
 #' specified.
 #' @export
-#' @section Examples:
-#' Log an arbitrary tuple:
-#' ```
+#' @examples
+#' # Log an arbitrary tuple
+#' \dontrun{
 #' log_row_to_run("Y over X", x = 1, y = 0.4)
-#' ```
-#' Log the complete table:
-#' ```
+#' }
+#'
+#' # Log the complete table
+#' \dontrun{
 #' citrus <- c("orange", "lemon", "lime")
 #' sizes <- c(10, 7, 3)
 #' for (i in seq_along(citrus)) {
 #'     log_row_to_run("citrus", fruit = citrus[i], size = sizes[i])
 #' }
-#' ```
+#' }
 #' @md
 log_row_to_run <- function(name, description = "", run = NULL, ...) {
   if (is.null(run)) {
@@ -518,12 +518,12 @@ log_row_to_run <- function(name, description = "", run = NULL, ...) {
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' log_table_to_run("Y over X",
 #'                  list("x" = c(1, 2, 3)),
 #'                  list("y" = c(0.6, 0.7, 0.89)))
-#' ```
+#' }
 #' @md
 log_table_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -534,10 +534,16 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
   invisible(NULL)
 }
 
-#' Plot table of run details in RStudio Viewer or browser
+#' Plot table of run details
+#' @description
+#' Plot table of run details in RStudio Viewer or browser.
 #' This table does not auto-refresh. To see current values,
 #' re-run the command or click the web view link to view more
 #' details in real time.
+#'
+#' If you are running this method from an RMarkdown file, the
+#' run details table will show up in the code chunk output
+#' instead of the Viewer.
 #' @param run The `Run` object.
 #' @export
 #' @md
@@ -644,8 +650,8 @@ view_run_details <- function(run) {
 #' the files.
 #' @param run The `Run` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #'
@@ -660,7 +666,7 @@ view_run_details <- function(run) {
 #'
 #' # Download a file from the run record
 #' download_file_from_run(filename1, "file_1.txt")
-#' ```
+#' }
 #' @md
 upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
                                 run = NULL) {
@@ -689,8 +695,8 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
 #' @param path A string of the relative local path to the folder to upload.
 #' @param run The `Run` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #'
@@ -703,7 +709,7 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
 #'
 #' # Download a file from the run record
 #' download_file_from_run("important_files/existing_file.txt", "local_file.txt")
-#' ```
+#' }
 #' @md
 upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
@@ -720,8 +726,6 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 #' Mark the run as completed. Use for an interactive logging run.
 #' @param run The `Run` object.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `start_logging_run()`.
 #' @seealso
 #' `start_logging_run()`
 #' @md

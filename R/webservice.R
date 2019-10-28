@@ -27,8 +27,6 @@ get_webservice <- function(workspace, name) {
 #' @param show_output If `TRUE`, print more verbose output. Defaults
 #' to `FALSE`.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `deploy_model()`.
 #' @seealso
 #' `deploy_model()`
 #' @md

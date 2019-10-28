@@ -10,10 +10,9 @@
 #' your `Environment` object within that Docker container.
 #'
 #' If the `custom_docker_image` parameter
-#' is not set, Azure ML automatically uses a default base image (CPU or GPU
-#' depending on the `use_gpu` flag) and installs any R packages specified in the
+#' is not set, Azure ML will build a default base image (CPU or GPU
+#' depending on the `use_gpu` flag) and install any R packages specified in the
 #' `cran_packages`, `github_packages`, or `custom_url_packages` parameters.
-#' TODO: link to the Dockerfiles of the default base images.
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @param environment_variables A named list of environment variables names
@@ -52,13 +51,13 @@
 #' a new version of the environment is created when you either submit a run,
 #' deploy a model, or manually register the environment. The versioning allows
 #' you to view changes to the environment over time.
-#' @section Examples:
-#' The following example defines an environment that will use the default
-#' base CPU image.
-#' ```
+#' @examples
+#' # The following example defines an environment that will build the default
+#' # base CPU image.
+#' \dontrun{
 #' r_env <- r_environment(name = 'myr_env',
 #'                        version = '1')
-#' ```
+#' }
 #' @seealso
 #' `estimator()`, `inference_config()`
 #' @md
@@ -159,11 +158,11 @@ register_environment <- function(environment, workspace) {
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @return The `Environment` object.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' env <- get_environment(ws, name = 'myenv', version = '1')
-#' ```
+#' }
 #' @export
 #' @md
 get_environment <- function(workspace, name, version = NULL) {

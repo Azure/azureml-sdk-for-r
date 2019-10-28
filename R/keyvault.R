@@ -10,13 +10,13 @@
 #' @param secrets The named list of secrets to be added to the keyvault,
 #' where element name corresponds to the secret name.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' my_secret <- Sys.getenv("MY_SECRET")
 #' keyvault <- get_default_keyvault(ws)
 #' set_secrets(list("mysecret" = my_secret))
-#' ```
+#' }
 #' @md
 set_secrets <- function(keyvault, secrets) {
   keyvault$set_secrets(secrets)
