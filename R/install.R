@@ -8,7 +8,7 @@
 #' @param restart_session restart R session after installation
 #' @param remove_existing_env delete the conda environment if already exists
 #' @export
-install_azureml <- function(version = NULL,
+install_azureml <- function(version = "1.0.69",
                             envname = "r-azureml",
                             conda_python_version = "3.6",
                             restart_session = TRUE,
