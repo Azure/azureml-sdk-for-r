@@ -494,6 +494,8 @@ inference_config <- function(entry_script,
 
     inference_config$environment$docker$base_image <- saved_image
   }, error =function(err) {
+    environment$docker$base_image <- saved_image
+    
     # this is the final code should be kept after upgrading default python sdk
     # version to 1.0.72
     inference_config <- azureml$core$model$InferenceConfig(
