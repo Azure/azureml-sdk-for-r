@@ -14,7 +14,7 @@
 #' where training will happen.
 #' @param vm_size A string of the VM size of the compute target that will be
 #' created for the training job. The list of available VM sizes
-#' are listed [here](https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs).
+#' are listed [here](<https://docs.microsoft.com/azure/cloud-services/cloud-services-sizes-specs>).
 #' Provide this parameter if you want to create AmlCompute as the compute target
 #' at run time, instead of providing an existing cluster to the `compute_target`
 #' parameter. If `vm_size` is specified, a single-node cluster is automatically
@@ -48,7 +48,7 @@
 #' script is being executed.
 #' @param shm_size A string for the size of the Docker container's shared
 #' memory block. For more information, see
-#' [Docker run reference](https://docs.docker.com/engine/reference/run/).
+#' [Docker run reference](<https://docs.docker.com/engine/reference/run/>).
 #' If not set, a default value of `'2g'` is used.
 #' @param max_run_duration_seconds An integer of the maximum allowed time for
 #' the run. Azure ML will attempt to automatically cancel the run if it takes

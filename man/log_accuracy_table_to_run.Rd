@@ -50,7 +50,7 @@ always has 4 values: TP, FP, TN, FN, and always in that order.
 
 The confusion values (TP, FP, TN, FN) are computed with the one vs. rest
 strategy. See the following link for more details:
-https://en.wikipedia.org/wiki/Multiclass_classification.
+\url{https://en.wikipedia.org/wiki/Multiclass_classification}.
 
 N = # of samples in validation dataset (200 in example),
 M = # thresholds = # samples taken from the probability space (5 in example),

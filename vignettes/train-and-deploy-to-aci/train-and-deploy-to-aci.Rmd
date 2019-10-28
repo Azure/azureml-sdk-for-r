@@ -23,7 +23,7 @@ In this tutorial, you learn the following tasks:
 
 ## Prerequisites
 
-If you don't have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/configuration.html) to configure and create a workspace.
+If you don't have access to an Azure ML workspace, follow the [setup tutorial](<https://azure.github.io/azureml-sdk-for-r/articles/configuration.html>) to configure and create a workspace.
 
 ## Set up your development environment
 The setup for your development work in this tutorial includes the following actions:
@@ -40,7 +40,7 @@ This tutorial assumes you already have the Azure ML SDK installed. Go ahead and 
 library(azuremlsdk)
 ```
 
-The tutorial uses data from the [**DAAG** package](https://cran.r-project.org/package=DAAG). Install the package if you don't have it.
+The tutorial uses data from the [**DAAG** package](<https://cran.r-project.org/package=DAAG>). Install the package if you don't have it.
 
 ```{r eval=FALSE}
 install.packages("DAAG")
@@ -49,7 +49,7 @@ install.packages("DAAG")
 The training and scoring scripts (`accidents.R` and `accident_predict.R`) have some additional dependencies. If you plan on running those scripts locally, make sure you have those required packages as well.
 
 ### Load your workspace
-Instantiate a workspace object from your existing workspace. The following code will load the workspace details from the **config.json** file. You can also retrieve a workspace using [`get_workspace()`](https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html).
+Instantiate a workspace object from your existing workspace. The following code will load the workspace details from the **config.json** file. You can also retrieve a workspace using [`get_workspace()`](<https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html>).
 
 ```{r load_workpace, eval=FALSE}
 ws <- load_workspace_from_config()
@@ -122,7 +122,7 @@ For this tutorial, fit a logistic regression model on your uploaded data using y
 A training script called `accidents.R` has been provided for you in the same directory as this tutorial. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
 
 * The training script takes an argument `-d` to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.
-* The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com). See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()`.
+* The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](<http://ml.azure.com>). See the [reference](<https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation>) for the full set of logging methods `log_*()`.
 * The training script saves your model into a directory named **outputs**. The `./outputs` folder receives special treatment by Azure ML. During training, files written to `./outputs` are automatically uploaded to your run record by Azure ML and persisted as artifacts. By saving the trained model to `./outputs`, you'll be able to access and retrieve your model file even after the run is over and you no longer have access to your remote training environment.
 
 ### Create an estimator
@@ -135,7 +135,7 @@ To create the estimator, define:
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
 * The parameters required from the training script (`script_params`). Azure ML will run your training script as a command-line script with `Rscript`. In this tutorial you specify one argument to the script, the data directory mounting point, which you can access with `ds$path(target_path)`.
-* Any environment dependencies required for training. The default Docker image built for training already contains the three packages (`caret`, `e1071`, and `optparse`) needed in the training script.  So you don't need to specify additional information. If you are using R packages that are not included by default, use the estimator's `cran_packages` parameter to add additional CRAN packages. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
+* Any environment dependencies required for training. The default Docker image built for training already contains the three packages (`caret`, `e1071`, and `optparse`) needed in the training script.  So you don't need to specify additional information. If you are using R packages that are not included by default, use the estimator's `cran_packages` parameter to add additional CRAN packages. See the [`estimator()`](<https://azure.github.io/azureml-sdk-for-r/reference/estimator.html>) reference for the full set of configurable options.
 
 ```{r create_estimator, eval=FALSE}
 est <- estimator(source_directory = ".",
@@ -171,7 +171,7 @@ You -- and colleagues with access to the workspace -- can submit multiple experi
 Once your model has finished training, you can access the artifacts of your job that were persisted to the run record, including any metrics logged and the final trained model.
 
 ### Get the logged metrics
-In the training script `accidents.R`, you logged a metric from your model: the accuracy of the predictions in the training data. You can see metrics in the [studio](https://ml.azure.com), or extract them to the local session as an R list as follows:
+In the training script `accidents.R`, you logged a metric from your model: the accuracy of the predictions in the training data. You can see metrics in the [studio](<https://ml.azure.com>), or extract them to the local session as an R list as follows:
 
 ```{r metrics, eval=FALSE}
 metrics <- get_run_metrics(run)
@@ -224,11 +224,11 @@ as.numeric(predict(accident_model,newdata, type="response")*100)
 
 ## Deploy as a web service
 
-With your model, you can predict the danger of death from a collision. Use Azure ML to deploy your model as a prediction service. In this tutorial, you will deploy the web service in [Azure Container Instances](https://docs.microsoft.com/en-us/azure/container-instances/) (ACI).
+With your model, you can predict the danger of death from a collision. Use Azure ML to deploy your model as a prediction service. In this tutorial, you will deploy the web service in [Azure Container Instances](<https://docs.microsoft.com/en-us/azure/container-instances/>) (ACI).
 
 ### Register the model
 
-First, register the model you downloaded to your workspace with [`register_model()`](https://azure.github.io/azureml-sdk-for-r/reference/register_model.html). A registered model can be any collection of files, but in this case the R model object is sufficient. Azure ML will use the registered model for deployment.
+First, register the model you downloaded to your workspace with [`register_model()`](<https://azure.github.io/azureml-sdk-for-r/reference/register_model.html>). A registered model can be any collection of files, but in this case the R model object is sufficient. Azure ML will use the registered model for deployment.
 
 ```{r register_model, eval=FALSE}
 model <- register_model(ws, 
@@ -238,7 +238,7 @@ model <- register_model(ws,
 ```
 
 ### Define the inference dependencies
-To create a web service for your model, you first need to create a scoring script (`entry_script`), an R script that will take as input variable values (in JSON format) and output a prediction from your model. For this tutorial, use the provided scoring file `accident_predict.R`. The scoring script must contain an `init()` method that loads your model and returns a function that uses the model to make a prediction based on the input data. See the [documentation](https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html#details) for more details.
+To create a web service for your model, you first need to create a scoring script (`entry_script`), an R script that will take as input variable values (in JSON format) and output a prediction from your model. For this tutorial, use the provided scoring file `accident_predict.R`. The scoring script must contain an `init()` method that loads your model and returns a function that uses the model to make a prediction based on the input data. See the [documentation](<https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html#details>) for more details.
 
 Next, define an Azure ML **environment** for your script's package dependencies. With an environment, you specify R packages (from CRAN or elsewhere) that are needed for your script to run. You can also provide the values of environment variables that your script can reference to modify its behavior. By default, Azure ML will build the same default Docker image used with the estimator for training. Since the tutorial has no special requirements, create an environment with no special attributes.
 
@@ -246,7 +246,7 @@ Next, define an Azure ML **environment** for your script's package dependencies.
 r_env <- r_environment(name = "basic_env")
 ```
 
-If you want to use your own Docker image for deployment instead, specify the `custom_docker_image` parameter. See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options for defining an environment.
+If you want to use your own Docker image for deployment instead, specify the `custom_docker_image` parameter. See the [`r_environment()`](<https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html>) reference for the full set of configurable options for defining an environment.
 
 Now you have everything you need to create an **inference config** for encapsulating your scoring script and environment dependencies.
 
@@ -257,7 +257,7 @@ inference_config <- inference_config(
 ```
 
 ### Deploy to ACI
-In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html).)
+In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](<https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html>) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](<https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html>).)
 
 ``` {r create_aci_config, eval=FALSE}
 aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)
@@ -277,7 +277,7 @@ wait_for_deployment(aci_service, show_output = TRUE)
 
 ## Test the deployed service
 
-Now that your model is deployed as a service, you can test the service from R using [`invoke_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html).  Provide a new set of data to predict from, convert it to JSON, and send it to the service.
+Now that your model is deployed as a service, you can test the service from R using [`invoke_webservice()`](<https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html>).  Provide a new set of data to predict from, convert it to JSON, and send it to the service.
 
 ```{r test_deployment, eval=FALSE}
 library(jsonlite)

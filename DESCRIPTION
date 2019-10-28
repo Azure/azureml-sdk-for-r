@@ -1,17 +1,17 @@
 Package: azuremlsdk
 Type: Package
-Title: R Interface to the Azure Machine Learning Software Development Kit ('SDK')
+Title: Interface to the Azure Machine Learning Software Development Kit ('SDK')
 Version: 0.5.6
 Authors@R: c(
+    person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
     person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
-    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("cre", "aut")),
-    person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("aut")),
+    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
     person("Diondra", "Peck", email = "Diondra.Peck@microsoft.com", role = c("aut")),
     person("Microsoft", role = c("cph", "fnd"))
     )
 URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
-Description: An R interface to the Azure Machine Learning service to build and run machine learning workloads.
+Description: Interface to the Azure Machine Learning service to build and run machine learning workloads.
 Encoding: UTF-8
 License: MIT + file LICENSE
 RoxygenNote: 6.1.1

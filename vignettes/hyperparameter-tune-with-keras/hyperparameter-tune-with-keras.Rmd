@@ -20,7 +20,7 @@ Let's get started with the example to see how it works!
 
 ## Prerequisites
 
-If you don’t have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/configuration.html) to configure and create a workspace.
+If you don’t have access to an Azure ML workspace, follow the [setup tutorial](<https://azure.github.io/azureml-sdk-for-r/articles/configuration.html>) to configure and create a workspace.
 
 ## Set up development environment
 The setup for your development work in this tutorial includes the following actions:
@@ -36,7 +36,7 @@ library(azuremlsdk)
 ```
 
 ### Load your workspace
-Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a **config.json** file if you previously wrote one out with [`write_workspace_config()`](https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html).
+Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a **config.json** file if you previously wrote one out with [`write_workspace_config()`](<https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html>).
 ```{r load_workpace, eval=FALSE}
 ws <- load_workspace_from_config()
 ```
@@ -88,7 +88,7 @@ library(azuremlsdk)
 
 * Take the hyperparameters as command-line arguments to the script. This is necessary so that when HyperDrive carries out the hyperparameter sweep, it can run the training script with different values to the hyperparameters as defined by the search space.
 
-* Use the [`log_metric_to_run()`](https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html) function to log the hyperparameters and the primary metric.
+* Use the [`log_metric_to_run()`](<https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html>) function to log the hyperparameters and the primary metric.
 ```
 log_metric_to_run("batch_size", batch_size)
 ...
@@ -110,7 +110,7 @@ To create the estimator, define the following:
 * The directory that contains your scripts needed for training (`source_directory`). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
-* Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, pass the package name to the `cran_packages` parameter to have it installed in the Docker container where the job will run. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
+* Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, pass the package name to the `cran_packages` parameter to have it installed in the Docker container where the job will run. See the [`estimator()`](<https://azure.github.io/azureml-sdk-for-r/reference/estimator.html>) reference for the full set of configurable options.
 * Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
 
 ```{r create_estimator, eval=FALSE}
@@ -144,12 +144,12 @@ __Continuous hyperparameters__ are specified as a distribution over a continuous
  * `normal(mu, sigma)`
  * `lognormal(mu, sigma)`
 
-Here, we will use the [`random_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html) function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
+Here, we will use the [`random_parameter_sampling()`](<https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html>) function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
 
 Other available sampling function options are:
 
- * [`grid_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html)
- * [`bayesian_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/bayesian_parameter_sampling.html)
+ * [`grid_parameter_sampling()`](<https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html>)
+ * [`bayesian_parameter_sampling()`](<https://azure.github.io/azureml-sdk-for-r/reference/bayesian_parameter_sampling.html>)
 
 ```{r search_space, eval=FALSE}
 sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
@@ -162,7 +162,7 @@ sampling <- random_parameter_sampling(list(batch_size = choice(c(16, 32, 64)),
 
 To prevent resource waste, Azure ML can detect and terminate poorly performing runs. HyperDrive will do this automatically if you specify an early termination policy.
 
-Here, you will use the [`bandit_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/bandit_policy.html), which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
+Here, you will use the [`bandit_policy()`](<https://azure.github.io/azureml-sdk-for-r/reference/bandit_policy.html>), which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.
 
 ```{r termination_policy, eval=FALSE}
 policy <- bandit_policy(slack_factor = 0.15)
@@ -170,14 +170,14 @@ policy <- bandit_policy(slack_factor = 0.15)
 
 Other termination policy options are:
 
- * [`median_stopping_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/median_stopping_policy.html)
- * [`truncation_selection_policy()`](https://azure.github.io/azureml-sdk-for-r/reference/truncation_selection_policy.html)
+ * [`median_stopping_policy()`](<https://azure.github.io/azureml-sdk-for-r/reference/median_stopping_policy.html>)
+ * [`truncation_selection_policy()`](<https://azure.github.io/azureml-sdk-for-r/reference/truncation_selection_policy.html>)
  
 If no policy is provided, all runs will continue to completion regardless of performance.
 
 ### Finalize configuration
 
-Now, you can create a `HyperDriveConfig` object to define your HyperDrive run. Along with the sampling and policy definitions, you need to specify the name of the primary metric that you want to track and whether we want to maximize it or minimize it. The `primary_metric_name` must correspond with the name of the primary metric you logged in your training script. `max_total_runs` specifies the total number of child runs to launch. See the [hyperdrive_config()](https://azure.github.io/azureml-sdk-for-r/reference/hyperdrive_config.html) reference for the full set of configurable parameters.
+Now, you can create a `HyperDriveConfig` object to define your HyperDrive run. Along with the sampling and policy definitions, you need to specify the name of the primary metric that you want to track and whether we want to maximize it or minimize it. The `primary_metric_name` must correspond with the name of the primary metric you logged in your training script. `max_total_runs` specifies the total number of child runs to launch. See the [hyperdrive_config()](<https://azure.github.io/azureml-sdk-for-r/reference/hyperdrive_config.html>) reference for the full set of configurable parameters.
 
 ```{r create_config, eval=FALSE}
 hyperdrive_config <- hyperdrive_config(hyperparameter_sampling = sampling,

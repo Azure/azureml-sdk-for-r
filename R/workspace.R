@@ -255,7 +255,7 @@ get_default_datastore <- function(workspace) {
 #'
 #' @description
 #' Returns a `Keyvault` object representing the default
-#' [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview)
+#' [Azure Key Vault](<https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview>)
 #' associated with the workspace.
 #' @param workspace The `Workspace` object.
 #' @return The `Keyvault` object.

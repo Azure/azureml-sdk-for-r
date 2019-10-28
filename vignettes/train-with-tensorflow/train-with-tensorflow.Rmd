@@ -11,7 +11,7 @@ vignette: >
 This tutorial demonstrates how run a TensorFlow job at scale using Azure ML. You will train a TensorFlow model to classify handwritten digits (MNIST) using a deep neural network (DNN) and log your results to the Azure ML service.
 
 ## Prerequisites
-If you don’t have access to an Azure ML workspace, follow the [setup tutorial](https://azure.github.io/azureml-sdk-for-r/articles/configuration.html) to configure and create a workspace.
+If you don’t have access to an Azure ML workspace, follow the [setup tutorial](<https://azure.github.io/azureml-sdk-for-r/articles/configuration.html>) to configure and create a workspace.
 
 ## Set up development environment
 The setup for your development work in this tutorial includes the following actions:
@@ -27,7 +27,7 @@ library(azuremlsdk)
 ```
 
 ### Load your workspace
-Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a **config.json** file if you previously wrote one out with [`write_workspace_config()`](https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html).
+Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a **config.json** file if you previously wrote one out with [`write_workspace_config()`](<https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html>).
 ```{r load_workpace, eval=FALSE}
 ws <- load_workspace_from_config()
 ```
@@ -67,7 +67,7 @@ wait_for_provisioning_completion(compute_target, show_output = TRUE)
 
 ## Prepare the training script
 
-A training script called `tf_mnist.R` has been provided for you in the same directory as this tutorial. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com/).
+A training script called `tf_mnist.R` has been provided for you in the same directory as this tutorial. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](<http://ml.azure.com/>).
 
 In order to collect and upload run metrics, you need to do the following **inside the training script**:
 
@@ -76,14 +76,14 @@ In order to collect and upload run metrics, you need to do the following **insid
 library(azuremlsdk)
 ```
 
-* Add the [`log_metric_to_run()`](https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html) function to track our primary metric,  "accuracy", for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.
+* Add the [`log_metric_to_run()`](<https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html>) function to track our primary metric,  "accuracy", for this experiment. If you have your own training script with several important metrics, simply create a logging call for each one within the script.
 ```
 log_metric_to_run("accuracy",
                   sess$run(accuracy,
                   feed_dict = dict(x = mnist$test$images, y_ = mnist$test$labels)))
 ```
 
-See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()` available from the R SDK.
+See the [reference](<https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation>) for the full set of logging methods `log_*()` available from the R SDK.
 
 ## Create an estimator
 
@@ -94,7 +94,7 @@ To create the estimator, define the following:
 * The directory that contains your scripts needed for training (`source_directory`). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
-* Any environment dependencies required for training. Since the training script requires the TensorFlow package, which is not included in the image by default, pass the package name to the `cran_packages` parameter to have it installed in the Docker container where the job will run. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
+* Any environment dependencies required for training. Since the training script requires the TensorFlow package, which is not included in the image by default, pass the package name to the `cran_packages` parameter to have it installed in the Docker container where the job will run. See the [`estimator()`](<https://azure.github.io/azureml-sdk-for-r/reference/estimator.html>) reference for the full set of configurable options.
 * Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
 
 ```{r create_estimator, eval=FALSE}
@@ -107,7 +107,7 @@ est <- estimator(source_directory = ".",
 
 ## Submit the job
 
-Finally submit the job to run on your cluster. [`submit_experiment()`](https://azure.github.io/azureml-sdk-for-r/reference/submit_experiment.html) returns a `Run` object that you can then use to interface with the run.
+Finally submit the job to run on your cluster. [`submit_experiment()`](<https://azure.github.io/azureml-sdk-for-r/reference/submit_experiment.html>) returns a `Run` object that you can then use to interface with the run.
 
 ```{r submit_job, eval=FALSE}
 run <- submit_experiment(exp, est)

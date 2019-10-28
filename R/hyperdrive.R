@@ -218,7 +218,7 @@ bandit_policy <- function(slack_factor = NULL,
 #' `evaluation_interval` that is greater than or equal to `delay_evaluation`.
 #'
 #' This policy is inspired from the research publication
-#' [Google Vizier: A Service for Black-Box Optimization](https://ai.google/research/pubs/pub46180).
+#' [Google Vizier: A Service for Black-Box Optimization](<https://ai.google/research/pubs/pub46180>).
 #'
 #' If you are looking for a conservative policy that provides savings without
 #' terminating promising jobs, you can use a `MedianStoppingPolicy` with

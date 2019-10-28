@@ -186,7 +186,7 @@ delete_model <- function(model) {
 #' @export
 #' @section Details:
 #' If you encounter any issue in deploying your web service, please visit this
-#' [troubleshooting guide](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment).
+#' [troubleshooting guide](<https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment>).
 #' @section Examples:
 #' Deploying a model as a web service on ACI:
 #' ```

@@ -39,7 +39,7 @@ and key file - to enable SSL validation.}
 \item{location}{A string of the location to provision the cluster in. If not
 specified, defaults to the workspace location. Available regions for this
 compute can be found here:
-"https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=kubernetes-service".}
+"\url{https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=kubernetes-service}".}
 
 \item{vnet_resourcegroup_name}{A string of the name of the resource group
 where the virtual network is located.}

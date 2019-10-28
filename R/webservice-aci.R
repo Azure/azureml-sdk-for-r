@@ -24,7 +24,7 @@
 #' @param description A string of the description to give the web service.
 #' @param location A string of the Azure region to deploy the web service
 #' to. If not specified the workspace location will be used. More details
-#' on available regions can be found [here](https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances).
+#' on available regions can be found [here](<https://azure.microsoft.com/en-us/global-infrastructure/services/?regions=all&products=container-instances>).
 #' @param auth_enabled If `TRUE` enable key-based authentication for the
 #' web service. Defaults to `FALSE`.
 #' @param ssl_enabled If `TRUE` enable SSL for the web service. Defaults
