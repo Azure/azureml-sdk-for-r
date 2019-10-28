@@ -184,7 +184,8 @@
 <p>Now you have everything you need to create an inference config for encapsulating your scoring script and environment dependencies.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/inference_config.html">inference_config</a></span>(</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"score.R"</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
 </div>
 <div id="deploy-to-aks" class="section level3">
 <h3 class="hasAnchor">

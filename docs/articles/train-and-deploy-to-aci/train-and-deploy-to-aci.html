@@ -170,9 +170,9 @@
 <a class="sourceLine" id="cb5-6" data-line-number="6">                                       <span class="dt">cluster_name =</span> cluster_name,</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">                                       <span class="dt">vm_size =</span> vm_size,</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target)</a></code></pre></div>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">}</a></code></pre></div>
 </div>
 </div>
 <div id="prepare-data-for-training" class="section level2">
@@ -321,7 +321,8 @@
 <p>Now you have everything you need to create an <strong>inference config</strong> for encapsulating your scoring script and environment dependencies.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/inference_config.html">inference_config</a></span>(</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"accident_predict.R"</span>,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
 </div>
 <div id="deploy-to-aci" class="section level3">
 <h3 class="hasAnchor">
