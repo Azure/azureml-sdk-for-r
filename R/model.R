@@ -485,13 +485,14 @@ inference_config <- function(entry_script,
     # this is a temporary fix for github issue #101
     environment$docker$base_image <- "temp_image"
   
-    azureml$core$model$InferenceConfig(
+    inference_config <- azureml$core$model$InferenceConfig(
       entry_script = "_generated_score.py",
       source_directory = source_directory,
       description = description,
       environment = environment)
 
     inference_config$environment$docker$base_image <- saved_image
+    inference_config
   }, error =function(err) {
     environment$docker$base_image <- saved_image
     
