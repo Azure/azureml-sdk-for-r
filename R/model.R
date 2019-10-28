@@ -480,9 +480,9 @@ inference_config <- function(entry_script,
 
   environment$inferencing_stack_version <- "latest"
 
+  saved_image <- environment$docker$base_image
   inference_config <- tryCatch({
     # this is a temporary fix for github issue #101
-    saved_image <- environment$docker$base_image
     environment$docker$base_image <- "temp_image"
   
     azureml$core$model$InferenceConfig(
