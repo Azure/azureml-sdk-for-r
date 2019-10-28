@@ -575,7 +575,7 @@ view_run_details <- function(run) {
                                   tz = "UTC")
       duration <- paste(round(as.numeric(difftime(end_date_time,
                                                   start_date_time,
-                                                  units="mins")),
+                                                  units = "mins")),
                               digits = 2), "mins")
     }
   }
@@ -667,12 +667,12 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
   if (is.null(run)) {
     run <- get_current_run()
   }
-  
+
   run$upload_files(
     names = names,
     paths = paths,
     timeout_seconds = timeout_seconds)
-  
+
   invisible(NULL)
 }
 
@@ -709,9 +709,9 @@ upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
     run <- get_current_run()
   }
-  
+
   run$upload_folder(name, path)
-  
+
   invisible(NULL)
 }
 
@@ -727,6 +727,6 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 #' @md
 complete_run <- function(run) {
   run$complete()
-  
+
   invisible(NULL)
 }
