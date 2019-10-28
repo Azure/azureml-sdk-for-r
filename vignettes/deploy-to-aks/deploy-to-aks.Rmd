@@ -93,6 +93,7 @@ Now you have everything you need to create an inference config for encapsulating
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
   entry_script = "score.R",
+  source_directory = ".",
   environment = r_env)
 ```
 

@@ -61,17 +61,19 @@ By using Azure Machine Learning Compute (AmlCompute), a managed service, data sc
 You may need to wait a few minutes for your compute cluster to be provisioned if it doesn't already exist.
 
 ```{r create_cluster, eval=FALSE}
-cluster_name <- "rcluster"
+cluster_name <- "gpucluster"
 
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target))
 {
   vm_size <- "STANDARD_NC6"
-  compute_target <- create_aml_compute(workspace = ws, cluster_name = cluster_name,
-                                       vm_size = vm_size, max_nodes = 4)
+  compute_target <- create_aml_compute(workspace = ws, 
+                                       cluster_name = cluster_name,
+                                       vm_size = vm_size, 
+                                       max_nodes = 4)
+  
+  wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
-
-wait_for_provisioning_completion(compute_target, show_output = TRUE)
 ```
 
 ## Prepare the training script
