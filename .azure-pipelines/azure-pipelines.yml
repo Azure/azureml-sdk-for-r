@@ -53,7 +53,8 @@ steps:
         R -e 'library("rcmdcheck");
         check_results <- rcmdcheck(".", args = c("--no-manual", "--no-tests"));
         stopifnot(length(check_results$errors) == 0);
-        stopifnot(length(check_results$warnings) == 0)'
+        stopifnot(length(check_results$warnings) == 0);
+        stopifnot(length(check_results$notes) == 0)'
     displayName: 'Check package build'
 
   - task: AzureCLI@1
