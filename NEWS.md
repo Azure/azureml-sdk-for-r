@@ -1,4 +1,4 @@
-# azuremlsdk (0.5.6)
+# azuremlsdk 0.5.6
 Initial CRAN release
 
 ## Initial features
