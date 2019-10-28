@@ -1,7 +1,7 @@
 ## Azure ML vignettes
 These vignettes are end-to-end tutorials for using the Azure Machine Learning service with the R SDK.
 
-Before running a vignette in RStudio, set the directory to the folder that contains the vignette file (.Rmd file) in RStudio using `setwd(dirname)` or Session -> Set Working Directory -> To Source File Location. Each vignette assumes that the data and scripts are in the current working directory.
+Before running a vignette in RStudio, set the working directory to the folder that contains the vignette file (.Rmd file) in RStudio using `setwd(dirname)` or Session -> Set Working Directory -> To Source File Location. Each vignette assumes that the data and scripts are in the current working directory.
 
 The following vignettes are included:
 1. [installation](installation.Rmd): Install the Azure ML SDK for R.
