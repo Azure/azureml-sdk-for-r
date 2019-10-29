@@ -23,10 +23,10 @@ model.
 Download a registered model to the \code{target_dir} of your local file
 system.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 model <- get_model(ws, name = "my_model", version = 2)
 download_model(model, exist_ok = TRUE)
 }
 }
-

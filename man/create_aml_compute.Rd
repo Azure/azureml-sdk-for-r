@@ -78,8 +78,9 @@ in a virtual network, see
 \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
 }
 
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 compute_target <- create_aml_compute(ws,
                                      cluster_name = 'mycluster',
                                      vm_size = 'STANDARD_D2_V2',
@@ -87,7 +88,6 @@ compute_target <- create_aml_compute(ws,
 wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
 }
-
 \seealso{
 \code{wait_for_provisioning_completion()}
 }

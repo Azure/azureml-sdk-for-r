@@ -52,9 +52,9 @@ If you encounter any issue in deploying your web service, please visit this
 \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment}{troubleshooting guide}.
 }
 
-\section{Examples}{
-
-Deploying a model as a web service on ACI:\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 model <- get_model(ws, name = "my_model")
 r_env <- r_environment(name = "r_env")
 inference_config <- inference_config(entry_script = "score.R",
@@ -69,7 +69,6 @@ service <- deploy_model(ws,
 wait_for_deployment(service, show_output = TRUE)
 }
 }
-
 \seealso{
 \code{inference_config()}, \code{aci_webservice_deployment_config()},
 \code{aks_webservice_deployment_config()}, \code{local_webservice_deployment_config()}

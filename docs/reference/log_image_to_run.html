@@ -179,26 +179,25 @@ to the current run from the service context.</p></td>
     </tr>
     </table>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Log an image file to the run:
-<code>log_image_to_run("myplot", "myplot.png")</code>
-Log a ggplot2 plot to the run:</p><pre>plot &lt;- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
-log_image_to_run("myplot", plot)
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='co'># Log an image file to the run</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>`log_image_to_run("myplot", "myplot.png")`</span>
+}
+<span class='co'># Log a ggplot2 plot to the run</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mydata</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"x_axis_name"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"y_axis_name"</span>))
+<span class='fu'>log_image_to_run</span>(<span class='st'>"myplot"</span>, <span class='no'>plot</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -206,7 +205,7 @@ log_image_to_run("myplot", plot)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

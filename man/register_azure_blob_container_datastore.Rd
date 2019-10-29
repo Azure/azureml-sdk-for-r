@@ -71,14 +71,13 @@ may improve the speed of your training runs, particularly if you train
 against a large dataset.
 }
 
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
-ds <- register_azure_blob_container_datastore(
-                               ws,
-                               datastore_name = 'mydatastore',
-                               container_name = 'myazureblobcontainername',
-                               account_name = 'mystorageaccoutname',
-                               account_key = 'mystorageaccountkey')
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
+ds <- register_azure_blob_container_datastore(ws,
+                                              datastore_name = 'mydatastore',
+                                              container_name = 'myazureblobcontainername',
+                                              account_name = 'mystorageaccoutname',
+                                              account_key = 'mystorageaccountkey')
 }
 }
-

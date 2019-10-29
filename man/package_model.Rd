@@ -45,9 +45,10 @@ With either scenario, you will need to have Docker installed in your
 development environment.
 }
 }
-\section{Examples}{
-
-Package a registered model:\preformatted{ws <- load_workspace_from_config()
+\examples{
+# Package a registered model
+\dontrun{
+ws <- load_workspace_from_config()
 model <- get_model(ws, name = "my_model")
 r_env <- r_environment(name = "r_env")
 inference_config <- inference_config(entry_script = "score.R",
@@ -59,7 +60,6 @@ package <- package_model(ws,
 wait_for_model_package_creation(show_output = TRUE)
 }
 }
-
 \seealso{
 \code{wait_for_model_package_creation()}, \code{get_model_package_container_registry()},
 \code{get_model_package_creation_logs()}, \code{pull_model_package_image()},

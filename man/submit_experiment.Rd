@@ -30,9 +30,10 @@ the type of trial required. For a script run, provide an \code{Estimator} object
 to the \code{config} parameter. For a HyperDrive run for hyperparameter tuning,
 provide a \code{HyperDriveConfig} to \code{config}.
 }
-\section{Examples}{
-
-The following example submits an Estimator experiment.\preformatted{ws <- load_workspace_from_config()
+\examples{
+# This example submits an Estimator experiment
+\dontrun{
+ws <- load_workspace_from_config()
 compute_target <- get_compute(ws, cluster_name = 'mycluster')
 exp <- experiment(ws, name = 'myexperiment')
 est <- estimator(source_directory = '.',
@@ -40,11 +41,7 @@ est <- estimator(source_directory = '.',
                  compute_target = compute_target)
 run <- submit_experiment(exp, est)
 }
-
-For an example of submitting a HyperDrive experiment, see the
-"Examples" section of \code{hyperdrive_config()}.
 }
-
 \seealso{
 \code{estimator()}, \code{hyperdrive_config()}
 }

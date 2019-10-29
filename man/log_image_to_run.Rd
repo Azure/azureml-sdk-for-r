@@ -25,12 +25,14 @@ Log an image to the run with the give metric name. Use
 run. These images will be visible and comparable in the run
 record.
 }
-\section{Examples}{
-
-Log an image file to the run:
-\code{log_image_to_run("myplot", "myplot.png")}
-Log a ggplot2 plot to the run:\preformatted{plot <- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
+\examples{
+# Log an image file to the run
+\dontrun{
+`log_image_to_run("myplot", "myplot.png")`
+}
+# Log a ggplot2 plot to the run
+\dontrun{
+plot <- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
 log_image_to_run("myplot", plot)
 }
 }
-

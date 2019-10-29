@@ -52,15 +52,15 @@ compared with the performance of other runs up to interval N even if they
 reported metrics for intervals greater than N.
 }
 
-\section{Examples}{
-
-In this example, the early termination policy is applied at every interval
-starting at evaluation interval 5. A run will be terminated at interval 5
-if its performance at interval 5 is in the lowest 20% of performance of all
-runs at interval 5.\preformatted{early_termination_policy = truncation_selection_policy(
+\examples{
+# In this example, the early termination policy is applied at every interval
+# starting at evaluation interval 5. A run will be terminated at interval 5
+# if its performance at interval 5 is in the lowest 20\% of performance of all
+# runs at interval 5
+\dontrun{
+early_termination_policy = truncation_selection_policy(
                                                  truncation_percentage = 20L,
                                                  evaluation_interval = 1L,
                                                  delay_evaluation = 5L)
 }
 }
-

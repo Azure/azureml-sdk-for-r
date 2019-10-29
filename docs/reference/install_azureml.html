@@ -144,8 +144,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
-  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>)</pre>
+    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.0.69"</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
+  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>, <span class='kw'>restart_session</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>remove_existing_env</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,6 +162,14 @@
     <tr>
       <th>conda_python_version</th>
       <td><p>version of python for conda environment</p></td>
+    </tr>
+    <tr>
+      <th>restart_session</th>
+      <td><p>restart R session after installation</p></td>
+    </tr>
+    <tr>
+      <th>remove_existing_env</th>
+      <td><p>delete the conda environment if already exists</p></td>
     </tr>
     </table>
     
@@ -178,7 +187,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

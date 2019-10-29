@@ -66,11 +66,11 @@ the deployment process.
 \item You are testing a model that is under development.
 }
 }
-\section{Examples}{
-\preformatted{deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+\examples{
+\dontrun{
+deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
 }
 }
-
 \seealso{
 \code{deploy_model()}
 }
