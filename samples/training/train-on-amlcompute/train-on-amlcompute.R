@@ -25,6 +25,8 @@ if (is.null(compute_target)) {
                                        cluster_name = cluster_name,
                                        vm_size = vm_size,
                                        max_nodes = 1)
+  
+  wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
 
 # Define estimator
