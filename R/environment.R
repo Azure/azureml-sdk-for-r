@@ -230,7 +230,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
 
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_github(repo = 'https://github.com/",
-                              "Azure/azureml-sdk-for-r')\"\n")
+                              "Azure/azureml-sdk-for-r', ref = 'v0.5.6')\"\n")
   }
 
   if (!is.null(cran_packages)) {
