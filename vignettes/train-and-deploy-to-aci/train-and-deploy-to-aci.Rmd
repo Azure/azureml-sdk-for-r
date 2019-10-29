@@ -127,7 +127,7 @@ A training script called `accidents.R` has been provided for you in the same dir
 
 ### Create an estimator
 
-An Azure ML estimator encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here.
+An Azure ML estimator encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included [here](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html).
 
 To create the estimator, define:
 
@@ -153,7 +153,7 @@ Finally submit the job to run on your cluster. `submit_experiment()` returns a R
 run <- submit_experiment(exp, est)
 ```
 
-You can view the run's details in RStudio Viewer. Clicking the "Web View" link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
+You can view a table of the run's details. Clicking the "Web View" link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
 
 ```{r view_run, eval=FALSE}
 view_run_details(run)
@@ -275,6 +275,8 @@ aci_service <- deploy_model(ws,
 
 wait_for_deployment(aci_service, show_output = TRUE)
 ```
+
+If you encounter any issue in deploying the web service, please visit the [troubleshooting guide](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment).
 
 ## Test the deployed service
 
