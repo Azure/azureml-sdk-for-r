@@ -1,5 +1,5 @@
-#' Copyright(c) Microsoft Corporation.
-#' Licensed under the MIT license.
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
 
 # Reminder: set working directory to current file location prior to running this script
 
