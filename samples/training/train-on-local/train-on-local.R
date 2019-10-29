@@ -3,7 +3,7 @@
 
 # Reminder: set working directory to current file location prior to running this script
 
-library("azuremlsdk")
+library(azuremlsdk)
 
 ws <- load_workspace_from_config()
 
