@@ -39,10 +39,9 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your Environment object within that Docker container.
 If the custom_docker_image parameter
-is not set, Azure ML automatically uses a default base image (CPU or GPU
-depending on the use_gpu flag) and installs any R packages specified in the
-cran_packages, github_packages, or custom_url_packages parameters.
-TODO: link to the Dockerfiles of the default base images." />
+is not set, Azure ML will build a default base image (CPU or GPU
+depending on the use_gpu flag) and install any R packages specified in the
+cran_packages, github_packages, or custom_url_packages parameters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -153,10 +152,9 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your <code>Environment</code> object within that Docker container.</p>
 <p>If the <code>custom_docker_image</code> parameter
-is not set, Azure ML automatically uses a default base image (CPU or GPU
-depending on the <code>use_gpu</code> flag) and installs any R packages specified in the
-<code>cran_packages</code>, <code>github_packages</code>, or <code>custom_url_packages</code> parameters.
-TODO: link to the Dockerfiles of the default base images.</p>
+is not set, Azure ML will build a default base image (CPU or GPU
+depending on the <code>use_gpu</code> flag) and install any R packages specified in the
+<code>cran_packages</code>, <code>github_packages</code>, or <code>custom_url_packages</code> parameters.</p>
     
     </div>
 
@@ -243,21 +241,18 @@ a new version of the environment is created when you either submit a run,
 deploy a model, or manually register the environment. The versioning allows
 you to view changes to the environment over time.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>The following example defines an environment that will use the default
-base CPU image.</p><pre>r_env &lt;- r_environment(name = 'myr_env',
-                       version = '1')
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='estimator.html'>estimator()</a></code>, <code><a href='inference_config.html'>inference_config()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># The following example defines an environment that will build the default</span>
+<span class='co'># base CPU image.</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'>r_environment</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myr_env'</span>,
+                       <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>'1'</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -268,10 +263,10 @@ base CPU image.</p><pre>r_env &lt;- r_environment(name = 'myr_env',
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -279,7 +274,7 @@ base CPU image.</p><pre>r_env &lt;- r_environment(name = 'myr_env',
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

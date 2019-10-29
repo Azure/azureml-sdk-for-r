@@ -249,20 +249,17 @@ service cluster IPs.</p></td>
 
 <p>For more information on using an AksCompute resource within a virtual
 network, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a></p>
+<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Create an AksCompute cluster using the default configuration (you can also
-provide parameters to customize this).</p><pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- create_aks_compute(ws, cluster_name = 'mycluster')
-wait_for_provisioning_completion(compute_target)
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='co'># Create an AksCompute cluster using the default configuration (you can also</span>
+<span class='co'># provide parameters to customize this)</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'>create_aks_compute</span>(<span class='no'>ws</span>, <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>)
+<span class='fu'><a href='wait_for_provisioning_completion.html'>wait_for_provisioning_completion</a></span>(<span class='no'>compute_target</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -272,9 +269,9 @@ wait_for_provisioning_completion(compute_target)
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
+      
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -282,7 +279,7 @@ wait_for_provisioning_completion(compute_target)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

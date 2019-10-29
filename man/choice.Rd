@@ -7,7 +7,7 @@
 choice(options)
 }
 \arguments{
-\item{options}{A list of discrete values to choose from, or
+\item{options}{An integer vector of discrete values to choose from, or
 one or more comma-separated discrete values to choose from.}
 }
 \value{

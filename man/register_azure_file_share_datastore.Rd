@@ -54,14 +54,13 @@ may improve the speed of your training runs, particularly if you train
 against a large dataset.
 }
 
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
-ds <- register_azure_file_share_datastore(
-                                   ws,
-                                   datastore_name = 'mydatastore',
-                                   file_share_name = 'myazurefilesharename',
-                                   account_name = 'mystorageaccoutname',
-                                   account_key = 'mystorageaccountkey')
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
+ds <- register_azure_file_share_datastore(ws,
+                                          datastore_name = 'mydatastore',
+                                          file_share_name = 'myazurefilesharename',
+                                          account_name = 'mystorageaccoutname',
+                                          account_key = 'mystorageaccountkey')
 }
 }
-

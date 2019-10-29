@@ -2,10 +2,7 @@
 % Please edit documentation in R/run.R
 \name{view_run_details}
 \alias{view_run_details}
-\title{Plot table of run details in RStudio Viewer or browser
-This table does not auto-refresh. To see current values,
-re-run the command or click the web view link to view more
-details in real time.}
+\title{Plot table of run details}
 \usage{
 view_run_details(run)
 }
@@ -13,8 +10,12 @@ view_run_details(run)
 \item{run}{The \code{Run} object.}
 }
 \description{
-Plot table of run details in RStudio Viewer or browser
+Plot table of run details in RStudio Viewer or browser.
 This table does not auto-refresh. To see current values,
 re-run the command or click the web view link to view more
 details in real time.
+
+If you are running this method from an RMarkdown file, the
+run details table will show up in the code chunk output
+instead of the Viewer.
 }

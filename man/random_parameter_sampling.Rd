@@ -29,16 +29,13 @@ use include:
 \code{qloguniform()}, \code{normal()}, \code{qnormal()}, \code{lognormal()}, and \code{qlognormal()}.
 }
 
-\section{Examples}{
-\preformatted{param_sampling <- random_parameter_sampling( {
-        'learning_rate': normal(10, 3),
-        'keep_probability': uniform(0.05, 0.1),
-        'batch_size': choice(16, 32, 64, 128)
-    }
-)
+\examples{
+\dontrun{
+param_sampling <- random_parameter_sampling(list("learning_rate" = normal(10, 3),
+                                                 "keep_probability" = uniform(0.05, 0.1),
+                                                 "batch_size" = choice(16, 32, 64, 128)))
 }
 }
-
 \seealso{
 \code{choice()}, \code{randint()}, \code{uniform()}, \code{quniform()}, \code{loguniform()},
 \code{qloguniform()}, \code{normal()}, \code{qnormal()}, \code{lognormal()}, \code{qlognormal()}

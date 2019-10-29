@@ -23,16 +23,18 @@ account attached to the workspace. The \code{workspaceblobstore} is set as the
 default datastore, and remains the default datastore unless you set a new
 datastore as the default with \code{set_default_datastore()}.
 }
-\section{Examples}{
-
-Get the default datastore for the datastore:\preformatted{ws <- load_workspace_from_config()
+\examples{
+# Get the default datastore for the datastore
+\dontrun{
+ws <- load_workspace_from_config()
 ds <- get_default_datastore(ws)
 }
 
-If you have not changed the default datastore for the workspace, the
-following code will return the same datastore object as the above
-example:\preformatted{ws <- load_workspace_from_config()
+# If you have not changed the default datastore for the workspace, the
+# following code will return the same datastore object as the above
+# example
+\dontrun{
+ws <- load_workspace_from_config()
 ds <- get_datastore(ws, datastore_name = 'workspaceblobstore')
 }
 }
-

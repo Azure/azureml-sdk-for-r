@@ -19,8 +19,8 @@ to the current run from the service context.}
 \description{
 Log a vector with the given metric name to the run.
 }
-\section{Examples}{
-\preformatted{log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
+\examples{
+\dontrun{
+log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
 }
 }
-
