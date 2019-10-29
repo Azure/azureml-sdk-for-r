@@ -80,9 +80,9 @@ download_from_datastore <- function(datastore,
                                     overwrite = FALSE,
                                     show_progress = TRUE) {
   datastore$download(target_path,
-              prefix = prefix,
-              overwrite = overwrite,
-              show_progress = show_progress)
+                     prefix = prefix,
+                     overwrite = overwrite,
+                     show_progress = show_progress)
   invisible(NULL)
 }
 
