@@ -214,23 +214,6 @@ can be run locally instead of building an image.</p></td>
 
     <p>The <code>ModelPackage</code> object.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Package a registered model:</p><pre>ws &lt;- load_workspace_from_config()
-model &lt;- get_model(ws, name = "my_model")
-r_env &lt;- r_environment(name = "r_env")
-inference_config &lt;- inference_config(entry_script = "score.R",
-                                     source_directory = ".",
-                                     environment = r_env)
-package &lt;- package_model(ws,
-                         models = list(model),
-                         inference_config = inference_config)
-wait_for_model_package_creation(show_output = TRUE)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='wait_for_model_package_creation.html'>wait_for_model_package_creation()</a></code>, <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code>,
@@ -238,6 +221,20 @@ wait_for_model_package_creation(show_output = TRUE)
 <code><a href='save_model_package_files.html'>save_model_package_files()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Package a registered model</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='r_environment.html'>r_environment</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"r_env"</span>)
+<span class='no'>inference_config</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='inference_config.html'>inference_config</a></span>(<span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"score.R"</span>,
+                                     <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                                     <span class='kw'>environment</span> <span class='kw'>=</span> <span class='no'>r_env</span>)
+<span class='no'>package</span> <span class='kw'>&lt;-</span> <span class='fu'>package_model</span>(<span class='no'>ws</span>,
+                         <span class='kw'>models</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model</span>),
+                         <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='no'>inference_config</span>)
+<span class='fu'><a href='wait_for_model_package_creation.html'>wait_for_model_package_creation</a></span>(<span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -246,10 +243,10 @@ wait_for_model_package_creation(show_output = TRUE)
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

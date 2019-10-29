@@ -45,23 +45,3 @@ that can be specified in an inference configuration.
 
 Values left as \code{NULL} will remain unchanged in the web service.
 }
-\section{Examples}{
-
-Updating a web service to use a new model, entry script, and environment:\preformatted{ws <- load_workspace_from_config()
-# Register a new version of the model
-new_model <- register_model(ws,
-                            model_path = "my_model.rds"
-                            model_name = "my_model")
-# Use version 3 of a registered environment
-deploy_env <- get_environment(ws, name = "my_env", version = "3")
-inference_config = inference_config(entry_script = "score.R",
-                                    environment = deploy_env)
-# Retrieve existing web service
-service <- get_webservice(ws, name = "my_service")
-# Update the web service
-update_aci_webservice(service,
-                      models = list(new_model),
-                      inference_config = inference_config)
-}
-}
-

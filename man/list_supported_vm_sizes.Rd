@@ -13,8 +13,8 @@ list_supported_vm_sizes(workspace, location = NULL)
 will default to the workspace location.}
 }
 \value{
-List of supported VM sizes in a region with name of the VM, VCPUs,
-RAM in data frame
+A data frame of supported VM sizes in a region with name of the VM, VCPUs,
+RAM.
 }
 \description{
 List the supported VM sizes in a region

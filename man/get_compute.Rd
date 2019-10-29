@@ -19,9 +19,9 @@ Returns an \code{AmlCompute} or \code{AksCompute} object for an existing compute
 resource. If the compute target doesn't exist, the function will return
 \code{NULL}.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 compute_target <- get_compute(ws, cluster_name = 'mycluster')
 }
 }
-

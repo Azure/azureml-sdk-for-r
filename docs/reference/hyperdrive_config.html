@@ -220,48 +220,45 @@ provide 25<!-- %-35% savings with no loss on primary metric -->
 
     <p>The <code>HyperDriveConfig</code> object.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-<pre># Load the workspace
-ws &lt;- load_workspace_from_config()
-
-# Get the compute target
-compute_target &lt;- get_compute(ws, cluster_name = 'mycluster')
-
-# Define the primary metric goal
-goal = primary_metric_goal("MAXIMIZE")
-
-# Define the early termination policy
-early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
-                                                  delay_evaluation = 5L)
-
-# Create the estimator
-est &lt;- estimator(source_directory = '.',
-                 entry_script = 'train.R',
-                 compute_target = compute_target)
-
-# Create the HyperDrive configuration
-hyperdrive_run_config = hyperdrive_config(
-                                   hyperparameter_sampling = param_sampling,
-                                   primary_metric_name = 'accuracy',
-                                   primary_metric_goal = goal,
-                                   max_total_runs = 100,
-                                   max_concurrent_runs = 4,
-                                   policy = early_termination_policy,
-                                   estimator = est)
-
-# Submit the HyperDrive experiment
-exp &lt;- experiment(ws, name = 'myexperiment')
-run = submit_experiment(exp, hyperdrive_run_config)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='submit_experiment.html'>submit_experiment()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Load the workspace</span>
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+
+<span class='co'># Get the compute target</span>
+<span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_compute.html'>get_compute</a></span>(<span class='no'>ws</span>, <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>)
+
+<span class='co'># Define the primary metric goal</span>
+<span class='no'>goal</span> <span class='kw'>=</span> <span class='fu'><a href='primary_metric_goal.html'>primary_metric_goal</a></span>(<span class='st'>"MAXIMIZE"</span>)
+
+<span class='co'># Define the early termination policy</span>
+<span class='no'>early_termination_policy</span> <span class='kw'>=</span> <span class='fu'><a href='median_stopping_policy.html'>median_stopping_policy</a></span>(<span class='kw'>evaluation_interval</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+                                                  <span class='kw'>delay_evaluation</span> <span class='kw'>=</span> <span class='fl'>5L</span>)
+
+<span class='co'># Create the estimator</span>
+<span class='no'>est</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='estimator.html'>estimator</a></span>(<span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>'.'</span>,
+                 <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>'train.R'</span>,
+                 <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='no'>compute_target</span>)
+
+<span class='co'># Create the HyperDrive configuration</span>
+<span class='no'>hyperdrive_run_config</span> <span class='kw'>=</span> <span class='fu'>hyperdrive_config</span>(
+                                   <span class='kw'>hyperparameter_sampling</span> <span class='kw'>=</span> <span class='no'>param_sampling</span>,
+                                   <span class='kw'>primary_metric_name</span> <span class='kw'>=</span> <span class='st'>'accuracy'</span>,
+                                   <span class='kw'>primary_metric_goal</span> <span class='kw'>=</span> <span class='no'>goal</span>,
+                                   <span class='kw'>max_total_runs</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+                                   <span class='kw'>max_concurrent_runs</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+                                   <span class='kw'>policy</span> <span class='kw'>=</span> <span class='no'>early_termination_policy</span>,
+                                   <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='no'>est</span>)
+
+<span class='co'># Submit the HyperDrive experiment</span>
+<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='experiment.html'>experiment</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
+<span class='no'>run</span> <span class='kw'>=</span> <span class='fu'><a href='submit_experiment.html'>submit_experiment</a></span>(<span class='no'>exp</span>, <span class='no'>hyperdrive_run_config</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -270,10 +267,10 @@ run = submit_experiment(exp, hyperdrive_run_config)
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

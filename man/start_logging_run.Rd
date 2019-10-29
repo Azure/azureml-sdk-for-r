@@ -33,15 +33,15 @@ tracking and artifact logging to the corresponding run record
 in Azure ML for local runs without have to submit an experiment
 run to a compute target with \code{submit_experiment()}.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 exp <- experiment(ws, name = 'myexperiment')
 run <- start_logging_run(exp)
 log_metric_to_run("Accuracy", 0.9)
 complete_run(run)
 }
 }
-
 \seealso{
 \code{complete_run()}
 }

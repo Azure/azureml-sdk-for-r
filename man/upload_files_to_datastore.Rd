@@ -10,7 +10,7 @@ upload_files_to_datastore(datastore, files, relative_root = NULL,
 \arguments{
 \item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
 
-\item{files}{A list of strings of the absolute path to files to upload.}
+\item{files}{A character vector of the absolute path to files to upload.}
 
 \item{relative_root}{A string of the base path from which is used to
 determine the path of the files in the Azure storage. For example, if

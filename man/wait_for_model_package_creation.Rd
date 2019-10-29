@@ -15,8 +15,3 @@ wait_for_model_package_creation(package, show_output = FALSE)
 \description{
 Wait for a model package creation to reach a terminal state.
 }
-\section{Examples}{
-
-See "Examples" section of \code{package_model()}.
-}
-

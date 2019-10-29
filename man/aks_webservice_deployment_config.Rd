@@ -142,11 +142,11 @@ workspace's region is available again. In addition, the greater the distance bet
 cluster's region and your workspace's region, the longer it will take to fetch a token.
 }
 }
-\section{Examples}{
-\preformatted{deployment_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+\examples{
+\dontrun{
+deployment_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
 }
 }
-
 \seealso{
 \code{deploy_model()}
 }

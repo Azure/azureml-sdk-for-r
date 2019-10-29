@@ -220,20 +220,16 @@ expensive, we suggest premium storage due to faster throughput speeds that
 may improve the speed of your training runs, particularly if you train
 against a large dataset.</p>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-<pre>ws &lt;- load_workspace_from_config()
-ds &lt;- register_azure_file_share_datastore(
-                                   ws,
-                                   datastore_name = 'mydatastore',
-                                   file_share_name = 'myazurefilesharename',
-                                   account_name = 'mystorageaccoutname',
-                                   account_key = 'mystorageaccountkey')
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>register_azure_file_share_datastore</span>(<span class='no'>ws</span>,
+                                          <span class='kw'>datastore_name</span> <span class='kw'>=</span> <span class='st'>'mydatastore'</span>,
+                                          <span class='kw'>file_share_name</span> <span class='kw'>=</span> <span class='st'>'myazurefilesharename'</span>,
+                                          <span class='kw'>account_name</span> <span class='kw'>=</span> <span class='st'>'mystorageaccoutname'</span>,
+                                          <span class='kw'>account_key</span> <span class='kw'>=</span> <span class='st'>'mystorageaccountkey'</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -243,9 +239,9 @@ ds &lt;- register_azure_file_share_datastore(
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
+      
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

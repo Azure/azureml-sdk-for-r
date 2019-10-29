@@ -161,19 +161,6 @@ create_aml_compute() or create_aks_compute() call." />
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Wait for an AmlCompute cluster to finish provisioning.</p><pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- create_aml_compute(ws,
-                                     cluster_name = 'mycluster',
-                                     vm_size = 'STANDARD_D2_V2',
-                                     max_nodes = 1)
-wait_for_provisioning_completion(compute_target)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='create_aml_compute.html'>create_aml_compute()</a></code>, <code><a href='create_aks_compute.html'>create_aks_compute()</a></code></p></div>
@@ -185,8 +172,6 @@ wait_for_provisioning_completion(compute_target)
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 

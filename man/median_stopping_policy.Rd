@@ -47,13 +47,13 @@ settings that can provide approximately 25%-35% savings with no loss on
 the primary metric (based on our evaluation data).
 }
 
-\section{Examples}{
-
-In this example, the early termination policy is applied at every
-interval starting at evaluation interval 5. A run will be terminated at
-interval 5 if its best primary metric is worse than the median of the
-running averages over intervals 1:5 across all training runs.\preformatted{early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
+\examples{
+# In this example, the early termination policy is applied at every
+# interval starting at evaluation interval 5. A run will be terminated at
+# interval 5 if its best primary metric is worse than the median of the
+# running averages over intervals 1:5 across all training runs
+\dontrun{
+early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
                                                   delay_evaluation = 5L)
 }
 }
-

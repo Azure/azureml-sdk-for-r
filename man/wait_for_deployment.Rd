@@ -20,11 +20,6 @@ an exception if it reaches a non-successful terminal state.
 
 Typically called after running \code{deploy_model()}.
 }
-\section{Examples}{
-
-See "Examples" section of \code{deploy_model()}.
-}
-
 \seealso{
 \code{deploy_model()}
 }

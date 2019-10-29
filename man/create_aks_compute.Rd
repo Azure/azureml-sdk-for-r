@@ -71,15 +71,15 @@ multiple deployments.
 
 For more information on using an AksCompute resource within a virtual
 network, see
-\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
+\href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
 }
 
-\section{Examples}{
-
-Create an AksCompute cluster using the default configuration (you can also
-provide parameters to customize this).\preformatted{ws <- load_workspace_from_config()
+\examples{
+# Create an AksCompute cluster using the default configuration (you can also
+# provide parameters to customize this)
+\dontrun{
+ws <- load_workspace_from_config()
 compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 wait_for_provisioning_completion(compute_target)
 }
 }
-

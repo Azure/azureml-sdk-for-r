@@ -20,9 +20,9 @@ The \code{Environment} object.
 Returns an \code{Environment} object for an existing environment in
 the workspace.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 env <- get_environment(ws, name = 'myenv', version = '1')
 }
 }
-

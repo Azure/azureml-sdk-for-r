@@ -11,7 +11,7 @@ inference_config(entry_script, source_directory = NULL,
 \item{entry_script}{A string of the path to the local file that contains
 the code to run for making predictions.}
 
-\item{source_directory}{(Optional) A string of the path to the local folder
+\item{source_directory}{A string of the path to the local folder
 that contains the files to package and deploy alongside your model, such as
 helper files for your scoring script (\code{entry_script}). The folder must
 contain the \code{entry_script}.}
@@ -70,19 +70,6 @@ Multiple model example:\preformatted{model1_path <- file.path(Sys.getenv("AZUREM
 
 }
 }
-\section{Examples}{
-
-The following example loads a previously registered environment from
-your workspace and uses it for defining the inference config:\preformatted{ws <- load_workspace_from_config()
-deploy_env = get_environment(ws, name = "my_env", version = "1")
-inference_config = inference_config(entry_script = "score.R",
-                                    environment = deploy_env)
-}
-
-You can then specify the inference config to \code{deploy_model()} to
-deploy a web service.
-}
-
 \seealso{
 \code{r_environment()}, \code{deploy_model()}
 }
