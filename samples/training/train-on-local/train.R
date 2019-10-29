@@ -1,8 +1,8 @@
 # This script loads a dataset of which the last column is supposed to be the
-#class and logs the accuracy
+# class and logs the accuracy
 
-library("azuremlsdk")
-library("caret")
+library(azuremlsdk)
+library(caret)
 
 all_data <- read.csv("iris.csv")
 summary(all_data)
