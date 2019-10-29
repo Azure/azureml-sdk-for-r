@@ -4,10 +4,10 @@ Title: Interface to the Azure Machine Learning Software Development Kit ('SDK')
 Version: 0.5.6
 Authors@R: c(
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
-    person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("aut")),
     person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
     person("Diondra", "Peck", email = "Diondra.Peck@microsoft.com", role = c("aut")),
     person("Minna", "Xiao", email = "Minna.Xiao@microsoft.com", role = c("aut")),
+    person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("ctb")),
     person("Abe", "Omorogbe", email = "Osarumwense.Omorogbe@microsoft.com", role = c("ctb")),
     person("Microsoft", role = c("cph", "fnd")),
     person(family = "Google Inc.", role = c("cph"), comment = "Examples and Tutorials"),
@@ -18,7 +18,7 @@ BugReports: https://github.com/azure/azureml-sdk-for-r/issues
 Description: Interface to the Azure Machine Learning Software Development Kit
     ('SDK'). Data scientists can use the 'SDK' to train, deploy, automate, and
     manage machine learning models on the Azure Machine Learning service. To
-    learn more about Azure Machine Learning visit the website
+    learn more about Azure Machine Learning visit the website:
     <https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml>.
 Encoding: UTF-8
 License: MIT + file LICENSE

@@ -8,6 +8,3 @@
 
 ## R CMD check results
 0 errors | 0 warnings | 0 notes
-
-## Authors and copyright holders
-We have added Google Inc and RStudio Inc in our Authors@R field aswith cph roles.
