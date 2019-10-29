@@ -35,7 +35,7 @@ test_that("create dockerfile", {
                                   " 'http://cran.us.r-project.org')",
                                   "\"\nRUN R -e \"remotes::install_github(",
                                   "repo = 'https://github.com/Azure/azureml-",
-                                  "sdk-for-r', ref = 'v0.5.6')\"\n"))
+                                  "sdk-for-r', ref = 'v0.5.6', upgrade = FALSE)\"\n"))
 
   # cran packages
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
