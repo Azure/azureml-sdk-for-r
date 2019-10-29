@@ -37,10 +37,5 @@ message(conf_matrix)
 
 log_metric_to_run(metric, conf_matrix$overall["Accuracy"])
 
-output_dir = "outputs"
-if (!dir.exists(output_dir)){
-  dir.create(output_dir)
-}
-
 saveRDS(model, file = "./outputs/model.rds")
 message("Model saved")
