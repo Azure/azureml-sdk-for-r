@@ -218,15 +218,13 @@ generate_docker_file <- function(custom_docker_image = NULL,
                                                      custom_docker_image))
 
   if (install_system_packages) {
-    base_dockerfile <- paste0(base_dockerfile, "RUN conda install -c r -y ",
-                              "r-essentials=3.6.0 rpy2 && conda clean -ay && ",
-                              "pip install --no-cache-dir azureml-defaults\n")
+    base_dockerfile <- paste0(base_dockerfile,
+                              "RUN conda install -c r -y r-essentials=3.6.0",
+                              " r-reticulate rpy2 r-remotes r-e1071 ",
+                              "r-optparse && conda clean -ay && pip ",
+                              "install --no-cache-dir azureml-defaults\n")
 
     base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
-
-    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"install.packages(",
-                              "c(\'remotes\', \'e1071\', \'optparse\'), repos",
-                              " = \'http://cran.us.r-project.org\')\"\n")
 
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_github(repo = 'https://github.com/",
