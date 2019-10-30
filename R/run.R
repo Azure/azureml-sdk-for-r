@@ -534,16 +534,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
   invisible(NULL)
 }
 
-#' Create table of run details
-#' @description
-#' Plot table of run details in RStudio Viewer or browser.
-#' This table does not auto-refresh. To see current values,
-#' re-run the command or click the web view link to view more
-#' details in real time.
-#'
-#' If you are running this method from an RMarkdown file, the
-#' run details table will show up in the code chunk output
-#' instead of the Viewer.
+#' Generate table of run details
 #' @param run The `Run` object.
 #' @md
 create_run_details_plot <- function(run) {
@@ -634,7 +625,17 @@ create_run_details_plot <- function(run) {
   DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 
-#' Show run details in browser
+#' Initialize run details widget
+#' @description
+#' Plot table of run details in RStudio Viewer or browser.
+#' By default, this table does not auto-refresh. To see stream
+#' live updates from the server, click the "Turn on auto-update"
+#' box in the top left corner of the widget.values. For more details,
+#' click the web view link.
+#'
+#' If you are running this method from an RMarkdown file, the
+#' run details table will show up in the code chunk output
+#' instead of the Viewer.
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {

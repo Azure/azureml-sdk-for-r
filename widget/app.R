@@ -1,13 +1,14 @@
-suppressWarnings(library(shiny))
+suppressMessages(library(shiny))
 suppressMessages(library(DT))
+suppressMessages(library(shinycssloaders))
 
 
 server <- function(input, output, session){
 
   observe({
-    invalidateLater(5000, session)
-
     # update values if auto-refresh activated
+    invalidateLater(10000, session)
+    
     if (input$checkbox == TRUE) {
       ws <- azureml::get_workspace(ws_name, subscription_id, rg)
       exp <- azuremlsdk::experiment(ws, exp_name)
@@ -45,33 +46,32 @@ server <- function(input, output, session){
       # update run status
       run_details_plot$x$data$V2[[2]] <<- details$status
       
-      if (details$status == "Failed") {
+      # show any error info if failed run
+      if (details$status == "Failed" &&
+          !("Errors" %in% run_details_plot$x$data$V1)) {
         error <- details$error$error$message
         
         if (is.null(error)) {
           error <- "Detailed error not set on the Run. Please check
                     the logs for details."
         }
-        run_details_plot <<- rbind(data.frame("Errors", error),
-                                   run_details_plot)
+        run_details_plot$x$data <<- rbind(run_details_plot$x$data,
+                                          data.frame(V1 = "Errors",
+                                                     V2 = error))
       }
     }
-  })
-
-  output$runDetailsPlot <- renderDataTable({
-    invalidateLater(2000)
-    run_details_plot
+    
+    output$runDetailsPlot <- renderDataTable({
+      run_details_plot
+    })
   })
 }
 
 ui <- fluidPage(
-
-  fluidRow(
-    column(3, checkboxInput("checkbox", "Turn on auto-refresh", value = FALSE))
-  ),
-  h4(
-    dataTableOutput("runDetailsPlot")
-  )
+  column(3, checkboxInput("checkbox", "Turn on auto-update", value = FALSE)),
+  withSpinner(dataTableOutput("runDetailsPlot"),
+              type = 5,
+              color="#487EDB")
 )
 
 suppressMessages(shiny::runApp(shinyApp(ui, server), port = 1234))
