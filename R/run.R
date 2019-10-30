@@ -534,7 +534,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
   invisible(NULL)
 }
 
-#' Plot table of run details
+#' Create table of run details
 #' @description
 #' Plot table of run details in RStudio Viewer or browser.
 #' This table does not auto-refresh. To see current values,
@@ -545,9 +545,8 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' run details table will show up in the code chunk output
 #' instead of the Viewer.
 #' @param run The `Run` object.
-#' @export
 #' @md
-view_run_details <- function(run) {
+create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -633,6 +632,41 @@ view_run_details <- function(run) {
                                      scrollY = "800px",
                                      pageLength = 1000))
   DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
+}
+
+#' Show run details in browser
+#' @param run Run object
+#' @export
+view_run_details <- function(run) {
+  if (rstudioapi::isAvailable()) {
+    run_details_plot <- create_run_details_plot(run)
+    run_url <- run$get_portal_url()
+    parsed_url <- strsplit(run_url, "/")[[1]]
+    rg <- parsed_url[8]
+    subscription_id <- parsed_url[6]
+    ws_name <- parsed_url[12]
+    exp_name <- parsed_url[14]
+    run_id <- parsed_url[16]
+
+    assign("rg", rg, envir=globalenv())
+    assign("subscription_id", subscription_id, envir=globalenv())
+    assign("ws_name", ws_name, envir=globalenv())
+    assign("exp_name", exp_name, envir=globalenv())
+    assign("run_id", run_id, envir=globalenv())
+    assign("run_details_plot", run_details_plot, envir=globalenv())
+    
+    path <- here::here("widget", "app.R")
+    rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
+    
+    Sys.sleep(3)
+    
+    viewer <- getOption("viewer")
+    if (!is.null(viewer)) {
+      viewer("http://localhost:1234")
+    } else {
+      utils::browseURL("http://localhost:1234")
+    }
+  }
 }
 
 #' Upload files to a run
