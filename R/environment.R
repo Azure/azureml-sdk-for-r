@@ -219,8 +219,8 @@ generate_docker_file <- function(custom_docker_image = NULL,
 
   if (install_system_packages) {
     base_dockerfile <- paste0(base_dockerfile,
-                              "RUN conda install -c r -y r-essentials=3.6.0",
-                              " r-reticulate rpy2 r-remotes r-e1071 ",
+                              "RUN conda install -c r -y r-essentials=3.6.0 ",
+                              "r-reticulate rpy2 r-remotes r-e1071 ",
                               "r-optparse && conda clean -ay && pip ",
                               "install --no-cache-dir azureml-defaults\n")
 
