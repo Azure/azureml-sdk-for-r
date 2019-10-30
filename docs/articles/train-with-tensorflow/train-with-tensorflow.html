@@ -184,7 +184,7 @@
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-an-estimator" class="anchor"></a>Create an estimator</h2>
-<p>An Azure ML <strong>estimator</strong> encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here.</p>
+<p>An Azure ML <strong>estimator</strong> encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html">here</a>.</p>
 <p>To create the estimator, define the following:</p>
 <ul>
 <li>The directory that contains your scripts needed for training (<code>source_directory</code>). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.</li>
@@ -204,7 +204,7 @@
 <a href="#submit-the-job" class="anchor"></a>Submit the job</h2>
 <p>Finally submit the job to run on your cluster. <a href="https://azure.github.io/azureml-sdk-for-r/reference/submit_experiment.html"><code><a href="../../reference/submit_experiment.html">submit_experiment()</a></code></a> returns a <code>Run</code> object that you can then use to interface with the run.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
-<p>You can view the run’s details in RStudio Viewer. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
+<p>You can view the run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
 <p>Model training happens in the background. Wait until the model has finished training before you run more code.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>

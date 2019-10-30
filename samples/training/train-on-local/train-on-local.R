@@ -1,26 +1,26 @@
-# run setup.R to setup workspace for the first time
-# set working directory to current file location prior to running this script
-library("azuremlsdk")
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+# Reminder: set working directory to current file location prior to running this script
+
+library(azuremlsdk)
 
 ws <- load_workspace_from_config()
 
-# define estimator
+# Define estimator
 est <- estimator(source_directory = ".",
                  entry_script = "train.R",
                  compute_target = "local")
 
-# initialize experiment
+# Initialize experiment
 experiment_name <- "train-r-script-on-local"
 exp <- experiment(ws, experiment_name)
 
-# start run and display the run details
+# Submit job and display the run details
 run <- submit_experiment(exp, est)
 view_run_details(run)
 wait_for_run_completion(run, show_output = TRUE)
 
-# get the run metrics
+# Get the run metrics
 metrics <- get_run_metrics(run)
 metrics
-
-# delete cluster
-delete_compute(compute_target)

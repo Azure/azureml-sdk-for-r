@@ -1,26 +1,28 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-library("azuremlsdk")
-library("jsonlite")
+library(azuremlsdk)
+library(jsonlite)
 
 ws <- load_workspace_from_config()
 
-# register the model
+# Register the model
 model <- register_model(ws, model_path = "model.rds", model_name = "model.rds")
+
+# Create environment
 r_env <- r_environment(name = "r_env")
 
-# create inference config
+# Create inference config
 inference_config <- inference_config(
   entry_script = "score.R",
   source_directory = ".",
   environment = r_env)
 
-# create ACI deployment config
+# Create ACI deployment config
 deployment_config <- aci_webservice_deployment_config(cpu_cores = 1,
                                                       memory_gb = 1)
 
-# deploy the webservice
+# Deploy the web service
 service <- deploy_model(ws, 
                         'rservice', 
                         list(model), 
@@ -48,6 +50,7 @@ plant <- data.frame(Sepal.Length = 6.7,
                     Petal.Length = 5.2,
                     Petal.Width = 2.3)
 
+# Test the web service
 predicted_val <- invoke_webservice(service, toJSON(plant))
 predicted_val
 
