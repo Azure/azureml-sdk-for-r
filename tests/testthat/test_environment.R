@@ -1,30 +1,44 @@
 context("environment")
 source("utils.R")
 
-test_that("create, register, and get environment", {
-  skip_if_no_subscription()
-  ws <- existing_ws
-  
+
+test_that("create environment and check parameters", {
   env_name <- "testenv"
   
   # Create environment
   env <- r_environment(env_name, version = "1")
   expect_equal(env$name, env_name)
   expect_equal(env$version, "1")
-  
   expect_equal(env$docker$enabled, TRUE)
   expect_equal(env$docker$base_image, NULL)
 
+  # use custom docker image
+  custom_docker_image_name = "temp_image"
+  env <- r_environment(env_name, custom_docker_image = custom_docker_image_name)
+  expect_equal(env$name, env_name)
+  expect_equal(env$docker$enabled, TRUE)
+  expect_equal(env$docker$base_dockerfile, NULL)
+  expect_equal(env$docker$base_image, custom_docker_image_name)
+})
+
+test_that("create, register, and get environment", {
+  skip_if_no_subscription()
+  ws <- existing_ws
+
+  env_name <- "testenv"
+
+  # Create environment
+  env <- r_environment(env_name, version = "1")
+
   # Register environment
   register_environment(env, ws)
-  
+
   # Get environment
   environ <- get_environment(ws, env_name, "1")
   expect_equal(env$name, environ$name)
 })
 
 test_that("create dockerfile", {
-  skip_if_no_subscription()
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04")
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN conda install -c r",
                                   " -y r-essentials=3.6.0 rpy2 && conda clean",

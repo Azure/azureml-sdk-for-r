@@ -80,3 +80,15 @@ test_that("create, check container registry and save model package", {
   wait_for_model_package_creation(model_package, show_output = TRUE)
   pull_model_package_image(model_package)
 })
+
+test_that("testpython score wrapper", {
+  tmp_dir_name <- "tmp_dir"
+  dir.create(tmp_dir_name)
+
+  #  file.copy(script_name, tmp_dir_name)
+  entry_script <- "myscore.R"
+  generate_score_python_wrapper(entry_script, tmp_dir_name)
+  expect_equal(file.exists(file.path(tmp_dir_name, "_generated_score.py")), TRUE)
+
+  unlink(tmp_dir_name, recursive = TRUE)
+})
