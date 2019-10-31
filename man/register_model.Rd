@@ -40,19 +40,19 @@ container for one or more files that make up your model. For example, if
 you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
-were registered.\cr
-\cr
+were registered.
+
 Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.
 }
-\section{Examples}{
-
-Registering a model from a single file:\preformatted{ws <- load_workspace_from_config()
+\examples{
+# Registering a model from a single file
+\dontrun{
+ws <- load_workspace_from_config()
 model <- register_model(ws,
                         model_path = "my_model.rds",
                         model_name = "my_model")
 }
 }
-

@@ -5,10 +5,14 @@
 #' @param version azureml sdk package version
 #' @param envname name of environment to create
 #' @param conda_python_version version of python for conda environment
+#' @param restart_session restart R session after installation
+#' @param remove_existing_env delete the conda environment if already exists
 #' @export
-install_azureml <- function(version = NULL,
+install_azureml <- function(version = "1.0.69",
                             envname = "r-azureml",
-                            conda_python_version = "3.6") {
+                            conda_python_version = "3.6",
+                            restart_session = TRUE,
+                            remove_existing_env = FALSE) {
   main_package <- "azureml-sdk"
   default_packages <- c("numpy")
 
@@ -22,21 +26,24 @@ install_azureml <- function(version = NULL,
     stop("Anaconda not installed or not in system path.")
   }
 
-  # remove conda environment if already exists
+  # remove the conda environment if needed
   envs <- reticulate::conda_list()
-  if (envname %in% envs$name) {
+  env_exists <- envname %in% envs$name
+  if (env_exists && remove_existing_env) {
     msg <- sprintf(paste("Environment \"%s\" already exists.",
                          "Remove the environment..."),
                    envname)
     message(msg)
     reticulate::conda_remove(envname)
+    env_exists <- FALSE
   }
 
-  # create conda environment
-  msg <- paste("Creating environment: ", envname)
-  message(msg)
-  py_version <- paste("python=", conda_python_version, sep = "")
-  reticulate::conda_create(envname, packages = py_version)
+  if (!env_exists) {
+    msg <- paste("Creating environment: ", envname)
+    message(msg)
+    py_version <- paste("python=", conda_python_version, sep = "")
+    reticulate::conda_create(envname, packages = py_version)
+  }
 
   # install packages
   reticulate::py_install(
@@ -48,7 +55,9 @@ install_azureml <- function(version = NULL,
 
   cat("\nInstallation complete.\n\n")
 
-  if (rstudioapi::isAvailable() && rstudioapi::hasFun("restartSession"))
+  if (restart_session &&
+      rstudioapi::isAvailable() &&
+      rstudioapi::hasFun("restartSession"))
     rstudioapi::restartSession()
 
   invisible(NULL)

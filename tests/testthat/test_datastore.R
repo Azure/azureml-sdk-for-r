@@ -12,7 +12,7 @@ test_that("default datastore", {
   # download files from datastore
   target_dir <- "./downloaded_files"
   dir.create(target_dir)
-  download_from_datastore(ds, target_path = target_dir)
+  download_from_datastore(ds, target_path = target_dir, prefix = file_name)
 
   # check whether file exists
   expect_equal(file.exists(file.path(target_dir, file_name)), TRUE)

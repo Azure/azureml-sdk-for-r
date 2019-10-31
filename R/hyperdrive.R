@@ -46,8 +46,8 @@
 #' @param estimator The `Estimator` object.
 #' @return The `HyperDriveConfig` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' # Load the workspace
 #' ws <- load_workspace_from_config()
 #'
@@ -79,7 +79,7 @@
 #' # Submit the HyperDrive experiment
 #' exp <- experiment(ws, name = 'myexperiment')
 #' run = submit_experiment(exp, hyperdrive_run_config)
-#' ```
+#' }
 #' @seealso
 #' `submit_experiment()`
 #' @md
@@ -171,16 +171,16 @@ primary_metric_goal <- function(goal) {
 #' with an AUC less than 0.6 (`0.8 - 0.2`) after 100 iterations will be
 #' terminated. Similarly, the `delay_evaluation` can also be used to delay the
 #' first termination policy evaluation for a specific number of sequences.
-#' @section Examples:
-#' In this example, the early termination policy is applied at every interval
-#' when metrics are reported, starting at evaluation interval 5. Any run whose
-#' best metric is less than
-#' `1 / (1 + 0.1)` or 91\% of the best performing run will be terminated.
-#' ```
+#' @examples
+#' # In this example, the early termination policy is applied at every interval
+#' # when metrics are reported, starting at evaluation interval 5. Any run whose
+#' # best metric is less than (1 / (1 + 0.1)) or 91\% of the best performing run will
+#' # be terminated
+#' \dontrun{
 #' early_termination_policy = bandit_policy(slack_factor = 0.1,
 #'                                          evaluation_interval = 1L,
 #'                                          delay_evaluation = 5L)
-#' ```
+#' }
 #' @md
 bandit_policy <- function(slack_factor = NULL,
                           slack_amount = NULL,
@@ -225,15 +225,15 @@ bandit_policy <- function(slack_factor = NULL,
 #' `evaluation_interval = 1` and `delay_evaluation = 5`. These are conservative
 #' settings that can provide approximately 25%-35% savings with no loss on
 #' the primary metric (based on our evaluation data).
-#' @section Examples:
-#' In this example, the early termination policy is applied at every
-#' interval starting at evaluation interval 5. A run will be terminated at
-#' interval 5 if its best primary metric is worse than the median of the
-#' running averages over intervals 1:5 across all training runs.
-#' ```
+#' @examples
+#' # In this example, the early termination policy is applied at every
+#' # interval starting at evaluation interval 5. A run will be terminated at
+#' # interval 5 if its best primary metric is worse than the median of the
+#' # running averages over intervals 1:5 across all training runs
+#' \dontrun{
 #' early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
 #'                                                   delay_evaluation = 5L)
-#' ```
+#' }
 #' @md
 median_stopping_policy <- function(evaluation_interval = 1L,
                                    delay_evaluation = 0L) {
@@ -278,17 +278,17 @@ median_stopping_policy <- function(evaluation_interval = 1L,
 #' For example, when evaluating a run at a interval N, its performance is only
 #' compared with the performance of other runs up to interval N even if they
 #' reported metrics for intervals greater than N.
-#' @section Examples:
-#' In this example, the early termination policy is applied at every interval
-#' starting at evaluation interval 5. A run will be terminated at interval 5
-#' if its performance at interval 5 is in the lowest 20% of performance of all
-#' runs at interval 5.
-#' ```
+#' @examples
+#' # In this example, the early termination policy is applied at every interval
+#' # starting at evaluation interval 5. A run will be terminated at interval 5
+#' # if its performance at interval 5 is in the lowest 20% of performance of all
+#' # runs at interval 5
+#' \dontrun{
 #' early_termination_policy = truncation_selection_policy(
 #'                                                  truncation_percentage = 20L,
 #'                                                  evaluation_interval = 1L,
 #'                                                  delay_evaluation = 5L)
-#' ```
+#' }
 #' @md
 truncation_selection_policy <- function(truncation_percentage,
                                         evaluation_interval = 1L,
@@ -317,15 +317,12 @@ truncation_selection_policy <- function(truncation_percentage,
 #' use include:
 #' `choice()`, `randint()`, `uniform()`, `quniform()`, `loguniform()`,
 #' `qloguniform()`, `normal()`, `qnormal()`, `lognormal()`, and `qlognormal()`.
-#' @section Examples:
-#' ```
-#' param_sampling <- random_parameter_sampling( {
-#'         'learning_rate': normal(10, 3),
-#'         'keep_probability': uniform(0.05, 0.1),
-#'         'batch_size': choice(16, 32, 64, 128)
-#'     }
-#' )
-#' ```
+#' @examples
+#' \dontrun{
+#' param_sampling <- random_parameter_sampling(list("learning_rate" = normal(10, 3),
+#'                                                  "keep_probability" = uniform(0.05, 0.1),
+#'                                                  "batch_size" = choice(16, 32, 64, 128)))
+#' }
 #' @seealso
 #' `choice()`, `randint()`, `uniform()`, `quniform()`, `loguniform()`,
 #' `qloguniform()`, `normal()`, `qnormal()`, `lognormal()`, `qlognormal()`
@@ -344,14 +341,11 @@ random_parameter_sampling <- function(parameter_space, properties = NULL) {
 #' distribution, e.g. `list("parameter" = distribution)`.
 #' @return The `GridParameterSampling` object.
 #' @export
-#' @section Examples:
-#' ```
-#' param_sampling <- grid_parameter_sampling( {
-#'         'num_hidden_layers': choice(1, 2, 3),
-#'         'batch_size': choice(16, 32)
-#'     }
-#' )
-#' ```
+#' @examples
+#' \dontrun{
+#' param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(1, 2, 3),
+#'                                                "batch_size" = choice(16, 32)))
+#' }
 #' @seealso
 #' `choice()`
 #' @md
@@ -383,14 +377,11 @@ grid_parameter_sampling <- function(parameter_space) {
 #' Bayesian sampling does not support any early termination policy. When
 #' using Bayesian parameter sampling, `early_termination_policy` must be
 #' `NULL`.
-#' @section Examples:
-#' ```
-#' param_sampling <- bayesian_parameter_sampling( {
-#'         'learning_rate': uniform(0.05, 0.1),
-#'         'batch_size': choice(16, 32, 64, 128)
-#'     }
-#' )
-#' ```
+#' @examples
+#' \dontrun{
+#' param_sampling <- bayesian_parameter_sampling(list("learning_rate" = uniform(0.05, 0.1),
+#'                                                    "batch_size" = choice(16, 32, 64, 128)))
+#' }
 #' @seealso
 #' `choice()`, `uniform()`, `quniform()`
 #' @md
@@ -405,7 +396,7 @@ bayesian_parameter_sampling <- function(parameter_space) {
 #' @description
 #' Specify a discrete set of options to sample the hyperparameters
 #' from.
-#' @param options A list of discrete values to choose from, or
+#' @param options An integer vector of discrete values to choose from, or
 #' one or more comma-separated discrete values to choose from.
 #' @return A list of the stochastic expression.
 #' @export

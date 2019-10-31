@@ -1,24 +1,21 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-library("azuremlsdk")
-library("jsonlite")
-
-
 # Register model and deploy locally
 # This example shows how to deploy a web service in step-by-step fashion:
 #   
 # 1) Register model
-# 2) Deploy the image as a web service in a local Docker container.
-# 3) Call web service with AzureML service call function or call web service with raw HTTP call.
+# 2) Deploy the model as a web service in a local Docker container.
+# 3) Invoke web service with SDK or call web service with raw HTTP call.
 # 4) Quickly test changes to your entry script by reloading the local service.
-# 5) Optionally, you can also make changes to model, conda and update local service
+# 5) Optionally, you can also make changes to model and update the local service.
 
-# Initialize a workspace object from persisted configuration.
+library(azuremlsdk)
+library(jsonlite)
+
 ws <- load_workspace_from_config()
 
-# Register the model. we are using model.rds file in the current directory 
-# as a model with the same name model.rds in the workspace.
+# Register the model
 model <- register_model(ws, model_path = "model.rds", model_name = "model.rds")
 
 # Create environment
@@ -30,10 +27,10 @@ inference_config <- inference_config(
   source_directory = ".",
   environment = r_env)
 
-# Create ACI deployment config, deploy Model as a local docker Web service
+# Create local deployment config
 local_deployment_config <- local_webservice_deployment_config()
 
-# Deploy the webservice
+# Deploy the web service
 # NOTE:
 # The Docker image runs as a Linux container. If you are running Docker for Windows, you need to ensure the Linux Engine is running:
 # # PowerShell command to switch to Linux engine
@@ -69,20 +66,20 @@ plant <- data.frame(Sepal.Length = 5.1,
 #                     Petal.Length = 5.2,
 #                     Petal.Width = 2.3)
 
-#Test the web service, Call the web service with some input data to get a prediction.
+#Test the web service
 invoke_webservice(service, toJSON(plant))
 
 ## The last few lines of the logs should have the correct prediction and should display -> R[write to console]: "setosa" 
 cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 
-## Test the web service with a HTTP Raw requests.
+## Test the web service with a HTTP Raw request
 # 
 # NOTE:
-# To test the service locally use the https://localhost:<local_service$port> URL. 
+# To test the service locally use the https://localhost:<local_service$port> URL
 
 # Import the request library
 library(httr)
-# Get the service scoring URL from the service object, it URL is for testing locally
+# Get the service scoring URL from the service object, its URL is for testing locally
 local_service_url <- service$scoring_uri #Same as https://localhost:<local_service$port>
 
 #POST request to web service
@@ -92,23 +89,23 @@ resp <- POST(local_service_url, body = plant, encode = "json", verbose())
 cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 
 
-##Optional, use a new inference config with new scoring script.
+# Optional, use a new scoring script
 inference_config <- inference_config(
   entry_script = "score_new.R",
   source_directory = ".",
   environment = r_env)
 
-##Optional, reload the service to see the changes made.
+## Then reload the service to see the changes made
 reload_local_webservice_assets(service)
 
-# Check updated service, you will see the last line will say "this is a new scoring script! I was reloaded"
+## Check reloaded service, you will see the last line will say "this is a new scoring script! I was reloaded"
 invoke_webservice(service, toJSON(plant))
 cat(gsub(pattern="\n", replacement = " \n", x=get_webservice_logs(service)))
 
 # Update service
-# If you want to change your model(s), Conda dependencies, or deployment configuration, call update() to rebuild the Docker image.
+# If you want to change your model(s), environment, or deployment configuration, call update() to rebuild the Docker image.
 
-#update_local_webservice(service, models = [NewModelObject], deployment_config = deployment_config, wait = FALSE, inference_config = inference_config)
+# update_local_webservice(service, models = [NewModelObject], deployment_config = deployment_config, wait = FALSE, inference_config = inference_config)
 
 # Delete service
 delete_local_webservice(service)

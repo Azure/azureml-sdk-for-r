@@ -4,18 +4,18 @@
 #' Create a deployment config for deploying a local web service
 #' @description
 #' You can deploy a model locally for limited testing and troubleshooting.
-#' To do so, you will need to have Docker installed on your local machine.\cr
-#' \cr
+#' To do so, you will need to have Docker installed on your local machine.
+#'
 #' If you are using an Azure Machine Learning Compute Instance for
 #' development, you can also deploy locally on your compute instance.
 #' @param port An int of the local port on which to expose the service's
 #' HTTP endpoint.
 #' @return The `LocalWebserviceDeploymentConfiguration` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' deployment_config <- local_webservice_deployment_config(port = 8890)
-#' ```
+#' }
 #' @md
 local_webservice_deployment_config <- function(port = NULL) {
   config <- azureml$core$webservice$LocalWebservice$deploy_configuration(port)
@@ -26,8 +26,8 @@ local_webservice_deployment_config <- function(port = NULL) {
 #' @description
 #' Update a local web service with the provided properties. You can update the
 #' web service to use a new model, a new entry script, or new dependencies
-#' that can be specified in an inference configuration.\cr
-#' \cr
+#' that can be specified in an inference configuration.
+#'
 #' Values left as `NULL` will remain unchanged in the service.
 #' @param webservice The `LocalWebservice` object.
 #' @param models A list of `Model` objects to package into the updated service.

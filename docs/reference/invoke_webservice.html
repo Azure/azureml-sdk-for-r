@@ -78,7 +78,7 @@ inference_config()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -93,21 +93,27 @@ inference_config()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -176,9 +182,8 @@ enabled key-based authentication for your service, you will need to provide
 a service key as a token in your request header
 (see <code><a href='get_webservice_keys.html'>get_webservice_keys()</a></code>). If you've enabled token-based
 authentication, you will need to provide an JWT token as a bearer
-token in your request header (see <code><a href='get_webservice_token.html'>get_webservice_token()</a></code>).<br />
-<br />
-To get the REST API address for the service's scoring endpoint, you can
+token in your request header (see <code><a href='get_webservice_token.html'>get_webservice_token()</a></code>).</p>
+<p>To get the REST API address for the service's scoring endpoint, you can
 access the following property from the Webservice object:
 <code>service$scoring_uri</code></p>
     
@@ -200,7 +205,7 @@ access the following property from the Webservice object:
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

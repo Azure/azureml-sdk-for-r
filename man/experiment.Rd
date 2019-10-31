@@ -19,12 +19,12 @@ The \code{Experiment} object.
 \description{
 An experiment is a grouping of many runs from a specified script.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 exp <- experiment(ws, name = 'myexperiment')
 }
 }
-
 \seealso{
 \code{submit_experiment()}
 }

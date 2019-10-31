@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot table of run details in RStudio Viewer — view_run_details • azuremlsdk</title>
+<title>Plot table of run details — view_run_details • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,15 @@
 
 
 
-<meta property="og:title" content="Plot table of run details in RStudio Viewer — view_run_details" />
+<meta property="og:title" content="Plot table of run details — view_run_details" />
 
-<meta property="og:description" content="Plot table of run details in RStudio Viewer" />
+<meta property="og:description" content="Plot table of run details in RStudio Viewer or browser.
+This table does not auto-refresh. To see current values,
+re-run the command or click the web view link to view more
+details in real time.
+If you are running this method from an RMarkdown file, the
+run details table will show up in the code chunk output
+instead of the Viewer." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -74,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,21 +95,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -127,14 +139,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot table of run details in RStudio Viewer</h1>
+    <h1>Plot table of run details</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>view_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Plot table of run details in RStudio Viewer</p>
+    <p>Plot table of run details in RStudio Viewer or browser.
+This table does not auto-refresh. To see current values,
+re-run the command or click the web view link to view more
+details in real time.</p>
+<p>If you are running this method from an RMarkdown file, the
+run details table will show up in the code chunk output
+instead of the Viewer.</p>
     
     </div>
 
@@ -163,7 +181,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

@@ -40,10 +40,8 @@ Docker environment — pull_model_package_image" />
 local Docker environment. The output of this call will
 display the name of the image. For example:
 Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338.
-
 This can only be used with a Docker image ModelPackage (where
 package_model() was called with generate_dockerfile = FALSE).
-
 After you've pulled the image, you can start a local container based
 on this image using Docker commands." />
 <meta name="twitter:card" content="summary" />
@@ -85,7 +83,7 @@ on this image using Docker commands." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -100,21 +98,27 @@ on this image using Docker commands." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -149,12 +153,10 @@ Docker environment</h1>
     <p>Pull the Docker image from a created <code>ModelPackage</code> to your
 local Docker environment. The output of this call will
 display the name of the image. For example:
-<code>Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338</code>.<br />
-<br />
-This can only be used with a Docker image <code>ModelPackage</code> (where
-<code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = FALSE</code>).<br />
-<br />
-After you've pulled the image, you can start a local container based
+<code>Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338</code>.</p>
+<p>This can only be used with a Docker image <code>ModelPackage</code> (where
+<code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = FALSE</code>).</p>
+<p>After you've pulled the image, you can start a local container based
 on this image using Docker commands.</p>
     
     </div>
@@ -190,7 +192,7 @@ on this image using Docker commands.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

@@ -17,23 +17,24 @@ Return a \code{ContainerRegistry} object for where the image
 (or base image, for Dockerfile packages) is stored in an
 Azure container registry.
 }
-\section{Examples}{
-
-Given a \code{ModelPackage} object (see \code{package_model()}'s "Examples" section),
-get the container registry information:\preformatted{container_registry <- get_model_package_container_registry(package)
+\examples{
+# Given a ModelPackage object,
+# get the container registry information
+\dontrun{
+container_registry <- get_model_package_container_registry(package)
 address <- container_registry$address
 username <- container_registry$username
 password <- container_registry$password
 }
 
-\cr
-To then authenticate Docker with the Azure container registry from
-a shell or command-line session, use the following command, replacing
-\code{<address>}, \code{<username>}, and \code{<password>} with the values retrieved
-from above:\preformatted{docker login <address> -u <username> -p <password>
+# To then authenticate Docker with the Azure container registry from
+# a shell or command-line session, use the following command, replacing
+# <address>, <username>, and <password> with the values retrieved
+# from above:
+# ```bash
+# docker login <address> -u <username> -p <password>
+# ```
 }
-}
-
 \seealso{
 \code{container_registry()}
 }

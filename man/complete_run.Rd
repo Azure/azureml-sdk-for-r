@@ -12,11 +12,6 @@ complete_run(run)
 \description{
 Mark the run as completed. Use for an interactive logging run.
 }
-\section{Examples}{
-
-See "Examples" section of \code{start_logging_run()}.
-}
-
 \seealso{
 \code{start_logging_run()}
 }

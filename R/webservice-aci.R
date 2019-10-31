@@ -5,8 +5,8 @@
 #' @description
 #' Deploy a web service to Azure Container Instances for testing or
 #' debugging. Use ACI for low-scale CPU-based workloads that
-#' require less than 48 GB of RAM.\cr
-#' \cr
+#' require less than 48 GB of RAM.
+#'
 #' Deploy to ACI if one of the following conditions is true:
 #' * You need to quickly deploy and validate your model. You do not need
 #' to create ACI containers ahead of time. They are created as part of
@@ -40,10 +40,10 @@
 #' endpoint.
 #' @return The `AciServiceDeploymentConfiguration` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
-#' ```
+#' }
 #' @seealso
 #' `deploy_model()`
 #' @md
@@ -80,8 +80,8 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
 #' @description
 #' Update an ACI web service with the provided properties. You can update the
 #' web service to use a new model, a new entry script, or new dependencies
-#' that can be specified in an inference configuration.\cr
-#' \cr
+#' that can be specified in an inference configuration.
+#'
 #' Values left as `NULL` will remain unchanged in the web service.
 #' @param webservice The `AciWebservice` object.
 #' @param tags A named list of key-value tags for the web service,
@@ -99,25 +99,6 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
 #' @param models A list of `Model` objects to package into the updated service.
 #' @param inference_config An `InferenceConfig` object.
 #' @export
-#' @section Examples:
-#' Updating a web service to use a new model, entry script, and environment:
-#' ```
-#' ws <- load_workspace_from_config()
-#' # Register a new version of the model
-#' new_model <- register_model(ws,
-#'                             model_path = "my_model.rds"
-#'                             model_name = "my_model")
-#' # Use version 3 of a registered environment
-#' deploy_env <- get_environment(ws, name = "my_env", version = "3")
-#' inference_config = inference_config(entry_script = "score.R",
-#'                                     environment = deploy_env)
-#' # Retrieve existing web service
-#' service <- get_webservice(ws, name = "my_service")
-#' # Update the web service
-#' update_aci_webservice(service,
-#'                       models = list(new_model),
-#'                       inference_config = inference_config)
-#' ```
 #' @md
 update_aci_webservice <- function(webservice,
                                   tags = NULL,

@@ -53,22 +53,22 @@
 #' "enterprise" edition.
 #' @return The `Workspace` object.
 #' @export
-#' @section Examples:
-#' The first example requires only minimal specification, and all dependent
-#' resources as well as the resource group will be created automatically.
-#' ```
+#' @examples
+#' # This example requires only minimal specification, and all dependent
+#' # resources as well as the resource group will be created automatically.
+#' \dontrun{
 #' ws <- create_workspace(name = 'myworkspace',
 #'                        subscription_id = '<azure-subscription-id>',
 #'                        resource_group = 'myresourcegroup',
 #'                        location = 'eastus2')
-#' ```
+#' }
 #'
-#' The following example shows how to reuse existing Azure resources by making
-#' use of all parameters utilizing the Azure resource ID format. The specific
-#' Azure resource IDs can be retrieved through the Azure Portal or SDK. This
-#' assumes that the resource group, storage account, key vault, App Insights
-#' and container registry already exist.
-#' ```
+#' # This example shows how to reuse existing Azure resources by making
+#' # use of all parameters utilizing the Azure resource ID format. The specific
+#' # Azure resource IDs can be retrieved through the Azure Portal or SDK. This
+#' # assumes that the resource group, storage account, key vault, App Insights
+#' # and container registry already exist
+#' \dontrun{
 #' ws <- create_workspace(
 #'        name = 'myworkspace',
 #'        subscription_id = '<azure-subscription-id>',
@@ -80,7 +80,7 @@
 #'        key_vault = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault',
 #'        app_insights = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights',
 #'        container_registry = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
-#' ```
+#' }
 #' @md
 create_workspace <- function(
   name,
@@ -236,20 +236,20 @@ write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
 #' @param workspace The `Workspace` object.
 #' @return The default `Datastore` object.
 #' @export
-#' @section Examples:
-#' Get the default datastore for the datastore:
-#' ```
+#' @examples
+#' # Get the default datastore for the datastore
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' ds <- get_default_datastore(ws)
-#' ```
+#' }
 #'
-#' If you have not changed the default datastore for the workspace, the
-#' following code will return the same datastore object as the above
-#' example:
-#' ```
+#' # If you have not changed the default datastore for the workspace, the
+#' # following code will return the same datastore object as the above
+#' # example
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' ds <- get_datastore(ws, datastore_name = 'workspaceblobstore')
-#' ```
+#' }
 #' @md
 get_default_datastore <- function(workspace) {
   workspace$get_default_datastore()
@@ -276,7 +276,7 @@ get_default_keyvault <- function(workspace) {
 #' @description
 #' Returns the details of the workspace.
 #' @param workspace The `Workspace` object.
-#' @return A named list of the workspace details.
+#' @return workspace details as data frame.
 #' @export
 #' @section Details:
 #' The returned list contains the following named elements:
@@ -298,7 +298,8 @@ get_default_keyvault <- function(workspace) {
 #' * *storageAccount*: Workspace storage account.
 #' @md
 get_workspace_details <- function(workspace) {
-  workspace$get_details()
+  details <- workspace$get_details()
+  as.data.frame(details)
 }
 
 #' Set the default datastore for a workspace

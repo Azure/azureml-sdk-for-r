@@ -56,8 +56,8 @@ The \code{AciServiceDeploymentConfiguration} object.
 \description{
 Deploy a web service to Azure Container Instances for testing or
 debugging. Use ACI for low-scale CPU-based workloads that
-require less than 48 GB of RAM.\cr
-\cr
+require less than 48 GB of RAM.
+
 Deploy to ACI if one of the following conditions is true:
 \itemize{
 \item You need to quickly deploy and validate your model. You do not need
@@ -66,11 +66,11 @@ the deployment process.
 \item You are testing a model that is under development.
 }
 }
-\section{Examples}{
-\preformatted{deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
+\examples{
+\dontrun{
+deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
 }
 }
-
 \seealso{
 \code{deploy_model()}
 }

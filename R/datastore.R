@@ -7,7 +7,7 @@
 #' Upload the data from the local file system to the Azure storage that the
 #' datastore points to.
 #' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
-#' @param files A list of strings of the absolute path to files to upload.
+#' @param files A character vector of the absolute path to files to upload.
 #' @param relative_root A string of the base path from which is used to
 #' determine the path of the files in the Azure storage. For example, if
 #' we upload `/path/to/file.txt`, and we define the base path to be `/path`,
@@ -80,9 +80,9 @@ download_from_datastore <- function(datastore,
                                     overwrite = FALSE,
                                     show_progress = TRUE) {
   datastore$download(target_path,
-              prefix = prefix,
-              overwrite = overwrite,
-              show_progress = show_progress)
+                     prefix = prefix,
+                     overwrite = overwrite,
+                     show_progress = show_progress)
   invisible(NULL)
 }
 
@@ -141,16 +141,15 @@ get_datastore <- function(workspace, datastore_name) {
 #' expensive, we suggest premium storage due to faster throughput speeds that
 #' may improve the speed of your training runs, particularly if you train
 #' against a large dataset.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
-#' ds <- register_azure_blob_container_datastore(
-#'                                ws,
-#'                                datastore_name = 'mydatastore',
-#'                                container_name = 'myazureblobcontainername',
-#'                                account_name = 'mystorageaccoutname',
-#'                                account_key = 'mystorageaccountkey')
-#' ```
+#' ds <- register_azure_blob_container_datastore(ws,
+#'                                               datastore_name = 'mydatastore',
+#'                                               container_name = 'myazureblobcontainername',
+#'                                               account_name = 'mystorageaccoutname',
+#'                                               account_key = 'mystorageaccountkey')
+#' }
 #' @md
 register_azure_blob_container_datastore <- function(
                                                 workspace,
@@ -216,16 +215,15 @@ register_azure_blob_container_datastore <- function(
 #' expensive, we suggest premium storage due to faster throughput speeds that
 #' may improve the speed of your training runs, particularly if you train
 #' against a large dataset.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
-#' ds <- register_azure_file_share_datastore(
-#'                                    ws,
-#'                                    datastore_name = 'mydatastore',
-#'                                    file_share_name = 'myazurefilesharename',
-#'                                    account_name = 'mystorageaccoutname',
-#'                                    account_key = 'mystorageaccountkey')
-#' ```
+#' ds <- register_azure_file_share_datastore(ws,
+#'                                           datastore_name = 'mydatastore',
+#'                                           file_share_name = 'myazurefilesharename',
+#'                                           account_name = 'mystorageaccoutname',
+#'                                           account_key = 'mystorageaccountkey')
+#' }
 #' @md
 register_azure_file_share_datastore <- function(workspace,
                                                 datastore_name,

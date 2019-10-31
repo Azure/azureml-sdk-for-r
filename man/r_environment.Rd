@@ -54,10 +54,9 @@ Docker image and creates a conda environment with your specifications from
 your \code{Environment} object within that Docker container.
 
 If the \code{custom_docker_image} parameter
-is not set, Azure ML automatically uses a default base image (CPU or GPU
-depending on the \code{use_gpu} flag) and installs any R packages specified in the
+is not set, Azure ML will build a default base image (CPU or GPU
+depending on the \code{use_gpu} flag) and install any R packages specified in the
 \code{cran_packages}, \code{github_packages}, or \code{custom_url_packages} parameters.
-TODO: link to the Dockerfiles of the default base images.
 }
 \section{Details}{
 
@@ -74,15 +73,14 @@ deploy a model, or manually register the environment. The versioning allows
 you to view changes to the environment over time.
 }
 
-\section{Examples}{
-
-The following example defines an environment that will use the default
-base CPU image and install the additional e1071 package from CRAN.\preformatted{r_env <- r_environment(name = 'myr_env',
-                       version = '1',
-                       cran_packages = c('e1071'))
+\examples{
+# The following example defines an environment that will build the default
+# base CPU image.
+\dontrun{
+r_env <- r_environment(name = 'myr_env',
+                       version = '1')
 }
 }
-
 \seealso{
 \code{estimator()}, \code{inference_config()}
 }

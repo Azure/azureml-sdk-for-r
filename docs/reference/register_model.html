@@ -40,7 +40,6 @@ you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
 were registered.
-
 Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
@@ -84,7 +83,7 @@ and the new model is registered under the same name." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -99,21 +98,27 @@ and the new model is registered under the same name." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -149,9 +154,8 @@ container for one or more files that make up your model. For example, if
 you have a model that's stored in multiple files, you can register them
 as a single model in your workspace. After registration, you can then
 download or deploy the registered model and receive all the files that
-were registered.<br />
-<br />
-Models are identified by name and version. Each time you register a
+were registered.</p>
+<p>Models are identified by name and version. Each time you register a
 model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.</p>
@@ -207,18 +211,15 @@ pointing to a folder; only the specified files will be bundled into the
 
     <p>The <code>Model</code> object.</p>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Registering a model from a single file:</p><pre>ws &lt;- load_workspace_from_config()
-model &lt;- register_model(ws,
-                        model_path = "my_model.rds",
-                        model_name = "my_model")
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='co'># Registering a model from a single file</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>register_model</span>(<span class='no'>ws</span>,
+                        <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='st'>"my_model.rds"</span>,
+                        <span class='kw'>model_name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -226,9 +227,9 @@ model &lt;- register_model(ws,
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
+      
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -236,7 +237,7 @@ model &lt;- register_model(ws,
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

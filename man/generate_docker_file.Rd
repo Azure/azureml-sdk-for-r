@@ -5,7 +5,8 @@
 \title{Generate a dockerfile string to build the image for training.}
 \usage{
 generate_docker_file(custom_docker_image = NULL, cran_packages = NULL,
-  github_packages = NULL, custom_url_packages = NULL)
+  github_packages = NULL, custom_url_packages = NULL,
+  install_system_packages = TRUE)
 }
 \arguments{
 \item{custom_docker_image}{The name of the docker image from which the image
@@ -18,6 +19,9 @@ be used as the base image.}
 
 \item{custom_url_packages}{character vector of packages to be installed from
 local, directory or custom url.}
+
+\item{install_system_packages}{logical parameter to specify if system
+packages should be installed at runtime.}
 }
 \description{
 Generate a dockerfile string to build the image for training.

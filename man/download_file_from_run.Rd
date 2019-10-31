@@ -23,8 +23,3 @@ the \code{./outputs} or \code{./logs} folders during a run.
 You can see what files are available to download from the run record
 by calling \code{get_run_file_names()}.
 }
-\section{Examples}{
-
-See "Examples" section of \code{upload_files_to_run()}.
-}
-

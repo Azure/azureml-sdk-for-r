@@ -16,15 +16,10 @@ to \code{FALSE}.}
 \description{
 Automatically poll on the running web service deployment and
 wait for the web service to reach a terminal state. Will throw
-an exception if it reaches a non-successful terminal state.\cr
-\cr
+an exception if it reaches a non-successful terminal state.
+
 Typically called after running \code{deploy_model()}.
 }
-\section{Examples}{
-
-See "Examples" section of \code{deploy_model()}.
-}
-
 \seealso{
 \code{deploy_model()}
 }

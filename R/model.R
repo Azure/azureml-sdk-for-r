@@ -48,8 +48,8 @@ get_model <- function(workspace,
 #' you have a model that's stored in multiple files, you can register them
 #' as a single model in your workspace. After registration, you can then
 #' download or deploy the registered model and receive all the files that
-#' were registered.\cr
-#' \cr
+#' were registered.
+#'
 #' Models are identified by name and version. Each time you register a
 #' model with the same name as an existing one, your workspace's model
 #' registry assumes that it's a new version. The version is incremented,
@@ -72,14 +72,14 @@ get_model <- function(workspace,
 #' `Model` object.
 #' @return The `Model` object.
 #' @export
-#' @section Examples:
-#' Registering a model from a single file:
-#' ```
+#' @examples
+#' # Registering a model from a single file
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- register_model(ws,
 #'                         model_path = "my_model.rds",
 #'                         model_name = "my_model")
-#' ```
+#' }
 #' @md
 register_model <- function(workspace,
                            model_path,
@@ -110,12 +110,12 @@ register_model <- function(workspace,
 #' @return A string of the path to the file or folder of the downloaded
 #' model.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model", version = 2)
 #' download_model(model, exist_ok = TRUE)
-#' ```
+#' }
 #' @md
 download_model <- function(model, target_dir = ".", exist_ok = FALSE) {
   model_path <- model$download(target_dir, exist_ok)
@@ -187,9 +187,8 @@ delete_model <- function(model) {
 #' @section Details:
 #' If you encounter any issue in deploying your web service, please visit this
 #' [troubleshooting guide](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment).
-#' @section Examples:
-#' Deploying a model as a web service on ACI:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model")
 #' r_env <- r_environment(name = "r_env")
@@ -203,7 +202,7 @@ delete_model <- function(model) {
 #'                         inference_config = inference_config,
 #'                         deployment_config = deployment_config)
 #' wait_for_deployment(service, show_output = TRUE)
-#' ```
+#' }
 #' @seealso
 #' `inference_config()`, `aci_webservice_deployment_config()`,
 #' `aks_webservice_deployment_config()`, `local_webservice_deployment_config()`
@@ -230,8 +229,8 @@ deploy_model <- function(workspace,
 #' the model (for example, if you plan to deploy to Azure App Service). Or
 #' you might want to download the image and run it on a local Docker installation.
 #' You might even want to download the files used to build the image, inspect
-#' them, modify them, and build the image manually.\cr
-#' \cr
+#' them, modify them, and build the image manually.
+#'
 #' Model packaging enables you to do these things. `package_model()` packages all
 #' the assets needed to host a model as a web service and allows you to download
 #' either a fully built Docker image or the files needed to build one. There are
@@ -241,7 +240,7 @@ deploy_model <- function(workspace,
 #' * **Generate a Dockerfile**: Download the Dockerfile, model, entry script, and
 #' other assets needed to build a Docker image. You can then inspect the files or
 #' make changes before you build the image locally. To use this method, make sure
-#' to set `generate_dockerfile = TRUE`.\cr
+#' to set `generate_dockerfile = TRUE`.
 #' With either scenario, you will need to have Docker installed in your
 #' development environment.
 #' @param workspace The `Workspace` object.
@@ -253,9 +252,9 @@ deploy_model <- function(workspace,
 #' can be run locally instead of building an image.
 #' @return The `ModelPackage` object.
 #' @export
-#' @section Examples:
-#' Package a registered model:
-#' ```
+#' @examples
+#' # Package a registered model
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model")
 #' r_env <- r_environment(name = "r_env")
@@ -266,7 +265,7 @@ deploy_model <- function(workspace,
 #'                          models = list(model),
 #'                          inference_config = inference_config)
 #' wait_for_model_package_creation(show_output = TRUE)
-#' ```
+#' }
 #' @seealso
 #' `wait_for_model_package_creation()`, `get_model_package_container_registry()`,
 #' `get_model_package_creation_logs()`, `pull_model_package_image()`,
@@ -291,23 +290,23 @@ package_model <- function(workspace,
 #' @param package The `ModelPackage` object.
 #' @return The `ContainerRegistry` object.
 #' @export
-#' @section Examples:
-#' Given a `ModelPackage` object (see `package_model()`'s "Examples" section),
-#' get the container registry information:
-#' ```
+#' @examples
+#' # Given a ModelPackage object,
+#' # get the container registry information
+#' \dontrun{
 #' container_registry <- get_model_package_container_registry(package)
 #' address <- container_registry$address
 #' username <- container_registry$username
 #' password <- container_registry$password
-#' ```
-#' \cr
-#' To then authenticate Docker with the Azure container registry from
-#' a shell or command-line session, use the following command, replacing
-#' `<address>`, `<username>`, and `<password>` with the values retrieved
-#' from above:
-#' ```bash
-#' docker login <address> -u <username> -p <password>
-#' ```
+#' }
+#'
+#' # To then authenticate Docker with the Azure container registry from
+#' # a shell or command-line session, use the following command, replacing
+#' # <address>, <username>, and <password> with the values retrieved
+#' # from above:
+#' # ```bash
+#' # docker login <address> -u <username> -p <password>
+#' # ```
 #' @seealso
 #' `container_registry()`
 #' @md
@@ -338,11 +337,11 @@ get_model_package_creation_logs <- function(package,
 #' Pull the Docker image from a created `ModelPackage` to your
 #' local Docker environment. The output of this call will
 #' display the name of the image. For example:
-#' `Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`.\cr
-#' \cr
+#' `Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`.
+#'
 #' This can only be used with a Docker image `ModelPackage` (where
-#' `package_model()` was called with `generate_dockerfile = FALSE`).\cr
-#' \cr
+#' `package_model()` was called with `generate_dockerfile = FALSE`).
+#'
 #' After you've pulled the image, you can start a local container based
 #' on this image using Docker commands.
 #' @param package The `ModelPackage` object.
@@ -358,12 +357,12 @@ pull_model_package_image <- function(package) {
 #' your local file system
 #' @description
 #' Download the Dockerfile, model, and other assets needed to build
-#' an image locally from a created `ModelPackage`.\cr
-#' \cr
+#' an image locally from a created `ModelPackage`.
+#'
 #' This can only be used with a Dockerfile `ModelPackage` (where
 #' `package_model()` was called with `generate_dockerfile = TRUE` to
-#' indicated that you wanted only the files and not a fully built image).\cr
-#' \cr
+#' indicated that you wanted only the files and not a fully built image).
+#'
 #' `save_model_package_files()` downloads the files needed to build the
 #' image to the `output_directory`. The Dockerfile included in the saved
 #' files references a base image stored in an Azure container registry.
@@ -388,8 +387,6 @@ save_model_package_files <- function(package, output_directory) {
 #' @param show_output If `TRUE`, print more verbose output. Defaults to
 #' `FALSE`.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `package_model()`.
 #' @md
 wait_for_model_package_creation <- function(package, show_output = FALSE) {
   package$wait_for_creation(show_output)
@@ -404,7 +401,7 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' to define the software dependencies needed for your deployment.
 #' @param entry_script A string of the path to the local file that contains
 #' the code to run for making predictions.
-#' @param source_directory (Optional) A string of the path to the local folder
+#' @param source_directory A string of the path to the local folder
 #' that contains the files to package and deploy alongside your model, such as
 #' helper files for your scoring script (`entry_script`). The folder must
 #' contain the `entry_script`.
@@ -423,8 +420,8 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' and the format of the data returned to clients. If the request data is in a
 #' format that is not usable by your model, the script can transform it into
 #' an acceptable format. It can also transform the response before returning
-#' it to the client.\cr
-#' \cr
+#' it to the client.
+#'
 #' The entry script must contain an `init()` method that loads your model and
 #' then returns a function that uses the model to make a prediction based on
 #' the input data passed to the function. Azure ML runs the `init()` method
@@ -432,25 +429,18 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' prediction function returned by `init()` will be run every time the service
 #' is invoked to make a prediction on some input data. The inputs and outputs
 #' of this prediction function typically use JSON for serialization and
-#' deserialization.\cr
-#' \cr
+#' deserialization.
+#'
 #' To locate the model in your entry script (when you load the model in the
 #' script's `init()` method), use `AZUREML_MODEL_DIR`, an environment variable
 #' containing the path to the model location. The environment variable is
 #' created during service deployment, and you can use it to find the location
-#' of your deployed model(s).\cr
-#' \cr
-#' The following table describes the value of `AZUREML_MODEL_DIR` depending
-#' on the number of models deployed:
-#' \tabular{rr}{
-#' **Deployment** \tab **Environment variable value**\cr
-#' Single model \tab The path to the folder containing the model\cr
-#' Multiple models \tab The path to the folder containing all models. Models are located by name and version in this folder (`$MODEL_NAME/$VERSION`)
-#' }
+#' of your deployed model(s).
+#'
 #' To get the path to a file in a model, combine the environment variable
 #' with the filename you're looking for. The filenames of the model files
-#' are preserved during registration and deployment.\cr
-#' \cr
+#' are preserved during registration and deployment.
+#'
 #' Single model example:
 #' ```
 #' model_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model.rds")
@@ -460,17 +450,6 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' model1_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 #' ```
 #' }
-#' @section Examples:
-#' The following example loads a previously registered environment from
-#' your workspace and uses it for defining the inference config:
-#' ```
-#' ws <- load_workspace_from_config()
-#' deploy_env = get_environment(ws, name = "my_env", version = "1")
-#' inference_config = inference_config(entry_script = "score.R",
-#'                                     environment = deploy_env)
-#' ```
-#' You can then specify the inference config to `deploy_model()` to
-#' deploy a web service.
 #' @seealso
 #' `r_environment()`, `deploy_model()`
 #' @md
@@ -480,21 +459,38 @@ inference_config <- function(entry_script,
                              environment = NULL) {
   saved_image <- NULL
   generate_score_python_wrapper(entry_script, source_directory)
-  if (!is.null(environment)) {
-      environment$inferencing_stack_version <- "latest"
 
-      # this is a temporary fix for github issue #101
-      saved_image <- environment$docker$base_image
-      environment$docker$base_image <- "temp_image"
+  if (is.null(environment)) {
+    environment <- r_environment("inferenceenv")
   }
 
-  inference_config <- azureml$core$model$InferenceConfig(
-    entry_script = "_generated_score.py",
-    source_directory = source_directory,
-    description = description,
-    environment = environment)
+  environment$inferencing_stack_version <- "latest"
 
-  inference_config$environment$docker$base_image <- saved_image
+  saved_image <- environment$docker$base_image
+  inference_config <- tryCatch({
+    # this is a temporary fix for github issue #101
+    environment$docker$base_image <- "temp_image"
+
+    inference_config <- azureml$core$model$InferenceConfig(
+      entry_script = "_generated_score.py",
+      source_directory = source_directory,
+      description = description,
+      environment = environment)
+
+    inference_config$environment$docker$base_image <- saved_image
+    inference_config
+  }, error = function(err) {
+    environment$docker$base_image <- saved_image
+
+    # this is the final code should be kept after upgrading default python sdk
+    # version to 1.0.72
+    azureml$core$model$InferenceConfig(
+      entry_script = "_generated_score.py",
+      source_directory = source_directory,
+      description = description,
+      environment = environment)
+  })
+
   invisible(inference_config)
 }
 

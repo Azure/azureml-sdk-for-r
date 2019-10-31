@@ -80,7 +80,7 @@ object corresponding to the deployed web service." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -95,21 +95,27 @@ object corresponding to the deployed web service." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -207,32 +213,28 @@ or to ACI, leave this parameter as <code>NULL</code>.</p></td>
 <p>If you encounter any issue in deploying your web service, please visit this
 <a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment'>troubleshooting guide</a>.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Deploying a model as a web service on ACI:</p><pre>ws &lt;- load_workspace_from_config()
-model &lt;- get_model(ws, name = "my_model")
-r_env &lt;- r_environment(name = "r_env")
-inference_config &lt;- inference_config(entry_script = "score.R",
-                                     source_directory = ".",
-                                     environment = r_env)
-deployment_config &lt;- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)
-service &lt;- deploy_model(ws,
-                        name = "my_webservice",
-                        models = list(model),
-                        inference_config = inference_config,
-                        deployment_config = deployment_config)
-wait_for_deployment(service, show_output = TRUE)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='inference_config.html'>inference_config()</a></code>, <code><a href='aci_webservice_deployment_config.html'>aci_webservice_deployment_config()</a></code>,
 <code><a href='aks_webservice_deployment_config.html'>aks_webservice_deployment_config()</a></code>, <code><a href='local_webservice_deployment_config.html'>local_webservice_deployment_config()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='r_environment.html'>r_environment</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"r_env"</span>)
+<span class='no'>inference_config</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='inference_config.html'>inference_config</a></span>(<span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"score.R"</span>,
+                                     <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                                     <span class='kw'>environment</span> <span class='kw'>=</span> <span class='no'>r_env</span>)
+<span class='no'>deployment_config</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='aci_webservice_deployment_config.html'>aci_webservice_deployment_config</a></span>(<span class='kw'>cpu_cores</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>memory_gb</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='no'>service</span> <span class='kw'>&lt;-</span> <span class='fu'>deploy_model</span>(<span class='no'>ws</span>,
+                        <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_webservice"</span>,
+                        <span class='kw'>models</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model</span>),
+                        <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='no'>inference_config</span>,
+                        <span class='kw'>deployment_config</span> <span class='kw'>=</span> <span class='no'>deployment_config</span>)
+<span class='fu'><a href='wait_for_deployment.html'>wait_for_deployment</a></span>(<span class='no'>service</span>, <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -243,10 +245,10 @@ wait_for_deployment(service, show_output = TRUE)
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -254,7 +256,7 @@ wait_for_deployment(service, show_output = TRUE)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

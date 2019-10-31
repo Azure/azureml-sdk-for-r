@@ -17,12 +17,11 @@ e.g. \code{list("metric_name" = metric)}.
 Retrieve the metrics logged to a run that were logged with
 the \code{log_*()} methods.
 }
-\section{Examples}{
-
-Retrieve a run from the workspace and get its metrics:\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 exp <- experiment(ws, name = 'myexperiment')
 run <- get_run(exp, run_id = "myrunid")
 metrics <- get_run_metrics(run)
 }
 }
-

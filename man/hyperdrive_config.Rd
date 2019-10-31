@@ -60,8 +60,9 @@ the compute target to execute the experiment runs on.
 To submit the HyperDrive experiment, pass the \code{HyperDriveConfig} object
 returned from this method to \code{submit_experiment()}.
 }
-\section{Examples}{
-\preformatted{# Load the workspace
+\examples{
+\dontrun{
+# Load the workspace
 ws <- load_workspace_from_config()
 
 # Get the compute target
@@ -94,7 +95,6 @@ exp <- experiment(ws, name = 'myexperiment')
 run = submit_experiment(exp, hyperdrive_run_config)
 }
 }
-
 \seealso{
 \code{submit_experiment()}
 }

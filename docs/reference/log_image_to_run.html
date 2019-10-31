@@ -77,7 +77,7 @@ record." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -92,21 +92,27 @@ record." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -173,26 +179,25 @@ to the current run from the service context.</p></td>
     </tr>
     </table>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Log an image file to the run:
-<code>log_image_to_run("myplot", "myplot.png")</code>
-Log a ggplot2 plot to the run:</p><pre>plot &lt;- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
-log_image_to_run("myplot", plot)
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='co'># Log an image file to the run</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>`log_image_to_run("myplot", "myplot.png")`</span>
+}
+<span class='co'># Log a ggplot2 plot to the run</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mydata</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"x_axis_name"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"y_axis_name"</span>))
+<span class='fu'>log_image_to_run</span>(<span class='st'>"myplot"</span>, <span class='no'>plot</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -200,7 +205,7 @@ log_image_to_run("myplot", plot)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

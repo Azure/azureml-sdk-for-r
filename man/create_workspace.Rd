@@ -77,20 +77,23 @@ models.
 sensitive information that's needed by the workspace.
 }
 }
-\section{Examples}{
-
-The first example requires only minimal specification, and all dependent
-resources as well as the resource group will be created automatically.\preformatted{ws <- create_workspace(name = 'myworkspace',
+\examples{
+# This example requires only minimal specification, and all dependent
+# resources as well as the resource group will be created automatically.
+\dontrun{
+ws <- create_workspace(name = 'myworkspace',
                        subscription_id = '<azure-subscription-id>',
                        resource_group = 'myresourcegroup',
                        location = 'eastus2')
 }
 
-The following example shows how to reuse existing Azure resources by making
-use of all parameters utilizing the Azure resource ID format. The specific
-Azure resource IDs can be retrieved through the Azure Portal or SDK. This
-assumes that the resource group, storage account, key vault, App Insights
-and container registry already exist.\preformatted{ws <- create_workspace(
+# This example shows how to reuse existing Azure resources by making
+# use of all parameters utilizing the Azure resource ID format. The specific
+# Azure resource IDs can be retrieved through the Azure Portal or SDK. This
+# assumes that the resource group, storage account, key vault, App Insights
+# and container registry already exist
+\dontrun{
+ws <- create_workspace(
        name = 'myworkspace',
        subscription_id = '<azure-subscription-id>',
        resource_group = 'myresourcegroup',
@@ -103,4 +106,3 @@ and container registry already exist.\preformatted{ws <- create_workspace(
        container_registry = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
 }
 }
-

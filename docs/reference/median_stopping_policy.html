@@ -79,7 +79,7 @@ the median of the running averages for intervals 1:N across all runs." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -94,21 +94,27 @@ the median of the running averages for intervals 1:N across all runs." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -191,19 +197,16 @@ terminating promising jobs, you can use a <code>MedianStoppingPolicy</code> with
 settings that can provide approximately 25<!-- %-35% savings with no loss on -->
 the primary metric (based on our evaluation data).</p>
     
+
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>In this example, the early termination policy is applied at every
-interval starting at evaluation interval 5. A run will be terminated at
-interval 5 if its best primary metric is worse than the median of the
-running averages over intervals 1:5 across all training runs.</p><pre>early_termination_policy = median_stopping_policy(evaluation_interval = 1L,
-                                                  delay_evaluation = 5L)
-</pre>
-
-    
-
+    <pre class="examples"><div class='input'><span class='co'># In this example, the early termination policy is applied at every</span>
+<span class='co'># interval starting at evaluation interval 5. A run will be terminated at</span>
+<span class='co'># interval 5 if its best primary metric is worse than the median of the</span>
+<span class='co'># running averages over intervals 1:5 across all training runs</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>early_termination_policy</span> <span class='kw'>=</span> <span class='fu'>median_stopping_policy</span>(<span class='kw'>evaluation_interval</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+                                                  <span class='kw'>delay_evaluation</span> <span class='kw'>=</span> <span class='fl'>5L</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -213,9 +216,9 @@ running averages over intervals 1:5 across all training runs.</p><pre>early_term
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
+      
       <li><a href="#examples">Examples</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -223,7 +226,7 @@ running averages over intervals 1:5 across all training runs.</p><pre>early_term
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

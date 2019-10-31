@@ -10,10 +10,9 @@
 #' your `Environment` object within that Docker container.
 #'
 #' If the `custom_docker_image` parameter
-#' is not set, Azure ML automatically uses a default base image (CPU or GPU
-#' depending on the `use_gpu` flag) and installs any R packages specified in the
+#' is not set, Azure ML will build a default base image (CPU or GPU
+#' depending on the `use_gpu` flag) and install any R packages specified in the
 #' `cran_packages`, `github_packages`, or `custom_url_packages` parameters.
-#' TODO: link to the Dockerfiles of the default base images.
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @param environment_variables A named list of environment variables names
@@ -52,14 +51,13 @@
 #' a new version of the environment is created when you either submit a run,
 #' deploy a model, or manually register the environment. The versioning allows
 #' you to view changes to the environment over time.
-#' @section Examples:
-#' The following example defines an environment that will use the default
-#' base CPU image and install the additional e1071 package from CRAN.
-#' ```
+#' @examples
+#' # The following example defines an environment that will build the default
+#' # base CPU image.
+#' \dontrun{
 #' r_env <- r_environment(name = 'myr_env',
-#'                        version = '1',
-#'                        cran_packages = c('e1071'))
-#' ```
+#'                        version = '1')
+#' }
 #' @seealso
 #' `estimator()`, `inference_config()`
 #' @md
@@ -87,33 +85,42 @@ r_environment <- function(name, version = NULL,
   }
 
   if (is.null(custom_docker_image)) {
-    processor <- "cpu"
     if (use_gpu) {
-      processor <- "gpu"
+      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base-",
+                                        "gpu:openmpi3.1.2-cuda10.0-cudnn7-",
+                                        "ubuntu16.04")
     }
-    env$docker$base_image <- paste("r-base",
-                                   processor,
-                                   sep = ":")
-    env$docker$base_image_registry$address <-
-      "viennaprivate.azurecr.io"
-  }
+    else {
+      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base:",
+                                        "openmpi3.1.2-ubuntu16.04")
+    }
 
-  # if extra package is specified, generate dockerfile
-  if (!is.null(cran_packages) ||
-      !is.null(github_packages) ||
-      !is.null(custom_url_packages)) {
-    base_image_with_address <- NULL
-    registry_address <- env$docker$base_image_registry$address
-    if (!is.null(env$docker$base_image_registry$address)) {
-      base_image_with_address <- paste(registry_address,
-                                       env$docker$base_image,
-                                       sep = "/")
-    }
     env$docker$base_dockerfile <- generate_docker_file(base_image_with_address,
                                                        cran_packages,
                                                        github_packages,
                                                        custom_url_packages)
     env$docker$base_image <- NULL
+  }
+  else {
+    # if extra package is specified, generate dockerfile
+    if (!is.null(cran_packages) ||
+        !is.null(github_packages) ||
+        !is.null(custom_url_packages)) {
+      base_image_with_address <- env$docker$base_image
+      registry_address <- env$docker$base_image_registry$address
+      if (!is.null(env$docker$base_image_registry$address)) {
+        base_image_with_address <- paste(registry_address,
+                                         env$docker$base_image,
+                                         sep = "/")
+      }
+      env$docker$base_dockerfile <- generate_docker_file(
+        base_image_with_address,
+        cran_packages,
+        github_packages,
+        custom_url_packages,
+        FALSE)
+      env$docker$base_image <- NULL
+    }
   }
 
   invisible(env)
@@ -151,11 +158,11 @@ register_environment <- function(environment, workspace) {
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @return The `Environment` object.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' env <- get_environment(ws, name = 'myenv', version = '1')
-#' ```
+#' }
 #' @export
 #' @md
 get_environment <- function(workspace, name, version = NULL) {
@@ -199,13 +206,30 @@ container_registry <- function(address = NULL,
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
+#' @param install_system_packages logical parameter to specify if system
+#' packages should be installed at runtime.
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,
-                                 custom_url_packages = NULL) {
+                                 custom_url_packages = NULL,
+                                 install_system_packages = TRUE) {
   base_dockerfile <- NULL
   base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
                                                      custom_docker_image))
+
+  if (install_system_packages) {
+    base_dockerfile <- paste0(base_dockerfile,
+                              "RUN conda install -c r -y r-essentials=3.6.0 ",
+                              "r-reticulate rpy2 r-remotes r-e1071 ",
+                              "r-optparse && conda clean -ay && pip ",
+                              "install --no-cache-dir azureml-defaults\n")
+
+    base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
+    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
+                              "install_github(repo = 'https://github.com/",
+                              "Azure/azureml-sdk-for-r', ref = 'v0.5.6', ",
+                              "upgrade = FALSE)\"\n")
+  }
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {

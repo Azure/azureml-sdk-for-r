@@ -18,15 +18,12 @@ Grid sampling performs a simple grid search over all feasible values in
 the defined search space. It can only be used with hyperparameters
 specified using \code{choice()}.
 }
-\section{Examples}{
-\preformatted{param_sampling <- grid_parameter_sampling( {
-        'num_hidden_layers': choice(1, 2, 3),
-        'batch_size': choice(16, 32)
-    }
-)
+\examples{
+\dontrun{
+param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(1, 2, 3),
+                                               "batch_size" = choice(16, 32)))
 }
 }
-
 \seealso{
 \code{choice()}
 }

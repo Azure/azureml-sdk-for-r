@@ -41,7 +41,6 @@ the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
 them, modify them, and build the image manually.
-
 Model packaging enables you to do these things. package_model() packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
@@ -95,7 +94,7 @@ development environment.
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -110,21 +109,27 @@ development environment.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -160,9 +165,8 @@ model as a web service</h1>
 the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
-them, modify them, and build the image manually.<br />
-<br />
-Model packaging enables you to do these things. <code>package_model()</code> packages all
+them, modify them, and build the image manually.</p>
+<p>Model packaging enables you to do these things. <code>package_model()</code> packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
 two ways to use model packaging:</p><ul>
@@ -171,7 +175,7 @@ and other files needed to host it as a web service.</p></li>
 <li><p><strong>Generate a Dockerfile</strong>: Download the Dockerfile, model, entry script, and
 other assets needed to build a Docker image. You can then inspect the files or
 make changes before you build the image locally. To use this method, make sure
-to set <code>generate_dockerfile = TRUE</code>.<br />
+to set <code>generate_dockerfile = TRUE</code>.
 With either scenario, you will need to have Docker installed in your
 development environment.</p></li>
 </ul>
@@ -210,23 +214,6 @@ can be run locally instead of building an image.</p></td>
 
     <p>The <code>ModelPackage</code> object.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-
-<p>Package a registered model:</p><pre>ws &lt;- load_workspace_from_config()
-model &lt;- get_model(ws, name = "my_model")
-r_env &lt;- r_environment(name = "r_env")
-inference_config &lt;- inference_config(entry_script = "score.R",
-                                     source_directory = ".",
-                                     environment = r_env)
-package &lt;- package_model(ws,
-                         models = list(model),
-                         inference_config = inference_config)
-wait_for_model_package_creation(show_output = TRUE)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='wait_for_model_package_creation.html'>wait_for_model_package_creation()</a></code>, <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code>,
@@ -234,6 +221,20 @@ wait_for_model_package_creation(show_output = TRUE)
 <code><a href='save_model_package_files.html'>save_model_package_files()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Package a registered model</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='r_environment.html'>r_environment</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"r_env"</span>)
+<span class='no'>inference_config</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='inference_config.html'>inference_config</a></span>(<span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"score.R"</span>,
+                                     <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                                     <span class='kw'>environment</span> <span class='kw'>=</span> <span class='no'>r_env</span>)
+<span class='no'>package</span> <span class='kw'>&lt;-</span> <span class='fu'>package_model</span>(<span class='no'>ws</span>,
+                         <span class='kw'>models</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model</span>),
+                         <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='no'>inference_config</span>)
+<span class='fu'><a href='wait_for_model_package_creation.html'>wait_for_model_package_creation</a></span>(<span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -242,10 +243,10 @@ wait_for_model_package_creation(show_output = TRUE)
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -253,7 +254,7 @@ wait_for_model_package_creation(show_output = TRUE)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

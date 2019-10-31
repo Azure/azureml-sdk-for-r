@@ -28,8 +28,8 @@ In some cases, you might want to create a Docker image without deploying
 the model (for example, if you plan to deploy to Azure App Service). Or
 you might want to download the image and run it on a local Docker installation.
 You might even want to download the files used to build the image, inspect
-them, modify them, and build the image manually.\cr
-\cr
+them, modify them, and build the image manually.
+
 Model packaging enables you to do these things. \code{package_model()} packages all
 the assets needed to host a model as a web service and allows you to download
 either a fully built Docker image or the files needed to build one. There are
@@ -40,14 +40,15 @@ and other files needed to host it as a web service.
 \item \strong{Generate a Dockerfile}: Download the Dockerfile, model, entry script, and
 other assets needed to build a Docker image. You can then inspect the files or
 make changes before you build the image locally. To use this method, make sure
-to set \code{generate_dockerfile = TRUE}.\cr
+to set \code{generate_dockerfile = TRUE}.
 With either scenario, you will need to have Docker installed in your
 development environment.
 }
 }
-\section{Examples}{
-
-Package a registered model:\preformatted{ws <- load_workspace_from_config()
+\examples{
+# Package a registered model
+\dontrun{
+ws <- load_workspace_from_config()
 model <- get_model(ws, name = "my_model")
 r_env <- r_environment(name = "r_env")
 inference_config <- inference_config(entry_script = "score.R",
@@ -59,7 +60,6 @@ package <- package_model(ws,
 wait_for_model_package_creation(show_output = TRUE)
 }
 }
-
 \seealso{
 \code{wait_for_model_package_creation()}, \code{get_model_package_container_registry()},
 \code{get_model_package_creation_logs()}, \code{pull_model_package_image()},

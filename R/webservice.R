@@ -19,16 +19,14 @@ get_webservice <- function(workspace, name) {
 #' @description
 #' Automatically poll on the running web service deployment and
 #' wait for the web service to reach a terminal state. Will throw
-#' an exception if it reaches a non-successful terminal state.\cr
-#' \cr
+#' an exception if it reaches a non-successful terminal state.
+#'
 #' Typically called after running `deploy_model()`.
 #' @param webservice The `LocalWebservice`, `AciWebservice`, or
 #' `AksWebservice` object.
 #' @param show_output If `TRUE`, print more verbose output. Defaults
 #' to `FALSE`.
 #' @export
-#' @section Examples:
-#' See "Examples" section of `deploy_model()`.
 #' @seealso
 #' `deploy_model()`
 #' @md
@@ -40,8 +38,8 @@ wait_for_deployment <- function(webservice, show_output = FALSE) {
 #' @description
 #' You can get the detailed Docker engine log messages from your
 #' web service deployment. You can view the logs for local, ACI,
-#' and AKS deployments.\cr
-#' \cr
+#' and AKS deployments.
+#'
 #' For example, if your web service deployment fails, you can
 #' inspect the logs to help troubleshoot.
 #' @param webservice The `LocalWebservice`, `AciWebservice`, or
@@ -65,12 +63,12 @@ get_webservice_logs <- function(webservice, num_lines = 5000L) {
 #' `aks_webservice_deployment_config()` for creation and
 #' `update_aci_webservice()` or `update_aks_webservice()` for updating).
 #' Note that key-based auth is enabled by default for `AksWebservice`
-#' but not for `AciWebservice`.\cr
-#' \cr
+#' but not for `AciWebservice`.
+#'
 #' To check if a web service has key-based auth enabled, you can
 #' access the following boolean property from the Webservice object:
-#' `service$auth_enabled`\cr
-#' \cr
+#' `service$auth_enabled`
+#'
 #' Not supported for `LocalWebservice` deployments.
 #' @param webservice The `AciWebservice` or `AksWebservice` object.
 #' @return A list of two strings corresponding to the primary and
@@ -87,8 +85,8 @@ get_webservice_keys <- function(webservice) {
 #' @description
 #' Delete a deployed ACI or AKS web service from the given workspace.
 #' This function call is not asynchronous; it runs until the resource is
-#' deleted.\cr
-#' \cr
+#' deleted.
+#'
 #' To delete a `LocalWebservice` see `delete_local_webservice()`.
 #' @param webservice The `AciWebservice` or `AksWebservice` object.
 #' @export
@@ -119,8 +117,8 @@ delete_webservice <- function(webservice) {
 #' a service key as a token in your request header
 #' (see `get_webservice_keys()`). If you've enabled token-based
 #' authentication, you will need to provide an JWT token as a bearer
-#' token in your request header (see `get_webservice_token()`).\cr
-#' \cr
+#' token in your request header (see `get_webservice_token()`).
+#'
 #' To get the REST API address for the service's scoring endpoint, you can
 #' access the following property from the Webservice object:
 #' `service$scoring_uri`
@@ -133,8 +131,8 @@ invoke_webservice <- function(webservice, input_data) {
 #' @description
 #' Regenerate either the primary or secondary authentication key for
 #' an `AciWebservice` or `AksWebservice`.The web service must have
-#' been deployed with key-based authentication enabled.\cr
-#' \cr
+#' been deployed with key-based authentication enabled.
+#'
 #' Not supported for `LocalWebservice` deployments.
 #' @param webservice The `AciWebservice` or `AksWebservice` object.
 #' @param key_type A string of which key to regenerate. Options are
@@ -153,15 +151,15 @@ generate_new_webservice_key <- function(webservice, key_type) {
 #' enabled. Token-based authentication requires clients to use an Azure
 #' Active Directory account to request an authentication token, which is
 #' used to make requests to the deployed service. Only available for
-#' AKS deployments.\cr
-#' \cr
+#' AKS deployments.
+#'
 #' In order to enable token-based authentication, set the
 #' `token_auth_enabled = TRUE` parameter when you are creating or
 #' updating a deployment (`aks_webservice_deployment_config()` for creation
 #' or `update_aks_webservice()` for updating). Note that you cannot have both
 #' key-based authentication and token-based authentication enabled.
-#' Token-based authentication is not enabled by default.\cr
-#' \cr
+#' Token-based authentication is not enabled by default.
+#'
 #' To check if a web service has token-based auth enabled, you can
 #' access the following boolean property from the Webservice object:
 #' `service$token_auth_enabled`

@@ -74,7 +74,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,21 +89,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -138,8 +144,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
-  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>)</pre>
+    <pre class="usage"><span class='fu'>install_azureml</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.0.69"</span>, <span class='kw'>envname</span> <span class='kw'>=</span> <span class='st'>"r-azureml"</span>,
+  <span class='kw'>conda_python_version</span> <span class='kw'>=</span> <span class='st'>"3.6"</span>, <span class='kw'>restart_session</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>remove_existing_env</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,6 +162,14 @@
     <tr>
       <th>conda_python_version</th>
       <td><p>version of python for conda environment</p></td>
+    </tr>
+    <tr>
+      <th>restart_session</th>
+      <td><p>restart R session after installation</p></td>
+    </tr>
+    <tr>
+      <th>remove_existing_env</th>
+      <td><p>delete the conda environment if already exists</p></td>
     </tr>
     </table>
     
@@ -172,7 +187,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">
