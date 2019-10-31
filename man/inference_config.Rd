@@ -4,7 +4,7 @@
 \alias{inference_config}
 \title{Create an inference configuration for model deployments}
 \usage{
-inference_config(entry_script, source_directory = NULL,
+inference_config(entry_script, source_directory = ".",
   description = NULL, environment = NULL)
 }
 \arguments{
