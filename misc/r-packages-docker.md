@@ -45,6 +45,27 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | glue        | 1.3.1    |
 | gower       | 0.2.0    | 
 | gtable      | 0.3.0    |
+| haven | 2.1.0 |
+| hexbin | 1.27.2 |
+| highr | 0.8 |
+| hms | 0.4.2 |
+| htmltools | 0.3.6 |
+| htmlwidgets | 1.3 |
+| httpuv | 1.5.1 |
+| httr | 1.4.0 |
+| ipred | 0.9-8 |
+| irdisplay | 0.7.0 |
+| irkernel | 0.8.15 |
+| iterators | 1.0.10 |
+| jsonlite | 1.6 |
+| kernsmooth | 2.23_15\cr
+| knitr | 1.22 |
+| labeling | 0.3 |
+| later | 0.8.0 |
+| lattice | 0.20-38 |
+| lava | 1.6.5 |
+| lazyeval | 0.2.2 |
+| lubridate | 1.7.4 |
 
 ### Additional R packages
 The following additional R packages from CRAN are also included:
