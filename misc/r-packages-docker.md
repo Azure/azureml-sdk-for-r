@@ -45,14 +45,14 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | glue        | 1.3.1    |
 | gower       | 0.2.0    | 
 | gtable      | 0.3.0    |
-| haven | 2.1.0 |
-| hexbin | 1.27.2 |
-| highr | 0.8 |
-| hms | 0.4.2 |
-| htmltools | 0.3.6 |
-| htmlwidgets | 1.3 |
-| httpuv | 1.5.1 |
-| httr | 1.4.0 |
+| haven       | 2.1.0    |
+| hexbin      | 1.27.2   |
+| highr       | 0.8      |
+| hms         | 0.4.2    |
+| htmltools   | 0.3.6    |
+| htmlwidgets | 1.3      |
+| httpuv      | 1.5.1    |
+| httr        | 1.4.0    |
 | ipred | 0.9-8 |
 | irdisplay | 0.7.0 |
 | irkernel | 0.8.15 |
@@ -66,33 +66,80 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | lava | 1.6.5 |
 | lazyeval | 0.2.2 |
 | lubridate | 1.7.4 |
-
 | magrittr | 1.5 |
-| maps | 3.3.0-r36h6115d3f_0
-| markdown | 0.9-r36h6115d3f_0
-| mass | 7.3_51.3-r36h6115d3f_0
-| matrix | 1.2_17-r36h6115d3f_0
-| mgcv | 1.8_28-r36h6115d3f_0
-| mime | 0.6-r36h6115d3f_0
-| modelmetrics | 1.2.2-r36h6115d3f_0
-| modelr | 0.1.4-r36h6115d3f_0
-| munsell | 0.5.0-r36h6115d3f_0
-| nlme | 3.1_139-r36h6115d3f_0
-r-nnet | 7.3_12-r36h6115d3f_0
-r-numderiv | 2016.8_1-r36h6115d3f_0
-r-openssl | 1.3-r36h6115d3f_0
-r-pbdzmq | 0.3_3-r36h6115d3f_0
-r-pillar | 1.3.1-r36h6115d3f_0
-r-pkgconfig | 2.0.2-r36h6115d3f_0
-r-plogr | 0.2.0-r36h6115d3f_0
-r-plyr | 1.8.4-r36h6115d3f_0
-r-prettyunits | 1.0.2-r36h6115d3f_0
-r-processx | 3.3.0-r36h6115d3f_0
-r-prodlim | 2018.04.18-r36h6115d3f_0
-r-progress | 1.2.0-r36h6115d3f_0
-r-promises | 1.0.1-r36h6115d3f_0
-r-ps | 1.3.0-r36h6115d3f_0
-r-purrr | 0.3.2-r36h6115d3f_0
+| maps | 3.3.0 |
+| markdown | 0.9 |
+| mass | 7.3_51.3 |
+| matrix | 1.2_17 |
+| mgcv | 1.8_28 |
+| mime | 0.6 |
+| modelmetrics | 1.2.2 |
+| modelr | 0.1.4 |
+| munsell | 0.5.0 |
+| nlme | 3.1-139 |
+| nnet | 7.3-12 |
+| numderiv | 2016.8-1 |
+| openssl | 1.3 |
+| pbdzmq | 0.3-3 |
+| pillar | 1.3.1 |
+| pkgconfig | 2.0.2 |
+| plogr | 0.2.0 |
+| plyr | 1.8.4 |
+| prettyunits | 1.0.2 |
+| processx | 3.3.0 |
+| prodlim | 2018.04.18 |
+| progress | 1.2.0 |
+| promises | 1.0.1 |
+| ps | 1.3.0 |
+| purrr | 0.3.2 |
+| quantmod | 0.4-14 |
+| r6 | 2.4.0 |
+| randomforest | 4.6-14 |
+| rbokeh | 0.6.3 |
+| rcolorbrewer | 1.1-2 |
+| rcpp | 1.0.1 |
+| rcpproll | 0.3.0 |
+| readr | 1.3.1 |
+| readxl | 1.3.1 |
+| recipes | 0.1.5 |
+| recommended | 3.6.0 |
+| rematch | 1.0.1 |
+| repr | 0.19.2 |
+| reprex | 0.2.1 |
+| reshape2 | 1.4.3 |
+| rlang | 0.3.4 |
+| rmarkdown | 1.12 |
+| rpart | 4.1-15 |
+| rstudioapi | 0.10 |
+| rvest | 0.3.3 |
+| scales | 1.0.0 |
+| selectr | 0.4-1 |
+| shiny | 1.3.2 |
+| sourcetools | 0.1.7 |
+| spatial | 7.3-11 |
+| squarem | 2017.10-1 |
+| stringi | 1.4.3 |
+| stringr | 1.4.0 |
+| survival | 2.44-1.1 |
+| sys | 3.2 |
+| tibble | 2.1.1 |
+| tidyr | 0.8.3 |
+| tidyselect | 0.2.5 |
+| tidyverse | 1.2.1 |
+| timedate | 3043.102 |
+| tinytex | 0.12 |
+| ttr | 0.23-4 |
+| utf8 | 1.1.4 |
+| uuid | 0.1-2 |
+| viridislite | 0.3.0 |
+| whisker | 0.3-2 |
+| withr | 2.1.2 |
+| xfun | 0.6 |
+| xml2 | 1.2.0 |
+| xtable | 1.8-4 |
+| xts | 0.11-2 |
+| yaml | 2.2.0 |
+| zoo | 1.8-5
 
 ### Additional R packages
 The following additional R packages from CRAN are also included:
