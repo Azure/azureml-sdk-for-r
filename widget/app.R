@@ -15,9 +15,8 @@ server <- function(input, output, session){
       run <- azuremlsdk::get_run(exp, run_id)
       details <- azuremlsdk::get_run_details(run)
 
-      if (run_details_plot$x$data$V2[[3]] == "-") {
-        # update start time
-        if (!is.null(details$startTimeUtc)) {
+      if (run_details_plot$x$data$V2[[3]] == "-" &&
+          !is.null(details$startTimeUtc)) {
           start_date_time <- as.POSIXct(details$startTimeUtc,
                                         "%Y-%m-%dT%H:%M:%S",
                                         tz = "UTC")

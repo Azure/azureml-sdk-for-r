@@ -2,7 +2,7 @@
 % Please edit documentation in R/run.R
 \name{view_run_details}
 \alias{view_run_details}
-\title{Show run details in browser}
+\title{Initialize run details widget}
 \usage{
 view_run_details(run)
 }
@@ -10,5 +10,13 @@ view_run_details(run)
 \item{run}{Run object}
 }
 \description{
-Show run details in browser
+Plot table of run details in RStudio Viewer or browser.
+By default, this table does not auto-refresh. To see stream
+live updates from the server, click the "Turn on auto-update"
+box in the top left corner of the widget. For more details,
+click the web view link.
+
+If you are running this method from an RMarkdown file, the
+run details table will show up in the code chunk output
+instead of the Viewer.
 }

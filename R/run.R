@@ -630,7 +630,7 @@ create_run_details_plot <- function(run) {
 #' Plot table of run details in RStudio Viewer or browser.
 #' By default, this table does not auto-refresh. To see stream
 #' live updates from the server, click the "Turn on auto-update"
-#' box in the top left corner of the widget.values. For more details,
+#' box in the top left corner of the widget. For more details,
 #' click the web view link.
 #'
 #' If you are running this method from an RMarkdown file, the
@@ -639,34 +639,29 @@ create_run_details_plot <- function(run) {
 #' @param run Run object
 #' @export
 view_run_details <- function(run) {
+  run_details_plot <- create_run_details_plot(run)
+  
   if (rstudioapi::isAvailable()) {
-    run_details_plot <- create_run_details_plot(run)
-    run_url <- run$get_portal_url()
-    parsed_url <- strsplit(run_url, "/")[[1]]
-    rg <- parsed_url[8]
-    subscription_id <- parsed_url[6]
-    ws_name <- parsed_url[12]
-    exp_name <- parsed_url[14]
-    run_id <- parsed_url[16]
+    parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
 
-    assign("rg", rg, envir=globalenv())
-    assign("subscription_id", subscription_id, envir=globalenv())
-    assign("ws_name", ws_name, envir=globalenv())
-    assign("exp_name", exp_name, envir=globalenv())
-    assign("run_id", run_id, envir=globalenv())
+    assign("rg", parsed_url[8], envir=globalenv())
+    assign("subscription_id", parsed_url[6], envir=globalenv())
+    assign("ws_name", parsed_url[12], envir=globalenv())
+    assign("exp_name", parsed_url[14], envir=globalenv())
+    assign("run_id", parsed_url[16], envir=globalenv())
     assign("run_details_plot", run_details_plot, envir=globalenv())
     
     path <- here::here("widget", "app.R")
     rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
-    
-    Sys.sleep(3)
-    
+
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer("http://localhost:1234")
     } else {
       utils::browseURL("http://localhost:1234")
     }
+  } else {
+    run_details_plot
   }
 }
 
