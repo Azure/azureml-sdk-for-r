@@ -1,5 +1,5 @@
 ## R packages
-List of R packages that are installed for predefined Docker image for training and deployment. See [r_environment()](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images) reference for more information. These include the `r-essentials` bundle and additional commonly used packages.
+List of R packages that are installed for predefined Docker image for training and deployment. These include the `r-essentials` bundle and additional commonly used packages. See [r_environment()](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images) reference for more information.
 
 ### R Essentials bundle
 The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most popular R packages for data science. The following packages are included:
