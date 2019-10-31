@@ -640,17 +640,17 @@ create_run_details_plot <- function(run) {
 #' @export
 view_run_details <- function(run) {
   run_details_plot <- create_run_details_plot(run)
-  
+
   if (rstudioapi::isAvailable()) {
     parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
 
-    assign("rg", parsed_url[8], envir=globalenv())
-    assign("subscription_id", parsed_url[6], envir=globalenv())
-    assign("ws_name", parsed_url[12], envir=globalenv())
-    assign("exp_name", parsed_url[14], envir=globalenv())
-    assign("run_id", parsed_url[16], envir=globalenv())
-    assign("run_details_plot", run_details_plot, envir=globalenv())
-    
+    assign("rg", parsed_url[8], envir = globalenv())
+    assign("subscription_id", parsed_url[6], envir = globalenv())
+    assign("ws_name", parsed_url[12], envir = globalenv())
+    assign("exp_name", parsed_url[14], envir = globalenv())
+    assign("run_id", parsed_url[16], envir = globalenv())
+    assign("run_details_plot", run_details_plot, envir = globalenv())
+
     path <- here::here("widget", "app.R")
     rstudioapi::jobRunScript(path, importEnv = TRUE, name = run$id)
 
