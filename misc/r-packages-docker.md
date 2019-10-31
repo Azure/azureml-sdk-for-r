@@ -67,6 +67,33 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | lazyeval | 0.2.2 |
 | lubridate | 1.7.4 |
 
+| magrittr | 1.5 |
+| maps | 3.3.0-r36h6115d3f_0
+| markdown | 0.9-r36h6115d3f_0
+| mass | 7.3_51.3-r36h6115d3f_0
+| matrix | 1.2_17-r36h6115d3f_0
+| mgcv | 1.8_28-r36h6115d3f_0
+| mime | 0.6-r36h6115d3f_0
+| modelmetrics | 1.2.2-r36h6115d3f_0
+| modelr | 0.1.4-r36h6115d3f_0
+| munsell | 0.5.0-r36h6115d3f_0
+| nlme | 3.1_139-r36h6115d3f_0
+r-nnet | 7.3_12-r36h6115d3f_0
+r-numderiv | 2016.8_1-r36h6115d3f_0
+r-openssl | 1.3-r36h6115d3f_0
+r-pbdzmq | 0.3_3-r36h6115d3f_0
+r-pillar | 1.3.1-r36h6115d3f_0
+r-pkgconfig | 2.0.2-r36h6115d3f_0
+r-plogr | 0.2.0-r36h6115d3f_0
+r-plyr | 1.8.4-r36h6115d3f_0
+r-prettyunits | 1.0.2-r36h6115d3f_0
+r-processx | 3.3.0-r36h6115d3f_0
+r-prodlim | 2018.04.18-r36h6115d3f_0
+r-progress | 1.2.0-r36h6115d3f_0
+r-promises | 1.0.1-r36h6115d3f_0
+r-ps | 1.3.0-r36h6115d3f_0
+r-purrr | 0.3.2-r36h6115d3f_0
+
 ### Additional R packages
 The following additional R packages from CRAN are also included:
 
