@@ -1,5 +1,5 @@
-## List of R packages
-List of R packages that are installed for predefined Docker image for training and deployment. See [r_environment()](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images) reference for more information.
+## R packages
+List of R packages that are installed for predefined Docker image for training and deployment. See [r_environment()](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images) reference for more information. These include the `r-essentials` bundle and additional commonly used packages.
 
 ### R Essentials bundle
 The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most popular R packages for data science. The following packages are included:
@@ -58,7 +58,7 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | irkernel | 0.8.15 |
 | iterators | 1.0.10 |
 | jsonlite | 1.6 |
-| kernsmooth | 2.23_15\cr
+| kernsmooth | 2.23_15 |
 | knitr | 1.22 |
 | labeling | 0.3 |
 | later | 0.8.0 |
@@ -142,7 +142,7 @@ The R Essentials bundle (3.6.0) from conda contains approximately 80 of the most
 | zoo | 1.8-5
 
 ### Additional R packages
-The following additional R packages from CRAN are also included:
+The following additional R packages from CRAN are also installed:
 
 | Dependency  | Version |
 | ----------- | ------- |
