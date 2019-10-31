@@ -225,7 +225,6 @@ generate_docker_file <- function(custom_docker_image = NULL,
                               "install --no-cache-dir azureml-defaults\n")
 
     base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
-
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_github(repo = 'https://github.com/",
                               "Azure/azureml-sdk-for-r', ref = 'v0.5.6', ",
