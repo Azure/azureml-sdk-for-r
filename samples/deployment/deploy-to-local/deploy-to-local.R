@@ -10,6 +10,15 @@
 # 4) Quickly test changes to your entry script by reloading the local service.
 # 5) Optionally, you can also make changes to model and update the local service.
 
+# NOTE: 
+# In order to run this demo, you have to have root access to Docker. 
+# If you are using Notebook VM you may get a "PermissionError(13, 'Permission denied'))" error,
+# because you may not have root access.
+# To add enable root access to Docker please, open the Terminal and run the following commands:
+#   $ sudo usermod -a -G docker $USER
+#   $ newgrp docker
+# After running the following commands, restart your Notebook VM to be grant root permissions
+
 library(azuremlsdk)
 library(jsonlite)
 
@@ -35,6 +44,7 @@ local_deployment_config <- local_webservice_deployment_config()
 # The Docker image runs as a Linux container. If you are running Docker for Windows, you need to ensure the Linux Engine is running:
 # # PowerShell command to switch to Linux engine
 # & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchLinuxEngine
+
 service <- deploy_model(ws, 
                         'rservice-local', 
                         list(model), 
