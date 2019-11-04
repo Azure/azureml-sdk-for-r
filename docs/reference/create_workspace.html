@@ -174,7 +174,7 @@ sensitive information that's needed by the workspace.</p></li>
   <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sku</span> <span class='kw'>=</span> <span class='st'>"basic"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -246,6 +246,11 @@ exists.</p></td>
       <th>show_output</th>
       <td><p>If <code>TRUE</code> the method will print out incremental progress
 of method.</p></td>
+    </tr>
+    <tr>
+      <th>sku</th>
+      <td><p>A string indicating if the workspace will be 'basic' or
+'enterprise' edition.</p></td>
     </tr>
     </table>
     
