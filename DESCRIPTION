@@ -11,6 +11,7 @@ Authors@R: c(
     person("Abe", "Omorogbe", email = "Osarumwense.Omorogbe@microsoft.com", role = c("ctb")),
     person("Microsoft", role = c("cph", "fnd")),
     person(family = "Google Inc.", role = c("cph"), comment = "Examples and Tutorials"),
+    person(family = "The TensorFlow Authors", role = c("cph"), comment = "Examples and Tutorials"),
     person(family = "RStudio Inc.", role = c("cph"), comment = "Examples and Tutorials")
     )
 URL: https://github.com/azure/azureml-sdk-for-r
