@@ -35,5 +35,6 @@ Imports:
 Suggests: rmarkdown,
     knitr,
     testthat,
+    dplyr,
     jsonlite
 VignetteBuilder: knitr
