@@ -249,8 +249,8 @@ of method.</p></td>
     </tr>
     <tr>
       <th>sku</th>
-      <td><p>A string indicating if the workspace will be 'basic' or
-'enterprise' edition.</p></td>
+      <td><p>A string indicating if the workspace will be "basic" or
+"enterprise" edition.</p></td>
     </tr>
     </table>
     
@@ -275,6 +275,7 @@ of method.</p></td>
 <span class='co'># assumes that the resource group, storage account, key vault, App Insights</span>
 <span class='co'># and container registry already exist</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>prefix</span> <span class='kw'>=</span> <span class='st'>"subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/"</span>
 <span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>create_workspace</span>(
        <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myworkspace'</span>,
        <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='st'>'&lt;azure-subscription-id&gt;'</span>,
@@ -282,10 +283,12 @@ of method.</p></td>
        <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
        <span class='kw'>location</span> <span class='kw'>=</span> <span class='st'>'eastus2'</span>,
        <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='st'>'My workspace'</span>,
-       <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='st'>'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.storage/storageaccounts/mystorageaccount'</span>,
-       <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='st'>'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'</span>,
-       <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='st'>'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights'</span>,
-       <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='st'>'subscriptions/&lt;azure-subscription-id&gt;/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry'</span>)
+       <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>prefix</span>, <span class='st'>'microsoft.storage/storageaccounts/mystorageaccount'</span>),
+       <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>prefix</span>, <span class='st'>'microsoft.keyvault/vaults/mykeyvault'</span>),
+       <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>prefix</span>, <span class='st'>'microsoft.insights/components/myappinsights'</span>),
+       <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
+         <span class='no'>prefix</span>,
+         <span class='st'>'microsoft.containerregistry/registries/mycontainerregistry'</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
