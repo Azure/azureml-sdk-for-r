@@ -186,10 +186,10 @@ environment does not have to be registered.</p></td>
 
     <p>The <code>InferenceConfig</code> object.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="defining-the-entry-script"><a class="anchor" href="#defining-the-entry-script"></a>Defining the entry script</h2>
 
     
-<h3>Defining the entry script</h3>
+
 <p>To deploy a model, you must provide an entry script that accepts requests,
 scores the requests by using the model, and returns the results. The
 entry script is specific to your model. It must understand the format of
@@ -220,8 +220,6 @@ are preserved during registration and deployment.</p>
 <p>Multiple model example:</p><pre>model1_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 </pre>
 
-
-
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -236,7 +234,7 @@ are preserved during registration and deployment.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#defining-the-entry-script">Defining the entry script</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

@@ -39,7 +39,7 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your Environment object within that Docker container.
 If the custom_docker_image parameter
-is not set, Azure ML will build a default base image (CPU or GPU
+is not set, Azure ML will build a predefined base image (CPU or GPU
 depending on the use_gpu flag) and install any R packages specified in the
 cran_packages, github_packages, or custom_url_packages parameters." />
 <meta name="twitter:card" content="summary" />
@@ -152,7 +152,7 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your <code>Environment</code> object within that Docker container.</p>
 <p>If the <code>custom_docker_image</code> parameter
-is not set, Azure ML will build a default base image (CPU or GPU
+is not set, Azure ML will build a predefined base image (CPU or GPU
 depending on the <code>use_gpu</code> flag) and install any R packages specified in the
 <code>cran_packages</code>, <code>github_packages</code>, or <code>custom_url_packages</code> parameters.</p>
     
@@ -197,9 +197,8 @@ from local directory or custom URL.</p></td>
       <th>custom_docker_image</th>
       <td><p>A string of the name of the Docker image from
 which the image to use for training or deployment will be built. If not set,
-a default CPU-based image will be used as the base image. To use an image
-from a private Docker repository, you will also have to specify the
-<code>image_registry_details</code> parameter.</p></td>
+a predefined Docker image will be used. To use an image from a private Docker
+repository, you will also have to specify the <code>image_registry_details</code> parameter.</p></td>
     </tr>
     <tr>
       <th>image_registry_details</th>
@@ -209,9 +208,9 @@ the Docker image registry for the custom Docker image.</p></td>
     <tr>
       <th>use_gpu</th>
       <td><p>Indicates whether the environment should support GPUs.
-If <code>TRUE</code>, a GPU-based default Docker image will be used in the environment.
-If <code>FALSE</code>, a CPU-based image will be used. Default Docker images (CPU or
-GPU) will only be used if the <code>custom_docker_image</code> parameter is not set.</p></td>
+If <code>TRUE</code>, a predefined GPU-based Docker image will be used in the environment.
+If <code>FALSE</code>, a predefined CPU-based image will be used. Predefined Docker images
+(CPU or GPU) will only be used if the <code>custom_docker_image</code> parameter is not set.</p></td>
     </tr>
     <tr>
       <th>shm_size</th>
@@ -241,6 +240,34 @@ a new version of the environment is created when you either submit a run,
 deploy a model, or manually register the environment. The versioning allows
 you to view changes to the environment over time.</p>
     
+    <h2 class="hasAnchor" id="predefined-docker-images"><a class="anchor" href="#predefined-docker-images"></a>Predefined Docker images</h2>
+
+    
+
+<p>When submitting a training job or deploying a model, Azure ML runs your
+training script or scoring script within a Docker container. If no custom
+Docker image is specified with the <code>custom_docker_image</code> parameter, Azure
+ML will build a predefined CPU or GPU Docker image. The predefine images extend
+the Ubuntu 16.04 <a href='https://github.com/Azure/AzureML-Containers'>Azure ML base images</a>
+and include the following dependencies:</p><table class='table'>
+<tr><td><strong>Dependencies</strong></td><td><strong>Version</strong></td><td><strong>Remarks</strong></td></tr>
+<tr><td>azuremlsdk</td><td>latest</td><td>(from GitHub)</td></tr>
+<tr><td>R</td><td>3.6.0</td><td>-</td></tr>
+<tr><td>Commonly used R packages</td><td>-</td><td>80+ of the most popular R packages for
+data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
+and nnet. For the full list of packages included, see
+<a href='https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md'>here</a>.</td></tr>
+<tr><td>Python</td><td>3.7.0</td><td>-</td></tr>
+<tr><td>azureml-defaults</td><td>latest</td><td><code>azureml-defaults</code> contains the
+<code>azureml-core</code> and <code>applicationinsights</code> packages of the Python SDK that
+are required for tasks such as logging metrics, uploading artifacts, and
+deploying models. (from pip)</td></tr>
+<tr><td>rpy2</td><td>latest</td><td>(from conda)</td></tr>
+<tr><td>CUDA (GPU image only)</td><td>10.0</td><td>CuDNN (version 7) is also included</td></tr>
+</table>
+
+
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='estimator.html'>estimator()</a></code>, <code><a href='inference_config.html'>inference_config()</a></code></p></div>
@@ -262,6 +289,8 @@ you to view changes to the environment over time.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#predefined-docker-images">Predefined Docker images</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
