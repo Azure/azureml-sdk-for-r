@@ -6,18 +6,6 @@ pool:
 
 container: ninhu/r-sdk-build:latest
 
-variables:
-- name: TEST_LOCATION
-  value: eastus2
-- name: TEST_RESOURCE_GROUP
-  value: static_resources_r_sdk
-- name: TEST_SUBSCRIPTION_ID
-  value: 4faaaf21-663f-4391-96fd-47197c630979
-- name: TEST_WORKSPACE_NAME
-  value: r_sdk_workspace
-- name: TEST_BUILD_NUMBER
-  value: $(Build.BuildNumber)
-
 steps:
   - task: Bash@3
     inputs:
@@ -36,7 +24,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        python -c "if ($servicePrincipalId and $servicePrincipalKey and $tenantId): from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        python -c "if ('$servicePrincipalId' and '$servicePrincipalKey' and '$tenantId'): from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
         R -e '# needed to load all non exported packages for testing
               devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
