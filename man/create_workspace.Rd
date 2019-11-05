@@ -8,7 +8,7 @@ create_workspace(name, subscription_id = NULL, resource_group = NULL,
   location = NULL, create_resource_group = TRUE,
   friendly_name = NULL, storage_account = NULL, key_vault = NULL,
   app_insights = NULL, container_registry = NULL, exist_ok = FALSE,
-  show_output = TRUE)
+  show_output = TRUE, sku = "basic")
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be
@@ -54,6 +54,9 @@ exists.}
 
 \item{show_output}{If \code{TRUE} the method will print out incremental progress
 of method.}
+
+\item{sku}{A string indicating if the workspace will be "basic" or
+"enterprise" edition.}
 }
 \value{
 The \code{Workspace} object.
@@ -90,6 +93,7 @@ ws <- create_workspace(name = 'myworkspace',
 # assumes that the resource group, storage account, key vault, App Insights
 # and container registry already exist
 \dontrun{
+prefix = "subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/"
 ws <- create_workspace(
        name = 'myworkspace',
        subscription_id = '<azure-subscription-id>',
@@ -97,9 +101,11 @@ ws <- create_workspace(
        create_resource_group = FALSE,
        location = 'eastus2',
        friendly_name = 'My workspace',
-       storage_account = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.storage/storageaccounts/mystorageaccount',
-       key_vault = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault',
-       app_insights = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.insights/components/myappinsights',
-       container_registry = 'subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/microsoft.containerregistry/registries/mycontainerregistry')
+       storage_account = paste0(prefix, 'microsoft.storage/storageaccounts/mystorageaccount'),
+       key_vault = paste0(prefix, 'microsoft.keyvault/vaults/mykeyvault'),
+       app_insights = paste0(prefix, 'microsoft.insights/components/myappinsights'),
+       container_registry = paste0(
+         prefix,
+         'microsoft.containerregistry/registries/mycontainerregistry'))
 }
 }

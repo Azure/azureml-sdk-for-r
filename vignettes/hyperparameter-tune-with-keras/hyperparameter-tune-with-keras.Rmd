@@ -105,7 +105,7 @@ log_metric_to_run("Loss", results[[1]])
 
 ## Create an estimator
 
-An Azure ML **estimator** encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included here. The estimator is used to define the configuration for each of the child runs that the parent HyperDrive run will kick off.
+An Azure ML **estimator** encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included [here](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html). The estimator is used to define the configuration for each of the child runs that the parent HyperDrive run will kick off.
 
 To create the estimator, define the following:
 
@@ -198,7 +198,7 @@ Finally submit the experiment to run on your cluster. The parent HyperDrive run 
 hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
 ```
 
-You can view the HyperDrive run’s details in RStudio Viewer. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
+You can view the HyperDrive run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
 
 ```{r eval=FALSE}
 view_run_details(hyperdrive_run)

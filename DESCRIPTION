@@ -1,7 +1,7 @@
 Package: azuremlsdk
 Type: Package
 Title: Interface to the Azure Machine Learning Software Development Kit ('SDK')
-Version: 0.5.6
+Version: 0.5.7
 Authors@R: c(
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
     person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
@@ -11,6 +11,7 @@ Authors@R: c(
     person("Abe", "Omorogbe", email = "Osarumwense.Omorogbe@microsoft.com", role = c("ctb")),
     person("Microsoft", role = c("cph", "fnd")),
     person(family = "Google Inc.", role = c("cph"), comment = "Examples and Tutorials"),
+    person(family = "The TensorFlow Authors", role = c("cph"), comment = "Examples and Tutorials"),
     person(family = "RStudio Inc.", role = c("cph"), comment = "Examples and Tutorials")
     )
 URL: https://github.com/azure/azureml-sdk-for-r
@@ -35,5 +36,6 @@ Imports:
 Suggests: rmarkdown,
     knitr,
     testthat,
+    dplyr,
     jsonlite
 VignetteBuilder: knitr
