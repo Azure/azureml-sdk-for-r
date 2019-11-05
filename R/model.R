@@ -411,8 +411,7 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' environment does not have to be registered.
 #' @return The `InferenceConfig` object.
 #' @export
-#' @details
-#' \subsection{Defining the entry script}{
+#' @section Defining the entry script:
 #' To deploy a model, you must provide an entry script that accepts requests,
 #' scores the requests by using the model, and returns the results. The
 #' entry script is specific to your model. It must understand the format of
@@ -449,7 +448,6 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' ```
 #' model1_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 #' ```
-#' }
 #' @seealso
 #' `r_environment()`, `deploy_model()`
 #' @md
