@@ -1,6 +1,7 @@
 context("estimator")
 
 test_that("create estimator", {
+  skip_if_no_azureml()
   est <- estimator(".",
                    compute_target = "local",
                    script_params = list("param1" = 1),
