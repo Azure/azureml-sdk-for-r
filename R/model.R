@@ -452,42 +452,21 @@ wait_for_model_package_creation <- function(package, show_output = FALSE) {
 #' `r_environment()`, `deploy_model()`
 #' @md
 inference_config <- function(entry_script,
-                             source_directory = NULL,
+                             source_directory = ".",
                              description = NULL,
                              environment = NULL) {
-  saved_image <- NULL
-  generate_score_python_wrapper(entry_script, source_directory)
-
   if (is.null(environment)) {
     environment <- r_environment("inferenceenv")
   }
 
+  generate_score_python_wrapper(entry_script, source_directory)
   environment$inferencing_stack_version <- "latest"
 
-  saved_image <- environment$docker$base_image
-  inference_config <- tryCatch({
-    # this is a temporary fix for github issue #101
-    environment$docker$base_image <- "temp_image"
-
-    inference_config <- azureml$core$model$InferenceConfig(
-      entry_script = "_generated_score.py",
-      source_directory = source_directory,
-      description = description,
-      environment = environment)
-
-    inference_config$environment$docker$base_image <- saved_image
-    inference_config
-  }, error = function(err) {
-    environment$docker$base_image <- saved_image
-
-    # this is the final code should be kept after upgrading default python sdk
-    # version to 1.0.72
-    azureml$core$model$InferenceConfig(
-      entry_script = "_generated_score.py",
-      source_directory = source_directory,
-      description = description,
-      environment = environment)
-  })
+  inference_config <- azureml$core$model$InferenceConfig(
+    entry_script = "_generated_score.py",
+    source_directory = source_directory,
+    description = description,
+    environment = environment)
 
   invisible(inference_config)
 }
