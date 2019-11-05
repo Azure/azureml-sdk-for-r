@@ -649,6 +649,7 @@ view_run_details <- function(run) {
     assign("ws_name", parsed_url[12], envir = globalenv())
     assign("exp_name", parsed_url[14], envir = globalenv())
     assign("run_id", parsed_url[16], envir = globalenv())
+    assign("details", get_run_details(run), envir = globalenv())
     assign("run_details_plot", run_details_plot, envir = globalenv())
 
     path <- here::here("widget", "app.R")
