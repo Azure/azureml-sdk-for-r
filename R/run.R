@@ -536,6 +536,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Generate table of run details
 #' @param run The `Run` object.
+#' @export
 #' @md
 create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
@@ -638,10 +639,10 @@ create_run_details_plot <- function(run) {
 #' instead of the Viewer.
 #' @param run Run object
 #' @export
-view_run_details <- function(run) {
+view_run_details <- function(run, auto_refresh = TRUE) {
   run_details_plot <- create_run_details_plot(run)
 
-  if (rstudioapi::isAvailable()) {
+  if (rstudioapi::isAvailable() && auto_refresh) {
     parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
 
     assign("rg", parsed_url[8], envir = globalenv())

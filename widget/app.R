@@ -3,15 +3,21 @@ suppressMessages(library(DT))
 suppressMessages(library(shinycssloaders))
 
 
+done <<- FALSE
 
 server <- function(input, output, session){
-  ws <- azureml::get_workspace(ws_name, subscription_id, rg)
+  ws <- azuremlsdk::get_workspace(ws_name, subscription_id, rg)
   exp <- azuremlsdk::experiment(ws, exp_name)
   run <- azuremlsdk::get_run(exp, run_id)
 
   plot <- reactive({
     invalidateLater(10000)
     
+    if (done == TRUE) {
+      shiny::onStop(azuremlsdk::view_run_details(run, auto_refresh = TRUE))
+      shiny::stopApp()
+    }
+
     if (!identical(details, azuremlsdk::get_run_details(run))) {
       details <- azuremlsdk::get_run_details(run)
       
@@ -39,6 +45,7 @@ server <- function(input, output, session){
                                           start_date_time,
                                           units = "mins")),
                       digits = 2), "mins")
+        done <<- TRUE
       }
       
       # update run status
