@@ -536,7 +536,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 
 #' Generate table of run details
 #' @param run The `Run` object.
-#' @export
 #' @md
 create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
@@ -629,20 +628,20 @@ create_run_details_plot <- function(run) {
 #' Initialize run details widget
 #' @description
 #' Plot table of run details in RStudio Viewer or browser.
-#' By default, this table does not auto-refresh. To see stream
-#' live updates from the server, click the "Turn on auto-update"
-#' box in the top left corner of the widget. For more details,
-#' click the web view link.
+#' If in RStudio, plot will update table values regularly. If not using
+#' RStudio, the plot will be static. For more details than provided in the
+#' plot, click the web view link.
 #'
 #' If you are running this method from an RMarkdown file, the
 #' run details table will show up in the code chunk output
 #' instead of the Viewer.
 #' @param run Run object
 #' @export
-view_run_details <- function(run, auto_refresh = TRUE) {
+#' @md
+view_run_details <- function(run) {
   run_details_plot <- create_run_details_plot(run)
 
-  if (rstudioapi::isAvailable() && auto_refresh) {
+  if (rstudioapi::isAvailable()) {
     parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
 
     assign("rg", parsed_url[8], envir = globalenv())

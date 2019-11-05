@@ -11,10 +11,9 @@ view_run_details(run)
 }
 \description{
 Plot table of run details in RStudio Viewer or browser.
-By default, this table does not auto-refresh. To see stream
-live updates from the server, click the "Turn on auto-update"
-box in the top left corner of the widget. For more details,
-click the web view link.
+If in RStudio, plot will update table values regularly. If not using
+RStudio, the plot will be static. For more details than provided in the
+plot, click the web view link.
 
 If you are running this method from an RMarkdown file, the
 run details table will show up in the code chunk output
