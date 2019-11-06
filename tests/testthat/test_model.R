@@ -5,7 +5,7 @@ test_that("get, register, download, serialize, deserialize and delete model", {
   skip_if_no_subscription()
   ws <- existing_ws
   
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   model_name <- "dummy_model.data"
   dir.create(tmp_dir_name)
   file.create(file.path(tmp_dir_name, model_name))
@@ -19,7 +19,7 @@ test_that("get, register, download, serialize, deserialize and delete model", {
   expect_equal(model_name, ws_model$name)
 
   # download model    
-  download_dir <- "downloaded"
+  download_dir <- file.path(tempdir(),"downloaded")
   dir.create(download_dir)
   path <- download_model(model, download_dir)
   expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)),
@@ -37,7 +37,7 @@ test_that("create, check container registry and save model package", {
   skip_if_no_subscription()
   ws <- existing_ws
   
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   model_name <- "dummy_model.data"
   dir.create(tmp_dir_name)
   file.create(file.path(tmp_dir_name, model_name))
@@ -82,11 +82,11 @@ test_that("create, check container registry and save model package", {
 })
 
 test_that("testpython score wrapper", {
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   dir.create(tmp_dir_name)
 
-  #  file.copy(script_name, tmp_dir_name)
   entry_script <- "myscore.R"
+  file.copy(entry_script, tmp_dir_name)
   generate_score_python_wrapper(entry_script, tmp_dir_name)
   expect_equal(file.exists(file.path(tmp_dir_name, "_generated_score.py")), TRUE)
 

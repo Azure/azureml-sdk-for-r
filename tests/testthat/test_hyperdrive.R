@@ -16,7 +16,7 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
   expect_equal(exp$name, experiment_name)
   
   # start a remote job and get the run, wait for it to finish
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   script_name <- "train_hyperdrive_dummy.R"
   
   dir.create(tmp_dir_name)

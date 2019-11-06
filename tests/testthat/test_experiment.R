@@ -13,7 +13,7 @@ test_that("create, submit experiment, run in default amlcompute,
   expect_equal(exp$name, experiment_name)
   
   # start a remote job and get the run, wait for it to finish
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   script_name <- "train_dummy.R"
   dir.create(tmp_dir_name)
   file.copy(script_name, tmp_dir_name)
@@ -55,7 +55,7 @@ test_that("submit experiment through a custom environment", {
   ws <- existing_ws
   
   # start a remote job and get the run, wait for it to finish
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
   script_name <- "train_dummy.R"
   dir.create(tmp_dir_name)
   file.copy(script_name, tmp_dir_name)
