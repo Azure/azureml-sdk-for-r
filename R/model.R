@@ -114,7 +114,7 @@ register_model <- function(workspace,
 #' \dontrun{
 #' ws <- load_workspace_from_config()
 #' model <- get_model(ws, name = "my_model", version = 2)
-#' download_model(model, exist_ok = TRUE)
+#' download_model(model, target_dir = tempdir(), exist_ok = TRUE)
 #' }
 #' @md
 download_model <- function(model, target_dir = ".", exist_ok = FALSE) {
