@@ -128,7 +128,7 @@
 <div id="install-the-azure-ml-python-sdk" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-the-azure-ml-python-sdk" class="anchor"></a>Install the Azure ML Python SDK</h2>
-<p>Lastly, use the <strong>azuremlsdk</strong> R library to install the Python SDK. By default, <code><a href="../reference/install_azureml.html">azuremlsdk::install_azureml()</a></code> will install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the Python SDK</a> in a conda environment called <code>r-azureml</code>.</p>
+<p>Lastly, use the <strong>azuremlsdk</strong> R library to install the Python SDK. By default, <code><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">azuremlsdk::install_azureml()</a></code> will install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the Python SDK</a> in a conda environment called <code>r-azureml</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
 <p>If you would like to override the default version, environment name, or Python version, you can pass in those arguments:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
@@ -140,7 +140,7 @@
 <a href="#test-installation" class="anchor"></a>Test installation</h2>
 <p>You can confirm your installation worked by loading the library and successfully retrieving a run.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
 </div>
 <div id="troubleshooting" class="section level2">
 <h2 class="hasAnchor">

@@ -256,9 +256,9 @@ network, see
     <pre class="examples"><div class='input'><span class='co'># Create an AksCompute cluster using the default configuration (you can also</span>
 <span class='co'># provide parameters to customize this)</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
 <span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'>create_aks_compute</span>(<span class='no'>ws</span>, <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>)
-<span class='fu'><a href='wait_for_provisioning_completion.html'>wait_for_provisioning_completion</a></span>(<span class='no'>compute_target</span>)
+<span class='fu'>wait_for_provisioning_completion</span>(<span class='no'>compute_target</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

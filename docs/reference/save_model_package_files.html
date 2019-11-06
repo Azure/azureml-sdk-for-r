@@ -156,14 +156,14 @@ your local file system</h1>
     <p>Download the Dockerfile, model, and other assets needed to build
 an image locally from a created <code>ModelPackage</code>.</p>
 <p>This can only be used with a Dockerfile <code>ModelPackage</code> (where
-<code><a href='package_model.html'>package_model()</a></code> was called with <code>generate_dockerfile = TRUE</code> to
+<code>package_model()</code> was called with <code>generate_dockerfile = TRUE</code> to
 indicated that you wanted only the files and not a fully built image).</p>
 <p><code>save_model_package_files()</code> downloads the files needed to build the
 image to the <code>output_directory</code>. The Dockerfile included in the saved
 files references a base image stored in an Azure container registry.
 When you build the image on your local Docker installation, you will
 need the address, username, and password to authenticate to the registry.
-You can get this information using <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code>.</p>
+You can get this information using <code>get_model_package_container_registry()</code>.</p>
     
     </div>
 
@@ -185,7 +185,7 @@ will be created to contain the contents of the package.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='package_model.html'>package_model()</a></code>, <code><a href='get_model_package_container_registry.html'>get_model_package_container_registry()</a></code></p></div>
+    <div class='dont-index'><p><code>package_model()</code>, <code>get_model_package_container_registry()</code></p></div>
     
 
   </div>
