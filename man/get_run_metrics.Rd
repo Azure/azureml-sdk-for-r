@@ -7,7 +7,7 @@
 get_run_metrics(run)
 }
 \arguments{
-\item{run}{The \code{tRun} object.}
+\item{run}{The \code{Run} object.}
 }
 \value{
 A named list of the metrics associated with the run,
