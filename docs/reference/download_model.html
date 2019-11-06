@@ -177,7 +177,7 @@ model.</p>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_model.html'>get_model</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'>download_model</span>(<span class='no'>model</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>download_model</span>(<span class='no'>model</span>, <span class='kw'>target_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

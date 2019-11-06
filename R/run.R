@@ -5,7 +5,7 @@
 #' @description
 #' Retrieve the metrics logged to a run that were logged with
 #' the `log_*()` methods.
-#' @param run The `tRun` object.
+#' @param run The `Run` object.
 #' @return A named list of the metrics associated with the run,
 #' e.g. `list("metric_name" = metric)`.
 #' @export
@@ -343,16 +343,6 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
 #' @export
-#' @examples
-#' # Log an image file to the run
-#' \dontrun{
-#' `log_image_to_run("myplot", "myplot.png")`
-#' }
-#' # Log a ggplot2 plot to the run
-#' \dontrun{
-#' plot <- ggplot(data = mydata, aes(x = "x_axis_name", y = "y_axis_name"))
-#' log_image_to_run("myplot", plot)
-#' }
 #' @md
 log_image_to_run <- function(name, path = NULL, plot = NULL,
                              description = "", run = NULL) {
