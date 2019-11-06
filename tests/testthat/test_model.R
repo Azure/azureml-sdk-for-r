@@ -5,13 +5,14 @@ test_that("get, register, download, serialize, deserialize and delete model", {
   skip_if_no_subscription()
   ws <- existing_ws
   
-  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
   model_name <- "dummy_model.data"
-  dir.create(tmp_dir_name)
-  file.create(file.path(tmp_dir_name, model_name))
+  dir.create(tmp_dir_path)
+  file.create(file.path(tmp_dir_path, model_name))
   
   # register the model
-  model <- register_model(ws, tmp_dir_name, model_name)
+  model <- register_model(ws, tmp_dir_path, model_name)
   
   # get model
   ws_model <- get_model(ws, model_name)
@@ -37,13 +38,14 @@ test_that("create, check container registry and save model package", {
   skip_if_no_subscription()
   ws <- existing_ws
   
-  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
   model_name <- "dummy_model.data"
-  dir.create(tmp_dir_name)
-  file.create(file.path(tmp_dir_name, model_name))
+  dir.create(tmp_dir_path)
+  file.create(file.path(tmp_dir_path, model_name))
   
   # register the model
-  model <- register_model(ws, tmp_dir_name, model_name)
+  model <- register_model(ws, tmp_dir_path, model_name)
 
   env <- r_environment("newenv")
   register_environment(env, ws)
@@ -82,13 +84,14 @@ test_that("create, check container registry and save model package", {
 })
 
 test_that("testpython score wrapper", {
-  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
-  dir.create(tmp_dir_name)
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
+  dir.create(tmp_dir_path)
 
   entry_script <- "myscore.R"
-  file.copy(entry_script, tmp_dir_name)
-  generate_score_python_wrapper(entry_script, tmp_dir_name)
-  expect_equal(file.exists(file.path(tmp_dir_name, "_generated_score.py")), TRUE)
+  file.copy(entry_script, tmp_dir_path)
+  generate_score_python_wrapper(entry_script, tmp_dir_path)
+  expect_equal(file.exists(file.path(tmp_dir_path, "_generated_score.py")), TRUE)
 
-  unlink(tmp_dir_name, recursive = TRUE)
+  unlink(tmp_dir_path, recursive = TRUE)
 })

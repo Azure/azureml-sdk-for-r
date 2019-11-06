@@ -10,7 +10,7 @@ test_that("default datastore", {
   upload_files_to_datastore(ds, files = list(file.path(".", file_name)))
 
   # download files from datastore
-  target_dir <- file.path(tempdir(),"downloaded_files")
+  target_dir <- file.path(tempdir(), "downloaded_files")
   dir.create(target_dir)
   download_from_datastore(ds, target_path = target_dir, prefix = file_name)
 
@@ -18,15 +18,16 @@ test_that("default datastore", {
   expect_equal(file.exists(file.path(target_dir, file_name)), TRUE)
 
   # upload tmp directory to datastore
-  tmp_dir_name <- file.path(tempdir(),"tmp_dir")
-  dir.create(tmp_dir_name)
-  file.copy(file_name, tmp_dir_name)
-  upload_to_datastore(ds, src_dir = tmp_dir_name, target_path = tmp_dir_name)
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
+  dir.create(tmp_dir_path)
+  file.copy(file_name, tmp_dir_path)
+  upload_to_datastore(ds, src_dir = tmp_dir_path, target_path = tmp_dir_path)
   
   # download data from datastore
-  target_dir <- file.path(tempdir(),"downloaded_dir")
+  target_dir <- file.path(tempdir(), "downloaded_dir")
   dir.create(target_dir)
-  download_from_datastore(ds, target_path = target_dir, prefix = tmp_dir_name)
+  download_from_datastore(ds, target_path = target_dir, prefix = "tmp_dir")
   
   # check whether the directory contents are downloaded
   expect_equal(file.exists(file.path(target_dir, tmp_dir_name)), TRUE)
