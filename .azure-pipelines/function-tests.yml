@@ -18,7 +18,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        az login --service-principal -u ${{ variables['servicePrincipalId'] }}-p ${{ variables['servicePrincipalKey'] }}--tenant${{ variables['tenantId'] }}
+        az login --service-principal -u ${{ variables['servicePrincipalId'] }} -p ${{ variables['servicePrincipalKey'] }} --tenant ${{ variables['tenantId'] }}
         az account set --subscription ${{ variables['TEST_SUBSCRIPTION_ID'] }}
     displayName: 'azure login'
   - task: Bash@3
