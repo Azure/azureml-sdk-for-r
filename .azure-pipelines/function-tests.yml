@@ -9,6 +9,9 @@ container: ninhu/r-sdk-build:latest
 variables:
   ${{ if in( variables['Build.Reason'], 'Manual', 'IndividualCI') }}:
     TEST_SUBSCRIPTION_ID: ${{ variables['CI_SUBSCRIPTION_ID'] }}
+  servicePrincipalId: $(SERVICE_PRINCIPAL_ID)
+  servicePrincipalKey: $(SERVICE_PRINCIPAL_KEY)
+  tenantId: $(TENANT)
 
 steps:
   - task: Bash@3
