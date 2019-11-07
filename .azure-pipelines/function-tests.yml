@@ -6,6 +6,10 @@ pool:
 
 container: ninhu/r-sdk-build:latest
 
+variables:
+  ${{ if in( variables['Build.Reason'], 'Manual', 'IndividualCI') }}:
+    TEST_SUBSCRIPTION_ID: ${{ variables['CI_SUBSCRIPTION_ID'] }}
+
 steps:
   - task: Bash@3
     inputs:
