@@ -9,20 +9,21 @@ container: ninhu/r-sdk-build:latest
 variables:
   ${{ if in( variables['Build.Reason'], 'Manual', 'IndividualCI') }}:
     TEST_SUBSCRIPTION_ID: $(CI_SUBSCRIPTION_ID)
-  ${{ if ne( variables['Build.Reason'], 'Manual') }}:
-    TEST_SUBSCRIPTION_ID: ${{ variables['Build.Reason'] }}
-  servicePrincipalId: $(SERVICE_PRINCIPAL_ID)
-  servicePrincipalKey: $(SERVICE_PRINCIPAL_KEY)
-  tenantId: $(TENANT)
+    servicePrincipalId: $(SERVICE_PRINCIPAL_ID)
+    servicePrincipalKey: $(SERVICE_PRINCIPAL_KEY)
+    tenantId: $(TENANT)
 
 steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
-        az login --service-principal -u ${{ variables['servicePrincipalId'] }} -p ${{ variables['servicePrincipalKey'] }} --tenant ${{ variables['tenantId'] }}
-        az account set --subscription ${{ variables['TEST_SUBSCRIPTION_ID'] }}
-    displayName: 'azure login'
+        if (${{ variables['TEST_SUBSCRIPTION_ID'] }}) {
+          az cloud set -n AzureCloud
+          az login --service-principal -u ${{ variables['servicePrincipalId'] }} -p ${{ variables['servicePrincipalKey'] }} --tenant ${{ variables['tenantId'] }}
+          az account set --subscription ${{ variables['TEST_SUBSCRIPTION_ID'] }}
+        }
+    displayName: 'Azure login'
   - task: Bash@3
     inputs:
       targetType: 'inline'
