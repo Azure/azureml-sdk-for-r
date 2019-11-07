@@ -5,7 +5,7 @@ test_that("create, get, generate keys of, and delete webservice", {
   skip('skip')
   ws <- existing_ws
   
-  tmp_dir_name <- "tmp_dir"
+  tmp_dir_name <- file.path(tempdir(), "tmp_dir")
   model_name <- "dummy_model.data"
   dir.create(tmp_dir_name)
   file.create(file.path(tmp_dir_name, model_name))

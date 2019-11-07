@@ -158,7 +158,7 @@ uploaded as run artifacts upon run completion.</p>
 <p>This method is useful if you would like to add experiment
 tracking and artifact logging to the corresponding run record
 in Azure ML for local runs without have to submit an experiment
-run to a compute target with <code><a href='submit_experiment.html'>submit_experiment()</a></code>.</p>
+run to a compute target with <code>submit_experiment()</code>.</p>
     
     </div>
 
@@ -190,16 +190,16 @@ Setting to <code>NULL</code> will take no snapshot.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='complete_run.html'>complete_run()</a></code></p></div>
+    <div class='dont-index'><p><code>complete_run()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='experiment.html'>experiment</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
 <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>start_logging_run</span>(<span class='no'>exp</span>)
-<span class='fu'><a href='log_metric_to_run.html'>log_metric_to_run</a></span>(<span class='st'>"Accuracy"</span>, <span class='fl'>0.9</span>)
-<span class='fu'><a href='complete_run.html'>complete_run</a></span>(<span class='no'>run</span>)
+<span class='fu'>log_metric_to_run</span>(<span class='st'>"Accuracy"</span>, <span class='fl'>0.9</span>)
+<span class='fu'>complete_run</span>(<span class='no'>run</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -27,17 +27,16 @@ from local directory or custom URL.}
 
 \item{custom_docker_image}{A string of the name of the Docker image from
 which the image to use for training or deployment will be built. If not set,
-a default CPU-based image will be used as the base image. To use an image
-from a private Docker repository, you will also have to specify the
-\code{image_registry_details} parameter.}
+a predefined Docker image will be used. To use an image from a private Docker
+repository, you will also have to specify the \code{image_registry_details} parameter.}
 
 \item{image_registry_details}{A \code{ContainerRegistry} object of the details of
 the Docker image registry for the custom Docker image.}
 
 \item{use_gpu}{Indicates whether the environment should support GPUs.
-If \code{TRUE}, a GPU-based default Docker image will be used in the environment.
-If \code{FALSE}, a CPU-based image will be used. Default Docker images (CPU or
-GPU) will only be used if the \code{custom_docker_image} parameter is not set.}
+If \code{TRUE}, a predefined GPU-based Docker image will be used in the environment.
+If \code{FALSE}, a predefined CPU-based image will be used. Predefined Docker images
+(CPU or GPU) will only be used if the \code{custom_docker_image} parameter is not set.}
 
 \item{shm_size}{A string for the size of the Docker container's shared
 memory block. For more information, see
@@ -54,7 +53,7 @@ Docker image and creates a conda environment with your specifications from
 your \code{Environment} object within that Docker container.
 
 If the \code{custom_docker_image} parameter
-is not set, Azure ML will build a default base image (CPU or GPU
+is not set, Azure ML will build a predefined base image (CPU or GPU
 depending on the \code{use_gpu} flag) and install any R packages specified in the
 \code{cran_packages}, \code{github_packages}, or \code{custom_url_packages} parameters.
 }
@@ -71,6 +70,32 @@ If you make changes to an existing environment, such as adding an R package,
 a new version of the environment is created when you either submit a run,
 deploy a model, or manually register the environment. The versioning allows
 you to view changes to the environment over time.
+}
+
+\section{Predefined Docker images}{
+
+When submitting a training job or deploying a model, Azure ML runs your
+training script or scoring script within a Docker container. If no custom
+Docker image is specified with the \code{custom_docker_image} parameter, Azure
+ML will build a predefined CPU or GPU Docker image. The predefine images extend
+the Ubuntu 16.04 \href{https://github.com/Azure/AzureML-Containers}{Azure ML base images}
+and include the following dependencies:
+\tabular{rrr}{
+\strong{Dependencies} \tab \strong{Version} \tab \strong{Remarks}\cr
+azuremlsdk \tab latest \tab (from GitHub)\cr
+R \tab 3.6.0 \tab -\cr
+Commonly used R packages \tab - \tab 80+ of the most popular R packages for
+data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
+and nnet. For the full list of packages included, see
+\href{https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md}{here}.\cr
+Python \tab 3.7.0 \tab -\cr
+azureml-defaults \tab latest \tab \code{azureml-defaults} contains the
+\code{azureml-core} and \code{applicationinsights} packages of the Python SDK that
+are required for tasks such as logging metrics, uploading artifacts, and
+deploying models. (from pip)\cr
+rpy2 \tab latest \tab (from conda)\cr
+CUDA (GPU image only) \tab 10.0 \tab CuDNN (version 7) is also included
+}
 }
 
 \examples{

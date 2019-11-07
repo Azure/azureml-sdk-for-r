@@ -147,12 +147,12 @@ to define the software dependencies needed for your deployment." />
     <p>The inference configuration describes how to configure the model to make
 predictions. It references your scoring script (<code>entry_script</code>) and is
 used to locate all the resources required for the deployment. Inference
-configurations use Azure Machine Learning environments (see <code><a href='r_environment.html'>r_environment()</a></code>)
+configurations use Azure Machine Learning environments (see <code>r_environment()</code>)
 to define the software dependencies needed for your deployment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>inference_config</span>(<span class='no'>entry_script</span>, <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>inference_config</span>(<span class='no'>entry_script</span>, <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
   <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,10 +186,10 @@ environment does not have to be registered.</p></td>
 
     <p>The <code>InferenceConfig</code> object.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="defining-the-entry-script"><a class="anchor" href="#defining-the-entry-script"></a>Defining the entry script</h2>
 
     
-<h3>Defining the entry script</h3>
+
 <p>To deploy a model, you must provide an entry script that accepts requests,
 scores the requests by using the model, and returns the results. The
 entry script is specific to your model. It must understand the format of
@@ -220,12 +220,10 @@ are preserved during registration and deployment.</p>
 <p>Multiple model example:</p><pre>model1_path &lt;- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 </pre>
 
-
-
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='r_environment.html'>r_environment()</a></code>, <code><a href='deploy_model.html'>deploy_model()</a></code></p></div>
+    <div class='dont-index'><p><code>r_environment()</code>, <code>deploy_model()</code></p></div>
     
 
   </div>
@@ -236,7 +234,7 @@ are preserved during registration and deployment.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#defining-the-entry-script">Defining the entry script</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

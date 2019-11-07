@@ -4,7 +4,7 @@
 \alias{inference_config}
 \title{Create an inference configuration for model deployments}
 \usage{
-inference_config(entry_script, source_directory = NULL,
+inference_config(entry_script, source_directory = ".",
   description = NULL, environment = NULL)
 }
 \arguments{
@@ -32,8 +32,8 @@ used to locate all the resources required for the deployment. Inference
 configurations use Azure Machine Learning environments (see \code{r_environment()})
 to define the software dependencies needed for your deployment.
 }
-\details{
-\subsection{Defining the entry script}{
+\section{Defining the entry script}{
+
 To deploy a model, you must provide an entry script that accepts requests,
 scores the requests by using the model, and returns the results. The
 entry script is specific to your model. It must understand the format of
@@ -67,9 +67,8 @@ Single model example:\preformatted{model_path <- file.path(Sys.getenv("AZUREML_M
 
 Multiple model example:\preformatted{model1_path <- file.path(Sys.getenv("AZUREML_MODEL_DIR"), "my_model/1/my_model.rds")
 }
+}
 
-}
-}
 \seealso{
 \code{r_environment()}, \code{deploy_model()}
 }

@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Hyperparameter tune a Keras model</h1>
             
-            <h4 class="date">2019-11-04</h4>
+            <h4 class="date">2019-11-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd"><code>vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd</code></a></small>
       <div class="hidden name"><code>hyperparameter-tune-with-keras.Rmd</code></div>
@@ -139,17 +139,17 @@
 <div id="load-your-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-your-workspace" class="anchor"></a>Load your workspace</h3>
-<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a <strong>config.json</strong> file if you previously wrote one out with <a href="https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html"><code><a href="../../reference/write_workspace_config.html">write_workspace_config()</a></code></a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a <strong>config.json</strong> file if you previously wrote one out with <a href="https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/write_workspace_config.html">write_workspace_config()</a></code></a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>Or, you can retrieve a workspace by directly specifying your workspace details:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
 <div id="create-an-experiment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-an-experiment" class="anchor"></a>Create an experiment</h3>
 <p>An Azure ML <strong>experiment</strong> tracks a grouping of runs, typically from the same training script. Create an experiment to track hyperparameter tuning runs for the Keras model.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'hyperdrive-cifar10'</span>)</a></code></pre></div>
-<p>If you would like to track your runs in an existing experiment, simply specify that experiment’s name to the <code>name</code> parameter of <code><a href="../../reference/experiment.html">experiment()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">exp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/experiment.html">experiment</a></span>(<span class="dt">workspace =</span> ws, <span class="dt">name =</span> <span class="st">'hyperdrive-cifar10'</span>)</a></code></pre></div>
+<p>If you would like to track your runs in an existing experiment, simply specify that experiment’s name to the <code>name</code> parameter of <code><a href="https://rdrr.io/pkg/azuremlsdk/man/experiment.html">experiment()</a></code>.</p>
 </div>
 <div id="create-a-compute-target" class="section level3">
 <h3 class="hasAnchor">
@@ -158,16 +158,16 @@
 <p>You may need to wait a few minutes for your compute cluster to be provisioned if it doesn’t already exist.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "gpucluster"</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target))</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">{</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">  vm_size &lt;-<span class="st"> "STANDARD_NC6"</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, </a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws, </a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">cluster_name =</span> cluster_name,</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">                                       <span class="dt">vm_size =</span> vm_size, </a>
 <a class="sourceLine" id="cb5-10" data-line-number="10">                                       <span class="dt">max_nodes =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">  <span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">  <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb5-13" data-line-number="13">}</a></code></pre></div>
 </div>
 </div>
@@ -183,9 +183,9 @@
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(azuremlsdk)</a></code></pre>
 <ul>
 <li><p>Take the hyperparameters as command-line arguments to the script. This is necessary so that when HyperDrive carries out the hyperparameter sweep, it can run the training script with different values to the hyperparameters as defined by the search space.</p></li>
-<li>Use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html"><code><a href="../../reference/log_metric_to_run.html">log_metric_to_run()</a></code></a> function to log the hyperparameters and the primary metric.</li>
+<li>Use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/log_metric_to_run.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/log_metric_to_run.html">log_metric_to_run()</a></code></a> function to log the hyperparameters and the primary metric.</li>
 </ul>
-<pre><code><a href="../../reference/log_metric_to_run.html">log_metric_to_run("batch_size", batch_size)
+<pre><code><a href="https://rdrr.io/pkg/azuremlsdk/man/log_metric_to_run.html">log_metric_to_run("batch_size", batch_size)
 ...
 log_metric_to_run("epochs", epochs)
 ...
@@ -204,10 +204,10 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <li>The directory that contains your scripts needed for training (<code>source_directory</code>). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.</li>
 <li>The training script that will be executed (<code>entry_script</code>).</li>
 <li>The compute target (<code>compute_target</code>), in this case the AmlCompute cluster you created earlier.</li>
-<li>Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, pass the package name to the <code>cran_packages</code> parameter to have it installed in the Docker container where the job will run. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/estimator.html"><code><a href="../../reference/estimator.html">estimator()</a></code></a> reference for the full set of configurable options.</li>
+<li>Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, pass the package name to the <code>cran_packages</code> parameter to have it installed in the Docker container where the job will run. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/estimator.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator()</a></code></a> reference for the full set of configurable options.</li>
 <li>Set the <code>use_gpu = TRUE</code> flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">                 <span class="dt">entry_script =</span> <span class="st">"cifar10_cnn.R"</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">                 <span class="dt">compute_target =</span> compute_target,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                 <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"keras"</span>),</a>
@@ -224,39 +224,39 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <p><strong>Discrete hyperparameters</strong> are specified as a choice among discrete values represented as a list.</p>
 <p>Advanced discrete hyperparameters can also be specified using a distribution. The following distributions are supported:</p>
 <ul>
-<li><code><a href="../../reference/quniform.html">quniform(low, high, q)</a></code></li>
-<li><code><a href="../../reference/qloguniform.html">qloguniform(low, high, q)</a></code></li>
-<li><code><a href="../../reference/qnormal.html">qnormal(mu, sigma, q)</a></code></li>
-<li><code><a href="../../reference/qlognormal.html">qlognormal(mu, sigma, q)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/quniform.html">quniform(low, high, q)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/qloguniform.html">qloguniform(low, high, q)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/qnormal.html">qnormal(mu, sigma, q)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/qlognormal.html">qlognormal(mu, sigma, q)</a></code></li>
 </ul>
 <p><strong>Continuous hyperparameters</strong> are specified as a distribution over a continuous range of values. The following distributions are supported:</p>
 <ul>
-<li><code><a href="../../reference/uniform.html">uniform(low, high)</a></code></li>
-<li><code><a href="../../reference/loguniform.html">loguniform(low, high)</a></code></li>
-<li><code><a href="../../reference/normal.html">normal(mu, sigma)</a></code></li>
-<li><code><a href="../../reference/lognormal.html">lognormal(mu, sigma)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/uniform.html">uniform(low, high)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/loguniform.html">loguniform(low, high)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/normal.html">normal(mu, sigma)</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/lognormal.html">lognormal(mu, sigma)</a></code></li>
 </ul>
-<p>Here, we will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html"><code><a href="../../reference/random_parameter_sampling.html">random_parameter_sampling()</a></code></a> function to define the search space for each hyperparameter. <code>batch_size</code> and <code>epochs</code> will be chosen from discrete sets while <code>lr</code> and <code>decay</code> will be drawn from continuous distributions.</p>
+<p>Here, we will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/random_parameter_sampling.html">random_parameter_sampling()</a></code></a> function to define the search space for each hyperparameter. <code>batch_size</code> and <code>epochs</code> will be chosen from discrete sets while <code>lr</code> and <code>decay</code> will be drawn from continuous distributions.</p>
 <p>Other available sampling function options are:</p>
 <ul>
-<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html"><code><a href="../../reference/grid_parameter_sampling.html">grid_parameter_sampling()</a></code></a></li>
-<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/bayesian_parameter_sampling.html"><code><a href="../../reference/bayesian_parameter_sampling.html">bayesian_parameter_sampling()</a></code></a></li>
+<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/grid_parameter_sampling.html">grid_parameter_sampling()</a></code></a></li>
+<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/bayesian_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/bayesian_parameter_sampling.html">bayesian_parameter_sampling()</a></code></a></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">sampling &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/random_parameter_sampling.html">random_parameter_sampling</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">batch_size =</span> <span class="kw"><a href="../../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>)),</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">                                           <span class="dt">epochs =</span> <span class="kw"><a href="../../reference/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>)),</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">                                           <span class="dt">lr =</span> <span class="kw"><a href="../../reference/normal.html">normal</a></span>(<span class="fl">0.0001</span>, <span class="fl">0.005</span>),</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">                                           <span class="dt">decay =</span> <span class="kw"><a href="../../reference/uniform.html">uniform</a></span>(<span class="fl">1e-6</span>, <span class="fl">3e-6</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">sampling &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/random_parameter_sampling.html">random_parameter_sampling</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">batch_size =</span> <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>)),</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">                                           <span class="dt">epochs =</span> <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/choice.html">choice</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">200</span>, <span class="dv">350</span>, <span class="dv">500</span>)),</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">                                           <span class="dt">lr =</span> <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/normal.html">normal</a></span>(<span class="fl">0.0001</span>, <span class="fl">0.005</span>),</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">                                           <span class="dt">decay =</span> <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/uniform.html">uniform</a></span>(<span class="fl">1e-6</span>, <span class="fl">3e-6</span>)))</a></code></pre></div>
 </div>
 <div id="define-termination-policy" class="section level3">
 <h3 class="hasAnchor">
 <a href="#define-termination-policy" class="anchor"></a>Define termination policy</h3>
 <p>To prevent resource waste, Azure ML can detect and terminate poorly performing runs. HyperDrive will do this automatically if you specify an early termination policy.</p>
-<p>Here, you will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/bandit_policy.html"><code><a href="../../reference/bandit_policy.html">bandit_policy()</a></code></a>, which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">policy &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/bandit_policy.html">bandit_policy</a></span>(<span class="dt">slack_factor =</span> <span class="fl">0.15</span>)</a></code></pre></div>
+<p>Here, you will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/bandit_policy.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/bandit_policy.html">bandit_policy()</a></code></a>, which terminates any runs where the primary metric is not within the specified slack factor with respect to the best performing training run.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">policy &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/bandit_policy.html">bandit_policy</a></span>(<span class="dt">slack_factor =</span> <span class="fl">0.15</span>)</a></code></pre></div>
 <p>Other termination policy options are:</p>
 <ul>
-<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/median_stopping_policy.html"><code><a href="../../reference/median_stopping_policy.html">median_stopping_policy()</a></code></a></li>
-<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/truncation_selection_policy.html"><code><a href="../../reference/truncation_selection_policy.html">truncation_selection_policy()</a></code></a></li>
+<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/median_stopping_policy.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/median_stopping_policy.html">median_stopping_policy()</a></code></a></li>
+<li><a href="https://azure.github.io/azureml-sdk-for-r/reference/truncation_selection_policy.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/truncation_selection_policy.html">truncation_selection_policy()</a></code></a></li>
 </ul>
 <p>If no policy is provided, all runs will continue to completion regardless of performance.</p>
 </div>
@@ -264,8 +264,8 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <h3 class="hasAnchor">
 <a href="#finalize-configuration" class="anchor"></a>Finalize configuration</h3>
 <p>Now, you can create a <code>HyperDriveConfig</code> object to define your HyperDrive run. Along with the sampling and policy definitions, you need to specify the name of the primary metric that you want to track and whether we want to maximize it or minimize it. The <code>primary_metric_name</code> must correspond with the name of the primary metric you logged in your training script. <code>max_total_runs</code> specifies the total number of child runs to launch. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/hyperdrive_config.html">hyperdrive_config()</a> reference for the full set of configurable parameters.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">hyperdrive_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/hyperdrive_config.html">hyperdrive_config</a></span>(<span class="dt">hyperparameter_sampling =</span> sampling,</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">                                       <span class="kw"><a href="../../reference/primary_metric_goal.html">primary_metric_goal</a></span>(<span class="st">"MINIMIZE"</span>),</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">hyperdrive_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/hyperdrive_config.html">hyperdrive_config</a></span>(<span class="dt">hyperparameter_sampling =</span> sampling,</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">                                       <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/primary_metric_goal.html">primary_metric_goal</a></span>(<span class="st">"MINIMIZE"</span>),</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">                                       <span class="dt">primary_metric_name =</span> <span class="st">"Loss"</span>,</a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">                                       <span class="dt">max_total_runs =</span> <span class="dv">4</span>,</a>
 <a class="sourceLine" id="cb11-5" data-line-number="5">                                       <span class="dt">policy =</span> policy,</a>
@@ -275,30 +275,30 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <div id="submit-the-hyperdrive-run" class="section level2">
 <h2 class="hasAnchor">
 <a href="#submit-the-hyperdrive-run" class="anchor"></a>Submit the HyperDrive run</h2>
-<p>Finally submit the experiment to run on your cluster. The parent HyperDrive run will launch the individual child runs. <code><a href="../../reference/submit_experiment.html">submit_experiment()</a></code> will return a <code>HyperDriveRun</code> object that you will use to interface with the run. In this tutorial, since the cluster we created scales to a max of <code>4</code> nodes, all 4 child runs will be launched in parallel.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">hyperdrive_run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/submit_experiment.html">submit_experiment</a></span>(exp, hyperdrive_config)</a></code></pre></div>
+<p>Finally submit the experiment to run on your cluster. The parent HyperDrive run will launch the individual child runs. <code><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment()</a></code> will return a <code>HyperDriveRun</code> object that you will use to interface with the run. In this tutorial, since the cluster we created scales to a max of <code>4</code> nodes, all 4 child runs will be launched in parallel.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">hyperdrive_run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, hyperdrive_config)</a></code></pre></div>
 <p>You can view the HyperDrive run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/view_run_details.html">view_run_details</a></span>(hyperdrive_run)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(hyperdrive_run)</a></code></pre></div>
 <p>Wait until hyperparameter tuning is complete before you run more code.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(hyperdrive_run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_run_completion.html">wait_for_run_completion</a></span>(hyperdrive_run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="analyse-runs-by-performance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analyse-runs-by-performance" class="anchor"></a>Analyse runs by performance</h2>
 <p>Finally, you can view and compare the metrics collected during all of the child runs!</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Get the metrics of all the child runs</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">child_run_metrics &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_child_run_metrics.html">get_child_run_metrics</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">child_run_metrics &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_child_run_metrics.html">get_child_run_metrics</a></span>(hyperdrive_run)</a>
 <a class="sourceLine" id="cb15-3" data-line-number="3">child_run_metrics</a>
 <a class="sourceLine" id="cb15-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co"># Get the child run objects sorted in descending order by the best primary metric</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">child_runs &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">child_runs &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_child_runs_sorted_by_primary_metric.html">get_child_runs_sorted_by_primary_metric</a></span>(hyperdrive_run)</a>
 <a class="sourceLine" id="cb15-7" data-line-number="7">child_runs</a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co"># Directly get the run object of the best performing run</span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">best_run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_best_run_by_primary_metric.html">get_best_run_by_primary_metric</a></span>(hyperdrive_run)</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">best_run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_best_run_by_primary_metric.html">get_best_run_by_primary_metric</a></span>(hyperdrive_run)</a>
 <a class="sourceLine" id="cb15-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co"># Get the metrics of the best performing run</span></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_run_metrics.html">get_run_metrics</a></span>(best_run)</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">metrics &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_run_metrics.html">get_run_metrics</a></span>(best_run)</a>
 <a class="sourceLine" id="cb15-14" data-line-number="14">metrics</a></code></pre></div>
 <p>The <code>metrics</code> variable will include the values of the hyperparameters that resulted in the best performing run.</p>
 </div>
@@ -307,7 +307,7 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <a href="#clean-up-resources" class="anchor"></a>Clean up resources</h2>
 <p>Delete the resources once you no longer need them. Don’t delete any resource you plan to still use.</p>
 <p>Delete the compute cluster:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_compute.html">delete_compute</a></span>(compute_target)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_compute.html">delete_compute</a></span>(compute_target)</a></code></pre></div>
 </div>
   </div>
 

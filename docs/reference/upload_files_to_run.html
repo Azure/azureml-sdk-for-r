@@ -180,11 +180,11 @@ the files.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='experiment.html'>experiment</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
 
 <span class='co'># Start an interactive logging run</span>
-<span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='start_logging_run.html'>start_logging_run</a></span>(<span class='no'>exp</span>)
+<span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>start_logging_run</span>(<span class='no'>exp</span>)
 
 <span class='co'># Upload files to the run record</span>
 <span class='no'>filename1</span> <span class='kw'>&lt;-</span> <span class='st'>"important_file_1"</span>
@@ -193,7 +193,7 @@ the files.</p></td>
                     <span class='kw'>paths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"path/on/disk/file_1.txt"</span>, <span class='st'>"other/path/on/disk/file_2.txt"</span>))
 
 <span class='co'># Download a file from the run record</span>
-<span class='fu'><a href='download_file_from_run.html'>download_file_from_run</a></span>(<span class='no'>filename1</span>, <span class='st'>"file_1.txt"</span>)
+<span class='fu'>download_file_from_run</span>(<span class='no'>filename1</span>, <span class='st'>"file_1.txt"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

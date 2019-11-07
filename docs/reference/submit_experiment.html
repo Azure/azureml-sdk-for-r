@@ -188,16 +188,16 @@ provide a <code>HyperDriveConfig</code> to <code>config</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='estimator.html'>estimator()</a></code>, <code><a href='hyperdrive_config.html'>hyperdrive_config()</a></code></p></div>
+    <div class='dont-index'><p><code>estimator()</code>, <code>hyperdrive_config()</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># This example submits an Estimator experiment</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
-<span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_compute.html'>get_compute</a></span>(<span class='no'>ws</span>, <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>)
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='experiment.html'>experiment</a></span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
-<span class='no'>est</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='estimator.html'>estimator</a></span>(<span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>'.'</span>,
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'>get_compute</span>(<span class='no'>ws</span>, <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>)
+<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
+<span class='no'>est</span> <span class='kw'>&lt;-</span> <span class='fu'>estimator</span>(<span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>'.'</span>,
                  <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>'train.R'</span>,
                  <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='no'>compute_target</span>)
 <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>submit_experiment</span>(<span class='no'>exp</span>, <span class='no'>est</span>)

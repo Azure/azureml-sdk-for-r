@@ -154,7 +154,7 @@ are registered to the workspace with the names <code>workspaceblobstore</code> a
 of the blob container and the file share that is provisioned in the storage
 account attached to the workspace. The <code>workspaceblobstore</code> is set as the
 default datastore, and remains the default datastore unless you set a new
-datastore as the default with <code><a href='set_default_datastore.html'>set_default_datastore()</a></code>.</p>
+datastore as the default with <code>set_default_datastore()</code>.</p>
     
     </div>
 
@@ -177,7 +177,7 @@ datastore as the default with <code><a href='set_default_datastore.html'>set_def
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Get the default datastore for the datastore</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
 <span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>get_default_datastore</span>(<span class='no'>ws</span>)
 }
 
@@ -185,8 +185,8 @@ datastore as the default with <code><a href='set_default_datastore.html'>set_def
 <span class='co'># following code will return the same datastore object as the above</span>
 <span class='co'># example</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='load_workspace_from_config.html'>load_workspace_from_config</a></span>()
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_datastore.html'>get_datastore</a></span>(<span class='no'>ws</span>, <span class='kw'>datastore_name</span> <span class='kw'>=</span> <span class='st'>'workspaceblobstore'</span>)
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'>get_datastore</span>(<span class='no'>ws</span>, <span class='kw'>datastore_name</span> <span class='kw'>=</span> <span class='st'>'workspaceblobstore'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
