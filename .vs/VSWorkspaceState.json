@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\R",
+    "\\samples",
+    "\\samples\\training",
+    "\\samples\\training\\train-on-amlcompute"
+  ],
+  "SelectedNode": "\\samples\\training\\config.json",
+  "PreviewInSolutionExplorer": false
+}
