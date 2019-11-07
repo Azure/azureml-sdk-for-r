@@ -23,17 +23,21 @@ steps:
               package_location <- devtools::build();
               install.packages(package_location, repos = NULL)'
     displayName: 'Build and Install SDK'
-
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        az cloud set -n AzureCloud
+        if ($Env:servicePrincipalId -And $Env:servicePrincipalKey -And $Env:tenantId) {az login --service-principal -u $Env:servicePrincipalId -p $Env:servicePrincipalKey --tenant $Env:tenantId}
+        if ($Env:TEST_SUBSCRIPTION_ID) {az account set --subscription $Env:TEST_SUBSCRIPTION_ID}
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
-        python -c "if ('$servicePrincipalId' and '$servicePrincipalKey' and '$tenantId'): from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
         R -e '# needed to load all non exported packages for testing
               devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
               testthat::test_dir("tests/testthat", reporter = "junit")'
-      addSpnToEnvironment: true
     displayName: 'Run R SDK Tests'
 
   - task: PublishTestResults@2
