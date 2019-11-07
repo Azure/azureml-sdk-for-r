@@ -18,6 +18,13 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        az login --service-principal -u ${{ variables['servicePrincipalId'] }}-p ${{ variables['servicePrincipalKey'] }}--tenant${{ variables['tenantId'] }}
+        az account set --subscription ${{ variables['TEST_SUBSCRIPTION_ID'] }}
+    displayName: 'azure login'
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
         pip install --user azureml-sdk
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
               .libPaths(Sys.getenv("R_LIBS_USER"));
@@ -30,7 +37,6 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        python -c "import os; from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='${{ variables['servicePrincipalId'] }}', password='${{ variables['servicePrincipalKey'] }}', service_principal=True, tenant='${{ variables['tenantId'] }}')"
         R -e '# needed to load all non exported packages for testing
               devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
