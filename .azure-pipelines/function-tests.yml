@@ -27,7 +27,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        python -c "if ('$servicePrincipalId' and '$servicePrincipalKey' and '$tenantId'): from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='$servicePrincipalId', password='$servicePrincipalKey', service_principal=True, tenant='$tenantId')"
+        python -c "from azureml._base_sdk_common.common import perform_interactive_login; perform_interactive_login(username='${{ variables['servicePrincipalId'] }}, password='${{ variables['servicePrincipalKey'] }}, service_principal=True, tenant='${{ variables['tenantId'] }})"
         R -e '# needed to load all non exported packages for testing
               devtools::load_all();
               options(testthat.output_file = "TEST-ALL.xml");
