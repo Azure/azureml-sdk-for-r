@@ -157,11 +157,14 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
 #' @param path A string of the path to the config file or starting directory
 #' for search. The parameter defaults to starting the search in the current
 #' directory.
+#' @param file_name A string that will override the config file name to
+#' search for when path is a directory path.
 #' @return The `Workspace` object.
 #' @export
 #' @md
-load_workspace_from_config <- function(path = NULL) {
-  azureml$core$workspace$Workspace$from_config(path)
+load_workspace_from_config <- function(path = NULL, file_name = NULL) {
+  azureml$core$workspace$Workspace$from_config(path = path,
+                                               "_file_name" = file_name)
 }
 
 #' Delete a workspace
