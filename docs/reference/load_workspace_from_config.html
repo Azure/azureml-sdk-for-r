@@ -154,7 +154,7 @@ in different files or projects without retyping the workspace ARM properties.</p
     
     </div>
 
-    <pre class="usage"><span class='fu'>load_workspace_from_config</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>load_workspace_from_config</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +164,11 @@ in different files or projects without retyping the workspace ARM properties.</p
       <td><p>A string of the path to the config file or starting directory
 for search. The parameter defaults to starting the search in the current
 directory.</p></td>
+    </tr>
+    <tr>
+      <th>file_name</th>
+      <td><p>A string that will override the config file name to
+search for when path is a directory path.</p></td>
     </tr>
     </table>
     
