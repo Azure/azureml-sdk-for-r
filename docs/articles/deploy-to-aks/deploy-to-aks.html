@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Deploy a web service to Azure Kubernetes Service</h1>
             
-            <h4 class="date">2019-11-04</h4>
+            <h4 class="date">2019-11-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/deploy-to-aks/deploy-to-aks.Rmd"><code>vignettes/deploy-to-aks/deploy-to-aks.Rmd</code></a></small>
       <div class="hidden name"><code>deploy-to-aks.Rmd</code></div>
@@ -139,18 +139,18 @@
 <div id="load-your-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-your-workspace" class="anchor"></a>Load your workspace</h3>
-<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a <strong>config.json</strong> file if you previously wrote one out with <code><a href="../../reference/write_workspace_config.html">write_workspace_config()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from a <strong>config.json</strong> file if you previously wrote one out with <code><a href="https://rdrr.io/pkg/azuremlsdk/man/write_workspace_config.html">write_workspace_config()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>Or, you can retrieve a workspace by directly specifying your workspace details:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_workspace.html">get_workspace</a></span>(<span class="st">"&lt;your workspace name&gt;"</span>, <span class="st">"&lt;your subscription ID&gt;"</span>, <span class="st">"&lt;your resource group&gt;"</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="register-the-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#register-the-model" class="anchor"></a>Register the model</h2>
 <p>In this tutorial we will deploy a model that was trained in one of the <a href="https://github.com/Azure/azureml-sdk-for-r/blob/master/samples/training/train-on-amlcompute/train-on-amlcompute.R">samples</a>. The model was trained with the Iris dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica). We have provided the model file (<code>model.rds</code>) for the tutorial; it is located in the same directory as this vignette.</p>
-<p>First, register the model to your workspace with <a href="https://azure.github.io/azureml-sdk-for-r/reference/register_model.html"><code><a href="../../reference/register_model.html">register_model()</a></code></a>. A registered model can be any collection of files, but in this case the R model file is sufficient. Azure ML will use the registered model for deployment.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/register_model.html">register_model</a></span>(ws, </a>
+<p>First, register the model to your workspace with <a href="https://azure.github.io/azureml-sdk-for-r/reference/register_model.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/register_model.html">register_model()</a></code></a>. A registered model can be any collection of files, but in this case the R model file is sufficient. Azure ML will use the registered model for deployment.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/register_model.html">register_model</a></span>(ws, </a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">                        <span class="dt">model_path =</span> <span class="st">"model.rds"</span>, </a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">                        <span class="dt">model_name =</span> <span class="st">"iris_model"</span>,</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">                        <span class="dt">description =</span> <span class="st">"Predict an Iris flower type"</span>)</a></code></pre></div>
@@ -161,13 +161,13 @@
 <p>When deploying a web service to AKS, you deploy to an AKS cluster that is connected to your workspace. There are two ways to connect an AKS cluster to your workspace:</p>
 <ul>
 <li>Create the AKS cluster. The process automatically connects the cluster to the workspace.</li>
-<li>Attach an existing AKS cluster to your workspace. You can attach a cluster with the <a href="https://azure.github.io/azureml-sdk-for-r/reference/attach_aks_compute.html"><code><a href="../../reference/attach_aks_compute.html">attach_aks_compute()</a></code></a> method.</li>
+<li>Attach an existing AKS cluster to your workspace. You can attach a cluster with the <a href="https://azure.github.io/azureml-sdk-for-r/reference/attach_aks_compute.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/attach_aks_compute.html">attach_aks_compute()</a></code></a> method.</li>
 </ul>
 <p>Creating or attaching an AKS cluster is a one-time process for your workspace. You can reuse this cluster for multiple deployments. If you delete the cluster or the resource group that contains it, you must create a new cluster the next time you need to deploy.</p>
-<p>In this tutorial, we will go with the first method of provisioning a new cluster. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/create_aks_compute.html"><code><a href="../../reference/create_aks_compute.html">create_aks_compute()</a></code></a> reference for the full set of configurable parameters. If you pick custom values for the <code>agent_count</code> and <code>vm_size</code> parameters, you need to make sure <code>agent_count</code> multiplied by <code>vm_size</code> is greater than or equal to <code>12</code> virtual CPUs.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">aks_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aks_compute.html">create_aks_compute</a></span>(ws, <span class="dt">cluster_name =</span> <span class="st">'myakscluster'</span>)</a>
+<p>In this tutorial, we will go with the first method of provisioning a new cluster. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/create_aks_compute.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/create_aks_compute.html">create_aks_compute()</a></code></a> reference for the full set of configurable parameters. If you pick custom values for the <code>agent_count</code> and <code>vm_size</code> parameters, you need to make sure <code>agent_count</code> multiplied by <code>vm_size</code> is greater than or equal to <code>12</code> virtual CPUs.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">aks_target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/create_aks_compute.html">create_aks_compute</a></span>(ws, <span class="dt">cluster_name =</span> <span class="st">'myakscluster'</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(aks_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(aks_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>The Azure ML SDK does not provide support for scaling an AKS cluster. To scale the nodes in the cluster, use the UI for your AKS cluster in the Azure portal. You can only change the node count, not the VM size of the cluster.</p>
 </div>
 <div id="deploy-as-a-web-service" class="section level2">
@@ -179,10 +179,10 @@
 <p>To deploy a model, you need an <strong>inference configuration</strong>, which describes the environment needed to host the model and web service. To create an inference config, you will first need a scoring script and an Azure ML environment.</p>
 <p>The scoring script (<code>entry_script</code>) is an R script that will take as input variable values (in JSON format) and output a prediction from your model. For this tutorial, use the provided scoring file <code>score.R</code>. The scoring script must contain an <code>init()</code> method that loads your model and returns a function that uses the model to make a prediction based on the input data. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html#details">documentation</a> for more details.</p>
 <p>Next, define an Azure ML <strong>environment</strong> for your script’s package dependencies. With an environment, you specify R packages (from CRAN or elsewhere) that are needed for your script to run. You can also provide the values of environment variables that your script can reference to modify its behavior.</p>
-<p>By default Azure ML will build a default Docker image that includes R, the Azure ML SDK, and additional required dependencies for deployment. See the documentation here for the full list of dependencies that will be installed in the default container. You can also specify additional packages to be installed at runtime, or even a custom Docker image to be used instead of the base image that will be built, using the other available parameters to <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="../../reference/r_environment.html">r_environment()</a></code></a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">r_env &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/r_environment.html">r_environment</a></span>(<span class="dt">name =</span> <span class="st">"deploy_env"</span>)</a></code></pre></div>
+<p>By default Azure ML will build a default Docker image that includes R, the Azure ML SDK, and additional required dependencies for deployment. See the documentation here for the full list of dependencies that will be installed in the default container. You can also specify additional packages to be installed at runtime, or even a custom Docker image to be used instead of the base image that will be built, using the other available parameters to <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment()</a></code></a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">r_env &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment</a></span>(<span class="dt">name =</span> <span class="st">"deploy_env"</span>)</a></code></pre></div>
 <p>Now you have everything you need to create an inference config for encapsulating your scoring script and environment dependencies.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/inference_config.html">inference_config</a></span>(</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/inference_config.html">inference_config</a></span>(</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"score.R"</span>,</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
@@ -190,26 +190,26 @@
 <div id="deploy-to-aks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#deploy-to-aks" class="anchor"></a>Deploy to AKS</h3>
-<p>Now, define the deployment configuration that describes the compute resources needed, for example, the number of cores and memory. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/aks_webservice_deployment_config.html"><code><a href="../../reference/aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code></a> for the full set of configurable parameters.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">aks_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/aks_webservice_deployment_config.html">aks_webservice_deployment_config</a></span>(<span class="dt">cpu_cores =</span> <span class="dv">1</span>, <span class="dt">memory_gb =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>Now, define the deployment configuration that describes the compute resources needed, for example, the number of cores and memory. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/aks_webservice_deployment_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code></a> for the full set of configurable parameters.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">aks_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/aks_webservice_deployment_config.html">aks_webservice_deployment_config</a></span>(<span class="dt">cpu_cores =</span> <span class="dv">1</span>, <span class="dt">memory_gb =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>Now, deploy your model as a web service to the AKS cluster you created earlier.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">aks_service &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/deploy_model.html">deploy_model</a></span>(ws, </a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">aks_service &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/deploy_model.html">deploy_model</a></span>(ws, </a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                            <span class="st">'my-new-aksservice'</span>, </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">                            <span class="dt">models =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(model), </a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">                            <span class="dt">inference_config =</span> inference_config, </a>
 <a class="sourceLine" id="cb9-5" data-line-number="5">                            <span class="dt">deployment_config =</span> aks_config,</a>
 <a class="sourceLine" id="cb9-6" data-line-number="6">                            <span class="dt">deployment_target =</span> aks_target)</a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw"><a href="../../reference/wait_for_deployment.html">wait_for_deployment</a></span>(aks_service, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_deployment.html">wait_for_deployment</a></span>(aks_service, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>To inspect the logs from the deployment:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/get_webservice_logs.html">get_webservice_logs</a></span>(aks_service)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_webservice_logs.html">get_webservice_logs</a></span>(aks_service)</a></code></pre></div>
 <p>If you encounter any issue in deploying the web service, please visit the <a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment">troubleshooting guide</a>.</p>
 </div>
 </div>
 <div id="test-the-deployed-service" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-the-deployed-service" class="anchor"></a>Test the deployed service</h2>
-<p>Now that your model is deployed as a service, you can test the service from R using <a href="https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html"><code><a href="../../reference/invoke_webservice.html">invoke_webservice()</a></code></a>. Provide a new set of data to predict from, convert it to JSON, and send it to the service.</p>
+<p>Now that your model is deployed as a service, you can test the service from R using <a href="https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/invoke_webservice.html">invoke_webservice()</a></code></a>. Provide a new set of data to predict from, convert it to JSON, and send it to the service.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(jsonlite)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co"># versicolor</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">plant &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">Sepal.Length =</span> <span class="fl">6.4</span>,</a>
@@ -229,7 +229,7 @@
 <a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#                    Petal.Length = 5.2,</span></a>
 <a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#                    Petal.Width = 2.3)</span></a>
 <a class="sourceLine" id="cb11-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20">predicted_val &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/invoke_webservice.html">invoke_webservice</a></span>(aks_service, <span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(plant))</a>
+<a class="sourceLine" id="cb11-20" data-line-number="20">predicted_val &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/invoke_webservice.html">invoke_webservice</a></span>(aks_service, <span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(plant))</a>
 <a class="sourceLine" id="cb11-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/message.html">message</a></span>(predicted_val)</a></code></pre></div>
 <p>You can also get the web service’s HTTP endpoint, which accepts REST client calls. You can share this endpoint with anyone who wants to test the web service or integrate it into an application.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">aks_service<span class="op">$</span>scoring_uri</a></code></pre></div>
@@ -238,16 +238,16 @@
 <h2 class="hasAnchor">
 <a href="#web-service-authentication" class="anchor"></a>Web service authentication</h2>
 <p>When deploying to AKS, key-based authentication is enabled by default. You can also enable token-based authentication. Token-based authentication requires clients to use an Azure Active Directory account to request an authentication token, which is used to make requests to the deployed service.</p>
-<p>To disable key-based auth, set the <code>auth_enabled = FALSE</code> parameter when creating the deployment configuration with <a href="https://azure.github.io/azureml-sdk-for-r/reference/aks_webservice_deployment_config.html"><code><a href="../../reference/aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code></a>. To enable token-based auth, set <code>token_auth_enabled = TRUE</code> when creating the deployment config.</p>
+<p>To disable key-based auth, set the <code>auth_enabled = FALSE</code> parameter when creating the deployment configuration with <a href="https://azure.github.io/azureml-sdk-for-r/reference/aks_webservice_deployment_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/aks_webservice_deployment_config.html">aks_webservice_deployment_config()</a></code></a>. To enable token-based auth, set <code>token_auth_enabled = TRUE</code> when creating the deployment config.</p>
 <div id="key-based-authentication" class="section level3">
 <h3 class="hasAnchor">
 <a href="#key-based-authentication" class="anchor"></a>Key-based authentication</h3>
-<p>If key authentication is enabled, you can use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_keys.html"><code><a href="../../reference/get_webservice_keys.html">get_webservice_keys()</a></code></a> method to retrieve a primary and secondary authentication key. To generate a new key, use <a href="https://azure.github.io/azureml-sdk-for-r/reference/generate_new_webservice_key.html"><code><a href="../../reference/generate_new_webservice_key.html">generate_new_webservice_key()</a></code></a>.</p>
+<p>If key authentication is enabled, you can use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_keys.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/get_webservice_keys.html">get_webservice_keys()</a></code></a> method to retrieve a primary and secondary authentication key. To generate a new key, use <a href="https://azure.github.io/azureml-sdk-for-r/reference/generate_new_webservice_key.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/generate_new_webservice_key.html">generate_new_webservice_key()</a></code></a>.</p>
 </div>
 <div id="token-based-authentication" class="section level3">
 <h3 class="hasAnchor">
 <a href="#token-based-authentication" class="anchor"></a>Token-based authentication</h3>
-<p>If token authentication is enabled, you can use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_token.html"><code><a href="../../reference/get_webservice_token.html">get_webservice_token()</a></code></a> method to retrieve a JWT token and that token’s expiration time. Make sure to request a new token after the token’s expiration time.</p>
+<p>If token authentication is enabled, you can use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_token.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/get_webservice_token.html">get_webservice_token()</a></code></a> method to retrieve a JWT token and that token’s expiration time. Make sure to request a new token after the token’s expiration time.</p>
 </div>
 </div>
 <div id="clean-up-resources" class="section level2">
@@ -255,11 +255,11 @@
 <a href="#clean-up-resources" class="anchor"></a>Clean up resources</h2>
 <p>Delete the resources once you no longer need them. Do not delete any resource you plan on still using.</p>
 <p>Delete the web service:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_webservice.html">delete_webservice</a></span>(aks_service)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_webservice.html">delete_webservice</a></span>(aks_service)</a></code></pre></div>
 <p>Delete the registered model:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_model.html">delete_model</a></span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_model.html">delete_model</a></span>(model)</a></code></pre></div>
 <p>Delete the AKS cluster:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_compute.html">delete_compute</a></span>(aks_target)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_compute.html">delete_compute</a></span>(aks_target)</a></code></pre></div>
 </div>
   </div>
 

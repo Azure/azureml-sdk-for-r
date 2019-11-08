@@ -1,11 +1,5 @@
 pandoc: 2.2.3.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
-articles:
-  configuration: configuration.html
-  deploy-to-aks: deploy-to-aks/deploy-to-aks.html
-  hyperparameter-tune-with-keras: hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html
-  installation: installation.html
-  train-and-deploy-to-aci: train-and-deploy-to-aci/train-and-deploy-to-aci.html
-  train-with-tensorflow: train-with-tensorflow/train-with-tensorflow.html
+articles: []
 

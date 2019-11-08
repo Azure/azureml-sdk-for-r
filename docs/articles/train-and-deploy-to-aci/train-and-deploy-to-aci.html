@@ -100,7 +100,7 @@
       <h1>Train and deploy your first model with Azure ML</h1>
                         <h4 class="author">David Smith</h4>
             
-            <h4 class="date">2019-11-04</h4>
+            <h4 class="date">2019-11-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-and-deploy-to-aci/train-and-deploy-to-aci.Rmd"><code>vignettes/train-and-deploy-to-aci/train-and-deploy-to-aci.Rmd</code></a></small>
       <div class="hidden name"><code>train-and-deploy-to-aci.Rmd</code></div>
@@ -147,15 +147,15 @@
 <div id="load-your-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-your-workspace" class="anchor"></a>Load your workspace</h3>
-<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from the <strong>config.json</strong> file. You can also retrieve a workspace using <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html"><code><a href="../../reference/get_workspace.html">get_workspace()</a></code></a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<p>Instantiate a workspace object from your existing workspace. The following code will load the workspace details from the <strong>config.json</strong> file. You can also retrieve a workspace using <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/get_workspace.html">get_workspace()</a></code></a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 </div>
 <div id="create-an-experiment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-an-experiment" class="anchor"></a>Create an experiment</h3>
 <p>An Azure ML experiment tracks a grouping of runs, typically from the same training script. Create an experiment to track the runs for training the caret model on the accidents data.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">experiment_name &lt;-<span class="st"> "accident-logreg"</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">exp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/experiment.html">experiment</a></span>(ws, experiment_name)</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2">exp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/experiment.html">experiment</a></span>(ws, experiment_name)</a></code></pre></div>
 </div>
 <div id="create-a-compute-target" class="section level3">
 <h3 class="hasAnchor">
@@ -163,15 +163,15 @@
 <p>By using Azure Machine Learning Compute (AmlCompute), a managed service, data scientists can train machine learning models on clusters of Azure virtual machines. Examples include VMs with GPU support. In this tutorial, you create a single-node AmlCompute cluster as your training environment. The code below creates the compute cluster for you if it doesn’t already exist in your workspace.</p>
 <p>You may need to wait a few minutes for your compute cluster to be provisioned if it doesn’t already exist.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cluster_name &lt;-<span class="st"> "rcluster"</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">compute_target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_compute.html">get_compute</a></span>(ws, <span class="dt">cluster_name =</span> cluster_name)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(compute_target)) {</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">  vm_size &lt;-<span class="st"> "STANDARD_D2_V2"</span> </a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  compute_target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/create_aml_compute.html">create_aml_compute</a></span>(<span class="dt">workspace =</span> ws,</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">                                       <span class="dt">cluster_name =</span> cluster_name,</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">                                       <span class="dt">vm_size =</span> vm_size,</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">                                       <span class="dt">max_nodes =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw"><a href="../../reference/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_provisioning_completion.html">wait_for_provisioning_completion</a></span>(compute_target, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11">}</a></code></pre></div>
 </div>
 </div>
@@ -191,10 +191,10 @@
 <h3 class="hasAnchor">
 <a href="#upload-data-to-the-datastore" class="anchor"></a>Upload data to the datastore</h3>
 <p>Upload data to the cloud so that it can be access by your remote training environment. Each Azure ML workspace comes with a default datastore that stores the connection information to the Azure blob container that is provisioned in the storage account attached to the workspace. The following code will upload the accidents data you created above to that datastore.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ds &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_default_datastore.html">get_default_datastore</a></span>(ws)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ds &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_default_datastore.html">get_default_datastore</a></span>(ws)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">target_path &lt;-<span class="st"> "accidentdata"</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="../../reference/upload_files_to_datastore.html">upload_files_to_datastore</a></span>(ds,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/upload_files_to_datastore.html">upload_files_to_datastore</a></span>(ds,</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">                          <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"./accidents.Rd"</span>),</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6">                          <span class="dt">target_path =</span> target_path,</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">                          <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
@@ -215,7 +215,7 @@
 <p>A training script called <code>accidents.R</code> has been provided for you in the same directory as this tutorial. Notice the following details <strong>inside the training script</strong> that have been done to leverage the Azure ML service for training:</p>
 <ul>
 <li>The training script takes an argument <code>-d</code> to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.</li>
-<li>The training script logs the final accuracy as a metric to the run record in Azure ML using <code><a href="../../reference/log_metric_to_run.html">log_metric_to_run()</a></code>. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in <a href="http://ml.azure.com">Azure Machine Learning studio</a>. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation">reference</a> for the full set of logging methods <code>log_*()</code>.</li>
+<li>The training script logs the final accuracy as a metric to the run record in Azure ML using <code><a href="https://rdrr.io/pkg/azuremlsdk/man/log_metric_to_run.html">log_metric_to_run()</a></code>. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in <a href="http://ml.azure.com">Azure Machine Learning studio</a>. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation">reference</a> for the full set of logging methods <code>log_*()</code>.</li>
 <li>The training script saves your model into a directory named <strong>outputs</strong>. The <code>./outputs</code> folder receives special treatment by Azure ML. During training, files written to <code>./outputs</code> are automatically uploaded to your run record by Azure ML and persisted as artifacts. By saving the trained model to <code>./outputs</code>, you’ll be able to access and retrieve your model file even after the run is over and you no longer have access to your remote training environment.</li>
 </ul>
 </div>
@@ -229,9 +229,9 @@
 <li>The training script that will be executed (<code>entry_script</code>).</li>
 <li>The compute target (<code>compute_target</code>), in this case the AmlCompute cluster you created earlier.</li>
 <li>The parameters required from the training script (<code>script_params</code>). Azure ML will run your training script as a command-line script with <code>Rscript</code>. In this tutorial you specify one argument to the script, the data directory mounting point, which you can access with <code>ds$path(target_path)</code>.</li>
-<li>Any environment dependencies required for training. The default Docker image built for training already contains the three packages (<code>caret</code>, <code>e1071</code>, and <code>optparse</code>) needed in the training script. So you don’t need to specify additional information. If you are using R packages that are not included by default, use the estimator’s <code>cran_packages</code> parameter to add additional CRAN packages. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/estimator.html"><code><a href="../../reference/estimator.html">estimator()</a></code></a> reference for the full set of configurable options.</li>
+<li>Any environment dependencies required for training. The default Docker image built for training already contains the three packages (<code>caret</code>, <code>e1071</code>, and <code>optparse</code>) needed in the training script. So you don’t need to specify additional information. If you are using R packages that are not included by default, use the estimator’s <code>cran_packages</code> parameter to add additional CRAN packages. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/estimator.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator()</a></code></a> reference for the full set of configurable options.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">est &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">                 <span class="dt">entry_script =</span> <span class="st">"accidents.R"</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">                 <span class="dt">script_params =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"--data_folder"</span> =<span class="st"> </span>ds<span class="op">$</span><span class="kw">path</span>(target_path)),</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                 <span class="dt">compute_target =</span> compute_target</a>
@@ -240,12 +240,12 @@
 <div id="submit-the-job-on-the-remote-cluster" class="section level3">
 <h3 class="hasAnchor">
 <a href="#submit-the-job-on-the-remote-cluster" class="anchor"></a>Submit the job on the remote cluster</h3>
-<p>Finally submit the job to run on your cluster. <code><a href="../../reference/submit_experiment.html">submit_experiment()</a></code> returns a Run object that you then use to interface with the run. In total, the first run takes <strong>about 10 minutes</strong>. But for later runs, the same Docker image is reused as long as the script dependencies don’t change. In this case, the image is cached and the container startup time is much faster.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
+<p>Finally submit the job to run on your cluster. <code><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment()</a></code> returns a Run object that you then use to interface with the run. In total, the first run takes <strong>about 10 minutes</strong>. But for later runs, the same Docker image is reused as long as the script dependencies don’t change. In this case, the image is cached and the container startup time is much faster.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
 <p>You can view a table of the run’s details. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
 <p>Model training happens in the background. Wait until the model has finished training before you run more code.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../../reference/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You – and colleagues with access to the workspace – can submit multiple experiments in parallel, and Azure ML will take of scheduling the tasks on the compute cluster. You can even configure the cluster to automatically scale up to multiple nodes, and scale back when there are no more compute tasks in the queue. This configuration is a cost-effective way for teams to share compute resources.</p>
 </div>
 </div>
@@ -257,7 +257,7 @@
 <h3 class="hasAnchor">
 <a href="#get-the-logged-metrics" class="anchor"></a>Get the logged metrics</h3>
 <p>In the training script <code>accidents.R</code>, you logged a metric from your model: the accuracy of the predictions in the training data. You can see metrics in the <a href="https://ml.azure.com">studio</a>, or extract them to the local session as an R list as follows:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">metrics &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_run_metrics.html">get_run_metrics</a></span>(run)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">metrics</a></code></pre></div>
 <p>If you’ve run multiple experiments (say, using differing variables, algorithms, or hyperparamers), you can use the metrics from each run to compare and choose the model you’ll use in production.</p>
 </div>
@@ -265,7 +265,7 @@
 <h3 class="hasAnchor">
 <a href="#get-the-trained-model" class="anchor"></a>Get the trained model</h3>
 <p>You can retrieve the trained model and look at the results in your local R session. The following code will download the contents of the <code>./outputs</code> directory, which includes the model file.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/download_files_from_run.html">download_files_from_run</a></span>(run, <span class="dt">prefix=</span><span class="st">"outputs/"</span>)</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/download_files_from_run.html">download_files_from_run</a></span>(run, <span class="dt">prefix=</span><span class="st">"outputs/"</span>)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">accident_model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(<span class="st">"outputs/model.rds"</span>)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(accident_model)</a></code></pre></div>
 <p>You see some factors that contribute to an increase in the estimated probability of death:</p>
@@ -305,8 +305,8 @@
 <div id="register-the-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#register-the-model" class="anchor"></a>Register the model</h3>
-<p>First, register the model you downloaded to your workspace with <a href="https://azure.github.io/azureml-sdk-for-r/reference/register_model.html"><code><a href="../../reference/register_model.html">register_model()</a></code></a>. A registered model can be any collection of files, but in this case the R model object is sufficient. Azure ML will use the registered model for deployment.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/register_model.html">register_model</a></span>(ws, </a>
+<p>First, register the model you downloaded to your workspace with <a href="https://azure.github.io/azureml-sdk-for-r/reference/register_model.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/register_model.html">register_model()</a></code></a>. A registered model can be any collection of files, but in this case the R model object is sufficient. Azure ML will use the registered model for deployment.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/register_model.html">register_model</a></span>(ws, </a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">                        <span class="dt">model_path =</span> <span class="st">"outputs/model.rds"</span>, </a>
 <a class="sourceLine" id="cb15-3" data-line-number="3">                        <span class="dt">model_name =</span> <span class="st">"accidents_model"</span>,</a>
 <a class="sourceLine" id="cb15-4" data-line-number="4">                        <span class="dt">description =</span> <span class="st">"Predict probablity of auto accident"</span>)</a></code></pre></div>
@@ -316,10 +316,10 @@
 <a href="#define-the-inference-dependencies" class="anchor"></a>Define the inference dependencies</h3>
 <p>To create a web service for your model, you first need to create a scoring script (<code>entry_script</code>), an R script that will take as input variable values (in JSON format) and output a prediction from your model. For this tutorial, use the provided scoring file <code>accident_predict.R</code>. The scoring script must contain an <code>init()</code> method that loads your model and returns a function that uses the model to make a prediction based on the input data. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html#details">documentation</a> for more details.</p>
 <p>Next, define an Azure ML <strong>environment</strong> for your script’s package dependencies. With an environment, you specify R packages (from CRAN or elsewhere) that are needed for your script to run. You can also provide the values of environment variables that your script can reference to modify its behavior. By default, Azure ML will build the same default Docker image used with the estimator for training. Since the tutorial has no special requirements, create an environment with no special attributes.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">r_env &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/r_environment.html">r_environment</a></span>(<span class="dt">name =</span> <span class="st">"basic_env"</span>)</a></code></pre></div>
-<p>If you want to use your own Docker image for deployment instead, specify the <code>custom_docker_image</code> parameter. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="../../reference/r_environment.html">r_environment()</a></code></a> reference for the full set of configurable options for defining an environment.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">r_env &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment</a></span>(<span class="dt">name =</span> <span class="st">"basic_env"</span>)</a></code></pre></div>
+<p>If you want to use your own Docker image for deployment instead, specify the <code>custom_docker_image</code> parameter. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment()</a></code></a> reference for the full set of configurable options for defining an environment.</p>
 <p>Now you have everything you need to create an <strong>inference config</strong> for encapsulating your scoring script and environment dependencies.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/inference_config.html">inference_config</a></span>(</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/inference_config.html">inference_config</a></span>(</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"accident_predict.R"</span>,</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
@@ -327,23 +327,23 @@
 <div id="deploy-to-aci" class="section level3">
 <h3 class="hasAnchor">
 <a href="#deploy-to-aci" class="anchor"></a>Deploy to ACI</h3>
-<p>In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See <a href="https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html"><code><a href="../../reference/aci_webservice_deployment_config.html">aci_webservice_deployment_config()</a></code></a> for additional configurable options. (For production-scale deployments, you can also <a href="https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html">deploy to Azure Kubernetes Service</a>.)</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">aci_config &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/aci_webservice_deployment_config.html">aci_webservice_deployment_config</a></span>(<span class="dt">cpu_cores =</span> <span class="dv">1</span>, <span class="dt">memory_gb =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<p>In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See <a href="https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/aci_webservice_deployment_config.html">aci_webservice_deployment_config()</a></code></a> for additional configurable options. (For production-scale deployments, you can also <a href="https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html">deploy to Azure Kubernetes Service</a>.)</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">aci_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/aci_webservice_deployment_config.html">aci_webservice_deployment_config</a></span>(<span class="dt">cpu_cores =</span> <span class="dv">1</span>, <span class="dt">memory_gb =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <p>Now you deploy your model as a web service. Deployment <strong>can take several minutes</strong>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">aci_service &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/deploy_model.html">deploy_model</a></span>(ws, </a>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">aci_service &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/deploy_model.html">deploy_model</a></span>(ws, </a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">                            <span class="st">'accident-pred'</span>, </a>
 <a class="sourceLine" id="cb19-3" data-line-number="3">                            <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(model), </a>
 <a class="sourceLine" id="cb19-4" data-line-number="4">                            inference_config, </a>
 <a class="sourceLine" id="cb19-5" data-line-number="5">                            aci_config)</a>
 <a class="sourceLine" id="cb19-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="kw"><a href="../../reference/wait_for_deployment.html">wait_for_deployment</a></span>(aci_service, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_deployment.html">wait_for_deployment</a></span>(aci_service, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>If you encounter any issue in deploying the web service, please visit the <a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment">troubleshooting guide</a>.</p>
 </div>
 </div>
 <div id="test-the-deployed-service" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-the-deployed-service" class="anchor"></a>Test the deployed service</h2>
-<p>Now that your model is deployed as a service, you can test the service from R using <a href="https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html"><code><a href="../../reference/invoke_webservice.html">invoke_webservice()</a></code></a>. Provide a new set of data to predict from, convert it to JSON, and send it to the service.</p>
+<p>Now that your model is deployed as a service, you can test the service from R using <a href="https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/invoke_webservice.html">invoke_webservice()</a></code></a>. Provide a new set of data to predict from, convert it to JSON, and send it to the service.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(jsonlite)</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3">newdata &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>( <span class="co"># valid values shown below</span></a>
@@ -357,7 +357,7 @@
 <a class="sourceLine" id="cb20-11" data-line-number="11"> <span class="dt">occRole=</span><span class="st">"pass"</span>        <span class="co"># "driver" "pass"</span></a>
 <a class="sourceLine" id="cb20-12" data-line-number="12"> )</a>
 <a class="sourceLine" id="cb20-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb20-14" data-line-number="14">prob &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/invoke_webservice.html">invoke_webservice</a></span>(aci_service, <span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(newdata))</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">prob &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/invoke_webservice.html">invoke_webservice</a></span>(aci_service, <span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">toJSON</a></span>(newdata))</a>
 <a class="sourceLine" id="cb20-15" data-line-number="15">prob</a></code></pre></div>
 <p>You can also get the web service’s HTTP endpoint, which accepts REST client calls. You can share this endpoint with anyone who wants to test the web service or integrate it into an application.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">aci_service<span class="op">$</span>scoring_uri</a></code></pre></div>
@@ -367,11 +367,11 @@
 <a href="#clean-up-resources" class="anchor"></a>Clean up resources</h2>
 <p>Delete the resources once you no longer need them. Don’t delete any resource you plan to still use.</p>
 <p>Delete the web service:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_webservice.html">delete_webservice</a></span>(aci_service)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_webservice.html">delete_webservice</a></span>(aci_service)</a></code></pre></div>
 <p>Delete the registered model:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_model.html">delete_model</a></span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_model.html">delete_model</a></span>(model)</a></code></pre></div>
 <p>Delete the compute cluster:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../../reference/delete_compute.html">delete_compute</a></span>(compute_target)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/delete_compute.html">delete_compute</a></span>(compute_target)</a></code></pre></div>
 </div>
   </div>
 

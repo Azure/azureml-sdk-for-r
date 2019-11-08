@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Set up an Azure ML workspace</h1>
             
-            <h4 class="date">2019-11-04</h4>
+            <h4 class="date">2019-11-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/configuration.Rmd"><code>vignettes/configuration.Rmd</code></a></small>
       <div class="hidden name"><code>configuration.Rmd</code></div>
@@ -151,7 +151,7 @@
 <li>A name for your workspace</li>
 </ul>
 <p>You can get your subscription ID from the <a href="https://portal.azure.com/">Azure portal</a>.</p>
-<p>You will also need access to a <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups">resource group</a>, which organizes Azure resources and provides a default region for the resources in a group. You can see what resource groups to which you have access, or create a new one in the Azure portal. If you don’t have a resource group, the <code><a href="../reference/create_workspace.html">create_workspace()</a></code> method will create one for you using the name you provide.</p>
+<p>You will also need access to a <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups">resource group</a>, which organizes Azure resources and provides a default region for the resources in a group. You can see what resource groups to which you have access, or create a new one in the Azure portal. If you don’t have a resource group, the <code><a href="https://rdrr.io/pkg/azuremlsdk/man/create_workspace.html">create_workspace()</a></code> method will create one for you using the name you provide.</p>
 <p>The region to host your workspace will be used if you are creating a new workspace. You do not need to specify this if you are using an existing workspace. You can find the list of supported regions <a href="https://azure.microsoft.com/en-us/global-infrastructure/services/?products=machine-learning-service">here</a>. You should pick a region that is close to your location or that contains your data.</p>
 <p>The name for your workspace is unique within the subscription and should be descriptive enough to discern among other workspaces. The subscription may be used only by you, or it may be used by your department or your entire enterprise, so choose a name that makes sense for your situation.</p>
 <p>The following code chunk allows you to specify your workspace parameters. It uses <code>Sys.getenv</code> to read values from environment variables, which is useful for automation. If no environment variable exists, the parameters will be set to the specified default values. Replace the default values in the code below with your default parameter values.</p>
@@ -163,7 +163,7 @@
 <div id="create-a-new-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-a-new-workspace" class="anchor"></a>Create a new workspace</h3>
-<p>If you don’t have an existing workspace and are the owner of the subscription or resource group, you can create a new workspace. If you don’t have a resource group, <code><a href="../reference/create_workspace.html">create_workspace()</a></code> will create one for you using the name you provide. If you don’t want it to do so, set the <code>create_resource_group = FALSE</code> parameter.</p>
+<p>If you don’t have an existing workspace and are the owner of the subscription or resource group, you can create a new workspace. If you don’t have a resource group, <code><a href="https://rdrr.io/pkg/azuremlsdk/man/create_workspace.html">create_workspace()</a></code> will create one for you using the name you provide. If you don’t want it to do so, set the <code>create_resource_group = FALSE</code> parameter.</p>
 <p>Note: As with other Azure services, there are limits on certain resources (e.g. AmlCompute quota) associated with the Azure ML service. Please read this <a href="https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-manage-quotas">article</a> on the default limits and how to request more quota.</p>
 <p>This cell will create an Azure ML workspace for you in a subscription, provided you have the correct permissions.</p>
 <p>This will fail if:</p>
@@ -173,25 +173,25 @@
 <li>You are not a subscription owner or contributor and no Azure ML workspaces have ever been created in this subscription.</li>
 </ul>
 <p>If workspace creation fails, please work with your IT admin to provide you with the appropriate permissions or to provision the required resources.</p>
-<p>There are additional parameters that are not shown below that can be configured when creating a workspace. Please see <a href="https://azure.github.io/azureml-sdk-for-r/reference/create_workspace.html"><code><a href="../reference/create_workspace.html">create_workspace()</a></code></a> for more details.</p>
+<p>There are additional parameters that are not shown below that can be configured when creating a workspace. Please see <a href="https://azure.github.io/azureml-sdk-for-r/reference/create_workspace.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/create_workspace.html">create_workspace()</a></code></a> for more details.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_workspace.html">create_workspace</a></span>(<span class="dt">name =</span> workspace_name,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/create_workspace.html">create_workspace</a></span>(<span class="dt">name =</span> workspace_name,</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">                       <span class="dt">subscription_id =</span> subscription_id,</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">                       <span class="dt">resource_group =</span> resource_group,</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">                       <span class="dt">location =</span> workspace_region,</a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">                       <span class="dt">exist_ok =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p>You can out write out the workspace ARM properties to a config file with <a href="https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html"><code><a href="../reference/write_workspace_config.html">write_workspace_config()</a></code></a>. The method provides a simple way of reusing the same workspace across multiple files or projects. Users can save the workspace details with <code><a href="../reference/write_workspace_config.html">write_workspace_config()</a></code>, and use <a href="https://azure.github.io/azureml-sdk-for-r/reference/load_workspace_from_config.html"><code><a href="../reference/load_workspace_from_config.html">load_workspace_from_config()</a></code></a> to load the same workspace in different files or projects without retyping the workspace ARM properties. The method defaults to writing out the config file to the current working directory with “config.json” as the file name. To specify a different path or file name, set the <code>path</code> and <code>file_name</code> parameters.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/write_workspace_config.html">write_workspace_config</a></span>(ws)</a></code></pre></div>
+<p>You can out write out the workspace ARM properties to a config file with <a href="https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/write_workspace_config.html">write_workspace_config()</a></code></a>. The method provides a simple way of reusing the same workspace across multiple files or projects. Users can save the workspace details with <code><a href="https://rdrr.io/pkg/azuremlsdk/man/write_workspace_config.html">write_workspace_config()</a></code>, and use <a href="https://azure.github.io/azureml-sdk-for-r/reference/load_workspace_from_config.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/load_workspace_from_config.html">load_workspace_from_config()</a></code></a> to load the same workspace in different files or projects without retyping the workspace ARM properties. The method defaults to writing out the config file to the current working directory with “config.json” as the file name. To specify a different path or file name, set the <code>path</code> and <code>file_name</code> parameters.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/write_workspace_config.html">write_workspace_config</a></span>(ws)</a></code></pre></div>
 </div>
 <div id="access-an-existing-workspace" class="section level3">
 <h3 class="hasAnchor">
 <a href="#access-an-existing-workspace" class="anchor"></a>Access an existing workspace</h3>
 <p>You can access an existing workspace in a couple of ways. If your workspace properties were previously saved to a config file, you can load the workspace as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/load_workspace_from_config.html">load_workspace_from_config</a></span>()</a></code></pre></div>
 <p>If Azure ML cannot find the config file, specify the path to the config file with the <code>path</code> parameter. The method defaults to starting the search in the current directory.</p>
-<p>You can also initialize a workspace using the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html"><code><a href="../reference/get_workspace.html">get_workspace()</a></code></a> method.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_workspace.html">get_workspace</a></span>(<span class="dt">name =</span> workspace_name,</a>
+<p>You can also initialize a workspace using the <a href="https://azure.github.io/azureml-sdk-for-r/reference/get_workspace.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/get_workspace.html">get_workspace()</a></code></a> method.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ws &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_workspace.html">get_workspace</a></span>(<span class="dt">name =</span> workspace_name,</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">                    <span class="dt">subscription_id =</span> subscription_id,</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">                    <span class="dt">resource_group =</span> resource_group)</a></code></pre></div>
 </div>

@@ -1,6 +1,6 @@
 Package: azuremlsdk
 Type: Package
-Title: Interface to the Azure Machine Learning Software Development Kit ('SDK')
+Title: Interface to the 'Azure Machine Learning' Software Development Kit ('SDK')
 Version: 0.5.7
 Authors@R: c(
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
@@ -16,10 +16,10 @@ Authors@R: c(
     )
 URL: https://github.com/azure/azureml-sdk-for-r
 BugReports: https://github.com/azure/azureml-sdk-for-r/issues
-Description: Interface to the Azure Machine Learning Software Development Kit
+Description: Interface to the 'Azure Machine Learning' Software Development Kit
     ('SDK'). Data scientists can use the 'SDK' to train, deploy, automate, and
-    manage machine learning models on the Azure Machine Learning service. To
-    learn more about Azure Machine Learning visit the website:
+    manage machine learning models on the 'Azure Machine Learning' service. To
+    learn more about 'Azure Machine Learning' visit the website:
     <https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml>.
 Encoding: UTF-8
 License: MIT + file LICENSE

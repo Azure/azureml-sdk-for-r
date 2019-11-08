@@ -46,8 +46,8 @@ the training script specified in \code{entry_script}.}
 from local directory or custom URL.}
 
 \item{custom_docker_image}{A string of the name of the Docker image from
-which the image to use for training will be built. If not set, a default
-CPU-based image will be used as the base image. To use an image from a
+which the image to use for training will be built. If not set, a predefined
+image will be used as the base image. To use an image from a
 private Docker repository, you will also have to specify the
 \code{image_registry_details} parameter.}
 
@@ -55,9 +55,9 @@ private Docker repository, you will also have to specify the
 the Docker image registry for the custom Docker image.}
 
 \item{use_gpu}{Indicates whether the environment to run the experiment should
-support GPUs. If \code{TRUE}, a GPU-based default Docker image will be used in the
-environment. If \code{FALSE}, a CPU-based image will be used. Default Docker
-images (CPU or GPU) will only be used if the \code{custom_docker_image} parameter
+support GPUs. If \code{TRUE}, a predefined GPU-based Docker image will be used in the
+environment. If \code{FALSE}, a predefined CPU-based image will be used. Predefined
+Docker images (CPU or GPU) will only be used if the \code{custom_docker_image} parameter
 is not set.}
 
 \item{environment_variables}{A named list of environment variables names
@@ -88,6 +88,14 @@ An Estimator wraps run configuration information for specifying details
 of executing an R script. Running an Estimator experiment
 (using \code{submit_experiment()}) will return a \code{ScriptRun} object and
 execute your training script on the specified compute target.
+
+To define the environment to use for training, you can either directly
+provide the environment-related parameters (e.g. \code{cran_packages},
+\code{custom_docker_image}) to \code{estimator()}, or you can provide an
+\code{Environment} object to the \code{environment} parameter. For more information
+on the predefined Docker images that are used for training if
+\code{custom_docker_image} is not specified, see the documentation
+\href{https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images}{here}.
 }
 \seealso{
 \code{r_environment()}, \code{container_registry()}, \code{submit_experiment()}
