@@ -163,7 +163,8 @@ get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
 #' @export
 #' @md
 load_workspace_from_config <- function(path = NULL, file_name = NULL) {
-    azureml$core$workspace$Workspace$from_config(path, NULL, NULL, file_name)
+  azureml$core$workspace$Workspace$from_config(path = path,
+                                               "_file_name"= file_name)
 }
 
 #' Delete a workspace
