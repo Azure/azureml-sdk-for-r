@@ -616,6 +616,82 @@ create_run_details_plot <- function(run) {
   DT::formatStyle(dt, columns = c("V1"), fontWeight = "bold")
 }
 
+#' Initialize run details widget
+#' @description
+#' Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer 
+#' is unavailable) showing details of the submitted run. If using RStudio, the
+#' plot will auto-update with information collected from the server. For more
+#' details about the run, click the web view link. The widget will stop running
+#' once the run has reached a terminal state: "Failed", "Completed", or
+#' "Canceled".
+#'
+#' If you are running this method from an RMarkdown file, the
+#' run details table will show up in the code chunk output
+#' instead of the Viewer.
+#' @param run Run object
+#' @param auto_refresh Boolean indicating whether or not widget should update
+#' run details automatically. The default is TRUE when using RStudio.
+#' @export
+view_run_details <- function(run, auto_refresh = TRUE) {
+  run_details_plot <- create_run_details_plot(run)
+  
+  if (rstudioapi::isAvailable() &&
+      auto_refresh) {
+    
+    # select random registered port
+    port <- sample(1024:49151, 1)
+    host <- paste0("http://localhost:", port)
+    
+    # import objects needed for Shiny app
+    parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
+    widget_obj_names <- list("subscription_id",
+                             "rg",
+                             "ws_name",
+                             "exp_name",
+                             "run_id",
+                             "run_details_plot",
+                             "port",
+                             "start_time")
+    widget_obj_vals <- list(parsed_url[6],
+                            parsed_url[8],
+                            parsed_url[12],
+                            parsed_url[14],
+                            parsed_url[16],
+                            run_details_plot,
+                            port,
+                            Sys.time())
+    
+    lapply(seq_along(widget_obj_names), 
+           function(x) {
+             assign(widget_obj_names[[x]],
+                    widget_obj_vals[[x]],
+                    envir=.GlobalEnv)
+           }
+    )
+    
+    # stop and remove any existing widget job before submitting script
+    if (exists("ACTIVE_WIDGET_JOB")) {
+      try(rstudioapi::jobSetState(ACTIVE_WIDGET_JOB, "succeeded"),
+          silent = TRUE)
+      try(rstudioapi::jobRemove(ACTIVE_WIDGET_JOB), silent = TRUE)
+    }
+    path <- here::here("widget", "app.R")
+    ACTIVE_WIDGET_JOB <<- rstudioapi::jobRunScript(path,
+                                                   name = "AzureML Widget",
+                                                   importEnv = TRUE) 
+    
+    # initialize viewer pane or browser
+    viewer <- getOption("viewer")
+    if (!is.null(viewer)) {
+      viewer(host)
+    } else {
+      utils::browseURL(host)
+    }
+  } else {
+    run_details_plot
+  }
+}
+
 #' Upload files to a run
 #' @description
 #' Upload files to the run record.
