@@ -527,7 +527,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' Generate table of run details
 #' @param run The `Run` object.
 #' @md
-#' @export
 create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
