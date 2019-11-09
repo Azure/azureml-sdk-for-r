@@ -535,19 +535,19 @@ create_run_details_plot <- function(run) {
       arg
     }
   }
-  
+
   web_portal_link <- paste0('<a href="',
                             run$get_portal_url(),
                             '" target="_blank">Link</a>')
-  
+
   details <- run$get_details()
-  
+
   # get general run properties
   script_name <- handle_null(details$runDefinition$script)
   arguments <- handle_null(toString(details$runDefinition$arguments))
   start_time <- "-"
   duration <- "-"
-  
+
   # get run time details
   if (handle_null(details$startTimeUtc) != "-") {
     start_date_time <- as.POSIXct(details$startTimeUtc, "%Y-%m-%dT%H:%M:%S",
@@ -555,7 +555,7 @@ create_run_details_plot <- function(run) {
     start_time <- format(start_date_time, "%B %d, %Y %I:%M %p",
                          tz = Sys.timezone(),
                          use_tz = TRUE)
-    
+
     if (handle_null(details$endTimeUtc) != "-") {
       end_date_time <- as.POSIXct(details$endTimeUtc, "%Y-%m-%dT%H:%M:%S",
                                   tz = "UTC")
@@ -565,7 +565,7 @@ create_run_details_plot <- function(run) {
                               digits = 2), "mins")
     }
   }
-  
+
   df_keys <- list("Run Id",
                   "Status",
                   "Start Time",
@@ -580,14 +580,14 @@ create_run_details_plot <- function(run) {
                     script_name,
                     arguments,
                     web_portal_link)
-  
+
   # add warnings and errors if applicable
   if (handle_null(details$warnings) != "-") {
     df_keys <- c(df_keys, paste(unlist(details$warnings), collapse = "\r\n"))
     df_values <- c(df_values, "Warnings")
   }
-  
-  if (run$get_status() == "Failed") {
+
+  if (run$status == "Failed") {
     error <- details$error$error$message
     error <- handle_null(error,
                          "Detailed error not set on the Run. Please check
@@ -595,11 +595,11 @@ create_run_details_plot <- function(run) {
     df_keys <- c(df_keys, "Errors")
     df_values <- c(df_values, error)
   }
-  
+
   run_details_plot <- matrix(c(df_keys, df_values),
                              nrow = length(df_keys),
                              ncol = 2)
-  
+
   dt <- DT::datatable(run_details_plot,
                       escape = FALSE,
                       rownames = FALSE,
@@ -617,7 +617,7 @@ create_run_details_plot <- function(run) {
 
 #' Initialize run details widget
 #' @description
-#' Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer 
+#' Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer
 #' is unavailable) showing details of the submitted run. If using RStudio, the
 #' plot will auto-update with information collected from the server. For more
 #' details about the run, click the web view link. The widget will stop running
@@ -632,15 +632,14 @@ create_run_details_plot <- function(run) {
 #' run details automatically. The default is TRUE when using RStudio.
 #' @export
 view_run_details <- function(run, auto_refresh = TRUE) {
-  run_details_plot <- create_run_details_plot(run)
-  
+  start_time <- Sys.time()
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
-    
+
     # select random registered port
     port <- sample(1024:49151, 1)
     host <- paste0("http://localhost:", port)
-    
+
     # import objects needed for Shiny app
     parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
     widget_obj_names <- list("subscription_id",
@@ -656,18 +655,18 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             parsed_url[12],
                             parsed_url[14],
                             parsed_url[16],
-                            run_details_plot,
+                            create_run_details_plot(run),
                             port,
                             Sys.time())
-    
-    lapply(seq_along(widget_obj_names), 
+
+    lapply(seq_along(widget_obj_names),
            function(x) {
              assign(widget_obj_names[[x]],
                     widget_obj_vals[[x]],
-                    envir=.GlobalEnv)
+                    envir = .GlobalEnv)
            }
     )
-    
+
     # stop and remove any existing widget job before submitting script
     if (exists("ACTIVE_WIDGET_JOB")) {
       try(rstudioapi::jobSetState(ACTIVE_WIDGET_JOB, "succeeded"),
@@ -677,8 +676,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     path <- here::here("widget", "app.R")
     ACTIVE_WIDGET_JOB <<- rstudioapi::jobRunScript(path,
                                                    name = "AzureML Widget",
-                                                   importEnv = TRUE) 
-    
+                                                   importEnv = TRUE)
+
     # initialize viewer pane or browser
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
@@ -686,6 +685,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     } else {
       utils::browseURL(host)
     }
+    print(Sys.time() - start_time)
   } else {
     run_details_plot
   }
