@@ -7,7 +7,7 @@ pool:
 container: ninhu/r-sdk-build:latest
 
 variables:
- ${{ if in( variables['Build.Reason'], 'Manual', 'IndividualCI') }}:
+ ${{ if in( variables['Build.Reason'], 'Schedule', 'Manual') }}:
   TEST_SUBSCRIPTION_ID: $(CI_SUBSCRIPTION_ID)
 
 steps:
@@ -29,6 +29,6 @@ steps:
       azureSubscription: 'Project Vienna Build Tests (4faaaf21-663f-4391-96fd-47197c630979)'
       scriptLocation: inlineScript
       inlineScript: |
-        Rscript './.azure-pipelines/scripts/validate_samples.R' 'deployment/deploy-to-aci' 'deploy-to-aci.R' deployment/deploy-to-local' 'deploy-to-local.R' 'training/train-on-amlcompute' ''train-on-amlcompute.R'' 'training/train-on-local' 'train-on-local.R'
+        Rscript './.azure-pipelines/scripts/validate_samples.R' 'samples'
       addSpnToEnvironment: true
     displayName: 'Validate Samples'
