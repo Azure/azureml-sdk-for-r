@@ -177,6 +177,7 @@ load_workspace_from_config <- function(path = NULL, file_name = NULL) {
 #' resources, i.e. ACR, storage account, key value, and application insights
 #' will also be deleted.
 #' @param no_wait If `FALSE` do not wait for the workspace deletion to complete.
+#' @return None
 #' @export
 #' @md
 delete_workspace <- function(workspace,
@@ -220,6 +221,7 @@ list_workspaces <- function(subscription_id, resource_group = NULL) {
 #' The parameter defaults to the current working directory.
 #' @param file_name A string of the name to use for the config file. The
 #' parameter defaults to `'config.json'`.
+#' @return None
 #' @export
 #' @md
 write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
@@ -314,6 +316,7 @@ get_workspace_details <- function(workspace) {
 #' Set the default datastore associated with the workspace.
 #' @param workspace The `Workspace` object.
 #' @param datastore_name The name of the datastore to be set as default.
+#' @return None
 #' @export
 #' @md
 set_default_datastore <- function(workspace, datastore_name) {

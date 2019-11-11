@@ -17,6 +17,9 @@ the files.}
 
 \item{run}{The \code{Run} object.}
 }
+\value{
+None
+}
 \description{
 Upload files to the run record.
 

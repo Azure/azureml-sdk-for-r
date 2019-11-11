@@ -13,6 +13,9 @@ upload_folder_to_run(name, path, run = NULL)
 
 \item{run}{The \code{Run} object.}
 }
+\value{
+None
+}
 \description{
 Upload the specified folder to the given prefix name to the run
 record.

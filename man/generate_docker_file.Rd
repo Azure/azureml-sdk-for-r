@@ -23,6 +23,9 @@ local, directory or custom url.}
 \item{install_system_packages}{logical parameter to specify if system
 packages should be installed at runtime.}
 }
+\value{
+Dockerfile string
+}
 \description{
 Generate a dockerfile string to build the image for training.
 }

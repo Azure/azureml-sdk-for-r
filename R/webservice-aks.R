@@ -220,6 +220,7 @@ aks_webservice_deployment_config <- function(
 #' the web service. If enabled, users can access the web service by fetching
 #' an access token using their Azure Active Directory credentials.
 #' Both `token_auth_enabled` and `auth_enabled` cannot be set to `TRUE`.
+#' @return None
 #' @export
 #' @md
 update_aks_webservice <- function(webservice, autoscale_enabled = NULL,

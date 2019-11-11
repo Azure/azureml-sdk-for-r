@@ -9,6 +9,9 @@ detach_aks_compute(cluster)
 \arguments{
 \item{cluster}{The \code{AksCompute} object.}
 }
+\value{
+None
+}
 \description{
 Detach the AksCompute cluster from its associated workspace. No
 underlying cloud resource will be deleted; the association will

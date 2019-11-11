@@ -16,6 +16,9 @@ log_confusion_matrix_to_run(name, value, description = "", run = NULL)
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 Log a confusion matrix metric to a run
 }
