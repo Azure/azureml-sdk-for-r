@@ -16,6 +16,9 @@ log_accuracy_table_to_run(name, value, description = "", run = NULL)
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 The accuracy table metric is a multi-use non-scalar metric that can be
 used to produce multiple types of line charts that vary continuously

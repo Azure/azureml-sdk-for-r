@@ -14,6 +14,9 @@ log_metric_to_run(name, value, run = NULL)
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 Log a numerical or string value with the given metric name
 to the run. Logging a metric to a run causes that metric to

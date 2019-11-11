@@ -17,6 +17,9 @@ element name corresponds to the column name).}
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 Log a table metric with the given metric name to the run. The
 table value is a named list where each element corresponds to

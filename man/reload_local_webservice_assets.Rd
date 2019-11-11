@@ -12,6 +12,9 @@ reload_local_webservice_assets(webservice, wait = FALSE)
 \item{wait}{If \code{TRUE}, wait for the service's container to reach a
 healthy state. Defaults to \code{FALSE}.}
 }
+\value{
+None
+}
 \description{
 This restarts the service's container with copies of updated assets,
 including the entry script and local dependencies, but it does not

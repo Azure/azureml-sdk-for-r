@@ -15,6 +15,9 @@ The parameter defaults to the current working directory.}
 \item{file_name}{A string of the name to use for the config file. The
 parameter defaults to \code{'config.json'}.}
 }
+\value{
+None
+}
 \description{
 Write out the workspace ARM properties to a config file. Workspace ARM
 properties can be loaded later using \code{load_workspace_from_config()}.
