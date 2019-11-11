@@ -1,19 +1,15 @@
-load_time <- Sys.time()
 suppressMessages(library(shiny))
 suppressMessages(library(DT))
-library(here)
-path <- here::here("R/run.R")
-source(path)
-print(Sys.time() - load_time)
 
-server_time <- Sys.time()
+
 server <- function(input, output, session) {
-
+  
   values <- reactiveValues(INITIALIZED = FALSE,
                            curr_run = NULL,
                            RUN_TERMINATED = FALSE)
 
-  observeEvent((values$INITIALIZED == TRUE), {
+  # retrieve run object once initialized
+  observeEvent((values$INITIALIZED), {
     ws <- azuremlsdk::get_workspace(ws_name, subscription_id, rg)
     exp <- azuremlsdk::experiment(ws, exp_name)
     values$curr_run <- azuremlsdk::get_run(exp, run_id)
@@ -21,47 +17,48 @@ server <- function(input, output, session) {
   ignoreInit = TRUE,
   once = TRUE)
 
+  # stop app when run reaches terminal state
+  observeEvent((values$RUN_TERMINATED), {
+    shiny::stopApp()
+  },
+  ignoreInit = TRUE)
+
+  # stop app if user closes session
+  session$onSessionEnded(function() {
+    shiny::stopApp()
+  })
+
   plot <- function() {
     if (!is.null(values$curr_run)) {
-      if (isolate(values$RUN_TERMINATED)) {
-        shiny::stopApp()
-      }
-
-      if (isolate(!values$RUN_TERMINATED) &&
-          values$curr_run$status %in% c("Failed", "Completed", "Canceled")) {
-        isolate(values$RUN_TERMINATED <- TRUE)
+      if (isolate(values$curr_run$status) %in% c("Failed", "Completed", "Canceled")) {
         print("Your run has reached a terminal state. The widget will close now.")
+        isolate(values$RUN_TERMINATED <- TRUE)
       }
 
-      run_details_plot <- view_run_details(values$curr_run,
+      run_details_plot <- azuremlsdk::view_run_details(values$curr_run,
                                                        auto_refresh = FALSE)
-    }
-
-    if (isolate(!values$INITIALIZED) &&
-        difftime(Sys.time(), start_time, units = "secs") > 10) {
-      isolate(values$INITIALIZED <- TRUE)
+    } else {
+      # initialize auto-refresh 10 seconds after job submitted
+      if (isolate(!values$INITIALIZED) &&
+          difftime(Sys.time(), start_time, units = "secs") > 10) {
+        isolate(values$INITIALIZED <- TRUE)
+      }      
     }
 
     return(run_details_plot)
   }
-
+  
   output$runDetailsPlot <- DT::renderDataTable({
     invalidateLater(10000, session)
     plot()
   })
-
 }
-print(Sys.time() - server_time)
 
-ui_time <- Sys.time()
 ui <- fluidPage(
   shinycssloaders::withSpinner(DT::dataTableOutput("runDetailsPlot"),
                                5,
                                color = "#4287f5",
                                size = 0.5)
 )
-print(Sys.time() - ui_time)
 
-app_time <- Sys.time()
 suppressMessages(shiny::runApp(shinyApp(ui, server), port = port))
-print(Sys.time() - app_time)

@@ -632,7 +632,6 @@ create_run_details_plot <- function(run) {
 #' run details automatically. The default is TRUE when using RStudio.
 #' @export
 view_run_details <- function(run, auto_refresh = TRUE) {
-  start_time <- Sys.time()
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
 
@@ -685,9 +684,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     } else {
       utils::browseURL(host)
     }
-    print(Sys.time() - start_time)
   } else {
-    run_details_plot
+    create_run_details_plot(run)
   }
 }
 
