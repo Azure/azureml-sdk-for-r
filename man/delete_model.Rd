@@ -9,6 +9,9 @@ delete_model(model)
 \arguments{
 \item{model}{The \code{Model} object.}
 }
+\value{
+None
+}
 \description{
 Delete the registered model from its associated workspace. Note that
 you cannot delete a registered model that is being used by an active

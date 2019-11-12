@@ -54,3 +54,6 @@ plant <- data.frame(Sepal.Length = 6.7,
 predicted_val <- invoke_webservice(service, toJSON(plant))
 predicted_val
 
+# Delete the web service
+delete_webservice(service)
+

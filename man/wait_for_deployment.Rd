@@ -13,6 +13,9 @@ wait_for_deployment(webservice, show_output = FALSE)
 \item{show_output}{If \code{TRUE}, print more verbose output. Defaults
 to \code{FALSE}.}
 }
+\value{
+None
+}
 \description{
 Automatically poll on the running web service deployment and
 wait for the web service to reach a terminal state. Will throw

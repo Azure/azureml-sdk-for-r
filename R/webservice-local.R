@@ -36,6 +36,7 @@ local_webservice_deployment_config <- function(port = NULL) {
 #' @param wait If `TRUE`, wait for the service's container to reach a
 #' healthy state. Defaults to `FALSE`.
 #' @param inference_config An `InferenceConfig` object.
+#' @return None
 #' @export
 #' @md
 update_local_webservice <- function(webservice, models = NULL,
@@ -57,6 +58,7 @@ update_local_webservice <- function(webservice, models = NULL,
 #' @param delete_cache If `TRUE`, delete the temporary files cached for
 #' the service.
 #' @param delete_image If `TRUE`, delete the service's Docker image.
+#' @return None
 #' @export
 #' @md
 delete_local_webservice <- function(webservice,
@@ -77,6 +79,7 @@ delete_local_webservice <- function(webservice,
 #' @param webservice The `LocalWebservice` object.
 #' @param wait If `TRUE`, wait for the service's container to reach a
 #' healthy state. Defaults to `FALSE`.
+#' @return None
 #' @export
 #' @md
 reload_local_webservice_assets <- function(webservice, wait = FALSE) {

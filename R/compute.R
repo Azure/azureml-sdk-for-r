@@ -134,6 +134,7 @@ get_compute <- function(workspace, cluster_name) {
 #' `create_aml_compute()` or `create_aks_compute()` call.
 #' @param cluster The `AmlCompute` or `AksCompute` object.
 #' @param show_output If `TRUE`, more verbose output will be provided.
+#' @return None
 #' @export
 #' @seealso
 #' `create_aml_compute()`, `create_aks_compute()`
@@ -148,6 +149,7 @@ wait_for_provisioning_completion <- function(cluster, show_output = FALSE) {
 #' Remove the compute object from its associated workspace and delete the
 #' corresponding cloud-based resource.
 #' @param cluster The `AmlCompute` or `AksCompute` object.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -172,6 +174,7 @@ delete_compute <- function(cluster) {
 #' the cluster.
 #' @param idle_seconds_before_scaledown An integer of the node idle time
 #' in seconds before scaling down the cluster.
+#' @return None
 #' @export
 #' @md
 update_aml_compute <- function(cluster, min_nodes = NULL, max_nodes = NULL,
@@ -342,6 +345,7 @@ attach_aks_compute <- function(workspace,
 #' underlying cloud resource will be deleted; the association will
 #' just be removed.
 #' @param cluster The `AksCompute` object.
+#' @return None
 #' @export
 #' @md
 detach_aks_compute <- function(cluster) {

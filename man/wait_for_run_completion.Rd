@@ -11,6 +11,9 @@ wait_for_run_completion(run, show_output = TRUE)
 
 \item{show_output}{If \code{TRUE}, print verbose output to console.}
 }
+\value{
+None
+}
 \description{
 Wait for the run to reach a terminal state. Typically called
 after submitting an experiment run with \code{submit_experiment()}.

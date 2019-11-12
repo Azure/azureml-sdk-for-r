@@ -20,6 +20,9 @@ healthy state. Defaults to \code{FALSE}.}
 
 \item{inference_config}{An \code{InferenceConfig} object.}
 }
+\value{
+None
+}
 \description{
 Update a local web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies

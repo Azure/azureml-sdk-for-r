@@ -230,6 +230,7 @@ container_registry <- function(address = NULL,
 #' local, directory or custom url.
 #' @param install_system_packages logical parameter to specify if system
 #' packages should be installed at runtime.
+#' @return Dockerfile string
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,

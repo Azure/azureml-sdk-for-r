@@ -147,6 +147,7 @@ deserialize_to_model <- function(workspace, model_payload) {
 #' you cannot delete a registered model that is being used by an active
 #' web service deployment.
 #' @param model The `Model` object.
+#' @return None
 #' @export
 #' @md
 delete_model <- function(model) {
@@ -345,6 +346,7 @@ get_model_package_creation_logs <- function(package,
 #' After you've pulled the image, you can start a local container based
 #' on this image using Docker commands.
 #' @param package The `ModelPackage` object.
+#' @return None
 #' @export
 #' @seealso
 #' `package_model()`
@@ -372,6 +374,7 @@ pull_model_package_image <- function(package) {
 #' @param package The `ModelPackage` object.
 #' @param output_directory A string of the local directory that
 #' will be created to contain the contents of the package.
+#' @return None
 #' @export
 #' @seealso
 #' `package_model()`, `get_model_package_container_registry()`
@@ -386,6 +389,7 @@ save_model_package_files <- function(package, output_directory) {
 #' @param package The `ModelPackage` object.
 #' @param show_output If `TRUE`, print more verbose output. Defaults to
 #' `FALSE`.
+#' @return None
 #' @export
 #' @md
 wait_for_model_package_creation <- function(package, show_output = FALSE) {
@@ -476,6 +480,7 @@ inference_config <- function(entry_script,
 #' the image.
 #' @param source_directory paths to folders that contains all files to
 #' create the image.
+#' @return None
 #' @noRd
 generate_score_python_wrapper <- function(entry_script, source_directory) {
   score_py_template <- sprintf("# This is auto-generated python wrapper.

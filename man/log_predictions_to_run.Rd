@@ -16,6 +16,9 @@ log_predictions_to_run(name, value, description = "", run = NULL)
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 \code{log_predictions_to_run()} logs a metric score that can be used to
 compare the distributions of true target values to the distribution
