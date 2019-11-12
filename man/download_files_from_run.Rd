@@ -22,6 +22,9 @@ where the artifacts will be downloaded to.}
 
 \item{batch_size}{An int of the number of files to download per batch.}
 }
+\value{
+None
+}
 \description{
 Download files from the run record. You can download any files that
 were uploaded to the run record via \code{upload_files_to_run()} or

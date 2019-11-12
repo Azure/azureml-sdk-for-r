@@ -1,7 +1,7 @@
 #!/usr/bin/env
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 0 || length(args) %% 2 == 1) {
-  stop("Please provide the directory path and entry script", call.=FALSE)
+if (length(args) == 0) {
+  stop("Please provide the Samples directory path", call.=FALSE)
 }
 
 library(azuremlsdk)
@@ -13,12 +13,23 @@ cluster_name <- Sys.getenv("TEST_CLUSTER_NAME")
 
 root_dir <- getwd()
 
-validate_samples <- function(args) {
-  for (i in seq(1, length(args), 2)) {
-    sub_dir_name <- args[i]
-    entry_script <- args[i+1]
-    
-    sub_dir <- file.path(root_dir, "samples", sub_dir_name)
+getPathLeaves <- function(path){
+  children <- list.dirs(path, recursive = FALSE)
+  if(length(children) == 0)
+    return(path)
+  ret <- list()
+  for(child in children){
+    ret[[length(ret)+1]] <- getPathLeaves(child)
+  }
+  return(unlist(ret))
+}
+
+validate_samples <- function(directory) {
+
+  sample_dirs = getPathLeaves(directory)
+
+  for (sub_dir in sample_dirs) {
+    entry_script <- paste0(basename(sub_dir), ".R")
     setwd(sub_dir)
     
     tryCatch({
@@ -34,5 +45,5 @@ validate_samples <- function(args) {
 if(!is.na(subscription_id)) {
   ws <- get_workspace(workspace_name, subscription_id, resource_group)
   write_workspace_config(ws, path = root_dir)
-  validate_samples(args)
+  validate_samples(directory = args[1])
 }

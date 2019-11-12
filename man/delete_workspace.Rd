@@ -16,6 +16,9 @@ will also be deleted.}
 
 \item{no_wait}{If \code{FALSE} do not wait for the workspace deletion to complete.}
 }
+\value{
+None
+}
 \description{
 Delete the Azure Machine Learning workspace resource. \code{delete_workspace()}
 can also delete the workspace's associated resources.

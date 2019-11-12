@@ -11,6 +11,9 @@ wait_for_provisioning_completion(cluster, show_output = FALSE)
 
 \item{show_output}{If \code{TRUE}, more verbose output will be provided.}
 }
+\value{
+None
+}
 \description{
 Wait for a cluster to finish provisioning. Typically invoked after a
 \code{create_aml_compute()} or \code{create_aks_compute()} call.

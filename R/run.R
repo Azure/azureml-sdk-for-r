@@ -27,6 +27,7 @@ get_run_metrics <- function(run) {
 #' after submitting an experiment run with `submit_experiment()`.
 #' @param run The `Run` object.
 #' @param show_output If `TRUE`, print verbose output to console.
+#' @return None
 #' @export
 #' @md
 wait_for_run_completion <- function(run, show_output = TRUE) {
@@ -107,6 +108,7 @@ get_run <- function(experiment, run_id) {
 #' @param name A string of the name of the artifact to be downloaded.
 #' @param output_file_path A string of the local path where to download
 #' the artifact to.
+#' @return None
 #' @export
 #' @md
 download_file_from_run <- function(run, name, output_file_path = NULL) {
@@ -129,6 +131,7 @@ download_file_from_run <- function(run, name, output_file_path = NULL) {
 #' @param output_paths (Optional) A list of strings of the local filepaths
 #' where the artifacts will be downloaded to.
 #' @param batch_size An int of the number of files to download per batch.
+#' @return None
 #' @md
 #' @export
 download_files_from_run <- function(run, prefix = NULL, output_directory = NULL,
@@ -228,6 +231,7 @@ get_secrets_from_run <- function(run, secrets) {
 #' @param value The value of the metric.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -254,6 +258,7 @@ log_metric_to_run <- function(name, value, run = NULL) {
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @details
 #' The calculation of the accuracy table is similar to the calculation of
@@ -318,6 +323,7 @@ log_accuracy_table_to_run <- function(name, value, description = "",
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @md
 log_confusion_matrix_to_run <- function(name, value, description = "",
@@ -342,6 +348,7 @@ log_confusion_matrix_to_run <- function(name, value, description = "",
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @md
 log_image_to_run <- function(name, path = NULL, plot = NULL,
@@ -377,6 +384,7 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -405,6 +413,7 @@ log_list_to_run <- function(name, value, description = "", run = NULL) {
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -438,6 +447,7 @@ log_predictions_to_run <- function(name, value, description = "", run = NULL) {
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -471,6 +481,7 @@ log_residuals_to_run <- function(name, value, description = "", run = NULL) {
 #' to the current run from the service context.
 #' @param ... Each named parameter generates a column with the value
 #' specified.
+#' @return None
 #' @export
 #' @examples
 #' # Log an arbitrary tuple
@@ -507,6 +518,7 @@ log_row_to_run <- function(name, description = "", run = NULL, ...) {
 #' @param description (Optional) A string of the metric description.
 #' @param run The `Run` object. If not specified, will default
 #' to the current run from the service context.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -703,6 +715,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 #' @param timeout_seconds An int of the timeout in seconds for uploading
 #' the files.
 #' @param run The `Run` object.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -748,6 +761,7 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
 #' @param name A string of the name of the folder of files to upload.
 #' @param path A string of the relative local path to the folder to upload.
 #' @param run The `Run` object.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -779,6 +793,7 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 #' @description
 #' Mark the run as completed. Use for an interactive logging run.
 #' @param run The `Run` object.
+#' @return None
 #' @export
 #' @seealso
 #' `start_logging_run()`

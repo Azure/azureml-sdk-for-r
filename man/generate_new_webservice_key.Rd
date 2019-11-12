@@ -12,6 +12,9 @@ generate_new_webservice_key(webservice, key_type)
 \item{key_type}{A string of which key to regenerate. Options are
 "Primary" or "Secondary".}
 }
+\value{
+None
+}
 \description{
 Regenerate either the primary or secondary authentication key for
 an \code{AciWebservice} or \code{AksWebservice}.The web service must have

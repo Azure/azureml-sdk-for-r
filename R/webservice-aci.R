@@ -98,6 +98,7 @@ aci_webservice_deployment_config <- function(cpu_cores = NULL,
 #' @param enable_app_insights If `TRUE` enable AppInsights for the web service.
 #' @param models A list of `Model` objects to package into the updated service.
 #' @param inference_config An `InferenceConfig` object.
+#' @return None
 #' @export
 #' @md
 update_aci_webservice <- function(webservice,
