@@ -539,7 +539,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' Generate table of run details
 #' @param run The `Run` object.
 #' @md
-create_run_details_plot <- function(run) {
+.create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -666,7 +666,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             parsed_url[12],
                             parsed_url[14],
                             parsed_url[16],
-                            create_run_details_plot(run),
+                            .create_run_details_plot(run),
                             port,
                             Sys.time())
 
@@ -697,7 +697,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       utils::browseURL(host)
     }
   } else {
-    create_run_details_plot(run)
+    .create_run_details_plot(run)
   }
 }
 
