@@ -256,6 +256,7 @@ register_azure_file_share_datastore <- function(workspace,
 #' Unregister the datastore from its associated workspace. The
 #' underlying Azure storage will not be deleted.
 #' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @return None
 #' @export
 #' @md
 unregister_datastore <- function(datastore) {

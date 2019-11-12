@@ -17,6 +17,9 @@ to the current run from the service context.}
 \item{...}{Each named parameter generates a column with the value
 specified.}
 }
+\value{
+None
+}
 \description{
 Using \code{log_row_to_run()} creates a metric with multiple columns
 as described in \code{...}. Each named parameter generates a column

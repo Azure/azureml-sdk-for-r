@@ -19,6 +19,9 @@ the cluster.}
 \item{idle_seconds_before_scaledown}{An integer of the node idle time
 in seconds before scaling down the cluster.}
 }
+\value{
+None
+}
 \description{
 Update the scale settings for an existing AmlCompute cluster.
 }

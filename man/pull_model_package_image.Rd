@@ -10,6 +10,9 @@ pull_model_package_image(package)
 \arguments{
 \item{package}{The \code{ModelPackage} object.}
 }
+\value{
+None
+}
 \description{
 Pull the Docker image from a created \code{ModelPackage} to your
 local Docker environment. The output of this call will

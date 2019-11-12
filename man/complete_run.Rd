@@ -9,6 +9,9 @@ complete_run(run)
 \arguments{
 \item{run}{The \code{Run} object.}
 }
+\value{
+None
+}
 \description{
 Mark the run as completed. Use for an interactive logging run.
 }

@@ -15,6 +15,9 @@ the service.}
 
 \item{delete_image}{If \code{TRUE}, delete the service's Docker image.}
 }
+\value{
+None
+}
 \description{
 Delete a local web service from the local machine. This function call
 is not asynchronous; it runs until the service is deleted.

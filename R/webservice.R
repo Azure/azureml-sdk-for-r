@@ -26,6 +26,7 @@ get_webservice <- function(workspace, name) {
 #' `AksWebservice` object.
 #' @param show_output If `TRUE`, print more verbose output. Defaults
 #' to `FALSE`.
+#' @return None
 #' @export
 #' @seealso
 #' `deploy_model()`
@@ -89,6 +90,7 @@ get_webservice_keys <- function(webservice) {
 #'
 #' To delete a `LocalWebservice` see `delete_local_webservice()`.
 #' @param webservice The `AciWebservice` or `AksWebservice` object.
+#' @return None
 #' @export
 #' @md
 delete_webservice <- function(webservice) {
@@ -137,6 +139,7 @@ invoke_webservice <- function(webservice, input_data) {
 #' @param webservice The `AciWebservice` or `AksWebservice` object.
 #' @param key_type A string of which key to regenerate. Options are
 #' "Primary" or "Secondary".
+#' @return None
 #' @export
 #' @md
 generate_new_webservice_key <- function(webservice, key_type) {

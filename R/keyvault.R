@@ -9,6 +9,7 @@
 #' @param keyvault The `Keyvault` object.
 #' @param secrets The named list of secrets to be added to the keyvault,
 #' where element name corresponds to the secret name.
+#' @return None
 #' @export
 #' @examples
 #' \dontrun{
@@ -49,6 +50,7 @@ get_secrets <- function(keyvault, secrets) {
 #' a specified set of secret names.
 #' @param keyvault The `Keyvault` object.
 #' @param secrets A vector of secret names.
+#' @return None
 #' @export
 #' @md
 delete_secrets <- function(keyvault, secrets) {
