@@ -647,8 +647,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
 
-    # select random registered port
-    port <- sample(1024:49151, 1)
+    # select random available registered port
+    port <- servr::random_port()
     host <- paste0("http://localhost:", port)
 
     # import objects needed for Shiny app
