@@ -24,11 +24,21 @@ getPathLeaves <- function(path){
   return(unlist(ret))
 }
 
-validate_samples <- function(directory) {
-
+validate_samples <- function(args) {
+  directory = args[1]
   sample_dirs = getPathLeaves(directory)
 
+  skip_tests = c()
+
+  if (length(args) > 1) {
+    skip_tests = unlist(strsplit(args[2], ";"))
+  }
+
   for (sub_dir in sample_dirs) {
+    if (basename(sub_dir) %in% skip_tests) {
+      next
+    }
+
     entry_script <- paste0(basename(sub_dir), ".R")
     setwd(sub_dir)
     
@@ -45,5 +55,5 @@ validate_samples <- function(directory) {
 if(!is.na(subscription_id)) {
   ws <- get_workspace(workspace_name, subscription_id, resource_group)
   write_workspace_config(ws, path = root_dir)
-  validate_samples(directory = args[1])
+  validate_samples(args)
 }
