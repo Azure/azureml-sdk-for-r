@@ -19,6 +19,9 @@ log_image_to_run(name, path = NULL, plot = NULL, description = "",
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 Log an image to the run with the give metric name. Use
 \code{log_image_to_run()} to log an image file or ggplot2 plot to the

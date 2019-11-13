@@ -13,6 +13,9 @@ save_model_package_files(package, output_directory)
 \item{output_directory}{A string of the local directory that
 will be created to contain the contents of the package.}
 }
+\value{
+None
+}
 \description{
 Download the Dockerfile, model, and other assets needed to build
 an image locally from a created \code{ModelPackage}.

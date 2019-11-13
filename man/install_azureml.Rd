@@ -19,6 +19,9 @@ install_azureml(version = "1.0.69", envname = "r-azureml",
 
 \item{remove_existing_env}{delete the conda environment if already exists}
 }
+\value{
+None
+}
 \description{
 Install azureml sdk package
 }

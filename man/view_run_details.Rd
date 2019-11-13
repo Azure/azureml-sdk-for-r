@@ -9,6 +9,9 @@ view_run_details(run)
 \arguments{
 \item{run}{The \code{Run} object.}
 }
+\value{
+None
+}
 \description{
 Plot table of run details in RStudio Viewer or browser.
 This table does not auto-refresh. To see current values,

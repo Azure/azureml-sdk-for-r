@@ -9,6 +9,9 @@ unregister_datastore(datastore)
 \arguments{
 \item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
 }
+\value{
+None
+}
 \description{
 Unregister the datastore from its associated workspace. The
 underlying Azure storage will not be deleted.

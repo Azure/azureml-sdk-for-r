@@ -16,6 +16,9 @@ log_list_to_run(name, value, description = "", run = NULL)
 \item{run}{The \code{Run} object. If not specified, will default
 to the current run from the service context.}
 }
+\value{
+None
+}
 \description{
 Log a vector with the given metric name to the run.
 }

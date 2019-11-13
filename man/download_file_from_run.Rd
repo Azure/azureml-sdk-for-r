@@ -14,6 +14,9 @@ download_file_from_run(run, name, output_file_path = NULL)
 \item{output_file_path}{A string of the local path where to download
 the artifact to.}
 }
+\value{
+None
+}
 \description{
 Download a file from the run record. You can download any file that
 was uploaded to the run record via \code{upload_files_to_run()} or

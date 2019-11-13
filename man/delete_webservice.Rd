@@ -9,6 +9,9 @@ delete_webservice(webservice)
 \arguments{
 \item{webservice}{The \code{AciWebservice} or \code{AksWebservice} object.}
 }
+\value{
+None
+}
 \description{
 Delete a deployed ACI or AKS web service from the given workspace.
 This function call is not asynchronous; it runs until the resource is

@@ -1,4 +1,12 @@
-## Resubmission 2019-11-06 (latest)
+## Resubmission 2019-11-11 (latest)
+This is a resubmission to address the following reviewer feedback:
+* Please shorten the title to a maximum of 65 characters. Acronyms can be used on their own in the title as long as they are explained in the description field.
+  * We have shortened the title to be <65 characters. Title now contains only the acronym 'SDK', and the full term 'Software Development Kit' is in the description.
+* Please add \value to .Rd files that are not data files and explain the functions results in the documentation.
+f.i.: detach_aks_compute.Rd - If your function does not return a value, please document that too, e.g. \value{None}.
+  * We have added \value to all functions (and the subsequently generated .Rd files), including \value{None} for the functions that do not return anything.
+
+## Resubmission 2019-11-06
 This is a resubmission to address the following reviewer feedback:
 * "Please write package names, software names and API names in single quotes (e.g. 'Azure') in Title and Description."
   * We have put the service name 'Azure Machine Learning' in single quotes in the Title and Description fields.

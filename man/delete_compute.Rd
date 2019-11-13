@@ -9,6 +9,9 @@ delete_compute(cluster)
 \arguments{
 \item{cluster}{The \code{AmlCompute} or \code{AksCompute} object.}
 }
+\value{
+None
+}
 \description{
 Remove the compute object from its associated workspace and delete the
 corresponding cloud-based resource.

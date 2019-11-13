@@ -4,12 +4,15 @@
 \alias{load_workspace_from_config}
 \title{Load workspace configuration details from a config file}
 \usage{
-load_workspace_from_config(path = NULL)
+load_workspace_from_config(path = NULL, file_name = NULL)
 }
 \arguments{
 \item{path}{A string of the path to the config file or starting directory
 for search. The parameter defaults to starting the search in the current
 directory.}
+
+\item{file_name}{A string that will override the config file name to
+search for when path is a directory path.}
 }
 \value{
 The \code{Workspace} object.

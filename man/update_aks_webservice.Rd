@@ -101,6 +101,9 @@ the web service. If enabled, users can access the web service by fetching
 an access token using their Azure Active Directory credentials.
 Both \code{token_auth_enabled} and \code{auth_enabled} cannot be set to \code{TRUE}.}
 }
+\value{
+None
+}
 \description{
 Update an AKS web service with the provided properties. You can update the
 web service to use a new model, a new entry script, or new dependencies

@@ -1,7 +1,7 @@
 # Azure Machine Learning SDK for R
-| Build | Docs |
-|:------|:-----|
-| [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Build?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) |
+| Tests | Docs | Samples | Code Quality |
+|:------|:-----|:--------|:-------------|
+| [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Function%20Tests?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Sample%20Validation?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Code%20Quality?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) |
 
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service. 
 
@@ -30,7 +30,7 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 | [HyperDrive](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-hyperparameter-tuning) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
 | [Model](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_check_mark: |
 | [Webservice](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
-| [Dataset](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :clipboard: |
+| [Dataset](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :arrows_counterclockwise: |
 
 ## Installation
 

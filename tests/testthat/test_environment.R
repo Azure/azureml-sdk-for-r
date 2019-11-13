@@ -3,6 +3,7 @@ source("utils.R")
 
 
 test_that("create environment and check parameters", {
+  skip_if_no_azureml()
   env_name <- "testenv"
   
   # Create environment
