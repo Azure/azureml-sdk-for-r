@@ -56,4 +56,4 @@ ui <- fluidPage(
                                size = 0.5)
 )
 
-suppressMessages(shiny::runApp(shinyApp(ui, server), port = port))
+shiny::runApp(shinyApp(ui, server), port = port)
