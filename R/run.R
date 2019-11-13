@@ -647,13 +647,6 @@ view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
 
-    # stop and remove any existing widget job before submitting script
-    if (exists("ACTIVE_WIDGET_JOB")) {
-      try(rstudioapi::jobSetState(ACTIVE_WIDGET_JOB, "succeeded"),
-          silent = TRUE)
-      try(rstudioapi::jobRemove(ACTIVE_WIDGET_JOB), silent = TRUE)
-    }
-
     # select random available registered port
     port <- servr::random_port(NULL)
     host <- paste0("http://localhost:", port)
@@ -685,10 +678,17 @@ view_run_details <- function(run, auto_refresh = TRUE) {
            }
     )
 
+    # stop and remove any existing widget job before submitting script
+    if (exists("activeWidgetJob")) {
+      try(rstudioapi::jobSetState(activeWidgetJob, "succeeded"),
+          silent = TRUE)
+      try(rstudioapi::jobRemove(activeWidgetJob), silent = TRUE)
+    }
+
     path <- here::here("widget", "app.R")
-    ACTIVE_WIDGET_JOB <<- rstudioapi::jobRunScript(path,
-                                                   name = "AzureML Widget",
-                                                   importEnv = TRUE)
+    activeWidgetJob <<- rstudioapi::jobRunScript(path,
+                                                 name = "AzureML Widget",
+                                                 importEnv = TRUE)
 
     # initialize viewer pane or browser
     viewer <- getOption("viewer")
