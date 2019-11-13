@@ -618,8 +618,8 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
                       colnames = c(" ", " "),
                       caption = htmltools::tags$caption(
                         style = "caption-side: top;
-                                   text-align: center;
-                                   font-size: 125%",
+                        text-align: center;
+                        font-size: 125%",
                         "Run Details"),
                       options = list(dom = "t",
                                      scrollY = "800px",

@@ -12,9 +12,6 @@ view_run_details(run, auto_refresh = TRUE)
 \item{auto_refresh}{Boolean indicating whether or not widget should update
 run details automatically. The default is TRUE when using RStudio.}
 }
-\value{
-None
-}
 \description{
 Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer
 is unavailable) showing details of the submitted run. If using RStudio, the
