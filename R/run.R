@@ -691,6 +691,14 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                                                  importEnv = TRUE)
 
     # initialize viewer pane or browser
+    if (notebook_vm) {
+      nb_vm_file_path <- here::here("../../mnt/azmnt/.nbv")
+      nb_vm_file_info <- readLines(nb_vm_file_path, warn = FALSE)
+      instance_name <- gsub("instance=", "", nb_vm_file_info[2])
+      domain_suffix <- gsub("domainsuffix=", "", nb_vm_file_info[3])
+
+      host <- paste0("https://", instance_name, "-", port, ".", domain_suffix)
+    }
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer(host)
