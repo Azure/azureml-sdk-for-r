@@ -649,7 +649,6 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 
     # select random available registered port
     port <- servr::random_port(NULL)
-    host <- paste0("http://localhost:", port)
 
     # import objects needed for Shiny app
     parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
@@ -679,6 +678,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     )
 
     # stop and remove any existing widget job before submitting script
+    # nolint start
     if (exists("activeWidgetJob")) {
       try(rstudioapi::jobSetState(activeWidgetJob, "succeeded"),
           silent = TRUE)
@@ -689,6 +689,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     activeWidgetJob <<- rstudioapi::jobRunScript(path,
                                                  name = "AzureML Widget",
                                                  importEnv = TRUE)
+    # nolint end
 
     # initialize viewer pane or browser
     if (notebook_vm) {
@@ -698,7 +699,10 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       domain_suffix <- gsub("domainsuffix=", "", nb_vm_file_info[3])
 
       host <- paste0("https://", instance_name, "-", port, ".", domain_suffix)
+    } else {
+      host <- paste0("http://localhost:", port)
     }
+
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer(host)
