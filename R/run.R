@@ -679,19 +679,21 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 
     # stop and remove any existing widget job before submitting script
     # nolint start
-    if (exists("activeWidgetJob")) {
-      try(rstudioapi::jobSetState(activeWidgetJob, "succeeded"),
+    if (exists("ACTIVE_WIDGET_JOB")) {
+      try(rstudioapi::jobSetState(ACTIVE_WIDGET_JOB, "succeeded"),
           silent = TRUE)
-      try(rstudioapi::jobRemove(activeWidgetJob), silent = TRUE)
+      try(rstudioapi::jobRemove(ACTIVE_WIDGET_JOB), silent = TRUE)
     }
 
     path <- here::here("widget", "app.R")
-    activeWidgetJob <<- rstudioapi::jobRunScript(path,
-                                                 name = "AzureML Widget",
-                                                 importEnv = TRUE)
+    ACTIVE_WIDGET_JOB <<- rstudioapi::jobRunScript(path,
+                                                   name = "AzureML Widget",
+                                                   importEnv = TRUE)
     # nolint end
 
     # initialize viewer pane or browser
+    notebook_vm <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
+
     if (notebook_vm) {
       nb_vm_file_path <- here::here("../../mnt/azmnt/.nbv")
       nb_vm_file_info <- readLines(nb_vm_file_path, warn = FALSE)
