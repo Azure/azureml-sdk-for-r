@@ -691,11 +691,9 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                                                    importEnv = TRUE)
     # nolint end
 
-    # initialize viewer pane or browser
-    notebook_vm <- grepl("rstudio-server", Sys.getenv("RS_RPOSTBACK_PATH"))
-
-    if (notebook_vm) {
-      nb_vm_file_path <- here::here("../../mnt/azmnt/.nbv")
+    # check if using notebook vm and assign host
+    nb_vm_file_path <- "~/../../mnt/azmnt/.nbvm"
+    if (file.exists(nb_vm_file_path)) {
       nb_vm_file_info <- readLines(nb_vm_file_path, warn = FALSE)
       instance_name <- gsub("instance=", "", nb_vm_file_info[2])
       domain_suffix <- gsub("domainsuffix=", "", nb_vm_file_info[3])
@@ -705,6 +703,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       host <- paste0("http://localhost:", port)
     }
 
+    # initialize viewer pane or browser
     viewer <- getOption("viewer")
     if (!is.null(viewer)) {
       viewer(host)
