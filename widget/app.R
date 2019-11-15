@@ -19,20 +19,25 @@ server <- function(input, output, session) {
   ignoreInit = TRUE,
   once = TRUE)
 
+  observeEvent(values$current_run$status %in% 
+               c("Failed", "Completed", "Canceled"), {
+    values$widget_state <- "finalizing"
+    print("Your run has reached a terminal state. You may close the widget now.")
+  },
+  ignoreInit = TRUE,
+  once = TRUE)
+
   # stop app if user closes session
   session$onSessionEnded(function() {
     shiny::stopApp()
   })
   
   plot <- function() {
+    if(isolate(values$widget_state) %in% c("initializing", "streaming")) {
+      invalidateLater(10000, session)
+    }
+  
     if (!is.null(values$current_run)) {
-      if (isolate(values$current_run$status) %in% 
-          c("Failed", "Completed", "Canceled")) {
-        print("Your run has reached a terminal state. The widget will close now.")
-        Sys.sleep(3)
-        shiny::stopApp()
-      }
-
       run_details_plot <- azuremlsdk::view_run_details(values$current_run,
                                                        auto_refresh = FALSE)
     } else {
@@ -47,7 +52,6 @@ server <- function(input, output, session) {
   }
   
   output$runDetailsPlot <- DT::renderDataTable({
-    invalidateLater(10000, session)
     plot()
   })
 }
