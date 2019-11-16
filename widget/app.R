@@ -19,14 +19,6 @@ server <- function(input, output, session) {
   ignoreInit = TRUE,
   once = TRUE)
 
-  observeEvent(values$current_run$status %in% 
-               c("Failed", "Completed", "Canceled"), {
-    values$widget_state <- "finalizing"
-    print("Your run has reached a terminal state. You may close the widget now.")
-  },
-  ignoreInit = TRUE,
-  once = TRUE)
-
   # stop app if user closes session
   session$onSessionEnded(function() {
     shiny::stopApp()
@@ -40,6 +32,11 @@ server <- function(input, output, session) {
     if (!is.null(values$current_run)) {
       run_details_plot <- azuremlsdk::view_run_details(values$current_run,
                                                        auto_refresh = FALSE)
+      if (isolate(values$widget_state == "streaming") &&
+          values$current_run$status %in% c("Canceled", "Completed", "Failed")) {
+        values$widget_state <- "finalizing"
+        print("Your run has reached a terminal state. You may close the widget now.")
+      }
     } else {
       # initialize auto-refresh 10 seconds after job submitted
       if (isolate(values$widget_state == "initializing") &&
