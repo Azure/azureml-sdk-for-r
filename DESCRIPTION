@@ -32,7 +32,10 @@ Imports:
     plyr (>= 1.8),
     DT,
     rstudioapi (>= 0.7),
-    htmltools
+    htmltools,
+    shinycssloaders,
+    shiny,
+    servr
 Suggests: rmarkdown,
     knitr,
     testthat,

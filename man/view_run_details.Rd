@@ -2,21 +2,23 @@
 % Please edit documentation in R/run.R
 \name{view_run_details}
 \alias{view_run_details}
-\title{Plot table of run details}
+\title{Initialize run details widget}
 \usage{
-view_run_details(run)
+view_run_details(run, auto_refresh = TRUE)
 }
 \arguments{
-\item{run}{The \code{Run} object.}
-}
-\value{
-None
+\item{run}{Run object}
+
+\item{auto_refresh}{Boolean indicating whether or not widget should update
+run details automatically. The default is TRUE when using RStudio.}
 }
 \description{
-Plot table of run details in RStudio Viewer or browser.
-This table does not auto-refresh. To see current values,
-re-run the command or click the web view link to view more
-details in real time.
+Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer
+is unavailable) showing details of the submitted run. If using RStudio, the
+plot will auto-update with information collected from the server. For more
+details about the run, click the web view link. The widget will stop running
+once the run has reached a terminal state: "Failed", "Completed", or
+"Canceled".
 
 If you are running this method from an RMarkdown file, the
 run details table will show up in the code chunk output
