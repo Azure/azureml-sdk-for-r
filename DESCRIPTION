@@ -33,8 +33,6 @@ Imports:
     DT,
     rstudioapi (>= 0.7),
     htmltools,
-    shinycssloaders,
-    shiny,
     servr
 Suggests: rmarkdown,
     knitr,
