@@ -33,6 +33,7 @@ Imports:
     DT,
     rstudioapi (>= 0.7),
     htmltools,
+    here,
     servr
 Suggests: rmarkdown,
     knitr,
