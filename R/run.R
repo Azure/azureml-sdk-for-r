@@ -679,16 +679,19 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 
     # stop and remove any existing widget job before submitting script
     # nolint start
-    if (exists("ACTIVE_WIDGET_JOB")) {
-      try(rstudioapi::jobSetState(ACTIVE_WIDGET_JOB, "succeeded"),
+    existing_job_id <- Sys.getenv("EXISTING_WIDGET_JOB")
+
+    if (existing_job_id != "") {
+      try(rstudioapi::jobSetState(existing_job_id, "succeeded"),
           silent = TRUE)
-      try(rstudioapi::jobRemove(ACTIVE_WIDGET_JOB), silent = TRUE)
+      try(rstudioapi::jobRemove(existing_job_id), silent = TRUE)
     }
 
     path <- here::here("widget", "app.R")
-    ACTIVE_WIDGET_JOB <<- rstudioapi::jobRunScript(path,
-                                                   name = "AzureML Widget",
-                                                   importEnv = TRUE)
+    current_job_id <- rstudioapi::jobRunScript(path,
+                                               name = "AzureML Widget",
+                                               importEnv = TRUE)
+    Sys.setenv(EXISTING_WIDGET_JOB = current_job_id)
     # nolint end
 
     # check if using notebook vm and assign host
