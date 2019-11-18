@@ -1,7 +1,7 @@
 Package: azuremlsdk
 Type: Package
 Title: Interface to the 'Azure Machine Learning' 'SDK'
-Version: 0.5.7
+Version: 0.5.7.9000
 Authors@R: c(
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
     person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
