@@ -11,6 +11,42 @@ parallel_run_config(source_directory = ".", name = NULL,
   run_invocation_timeout = 600L, error_threshold = 10L,
   environment = NULL, allow_reuse = TRUE, workspace = NULL)
 }
+\arguments{
+\item{source_directory}{source_directory}
+
+\item{name}{name}
+
+\item{inputs}{inputs}
+
+\item{output}{output}
+
+\item{models}{models}
+
+\item{compute_target}{compute_target}
+
+\item{entry_script}{entry_script}
+
+\item{arguments}{arguments}
+
+\item{mini_batch_size}{mini_batch_size}
+
+\item{output_action}{output_action}
+
+\item{node_count}{node_count}
+
+\item{run_invocation_timeout}{run_invocation_timeout}
+
+\item{error_threshold}{error_threshold}
+
+\item{environment}{environment}
+
+\item{allow_reuse}{allow_reuse}
+
+\item{workspace}{workspace}
+}
+\value{
+parallel_run_config
+}
 \description{
 Create a parallel run config
 }

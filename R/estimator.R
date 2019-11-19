@@ -118,6 +118,23 @@ estimator <- function(source_directory,
 }
 
 #' Create a parallel run config
+#' @param source_directory source_directory
+#' @param name name
+#' @param inputs inputs
+#' @param output output
+#' @param models models
+#' @param compute_target compute_target
+#' @param entry_script entry_script
+#' @param arguments arguments
+#' @param mini_batch_size mini_batch_size
+#' @param output_action output_action
+#' @param node_count node_count
+#' @param run_invocation_timeout run_invocation_timeout
+#' @param error_threshold error_threshold
+#' @param environment environment
+#' @param allow_reuse allow_reuse
+#' @param workspace workspace
+#' @return parallel_run_config
 #' @export
 parallel_run_config <- function(source_directory = ".",
                                 name = NULL,
