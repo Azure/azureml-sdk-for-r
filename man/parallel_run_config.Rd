@@ -6,10 +6,10 @@
 \usage{
 parallel_run_config(source_directory = ".", name = NULL,
   inputs = NULL, output = NULL, models = list(),
-  compute_target = NULL, entry_script = NULL, arguments = lists(),
+  compute_target = NULL, entry_script = NULL, arguments = list(),
   mini_batch_size = 5, output_action = "append_row", node_count = 1,
   run_invocation_timeout = 600L, error_threshold = 10L,
-  environment = NULL, allow_reuse = TRUE)
+  environment = NULL, allow_reuse = TRUE, workspace = NULL)
 }
 \description{
 Create a parallel run config
