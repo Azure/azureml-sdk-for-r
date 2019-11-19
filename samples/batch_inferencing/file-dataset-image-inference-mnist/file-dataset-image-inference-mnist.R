@@ -72,15 +72,6 @@ parallel_run_step <- azureml$contrib$pipeline$steps$ParallelRunStep(
                         arguments = list(),
                         allow_reuse = FALSE)
 
-azureml$core$Workspace$"__repr__" <- function(self) {
-  sprintf("create_workspace(name=\"%s\", subscription_id=\"%s\", resource_group=\"%s\")", 
-          self$"_workspace_name",
-          self$"_subscription_id",
-          self$"_resource_group")
-  }
-ws
-
-
 tryCatch(
   expr = {
     pipeline <- azureml$pipeline$core$Pipeline(workspace = ws, steps = c(parallel_run_step))
