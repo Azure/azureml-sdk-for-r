@@ -133,7 +133,8 @@ parallel_run_config <- function(source_directory = ".",
                                 run_invocation_timeout = 600L,
                                 error_threshold = 10L,
                                 environment = NULL,
-                                allow_reuse = TRUE) {
+                                allow_reuse = TRUE,
+                                workspace = NULL) {
 
   # Setup the pipeline for the batch-inferencing job
   run_config <- azureml$contrib$pipeline$steps$ParallelRunConfig(
@@ -158,5 +159,5 @@ parallel_run_config <- function(source_directory = ".",
                                 arguments = arguments,
                                 allow_reuse = allow_reuse)
 
-  azureml$pipeline$core$Pipeline(workspace = ws, steps = c(step))
+  azureml$pipeline$core$Pipeline(workspace = workspace, steps = c(step))
 }

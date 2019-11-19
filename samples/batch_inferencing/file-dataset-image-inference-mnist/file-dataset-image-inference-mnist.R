@@ -1,5 +1,4 @@
 library(azuremlsdk)
-library(jsonlite)
 
 
 ws <- load_workspace_from_config()
@@ -44,9 +43,9 @@ output_folder <- azureml$pipeline$core$PipelineData(name = 'inferences',
 # The reason we use a custom docker image here is because pipeline doesn't support
 # base_dockerfile yet. Once RSection is ready, we also need to inform pipeline team 
 # to make according backend changes.
-batch_env <- r_environment("predict_environment", 
-                             environment_variables = list(env1 = "val1"),
-                             custom_docker_image = "ninhu/batchinferencing")
+batch_env <- r_environment(name = "predict_environment",
+                           environment_variables = list(env1 = "val1"),
+                           custom_docker_image = "ninhu/batchinferencing")
 
 # register the model
 # please ntoe model is not required for batch-inferencing
@@ -67,7 +66,8 @@ run_config <- parallel_run_config(name = "predict-digits-mnist",
                                   node_count = 2L,
                                   run_invocation_timeout = 300L,
                                   error_threshold = 100L,
-                                  environment = batch_env)
+                                  environment = batch_env,
+                                  workspace = ws)
 
 # Submit the parallel run 
 exp <- experiment(ws, 'batch_mnist')
