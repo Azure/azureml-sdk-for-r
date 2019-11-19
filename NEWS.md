@@ -1,3 +1,6 @@
+# azuremlsdk 0.5.7.9000
+`view_run_details` for invoking Azure ML run details widget with live updates in RStudio Viewer pane.
+
 # azuremlsdk 0.5.7
 Initial CRAN release
 
