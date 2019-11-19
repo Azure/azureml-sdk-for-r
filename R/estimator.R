@@ -116,3 +116,47 @@ estimator <- function(source_directory,
   run_config$framework <- "R"
   invisible(est)
 }
+
+#' Create a parallel run config
+#' @export
+parallel_run_config <- function(source_directory = ".",
+                                name = NULL,
+                                inputs = NULL,
+                                output = NULL,
+                                models = list(),
+                                compute_target = NULL,
+                                entry_script = NULL,
+                                arguments = list(),
+                                mini_batch_size = 5,
+                                output_action = "append_row",
+                                node_count = 1,
+                                run_invocation_timeout = 600L,
+                                error_threshold = 10L,
+                                environment = NULL,
+                                allow_reuse = TRUE) {
+
+  # Setup the pipeline for the batch-inferencing job
+  run_config <- azureml$contrib$pipeline$steps$ParallelRunConfig(
+                                source_directory = source_directory,
+                                # _score_wrapper.py should be auto-generated
+                                entry_script = "_score_wrapper.py",
+                                mini_batch_size = mini_batch_size,
+                                output_action = output_action,
+                                environment = environment,
+                                compute_target = compute_target,
+                                node_count = node_count,
+                                run_invocation_timeout = run_invocation_timeout,
+                                error_threshold = error_threshold)
+
+
+  step <- azureml$contrib$pipeline$steps$ParallelRunStep(
+                                name = name,
+                                inputs = inputs,
+                                output = output,
+                                parallel_run_config = run_config,
+                                models = models,
+                                arguments = arguments,
+                                allow_reuse = allow_reuse)
+
+  azureml$pipeline$core$Pipeline(workspace = ws, steps = c(step))
+}

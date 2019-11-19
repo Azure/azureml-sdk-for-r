@@ -30,8 +30,9 @@ init <- function() {
       data <- PIL$Image$open(image)
 
       # predict
+      # use sample to generate a random number b/w 0-9 to simulate prediction
       prediction <- sample(0:9, 1)
-      result <- paste(image, " ", prediction)
+      result <- paste(basename(image), " ", prediction)
       resultList <- c(resultList, result)
     }
 

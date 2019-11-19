@@ -18,6 +18,8 @@ if (is.null(compute_target)) {
 }
 
 # Create a FileDataset
+# DataSet is required for batch inferencing as it will be used to partitition the data
+# into mini-batches
 mnist_data <- register_azure_blob_container_datastore(
                             ws,
                             datastore_name = "mnist_datastore",
@@ -29,9 +31,8 @@ input_mnist_ds <- azureml$core$Dataset$File$from_files(path=path_on_datastore, v
 registered_mnist_ds <- input_mnist_ds$register(ws, "mnist_sample_data", create_new_version = TRUE)
 named_mnist_ds <- registered_mnist_ds$as_named_input("mnist_sample_data")
 
-registered_mnist_ds$to_path()
-
 # Setup output data
+# need a wrapper to hide PipelineData from customer
 output_folder <- azureml$pipeline$core$PipelineData(name = 'inferences', 
                                                     datastore = ws$get_default_datastore(), 
                                                     output_path_on_compute = "mnist/results")
@@ -40,57 +41,44 @@ output_folder <- azureml$pipeline$core$PipelineData(name = 'inferences',
 # Issues
 # https://msdata.visualstudio.com/Vienna/_workitems/edit/543502, 
 # https://msdata.visualstudio.com/Vienna/_workitems/edit/543503
+# The reason we use a custom docker image here is because pipeline doesn't support
+# base_dockerfile yet. Once RSection is ready, we also need to inform pipeline team 
+# to make according backend changes.
 batch_env <- r_environment("predict_environment", 
                              environment_variables = list(env1 = "val1"),
                              custom_docker_image = "ninhu/batchinferencing")
 
 # register the model
+# please ntoe model is not required for batch-inferencing
 model <- register_model(ws, 
                         model_path = "models/", 
                         model_name = "mnist",
                         description = "Mnist trained tensorflow model")
 
-# Create runconfig and pipeline step
-parallel_run_config <- azureml$contrib$pipeline$steps$ParallelRunConfig(
-                        source_directory = ".",
-                        entry_script = "_score_wrapper.py",
-                        mini_batch_size = '5',
-                        output_action = 'append_row',
-                        environment = batch_env,
-                        compute_target = compute_target,
-                        node_count = 2L,
-                        run_invocation_timeout = 300L,
-                        error_threshold = 100L)
-
-
-parallel_run_step <- azureml$contrib$pipeline$steps$ParallelRunStep(
-                        name = 'predict-digits-mnist',
-                        inputs = list(named_mnist_ds),
-                        output = output_folder,
-                        parallel_run_config = parallel_run_config,
-                        models = list(model),
-                        arguments = list(),
-                        allow_reuse = FALSE)
-
-tryCatch(
-  expr = {
-    pipeline <- azureml$pipeline$core$Pipeline(workspace = ws, steps = c(parallel_run_step))
-  },
-  error = function(e) {
-    print(e)
-  }
-)
+# parallel_run_config (wrapper of the pipeline)
+run_config <- parallel_run_config(name = "predict-digits-mnist",
+                                  inputs = list(named_mnist_ds),
+                                  output = output_folder,
+                                  models = list(model),
+                                  compute_target = compute_target,
+                                  entry_script = "score.py",
+                                  mini_batch_size = '5',
+                                  output_action = 'append_row',
+                                  node_count = 2L,
+                                  run_invocation_timeout = 300L,
+                                  error_threshold = 100L,
+                                  environment = batch_env)
 
 # Submit the parallel run 
-run <- azureml$core$Experiment(ws, 'batch_mnist')$submit(pipeline)
+exp <- experiment(ws, 'batch_mnist')
+run <- submit_experiment(exp, run_config)
+wait_for_run_completion(run)
 
-run$wait_for_completion(show_output = TRUE)
-
+# Get the results
 batch_run <- reticulate::iterate(run$get_children())[[1]]
 batch_output <- batch_run$get_output_data("inferences")
 batch_output$download(local_path = "inferencing_results")
 
+# Peek first 10 rows
 result_file <- list.files(pattern = "parallel_run_step.txt", recursive = TRUE)
 head(read.table(result_file), 10)
-
-           
