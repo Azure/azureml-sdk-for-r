@@ -1,7 +1,8 @@
 # Azure Machine Learning SDK for R
-| Tests | Docs | Samples | Code Quality |
-|:------|:-----|:--------|:-------------|
-| [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Function%20Tests?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Sample%20Validation?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) | [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Code%20Quality?branchName=master)](https://azure.microsoft.com/en-us/services/devops/pipelines/) |
+[![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Function%20Tests?branchName=master&label=Build%20%26%20Tests)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+[![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Code%20Quality?branchName=master&label=Code%20Quality)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+[![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Sample%20Validation?branchName=master&&label=Samples)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+[![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master&label=Docs)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service. 
 
