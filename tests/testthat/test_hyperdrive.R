@@ -59,10 +59,14 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
   expect_equal(expected_best_run, best_run$id)
   
   # create new child runs
+  extra_child <- create_child_run(hyperdrive_run, run_id = "my_new_child")
+  expect_equal(extra_child$id, "my_new_child")
+
   extra_children <- create_child_runs(hyperdrive_run, count = 3L)
   expect_equal(length(extra_children), 3)
-  
-  child_run <- submit_child_run(hyperdrive_run, est)
+
+  # extra child run
+  child_run <- submit_child_run(hyperdrive_run, hyperdrive_config)
 
   # tear down resources
   unlink(tmp_dir_name, recursive = TRUE)
