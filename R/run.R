@@ -6,6 +6,10 @@
 #' Retrieve the metrics logged to a run that were logged with
 #' the `log_*()` methods.
 #' @param run The `Run` object.
+#' @param name The name of the metric.
+#' @param recursive If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
+#' @param run_type run type
+#' @param populate Boolean indicating whether to fetch the contents of external data linked to the metric.
 #' @return A named list of the metrics associated with the run,
 #' e.g. `list("metric_name" = metric)`.
 #' @export
@@ -17,8 +21,12 @@
 #' metrics <- get_run_metrics(run)
 #' }
 #' @md
-get_run_metrics <- function(run) {
-  run$get_metrics()
+get_run_metrics <- function(run,
+                            name = NULL,
+                            recursive = FALSE,
+                            run_type = NULL,
+                            populate = FALSE) {
+    run$get_metrics(name, recursive, run_type, populate)
 }
 
 #' Wait for the completion of a run

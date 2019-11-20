@@ -685,20 +685,12 @@ get_child_run_hyperparameters <- function(hyperdrive_run) {
 #' Return the metrics from all the child runs of the
 #' HyperDrive run.
 #' @param hyperdrive_run The `HyperDriveRun` object.
-#' @param name The name of the metric.
-#' @param recursive If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
-#' @param run_type run type
-#' @param populate Boolean indicating whether to fetch the contents of external data linked to the metric.
 #' @return The named list of metrics where element name is
 #' the run_id, e.g. `list("run_id" = metrics)`.
 #' @export
 #' @md
-get_child_run_metrics <- function(hyperdrive_run,
-                                  name = NULL,
-                                  recursive = FALSE,
-                                  run_type = NULL,
-                                  populate = FALSE) {
-  hyperdrive_run$get_metrics(name, recursive, run_type, populate)
+get_child_run_metrics <- function(hyperdrive_run) {
+  hyperdrive_run$get_metrics()
 }
 
 #' Create a child run
@@ -773,10 +765,12 @@ get_child_runs <- function(parent_run,
                            tags = NULL,
                            properties = NULL,
                            type = NULL,
-                           status = NULL) {
-  parent_run$get_children(recursive,
-                          tags,
-                          properties,
-                          type,
-                          status)
+                           status = NULL,
+                           rehydrate_runs = TRUE) {
+  reticulate::iterate(parent_run$get_children(recursive,
+                                              tags,
+                                              properties,
+                                              type,
+                                              status,
+                                              rehydrate_runs))
 }
