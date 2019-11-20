@@ -5,7 +5,8 @@
 \title{Get all children for the current run selected by specified filters}
 \usage{
 get_child_runs(parent_run, recursive = FALSE, tags = NULL,
-  properties = NULL, type = NULL, status = NULL)
+  properties = NULL, type = NULL, status = NULL,
+  rehydrate_runs = TRUE)
 }
 \arguments{
 \item{parent_run}{The \code{HyperDriveRun} object.}

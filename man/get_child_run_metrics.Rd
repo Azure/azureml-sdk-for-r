@@ -4,19 +4,10 @@
 \alias{get_child_run_metrics}
 \title{Get the metrics from all child runs}
 \usage{
-get_child_run_metrics(hyperdrive_run, name = NULL, recursive = FALSE,
-  run_type = NULL, populate = FALSE)
+get_child_run_metrics(hyperdrive_run)
 }
 \arguments{
 \item{hyperdrive_run}{The \code{HyperDriveRun} object.}
-
-\item{name}{The name of the metric.}
-
-\item{recursive}{If specified, returns runs matching specified \emph{"property"} or {\emph{"property"}: \emph{"value"}}.}
-
-\item{run_type}{run type}
-
-\item{populate}{Boolean indicating whether to fetch the contents of external data linked to the metric.}
 }
 \value{
 The named list of metrics where element name is
