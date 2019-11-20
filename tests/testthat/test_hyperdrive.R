@@ -59,7 +59,7 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
   expect_equal(expected_best_run, best_run$id)
   
   # create new child runs
-  extra_children <- create_child_runs(hyperdrive_run, count = 3)
+  extra_children <- create_child_runs(hyperdrive_run, count = 3L)
   expect_equal(length(extra_children), 3)
   
   child_run <- submit_child_run(hyperdrive_run, est)
