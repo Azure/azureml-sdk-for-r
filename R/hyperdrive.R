@@ -736,7 +736,7 @@ create_child_runs <- function(parent_run,
 #' @description
 #' Submit an experiment and return the active child run.
 #' @param parent_run The `HyperDriveRun` object.
-#' @param config The config to be submitted, HyperDriveConfig or estimator object
+#' @param config The HyperDriveConfig object
 #' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
 #' @return A run object.
 #' @export
