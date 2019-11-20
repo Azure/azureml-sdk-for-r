@@ -42,7 +42,7 @@ Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already i
 # Install Azure ML SDK from CRAN
 install.packages("azuremlsdk")
 
-# Or the development versio from GitHub
+# Or the development version from GitHub
 # install.packages("remotes")
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
