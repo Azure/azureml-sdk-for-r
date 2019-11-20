@@ -3,6 +3,7 @@
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Code%20Quality?branchName=master&label=Code%20Quality)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Sample%20Validation?branchName=master&&label=Samples)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master&label=Docs)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/azuremlsdk)](https://cran.r-project.org/package=azuremlsdk)
 
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service. 
 
@@ -37,13 +38,15 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 
 Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already installed. Choose Python 3.5 or later.
 
-To get started, use the `remotes` package to install Azure ML SDK for R from GitHub.
+```R
+# Install Azure ML SDK from CRAN
+install.packages("azuremlsdk")
 
-```R
+# Or the development versio from GitHub
+# install.packages("remotes")
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
-```
-Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
-```R
+
+# Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 azuremlsdk::install_azureml()
 ```
 
