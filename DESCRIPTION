@@ -39,5 +39,7 @@ Suggests: rmarkdown,
     knitr,
     testthat,
     dplyr,
-    jsonlite
+    jsonlite,
+    shiny,
+    shinycssloaders
 VignetteBuilder: knitr
