@@ -210,8 +210,6 @@ Wait until hyperparameter tuning is complete before you run more code.
 wait_for_run_completion(hyperdrive_run, show_output = TRUE)
 ```
 
-More child runs can be added later by using `create_child_run()` or `create_child_runs()` to return a Run object or list of Run objects. Alternatively, you can pass a HyperDriveConfig object along with the parent run to `submit_child_run()`.
-
 ## Analyse runs by performance
 
 Finally, you can view and compare the metrics collected during all of the child runs!
