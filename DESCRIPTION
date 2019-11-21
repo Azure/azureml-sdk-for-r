@@ -35,8 +35,8 @@ Imports:
     htmltools,
     here,
     servr,
-    htmlwidgets (>= 1.5),
-    shiny
+    shiny,
+    htmlwidgets
 Suggests: rmarkdown,
     knitr,
     testthat,

@@ -1,9 +1,8 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-suppressMessages(require(shiny))
-suppressMessages(require(shinycssloaders))
-suppressMessages(require(DT))
+suppressMessages(library(shiny))
+suppressMessages(library(DT))
 
 
 server <- function(input, output, session) {
@@ -55,10 +54,7 @@ server <- function(input, output, session) {
 }
 
 ui <- fluidPage(
-  shinycssloaders::withSpinner(DT::dataTableOutput("runDetailsPlot"),
-                               5,
-                               color = "#4287f5",
-                               size = 0.5)
+  dataTableOutput("runDetailsPlot")
 )
 
 shiny::runApp(shinyApp(ui, server), port = port)
