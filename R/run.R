@@ -901,12 +901,10 @@ get_child_runs <- function(parent_run,
                            tags = NULL,
                            properties = NULL,
                            type = NULL,
-                           status = NULL,
-                           rehydrate_runs = TRUE) {
+                           status = NULL) {
   reticulate::iterate(parent_run$get_children(recursive,
                                               tags,
                                               properties,
                                               type,
-                                              status,
-                                              rehydrate_runs))
+                                              status))
 }
