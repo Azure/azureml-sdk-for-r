@@ -125,3 +125,41 @@ test_that("Create an interactive run, log metrics locally.", {
   image_found <- grep("myplot", files)
   expect_true(length(image_found) > 0)
 })
+
+test_that("Create and submit child runs", {
+  skip_if_no_subscription()
+  ws <- existing_ws
+  
+  # start a remote job and get the run, wait for it to finish
+  tmp_dir_name <- file.path(tempdir(), "tmp_dir")
+  script_name <- "train_dummy.R"
+  dir.create(tmp_dir_name)
+  file.copy(script_name, tmp_dir_name)
+  
+  env <- r_environment("myenv", cran_packages = c("dplyr", "ggplot2"))
+  
+  est <- estimator(tmp_dir_name,
+                   compute_target = existing_compute$name, 
+                   entry_script = script_name,
+                   environment = env)
+  
+  exp <- experiment(ws, "estimator_run")
+  run <- submit_experiment(exp, est)
+
+  # create new child runs
+  extra_child <- create_child_run(run, run_id = "my_new_child_2")
+  expect_equal(extra_child$id, "my_new_child_2")
+
+  extra_children <- create_child_runs(run, count = 3L)
+  expect_equal(length(extra_children), 3)
+
+  # extra child run
+  run_config <- est$run_config
+  child_run <- submit_child_run(run, run_config)
+
+  child_runs <- get_child_runs(run)
+  expect_equal(length(child_runs), 5)
+
+  # tear down resources
+  unlink(tmp_dir_name, recursive = TRUE)
+})

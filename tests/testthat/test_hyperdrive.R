@@ -43,31 +43,19 @@ test_that("create hyperdrive config, launch runs, get run metrics", {
   hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
   wait_for_run_completion(hyperdrive_run, show_output = TRUE)
   
-  child_runs <- get_child_runs(hyperdrive_run)
-  expect_equal(length(child_runs), 5)
-  
-  sorted_child_runs <- 
+  child_runs <- 
     get_child_runs_sorted_by_primary_metric(hyperdrive_run)
-  expect_equal(length(sorted_child_runs), 5)
+  expected_best_run <- toString(child_runs[[1]][1])
+  expect_equal(length(child_runs), 5)
   
   child_run_metrics <- get_child_run_metrics(hyperdrive_run)
   expect_equal(length(child_run_metrics), 4)
   
   # find best-performing run
   best_run <- get_best_run_by_primary_metric(hyperdrive_run)
-  expected_best_run <- toString(sorted_child_runs[[1]][1])
+  
   expect_equal(expected_best_run, best_run$id)
   
-  # create new child runs
-  extra_child <- create_child_run(hyperdrive_run, run_id = "my_new_child")
-  expect_equal(extra_child$id, "my_new_child")
-
-  extra_children <- create_child_runs(hyperdrive_run, count = 3L)
-  expect_equal(length(extra_children), 3)
-
-  # extra child run
-  child_run <- submit_child_run(hyperdrive_run, hyperdrive_config)
-
   # tear down resources
   unlink(tmp_dir_name, recursive = TRUE)
 })
