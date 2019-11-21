@@ -34,12 +34,12 @@ Imports:
     rstudioapi (>= 0.7),
     htmltools,
     here,
-    servr
+    servr,
+    htmlwidgets (>= 1.5),
+    shiny
 Suggests: rmarkdown,
     knitr,
     testthat,
     dplyr,
-    jsonlite,
-    shiny,
-    shinycssloaders
+    jsonlite
 VignetteBuilder: knitr

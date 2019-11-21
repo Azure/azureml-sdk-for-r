@@ -1,9 +1,9 @@
 # Copyright(c) Microsoft Corporation.
 # Licensed under the MIT license.
 
-suppressMessages(library(shiny))
-suppressMessages(library(shinycssloaders))
-suppressMessages(library(DT))
+suppressMessages(require(shiny))
+suppressMessages(require(shinycssloaders))
+suppressMessages(require(DT))
 
 
 server <- function(input, output, session) {
