@@ -828,3 +828,85 @@ complete_run <- function(run) {
 
   invisible(NULL)
 }
+
+#' Create a child run
+#'
+#' @description
+#' Create a child run. This is used to isolate part of a run into a subsection.
+#' @param parent_run The `HyperDriveRun` object.
+#' @param name An optional name for the child run, typically specified for a "part"
+#' @param run_id An optional run ID for the child, otherwise it is auto-generated.
+#' Typically this parameter is not set.
+#' @param outputs Optional outputs directory to track for the child.
+#' @return The child run.
+#' @export
+#' @md
+create_child_run <- function(parent_run,
+                             name = NULL,
+                             run_id = NULL,
+                             outputs = NULL) {
+  parent_run$child_run(name, run_id, outputs)
+}
+
+#' Create one or many child runs
+#'
+#' @description
+#' Create one or many child runs.
+#' @param parent_run The `HyperDriveRun` object.
+#' @param count An optional number of children to create.
+#' @param tag_key An optional key to populate the Tags entry in all created children.
+#' @param tag_values An optional list of values that will map onto Tags[tag_key]
+#' for the list of runs created.
+#' @return The list of child runs.
+#' @export
+#' @md
+create_child_runs <- function(parent_run,
+                              count = NULL,
+                              tag_key = NULL,
+                              tag_values = NULL) {
+  parent_run$create_children(count, tag_key, tag_values)
+}
+
+#' Submit an experiment and return the active child run
+#'
+#' @description
+#' Submit an experiment and return the active child run.
+#' @param parent_run The `HyperDriveRun` object.
+#' @param config The HyperDriveConfig object
+#' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
+#' @return A run object.
+#' @export
+#' @md
+submit_child_run <- function(parent_run,
+                             config = NULL,
+                             tags = NULL) {
+  parent_run$submit_child(config, tags)
+}
+
+#' Get all children for the current run selected by specified filters
+#'
+#' @description
+#' Get all children for the current run selected by specified filters.
+#' @param parent_run The `HyperDriveRun` object.
+#' @param recursive Boolean indicating whether to recurse through all descendants.
+#' @param tags If specified, returns runs matching specified *"tag"* or {*"tag"*: *"value"*}.
+#' @param properties If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
+#' @param type If specified, returns runs matching this type.
+#' @param status If specified, returns runs with status specified *"status"*.
+#' @return A list of child runs.
+#' @export
+#' @md
+get_child_runs <- function(parent_run,
+                           recursive = FALSE,
+                           tags = NULL,
+                           properties = NULL,
+                           type = NULL,
+                           status = NULL,
+                           rehydrate_runs = TRUE) {
+  reticulate::iterate(parent_run$get_children(recursive,
+                                              tags,
+                                              properties,
+                                              type,
+                                              status,
+                                              rehydrate_runs))
+}
