@@ -833,12 +833,12 @@ complete_run <- function(run) {
 #'
 #' @description
 #' Create a child run. This is used to isolate part of a run into a subsection.
-#' @param parent_run The `HyperDriveRun` object.
+#' @param parent_run The parent `Run` object.
 #' @param name An optional name for the child run, typically specified for a "part"
 #' @param run_id An optional run ID for the child, otherwise it is auto-generated.
 #' Typically this parameter is not set.
 #' @param outputs Optional outputs directory to track for the child.
-#' @return The child run.
+#' @return The child run, a `Run` object.
 #' @export
 #' @md
 create_child_run <- function(parent_run,
@@ -852,12 +852,12 @@ create_child_run <- function(parent_run,
 #'
 #' @description
 #' Create one or many child runs.
-#' @param parent_run The `HyperDriveRun` object.
+#' @param parent_run The parent `Run` object.
 #' @param count An optional number of children to create.
 #' @param tag_key An optional key to populate the Tags entry in all created children.
 #' @param tag_values An optional list of values that will map onto Tags[tag_key]
 #' for the list of runs created.
-#' @return The list of child runs.
+#' @return The list of child runs, `Run` objects.
 #' @export
 #' @md
 create_child_runs <- function(parent_run,
@@ -871,10 +871,10 @@ create_child_runs <- function(parent_run,
 #'
 #' @description
 #' Submit an experiment and return the active child run.
-#' @param parent_run The `HyperDriveRun` object.
-#' @param config The HyperDriveConfig object
+#' @param parent_run The parent `Run` object.
+#' @param config The `RunConfig` object
 #' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
-#' @return A run object.
+#' @return A `Run` object.
 #' @export
 #' @md
 submit_child_run <- function(parent_run,
@@ -887,13 +887,13 @@ submit_child_run <- function(parent_run,
 #'
 #' @description
 #' Get all children for the current run selected by specified filters.
-#' @param parent_run The `HyperDriveRun` object.
+#' @param parent_run The parent `Run` object.
 #' @param recursive Boolean indicating whether to recurse through all descendants.
 #' @param tags If specified, returns runs matching specified *"tag"* or {*"tag"*: *"value"*}.
 #' @param properties If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
 #' @param type If specified, returns runs matching this type.
 #' @param status If specified, returns runs with status specified *"status"*.
-#' @return A list of child runs.
+#' @return A list of child runs, `Run` objects.
 #' @export
 #' @md
 get_child_runs <- function(parent_run,
