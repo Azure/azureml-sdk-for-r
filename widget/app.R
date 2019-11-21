@@ -2,6 +2,7 @@
 # Licensed under the MIT license.
 
 suppressMessages(library(shiny))
+suppressMessages(library(shinycssloaders))
 suppressMessages(library(DT))
 
 
