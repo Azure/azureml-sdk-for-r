@@ -651,7 +651,6 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     port <- servr::random_port(NULL)
 
     # import objects needed for Shiny app
-    parsed_url <- strsplit(run$get_portal_url(), "/")[[1]]
     widget_obj_names <- list("subscription_id",
                              "rg",
                              "ws_name",
@@ -660,11 +659,11 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                              "run_details_plot",
                              "port",
                              "start_time")
-    widget_obj_vals <- list(parsed_url[6],
-                            parsed_url[8],
-                            parsed_url[12],
-                            parsed_url[14],
-                            parsed_url[16],
+    widget_obj_vals <- list(run$experiment$workspace$subscription_id,
+                            run$experiment$workspace$resource_group,
+                            run$experiment$workspace$name,
+                            run$experiment$name,
+                            run$id,
                             .create_run_details_plot(run),
                             port,
                             Sys.time())
