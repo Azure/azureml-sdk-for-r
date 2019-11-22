@@ -855,8 +855,7 @@ create_child_run <- function(parent_run,
 #' @param parent_run The parent `Run` object.
 #' @param count An optional number of children to create.
 #' @param tag_key An optional key to populate the Tags entry in all created children.
-#' @param tag_values An optional list of values that will map onto Tags[tag_key]
-#' for the list of runs created.
+#' @param tag_values An optional list of values that will map onto Tags for the list of runs created.
 #' @return The list of child runs, `Run` objects.
 #' @export
 #' @md
