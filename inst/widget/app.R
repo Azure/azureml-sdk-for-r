@@ -25,6 +25,7 @@ server <- function(input, output, session) {
   })
   
   plot <- function() {
+
     if(isolate(values$widget_state) %in% c("initializing", "streaming")) {
       invalidateLater(10000, session)
     }
@@ -54,7 +55,10 @@ server <- function(input, output, session) {
 }
 
 ui <- fluidPage(
-  dataTableOutput("runDetailsPlot")
+  shinycssloaders::withSpinner(dataTableOutput("runDetailsPlot"),
+                               5,
+                               size = 0.5)
 )
 
-shiny::runApp(shinyApp(ui, server), port = port)
+print(paste0("Listening on 127.0.0.1:", port))
+suppressMessages(shiny::runApp(shinyApp(ui, server), port = port))
