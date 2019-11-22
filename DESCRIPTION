@@ -34,7 +34,8 @@ Imports:
     rstudioapi (>= 0.7),
     htmltools,
     here,
-    servr
+    servr,
+    shiny
 Suggests: rmarkdown,
     knitr,
     testthat,
