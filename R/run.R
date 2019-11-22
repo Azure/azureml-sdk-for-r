@@ -888,10 +888,10 @@ submit_child_run <- function(parent_run,
 #' Get all children for the current run selected by specified filters.
 #' @param parent_run The parent `Run` object.
 #' @param recursive Boolean indicating whether to recurse through all descendants.
-#' @param tags If specified, returns runs matching specified *"tag"* or {*"tag"*: *"value"*}.
-#' @param properties If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
+#' @param tags If specified, returns runs matching specified "tag" or list(tag = value}.
+#' @param properties If specified, returns runs matching specified "property" or list(property = value}.
 #' @param type If specified, returns runs matching this type.
-#' @param status If specified, returns runs with status specified *"status"*.
+#' @param status If specified, returns runs with status specified "status".
 #' @return A list of child runs, `Run` objects.
 #' @export
 #' @md

@@ -14,8 +14,7 @@ create_child_runs(parent_run, count = NULL, tag_key = NULL,
 
 \item{tag_key}{An optional key to populate the Tags entry in all created children.}
 
-\item{tag_values}{An optional list of values that will map onto Tags\link{tag_key}
-for the list of runs created.}
+\item{tag_values}{An optional list of values that will map onto Tags for the list of runs created.}
 }
 \value{
 The list of child runs, \code{Run} objects.
