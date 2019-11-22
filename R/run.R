@@ -658,8 +658,9 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                              "run_id",
                              "run_details_plot",
                              "port",
-                             "start_time",
-                             "options")
+                             "shiny",
+                             "shinycssloaders",
+                             "start_time")
     widget_obj_vals <- list(run$experiment$workspace$subscription_id,
                             run$experiment$workspace$resource_group,
                             run$experiment$workspace$name,
@@ -667,8 +668,9 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$id,
                             .create_run_details_plot(run),
                             port,
-                            Sys.time(),
-                            shiny::getShinyOption)
+                            shinycssloaders::withSpinner,
+                            shiny::shinyOptions,
+                            Sys.time())
 
     lapply(seq_along(widget_obj_names),
            function(x) {
@@ -688,7 +690,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       try(rstudioapi::jobRemove(existing_job_id), silent = TRUE)
     }
 
-    path <- here::here("widget", "app.R")
+    path <- system.file("widget", "app.R", package = "azuremlsdk")
     current_job_id <- rstudioapi::jobRunScript(path,
                                                name = "AzureML Widget",
                                                importEnv = TRUE)
