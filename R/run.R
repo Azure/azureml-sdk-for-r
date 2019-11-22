@@ -658,6 +658,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                              "run_id",
                              "run_details_plot",
                              "port",
+                             "shiny",
+                             "shinycssloaders",
                              "start_time")
     widget_obj_vals <- list(run$experiment$workspace$subscription_id,
                             run$experiment$workspace$resource_group,
@@ -666,6 +668,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$id,
                             .create_run_details_plot(run),
                             port,
+                            shinycssloaders::withSpinner,
+                            shiny::shinyOptions,
                             Sys.time())
 
     lapply(seq_along(widget_obj_names),
