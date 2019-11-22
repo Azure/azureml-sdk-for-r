@@ -705,6 +705,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       domain_suffix <- gsub("domainsuffix=", "", nb_vm_file_info[3])
 
       host <- paste0("https://", instance_name, "-", port, ".", domain_suffix)
+      Sys.sleep(1) # Notebook VM server requires longer to connect to host
     } else {
       host <- paste0("http://localhost:", port)
     }
