@@ -129,22 +129,9 @@ test_that("Create an interactive run, log metrics locally.", {
 test_that("Create and submit child runs", {
   skip_if_no_subscription()
   ws <- existing_ws
-  
-  # start a remote job and get the run, wait for it to finish
-  tmp_dir_name <- file.path(tempdir(), "tmp_dir")
-  script_name <- "train_dummy.R"
-  dir.create(tmp_dir_name)
-  file.copy(script_name, tmp_dir_name)
-  
-  env <- r_environment("myenv", cran_packages = c("dplyr", "ggplot2"))
-  
-  est <- estimator(tmp_dir_name,
-                   compute_target = existing_compute$name, 
-                   entry_script = script_name,
-                   environment = env)
-  
+
   exp <- experiment(ws, "estimator_run")
-  run <- submit_experiment(exp, est)
+  run <- start_logging_run(exp)
 
   # create new child runs
   extra_child <- create_child_run(run, run_id = "my_new_child_2")
