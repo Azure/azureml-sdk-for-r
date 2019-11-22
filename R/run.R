@@ -6,6 +6,10 @@
 #' Retrieve the metrics logged to a run that were logged with
 #' the `log_*()` methods.
 #' @param run The `Run` object.
+#' @param name The name of the metric.
+#' @param recursive If specified, returns runs matching specified *"property"* or {*"property"*: *"value"*}.
+#' @param run_type run type
+#' @param populate Boolean indicating whether to fetch the contents of external data linked to the metric.
 #' @return A named list of the metrics associated with the run,
 #' e.g. `list("metric_name" = metric)`.
 #' @export
@@ -17,8 +21,12 @@
 #' metrics <- get_run_metrics(run)
 #' }
 #' @md
-get_run_metrics <- function(run) {
-  run$get_metrics()
+get_run_metrics <- function(run,
+                            name = NULL,
+                            recursive = FALSE,
+                            run_type = NULL,
+                            populate = FALSE) {
+    run$get_metrics(name, recursive, run_type, populate)
 }
 
 #' Wait for the completion of a run
@@ -822,4 +830,83 @@ complete_run <- function(run) {
   run$complete()
 
   invisible(NULL)
+}
+
+#' Create a child run
+#'
+#' @description
+#' Create a child run. This is used to isolate part of a run into a subsection.
+#' @param parent_run The parent `Run` object.
+#' @param name An optional name for the child run, typically specified for a "part"
+#' @param run_id An optional run ID for the child, otherwise it is auto-generated.
+#' Typically this parameter is not set.
+#' @param outputs Optional outputs directory to track for the child.
+#' @return The child run, a `Run` object.
+#' @export
+#' @md
+create_child_run <- function(parent_run,
+                             name = NULL,
+                             run_id = NULL,
+                             outputs = NULL) {
+  parent_run$child_run(name, run_id, outputs)
+}
+
+#' Create one or many child runs
+#'
+#' @description
+#' Create one or many child runs.
+#' @param parent_run The parent `Run` object.
+#' @param count An optional number of children to create.
+#' @param tag_key An optional key to populate the Tags entry in all created children.
+#' @param tag_values An optional list of values that will map onto Tags for the list of runs created.
+#' @return The list of child runs, `Run` objects.
+#' @export
+#' @md
+create_child_runs <- function(parent_run,
+                              count = NULL,
+                              tag_key = NULL,
+                              tag_values = NULL) {
+  parent_run$create_children(count, tag_key, tag_values)
+}
+
+#' Submit an experiment and return the active child run
+#'
+#' @description
+#' Submit an experiment and return the active child run.
+#' @param parent_run The parent `Run` object.
+#' @param config The `RunConfig` object
+#' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
+#' @return A `Run` object.
+#' @export
+#' @md
+submit_child_run <- function(parent_run,
+                             config = NULL,
+                             tags = NULL) {
+  parent_run$submit_child(config, tags)
+}
+
+#' Get all children for the current run selected by specified filters
+#'
+#' @description
+#' Get all children for the current run selected by specified filters.
+#' @param parent_run The parent `Run` object.
+#' @param recursive Boolean indicating whether to recurse through all descendants.
+#' @param tags If specified, returns runs matching specified "tag" or list(tag = value}.
+#' @param properties If specified, returns runs matching specified "property" or list(property = value}.
+#' @param type If specified, returns runs matching this type.
+#' @param status If specified, returns runs with status specified "status".
+#' @return A list of child runs, `Run` objects.
+#' @export
+#' @md
+get_child_runs <- function(parent_run,
+                           recursive = FALSE,
+                           tags = NULL,
+                           properties = NULL,
+                           type = NULL,
+                           status = NULL) {
+  reticulate::iterate(parent_run$get_children(recursive,
+                                              tags,
+                                              properties,
+                                              type,
+                                              status))
 }
