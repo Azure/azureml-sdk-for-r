@@ -127,7 +127,7 @@ test_that("Create an interactive run, log metrics locally.", {
 })
 
 test_that("Create and submit child runs", {
-  skip_if_no_subscription()
+  skip('skip')
   ws <- existing_ws
 
   exp <- experiment(ws, "estimator_run")
