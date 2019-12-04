@@ -50,7 +50,8 @@ test_that("create, submit experiment, run in default amlcompute,
   unlink(tmp_dir_name, recursive = TRUE)
 })
 
-test_that("submit experiment through a custom environment", {
+test_that("submit experiment through a custom environment,
+          add child run with config", {
   skip_if_no_subscription()
   ws <- existing_ws
   
@@ -69,6 +70,11 @@ test_that("submit experiment through a custom environment", {
   
   exp <- experiment(ws, "estimator_run")
   run <- submit_experiment(exp, est)
+
+  # add child run using config
+  run_config <- est$run_config
+  child_run <- submit_child_run(run, run_config)
+
   wait_for_run_completion(run, show_output = TRUE)
   expect_equal(run$status, "Completed")
   
@@ -139,10 +145,6 @@ test_that("Create and submit child runs", {
 
   extra_children <- create_child_runs(run, count = 3L)
   expect_equal(length(extra_children), 3)
-
-  # extra child run
-  run_config <- est$run_config
-  child_run <- submit_child_run(run, run_config)
 
   child_runs <- get_child_runs(run)
   expect_equal(length(child_runs), 5)
