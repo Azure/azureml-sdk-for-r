@@ -2,7 +2,7 @@ context("experiment")
 source("utils.R")
 
 test_that("create, submit experiment, run in default amlcompute,
-          add child run with config, get run metrics", {
+          get run metrics", {
   skip_if_no_subscription()
   experiment_name <- "estimator_run"
   
@@ -50,7 +50,8 @@ test_that("create, submit experiment, run in default amlcompute,
   unlink(tmp_dir_name, recursive = TRUE)
 })
 
-test_that("submit experiment through a custom environment", {
+test_that("submit experiment through a custom environment,
+          add child run with config", {
   skip_if_no_subscription()
   ws <- existing_ws
   
