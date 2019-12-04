@@ -19,11 +19,6 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
 }
 
 .doAMLComputeBatch <- function(obj, expr, envir, data) {
-  
-  print(expr)
-  print(typeof(expr))
-  
-  
   if (!inherits(obj, 'foreach'))
     stop('obj must be a foreach object')
   
@@ -80,7 +75,8 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
     }
   }
   
-  
+  expr <- compiler::compile(expr, env=envir, options=list(suppressUndefined=TRUE))
+
   assign('expr', expr, .doAzureBatchGlobals)
   assign('exportenv', exportenv, .doAzureBatchGlobals)
   assign('packages', obj$packages, .doAzureBatchGlobals)
@@ -103,7 +99,6 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
   if (length(startIndices) > length(endIndices)) {
     endIndices[length(startIndices)] <- ntasks
   }
-  
   
   task_args <- list()
   for (i in 1:length(endIndices)) {
@@ -128,12 +123,32 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
 
   run_config <- est$run_config
   run_config$framework <- "python"
-
   run_config$communicator <- "IntelMpi"
   run_config$mpi <- dist_backend 
 
   experiment_name <- "r-foreach"
   exp <- experiment(data$ws, experiment_name)
   run <- submit_experiment(exp, est)
-  wait_for_run_completion(run, show_output = TRUE)  
+  wait_for_run_completion(run, show_output = TRUE)
+  
+  # merge results
+  download_dir <- "tmp"
+  dir.create(download_dir)
+  
+  result <- list()
+  result_index <- 1
+
+  for (i in 1:num_processes) {
+    file_name <- paste0("task_", i-1, ".rds")
+    run$download_file(name = file.path("outputs", file_name), output_file_path = file.path(download_dir, file_name))
+    
+    task_data <- readRDS(file.path(download_dir, file_name))
+    for (j in 1:length(task_data)) {
+      result[[result_index]] <- task_data[[j]]
+      result_index <- result_index + 1
+    }
+  }
+  
+  invisible(result)
+  
 }

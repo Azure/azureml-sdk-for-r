@@ -29,7 +29,7 @@ if (run_prod == 0) {
 
 x <- seq(-1, 1, by=0.5)
 
-v <- foreach(w = 1:5) %dopar% {
+v <- foreach(w = 1:10) %dopar% {
   res <- x+w
 }
 
