@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the metrics logged to a run — get_run_metrics • azuremlsdk</title>
+<title>Create a child run — create_child_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
 
 
-<meta property="og:title" content="Get the metrics logged to a run — get_run_metrics" />
+<meta property="og:title" content="Create a child run — create_child_run" />
 
-<meta property="og:description" content="Retrieve the metrics logged to a run that were logged with
-the log_*() methods." />
+<meta property="og:description" content="Create a child run. This is used to isolate part of a run into a subsection." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -134,59 +133,47 @@ the log_*() methods." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the metrics logged to a run</h1>
+    <h1>Create a child run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>get_run_metrics.Rd</code></div>
+    <div class="hidden name"><code>create_child_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve the metrics logged to a run that were logged with
-the <code>log_*()</code> methods.</p>
+    <p>Create a child run. This is used to isolate part of a run into a subsection.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_run_metrics</span>(<span class='no'>run</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>populate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>create_child_run</span>(<span class='no'>parent_run</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>run_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>outputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>run</th>
-      <td><p>The <code>Run</code> object.</p></td>
+      <th>parent_run</th>
+      <td><p>The parent <code>Run</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name of the metric.</p></td>
+      <td><p>An optional name for the child run, typically specified for a "part"</p></td>
     </tr>
     <tr>
-      <th>recursive</th>
-      <td><p>If specified, returns runs matching specified <em>"property"</em> or <em>"property"</em>: <em>"value"</em>.</p></td>
+      <th>run_id</th>
+      <td><p>An optional run ID for the child, otherwise it is auto-generated.
+Typically this parameter is not set.</p></td>
     </tr>
     <tr>
-      <th>run_type</th>
-      <td><p>run type</p></td>
-    </tr>
-    <tr>
-      <th>populate</th>
-      <td><p>Boolean indicating whether to fetch the contents of external data linked to the metric.</p></td>
+      <th>outputs</th>
+      <td><p>Optional outputs directory to track for the child.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named list of the metrics associated with the run,
-e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metric)</a></code>.</p>
+    <p>The child run, a <code>Run</code> object.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
-<span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>get_run</span>(<span class='no'>exp</span>, <span class='kw'>run_id</span> <span class='kw'>=</span> <span class='st'>"myrunid"</span>)
-<span class='no'>metrics</span> <span class='kw'>&lt;-</span> <span class='fu'>get_run_metrics</span>(<span class='no'>run</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -194,9 +181,7 @@ e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metri
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
