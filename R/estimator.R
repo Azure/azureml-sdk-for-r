@@ -67,6 +67,8 @@
 #' , `image_registry_details`, `use_gpu`, `environment_variables`, `shm_size`,
 #' `cran_packages`, `github_packages`, and `custom_url_packages` and if set
 #' will take precedence over those parameters.
+#' @param inputs A list of DataReference objects or DatasetConsumptionConfig
+#' objects to use as input.
 #' @return The `Estimator` object.
 #' @export
 #' @seealso
@@ -87,7 +89,8 @@ estimator <- function(source_directory,
                       environment_variables = NULL,
                       shm_size = NULL,
                       max_run_duration_seconds = NULL,
-                      environment = NULL) {
+                      environment = NULL,
+                      inputs = inputs) {
 
   if (is.null(environment)) {
     environment <- r_environment(
