@@ -567,16 +567,16 @@ data_type_datetime <- function(formats = NULL) {
   azureml$core$data$DatasetFactory$TabularDatasetFactory$to_datetime(formats)
 }
 
-#' Configure conversion to 64-bit float.
+#' Configure conversion to 53-bit double.
 #' 
 #' @description
-#' Configure conversion to 64-bit float.
+#' Configure conversion to 53-bit double.
 #' 
 #' @return Converted DataType object.
 #' @export
 #' @md
-data_type_float <- function()	{
-  azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float()
+data_type_double <- function()	{
+  as.double(azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float())
 }
 
 #' Configure conversion to 64-bit integer.
@@ -588,7 +588,7 @@ data_type_float <- function()	{
 #' @export
 #' @md
 data_type_long <- function() {
-  azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float()
+  as.integer(azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float())
 }
 
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
