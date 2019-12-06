@@ -359,7 +359,7 @@ create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
 #' 
 #' @param dataset The Tabular Dataset object.
 #' @param columns A name or a list of names for the columns to drop.
-#' @return
+#' @return A new TabularDataset object with the specified columns dropped.
 #' @export
 #' @md
 drop_columns_from_dataset <- function(dataset, columns) {
