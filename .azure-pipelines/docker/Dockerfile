@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y bzip2 wget git libxrender1 && \
     find / -type d -name __pycache__ | xargs rm -rf
 
 RUN conda install -c r -y r-essentials r-devtools r-testthat r-reticulate && conda clean -ay && \
-    pip install azureml-defaults
+    pip install azureml-defaults azureml-dataprep[pandas,fuse]
 
 # Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
