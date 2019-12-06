@@ -71,10 +71,6 @@ test_that("submit experiment through a custom environment,
   exp <- experiment(ws, "estimator_run")
   run <- submit_experiment(exp, est)
 
-  # add child run using config
-  run_config <- est$run_config
-  child_run <- submit_child_run(run, run_config)
-
   wait_for_run_completion(run, show_output = TRUE)
   expect_equal(run$status, "Completed")
   
