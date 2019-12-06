@@ -2,7 +2,7 @@ context("experiment")
 source("utils.R")
 
 test_that("create, submit experiment, run in default amlcompute,
-          add child run with config, get run metrics", {
+          get run metrics", {
   skip_if_no_subscription()
   experiment_name <- "estimator_run"
   
