@@ -240,10 +240,10 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
                                                       include_path = FALSE,
                                                       set_column_types = NULL,
                                                       partition_format = NULL) {
-  azureml$core$Dataset$Tabular$from_parquet_files(path, validate,
-                                                       include_path,
-                                                       set_column_types,
-                                                       partition_format)
+  azureml$core$dataset$Dataset$Tabular$from_parquet_files(path, validate,
+                                                          include_path,
+                                                          set_column_types,
+                                                          partition_format)
 }
 
 #' Create an unregistered, in-memory Dataset from delimited files.
@@ -270,14 +270,14 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
                                                         separator = ',',
                                                         partition_format = NULL,
                                                         header = TRUE) {
-  azureml$core$Dataset$Tabular$from_delimited_files(path,
-                                                         validate,
-                                                         include_path,
-                                                         infer_column_types,
-                                                         set_column_types,
-                                                         separator,
-                                                         header,
-                                                         partition_format)
+  azureml$core$dataset$Dataset$Tabular$from_delimited_files(path,
+                                                            validate,
+                                                            include_path,
+                                                            infer_column_types,
+                                                            set_column_types,
+                                                            separator,
+                                                            header,
+                                                            partition_format)
 }
 
 #' Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).
@@ -312,15 +312,16 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
 #' @return The Tabular Dataset object.
 #' @export
 #' @md
-create_tabular_dataset_from_json_lines_files <- function(path, validate = TRUE,
-                                                         include_path = FALSE,
-                                                         set_column_types = NULL,
-                                                         partition_format = NULL) {
-  azureml$core$Dataset$Tabular$from_json_lines_files(path,
-                                                          validate,
-                                                          include_path,
-                                                          set_column_types,
-                                                          partition_format)
+create_tabular_dataset_from_json_lines_files <- function(path,
+                                                      validate = TRUE,
+                                                      include_path = FALSE,
+                                                      set_column_types = NULL,
+                                                      partition_format = NULL) {
+  azureml$core$dataset$Dataset$Tabular$from_json_lines_files(path,
+                                                             validate,
+                                                             include_path,
+                                                             set_column_types,
+                                                             partition_format)
 }
 
 #' Create a TabularDataset to represent tabular data in SQL databases.
@@ -345,8 +346,8 @@ create_tabular_dataset_from_json_lines_files <- function(path, validate = TRUE,
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL) {
-  azureml$core$Dataset$Tabular$from_sql_query(query, validate,
-                                                   set_column_types)
+  azureml$core$dataset$Dataset$Tabular$from_sql_query(query, validate,
+                                                      set_column_types)
 }
 
 #' Drop the specified columns from the dataset.
@@ -532,7 +533,7 @@ convert_to_dataset_with_parquet_files <- function(dataset) {
 #' @export
 #' @md
 data_type_bool <- function() {
-  azureml$data$TabularDatasetFactory$to_bool()
+  azureml$data$dataset_factory$DataType$to_bool()
 }
 
 #' Configure conversion to datetime.
@@ -562,7 +563,7 @@ data_type_bool <- function() {
 #' @export
 #' @md
 data_type_datetime <- function(formats = NULL) {
-  azureml$data$TabularDatasetFactory$to_datetime(formats)
+  azureml$data$dataset_factory$DataType$to_datetime(formats)
 }
 
 #' Configure conversion to 53-bit double.
@@ -574,7 +575,7 @@ data_type_datetime <- function(formats = NULL) {
 #' @export
 #' @md
 data_type_double <- function()	{
-  as.double(azureml$data$dataset_factory$TabularDatasetFactory$to_float())
+  as.double(azureml$data$dataset_factory$DataType$to_float())
 }
 
 #' Configure conversion to 64-bit integer.
@@ -586,7 +587,7 @@ data_type_double <- function()	{
 #' @export
 #' @md
 data_type_long <- function() {
-  as.integer(azureml$data$dataset_factory$TabularDatasetFactory$to_float())
+  as.integer(azureml$data$dataset_factory$DataType$to_float())
 }
 
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
@@ -603,6 +604,6 @@ data_type_long <- function() {
 #' @return The PromoteHeadersBehavior object.
 #' @export
 #' @md
-promote_headers_behavior <- function(behavior) {
+promote_headers_behavior <- function(option) {
   azureml$data$dataset_type_definitions$PromoteHeadersBehavior(option)
 }

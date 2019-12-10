@@ -338,13 +338,13 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
                                                  port_number = NULL,
                                                  endpoint = NULL,
                                                  overwrite = FALSE) {
-  azureml$core$Datastore$register_azure_postgre(workspace,
-                                                datastore_name,
-                                                server_name,
-                                                database_name,
-                                                user_id,
-                                                user_password,
-                                                port_number,
-                                                endpoint,
-                                                overwrite)
+  azureml$core$Datastore$register_azure_postgre_sql(workspace,
+                                                    datastore_name,
+                                                    server_name,
+                                                    database_name,
+                                                    user_id,
+                                                    user_password,
+                                                    port_number,
+                                                    endpoint,
+                                                    overwrite)
 }
