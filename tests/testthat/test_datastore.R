@@ -71,40 +71,5 @@ test_that("register azure blob/fileshare datastores", {
   fileshare_datastore <- get_datastore(ws, fileshare_datastore_name)
   expect_equal(fileshare_datastore$name, fileshare_datastore_name)
   unregister_datastore(fileshare_datastore)
-  
-  # register azure sql database datastore
-  ds <- get_default_datastore(ws)
-  file_name <- "iris.csv"
-  upload_files_to_datastore(ds,
-                            files = list(file.path(".", file_name)),
-                            target_path = 'train-dataset/tabular/',
-                            overwrite = TRUE)
-  dataset <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
-  register_dataset(ws, dataset, "iris")
 
-  ws_sql_datastore <- get_datastore(ws, "workspacesqlstore")
-  sql_datastore_name <- paste0("dssqlshare", gsub("-", "", build_num))
-
-  register_azure_sql_database_datastore(
-    workspace = ws,
-    datastore_name = sql_datastore_name,
-    server_name = ,
-    database_name = dataset$name,
-    tenant_id = ,
-    client_id = , 
-    client_secret = 
-  )
-  
-  # register azure postgre sql database datastore
-  ws_postgre_datastore <- get_datastore(ws, "workspacepostgrestore")
-  postgre_datastore_name <- paste0("dspostgreshare", gsub("-", "", build_num))
-
-  register_azure_postgre_sql_datastore(
-    workspace = ws,
-    datastore_name = postgre_datastore_name,
-    server_name = ,
-    database_name = dataset$name,
-    user_id = ,
-    user_password = 
-  )
 })

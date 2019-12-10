@@ -9,28 +9,29 @@ testthat("create a tabular dataset, register multiple versions of a dataset,
   # confirm no registered datasets in workspace
   all_registered_datasets <- ws$datasets
   expect_equal(len(all_registered_datasets), 0)
-  
+
   # upload files to datastore and create dataset
   ds <- get_default_datastore(ws)
-  
+
   file_name <- "iris.csv"
   upload_files_to_datastore(ds,
                             files = list(file.path(".", file_name)),
                             target_path = 'train-dataset/tabular/',
                             overwrite = TRUE)
   dataset <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
-  
+
   # register two versions of the dataset
   register_dataset(ws, dataset, "iris")
   register_dataset(ws, dataset, "iris", create_new_version = TRUE)
-  
-  
+
   # check updated number of datasets in workspace
   all_registered_datasets <- ws$datasets
   expect_equal(length(all_registered_datasets), 1)
-  
+
   # unregister datasets
   unregister_all_dataset_versions(dataset)
+  expect_equal(dataset$name, NULL)
+  expect_equal(dataset$id, NULL)
 
 })
 
