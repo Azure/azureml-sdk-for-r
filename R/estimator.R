@@ -75,7 +75,6 @@
 #' `r_environment()`, `container_registry()`, `submit_experiment()`
 #' @md
 estimator <- function(source_directory,
-                      inputs,
                       compute_target = NULL,
                       vm_size = NULL,
                       vm_priority = NULL,
@@ -90,7 +89,8 @@ estimator <- function(source_directory,
                       environment_variables = NULL,
                       shm_size = NULL,
                       max_run_duration_seconds = NULL,
-                      environment = NULL) {
+                      environment = NULL,
+                      inputs = NULL) {
 
   if (is.null(environment)) {
     environment <- r_environment(
