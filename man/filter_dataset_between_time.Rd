@@ -4,17 +4,18 @@
 \alias{filter_dataset_between_time}
 \title{Filter Tabular Dataset between a specified start and end time.}
 \usage{
-filter_dataset_between_time(dataset, end_time, include_boundary = FALSE)
+filter_dataset_between_time(dataset, start_time, end_time,
+  include_boundary = FALSE)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object}
+
+\item{start_time}{The lower bound for filtering data.}
 
 \item{end_time}{The upper bound for filtering data.}
 
 \item{include_boundary}{Boolean indicating if the row associated with the
 boundary time (\code{start_time} and \code{end_time}) should be included.}
-
-\item{start_time}{The lower bound for filtering data.}
 }
 \value{
 The filtered Tabular Dataset
