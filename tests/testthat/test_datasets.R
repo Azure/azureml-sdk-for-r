@@ -1,8 +1,8 @@
 context("datasets")
 source("utils.R")
 
-testthat("create a tabular dataset, register multiple versions of a dataset,
-         unregister a dataset",{
+test_that("create a tabular dataset, register multiple versions of a dataset,
+          unregister a dataset",{
   skip_if_no_subscription()
   ws <- existing_ws
 
@@ -35,8 +35,8 @@ testthat("create a tabular dataset, register multiple versions of a dataset,
 
 })
 
-testthat("create file dataset, submit with run,
-         check file dataset path", {
+test_that("create file dataset, submit with run,
+          check file dataset path", {
   skip_if_no_subscription()
   ws <- existing_ws
 
