@@ -22,6 +22,26 @@ and want to know which file a particular record originated from, or to keep
 useful information in file path.}
 
 \item{infer_column_types}{Indicates whether column data types are inferred.}
+
+\item{set_column_types}{A named list to set column data type, where key is
+column name and value is data type.}
+
+\item{separator}{The separator used to split columns.}
+
+\item{partition_format}{Specify the partition format in path and create string columns from
+format '{x}' and datetime column from format '{x:yyyy/MM/dd/HH/mm/ss}', where 'yyyy', 'MM',
+'dd', 'HH', 'mm' and 'ss' are used to extrat year, month, day, hour, minute and second for the datetime
+type. The format should start from the postition of first partition key until the end of file path.
+For example, given a file path '../USA/2019/01/01/data.csv' and data is partitioned by country and time,
+we can define '/{Country}/{PartitionDate:yyyy/MM/dd}/data.csv' to create columns 'Country'
+of string type and 'PartitionDate' of datetime type.}
+
+\item{header}{Controls how column headers are promoted when reading from files. Defaults to True for all
+files having the same header. Files will read as having no header When header=False. More options can
+be specified using \code{PromoteHeadersBehavior}.}
+}
+\value{
+The Tabular Dataset object.
 }
 \description{
 Create an unregistered, in-memory Dataset from delimited files.

@@ -12,6 +12,8 @@ get_dataset_by_name(workspace, name, version = "latest")
 \item{name}{The registration name.}
 
 \item{version}{The registration version. Defaults to "latest".}
+
+\item{dataset}{The Dataset object.}
 }
 \value{
 The registered Dataset object.

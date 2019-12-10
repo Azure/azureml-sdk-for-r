@@ -297,7 +297,9 @@ register_azure_sql_database_datastore <- function(workspace, datastore_name,
                                                   resource_url = NULL,
                                                   authority_url = NULL,
                                                   endpoint = NULL,
-                                                  overwrite = FALSE) {
+                                                  overwrite = FALSE,
+                                                  user_name = NULL,
+                                                  password = NULL) {
   azureml$core$Datastore$register_azure_sql_database(workspace,
                                                      datastore_name,
                                                      server_name,

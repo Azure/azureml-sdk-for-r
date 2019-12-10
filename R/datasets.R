@@ -14,7 +14,7 @@
 #' @return The registered Dataset object.
 #' @export
 #' @md
-register_dataset <- function(workspace, dataset, name, description = NULL,
+register_dataset <- function(dataset, workspace, name, description = NULL,
                              tags = NULL, create_new_version = FALSE) {
   dataset$register(workspace, name, description, tags, create_new_version)
 }
@@ -37,6 +37,7 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @description
 #' Get a registered Dataset from the workspace by its registration name.
 #'
+#' @param dataset The Dataset object.
 #' @param workspace The existing AzureML workspace in which the Dataset was registered.
 #' @param name The registration name.
 #' @param version The registration version. Defaults to "latest".
@@ -263,6 +264,20 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
 #' and want to know which file a particular record originated from, or to keep
 #' useful information in file path.
 #' @param infer_column_types Indicates whether column data types are inferred.
+#' @param set_column_types A named list to set column data type, where key is
+#' column name and value is data type.
+#' @param separator The separator used to split columns.
+#' @param partition_format Specify the partition format in path and create string columns from
+#' format '{x}' and datetime column from format '{x:yyyy/MM/dd/HH/mm/ss}', where 'yyyy', 'MM',
+#' 'dd', 'HH', 'mm' and 'ss' are used to extrat year, month, day, hour, minute and second for the datetime
+#' type. The format should start from the postition of first partition key until the end of file path.
+#' For example, given a file path '../USA/2019/01/01/data.csv' and data is partitioned by country and time,
+#' we can define '/{Country}/{PartitionDate:yyyy/MM/dd}/data.csv' to create columns 'Country'
+#' of string type and 'PartitionDate' of datetime type.
+#' @param header Controls how column headers are promoted when reading from files. Defaults to True for all
+#' files having the same header. Files will read as having no header When header=False. More options can
+#' be specified using `PromoteHeadersBehavior`.
+#' @return The Tabular Dataset object.
 #' @export
 #' @md
 create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,

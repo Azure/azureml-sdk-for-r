@@ -4,20 +4,17 @@
 \alias{estimator}
 \title{Create an estimator}
 \usage{
-estimator(source_directory, inputs, compute_target = NULL,
-  vm_size = NULL, vm_priority = NULL, entry_script = NULL,
-  script_params = NULL, cran_packages = NULL, github_packages = NULL,
+estimator(source_directory, compute_target = NULL, vm_size = NULL,
+  vm_priority = NULL, entry_script = NULL, script_params = NULL,
+  cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
   image_registry_details = NULL, use_gpu = FALSE,
   environment_variables = NULL, shm_size = NULL,
-  max_run_duration_seconds = NULL, environment = NULL)
+  max_run_duration_seconds = NULL, environment = NULL, inputs = NULL)
 }
 \arguments{
 \item{source_directory}{A string of the local directory containing
 experiment configuration and code files needed for the training job.}
-
-\item{inputs}{A list of DataReference objects or DatasetConsumptionConfig
-objects to use as input.}
 
 \item{compute_target}{The \code{AmlCompute} object for the compute target
 where training will happen.}
@@ -82,6 +79,9 @@ exclusive with the other environment-related parameters \code{custom_docker_imag
 , \code{image_registry_details}, \code{use_gpu}, \code{environment_variables}, \code{shm_size},
 \code{cran_packages}, \code{github_packages}, and \code{custom_url_packages} and if set
 will take precedence over those parameters.}
+
+\item{inputs}{A list of DataReference objects or DatasetConsumptionConfig
+objects to use as input.}
 }
 \value{
 The \code{Estimator} object.
