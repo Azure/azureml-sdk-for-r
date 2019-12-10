@@ -71,4 +71,13 @@ test_that("register azure blob/fileshare datastores", {
   fileshare_datastore <- get_datastore(ws, fileshare_datastore_name)
   expect_equal(fileshare_datastore$name, fileshare_datastore_name)
   unregister_datastore(fileshare_datastore)
+  
+  # register azure sql database
+  ws_sql_datastore <- get_datastore(ws, "workspacesqlstore")
+  sql_datastore_name <- paste0("dssqlshare", gsub("-", "", build_num))
+  register_azure_sql_database_datastore(
+    workspace = ws,
+    datastore_name = sql_datastore_name
+    server_name = 
+  )
 })
