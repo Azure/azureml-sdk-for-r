@@ -433,7 +433,7 @@ filter_dataset_before_time <- function(dataset, end_time,
 #' @return The filtered Tabular Dataset
 #' @export
 #' @md
-filter_dataset_between_time <- function(dataset, end_time,
+filter_dataset_between_time <- function(dataset, start_time, end_time,
                                         include_boundary = FALSE) {
   dataset$time_between(start_time, end_time, include_boundary)
 }
