@@ -12,13 +12,9 @@ get_child_runs(parent_run, recursive = FALSE, tags = NULL,
 
 \item{recursive}{Boolean indicating whether to recurse through all descendants.}
 
-\item{tags}{If specified, returns runs matching specified \emph{"tag"} or {\emph{"tag"}: \emph{"value"}}.}
-
-\item{properties}{If specified, returns runs matching specified \emph{"property"} or {\emph{"property"}: \emph{"value"}}.}
-
 \item{type}{If specified, returns runs matching this type.}
 
-\item{status}{If specified, returns runs with status specified \emph{"status"}.}
+\item{status}{If specified, returns runs with status specified "status".}
 }
 \value{
 A list of child runs, \code{Run} objects.

@@ -4,7 +4,7 @@
 \alias{promote_headers_behavior}
 \title{Defines options for how column headers are processed when reading data from files to create a dataset.}
 \usage{
-promote_headers_behavior(behavior)
+promote_headers_behavior(option)
 }
 \arguments{
 \item{option}{A string describing how column headers are to be processed
