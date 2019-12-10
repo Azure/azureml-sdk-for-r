@@ -10,15 +10,13 @@
 #' @param name The name of the Dataset in the workspace.
 #' @param description A description of the Dataset.
 #' @param tags Named list of tags to give the Dataset. Defaults to NULL.
-#' @param create_new_version Boolean to register the datset as a new version under the specified name.
+#' @param create_new_version Boolean to register the dataset as a new version under the specified name.
 #' @return The registered Dataset object.
 #' @export
 #' @md
 register_dataset <- function(workspace, dataset, name, description = NULL,
                              tags = NULL, create_new_version = FALSE) {
-  azureml$core$data$AbstractDataset$register(workspace,  name, description,
-                                             tags, visible, exist_ok,
-                                             update_if_exist)
+  dataset$register(workspace, name, description, tags, create_new_version)
 }
 
 #' Unregister all versions under the registration name of this dataset from the workspace.
@@ -46,7 +44,7 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @export
 #' @md
 get_dataset_by_name <- function(workspace, name, version = "latest") {
-  azureml$core$data$AbstractDataset$get_by_name(workspace, name, version)
+  azureml$data$abstract_dataset$AbstractDataset$get_by_name(workspace, name, version)
 }
 
 #' Get Dataset by ID.
@@ -60,7 +58,7 @@ get_dataset_by_name <- function(workspace, name, version = "latest") {
 #' @export
 #' @md
 get_dataset_by_id <- function(workspace, id) {
-  azureml$core$data$AbstractDataset$get_by_id(workspace, id)
+  azureml$data$abstract_dataset$AbstractDataset$get_by_id(workspace, id)
 }
 
 #' Return the named list for input datasets.
@@ -93,7 +91,7 @@ get_input_dataset_from_run <- function(name, run) {
 #' is accessible from the current compute.
 #' @return The Dataset object
 create_file_dataset_from_files <- function(path, validate = TRUE) {
-  azureml$core$data$Dataset$File$from_files(path, validate)
+  azureml$data$dataset_factory$FileDatasetFactory$from_files(path, validate)
 }
 
 #' Get a list of file paths for each file stream defined by the dataset.
@@ -242,7 +240,7 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
                                                       include_path = FALSE,
                                                       set_column_types = NULL,
                                                       partition_format = NULL) {
-  azureml$core$data$Dataset$Tabular$from_parquet_files(path, validate,
+  azureml$core$Dataset$Tabular$from_parquet_files(path, validate,
                                                        include_path,
                                                        set_column_types,
                                                        partition_format)
@@ -272,12 +270,12 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
                                                         separator = ',',
                                                         partition_format = NULL,
                                                         header = TRUE) {
-  azureml$core$data$Dataset$Tabular$from_delimited_files(path,
+  azureml$core$Dataset$Tabular$from_delimited_files(path,
                                                          validate,
                                                          include_path,
                                                          infer_column_types,
                                                          set_column_types,
-                                                         seperator,
+                                                         separator,
                                                          header,
                                                          partition_format)
 }
@@ -318,7 +316,7 @@ create_tabular_dataset_from_json_lines_files <- function(path, validate = TRUE,
                                                          include_path = FALSE,
                                                          set_column_types = NULL,
                                                          partition_format = NULL) {
-  azureml$core$data$Dataset$Tabular$from_json_lines_files(path,
+  azureml$core$Dataset$Tabular$from_json_lines_files(path,
                                                           validate,
                                                           include_path,
                                                           set_column_types,
@@ -347,7 +345,7 @@ create_tabular_dataset_from_json_lines_files <- function(path, validate = TRUE,
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL) {
-  azureml$core$data$Dataset$Tabular$from_sql_query(query, validate,
+  azureml$core$Dataset$Tabular$from_sql_query(query, validate,
                                                    set_column_types)
 }
 
@@ -534,7 +532,7 @@ convert_to_dataset_with_parquet_files <- function(dataset) {
 #' @export
 #' @md
 data_type_bool <- function() {
-  azureml$core$data$DatasetFactory$TabularDatasetFactory$to_bool()
+  azureml$data$TabularDatasetFactory$to_bool()
 }
 
 #' Configure conversion to datetime.
@@ -564,7 +562,7 @@ data_type_bool <- function() {
 #' @export
 #' @md
 data_type_datetime <- function(formats = NULL) {
-  azureml$core$data$DatasetFactory$TabularDatasetFactory$to_datetime(formats)
+  azureml$data$TabularDatasetFactory$to_datetime(formats)
 }
 
 #' Configure conversion to 53-bit double.
@@ -576,7 +574,7 @@ data_type_datetime <- function(formats = NULL) {
 #' @export
 #' @md
 data_type_double <- function()	{
-  as.double(azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float())
+  as.double(azureml$data$dataset_factory$TabularDatasetFactory$to_float())
 }
 
 #' Configure conversion to 64-bit integer.
@@ -588,7 +586,7 @@ data_type_double <- function()	{
 #' @export
 #' @md
 data_type_long <- function() {
-  as.integer(azureml$core$data$DatasetFactory$TabularDatasetFactory$to_float())
+  as.integer(azureml$data$dataset_factory$TabularDatasetFactory$to_float())
 }
 
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
@@ -606,5 +604,5 @@ data_type_long <- function() {
 #' @export
 #' @md
 promote_headers_behavior <- function(behavior) {
-  azureml$core$data$DatasetTypeDefinitions$PromoteHeadersBehavior(option)
+  azureml$data$dataset_type_definitions$PromoteHeadersBehavior(option)
 }

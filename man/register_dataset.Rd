@@ -16,7 +16,7 @@ register_dataset(workspace, dataset, name, description = NULL,
 
 \item{tags}{Named list of tags to give the Dataset. Defaults to NULL.}
 
-\item{create_new_version}{Boolean to register the datset as a new version under the specified name.}
+\item{create_new_version}{Boolean to register the dataset as a new version under the specified name.}
 }
 \value{
 The registered Dataset object.
