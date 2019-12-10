@@ -5,7 +5,7 @@
 #'
 #' @description
 #' Register the Dataset in the workspace, making it available to other users of the workspace.
-#' 
+#'
 #' @param workspace The AzureML workspace in which the Dataset is to be registered.
 #' @param name The name of the Dataset in the workspace.
 #' @param description A description of the Dataset.
@@ -20,10 +20,10 @@ register_dataset <- function(workspace, dataset, name, description = NULL,
 }
 
 #' Unregister all versions under the registration name of this dataset from the workspace.
-#' 
+#'
 #' @description
 #' Unregister all versions under the registration name of this dataset from the workspace.
-#' 
+#'
 #' @param dataset The dataset to be unregistered.
 #' @return None
 #' @export
@@ -33,10 +33,10 @@ unregister_all_dataset_versions <- function(dataset) {
 }
 
 #' Get a registered Dataset from the workspace by its registration name.
-#' 
-#' @description 
+#'
+#' @description
 #' Get a registered Dataset from the workspace by its registration name.
-#' 
+#'
 #' @param workspace The existing AzureML workspace in which the Dataset was registered.
 #' @param name The registration name.
 #' @param version The registration version. Defaults to "latest".
@@ -44,14 +44,16 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @export
 #' @md
 get_dataset_by_name <- function(workspace, name, version = "latest") {
-  azureml$data$abstract_dataset$AbstractDataset$get_by_name(workspace, name, version)
+  azureml$data$abstract_dataset$AbstractDataset$get_by_name(workspace,
+                                                            name,
+                                                            version)
 }
 
 #' Get Dataset by ID.
-#' 
+#'
 #' @description
 #' Get a Dataset which is saved to the workspace using its ID.
-#' 
+#'
 #' @param workspace The existing AzureML workspace in which the Dataset is saved.
 #' @param id The ID of the dataset
 #' @return The Dataset object
@@ -62,10 +64,10 @@ get_dataset_by_id <- function(workspace, id) {
 }
 
 #' Return the named list for input datasets.
-#' 
+#'
 #' @description
 #' Return the named list for input datasets.
-#' 
+#'
 #' @param name The name of the input dataset
 #' @param run The run taking the dataset as input
 #' @return A dictionary with the name being the dataset's name and value being
@@ -84,7 +86,7 @@ get_input_dataset_from_run <- function(name, run) {
 #' Create an unregistered, in-memory Dataset from files. Use this method to read
 #' files as streams of data. Returns one file stream object per file read.
 #' The returned Dataset is not registered with the workspace.
-#' 
+#'
 #' @param path A data path in a registered datastore or a local path.
 #' @param validate Indicates whether to validate if data can be loaded from the
 #' returned dataset. Defaults to True. Validation requires that the data source
@@ -95,13 +97,13 @@ create_file_dataset_from_files <- function(path, validate = TRUE) {
 }
 
 #' Get a list of file paths for each file stream defined by the dataset.
-#' 
+#'
 #' @description
 #' Get a list of file paths for each file stream defined by the dataset. The file
 #' paths are relative paths for local files when the file srteam are downloaded
 #' or mounted. A common prefix will be removed from the file paths based on how
 #' data source was specified to create the dataset.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @return A list of file paths.
 #' @export
@@ -111,12 +113,12 @@ get_file_dataset_paths <- function(dataset) {
 }
 
 #' Download file streams defined by the dataset as local files.
-#' 
+#'
 #' @description
 #' Download file streams defined by the dataset as local files. If target_path starts
 #' with a /, then it will be treated as an absolute path. If it doesn't start with a /,
 #' then it will be treated as a relative path relative to the current working directory.
-#' 
+#'
 #' @param dataset The Dataset object
 #' @param target_path The local directory to download the files to. If NULL,
 #' the data will be downloaded into a temporary directory.
@@ -132,16 +134,16 @@ download_from_file_dataset <- function(dataset, target_path = NULL,
 }
 
 #' Create a context manager for mounting file streams defined by the dataset as local files.
-#' 
+#'
 #' @description
 #' Create a context manager for mounting file streams defined by the dataset as local files.
 #' A context manager will be returned to manage the lifecycle of the mount.
 #' To mount, you will need to enter the context manager and to unmount, exit from
 #' the context manager. Mount is only supported on Unix or Unix-like operating systems
 #' and libfuse must be present. If you are running inside a docker container, the docker
-#' container must be started with the `--privileged` flag or started with 
+#' container must be started with the `--privileged` flag or started with
 #' `--cap-add SYS_ADMIN --device /dev/fuse`.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @param mount_point The local directory to mount the files to. If NULL, the
 #' data will be mounted into a temporary directory.
@@ -153,10 +155,10 @@ mount_file_dataset <- function(dataset, mount_point) {
 }
 
 #' Skip file streams from the top of the dataset by the specified count.
-#' 
+#'
 #' @description
 #' Skip file streams from the top of the dataset by the specified count.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @param count The number of file streams to skip.
 #' @return A new FileDataset object representing the dataset with file streams skipped.
@@ -167,10 +169,10 @@ skip_from_dataset <- function(dataset, count) {
 }
 
 #' Take a sample of file streams from top of the dataset by the specified count.
-#' 
+#'
 #' @description
 #' Take a sample of file streams from top of the dataset by the specified count.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @param count The number of file streams to take.
 #' @return A new FileDataset object representing the sampled dataset.
@@ -181,10 +183,10 @@ take_from_dataset <- function(dataset, count) {
 }
 
 #' Take a random sample of file streams in the dataset approximately by the probability specified.
-#' 
+#'
 #' @description
 #' Take a random sample of file streams in the dataset approximately by the probability specified.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @param probability The probability of a file stream being included in the sample.
 #' @param seed An optional seed to use for the random generator.
@@ -196,10 +198,10 @@ take_sample_from_dataset <- function(dataset, probability, seed) {
 }
 
 #' Split file streams in the dataset into two parts randomly and approximately by the percentage specified.
-#' 
+#'
 #' @description
 #' Split file streams in the dataset into two parts randomly and approximately by the percentage specified.
-#' 
+#'
 #' @param dataset The Dataset object.
 #' @param percentage The approximate percentage to split the Dataset by. This must
 #' be a number between 0.0 and 1.0.
@@ -212,10 +214,10 @@ random_split_dataset <- function(dataset, percentage, seed) {
 }
 
 #' Create an unregistered, in-memory Dataset from parquet files.
-#' 
+#'
 #' @description
 #' Create an unregistered, in-memory Dataset from parquet files.
-#' 
+#'
 #' @param path A data path in a registered datastore or a local path.
 #' @param validate Boolean to validate if data can be loaded from the returned dataset.
 #' Defaults to True. Validation requires that the data source is accessible from the
@@ -247,11 +249,11 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
 }
 
 #' Create an unregistered, in-memory Dataset from delimited files.
-#' 
+#'
 #' @description
 #' Create an unregistered, in-memory Dataset from delimited files.
 #' Use this method to read delimited text files when you want to control the options used.
-#' 
+#'
 #' @param path A data path in a registered datastore, a local path, or an HTTP URL.
 #' @param validate Boolean to validate if data can be loaded from the returned dataset.
 #' Defaults to True. Validation requires that the data source is accessible from the
@@ -267,7 +269,7 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
                                                         include_path = FALSE,
                                                         infer_column_types = T,
                                                         set_column_types = NULL,
-                                                        separator = ',',
+                                                        separator = ",",
                                                         partition_format = NULL,
                                                         header = TRUE) {
   azureml$core$dataset$Dataset$Tabular$from_delimited_files(path,
@@ -281,7 +283,7 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
 }
 
 #' Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).
-#' 
+#'
 #' @description
 #' Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).
 #' ``from_json_lines_files``` creates a Tabular Dataset object , which defines the operations to
@@ -290,7 +292,7 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
 #' a Datastore or behind public web urls. Column data types are read from data types saved
 #' in the JSON Lines files. Providing `set_column_types` will override the data type
 #' for the specified columns in the returned Tabular Dataset.
-#' 
+#'
 #' @param path The path to the source files, which can be single value or list
 #' of http url string or tuple of Datastore and relative path.
 #' @param validate Boolean to validate if data can be loaded from the returned
@@ -325,7 +327,7 @@ create_tabular_dataset_from_json_lines_files <- function(path,
 }
 
 #' Create a TabularDataset to represent tabular data in SQL databases.
-#' 
+#'
 #' @description
 #' Create a TabularDataset to represent tabular data in SQL databases.
 #' ``from_sql_query``` creates a Tabular Dataset object , which defines the operations to
@@ -334,7 +336,7 @@ create_tabular_dataset_from_json_lines_files <- function(path,
 #' a Datastore and the datastore type must be of a SQL kind. Column data types are
 #' read from data types in SQL query result. Providing `set_column_types` will
 #' override the data type  for the specified columns in the returned Tabular Dataset.
-#' 
+#'
 #' @param query A SQL-kind datastore and a query
 #' @param validate Boolean to validate if data can be loaded from the returned dataset.
 #' Defaults to True. Validation requires that the data source is accessible from
@@ -351,11 +353,11 @@ create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
 }
 
 #' Drop the specified columns from the dataset.
-#' 
+#'
 #' @description
 #' Drop the specified columns from the dataset. If a timeseries column is dropped,
 #' the corresponding capabilities will be dropped for the returned dataset as well.
-#' 
+#'
 #' @param dataset The Tabular Dataset object.
 #' @param columns A name or a list of names for the columns to drop.
 #' @return A new TabularDataset object with the specified columns dropped.
@@ -366,12 +368,12 @@ drop_columns_from_dataset <- function(dataset, columns) {
 }
 
 #' Keep the specified columns and drops all others from the dataset.
-#' 
+#'
 #' @description
 #' Keep the specified columns and drops all others from the dataset.
 #' If a timeseries column is dropped, the corresponding capabilities will be
 #' dropped for the returned dataset as well.
-#' 
+#'
 #' @param dataset The Tabular Dataset object
 #' @param columns The name or a list of names for the columns to keep.
 #' @param validate Indicates whether to validate if data can be loaded from the
@@ -385,10 +387,10 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 }
 
 #' Filter Tabular Dataset with time stamp columns after a specified start time.
-#' 
+#'
 #' @description
 #' Filter Tabular Dataset with time stamp columns after a specified start time.
-#' 
+#'
 #' @param dataset The Tabular Dataset object
 #' @param start_time The lower bound for filtering data.
 #' @param include_boundary Boolean indicating if the row associated with the
@@ -402,10 +404,10 @@ filter_dataset_after_time <- function(dataset, start_time,
 }
 
 #' Filter Tabular Dataset with time stamp columns before a specified end time.
-#' 
+#'
 #' @description
 #' Filter Tabular Dataset with time stamp columns before a specified end time.
-#' 
+#'
 #' @param dataset The Tabular Dataset object
 #' @param end_time The upper bound for filtering data.
 #' @param include_boundary Boolean indicating if the row associated with the
@@ -419,10 +421,10 @@ filter_dataset_before_time <- function(dataset, end_time,
 }
 
 #' Filter Tabular Dataset between a specified start and end time.
-#' 
+#'
 #' @description
 #' Filter Tabular Dataset between a specified start and end time.
-#' 
+#'
 #' @param dataset The Tabular Dataset object
 #' @param start_time The lower bound for filtering data.
 #' @param end_time The upper bound for filtering data.
@@ -437,10 +439,10 @@ filter_dataset_between_time <- function(dataset, end_time,
 }
 
 #' Filter Tabular Dataset to contain only the specified duration (amount) of recent data.
-#' 
+#'
 #' @description
 #' Filter Tabular Dataset to contain only the specified duration (amount) of recent data.
-#' 
+#'
 #' @param dataset The Tabular Dataset object
 #' @param time_delta The duration (amount) of recent data to retrieve.
 #' @param include_boundary Boolean indicating if the row associated with the
@@ -454,18 +456,18 @@ filter_dataset_from_recent_time <- function(dataset, time_delta,
 }
 
 #' Define timestamp columns for the dataset.
-#' 
+#'
 #' @description
 #' Define timestamp columns for the dataset.
 #' The method defines columns to be used as timestamps. Timestamp columns on a dataset
 #' make it possible to treat the data as time-series data and enable additional capabilities.
 #' When a dataset has both `fine_grain_timestamp` and `coarse_grain_timestamp defined`
 #' specified, the two columns should represent the same timeline.
-#' 
+#'
 #' @param dataset The Tabular Dataset object.
 #' @param fine_grain_timestamp The name of column as fine grain timestamp. Use None to clear it.
 #' @param coarse_grain_timestamp The name of column coarse grain timestamp (optional).
-#' The default is None
+#' The default is None.
 #' @param validate Indicates whether to validate if specified columns exist in dataset.
 #' The default is False. Validation requires that the data source is accessible
 #' from the current compute.
@@ -480,10 +482,10 @@ define_timestamp_columns_for_dataset <- function(dataset, fine_grain_timestamp,
 }
 
 #' Load all records from the dataset into a pandas DataFrame.
-#' 
+#'
 #' @description
 #' Load all records from the dataset into a pandas DataFrame.
-#' 
+#'
 #' @param dataset The Tabular Dataset object.
 #' @return A pandas DataFrame.
 #' @export
@@ -493,28 +495,29 @@ load_dataset_into_data_frame <- function(dataset)	{
 }
 
 #' Convert the current dataset into a FileDataset containing CSV files.
-#' 
+#'
 #' @description
 #' Convert the current dataset into a FileDataset containing CSV files.
-#' 
+#'
 #' @param dataset The Tabular Dataset object.
 #' @param separator The separator to use to separate values in the resulting file.
 #' @return A new FileDataset object with a set of CSV files containing the data
 #' in this dataset.
 #' @export
 #' @md
-convert_to_dataset_with_csv_files <- function(dataset, separator = ',') {
+
+convert_to_dataset_with_csv_files <- function(dataset, separator = ",") {
   dataset$to_csv_files(separator)
 }
 
 #' Convert the current dataset into a FileDataset containing Parquet files.
-#' 
+#'
 #' @description
 #' Convert the current dataset into a FileDataset containing Parquet files.
 #' The resulting dataset will contain one or more Parquet files, each corresponding
 #' to a partition of data from the current dataset. These files are not materialized
 #' until they are downloaded or read from.
-#' 
+#'
 #' @param dataset The Tabular Dataset object.
 #' @return A new FileDataset object with a set of Parquet files containing the
 #' data in this dataset.
@@ -525,10 +528,10 @@ convert_to_dataset_with_parquet_files <- function(dataset) {
 }
 
 #' Configure conversion to bool.
-#' 
+#'
 #' @description
 #' Configure conversion to bool.
-#' 
+#'
 #' @return Converted DataType object.
 #' @export
 #' @md
@@ -537,10 +540,10 @@ data_type_bool <- function() {
 }
 
 #' Configure conversion to datetime.
-#' 
+#'
 #' @description
 #' Configure conversion to datetime.
-#' 
+#'
 #' @param formats Formats to try for datetime conversion. For example `%d-%m-%Y` for data in "day-month-year",
 #' and `%Y-%m-%dT%H:%M:%S.%f` for "combined date an time representation" according to ISO 8601.
 #' * %Y: Year with 4 digits
@@ -556,7 +559,7 @@ data_type_bool <- function() {
 #' * %f: Microsecond
 #' * %p: AM/PM designator
 #' * %z: Timezone, for example: -0700
-#' 
+#'
 #' Format specifiers will be inferred if not specified.
 #' Inference requires that the data source is accessible from current compute.
 #' @return Converted DataType object.
@@ -567,10 +570,10 @@ data_type_datetime <- function(formats = NULL) {
 }
 
 #' Configure conversion to 53-bit double.
-#' 
+#'
 #' @description
 #' Configure conversion to 53-bit double.
-#' 
+#'
 #' @return Converted DataType object.
 #' @export
 #' @md
@@ -579,10 +582,10 @@ data_type_double <- function()	{
 }
 
 #' Configure conversion to 64-bit integer.
-#' 
+#'
 #' @description
 #' Configure conversion to 64-bit integer.
-#' 
+#'
 #' @return Converted DataType object.
 #' @export
 #' @md
@@ -591,11 +594,11 @@ data_type_long <- function() {
 }
 
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
-#' 
+#'
 #' @description
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
 #' These enumeration values are used in the Dataset class method.
-#' 
+#'
 #' @param option A string describing how column headers are to be processed
 #' * NO_HEADERS No column headers are read
 #' * ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.

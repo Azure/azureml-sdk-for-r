@@ -13,7 +13,7 @@ define_timestamp_columns_for_dataset(dataset, fine_grain_timestamp,
 \item{fine_grain_timestamp}{The name of column as fine grain timestamp. Use None to clear it.}
 
 \item{coarse_grain_timestamp}{The name of column coarse grain timestamp (optional).
-The default is None}
+The default is None.}
 
 \item{validate}{Indicates whether to validate if specified columns exist in dataset.
 The default is False. Validation requires that the data source is accessible

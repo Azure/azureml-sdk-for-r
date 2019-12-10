@@ -265,10 +265,10 @@ unregister_datastore <- function(datastore) {
 }
 
 #' Initialize a new Azure SQL database Datastore.
-#' 
+#'
 #' @description
 #' Initialize a new Azure SQL database Datastore.
-#' 
+#'
 #' @param workspace The workspace this datastore belongs to.
 #' @param datastore_name The datastore name.
 #' @param server_name The SQL server name.
@@ -314,10 +314,10 @@ register_azure_sql_database_datastore <- function(workspace, datastore_name,
 }
 
 #' Initialize a new Azure PostgreSQL Datastore.
-#' 
+#'
 #' @description
 #' Initialize a new Azure PostgreSQL Datastore.
-#' 
+#'
 #' @param workspace The workspace this datastore belongs to.
 #' @param datastore_name The datastore name.
 #' @param server_name The PostgreSQL server name.
