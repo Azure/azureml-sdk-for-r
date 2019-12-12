@@ -30,6 +30,7 @@ register_dataset <- function(dataset, workspace, name, description = NULL,
 #' @md
 unregister_all_dataset_versions <- function(dataset) {
   dataset$unregister_all_versions()
+  invisible(NULL)
 }
 
 #' Get a registered Dataset from the workspace by its registration name.
