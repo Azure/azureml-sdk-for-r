@@ -38,7 +38,6 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @description
 #' Get a registered Dataset from the workspace by its registration name.
 #'
-#' @param dataset The Dataset object.
 #' @param workspace The existing AzureML workspace in which the Dataset was registered.
 #' @param name The registration name.
 #' @param version The registration version. Defaults to "latest".
@@ -72,28 +71,27 @@ get_dataset_by_id <- function(workspace, id) {
 #'
 #' @param name The name of the input dataset
 #' @param run The run taking the dataset as input
-#' @return A dictionary with the name being the dataset's name and value being
-#' the delivered data. If the mode is set to mount or download, it will return
-#' the base path of the delivered data. If the mode is set to direct, it will
-#' return the dataset object.
+#' @return A dataset object corresponding to the "name"
 #' @export
 #' @md
-get_input_dataset_from_run <- function(name, run) {
-  run$input_datasets(name)
+get_input_dataset_from_run <- function(name, run = NULL) {
+  if (is.null(run)) {
+    run <- get_current_run()
+  }
+
+  run$input_datasets[name]
 }
 
-#' Create an unregistered, in-memory Dataset from files.
+#' Create a FileDataset to represent file streams.
 #'
 #' @description
-#' Create an unregistered, in-memory Dataset from files. Use this method to read
-#' files as streams of data. Returns one file stream object per file read.
-#' The returned Dataset is not registered with the workspace.
+#' Create a FileDataset to represent file streams.
 #'
 #' @param path A data path in a registered datastore or a local path.
 #' @param validate Indicates whether to validate if data can be loaded from the
 #' returned dataset. Defaults to True. Validation requires that the data source
 #' is accessible from the current compute.
-#' @return The Dataset object
+#' @return The FileDataset object
 create_file_dataset_from_files <- function(path, validate = TRUE) {
   azureml$data$dataset_factory$FileDatasetFactory$from_files(path, validate)
 }
@@ -111,7 +109,7 @@ create_file_dataset_from_files <- function(path, validate = TRUE) {
 #' @export
 #' @md
 get_file_dataset_paths <- function(dataset) {
-  dataset$to_path()
+  list(dataset$to_path())
 }
 
 #' Download file streams defined by the dataset as local files.
@@ -132,7 +130,7 @@ get_file_dataset_paths <- function(dataset) {
 #' @md
 download_from_file_dataset <- function(dataset, target_path = NULL,
                                        overwrite = FALSE) {
-  dataset$download(target_path, overwrite)
+  list(dataset$download(target_path, overwrite))
 }
 
 #' Create a context manager for mounting file streams defined by the dataset as local files.
@@ -149,7 +147,8 @@ download_from_file_dataset <- function(dataset, target_path = NULL,
 #' @param dataset The Dataset object.
 #' @param mount_point The local directory to mount the files to. If NULL, the
 #' data will be mounted into a temporary directory.
-#' @return Returns a context manager for managing the lifecycle of the mount.
+#' @return Returns a context manager for managing the lifecycle of the mount of
+#' type `azureml.dataprep.fuse.daemon.MountContext`.
 #' @export
 #' @md
 mount_file_dataset <- function(dataset, mount_point) {
@@ -163,7 +162,7 @@ mount_file_dataset <- function(dataset, mount_point) {
 #'
 #' @param dataset The Dataset object.
 #' @param count The number of file streams to skip.
-#' @return A new FileDataset object representing the dataset with file streams skipped.
+#' @return A new Dataset object representing the dataset with file streams skipped.
 #' @export
 #' @md
 skip_from_dataset <- function(dataset, count) {
@@ -177,7 +176,7 @@ skip_from_dataset <- function(dataset, count) {
 #'
 #' @param dataset The Dataset object.
 #' @param count The number of file streams to take.
-#' @return A new FileDataset object representing the sampled dataset.
+#' @return A new Dataset object representing the sampled dataset.
 #' @export
 #' @md
 take_from_dataset <- function(dataset, count) {
@@ -192,10 +191,10 @@ take_from_dataset <- function(dataset, count) {
 #' @param dataset The Dataset object.
 #' @param probability The probability of a file stream being included in the sample.
 #' @param seed An optional seed to use for the random generator.
-#' @return A new FileDataset object representing the sampled dataset.
+#' @return A new Dataset object representing the sampled dataset.
 #' @export
 #' @md
-take_sample_from_dataset <- function(dataset, probability, seed) {
+take_sample_from_dataset <- function(dataset, probability, seed = NULL) {
   dataset$take_sample(probability, seed)
 }
 
@@ -208,10 +207,10 @@ take_sample_from_dataset <- function(dataset, probability, seed) {
 #' @param percentage The approximate percentage to split the Dataset by. This must
 #' be a number between 0.0 and 1.0.
 #' @param seed An optional seed to use for the random generator.
-#' @return A new FileDataset object representing the two datasets after the split.
+#' @return A new Dataset object representing the two datasets after the split.
 #' @export
 #' @md
-random_split_dataset <- function(dataset, percentage, seed) {
+random_split_dataset <- function(dataset, percentage, seed = NULL) {
   dataset$random_split(percentage, seed)
 }
 
@@ -282,12 +281,12 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
 #' @export
 #' @md
 create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
-                                                        include_path = FALSE,
-                                                        infer_column_types = T,
-                                                        set_column_types = NULL,
-                                                        separator = ",",
-                                                        partition_format = NULL,
-                                                        header = TRUE) {
+                                                      include_path = FALSE,
+                                                      infer_column_types = TRUE,
+                                                      set_column_types = NULL,
+                                                      separator = ",",
+                                                      header = TRUE,
+                                                      partition_format = NULL) {
   azureml$core$dataset$Dataset$Tabular$from_delimited_files(path,
                                                             validate,
                                                             include_path,
@@ -415,7 +414,7 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 #' @export
 #' @md
 filter_dataset_after_time <- function(dataset, start_time,
-                                      include_boundary = FALSE) {
+                                      include_boundary = TRUE) {
   dataset$time_after(start_time, include_boundary)
 }
 
@@ -432,7 +431,7 @@ filter_dataset_after_time <- function(dataset, start_time,
 #' @export
 #' @md
 filter_dataset_before_time <- function(dataset, end_time,
-                                       include_boundary = FALSE) {
+                                       include_boundary = TRUE) {
   dataset$time_before(end_time, include_boundary)
 }
 
@@ -450,7 +449,7 @@ filter_dataset_before_time <- function(dataset, end_time,
 #' @export
 #' @md
 filter_dataset_between_time <- function(dataset, start_time, end_time,
-                                        include_boundary = FALSE) {
+                                        include_boundary = TRUE) {
   dataset$time_between(start_time, end_time, include_boundary)
 }
 
@@ -467,7 +466,7 @@ filter_dataset_between_time <- function(dataset, start_time, end_time,
 #' @export
 #' @md
 filter_dataset_from_recent_time <- function(dataset, time_delta,
-                                            include_boundary = FALSE) {
+                                            include_boundary = TRUE) {
   dataset$time_recent(time_delta, include_boundary)
 }
 
@@ -497,13 +496,13 @@ define_timestamp_columns_for_dataset <- function(dataset, fine_grain_timestamp,
                                  validate)
 }
 
-#' Load all records from the dataset into a pandas DataFrame.
+#' Load all records from the dataset into a dataframe.
 #'
 #' @description
-#' Load all records from the dataset into a pandas DataFrame.
+#' Load all records from the dataset into a dataframe.
 #'
 #' @param dataset The Tabular Dataset object.
-#' @return A pandas DataFrame.
+#' @return A dataframe.
 #' @export
 #' @md
 load_dataset_into_data_frame <- function(dataset)	{
@@ -609,20 +608,33 @@ data_type_long <- function() {
   as.integer(azureml$data$dataset_factory$DataType$to_float())
 }
 
+#' Configure conversion to string.
+#'
+#' @description
+#' Configure conversion to string.
+#'
+#' @return Converted DataType object.
+#' @export
+#' @md
+data_type_string <- function() {
+  as.integer(azureml$data$dataset_factory$DataType$to_string())
+}
+
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
 #'
 #' @description
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
 #' These enumeration values are used in the Dataset class method.
 #'
-#' @param option A string describing how column headers are to be processed
-#' * NO_HEADERS No column headers are read
-#' * ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.
-#' * COMBINE_ALL_FILES_HEADERS Read headers from first row of each file, combining identically named columns.
-#' * ALL_FILES_HAVE_SAME_HEADERS Read headers from first row of first file, drops first row from other files.
+#' @param option An integer corresponding to an option for how column headers are to be processed
+#' * 0: NO_HEADERS No column headers are read
+#' * 1: ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.
+#' * 2: COMBINE_ALL_FILES_HEADERS Read headers from first row of each file, combining identically named columns.
+#' * 3: ALL_FILES_HAVE_SAME_HEADERS Read headers from first row of first file, drops first row from other files.
 #' @return The PromoteHeadersBehavior object.
 #' @export
 #' @md
 promote_headers_behavior <- function(option) {
+  option <- as.integer(option)
   azureml$data$dataset_type_definitions$PromoteHeadersBehavior(option)
 }

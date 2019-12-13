@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{create_file_dataset_from_files}
 \alias{create_file_dataset_from_files}
-\title{Create an unregistered, in-memory Dataset from files.}
+\title{Create a FileDataset to represent file streams.}
 \usage{
 create_file_dataset_from_files(path, validate = TRUE)
 }
@@ -14,10 +14,8 @@ returned dataset. Defaults to True. Validation requires that the data source
 is accessible from the current compute.}
 }
 \value{
-The Dataset object
+The FileDataset object
 }
 \description{
-Create an unregistered, in-memory Dataset from files. Use this method to read
-files as streams of data. Returns one file stream object per file read.
-The returned Dataset is not registered with the workspace.
+Create a FileDataset to represent file streams.
 }

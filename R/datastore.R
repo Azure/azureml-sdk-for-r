@@ -287,7 +287,8 @@ unregister_datastore <- function(datastore) {
 #' not exist, it will create one. The default is FALSE.
 #' @param username The username of the database user to access the database.
 #' @param password The password of the database user to access the database.
-#' @return The SQL database Datastore.
+#' @return The `azureml.data.azure_sql_database_datastore.AzureSqlDatabaseDatastore`
+#' object.
 #' @export
 #' @md
 register_azure_sql_database_datastore <- function(workspace, datastore_name,
@@ -298,7 +299,7 @@ register_azure_sql_database_datastore <- function(workspace, datastore_name,
                                                   authority_url = NULL,
                                                   endpoint = NULL,
                                                   overwrite = FALSE,
-                                                  user_name = NULL,
+                                                  username = NULL,
                                                   password = NULL) {
   azureml$core$Datastore$register_azure_sql_database(workspace,
                                                      datastore_name,
@@ -331,7 +332,8 @@ register_azure_sql_database_datastore <- function(workspace, datastore_name,
 #' postgres.database.azure.com.
 #' @param overwrite Whether to overwrite an existing datastore. If the datastore
 #' does not exist, it will create one. The default is FALSE.
-#' @return The PostgreSQL database Datastore.
+#' @return The `azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore`
+#' object.
 #' @export
 #' @md
 register_azure_postgre_sql_datastore <- function(workspace, datastore_name,

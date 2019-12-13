@@ -12,7 +12,7 @@ take_from_dataset(dataset, count)
 \item{count}{The number of file streams to take.}
 }
 \value{
-A new FileDataset object representing the sampled dataset.
+A new Dataset object representing the sampled dataset.
 }
 \description{
 Take a sample of file streams from top of the dataset by the specified count.

@@ -4,7 +4,7 @@
 \alias{filter_dataset_after_time}
 \title{Filter Tabular Dataset with time stamp columns after a specified start time.}
 \usage{
-filter_dataset_after_time(dataset, start_time, include_boundary = FALSE)
+filter_dataset_after_time(dataset, start_time, include_boundary = TRUE)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object}

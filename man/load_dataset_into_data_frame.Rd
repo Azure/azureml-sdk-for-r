@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{load_dataset_into_data_frame}
 \alias{load_dataset_into_data_frame}
-\title{Load all records from the dataset into a pandas DataFrame.}
+\title{Load all records from the dataset into a dataframe.}
 \usage{
 load_dataset_into_data_frame(dataset)
 }
@@ -10,8 +10,8 @@ load_dataset_into_data_frame(dataset)
 \item{dataset}{The Tabular Dataset object.}
 }
 \value{
-A pandas DataFrame.
+A dataframe.
 }
 \description{
-Load all records from the dataset into a pandas DataFrame.
+Load all records from the dataset into a dataframe.
 }

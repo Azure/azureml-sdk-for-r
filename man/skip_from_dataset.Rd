@@ -12,7 +12,7 @@ skip_from_dataset(dataset, count)
 \item{count}{The number of file streams to skip.}
 }
 \value{
-A new FileDataset object representing the dataset with file streams skipped.
+A new Dataset object representing the dataset with file streams skipped.
 }
 \description{
 Skip file streams from the top of the dataset by the specified count.

@@ -4,7 +4,7 @@
 \alias{random_split_dataset}
 \title{Split file streams in the dataset into two parts randomly and approximately by the percentage specified.}
 \usage{
-random_split_dataset(dataset, percentage, seed)
+random_split_dataset(dataset, percentage, seed = NULL)
 }
 \arguments{
 \item{dataset}{The Dataset object.}
@@ -15,7 +15,7 @@ be a number between 0.0 and 1.0.}
 \item{seed}{An optional seed to use for the random generator.}
 }
 \value{
-A new FileDataset object representing the two datasets after the split.
+A new Dataset object representing the two datasets after the split.
 }
 \description{
 Split file streams in the dataset into two parts randomly and approximately by the percentage specified.

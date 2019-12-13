@@ -7,7 +7,7 @@
 register_azure_sql_database_datastore(workspace, datastore_name,
   server_name, database_name, tenant_id, client_id, client_secret,
   resource_url = NULL, authority_url = NULL, endpoint = NULL,
-  overwrite = FALSE, user_name = NULL, password = NULL)
+  overwrite = FALSE, username = NULL, password = NULL)
 }
 \arguments{
 \item{workspace}{The workspace this datastore belongs to.}
@@ -37,12 +37,13 @@ database.windows.net.}
 \item{overwrite}{Whether to overwrite an existing datastore. If the datastore does
 not exist, it will create one. The default is FALSE.}
 
-\item{password}{The password of the database user to access the database.}
-
 \item{username}{The username of the database user to access the database.}
+
+\item{password}{The password of the database user to access the database.}
 }
 \value{
-The SQL database Datastore.
+The \code{azureml.data.azure_sql_database_datastore.AzureSqlDatabaseDatastore}
+object.
 }
 \description{
 Initialize a new Azure SQL database Datastore.

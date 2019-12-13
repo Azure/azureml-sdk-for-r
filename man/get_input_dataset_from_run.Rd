@@ -4,7 +4,7 @@
 \alias{get_input_dataset_from_run}
 \title{Return the named list for input datasets.}
 \usage{
-get_input_dataset_from_run(name, run)
+get_input_dataset_from_run(name, run = NULL)
 }
 \arguments{
 \item{name}{The name of the input dataset}
@@ -12,10 +12,7 @@ get_input_dataset_from_run(name, run)
 \item{run}{The run taking the dataset as input}
 }
 \value{
-A dictionary with the name being the dataset's name and value being
-the delivered data. If the mode is set to mount or download, it will return
-the base path of the delivered data. If the mode is set to direct, it will
-return the dataset object.
+A dataset object corresponding to the "name"
 }
 \description{
 Return the named list for input datasets.

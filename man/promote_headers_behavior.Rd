@@ -7,12 +7,12 @@
 promote_headers_behavior(option)
 }
 \arguments{
-\item{option}{A string describing how column headers are to be processed
+\item{option}{An integer corresponding to an option for how column headers are to be processed
 \itemize{
-\item NO_HEADERS No column headers are read
-\item ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.
-\item COMBINE_ALL_FILES_HEADERS Read headers from first row of each file, combining identically named columns.
-\item ALL_FILES_HAVE_SAME_HEADERS Read headers from first row of first file, drops first row from other files.
+\item 0: NO_HEADERS No column headers are read
+\item 1: ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.
+\item 2: COMBINE_ALL_FILES_HEADERS Read headers from first row of each file, combining identically named columns.
+\item 3: ALL_FILES_HAVE_SAME_HEADERS Read headers from first row of first file, drops first row from other files.
 }}
 }
 \value{

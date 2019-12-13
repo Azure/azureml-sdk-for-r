@@ -4,7 +4,7 @@
 \alias{take_sample_from_dataset}
 \title{Take a random sample of file streams in the dataset approximately by the probability specified.}
 \usage{
-take_sample_from_dataset(dataset, probability, seed)
+take_sample_from_dataset(dataset, probability, seed = NULL)
 }
 \arguments{
 \item{dataset}{The Dataset object.}
@@ -14,7 +14,7 @@ take_sample_from_dataset(dataset, probability, seed)
 \item{seed}{An optional seed to use for the random generator.}
 }
 \value{
-A new FileDataset object representing the sampled dataset.
+A new Dataset object representing the sampled dataset.
 }
 \description{
 Take a random sample of file streams in the dataset approximately by the probability specified.

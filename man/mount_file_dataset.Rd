@@ -13,7 +13,8 @@ mount_file_dataset(dataset, mount_point)
 data will be mounted into a temporary directory.}
 }
 \value{
-Returns a context manager for managing the lifecycle of the mount.
+Returns a context manager for managing the lifecycle of the mount of
+type \code{azureml.dataprep.fuse.daemon.MountContext}.
 }
 \description{
 Create a context manager for mounting file streams defined by the dataset as local files.

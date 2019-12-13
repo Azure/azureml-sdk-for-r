@@ -30,7 +30,8 @@ postgres.database.azure.com.}
 does not exist, it will create one. The default is FALSE.}
 }
 \value{
-The PostgreSQL database Datastore.
+The \code{azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore}
+object.
 }
 \description{
 Initialize a new Azure PostgreSQL Datastore.

@@ -4,7 +4,7 @@
 \alias{filter_dataset_before_time}
 \title{Filter Tabular Dataset with time stamp columns before a specified end time.}
 \usage{
-filter_dataset_before_time(dataset, end_time, include_boundary = FALSE)
+filter_dataset_before_time(dataset, end_time, include_boundary = TRUE)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object}
