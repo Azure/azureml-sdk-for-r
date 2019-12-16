@@ -29,7 +29,7 @@ reference:
   contents:
   - '`install_azureml`'
 - title: Workspaces
-  desc: Functions for managing workspace resources. A **Workspace** is the top-level resource for Azure Machine Learning service. It provides a centralized place to work with all the artifacts you create when you use Azure ML.
+  desc: Functions for managing workspace resources. A **Workspace** is the top-level resource for Azure Machine Learning. It provides a centralized place to work with all the artifacts you create when you use Azure ML.
   contents:
   - '`create_workspace`'
   - '`get_workspace`'
