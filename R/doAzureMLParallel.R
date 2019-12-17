@@ -1,15 +1,16 @@
-registerDoAMLComputeParallel <- function(ws, aml_cluster) {
-  setDoPar(fun = .doAMLComputeBatch, data = list(
-    ws = ws,
-    cls = aml_cluster)
-    , info = .info)
+registerDoAzureMLParallel <- function(workspace, compute_target) {
+  foreach::setDoPar(fun = .doAzureMLParallel,
+           data = list(
+             ws = workspace,
+             cls = compute_target),
+           info = .info)
 }
 
 .info <- function(data, item){
   switch(item,
-         workers = 2, #workers(data),
-         name = "doAMLComputeBatch",
-         version = packageDescription("doAMLComputeBatch", fields = "Version"),
+         workers = workers(data),
+         name = "doAzureMLParallel",
+         version = packageDescription("doAzureMLParallel", fields = "Version"),
          NULL)
 }
 
@@ -18,20 +19,42 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
   function() NULL
 }
 
-.doAMLComputeBatch <- function(obj, expr, envir, data) {
+workers <- function(data) {
+  invisible(2)
+}
+
+.doAzureMLParallel <- function(obj, expr, envir, data) {
   if (!inherits(obj, 'foreach'))
     stop('obj must be a foreach object')
   
-  it <- iterators::iter(obj)
-  argsList <- as.list(it)
+  node_count <- 1L
+  process_count_per_node <- 1L
+  r_env <- NULL
+  max_run_duration_seconds <- NULL
   
-  chunkSize <- 1
-  jobTimeout <- 60 * 60 * 24
-  
-  if(!is.null(obj$options$azure$timeout)){
-    jobTimeout <- obj$options$azure$timeout
+  if(!is.null(obj$args$job_timeout)){
+    max_run_duration_seconds <- obj$args$job_timeout
+    obj$args$job_timeout <- NULL
   }
   
+  if(!is.null(obj$args$node_count)){
+    node_count <- obj$args$node_count
+    obj$args$node_count <- NULL
+  }
+  
+  if(!is.null(obj$args$process_count_per_node)){
+    process_count_per_node <- obj$args$process_count_per_node
+    obj$args$process_count_per_node <- NULL
+  }
+
+  if(!is.null(obj$args$r_env)){
+    r_env <- obj$args$r_env
+    obj$args$r_env <- NULL
+  }
+
+  it <- iterators::iter(obj)
+  argsList <- as.list(it)
+
   exportenv <- tryCatch({
     qargs <- quote(list(...))
     args <- eval(qargs, envir)
@@ -61,16 +84,6 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
         stop(sprintf('unable to find variable "%s"', sym))
 
       val <- get(sym, envir, inherits=TRUE)
-      #if (is.function(val) &&
-      #    (identical(environment(val), .GlobalEnv) ||
-      #     identical(environment(val), envir))) {
-        # Changing this function's environment to exportenv allows it to
-        # access/execute any other functions defined in exportenv.  This
-        # has always been done for auto-exported functions, and not
-        # doing so for explicitly exported functions results in
-        # functions defined in exportenv that can't call each other.
-      #  environment(val) <- exportenv
-      #}
       assign(sym, val, pos=exportenv, inherits=FALSE)
     }
   }
@@ -81,10 +94,9 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
   assign('exportenv', exportenv, .doAzureBatchGlobals)
   assign('packages', obj$packages, .doAzureBatchGlobals)
 
-  num_processes <- 2L
-
+  # divide args into MPI tasks
   ntasks <- length(argsList)
-  
+  num_processes <- node_count*process_count_per_node
   chunkSize <- ceiling(ntasks / num_processes)
   
   startIndices <- seq(1, length(argsList), chunkSize)
@@ -107,24 +119,27 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
   
   assign('task_args', task_args, .doAzureBatchGlobals)
   
-  source_dir <- "parallel_exp"
+  source_dir <- paste0("foreach_project_", as.integer(Sys.time()))
+  dir.create(source_dir)
+  
   saveRDS(.doAzureBatchGlobals, file = file.path(source_dir, "envs.rds"))
   
-  dist_backend <- azureml$core$runconfig$MpiConfiguration()
-  dist_backend$process_count_per_node = num_processes
-  
-  image_registry_details <- azureml$core$container_registry$ContainerRegistry()
-  image_registry_details$address <- "viennaprivate.azurecr.io"
-  
+  # submit estimator job to the cluster  
+  create_entry_script(source_directory = source_dir)
   est <- estimator(source_directory = source_dir,
                    compute_target = data$cls,
-                   entry_script = "parallel.py",
-                   cran_packages = c("ggplot2"))
+                   entry_script = "entry_script.py",
+                   environment = r_env,
+                   max_run_duration_seconds = max_run_duration_seconds)
+
+  dist_backend <- azureml$core$runconfig$MpiConfiguration()
+  dist_backend$process_count_per_node = process_count_per_node
 
   run_config <- est$run_config
   run_config$framework <- "python"
   run_config$communicator <- "IntelMpi"
   run_config$mpi <- dist_backend 
+  run_config$node_count <- node_count
 
   experiment_name <- "r-foreach"
   exp <- experiment(data$ws, experiment_name)
@@ -132,9 +147,7 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
   wait_for_run_completion(run, show_output = TRUE)
   
   # merge results
-  download_dir <- "tmp"
-  dir.create(download_dir)
-  
+  download_dir <- source_dir
   result <- list()
   result_index <- 1
 
@@ -149,6 +162,49 @@ registerDoAMLComputeParallel <- function(ws, aml_cluster) {
     }
   }
   
+  # delete generated files
+  unlink(source_dir, recursive = TRUE)
+  
   invisible(result)
+}
+
+create_entry_script <- function(source_directory) {
+  r_launcher_script <- "
+globalEnv <- readRDS(\"envs.rds\")
+
+task_rank <- Sys.getenv(\"OMPI_COMM_WORLD_RANK\")
+if (is.null(task_rank))
+  task_rank = Sys.getenv(\"PMI_RANK\")
+
+task_rank <- as.integer(task_rank)
+
+args <- globalEnv$task_args
+task_args <- args[[task_rank + 1L]]
+
+result <- lapply(task_args, function(args) {
+  tryCatch({
+    lapply(names(args), function(n)
+      assign(n, args[[n]], pos = globalEnv$exportenv))
+
+    eval(globalEnv$expr, envir = globalEnv$exportenv)
+  },
+  error = function(e) {
+    print(e)
+    traceback()
+    e
+  })
+})
+
+saveRDS(result, file = file.path(\"outputs\", paste0(\"task_\", task_rank, \".rds\")))
+"
+  write(r_launcher_script, file.path(source_directory, "launcher.R"))
+  
+  
+  python_entry_script <- "
+import rpy2.robjects as robjects
+
+robjects.r.source(\"launcher.R\")
+"
+  write(python_entry_script, file.path(source_directory, "entry_script.py"))
   
 }
