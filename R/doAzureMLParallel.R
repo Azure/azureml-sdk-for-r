@@ -27,6 +27,8 @@ workers <- function(data) {
   if (!inherits(obj, 'foreach'))
     stop('obj must be a foreach object')
   
+  .doAzureBatchGlobals <- new.env(parent = emptyenv())
+
   node_count <- 1L
   process_count_per_node <- 1L
   r_env <- NULL
@@ -92,25 +94,19 @@ workers <- function(data) {
 
   assign('expr', expr, .doAzureBatchGlobals)
   assign('exportenv', exportenv, .doAzureBatchGlobals)
-  assign('packages', obj$packages, .doAzureBatchGlobals)
 
   # divide args into MPI tasks
   ntasks <- length(argsList)
   num_processes <- node_count*process_count_per_node
-  chunkSize <- ceiling(ntasks / num_processes)
+  chunkSize <- as.integer(ntasks / num_processes)
   
-  startIndices <- seq(1, length(argsList), chunkSize)
-  endIndices <-
-    if (chunkSize >= length(argsList)) {
-      c(length(argsList))
-    }
-  else {
-    seq(chunkSize, length(argsList), chunkSize)
-  }
-  
-  if (length(startIndices) > length(endIndices)) {
-    endIndices[length(startIndices)] <- ntasks
-  }
+  if (chunkSize == 0L)
+    stop(paste0('Number of arguments (currently, ', ntasks,') should be greater than or equal to number of processes (currently, ', num_processes,  ')'))
+
+  startIndices <- seq(1, chunkSize*num_processes, chunkSize)
+  endIndices <- seq(chunkSize, chunkSize*num_processes, chunkSize)
+
+  endIndices[length(startIndices)] <- length(argsList)
   
   task_args <- list()
   for (i in 1:length(endIndices)) {
@@ -147,19 +143,14 @@ workers <- function(data) {
   wait_for_run_completion(run, show_output = TRUE)
   
   # merge results
-  download_dir <- source_dir
   result <- list()
-  result_index <- 1
 
   for (i in 1:num_processes) {
     file_name <- paste0("task_", i-1, ".rds")
-    run$download_file(name = file.path("outputs", file_name), output_file_path = file.path(download_dir, file_name))
+    run$download_file(name = file.path("outputs", file_name), output_file_path = file.path(source_dir, file_name))
     
-    task_data <- readRDS(file.path(download_dir, file_name))
-    for (j in 1:length(task_data)) {
-      result[[result_index]] <- task_data[[j]]
-      result_index <- result_index + 1
-    }
+    task_data <- readRDS(file.path(source_dir, file_name))
+    result <- append(result, task_data)
   }
   
   # delete generated files
@@ -173,13 +164,9 @@ create_entry_script <- function(source_directory) {
 globalEnv <- readRDS(\"envs.rds\")
 
 task_rank <- Sys.getenv(\"OMPI_COMM_WORLD_RANK\")
-if (is.null(task_rank))
-  task_rank = Sys.getenv(\"PMI_RANK\")
-
 task_rank <- as.integer(task_rank)
 
-args <- globalEnv$task_args
-task_args <- args[[task_rank + 1L]]
+task_args <- globalEnv$task_args[[task_rank + 1L]]
 
 result <- lapply(task_args, function(args) {
   tryCatch({
