@@ -1,3 +1,9 @@
+# Copyright(c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+#' Registers AMLCompute as a parallel backend with the foreach package.
+#' @param workspace The Workspace object which has the compute_target.
+#' @param compute_target The AMLCompute target to use for parallelization.
 registerDoAzureMLParallel <- function(workspace, compute_target) {
   foreach::setDoPar(fun = .doAzureMLParallel,
            data = list(
@@ -20,7 +26,9 @@ registerDoAzureMLParallel <- function(workspace, compute_target) {
 }
 
 workers <- function(data) {
-  invisible(2)
+  compute_cluster <- data$cls
+  max_nodes <- data$cls$scale_settings$maximum_node_count
+  max_nodes
 }
 
 .doAzureMLParallel <- function(obj, expr, envir, data) {
@@ -118,10 +126,10 @@ workers <- function(data) {
   source_dir <- paste0("foreach_project_", as.integer(Sys.time()))
   dir.create(source_dir)
   
-  saveRDS(.doAzureBatchGlobals, file = file.path(source_dir, "envs.rds"))
+  saveRDS(.doAzureBatchGlobals, file = file.path(source_dir, "env.rds"))
   
   # submit estimator job to the cluster  
-  create_entry_script(source_directory = source_dir)
+  generate_entry_script(source_directory = source_dir)
   est <- estimator(source_directory = source_dir,
                    compute_target = data$cls,
                    entry_script = "entry_script.py",
@@ -144,9 +152,12 @@ workers <- function(data) {
   
   # merge results
   result <- list()
-
   for (i in 1:num_processes) {
-    file_name <- paste0("task_", i-1, ".rds")
+    if (num_processes == 1) {
+      file_name <- "task.rds"
+    } else {
+      file_name <- paste0("task_", i-1, ".rds")
+    }
     run$download_file(name = file.path("outputs", file_name), output_file_path = file.path(source_dir, file_name))
     
     task_data <- readRDS(file.path(source_dir, file_name))
@@ -159,14 +170,20 @@ workers <- function(data) {
   invisible(result)
 }
 
-create_entry_script <- function(source_directory) {
+generate_entry_script <- function(source_directory) {
   r_launcher_script <- "
-globalEnv <- readRDS(\"envs.rds\")
+globalEnv <- readRDS(\"env.rds\")
 
-task_rank <- Sys.getenv(\"OMPI_COMM_WORLD_RANK\")
-task_rank <- as.integer(task_rank)
+task_rank <- Sys.getenv(\"OMPI_COMM_WORLD_RANK\", unset = NA)
 
-task_args <- globalEnv$task_args[[task_rank + 1L]]
+if (is.na(task_rank)) {
+  task_args <- globalEnv$task_args[[1L]]
+  output_file <- \"task.rds\"
+} else {
+  task_rank <- as.integer(task_rank)
+  task_args <- globalEnv$task_args[[task_rank + 1L]]
+  output_file <- paste0(\"task_\", task_rank, \".rds\")
+}
 
 result <- lapply(task_args, function(args) {
   tryCatch({
@@ -182,7 +199,7 @@ result <- lapply(task_args, function(args) {
   })
 })
 
-saveRDS(result, file = file.path(\"outputs\", paste0(\"task_\", task_rank, \".rds\")))
+saveRDS(result, file = file.path(\"outputs\", output_file))
 "
   write(r_launcher_script, file.path(source_directory, "launcher.R"))
   
