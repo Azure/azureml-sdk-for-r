@@ -4,8 +4,8 @@
 #' Registers AMLCompute as a parallel backend with the foreach package.
 #' @param workspace The Workspace object which has the compute_target.
 #' @param compute_target The AMLCompute target to use for parallelization.
-registerDoAzureMLParallel <- function(workspace, compute_target) {
-  foreach::setDoPar(fun = .doAzureMLParallel,
+register_do_azureml_parallel <- function(workspace, compute_target) {
+  foreach::setDoPar(fun = .do_azureml_parallel,
            data = list(
              ws = workspace,
              cls = compute_target),
@@ -20,7 +20,7 @@ registerDoAzureMLParallel <- function(workspace, compute_target) {
          NULL)
 }
 
-.makeDotsEnv <- function() {
+.make_dots_env <- function() {
   list(...)
   function() NULL
 }
@@ -30,11 +30,11 @@ workers <- function(data) {
   max_nodes
 }
 
-.doAzureMLParallel <- function(obj, expr, envir, data) {
+.do_azureml_parallel <- function(obj, expr, envir, data) {
   if (!inherits(obj, "foreach"))
     stop("obj must be a foreach object")
 
-  .doAzureBatchGlobals <- new.env(parent = emptyenv())
+  global_env <- new.env(parent = emptyenv())
 
   node_count <- 1L
   process_count_per_node <- 1L
@@ -67,18 +67,18 @@ workers <- function(data) {
   exportenv <- tryCatch({
     qargs <- quote(list(...))
     args <- eval(qargs, envir)
-    environment(do.call(.makeDotsEnv, args))
+    environment(do.call(.make_dots_env, args))
   },
-  error=function(e) {
+  error = function(e) {
     new.env(parent = emptyenv())
   })
   noexport <- union(obj$noexport, obj$argnames)
   foreach::getexports(expr, exportenv, envir, bad = noexport)
   vars <- ls(exportenv)
-  
+
   export <- unique(obj$export)
   ignore <- intersect(export, vars)
-  if(length(ignore) > 0){
+  if (length(ignore) > 0) {
     export <- setdiff(export, ignore)
   }
 
@@ -87,7 +87,7 @@ workers <- function(data) {
     if (obj$verbose)
       cat(sprintf("explicitly exporting variables(s): %s\n",
                   paste(export, collapse = ", ")))
-    
+
     for (sym in export) {
       if (!exists(sym, envir, inherits = TRUE))
         stop(sprintf('unable to find variable "%s"', sym))
@@ -101,35 +101,17 @@ workers <- function(data) {
                             env = envir,
                             options = list(suppressUndefined = TRUE))
 
-  assign("expr", expr, .doAzureBatchGlobals)
-  assign("exportenv", exportenv, .doAzureBatchGlobals)
+  assign("expr", expr, global_env)
+  assign("exportenv", exportenv, global_env)
 
   # divide args into MPI tasks
-  ntasks <- length(args_list)
-  num_processes <- node_count * process_count_per_node
-  chunk_size <- as.integer(ntasks / num_processes)
-
-  if (chunk_size == 0L)
-    stop(paste0("Number of arguments (currently, ", ntasks,") should be ",
-                "greater than or equal to number of processes ",
-                "(currently, ", num_processes,  ")"))
-
-  startIndices <- seq(1, chunk_size * num_processes, chunk_size)
-  endIndices <- seq(chunk_size, chunk_size * num_processes, chunk_size)
-
-  endIndices[length(startIndices)] <- length(args_list)
-
-  task_args <- list()
-  for (i in seq_len(length(endIndices))) {
-    task_args[[i]] <- args_list[startIndices[i]: endIndices[i]]
-  }
-
-  assign("task_args", task_args, .doAzureBatchGlobals)
+  task_args <- split_tasks(args_list, node_count, process_count_per_node)
+  assign("task_args", task_args, global_env)
 
   source_dir <- paste0("foreach_run_", as.integer(Sys.time()))
   dir.create(source_dir)
 
-  saveRDS(.doAzureBatchGlobals, file = file.path(source_dir, "env.rds"))
+  saveRDS(global_env, file = file.path(source_dir, "env.rds"))
 
   # submit estimator job to the cluster
   generate_entry_script(source_directory = source_dir)
@@ -140,7 +122,7 @@ workers <- function(data) {
                    max_run_duration_seconds = max_run_duration_seconds)
 
   dist_backend <- azureml$core$runconfig$MpiConfiguration()
-  dist_backend$process_count_per_node = process_count_per_node
+  dist_backend$process_count_per_node <- process_count_per_node
 
   run_config <- est$run_config
   run_config$framework <- "python"
@@ -154,7 +136,41 @@ workers <- function(data) {
   wait_for_run_completion(run, show_output = TRUE)
 
   # merge results
+  result <- merge_results(num_node_count, process_count_per_node, run,
+                          source_dir)
+
+  # delete generated files
+  unlink(source_dir, recursive = TRUE)
+  invisible(result)
+}
+
+split_tasks <- function(args_list, node_count, process_count_per_node) {
+  ntasks <- length(args_list)
+  num_processes <- node_count * process_count_per_node
+  chunk_size <- as.integer(ntasks / num_processes)
+
+  if (chunk_size == 0L)
+    stop(paste0("Number of arguments (currently, ", ntasks, ") should be ",
+                "greater than or equal to number of processes ",
+                "(currently, ", num_processes, ")"))
+
+  start_indices <- seq(1, chunk_size * num_processes, chunk_size)
+  end_indices <- seq(chunk_size, chunk_size * num_processes, chunk_size)
+
+  end_indices[length(start_indices)] <- length(args_list)
+
+  task_args <- list()
+  for (i in seq_len(length(end_indices))) {
+    task_args[[i]] <- args_list[start_indices[i]: end_indices[i]]
+  }
+
+  invisible(task_args)
+}
+
+merge_results <- function(node_count, process_count_per_node, run,
+                          source_dir) {
   result <- list()
+  num_processes <- node_count * process_count_per_node
   for (i in seq_len(num_processes)) {
     if (num_processes == 1) {
       file_name <- "task.rds"
@@ -168,8 +184,6 @@ workers <- function(data) {
     result <- append(result, task_data)
   }
 
-  # delete generated files
-  unlink(source_dir, recursive = TRUE)
   invisible(result)
 }
 
