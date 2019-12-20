@@ -16,11 +16,12 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   switch(item,
          workers = workers(data),
          name = "doAzureMLParallel",
-         version = packageDescription("doAzureMLParallel", fields = "Version"),
+         version = utils::packageDescription("do_azureml_parallel",
+                                             fields = "Version"),
          NULL)
 }
 
-.make_dots_env <- function() {
+.make_dots_env <- function(...) {
   list(...)
   function() NULL
 }
@@ -136,7 +137,7 @@ workers <- function(data) {
   wait_for_run_completion(run, show_output = TRUE)
 
   # merge results
-  result <- merge_results(num_node_count, process_count_per_node, run,
+  result <- merge_results(node_count, process_count_per_node, run,
                           source_dir)
 
   # delete generated files
