@@ -73,5 +73,6 @@ test_that("register datastore, create file dataset,
 
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
+  expect_equal(run$status, "Completed")
 
 })
