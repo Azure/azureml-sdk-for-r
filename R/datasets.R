@@ -329,7 +329,8 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
 #' @return The Tabular Dataset object.
 #' @export
 #' @md
-create_tabular_dataset_from_json_lines_files <- function(path,
+create_tabular_dataset_from_json_lines_files <- function(
+                                                      path,
                                                       validate = TRUE,
                                                       include_path = FALSE,
                                                       set_column_types = NULL,
@@ -593,7 +594,7 @@ data_type_datetime <- function(formats = NULL) {
 #' @export
 #' @md
 data_type_double <- function()	{
-  as.double(azureml$data$dataset_factory$DataType$to_float())
+  azureml$data$dataset_factory$DataType$to_float()
 }
 
 #' Configure conversion to 64-bit integer.
@@ -605,7 +606,7 @@ data_type_double <- function()	{
 #' @export
 #' @md
 data_type_long <- function() {
-  as.integer(azureml$data$dataset_factory$DataType$to_float())
+  azureml$data$dataset_factory$DataType$to_float()
 }
 
 #' Configure conversion to string.
@@ -617,7 +618,7 @@ data_type_long <- function() {
 #' @export
 #' @md
 data_type_string <- function() {
-  as.integer(azureml$data$dataset_factory$DataType$to_string())
+  azureml$data$dataset_factory$DataType$to_string()
 }
 
 #' Defines options for how column headers are processed when reading data from files to create a dataset.
