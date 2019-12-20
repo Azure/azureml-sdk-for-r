@@ -35,9 +35,8 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
 
 })
 
-test_that("create file dataset, submit with run,
-          check file dataset path", {
-  skip_if_no_subscription()
+test_that("register datastore, create file dataset, get file dataset paths,
+          submit run with dataset as named input", {
   ws <- existing_ws
 
   ds <- get_default_datastore(ws)
