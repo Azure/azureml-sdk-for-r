@@ -14,7 +14,7 @@
 #' @return The registered Dataset object.
 #' @export
 #' @md
-register_dataset <- function(dataset, workspace, name, description = NULL,
+register_dataset <- function(workspace, name, description = NULL,
                              tags = NULL, create_new_version = FALSE) {
   dataset$register(workspace, name, description, tags, create_new_version)
 }

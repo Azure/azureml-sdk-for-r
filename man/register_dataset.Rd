@@ -4,8 +4,8 @@
 \alias{register_dataset}
 \title{Register a Dataset in the workspace}
 \usage{
-register_dataset(dataset, workspace, name, description = NULL,
-  tags = NULL, create_new_version = FALSE)
+register_dataset(workspace, name, description = NULL, tags = NULL,
+  create_new_version = FALSE)
 }
 \arguments{
 \item{workspace}{The AzureML workspace in which the Dataset is to be registered.}
