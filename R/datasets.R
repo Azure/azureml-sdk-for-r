@@ -6,6 +6,7 @@
 #' @description
 #' Register the Dataset in the workspace, making it available to other users of the workspace.
 #'
+#' @param dataset The dataset to be registered.
 #' @param workspace The AzureML workspace in which the Dataset is to be registered.
 #' @param name The name of the Dataset in the workspace.
 #' @param description A description of the Dataset.
@@ -14,7 +15,7 @@
 #' @return The registered Dataset object.
 #' @export
 #' @md
-register_dataset <- function(workspace, name, description = NULL,
+register_dataset <- function(workspace, dataset, name, description = NULL,
                              tags = NULL, create_new_version = FALSE) {
   dataset$register(workspace, name, description, tags, create_new_version)
 }
