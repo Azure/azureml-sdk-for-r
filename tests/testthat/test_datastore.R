@@ -71,4 +71,5 @@ test_that("register azure blob/fileshare datastores", {
   fileshare_datastore <- get_datastore(ws, fileshare_datastore_name)
   expect_equal(fileshare_datastore$name, fileshare_datastore_name)
   unregister_datastore(fileshare_datastore)
+
 })
