@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Register a model to a given workspace — register_model • azuremlsdk</title>
+<title>Take a random sample of file streams in the dataset approximately by the probability specified. — take_sample_from_dataset • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,18 +32,9 @@
 
 
 
-<meta property="og:title" content="Register a model to a given workspace — register_model" />
+<meta property="og:title" content="Take a random sample of file streams in the dataset approximately by the probability specified. — take_sample_from_dataset" />
 
-<meta property="og:description" content="Register a model to the given workspace. A registered model is a logical
-container for one or more files that make up your model. For example, if
-you have a model that's stored in multiple files, you can register them
-as a single model in your workspace. After registration, you can then
-download or deploy the registered model and receive all the files that
-were registered.
-Models are identified by name and version. Each time you register a
-model with the same name as an existing one, your workspace's model
-registry assumes that it's a new version. The version is incremented,
-and the new model is registered under the same name." />
+<meta property="og:description" content="Take a random sample of file streams in the dataset approximately by the probability specified." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -142,90 +133,41 @@ and the new model is registered under the same name." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Register a model to a given workspace</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
-    <div class="hidden name"><code>register_model.Rd</code></div>
+    <h1>Take a random sample of file streams in the dataset approximately by the probability specified.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
+    <div class="hidden name"><code>take_sample_from_dataset.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Register a model to the given workspace. A registered model is a logical
-container for one or more files that make up your model. For example, if
-you have a model that's stored in multiple files, you can register them
-as a single model in your workspace. After registration, you can then
-download or deploy the registered model and receive all the files that
-were registered.</p>
-<p>Models are identified by name and version. Each time you register a
-model with the same name as an existing one, your workspace's model
-registry assumes that it's a new version. The version is incremented,
-and the new model is registered under the same name.</p>
+    <p>Take a random sample of file streams in the dataset approximately by the probability specified.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='no'>datasets</span>)</pre>
+    <pre class="usage"><span class='fu'>take_sample_from_dataset</span>(<span class='no'>dataset</span>, <span class='no'>probability</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
+      <th>dataset</th>
+      <td><p>The Dataset object.</p></td>
     </tr>
     <tr>
-      <th>model_path</th>
-      <td><p>A string of the path on the local file system where
-the model assets are located. This can be a direct pointer to a single
-file or folder. If pointing to a folder, the <code>child_paths</code> parameter can
-be used to specify individual files to bundle together as the <code>Model</code>
-object, as opposed to using the entire contents of the folder.</p></td>
+      <th>probability</th>
+      <td><p>The probability of a file stream being included in the sample.</p></td>
     </tr>
     <tr>
-      <th>model_name</th>
-      <td><p>A string of the name to register the model with.</p></td>
-    </tr>
-    <tr>
-      <th>tags</th>
-      <td><p>A named list of key-value tags to give the model, e.g.
-<code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code></p></td>
-    </tr>
-    <tr>
-      <th>properties</th>
-      <td><p>A named list of key-value properties to give the model,
-e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td><p>A string of the text description of the model.</p></td>
-    </tr>
-    <tr>
-      <th>child_paths</th>
-      <td><p>A list of strings of child paths of a folder specified
-by <code>model_name</code>. Must be provided in conjunction with a <code>model_path</code>
-pointing to a folder; only the specified files will be bundled into the
-<code>Model</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>datasets</th>
-      <td><p>A list of tuples where the first element describes the
-dataset-model relationship and the second element is the dataset.</p></td>
+      <th>seed</th>
+      <td><p>An optional seed to use for the random generator.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The <code>Model</code> object.</p>
+    <p>A new Dataset object representing the sampled dataset.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Registering a model from a single file</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>register_model</span>(<span class='no'>ws</span>,
-                        <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='st'>"my_model.rds"</span>,
-                        <span class='kw'>model_name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -233,9 +175,7 @@ dataset-model relationship and the second element is the dataset.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
