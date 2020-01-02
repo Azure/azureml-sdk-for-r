@@ -86,11 +86,11 @@ get_model <- function(workspace,
 register_model <- function(workspace,
                            model_path,
                            model_name,
+                           datasets,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
-                           child_paths = NULL,
-                           datasets = datasets) {
+                           child_paths = NULL) {
   model <- azureml$core$Model$register(workspace,
                                        model_path,
                                        model_name,
@@ -98,8 +98,7 @@ register_model <- function(workspace,
                                        properties = properties,
                                        description = description,
                                        child_paths = child_paths,
-                                       datasets = datasets,
-                                       ...)
+                                       datasets = datasets)
   invisible(model)
 }
 
