@@ -98,7 +98,8 @@ register_model <- function(workspace,
                                        properties = properties,
                                        description = description,
                                        child_paths = child_paths,
-                                       datasets = datasets)
+                                       datasets = datasets,
+                                       ...)
   invisible(model)
 }
 
