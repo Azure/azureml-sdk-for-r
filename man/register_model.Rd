@@ -4,8 +4,9 @@
 \alias{register_model}
 \title{Register a model to a given workspace}
 \usage{
-register_model(workspace, model_path, model_name, datasets, tags = NULL,
-  properties = NULL, description = NULL, child_paths = NULL)
+register_model(workspace, model_path, model_name, datasets = NULL,
+  tags = NULL, properties = NULL, description = NULL,
+  child_paths = NULL)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
