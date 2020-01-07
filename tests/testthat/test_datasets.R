@@ -8,7 +8,7 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
 
   # confirm no registered datasets in workspace
   all_registered_datasets <- ws$datasets
-  expect_equal(len(all_registered_datasets), 0)
+  expect_equal(length(all_registered_datasets), 0)
 
   # upload files to datastore and create dataset
   ds <- get_default_datastore(ws)

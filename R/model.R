@@ -61,6 +61,8 @@ get_model <- function(workspace,
 #' be used to specify individual files to bundle together as the `Model`
 #' object, as opposed to using the entire contents of the folder.
 #' @param model_name A string of the name to register the model with.
+#' @param datasets A list of tuples where the first element describes the
+#' dataset-model relationship and the second element is the dataset.
 #' @param tags A named list of key-value tags to give the model, e.g.
 #' `list("key" = "value")`
 #' @param properties A named list of key-value properties to give the model,
@@ -70,8 +72,6 @@ get_model <- function(workspace,
 #' by `model_name`. Must be provided in conjunction with a `model_path`
 #' pointing to a folder; only the specified files will be bundled into the
 #' `Model` object.
-#' @param datasets A list of tuples where the first element describes the
-#' dataset-model relationship and the second element is the dataset.
 #' @return The `Model` object.
 #' @export
 #' @examples
@@ -86,11 +86,11 @@ get_model <- function(workspace,
 register_model <- function(workspace,
                            model_path,
                            model_name,
+                           datasets = NULL,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
-                           child_paths = NULL,
-                           datasets = datasets) {
+                           child_paths = NULL) {
   model <- azureml$core$Model$register(workspace,
                                        model_path,
                                        model_name,
