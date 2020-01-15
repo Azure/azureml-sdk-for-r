@@ -6,10 +6,6 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
   skip_if_no_subscription()
   ws <- existing_ws
 
-  # confirm no registered datasets in workspace
-  all_registered_datasets <- ws$datasets
-  expect_equal(length(all_registered_datasets), 0)
-
   # upload files to datastore and create dataset
   ds <- get_default_datastore(ws)
 
@@ -26,7 +22,7 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
 
   # check updated number of datasets in workspace
   all_registered_datasets <- ws$datasets
-  expect_equal(length(all_registered_datasets), 1)
+  expect_equal(length(all_registered_datasets), 2)
 
   # unregister datasets
   unregister_all_dataset_versions(dataset)
