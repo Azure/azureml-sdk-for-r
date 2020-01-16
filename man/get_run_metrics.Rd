@@ -2,16 +2,35 @@
 % Please edit documentation in R/run.R
 \name{get_run_metrics}
 \alias{get_run_metrics}
-\title{Get the metrics for run}
+\title{Get the metrics logged to a run}
 \usage{
-get_run_metrics(run)
+get_run_metrics(run, name = NULL, recursive = FALSE, run_type = NULL,
+  populate = FALSE)
 }
 \arguments{
-\item{run}{Run object}
+\item{run}{The \code{Run} object.}
+
+\item{name}{The name of the metric.}
+
+\item{recursive}{If specified, returns runs matching specified \emph{"property"} or {\emph{"property"}: \emph{"value"}}.}
+
+\item{run_type}{run type}
+
+\item{populate}{Boolean indicating whether to fetch the contents of external data linked to the metric.}
 }
 \value{
-named list containing metrics associated with the run.
+A named list of the metrics associated with the run,
+e.g. \code{list("metric_name" = metric)}.
 }
 \description{
-Get the metrics for run
+Retrieve the metrics logged to a run that were logged with
+the \code{log_*()} methods.
+}
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
+exp <- experiment(ws, name = 'myexperiment')
+run <- get_run(exp, run_id = "myrunid")
+metrics <- get_run_metrics(run)
+}
 }

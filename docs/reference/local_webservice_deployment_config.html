@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config • azureml</title>
+<title>Create a deployment config for deploying a local web service — local_webservice_deployment_config • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="Create a configuration object for deploying a local Webservice. — local_webservice_deployment_config" />
+<meta property="og:title" content="Create a deployment config for deploying a local web service — local_webservice_deployment_config" />
 
-<meta property="og:description" content="Create a configuration object for deploying a local Webservice." />
+<meta property="og:description" content="You can deploy a model locally for limited testing and troubleshooting.
+To do so, you will need to have Docker installed on your local machine.
+If you are using an Azure Machine Learning Compute Instance for
+development, you can also deploy locally on your compute instance." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +68,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +77,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +92,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +136,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a configuration object for deploying a local Webservice.</h1>
+    <h1>Create a deployment config for deploying a local web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
     <div class="hidden name"><code>local_webservice_deployment_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a configuration object for deploying a local Webservice.</p>
+    <p>You can deploy a model locally for limited testing and troubleshooting.
+To do so, you will need to have Docker installed on your local machine.</p>
+<p>If you are using an Azure Machine Learning Compute Instance for
+development, you can also deploy locally on your compute instance.</p>
     
     </div>
 
@@ -142,16 +157,20 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>port</th>
-      <td><p>The local port on which to expose the service's HTTP endpoint.</p></td>
+      <td><p>An int of the local port on which to expose the service's
+HTTP endpoint.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>LocalWebserviceDeploymentConfiguration object to use when deploying
-a Webservice object.</p>
+    <p>The <code>LocalWebserviceDeploymentConfiguration</code> object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>deployment_config</span> <span class='kw'>&lt;-</span> <span class='fu'>local_webservice_deployment_config</span>(<span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>8890</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -159,7 +178,9 @@ a Webservice object.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -167,7 +188,7 @@ a Webservice object.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

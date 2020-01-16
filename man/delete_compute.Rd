@@ -9,14 +9,17 @@ delete_compute(cluster)
 \arguments{
 \item{cluster}{The \code{AmlCompute} or \code{AksCompute} object.}
 }
+\value{
+None
+}
 \description{
 Remove the compute object from its associated workspace and delete the
 corresponding cloud-based resource.
 }
-\section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
 compute_target <- get_compute(ws, cluster_name = 'mycluster')
 delete_compute(compute_target)
 }
 }
-

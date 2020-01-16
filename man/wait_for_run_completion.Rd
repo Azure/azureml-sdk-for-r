@@ -2,15 +2,19 @@
 % Please edit documentation in R/run.R
 \name{wait_for_run_completion}
 \alias{wait_for_run_completion}
-\title{Wait for the completion of this run}
+\title{Wait for the completion of a run}
 \usage{
 wait_for_run_completion(run, show_output = TRUE)
 }
 \arguments{
-\item{run}{Run object}
+\item{run}{The \code{Run} object.}
 
-\item{show_output}{print verbose output to console}
+\item{show_output}{If \code{TRUE}, print verbose output to console.}
+}
+\value{
+None
 }
 \description{
-Wait for the completion of this run
+Wait for the run to reach a terminal state. Typically called
+after submitting an experiment run with \code{submit_experiment()}.
 }

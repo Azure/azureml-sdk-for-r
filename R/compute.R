@@ -49,15 +49,15 @@
 #' For more information on using an Azure Machine Learning Compute resource
 #' in a virtual network, see
 #' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-a-machine-learning-compute-instance).
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- create_aml_compute(ws,
 #'                                      cluster_name = 'mycluster',
 #'                                      vm_size = 'STANDARD_D2_V2',
 #'                                      max_nodes = 1)
 #' wait_for_provisioning_completion(compute_target, show_output = TRUE)
-#' ```
+#' }
 #' @seealso
 #' `wait_for_provisioning_completion()`
 #' @md
@@ -106,11 +106,11 @@ create_aml_compute <- function(workspace,
 #' @param cluster_name A string of the name of the cluster.
 #' @return The `AmlCompute` or `AksCompute` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- get_compute(ws, cluster_name = 'mycluster')
-#' ```
+#' }
 #' @md
 get_compute <- function(workspace, cluster_name) {
   tryCatch({
@@ -134,16 +134,8 @@ get_compute <- function(workspace, cluster_name) {
 #' `create_aml_compute()` or `create_aks_compute()` call.
 #' @param cluster The `AmlCompute` or `AksCompute` object.
 #' @param show_output If `TRUE`, more verbose output will be provided.
+#' @return None
 #' @export
-#' @section Examples:
-#' Wait for an AmlCompute cluster to finish provisioning.
-#' ```
-#' ws <- load_workspace_from_config()
-#' compute_target <- create_aml_compute(ws,
-#'                                      cluster_name = 'mycluster',
-#'                                      vm_size = 'STANDARD_D2_V2',
-#'                                      max_nodes = 1)
-#' wait_for_provisioning_completion(compute_target)
 #' @seealso
 #' `create_aml_compute()`, `create_aks_compute()`
 #' @md
@@ -157,13 +149,14 @@ wait_for_provisioning_completion <- function(cluster, show_output = FALSE) {
 #' Remove the compute object from its associated workspace and delete the
 #' corresponding cloud-based resource.
 #' @param cluster The `AmlCompute` or `AksCompute` object.
+#' @return None
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- get_compute(ws, cluster_name = 'mycluster')
 #' delete_compute(compute_target)
-#' ```
+#' }
 #' @md
 delete_compute <- function(cluster) {
   cluster$delete()
@@ -181,6 +174,7 @@ delete_compute <- function(cluster) {
 #' the cluster.
 #' @param idle_seconds_before_scaledown An integer of the node idle time
 #' in seconds before scaling down the cluster.
+#' @return None
 #' @export
 #' @md
 update_aml_compute <- function(cluster, min_nodes = NULL, max_nodes = NULL,
@@ -248,15 +242,15 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' @section Details:
 #' For more information on using an AksCompute resource within a virtual
 #' network, see
-#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks)
-#' @section Examples:
-#' Create an AksCompute cluster using the default configuration (you can also
-#' provide parameters to customize this).
-#' ```
+#' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).
+#' @examples
+#' # Create an AksCompute cluster using the default configuration (you can also
+#' # provide parameters to customize this)
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 #' wait_for_provisioning_completion(compute_target)
-#' ```
+#' }
 #' @md
 create_aks_compute <- function(workspace,
                                cluster_name,
@@ -296,11 +290,12 @@ create_aks_compute <- function(workspace,
 #' @description
 #' Retrieved the credentials for an AksCompute cluster.
 #' @param cluster The `AksCompute` object.
-#' @return A named list of the cluster credentials.
+#' @return Details of the cluster credentials as data frame.
 #' @export
 #' @md
 get_aks_compute_credentials <- function(cluster) {
-  cluster$get_credentials()
+  creds <- cluster$get_credentials()
+  as.data.frame(creds)
 }
 
 #' Attach an existing AKS cluster to a workspace
@@ -322,14 +317,14 @@ get_aks_compute_credentials <- function(cluster) {
 #' is located.
 #' @return The `AksCompute` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- attach_aks_compute(ws,
 #'                                      cluster_name = 'mycluster',
 #'                                      resource_id = 'myresourceid',
 #'                                      resource_group = 'myresourcegroup')
-#' ```
+#' }
 #' @md
 attach_aks_compute <- function(workspace,
                                cluster_name,
@@ -350,6 +345,7 @@ attach_aks_compute <- function(workspace,
 #' underlying cloud resource will be deleted; the association will
 #' just be removed.
 #' @param cluster The `AksCompute` object.
+#' @return None
 #' @export
 #' @md
 detach_aks_compute <- function(cluster) {
@@ -362,8 +358,8 @@ detach_aks_compute <- function(cluster) {
 #' @param workspace The `Workspace` object.
 #' @param location A string of the location of the cluster. If not specified,
 #' will default to the workspace location.
-#' @return List of supported VM sizes in a region with name of the VM, VCPUs,
-#' RAM in data frame
+#' @return A data frame of supported VM sizes in a region with name of the VM, VCPUs,
+#' RAM.
 #' @export
 #' @md
 list_supported_vm_sizes <- function(workspace, location = NULL) {

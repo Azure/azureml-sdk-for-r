@@ -11,6 +11,9 @@ set_default_datastore(workspace, datastore_name)
 
 \item{datastore_name}{The name of the datastore to be set as default.}
 }
+\value{
+None
+}
 \description{
 Set the default datastore associated with the workspace.
 }

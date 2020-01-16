@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an environment — r_environment • azureml</title>
+<title>Create an environment — r_environment • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -39,10 +39,9 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your Environment object within that Docker container.
 If the custom_docker_image parameter
-is not set, Azure ML automatically uses a default base image (CPU or GPU
-depending on the use_gpu flag) and installs any R packages specified in the
-cran_packages, github_packages, or custom_url_packages parameters.
-TODO: link to the Dockerfiles of the default base images." />
+is not set, Azure ML will build a predefined base image (CPU or GPU
+depending on the use_gpu flag) and install any R packages specified in the
+cran_packages, github_packages, or custom_url_packages parameters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -73,8 +72,8 @@ TODO: link to the Dockerfiles of the default base images." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -82,7 +81,7 @@ TODO: link to the Dockerfiles of the default base images." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -97,18 +96,27 @@ TODO: link to the Dockerfiles of the default base images." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -144,10 +152,9 @@ deployments. When you submit a run or deploy a model, Azure ML builds a
 Docker image and creates a conda environment with your specifications from
 your <code>Environment</code> object within that Docker container.</p>
 <p>If the <code>custom_docker_image</code> parameter
-is not set, Azure ML automatically uses a default base image (CPU or GPU
-depending on the <code>use_gpu</code> flag) and installs any R packages specified in the
-<code>cran_packages</code>, <code>github_packages</code>, or <code>custom_url_packages</code> parameters.
-TODO: link to the Dockerfiles of the default base images.</p>
+is not set, Azure ML will build a predefined base image (CPU or GPU
+depending on the <code>use_gpu</code> flag) and install any R packages specified in the
+<code>cran_packages</code>, <code>github_packages</code>, or <code>custom_url_packages</code> parameters.</p>
     
     </div>
 
@@ -190,9 +197,8 @@ from local directory or custom URL.</p></td>
       <th>custom_docker_image</th>
       <td><p>A string of the name of the Docker image from
 which the image to use for training or deployment will be built. If not set,
-a default CPU-based image will be used as the base image. To use an image
-from a private Docker repository, you will also have to specify the
-<code>image_registry_details</code> parameter.</p></td>
+a predefined Docker image will be used. To use an image from a private Docker
+repository, you will also have to specify the <code>image_registry_details</code> parameter.</p></td>
     </tr>
     <tr>
       <th>image_registry_details</th>
@@ -202,9 +208,9 @@ the Docker image registry for the custom Docker image.</p></td>
     <tr>
       <th>use_gpu</th>
       <td><p>Indicates whether the environment should support GPUs.
-If <code>TRUE</code>, a GPU-based default Docker image will be used in the environment.
-If <code>FALSE</code>, a CPU-based image will be used. Default Docker images (CPU or
-GPU) will only be used if the <code>custom_docker_image</code> parameter is not set.</p></td>
+If <code>TRUE</code>, a predefined GPU-based Docker image will be used in the environment.
+If <code>FALSE</code>, a predefined CPU-based image will be used. Predefined Docker images
+(CPU or GPU) will only be used if the <code>custom_docker_image</code> parameter is not set.</p></td>
     </tr>
     <tr>
       <th>shm_size</th>
@@ -234,22 +240,46 @@ a new version of the environment is created when you either submit a run,
 deploy a model, or manually register the environment. The versioning allows
 you to view changes to the environment over time.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <h2 class="hasAnchor" id="predefined-docker-images"><a class="anchor" href="#predefined-docker-images"></a>Predefined Docker images</h2>
 
     
 
-<p>The following example defines an environment that will use the default
-base CPU image and install the additional e1071 package from CRAN.</p><pre>r_env &lt;- r_environment(name = 'myr_env',
-                       version = '1',
-                       cran_packages = c('e1071'))
-</pre>
+<p>When submitting a training job or deploying a model, Azure ML runs your
+training script or scoring script within a Docker container. If no custom
+Docker image is specified with the <code>custom_docker_image</code> parameter, Azure
+ML will build a predefined CPU or GPU Docker image. The predefine images extend
+the Ubuntu 16.04 <a href='https://github.com/Azure/AzureML-Containers'>Azure ML base images</a>
+and include the following dependencies:</p><table class='table'>
+<tr><td><strong>Dependencies</strong></td><td><strong>Version</strong></td><td><strong>Remarks</strong></td></tr>
+<tr><td>azuremlsdk</td><td>latest</td><td>(from GitHub)</td></tr>
+<tr><td>R</td><td>3.6.0</td><td>-</td></tr>
+<tr><td>Commonly used R packages</td><td>-</td><td>80+ of the most popular R packages for
+data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
+and nnet. For the full list of packages included, see
+<a href='https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md'>here</a>.</td></tr>
+<tr><td>Python</td><td>3.7.0</td><td>-</td></tr>
+<tr><td>azureml-defaults</td><td>latest</td><td><code>azureml-defaults</code> contains the
+<code>azureml-core</code> and <code>applicationinsights</code> packages of the Python SDK that
+are required for tasks such as logging metrics, uploading artifacts, and
+deploying models. (from pip)</td></tr>
+<tr><td>rpy2</td><td>latest</td><td>(from conda)</td></tr>
+<tr><td>CUDA (GPU image only)</td><td>10.0</td><td>CuDNN (version 7) is also included</td></tr>
+</table>
+
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='estimator.html'>estimator()</a></code>, <code><a href='inference_config.html'>inference_config()</a></code></p></div>
+    <div class='dont-index'><p><code>estimator()</code>, <code>inference_config()</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># The following example defines an environment that will build the default</span>
+<span class='co'># base CPU image.</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'>r_environment</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myr_env'</span>,
+                       <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>'1'</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -260,10 +290,12 @@ base CPU image and install the additional e1071 package from CRAN.</p><pre>r_env
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#predefined-docker-images">Predefined Docker images</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -271,7 +303,7 @@ base CPU image and install the additional e1071 package from CRAN.</p><pre>r_env
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

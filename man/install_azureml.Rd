@@ -4,8 +4,9 @@
 \alias{install_azureml}
 \title{Install azureml sdk package}
 \usage{
-install_azureml(version = NULL, envname = "r-azureml",
-  conda_python_version = "3.6")
+install_azureml(version = "1.0.74", envname = "r-azureml",
+  conda_python_version = "3.6", restart_session = TRUE,
+  remove_existing_env = FALSE)
 }
 \arguments{
 \item{version}{azureml sdk package version}
@@ -13,6 +14,13 @@ install_azureml(version = NULL, envname = "r-azureml",
 \item{envname}{name of environment to create}
 
 \item{conda_python_version}{version of python for conda environment}
+
+\item{restart_session}{restart R session after installation}
+
+\item{remove_existing_env}{delete the conda environment if already exists}
+}
+\value{
+None
 }
 \description{
 Install azureml sdk package

@@ -11,6 +11,9 @@ delete_secrets(keyvault, secrets)
 
 \item{secrets}{A vector of secret names.}
 }
+\value{
+None
+}
 \description{
 Delete secrets from the keyvault associated with the workspace for
 a specified set of secret names.

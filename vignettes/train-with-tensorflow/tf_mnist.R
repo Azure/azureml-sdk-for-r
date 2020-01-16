@@ -15,10 +15,10 @@
 # ==============================================================================
 
 
-library("tensorflow")
+library(tensorflow)
 install_tensorflow(version = "1.13.2-gpu")
 
-library("azureml")
+library(azuremlsdk)
 
 # Create the model
 x <- tf$placeholder(tf$float32, shape(NULL, 784L))
@@ -57,10 +57,8 @@ cat("Accuracy: ", sess$run(accuracy,
                            feed_dict = dict(x = mnist$test$images,
                                             y_ = mnist$test$labels)))
 
-current_run <- get_current_run()
 log_metric_to_run("accuracy",
                   sess$run(accuracy, feed_dict = dict(x = mnist$test$images,
-                                                      y_ = mnist$test$labels)),
-                  current_run)
+                                                      y_ = mnist$test$labels)))
 
 

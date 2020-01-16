@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download an associated file from storage. — download_file_from_run • azureml</title>
+<title>Download a file from a run — download_file_from_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,14 @@
 
 
 
-<meta property="og:title" content="Download an associated file from storage. — download_file_from_run" />
+<meta property="og:title" content="Download a file from a run — download_file_from_run" />
 
-<meta property="og:description" content="Download an associated file from storage." />
+<meta property="og:description" content="Download a file from the run record. You can download any file that
+was uploaded to the run record via upload_files_to_run() or
+upload_folder_to_run(), or any file that was written out to
+the ./outputs or ./logs folders during a run.
+You can see what files are available to download from the run record
+by calling get_run_file_names()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +70,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +94,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +138,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download an associated file from storage.</h1>
+    <h1>Download a file from a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>download_file_from_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Download an associated file from storage.</p>
+    <p>Download a file from the run record. You can download any file that
+was uploaded to the run record via <code>upload_files_to_run()</code> or
+<code>upload_folder_to_run()</code>, or any file that was written out to
+the <code>./outputs</code> or <code>./logs</code> folders during a run.</p>
+<p>You can see what files are available to download from the run record
+by calling <code>get_run_file_names()</code>.</p>
     
     </div>
 
@@ -142,17 +161,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>the run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name of the artifact to be downloaded</p></td>
+      <td><p>A string of the name of the artifact to be downloaded.</p></td>
     </tr>
     <tr>
       <th>output_file_path</th>
-      <td><p>The local path where to store the artifact</p></td>
+      <td><p>A string of the local path where to download
+the artifact to.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None</p>
     
 
   </div>
@@ -160,7 +184,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
@@ -168,7 +194,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

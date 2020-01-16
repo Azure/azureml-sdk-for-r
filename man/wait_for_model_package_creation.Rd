@@ -2,16 +2,19 @@
 % Please edit documentation in R/model.R
 \name{wait_for_model_package_creation}
 \alias{wait_for_model_package_creation}
-\title{Wait for the package to finish creating.}
+\title{Wait for a model package to finish creating}
 \usage{
 wait_for_model_package_creation(package, show_output = FALSE)
 }
 \arguments{
-\item{package}{Package created with model(s) and dependencies.}
+\item{package}{The \code{ModelPackage} object.}
 
-\item{show_output}{Boolean option to print more verbose output. Defaults to
-FALSE.}
+\item{show_output}{If \code{TRUE}, print more verbose output. Defaults to
+\code{FALSE}.}
+}
+\value{
+None
 }
 \description{
-Wait for the package to finish creating.
+Wait for a model package creation to reach a terminal state.
 }

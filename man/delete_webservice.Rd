@@ -2,13 +2,20 @@
 % Please edit documentation in R/webservice.R
 \name{delete_webservice}
 \alias{delete_webservice}
-\title{Delete this Webservice from its associated workspace.}
+\title{Delete a web service from a given workspace}
 \usage{
 delete_webservice(webservice)
 }
 \arguments{
-\item{webservice}{The webservice object.}
+\item{webservice}{The \code{AciWebservice} or \code{AksWebservice} object.}
+}
+\value{
+None
 }
 \description{
-Delete this Webservice from its associated workspace.
+Delete a deployed ACI or AKS web service from the given workspace.
+This function call is not asynchronous; it runs until the resource is
+deleted.
+
+To delete a \code{LocalWebservice} see \code{delete_local_webservice()}.
 }

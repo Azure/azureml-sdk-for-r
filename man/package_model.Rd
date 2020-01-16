@@ -2,28 +2,66 @@
 % Please edit documentation in R/model.R
 \name{package_model}
 \alias{package_model}
-\title{Create a model package in the form of a Docker image or Dockerfile build
-context}
+\title{Create a model package that packages all the assets needed to host a
+model as a web service}
 \usage{
 package_model(workspace, models, inference_config,
   generate_dockerfile = FALSE)
 }
 \arguments{
-\item{workspace}{The workspace in which to create the package.}
+\item{workspace}{The \code{Workspace} object.}
 
-\item{models}{A list of Model objects to include in the package. Can be an
-empty list.}
+\item{models}{A list of \code{Model} objects to include in the package. Can
+be an empty list.}
 
-\item{inference_config}{An InferenceConfig object to configure the
-operation of the models. This must include an Environment object.}
+\item{inference_config}{The \code{InferenceConfig} object to configure the
+operation of the models.}
 
-\item{generate_dockerfile}{Whether to create a Dockerfile that can be run
-locally instead of building an image.}
+\item{generate_dockerfile}{If \code{TRUE}, will create a Dockerfile that
+can be run locally instead of building an image.}
 }
 \value{
-A ModelPackage object.
+The \code{ModelPackage} object.
 }
 \description{
-Create a model package in the form of a Docker image or Dockerfile build
-context
+In some cases, you might want to create a Docker image without deploying
+the model (for example, if you plan to deploy to Azure App Service). Or
+you might want to download the image and run it on a local Docker installation.
+You might even want to download the files used to build the image, inspect
+them, modify them, and build the image manually.
+
+Model packaging enables you to do these things. \code{package_model()} packages all
+the assets needed to host a model as a web service and allows you to download
+either a fully built Docker image or the files needed to build one. There are
+two ways to use model packaging:
+\itemize{
+\item \strong{Download a packaged model}: Download a Docker image that contains the model
+and other files needed to host it as a web service.
+\item \strong{Generate a Dockerfile}: Download the Dockerfile, model, entry script, and
+other assets needed to build a Docker image. You can then inspect the files or
+make changes before you build the image locally. To use this method, make sure
+to set \code{generate_dockerfile = TRUE}.
+With either scenario, you will need to have Docker installed in your
+development environment.
+}
+}
+\examples{
+# Package a registered model
+\dontrun{
+ws <- load_workspace_from_config()
+model <- get_model(ws, name = "my_model")
+r_env <- r_environment(name = "r_env")
+inference_config <- inference_config(entry_script = "score.R",
+                                     source_directory = ".",
+                                     environment = r_env)
+package <- package_model(ws,
+                         models = list(model),
+                         inference_config = inference_config)
+wait_for_model_package_creation(show_output = TRUE)
+}
+}
+\seealso{
+\code{wait_for_model_package_creation()}, \code{get_model_package_container_registry()},
+\code{get_model_package_creation_logs()}, \code{pull_model_package_image()},
+\code{save_model_package_files()}
 }

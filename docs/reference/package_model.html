@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a model package in the form of a Docker image or Dockerfile build
-context — package_model • azureml</title>
+<title>Create a model package that packages all the assets needed to host a
+model as a web service — package_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +33,28 @@ context — package_model • azureml</title>
 
 
 
-<meta property="og:title" content="Create a model package in the form of a Docker image or Dockerfile build
-context — package_model" />
+<meta property="og:title" content="Create a model package that packages all the assets needed to host a
+model as a web service — package_model" />
 
-<meta property="og:description" content="Create a model package in the form of a Docker image or Dockerfile build
-context" />
+<meta property="og:description" content="In some cases, you might want to create a Docker image without deploying
+the model (for example, if you plan to deploy to Azure App Service). Or
+you might want to download the image and run it on a local Docker installation.
+You might even want to download the files used to build the image, inspect
+them, modify them, and build the image manually.
+Model packaging enables you to do these things. package_model() packages all
+the assets needed to host a model as a web service and allows you to download
+either a fully built Docker image or the files needed to build one. There are
+two ways to use model packaging:
+Download a packaged model: Download a Docker image that contains the model
+and other files needed to host it as a web service.
+Generate a Dockerfile: Download the Dockerfile, model, entry script, and
+other assets needed to build a Docker image. You can then inspect the files or
+make changes before you build the image locally. To use this method, make sure
+to set generate_dockerfile = TRUE.
+With either scenario, you will need to have Docker installed in your
+development environment.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -68,8 +85,8 @@ context" />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -77,7 +94,7 @@ context" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -92,18 +109,27 @@ context" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -127,16 +153,33 @@ context" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a model package in the form of a Docker image or Dockerfile build
-context</h1>
+    <h1>Create a model package that packages all the assets needed to host a
+model as a web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>package_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a model package in the form of a Docker image or Dockerfile build
-context</p>
+    <p>In some cases, you might want to create a Docker image without deploying
+the model (for example, if you plan to deploy to Azure App Service). Or
+you might want to download the image and run it on a local Docker installation.
+You might even want to download the files used to build the image, inspect
+them, modify them, and build the image manually.</p>
+<p>Model packaging enables you to do these things. <code>package_model()</code> packages all
+the assets needed to host a model as a web service and allows you to download
+either a fully built Docker image or the files needed to build one. There are
+two ways to use model packaging:</p><ul>
+<li><p><strong>Download a packaged model</strong>: Download a Docker image that contains the model
+and other files needed to host it as a web service.</p></li>
+<li><p><strong>Generate a Dockerfile</strong>: Download the Dockerfile, model, entry script, and
+other assets needed to build a Docker image. You can then inspect the files or
+make changes before you build the image locally. To use this method, make sure
+to set <code>generate_dockerfile = TRUE</code>.
+With either scenario, you will need to have Docker installed in your
+development environment.</p></li>
+</ul>
+
     
     </div>
 
@@ -148,30 +191,50 @@ context</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace in which to create the package.</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>models</th>
-      <td><p>A list of Model objects to include in the package. Can be an
-empty list.</p></td>
+      <td><p>A list of <code>Model</code> objects to include in the package. Can
+be an empty list.</p></td>
     </tr>
     <tr>
       <th>inference_config</th>
-      <td><p>An InferenceConfig object to configure the
-operation of the models. This must include an Environment object.</p></td>
+      <td><p>The <code>InferenceConfig</code> object to configure the
+operation of the models.</p></td>
     </tr>
     <tr>
       <th>generate_dockerfile</th>
-      <td><p>Whether to create a Dockerfile that can be run
-locally instead of building an image.</p></td>
+      <td><p>If <code>TRUE</code>, will create a Dockerfile that
+can be run locally instead of building an image.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A ModelPackage object.</p>
+    <p>The <code>ModelPackage</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>wait_for_model_package_creation()</code>, <code>get_model_package_container_registry()</code>,
+<code>get_model_package_creation_logs()</code>, <code>pull_model_package_image()</code>,
+<code>save_model_package_files()</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Package a registered model</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>get_model</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'>r_environment</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"r_env"</span>)
+<span class='no'>inference_config</span> <span class='kw'>&lt;-</span> <span class='fu'>inference_config</span>(<span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"score.R"</span>,
+                                     <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                                     <span class='kw'>environment</span> <span class='kw'>=</span> <span class='no'>r_env</span>)
+<span class='no'>package</span> <span class='kw'>&lt;-</span> <span class='fu'>package_model</span>(<span class='no'>ws</span>,
+                         <span class='kw'>models</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model</span>),
+                         <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='no'>inference_config</span>)
+<span class='fu'>wait_for_model_package_creation</span>(<span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -179,7 +242,11 @@ locally instead of building an image.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -187,7 +254,7 @@ locally instead of building an image.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

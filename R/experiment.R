@@ -2,21 +2,19 @@
 # Licensed under the MIT license.
 
 #' Create an Azure Machine Learning experiment
-#'
 #' @description
 #' An experiment is a grouping of many runs from a specified script.
-#'
 #' @param workspace The `Workspace` object.
 #' @param name A string of the experiment name. The name must be between
 #' 3-36 characters, start with a letter or number, and can only contain
 #' letters, numbers, underscores, and dashes.
 #' @return The `Experiment` object.
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
-#' ```
+#' }
 #' @seealso
 #' `submit_experiment()`
 #' @md
@@ -25,7 +23,6 @@ experiment <- function(workspace, name) {
 }
 
 #' Submit an experiment and return the active created run
-#'
 #' @description
 #' `submit_experiment()` is an asynchronous call to Azure Machine Learning
 #' service to execute a trial on local or remote compute. Depending on the
@@ -44,9 +41,9 @@ experiment <- function(workspace, name) {
 #' `list("tag" = "value")`.
 #' @return The `ScriptRun` or `HyperDriveRun` object.
 #' @export
-#' @section Examples:
-#' The following example submits an Estimator experiment.
-#' ```
+#' @examples
+#' # This example submits an Estimator experiment
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' compute_target <- get_compute(ws, cluster_name = 'mycluster')
 #' exp <- experiment(ws, name = 'myexperiment')
@@ -54,10 +51,7 @@ experiment <- function(workspace, name) {
 #'                  entry_script = 'train.R',
 #'                  compute_target = compute_target)
 #' run <- submit_experiment(exp, est)
-#' ```
-#'
-#' For an example of submitting a HyperDrive experiment, see the
-#' "Examples" section of `hyperdrive_config()`.
+#' }
 #' @seealso
 #' `estimator()`, `hyperdrive_config()`
 #' @md
@@ -66,7 +60,6 @@ submit_experiment <- function(experiment, config, tags = NULL) {
 }
 
 #' Return a generator of the runs for an experiment
-#'
 #' @description
 #' Return a generator of the runs for an experiment, in reverse
 #' chronological order.
@@ -89,4 +82,43 @@ get_runs_in_experiment <- function(experiment,
                       tags = tags,
                       properties = properties,
                       include_children = include_children)
+}
+
+#' Create an interactive logging run
+#' @description
+#' Create an interactive run that allows the user to log
+#' metrics and artifacts to a run locally.
+#'
+#' Any metrics that are logged during the interactive run session
+#' are added to the run record in the experiment. If an output
+#' directory is specified, the contents of that directory is
+#' uploaded as run artifacts upon run completion.
+#'
+#' This method is useful if you would like to add experiment
+#' tracking and artifact logging to the corresponding run record
+#' in Azure ML for local runs without have to submit an experiment
+#' run to a compute target with `submit_experiment()`.
+#' @param experiment The `Experiment` object.
+#' @param outputs (Optional) A string of the local path to an
+#' outputs directory to track.
+#' @param snapshot_directory (Optional) Directory to take snapshot of.
+#' Setting to `NULL` will take no snapshot.
+#' @return The `Run` object of the started run.
+#' @export
+#' @examples
+#' \dontrun{
+#' ws <- load_workspace_from_config()
+#' exp <- experiment(ws, name = 'myexperiment')
+#' run <- start_logging_run(exp)
+#' log_metric_to_run("Accuracy", 0.9)
+#' complete_run(run)
+#' }
+#' @seealso
+#' `complete_run()`
+#' @md
+start_logging_run <- function(experiment,
+                              outputs = NULL,
+                              snapshot_directory = NULL) {
+  experiment$start_logging(outputs = outputs,
+                           snapshot_directory = snapshot_directory)
 }

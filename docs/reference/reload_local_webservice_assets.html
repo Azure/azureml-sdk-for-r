@@ -6,12 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead. — reload_local_webservice_assets • azureml</title>
+<title>Reload a local web service's entry script and dependencies — reload_local_webservice_assets • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,19 +32,13 @@ To handle those changes call LocalWebservice.update(), instead. — reload_local
 
 
 
-<meta property="og:title" content="Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead. — reload_local_webservice_assets" />
+<meta property="og:title" content="Reload a local web service's entry script and dependencies — reload_local_webservice_assets" />
 
-<meta property="og:description" content="Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead." />
+<meta property="og:description" content="This restarts the service's container with copies of updated assets,
+including the entry script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to the environment
+will not be reflected in the reloaded local web service. To handle those
+changes call update_local_webservice() instead." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,8 +69,8 @@ To handle those changes call LocalWebservice.update(), instead." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -89,7 +78,7 @@ To handle those changes call LocalWebservice.update(), instead." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -104,18 +93,27 @@ To handle those changes call LocalWebservice.update(), instead." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -139,24 +137,18 @@ To handle those changes call LocalWebservice.update(), instead." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead.</h1>
+    <h1>Reload a local web service's entry script and dependencies</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice-local.R'><code>R/webservice-local.R</code></a></small>
     <div class="hidden name"><code>reload_local_webservice_assets.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead.</p>
+    <p>This restarts the service's container with copies of updated assets,
+including the entry script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to the environment
+will not be reflected in the reloaded local web service. To handle those
+changes call <code>update_local_webservice()</code> instead.</p>
     
     </div>
 
@@ -167,13 +159,18 @@ To handle those changes call LocalWebservice.update(), instead.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>LocalWebservice object.</p></td>
+      <td><p>The <code>LocalWebservice</code> object.</p></td>
     </tr>
     <tr>
       <th>wait</th>
-      <td><p>Wait for the service's container to reach a healthy state.</p></td>
+      <td><p>If <code>TRUE</code>, wait for the service's container to reach a
+healthy state. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None</p>
     
 
   </div>
@@ -181,7 +178,9 @@ To handle those changes call LocalWebservice.update(), instead.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
@@ -189,7 +188,7 @@ To handle those changes call LocalWebservice.update(), instead.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

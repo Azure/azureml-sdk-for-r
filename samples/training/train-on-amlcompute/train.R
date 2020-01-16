@@ -1,9 +1,9 @@
 # This script loads a dataset of which the last column is supposed to be the
-#class and logs the accuracy
+# class and logs the accuracy
 
-library("azureml")
-library("caret")
-library("optparse")
+library(azuremlsdk)
+library(caret)
+library(optparse)
 
 options <- list(
     make_option(c("-d", "--data_folder"))
@@ -35,8 +35,7 @@ predictions <- predict(model, test_data)
 conf_matrix <- confusionMatrix(predictions, test_data$Species)
 message(conf_matrix)
 
-current_run <- get_current_run()
-log_metric_to_run(metric, conf_matrix$overall["Accuracy"], current_run)
+log_metric_to_run(metric, conf_matrix$overall["Accuracy"])
 
 saveRDS(model, file = "./outputs/model.rds")
 message("Model saved")

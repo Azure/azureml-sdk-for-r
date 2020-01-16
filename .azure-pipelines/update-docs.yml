@@ -31,17 +31,15 @@ steps:
         R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE);
               .libPaths(Sys.getenv("R_LIBS_USER"));
               devtools::install_deps(upgrade = FALSE);
-              unlink("man", recursive=TRUE, force=TRUE);
-              roxygen2::roxygenise();
               unlink("docs", recursive=TRUE, force=TRUE);
               pkgdown::build_site();'
         retVal=$?
         if [ $retVal -ne 0 ]; then
-            echo "Failed to generate documents!! Exiting..."
+            echo "Failed to generate pkgdown docs!! Exiting..."
             exit $retVal
         fi
         echo GIT ADD
-        git add man/* docs/* DESCRIPTION NAMESPACE
+        git add docs/*
         echo GIT COMMIT
         git commit -m "Update R SDK docs via Build $(Build.BuildNumber) [skip ci]"
         echo GIT STATUS

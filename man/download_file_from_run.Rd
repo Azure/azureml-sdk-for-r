@@ -2,17 +2,27 @@
 % Please edit documentation in R/run.R
 \name{download_file_from_run}
 \alias{download_file_from_run}
-\title{Download an associated file from storage.}
+\title{Download a file from a run}
 \usage{
 download_file_from_run(run, name, output_file_path = NULL)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 
-\item{name}{The name of the artifact to be downloaded}
+\item{name}{A string of the name of the artifact to be downloaded.}
 
-\item{output_file_path}{The local path where to store the artifact}
+\item{output_file_path}{A string of the local path where to download
+the artifact to.}
+}
+\value{
+None
 }
 \description{
-Download an associated file from storage.
+Download a file from the run record. You can download any file that
+was uploaded to the run record via \code{upload_files_to_run()} or
+\code{upload_folder_to_run()}, or any file that was written out to
+the \code{./outputs} or \code{./logs} folders during a run.
+
+You can see what files are available to download from the run record
+by calling \code{get_run_file_names()}.
 }

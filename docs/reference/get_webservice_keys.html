@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth keys for this Webservice. — get_webservice_keys • azureml</title>
+<title>Retrieve auth keys for a web service — get_webservice_keys • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,21 @@
 
 
 
-<meta property="og:title" content="Retrieve auth keys for this Webservice. — get_webservice_keys" />
+<meta property="og:title" content="Retrieve auth keys for a web service — get_webservice_keys" />
 
-<meta property="og:description" content="Retrieve auth keys for this Webservice." />
+<meta property="og:description" content="Get the authentication keys for a web service that is deployed
+with key-based authentication enabled. In order to enable
+key-based authentication, set the auth_enabled = TRUE parameter
+when you are creating or updating a deployment (either
+aci_webservice_deployment_config() or
+aks_webservice_deployment_config() for creation and
+update_aci_webservice() or update_aks_webservice() for updating).
+Note that key-based auth is enabled by default for AksWebservice
+but not for AciWebservice.
+To check if a web service has key-based auth enabled, you can
+access the following boolean property from the Webservice object:
+service$auth_enabled
+Not supported for LocalWebservice deployments." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +77,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +86,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +101,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +145,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth keys for this Webservice.</h1>
+    <h1>Retrieve auth keys for a web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>get_webservice_keys.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve auth keys for this Webservice.</p>
+    <p>Get the authentication keys for a web service that is deployed
+with key-based authentication enabled. In order to enable
+key-based authentication, set the <code>auth_enabled = TRUE</code> parameter
+when you are creating or updating a deployment (either
+<code>aci_webservice_deployment_config()</code> or
+<code>aks_webservice_deployment_config()</code> for creation and
+<code>update_aci_webservice()</code> or <code>update_aks_webservice()</code> for updating).
+Note that key-based auth is enabled by default for <code>AksWebservice</code>
+but not for <code>AciWebservice</code>.</p>
+<p>To check if a web service has key-based auth enabled, you can
+access the following boolean property from the Webservice object:
+<code>service$auth_enabled</code></p>
+<p>Not supported for <code>LocalWebservice</code> deployments.</p>
     
     </div>
 
@@ -142,13 +175,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>AciWebservice</code> or <code>AksWebservice</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The auth keys for this Webservice</p>
+    <p>A list of two strings corresponding to the primary and
+secondary authentication keys.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>generate_new_webservice_key()</code></p></div>
     
 
   </div>
@@ -158,6 +196,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
@@ -166,7 +206,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

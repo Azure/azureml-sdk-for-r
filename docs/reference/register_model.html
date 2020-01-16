@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Register a model with the provided workspace. — register_model • azureml</title>
+<title>Register a model to a given workspace — register_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,18 @@
 
 
 
-<meta property="og:title" content="Register a model with the provided workspace. — register_model" />
+<meta property="og:title" content="Register a model to a given workspace — register_model" />
 
-<meta property="og:description" content="Register a model with the provided workspace." />
+<meta property="og:description" content="Register a model to the given workspace. A registered model is a logical
+container for one or more files that make up your model. For example, if
+you have a model that's stored in multiple files, you can register them
+as a single model in your workspace. After registration, you can then
+download or deploy the registered model and receive all the files that
+were registered.
+Models are identified by name and version. Each time you register a
+model with the same name as an existing one, your workspace's model
+registry assumes that it's a new version. The version is incremented,
+and the new model is registered under the same name." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +74,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +83,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +98,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,65 +142,90 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Register a model with the provided workspace.</h1>
+    <h1>Register a model to a given workspace</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>register_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Register a model with the provided workspace.</p>
+    <p>Register a model to the given workspace. A registered model is a logical
+container for one or more files that make up your model. For example, if
+you have a model that's stored in multiple files, you can register them
+as a single model in your workspace. After registration, you can then
+download or deploy the registered model and receive all the files that
+were registered.</p>
+<p>Models are identified by name and version. Each time you register a
+model with the same name as an existing one, your workspace's model
+registry assumes that it's a new version. The version is incremented,
+and the new model is registered under the same name.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The workspace to register the model under</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>model_path</th>
-      <td><p>String which points to the path on the local file system
-where the model assets are located. This can be a direct pointer to a single
-file or folder. If pointing to a folder, the child_paths parameter can be
-used to specify individual files to bundle together as the Model object,
-as opposed to using the entire contents of the folder.</p></td>
+      <td><p>A string of the path on the local file system where
+the model assets are located. This can be a direct pointer to a single
+file or folder. If pointing to a folder, the <code>child_paths</code> parameter can
+be used to specify individual files to bundle together as the <code>Model</code>
+object, as opposed to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>model_name</th>
-      <td><p>The name to register the model with</p></td>
+      <td><p>A string of the name to register the model with.</p></td>
+    </tr>
+    <tr>
+      <th>datasets</th>
+      <td><p>A list of tuples where the first element describes the
+dataset-model relationship and the second element is the dataset.</p></td>
     </tr>
     <tr>
       <th>tags</th>
-      <td><p>Dictionary of key value tags to give the model</p></td>
+      <td><p>A named list of key-value tags to give the model, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code></p></td>
     </tr>
     <tr>
       <th>properties</th>
-      <td><p>Dictionary of key value properties to give the model.
-These properties cannot be changed after model creation, however new key
-value pairs can be added</p></td>
+      <td><p>A named list of key-value properties to give the model,
+e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a></code>.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>A text description of the model</p></td>
+      <td><p>A string of the text description of the model.</p></td>
     </tr>
     <tr>
       <th>child_paths</th>
-      <td><p>If provided in conjunction with a model_path to a folder,
-only the specified files will be bundled into the Model object.</p></td>
+      <td><p>A list of strings of child paths of a folder specified
+by <code>model_name</code>. Must be provided in conjunction with a <code>model_path</code>
+pointing to a folder; only the specified files will be bundled into the
+<code>Model</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The registered Model object</p>
+    <p>The <code>Model</code> object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Registering a model from a single file</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>register_model</span>(<span class='no'>ws</span>,
+                        <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='st'>"my_model.rds"</span>,
+                        <span class='kw'>model_name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -190,7 +233,9 @@ only the specified files will be bundled into the Model object.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -198,7 +243,7 @@ only the specified files will be bundled into the Model object.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

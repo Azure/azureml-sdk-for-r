@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wait for a cluster to finish provisioning — wait_for_provisioning_completion • azureml</title>
+<title>Wait for a cluster to finish provisioning — wait_for_provisioning_completion • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -66,8 +66,8 @@ create_aml_compute() or create_aks_compute() call." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -75,7 +75,7 @@ create_aml_compute() or create_aks_compute() call." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -90,18 +90,27 @@ create_aml_compute() or create_aks_compute() call." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -133,7 +142,7 @@ create_aml_compute() or create_aks_compute() call." />
     <div class="ref-description">
     
     <p>Wait for a cluster to finish provisioning. Typically invoked after a
-<code><a href='create_aml_compute.html'>create_aml_compute()</a></code> or <code><a href='create_aks_compute.html'>create_aks_compute()</a></code> call.</p>
+<code>create_aml_compute()</code> or <code>create_aks_compute()</code> call.</p>
     
     </div>
 
@@ -152,22 +161,13 @@ create_aml_compute() or create_aks_compute() call." />
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-<p>Wait for an AmlCompute cluster to finish provisioning.</p><pre>ws &lt;- load_workspace_from_config()
-compute_target &lt;- create_aml_compute(ws,
-                                     cluster_name = 'mycluster',
-                                     vm_size = 'STANDARD_D2_V2',
-                                     max_nodes = 1)
-wait_for_provisioning_completion(compute_target)
-</pre>
-
+    <p>None</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='create_aml_compute.html'>create_aml_compute()</a></code>, <code><a href='create_aks_compute.html'>create_aks_compute()</a></code></p></div>
+    <div class='dont-index'><p><code>create_aml_compute()</code>, <code>create_aks_compute()</code></p></div>
     
 
   </div>
@@ -176,7 +176,7 @@ wait_for_provisioning_completion(compute_target)
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
@@ -187,7 +187,7 @@ wait_for_provisioning_completion(compute_target)
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

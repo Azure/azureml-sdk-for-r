@@ -2,18 +2,35 @@
 % Please edit documentation in R/model.R
 \name{save_model_package_files}
 \alias{save_model_package_files}
-\title{Save the package output to a local directory.
-This can only be used with a Dockerfile package.}
+\title{Save a Dockerfile and dependencies from a \code{ModelPackage} to
+your local file system}
 \usage{
 save_model_package_files(package, output_directory)
 }
 \arguments{
-\item{package}{Package created with model(s) and dependencies.}
+\item{package}{The \code{ModelPackage} object.}
 
-\item{output_directory}{Local directory that will be created to contain
-the contents of the package.}
+\item{output_directory}{A string of the local directory that
+will be created to contain the contents of the package.}
+}
+\value{
+None
 }
 \description{
-Save the package output to a local directory.
-This can only be used with a Dockerfile package.
+Download the Dockerfile, model, and other assets needed to build
+an image locally from a created \code{ModelPackage}.
+
+This can only be used with a Dockerfile \code{ModelPackage} (where
+\code{package_model()} was called with \code{generate_dockerfile = TRUE} to
+indicated that you wanted only the files and not a fully built image).
+
+\code{save_model_package_files()} downloads the files needed to build the
+image to the \code{output_directory}. The Dockerfile included in the saved
+files references a base image stored in an Azure container registry.
+When you build the image on your local Docker installation, you will
+need the address, username, and password to authenticate to the registry.
+You can get this information using \code{get_model_package_container_registry()}.
+}
+\seealso{
+\code{package_model()}, \code{get_model_package_container_registry()}
 }

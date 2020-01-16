@@ -2,26 +2,31 @@
 % Please edit documentation in R/webservice-local.R
 \name{update_local_webservice}
 \alias{update_local_webservice}
-\title{Update the LocalWebservice with provided properties.
-Values left as None will remain unchanged in this LocalWebservice.}
+\title{Update a local web service}
 \usage{
 update_local_webservice(webservice, models = NULL,
   deployment_config = NULL, wait = FALSE, inference_config = NULL)
 }
 \arguments{
-\item{webservice}{LocalWebservice object.}
+\item{webservice}{The \code{LocalWebservice} object.}
 
-\item{models}{A new list of models contained in the LocalWebservice.}
+\item{models}{A list of \code{Model} objects to package into the updated service.}
 
-\item{deployment_config}{Deployment configuration options to apply to the
-LocalWebservice.}
+\item{deployment_config}{A \code{LocalWebserviceDeploymentConfiguration} to
+apply to the web service.}
 
-\item{wait}{Wait for the service's container to reach a healthy state.}
+\item{wait}{If \code{TRUE}, wait for the service's container to reach a
+healthy state. Defaults to \code{FALSE}.}
 
-\item{inference_config}{An InferenceConfig object used to provide the
-required model deployment properties.}
+\item{inference_config}{An \code{InferenceConfig} object.}
+}
+\value{
+None
 }
 \description{
-Update the LocalWebservice with provided properties.
-Values left as None will remain unchanged in this LocalWebservice.
+Update a local web service with the provided properties. You can update the
+web service to use a new model, a new entry script, or new dependencies
+that can be specified in an inference configuration.
+
+Values left as \code{NULL} will remain unchanged in the service.
 }

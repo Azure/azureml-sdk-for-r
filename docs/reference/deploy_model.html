@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deploy a Webservice from zero or more model objects. — deploy_model • azureml</title>
+<title>Deploy a web service from registered model(s) — deploy_model • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,15 @@
 
 
 
-<meta property="og:title" content="Deploy a Webservice from zero or more model objects. — deploy_model" />
+<meta property="og:title" content="Deploy a web service from registered model(s) — deploy_model" />
 
-<meta property="og:description" content="Deploy a Webservice from zero or more model objects." />
+<meta property="og:description" content="Deploy a web service from zero or more registered models. Types of web
+services that can be deployed are LocalWebservice, which will deploy
+a model locally, and AciWebservice and AksWebservice, which will
+deploy a model to Azure Container Instances (ACI) and Azure Kubernetes
+Service (AKS), respectively.The type of web service deployed will be
+determined by the deployment_config specified. Returns a Webservice
+object corresponding to the deployed web service." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +71,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +95,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +139,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deploy a Webservice from zero or more model objects.</h1>
+    <h1>Deploy a web service from registered model(s)</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
     <div class="hidden name"><code>deploy_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Deploy a Webservice from zero or more model objects.</p>
+    <p>Deploy a web service from zero or more registered models. Types of web
+services that can be deployed are <code>LocalWebservice</code>, which will deploy
+a model locally, and <code>AciWebservice</code> and <code>AksWebservice</code>, which will
+deploy a model to Azure Container Instances (ACI) and Azure Kubernetes
+Service (AKS), respectively.The type of web service deployed will be
+determined by the <code>deployment_config</code> specified. Returns a <code>Webservice</code>
+object corresponding to the deployed web service.</p>
     
     </div>
 
@@ -143,43 +164,77 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>A Workspace object to associate the Webservice with</p></td>
+      <td><p>The <code>Workspace</code> object.</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name to give the deployed service. Must be unique to the
-workspace, only consist of lowercase letters, numbers, or dashes, start with
-a letter, and be between 3 and 32 characters long.</p></td>
+      <td><p>A string of the name to give the deployed service. Must be
+unique to the workspace, only consist of lowercase letters, numbers, or
+dashes, start with a letter, and be between 3 and 32 characters long.</p></td>
     </tr>
     <tr>
       <th>models</th>
-      <td><p>A list of model objects. Can be an empty list.</p></td>
+      <td><p>A list of <code>Model</code> objects. Can be an empty list.</p></td>
     </tr>
     <tr>
       <th>inference_config</th>
-      <td><p>An InferenceConfig object used to determine required
-model properties.</p></td>
+      <td><p>The <code>InferenceConfig</code> object used to describe
+how to configure the model to make predictions.</p></td>
     </tr>
     <tr>
       <th>deployment_config</th>
-      <td><p>A WebserviceDeploymentConfiguration used to
-configure the webservice. If one is not provided, an empty configuration
-object will be used based on the desired target.</p></td>
+      <td><p>The deployment configuration of type
+<code>LocalWebserviceDeploymentConfiguration</code>,
+<code>AciServiceDeploymentConfiguration</code>, or
+<code>AksServiceDeploymentConfiguration</code> used to configure the web service.
+The deployment configuration is specific to the compute target that will
+host the web service. For example, when you deploy a model locally, you
+must specify the port where the service accepts requests. If <code>NULL</code>, an
+empty configuration object will be used based on the desired target
+specified by <code>deployment_target</code>.</p></td>
     </tr>
     <tr>
       <th>deployment_target</th>
-      <td><p>A azureml.core.ComputeTarget to deploy the
-Webservice to. As Azure Container Instances has no associated
-azureml.core.ComputeTarget, leave this parameter as None to deploy to Azure
-Container Instances.</p></td>
+      <td><p>The compute target to deploy the model to.
+You will only need to specify this parameter if you are deploy to AKS,
+in which case provide an <code>AksCompute</code> object. If you are deploying locally
+or to ACI, leave this parameter as <code>NULL</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Webservice object corresponding to the deployed webservice</p>
+    <p>The <code>LocalWebservice</code>, <code>AciWebservice</code>, or <code>AksWebservice</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
     
 
+<p>If you encounter any issue in deploying your web service, please visit this
+<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-troubleshoot-deployment'>troubleshooting guide</a>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>inference_config()</code>, <code>aci_webservice_deployment_config()</code>,
+<code>aks_webservice_deployment_config()</code>, <code>local_webservice_deployment_config()</code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>get_model</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
+<span class='no'>r_env</span> <span class='kw'>&lt;-</span> <span class='fu'>r_environment</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"r_env"</span>)
+<span class='no'>inference_config</span> <span class='kw'>&lt;-</span> <span class='fu'>inference_config</span>(<span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"score.R"</span>,
+                                     <span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                                     <span class='kw'>environment</span> <span class='kw'>=</span> <span class='no'>r_env</span>)
+<span class='no'>deployment_config</span> <span class='kw'>&lt;-</span> <span class='fu'>aci_webservice_deployment_config</span>(<span class='kw'>cpu_cores</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>memory_gb</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='no'>service</span> <span class='kw'>&lt;-</span> <span class='fu'>deploy_model</span>(<span class='no'>ws</span>,
+                        <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"my_webservice"</span>,
+                        <span class='kw'>models</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>model</span>),
+                        <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='no'>inference_config</span>,
+                        <span class='kw'>deployment_config</span> <span class='kw'>=</span> <span class='no'>deployment_config</span>)
+<span class='fu'>wait_for_deployment</span>(<span class='no'>service</span>, <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -187,7 +242,13 @@ Container Instances.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -195,7 +256,7 @@ Container Instances.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

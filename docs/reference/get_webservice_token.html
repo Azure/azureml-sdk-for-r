@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve auth token for this Webservice, scoped to the current user. — get_webservice_token • azureml</title>
+<title>Retrieve the auth token for a web service — get_webservice_token • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,23 @@
 
 
 
-<meta property="og:title" content="Retrieve auth token for this Webservice, scoped to the current user. — get_webservice_token" />
+<meta property="og:title" content="Retrieve the auth token for a web service — get_webservice_token" />
 
-<meta property="og:description" content="Retrieve auth token for this Webservice, scoped to the current user." />
+<meta property="og:description" content="Get the authentication token, scoped to the current user,
+for a web service that was deployed with token-based authentication
+enabled. Token-based authentication requires clients to use an Azure
+Active Directory account to request an authentication token, which is
+used to make requests to the deployed service. Only available for
+AKS deployments.
+In order to enable token-based authentication, set the
+token_auth_enabled = TRUE parameter when you are creating or
+updating a deployment (aks_webservice_deployment_config() for creation
+or update_aks_webservice() for updating). Note that you cannot have both
+key-based authentication and token-based authentication enabled.
+Token-based authentication is not enabled by default.
+To check if a web service has token-based auth enabled, you can
+access the following boolean property from the Webservice object:
+service$token_auth_enabled" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +79,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +103,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +147,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve auth token for this Webservice, scoped to the current user.</h1>
+    <h1>Retrieve the auth token for a web service</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/webservice.R'><code>R/webservice.R</code></a></small>
     <div class="hidden name"><code>get_webservice_token.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieve auth token for this Webservice, scoped to the current user.</p>
+    <p>Get the authentication token, scoped to the current user,
+for a web service that was deployed with token-based authentication
+enabled. Token-based authentication requires clients to use an Azure
+Active Directory account to request an authentication token, which is
+used to make requests to the deployed service. Only available for
+AKS deployments.</p>
+<p>In order to enable token-based authentication, set the
+<code>token_auth_enabled = TRUE</code> parameter when you are creating or
+updating a deployment (<code>aks_webservice_deployment_config()</code> for creation
+or <code>update_aks_webservice()</code> for updating). Note that you cannot have both
+key-based authentication and token-based authentication enabled.
+Token-based authentication is not enabled by default.</p>
+<p>To check if a web service has token-based auth enabled, you can
+access the following boolean property from the Webservice object:
+<code>service$token_auth_enabled</code></p>
     
     </div>
 
@@ -142,14 +179,16 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>webservice</th>
-      <td><p>The webservice object.</p></td>
+      <td><p>The <code>AksWebservice</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The auth token for this Webservice and when it should be
-refreshed after.</p>
+    <p>A list of string and datetime corresponding to the auth token
+and the token's expiration time. You will need to request a new
+token using <code>get_webservice_token()</code> after the token's expiration
+time.</p>
     
 
   </div>
@@ -167,7 +206,7 @@ refreshed after.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

@@ -2,20 +2,40 @@
 % Please edit documentation in R/run.R
 \name{log_predictions_to_run}
 \alias{log_predictions_to_run}
-\title{Log a predictions to the artifact store.}
+\title{Log a predictions metric to a run}
 \usage{
 log_predictions_to_run(name, value, description = "", run = NULL)
 }
 \arguments{
-\item{name}{The name of the predictions}
+\item{name}{A string of the name of the metric.}
 
-\item{value}{json containing name, version, and data properties}
+\item{value}{A named list containing name, version, and data properties.}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
+}
+\value{
+None
 }
 \description{
-Log a predictions to the artifact store.
+\code{log_predictions_to_run()} logs a metric score that can be used to
+compare the distributions of true target values to the distribution
+of predicted values for a regression task.
+
+The predictions are binned and standard deviations are calculated
+for error bars on a line chart.
+}
+\examples{
+\dontrun{
+data <- list("bin_averages" = c(0.25, 0.75),
+             "bin_errors" = c(0.013, 0.042),
+             "bin_counts" = c(56, 34),
+             "bin_edges" = c(0.0, 0.5, 1.0))
+predictions <- list("schema_type" = "predictions",
+                    "schema_version" = "v1",
+                    "data" = data)
+log_predictions_to_run("mypredictions", predictions)
+}
 }

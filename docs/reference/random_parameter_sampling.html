@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define random sampling over a hyperparameter search space — random_parameter_sampling • azureml</title>
+<title>Define random sampling over a hyperparameter search space — random_parameter_sampling • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -67,8 +67,8 @@ both discrete and continuous hyperparameters." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@ both discrete and continuous hyperparameters." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -91,18 +91,27 @@ both discrete and continuous hyperparameters." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -166,27 +175,21 @@ distribution, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("parame
 <p>In this sampling algorithm, parameter values are chosen from a set of
 discrete values or a distribution over a continuous range. Functions you can
 use include:
-<code><a href='choice.html'>choice()</a></code>, <code><a href='randint.html'>randint()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code>, <code><a href='loguniform.html'>loguniform()</a></code>,
-<code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='normal.html'>normal()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>, <code><a href='lognormal.html'>lognormal()</a></code>, and <code><a href='qlognormal.html'>qlognormal()</a></code>.</p>
-    
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-<pre>param_sampling &lt;- random_parameter_sampling( {
-        'learning_rate': normal(10, 3),
-        'keep_probability': uniform(0.05, 0.1),
-        'batch_size': choice(16, 32, 64, 128)
-    }
-)
-</pre>
-
+<code>choice()</code>, <code>randint()</code>, <code>uniform()</code>, <code>quniform()</code>, <code>loguniform()</code>,
+<code>qloguniform()</code>, <code>normal()</code>, <code>qnormal()</code>, <code>lognormal()</code>, and <code>qlognormal()</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='choice.html'>choice()</a></code>, <code><a href='randint.html'>randint()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code>, <code><a href='loguniform.html'>loguniform()</a></code>,
-<code><a href='qloguniform.html'>qloguniform()</a></code>, <code><a href='normal.html'>normal()</a></code>, <code><a href='qnormal.html'>qnormal()</a></code>, <code><a href='lognormal.html'>lognormal()</a></code>, <code><a href='qlognormal.html'>qlognormal()</a></code></p></div>
+    <div class='dont-index'><p><code>choice()</code>, <code>randint()</code>, <code>uniform()</code>, <code>quniform()</code>, <code>loguniform()</code>,
+<code>qloguniform()</code>, <code>normal()</code>, <code>qnormal()</code>, <code>lognormal()</code>, <code>qlognormal()</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>param_sampling</span> <span class='kw'>&lt;-</span> <span class='fu'>random_parameter_sampling</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"learning_rate"</span> <span class='kw'>=</span> <span class='fu'>normal</span>(<span class='fl'>10</span>, <span class='fl'>3</span>),
+                                                 <span class='st'>"keep_probability"</span> <span class='kw'>=</span> <span class='fu'>uniform</span>(<span class='fl'>0.05</span>, <span class='fl'>0.1</span>),
+                                                 <span class='st'>"batch_size"</span> <span class='kw'>=</span> <span class='fu'>choice</span>(<span class='fl'>16</span>, <span class='fl'>32</span>, <span class='fl'>64</span>, <span class='fl'>128</span>)))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -197,10 +200,10 @@ use include:
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -208,7 +211,7 @@ use include:
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

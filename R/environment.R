@@ -10,10 +10,9 @@
 #' your `Environment` object within that Docker container.
 #'
 #' If the `custom_docker_image` parameter
-#' is not set, Azure ML automatically uses a default base image (CPU or GPU
-#' depending on the `use_gpu` flag) and installs any R packages specified in the
+#' is not set, Azure ML will build a predefined base image (CPU or GPU
+#' depending on the `use_gpu` flag) and install any R packages specified in the
 #' `cran_packages`, `github_packages`, or `custom_url_packages` parameters.
-#' TODO: link to the Dockerfiles of the default base images.
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @param environment_variables A named list of environment variables names
@@ -25,15 +24,14 @@
 #' from local directory or custom URL.
 #' @param custom_docker_image A string of the name of the Docker image from
 #' which the image to use for training or deployment will be built. If not set,
-#' a default CPU-based image will be used as the base image. To use an image
-#' from a private Docker repository, you will also have to specify the
-#' `image_registry_details` parameter.
+#' a predefined Docker image will be used. To use an image from a private Docker
+#' repository, you will also have to specify the `image_registry_details` parameter.
 #' @param image_registry_details A `ContainerRegistry` object of the details of
 #' the Docker image registry for the custom Docker image.
 #' @param use_gpu Indicates whether the environment should support GPUs.
-#' If `TRUE`, a GPU-based default Docker image will be used in the environment.
-#' If `FALSE`, a CPU-based image will be used. Default Docker images (CPU or
-#' GPU) will only be used if the `custom_docker_image` parameter is not set.
+#' If `TRUE`, a predefined GPU-based Docker image will be used in the environment.
+#' If `FALSE`, a predefined CPU-based image will be used. Predefined Docker images
+#' (CPU or GPU) will only be used if the `custom_docker_image` parameter is not set.
 #' @param shm_size A string for the size of the Docker container's shared
 #' memory block. For more information, see
 #' [Docker run reference](https://docs.docker.com/engine/reference/run/)
@@ -52,14 +50,36 @@
 #' a new version of the environment is created when you either submit a run,
 #' deploy a model, or manually register the environment. The versioning allows
 #' you to view changes to the environment over time.
-#' @section Examples:
-#' The following example defines an environment that will use the default
-#' base CPU image and install the additional e1071 package from CRAN.
-#' ```
+#' @section Predefined Docker images:
+#' When submitting a training job or deploying a model, Azure ML runs your
+#' training script or scoring script within a Docker container. If no custom
+#' Docker image is specified with the `custom_docker_image` parameter, Azure
+#' ML will build a predefined CPU or GPU Docker image. The predefine images extend
+#' the Ubuntu 16.04 [Azure ML base images](https://github.com/Azure/AzureML-Containers)
+#' and include the following dependencies:
+#' \tabular{rrr}{
+#' **Dependencies** \tab **Version** \tab **Remarks**\cr
+#' azuremlsdk \tab latest \tab (from GitHub)\cr
+#' R \tab 3.6.0 \tab -\cr
+#' Commonly used R packages \tab - \tab 80+ of the most popular R packages for
+#' data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
+#' and nnet. For the full list of packages included, see
+#' [here](https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md).\cr
+#' Python \tab 3.7.0 \tab -\cr
+#' azureml-defaults \tab latest \tab `azureml-defaults` contains the
+#' `azureml-core` and `applicationinsights` packages of the Python SDK that
+#' are required for tasks such as logging metrics, uploading artifacts, and
+#' deploying models. (from pip)\cr
+#' rpy2 \tab latest \tab (from conda)\cr
+#' CUDA (GPU image only) \tab 10.0 \tab CuDNN (version 7) is also included
+#' }
+#' @examples
+#' # The following example defines an environment that will build the default
+#' # base CPU image.
+#' \dontrun{
 #' r_env <- r_environment(name = 'myr_env',
-#'                        version = '1',
-#'                        cran_packages = c('e1071'))
-#' ```
+#'                        version = '1')
+#' }
 #' @seealso
 #' `estimator()`, `inference_config()`
 #' @md
@@ -87,33 +107,42 @@ r_environment <- function(name, version = NULL,
   }
 
   if (is.null(custom_docker_image)) {
-    processor <- "cpu"
     if (use_gpu) {
-      processor <- "gpu"
+      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base-",
+                                        "gpu:openmpi3.1.2-cuda10.0-cudnn7-",
+                                        "ubuntu16.04")
     }
-    env$docker$base_image <- paste("r-base",
-                                   processor,
-                                   sep = ":")
-    env$docker$base_image_registry$address <-
-      "viennaprivate.azurecr.io"
-  }
+    else {
+      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base:",
+                                        "openmpi3.1.2-ubuntu16.04")
+    }
 
-  # if extra package is specified, generate dockerfile
-  if (!is.null(cran_packages) ||
-      !is.null(github_packages) ||
-      !is.null(custom_url_packages)) {
-    base_image_with_address <- NULL
-    registry_address <- env$docker$base_image_registry$address
-    if (!is.null(env$docker$base_image_registry$address)) {
-      base_image_with_address <- paste(registry_address,
-                                       env$docker$base_image,
-                                       sep = "/")
-    }
     env$docker$base_dockerfile <- generate_docker_file(base_image_with_address,
                                                        cran_packages,
                                                        github_packages,
                                                        custom_url_packages)
     env$docker$base_image <- NULL
+  }
+  else {
+    # if extra package is specified, generate dockerfile
+    if (!is.null(cran_packages) ||
+        !is.null(github_packages) ||
+        !is.null(custom_url_packages)) {
+      base_image_with_address <- env$docker$base_image
+      registry_address <- env$docker$base_image_registry$address
+      if (!is.null(env$docker$base_image_registry$address)) {
+        base_image_with_address <- paste(registry_address,
+                                         env$docker$base_image,
+                                         sep = "/")
+      }
+      env$docker$base_dockerfile <- generate_docker_file(
+        base_image_with_address,
+        cran_packages,
+        github_packages,
+        custom_url_packages,
+        FALSE)
+      env$docker$base_image <- NULL
+    }
   }
 
   invisible(env)
@@ -151,11 +180,11 @@ register_environment <- function(environment, workspace) {
 #' @param name A string of the name of the environment.
 #' @param version A string of the version of the environment.
 #' @return The `Environment` object.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' env <- get_environment(ws, name = 'myenv', version = '1')
-#' ```
+#' }
 #' @export
 #' @md
 get_environment <- function(workspace, name, version = NULL) {
@@ -199,13 +228,31 @@ container_registry <- function(address = NULL,
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.
+#' @param install_system_packages logical parameter to specify if system
+#' packages should be installed at runtime.
+#' @return Dockerfile string
 generate_docker_file <- function(custom_docker_image = NULL,
                                  cran_packages = NULL,
                                  github_packages = NULL,
-                                 custom_url_packages = NULL) {
+                                 custom_url_packages = NULL,
+                                 install_system_packages = TRUE) {
   base_dockerfile <- NULL
   base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
                                                      custom_docker_image))
+
+  if (install_system_packages) {
+    base_dockerfile <- paste0(base_dockerfile,
+                              "RUN conda install -c r -y r-essentials=3.6.0 ",
+                              "r-reticulate rpy2 r-remotes r-e1071 ",
+                              "r-optparse && conda clean -ay && pip ",
+                              "install --no-cache-dir azureml-defaults\n")
+
+    base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
+    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
+                              "install_cran('azuremlsdk', ",
+                              "repos = 'http://cran.us.r-project.org', ",
+                              "upgrade = FALSE)\"\n")
+  }
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {

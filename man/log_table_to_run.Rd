@@ -2,21 +2,33 @@
 % Please edit documentation in R/run.R
 \name{log_table_to_run}
 \alias{log_table_to_run}
-\title{Log a table metric to the run with the given name.}
+\title{Log a table metric to a run}
 \usage{
 log_table_to_run(name, value, description = "", run = NULL)
 }
 \arguments{
-\item{name}{The name of metric}
+\item{name}{A string of the name of metric.}
 
-\item{value}{The table value of the metric (dictionary where keys are
-columns to be posted to the service)}
+\item{value}{The table value of the metric (a named list where the
+element name corresponds to the column name).}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
+}
+\value{
+None
 }
 \description{
-Log a table metric to the run with the given name.
+Log a table metric with the given metric name to the run. The
+table value is a named list where each element corresponds to
+a column of the table.
+}
+\examples{
+\dontrun{
+log_table_to_run("Y over X",
+                 list("x" = c(1, 2, 3)),
+                 list("y" = c(0.6, 0.7, 0.89)))
+}
 }

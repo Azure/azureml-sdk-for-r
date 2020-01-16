@@ -9,14 +9,15 @@
 #' @param keyvault The `Keyvault` object.
 #' @param secrets The named list of secrets to be added to the keyvault,
 #' where element name corresponds to the secret name.
+#' @return None
 #' @export
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
 #' my_secret <- Sys.getenv("MY_SECRET")
 #' keyvault <- get_default_keyvault(ws)
 #' set_secrets(list("mysecret" = my_secret))
-#' ```
+#' }
 #' @md
 set_secrets <- function(keyvault, secrets) {
   keyvault$set_secrets(secrets)
@@ -49,6 +50,7 @@ get_secrets <- function(keyvault, secrets) {
 #' a specified set of secret names.
 #' @param keyvault The `Keyvault` object.
 #' @param secrets A vector of secret names.
+#' @return None
 #' @export
 #' @md
 delete_secrets <- function(keyvault, secrets) {

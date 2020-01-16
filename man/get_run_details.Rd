@@ -2,18 +2,31 @@
 % Please edit documentation in R/run.R
 \name{get_run_details}
 \alias{get_run_details}
-\title{Get the definition, status information, current log files and other details
-of the run.}
+\title{Get the details of a run}
 \usage{
 get_run_details(run)
 }
 \arguments{
-\item{run}{the run object}
+\item{run}{The \code{Run} object.}
 }
 \value{
-Return the details for the run
+A named list of the details for the run.
 }
 \description{
-Get the definition, status information, current log files and other details
-of the run.
+Get the definition, status information, current log files, and
+other details of the run.
+}
+\details{
+The returned list contains the following named elements:
+\itemize{
+\item \emph{runId}: ID of the run.
+\item \emph{target}: The compute target of the run.
+\item \emph{status}: The run's current status.
+\item \emph{startTimeUtc}: UTC time of when the run was started, in ISO8601.
+\item \emph{endTimeUtc}: UTC time of when the run was finished (either
+Completed or Failed), in ISO8601. This element does not exist if
+the run is still in progress.
+\item \emph{properties}: Immutable key-value pairs associated with the run.
+\item \emph{logFiles}: Log files from the run.
+}
 }

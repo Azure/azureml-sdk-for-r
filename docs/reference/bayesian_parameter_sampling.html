@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define Bayesian sampling over a hyperparameter search space — bayesian_parameter_sampling • azureml</title>
+<title>Define Bayesian sampling over a hyperparameter search space — bayesian_parameter_sampling • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -68,8 +68,8 @@ sample improves the reported primary metric." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@ sample improves the reported primary metric." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -92,18 +92,27 @@ sample improves the reported primary metric." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -166,28 +175,22 @@ on the effectiveness of the tuning process. Typically, a smaller number of
 concurrent runs can lead to better sampling convergence, since the smaller
 degree of parallelism increases the number of runs that benefit from
 previously completed runs.</p>
-<p>Bayesian sampling only supports <code><a href='choice.html'>choice()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, and <code><a href='quniform.html'>quniform()</a></code>
+<p>Bayesian sampling only supports <code>choice()</code>, <code>uniform()</code>, and <code>quniform()</code>
 distributions over the search space.</p>
 <p>Bayesian sampling does not support any early termination policy. When
 using Bayesian parameter sampling, <code>early_termination_policy</code> must be
 <code>NULL</code>.</p>
     
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-
-    
-<pre>param_sampling &lt;- bayesian_parameter_sampling( {
-        'learning_rate': uniform(0.05, 0.1),
-        'batch_size': choice(16, 32, 64, 128)
-    }
-)
-</pre>
-
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='choice.html'>choice()</a></code>, <code><a href='uniform.html'>uniform()</a></code>, <code><a href='quniform.html'>quniform()</a></code></p></div>
+    <div class='dont-index'><p><code>choice()</code>, <code>uniform()</code>, <code>quniform()</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>param_sampling</span> <span class='kw'>&lt;-</span> <span class='fu'>bayesian_parameter_sampling</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"learning_rate"</span> <span class='kw'>=</span> <span class='fu'>uniform</span>(<span class='fl'>0.05</span>, <span class='fl'>0.1</span>),
+                                                   <span class='st'>"batch_size"</span> <span class='kw'>=</span> <span class='fu'>choice</span>(<span class='fl'>16</span>, <span class='fl'>32</span>, <span class='fl'>64</span>, <span class='fl'>128</span>)))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -198,10 +201,10 @@ using Bayesian parameter sampling, <code>early_termination_policy</code> must be
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#examples">Examples</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
@@ -209,7 +212,7 @@ using Bayesian parameter sampling, <code>early_termination_policy</code> must be
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

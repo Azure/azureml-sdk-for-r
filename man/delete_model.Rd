@@ -2,13 +2,18 @@
 % Please edit documentation in R/model.R
 \name{delete_model}
 \alias{delete_model}
-\title{Delete this model from its associated workspace.}
+\title{Delete a model from its associated workspace}
 \usage{
 delete_model(model)
 }
 \arguments{
-\item{model}{The model to download}
+\item{model}{The \code{Model} object.}
+}
+\value{
+None
 }
 \description{
-Delete this model from its associated workspace.
+Delete the registered model from its associated workspace. Note that
+you cannot delete a registered model that is being used by an active
+web service deployment.
 }

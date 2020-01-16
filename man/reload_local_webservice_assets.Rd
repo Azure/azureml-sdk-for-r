@@ -2,25 +2,23 @@
 % Please edit documentation in R/webservice-local.R
 \name{reload_local_webservice_assets}
 \alias{reload_local_webservice_assets}
-\title{Reload the LocalWebservice's execution script and dependencies.
-This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead.}
+\title{Reload a local web service's entry script and dependencies}
 \usage{
 reload_local_webservice_assets(webservice, wait = FALSE)
 }
 \arguments{
-\item{webservice}{LocalWebservice object.}
+\item{webservice}{The \code{LocalWebservice} object.}
 
-\item{wait}{Wait for the service's container to reach a healthy state.}
+\item{wait}{If \code{TRUE}, wait for the service's container to reach a
+healthy state. Defaults to \code{FALSE}.}
+}
+\value{
+None
 }
 \description{
-Reload the LocalWebservice's execution script and dependencies.
 This restarts the service's container with copies of updated assets,
-including the execution script and local dependencies, but it does not
-rebuild the underlying image. Accordingly, changes to Conda/pip dependencies
-or custom Docker steps will not be reflected in the reloaded LocalWebservice.
-To handle those changes call LocalWebservice.update(), instead.
+including the entry script and local dependencies, but it does not
+rebuild the underlying image. Accordingly, changes to the environment
+will not be reflected in the reloaded local web service. To handle those
+changes call \code{update_local_webservice()} instead.
 }

@@ -2,17 +2,42 @@
 % Please edit documentation in R/run.R
 \name{upload_folder_to_run}
 \alias{upload_folder_to_run}
-\title{Upload the specified folder to the given prefix name.}
+\title{Upload a folder to a run}
 \usage{
 upload_folder_to_run(name, path, run = NULL)
 }
 \arguments{
-\item{name}{The name of the folder of files to upload.}
+\item{name}{A string of the name of the folder of files to upload.}
 
-\item{path}{The relative local path to the folder to upload.}
+\item{path}{A string of the relative local path to the folder to upload.}
 
-\item{run}{Run object.}
+\item{run}{The \code{Run} object.}
+}
+\value{
+None
 }
 \description{
-Upload the specified folder to the given prefix name.
+Upload the specified folder to the given prefix name to the run
+record.
+
+Note: Runs automatically capture files in the specified output
+directory, which defaults to "./outputs". Use \code{upload_folder_to_run()}
+only when additional files need to be uploaded or an output directory
+is not specified.
+}
+\examples{
+\dontrun{
+ws <- load_workspace_from_config()
+exp <- experiment(ws, name = 'myexperiment')
+
+# Start an interactive logging run
+run <- start_logging_run(exp)
+
+# Upload folder to the run record
+upload_folder_to_run(name = "important_files",
+                     path = "path/on/disk")
+
+# Download a file from the run record
+download_file_from_run("important_files/existing_file.txt", "local_file.txt")
+}
 }

@@ -2,20 +2,75 @@
 % Please edit documentation in R/run.R
 \name{log_accuracy_table_to_run}
 \alias{log_accuracy_table_to_run}
-\title{Log a accuracy table to the artifact store.}
+\title{Log an accuracy table metric to a run}
 \usage{
 log_accuracy_table_to_run(name, value, description = "", run = NULL)
 }
 \arguments{
-\item{name}{The name of the accuracy table}
+\item{name}{A string of the name of the metric.}
 
-\item{value}{json containing name, version, and data properties}
+\item{value}{A named list containing name, version, and data properties.}
 
-\item{description}{An optional metric description}
+\item{description}{(Optional) A string of the metric description.}
 
-\item{run}{Run object. If not specified, will default to current run from
-service context.}
+\item{run}{The \code{Run} object. If not specified, will default
+to the current run from the service context.}
+}
+\value{
+None
 }
 \description{
-Log a accuracy table to the artifact store.
+The accuracy table metric is a multi-use non-scalar metric that can be
+used to produce multiple types of line charts that vary continuously
+over the space of predicted probabilities. Examples of these charts are
+ROC, precision-recall, and lift curves.
+}
+\details{
+The calculation of the accuracy table is similar to the calculation of
+an ROC curve. An ROC curve stores true positive rates and false positive
+rates at many different probability thresholds. The accuracy table stores
+the raw number of true positives, false positives, true negatives, and
+false negatives at many probability thresholds.
+
+There are two methods used for selecting thresholds: "probability" and
+"percentile." They differ in how they sample from the space of predicted
+probabilities.
+
+Probability thresholds are uniformly spaced thresholds between 0 and 1.
+If NUM_POINTS were 5 the probability thresholds would be
+c(0.0, 0.25, 0.5, 0.75, 1.0).
+
+Percentile thresholds are spaced according to the distribution of predicted
+probabilities. Each threshold corresponds to the percentile of the data at
+a probability threshold. For example, if NUM_POINTS were 5, then the first
+threshold would be at the 0th percentile, the second at the 25th percentile,
+the third at the 50th, and so on.
+
+The probability tables and percentile tables are both 3D lists where the
+first dimension represents the class label, the second dimension represents
+the sample at one threshold (scales with NUM_POINTS), and the third dimension
+always has 4 values: TP, FP, TN, FN, and always in that order.
+
+The confusion values (TP, FP, TN, FN) are computed with the one vs. rest
+strategy. See the following link for more details:
+https://en.wikipedia.org/wiki/Multiclass_classification.
+
+N = # of samples in validation dataset (200 in example),
+M = # thresholds = # samples taken from the probability space (5 in example),
+C = # classes in full dataset (3 in example)
+
+Some invariants of the accuracy table:
+\itemize{
+\item TP + FP + TN + FN = N for all thresholds for all classes
+\item TP + FN is the same at all thresholds for any class
+\item TN + FP is the same at all thresholds for any class
+\item Probability tables and percentile tables have shape (C, M, 4)
+}
+
+Note: M can be any value and controls the resolution of the charts.
+This is independent of the dataset, is defined when calculating metrics,
+and trades off storage space, computation time, and resolution.
+
+Class labels should be strings, confusion values should be integers,
+and thresholds should be doubles.
 }

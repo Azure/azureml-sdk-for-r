@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the definition, status information, current log files and other details
-of the run. — get_run_details • azureml</title>
+<title>Get the details of a run — get_run_details • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,10 @@ of the run. — get_run_details • azureml</title>
 
 
 
-<meta property="og:title" content="Get the definition, status information, current log files and other details
-of the run. — get_run_details" />
+<meta property="og:title" content="Get the details of a run — get_run_details" />
 
-<meta property="og:description" content="Get the definition, status information, current log files and other details
-of the run." />
+<meta property="og:description" content="Get the definition, status information, current log files, and
+other details of the run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -68,8 +66,8 @@ of the run." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -77,7 +75,7 @@ of the run." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -92,18 +90,27 @@ of the run." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -127,16 +134,15 @@ of the run." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the definition, status information, current log files and other details
-of the run.</h1>
+    <h1>Get the details of a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>get_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the definition, status information, current log files and other details
-of the run.</p>
+    <p>Get the definition, status information, current log files, and
+other details of the run.</p>
     
     </div>
 
@@ -147,13 +153,28 @@ of the run.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>the run object</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Return the details for the run</p>
+    <p>A named list of the details for the run.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The returned list contains the following named elements:</p><ul>
+<li><p><em>runId</em>: ID of the run.</p></li>
+<li><p><em>target</em>: The compute target of the run.</p></li>
+<li><p><em>status</em>: The run's current status.</p></li>
+<li><p><em>startTimeUtc</em>: UTC time of when the run was started, in ISO8601.</p></li>
+<li><p><em>endTimeUtc</em>: UTC time of when the run was finished (either
+Completed or Failed), in ISO8601. This element does not exist if
+the run is still in progress.</p></li>
+<li><p><em>properties</em>: Immutable key-value pairs associated with the run.</p></li>
+<li><p><em>logFiles</em>: Log files from the run.</p></li>
+</ul>
+
     
 
   </div>
@@ -163,6 +184,8 @@ of the run.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>
@@ -171,7 +194,7 @@ of the run.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

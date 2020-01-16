@@ -8,6 +8,14 @@
 #' of executing an R script. Running an Estimator experiment
 #' (using `submit_experiment()`) will return a `ScriptRun` object and
 #' execute your training script on the specified compute target.
+#'
+#' To define the environment to use for training, you can either directly
+#' provide the environment-related parameters (e.g. `cran_packages`,
+#' `custom_docker_image`) to `estimator()`, or you can provide an
+#' `Environment` object to the `environment` parameter. For more information
+#' on the predefined Docker images that are used for training if
+#' `custom_docker_image` is not specified, see the documentation
+#' [here](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images).
 #' @param source_directory A string of the local directory containing
 #' experiment configuration and code files needed for the training job.
 #' @param compute_target The `AmlCompute` object for the compute target
@@ -32,16 +40,16 @@
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
 #' @param custom_docker_image A string of the name of the Docker image from
-#' which the image to use for training will be built. If not set, a default
-#' CPU-based image will be used as the base image. To use an image from a
+#' which the image to use for training will be built. If not set, a predefined
+#' image will be used as the base image. To use an image from a
 #' private Docker repository, you will also have to specify the
 #' `image_registry_details` parameter.
 #' @param image_registry_details A `ContainerRegistry` object of the details of
 #' the Docker image registry for the custom Docker image.
 #' @param use_gpu Indicates whether the environment to run the experiment should
-#' support GPUs. If `TRUE`, a GPU-based default Docker image will be used in the
-#' environment. If `FALSE`, a CPU-based image will be used. Default Docker
-#' images (CPU or GPU) will only be used if the `custom_docker_image` parameter
+#' support GPUs. If `TRUE`, a predefined GPU-based Docker image will be used in the
+#' environment. If `FALSE`, a predefined CPU-based image will be used. Predefined
+#' Docker images (CPU or GPU) will only be used if the `custom_docker_image` parameter
 #' is not set.
 #' @param environment_variables A named list of environment variables names
 #' and values. These environment variables are set on the process where the user
@@ -59,6 +67,8 @@
 #' , `image_registry_details`, `use_gpu`, `environment_variables`, `shm_size`,
 #' `cran_packages`, `github_packages`, and `custom_url_packages` and if set
 #' will take precedence over those parameters.
+#' @param inputs A list of DataReference objects or DatasetConsumptionConfig
+#' objects to use as input.
 #' @return The `Estimator` object.
 #' @export
 #' @seealso
@@ -79,11 +89,12 @@ estimator <- function(source_directory,
                       environment_variables = NULL,
                       shm_size = NULL,
                       max_run_duration_seconds = NULL,
-                      environment = NULL) {
+                      environment = NULL,
+                      inputs = NULL) {
 
   if (is.null(environment)) {
     environment <- r_environment(
-      name = NULL,
+      name = "estimatorenv",
       environment_variables = environment_variables,
       cran_packages = cran_packages,
       github_packages = github_packages,
@@ -102,7 +113,8 @@ estimator <- function(source_directory,
     entry_script = entry_script,
     script_params = script_params,
     max_run_duration_seconds = max_run_duration_seconds,
-    environment_definition = environment)
+    environment_definition = environment,
+    inputs = inputs)
 
   run_config <- est$run_config
   run_config$framework <- "R"

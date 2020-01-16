@@ -1,49 +1,54 @@
 context("model tests")
+source("utils.R")
 
 test_that("get, register, download, serialize, deserialize and delete model", {
-    ws <- existing_ws
-    
-    tmp_dir_name <- "tmp_dir"
-    model_name <- "dummy_model.data"
-    dir.create(tmp_dir_name)
-    file.create(file.path(tmp_dir_name, model_name))
-    
-    # register the model
-    model <- register_model(ws, tmp_dir_name, model_name)
-    
-    # get model
-    ws_model <- get_model(ws, model_name)
-
-    expect_equal(model_name, ws_model$name)
-
-    # download model    
-    download_dir <- "downloaded"
-    dir.create(download_dir)
-    path <- download_model(model, download_dir)
-    expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)),
-                 TRUE)
-    
-    # serialize and deserialize model
-    model_payload <- serialize_model(model)
-    deserialized_model <- deserialize_to_model(ws, model_payload)
-
-    # delete the model
-    delete_model(model)
-})
-
-test_that("create, check container registry and save model package", {
+  skip_if_no_subscription()
   ws <- existing_ws
   
   tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
   model_name <- "dummy_model.data"
-  dir.create(tmp_dir_name)
-  file.create(file.path(tmp_dir_name, model_name))
+  dir.create(tmp_dir_path)
+  file.create(file.path(tmp_dir_path, model_name))
   
   # register the model
-  model <- register_model(ws, tmp_dir_name, model_name)
+  model <- register_model(ws, tmp_dir_path, model_name)
   
-  env <- azureml$core$Environment(name = "newenv")
-  env$register(ws)
+  # get model
+  ws_model <- get_model(ws, model_name)
+
+  expect_equal(model_name, ws_model$name)
+
+  # download model    
+  download_dir <- file.path(tempdir(),"downloaded")
+  dir.create(download_dir)
+  path <- download_model(model, download_dir)
+  expect_equal(file.exists(file.path(download_dir, tmp_dir_name, model_name)),
+               TRUE)
+  
+  # serialize and deserialize model
+  model_payload <- serialize_model(model)
+  deserialized_model <- deserialize_to_model(ws, model_payload)
+
+  # delete the model
+  delete_model(model)
+})
+
+test_that("create, check container registry and save model package", {
+  skip_if_no_subscription()
+  ws <- existing_ws
+  
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
+  model_name <- "dummy_model.data"
+  dir.create(tmp_dir_path)
+  file.create(file.path(tmp_dir_path, model_name))
+  
+  # register the model
+  model <- register_model(ws, tmp_dir_path, model_name)
+
+  env <- r_environment("newenv")
+  register_environment(env, ws)
   
   config <- inference_config(entry_script = "dummy_score.py",
                              environment = env)
@@ -76,4 +81,17 @@ test_that("create, check container registry and save model package", {
   # wait for the package to be created
   wait_for_model_package_creation(model_package, show_output = TRUE)
   pull_model_package_image(model_package)
+})
+
+test_that("testpython score wrapper", {
+  tmp_dir_name <- "tmp_dir"
+  tmp_dir_path <- file.path(tempdir(), tmp_dir_name)
+  dir.create(tmp_dir_path)
+
+  entry_script <- "myscore.R"
+  file.copy(entry_script, tmp_dir_path)
+  generate_score_python_wrapper(entry_script, tmp_dir_path)
+  expect_equal(file.exists(file.path(tmp_dir_path, "_generated_score.py")), TRUE)
+
+  unlink(tmp_dir_path, recursive = TRUE)
 })

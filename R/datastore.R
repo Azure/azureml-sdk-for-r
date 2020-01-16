@@ -7,7 +7,7 @@
 #' Upload the data from the local file system to the Azure storage that the
 #' datastore points to.
 #' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
-#' @param files A list of strings of the absolute path to files to upload.
+#' @param files A character vector of the absolute path to files to upload.
 #' @param relative_root A string of the base path from which is used to
 #' determine the path of the files in the Azure storage. For example, if
 #' we upload `/path/to/file.txt`, and we define the base path to be `/path`,
@@ -80,9 +80,9 @@ download_from_datastore <- function(datastore,
                                     overwrite = FALSE,
                                     show_progress = TRUE) {
   datastore$download(target_path,
-              prefix = prefix,
-              overwrite = overwrite,
-              show_progress = show_progress)
+                     prefix = prefix,
+                     overwrite = overwrite,
+                     show_progress = show_progress)
   invisible(NULL)
 }
 
@@ -141,16 +141,15 @@ get_datastore <- function(workspace, datastore_name) {
 #' expensive, we suggest premium storage due to faster throughput speeds that
 #' may improve the speed of your training runs, particularly if you train
 #' against a large dataset.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
-#' ds <- register_azure_blob_container_datastore(
-#'                                ws,
-#'                                datastore_name = 'mydatastore',
-#'                                container_name = 'myazureblobcontainername',
-#'                                account_name = 'mystorageaccoutname',
-#'                                account_key = 'mystorageaccountkey')
-#' ```
+#' ds <- register_azure_blob_container_datastore(ws,
+#'                                               datastore_name = 'mydatastore',
+#'                                               container_name = 'myazureblobcontainername',
+#'                                               account_name = 'mystorageaccoutname',
+#'                                               account_key = 'mystorageaccountkey')
+#' }
 #' @md
 register_azure_blob_container_datastore <- function(
                                                 workspace,
@@ -216,16 +215,15 @@ register_azure_blob_container_datastore <- function(
 #' expensive, we suggest premium storage due to faster throughput speeds that
 #' may improve the speed of your training runs, particularly if you train
 #' against a large dataset.
-#' @section Examples:
-#' ```
+#' @examples
+#' \dontrun{
 #' ws <- load_workspace_from_config()
-#' ds <- register_azure_file_share_datastore(
-#'                                    ws,
-#'                                    datastore_name = 'mydatastore',
-#'                                    file_share_name = 'myazurefilesharename',
-#'                                    account_name = 'mystorageaccoutname',
-#'                                    account_key = 'mystorageaccountkey')
-#' ```
+#' ds <- register_azure_file_share_datastore(ws,
+#'                                           datastore_name = 'mydatastore',
+#'                                           file_share_name = 'myazurefilesharename',
+#'                                           account_name = 'mystorageaccoutname',
+#'                                           account_key = 'mystorageaccountkey')
+#' }
 #' @md
 register_azure_file_share_datastore <- function(workspace,
                                                 datastore_name,
@@ -258,9 +256,99 @@ register_azure_file_share_datastore <- function(workspace,
 #' Unregister the datastore from its associated workspace. The
 #' underlying Azure storage will not be deleted.
 #' @param datastore The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @return None
 #' @export
 #' @md
 unregister_datastore <- function(datastore) {
   datastore$unregister()
   invisible(NULL)
+}
+
+#' Initialize a new Azure SQL database Datastore.
+#'
+#' @description
+#' Initialize a new Azure SQL database Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param server_name The SQL server name.
+#' @param database_name The SQL database name.
+#' @param tenant_id The Directory ID/Tenant ID of the service principal.
+#' @param client_id The Client ID/Application ID of the service principal.
+#' @param client_secret The secret of the service principal.
+#' @param resource_url The resource URL, which determines what operations will
+#' be performed on the SQL database store, if NULL, defaults to
+#' https://database.windows.net/.
+#' @param authority_url The authority URL used to authenticate the user, defaults
+#' to https://login.microsoftonline.com.
+#' @param endpoint The endpoint of the SQL server. If NULL, defaults to
+#' database.windows.net.
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore does
+#' not exist, it will create one. The default is FALSE.
+#' @param username The username of the database user to access the database.
+#' @param password The password of the database user to access the database.
+#' @return The `azureml.data.azure_sql_database_datastore.AzureSqlDatabaseDatastore`
+#' object.
+#' @export
+#' @md
+register_azure_sql_database_datastore <- function(workspace, datastore_name,
+                                                  server_name, database_name,
+                                                  tenant_id, client_id,
+                                                  client_secret,
+                                                  resource_url = NULL,
+                                                  authority_url = NULL,
+                                                  endpoint = NULL,
+                                                  overwrite = FALSE,
+                                                  username = NULL,
+                                                  password = NULL) {
+  azureml$core$Datastore$register_azure_sql_database(workspace,
+                                                     datastore_name,
+                                                     server_name,
+                                                     database_name,
+                                                     tenant_id,
+                                                     client_id,
+                                                     client_secret,
+                                                     resource_url,
+                                                     authority_url,
+                                                     endpoint,
+                                                     overwrite,
+                                                     username,
+                                                     password)
+}
+
+#' Initialize a new Azure PostgreSQL Datastore.
+#'
+#' @description
+#' Initialize a new Azure PostgreSQL Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param server_name The PostgreSQL server name.
+#' @param database_name The PostgreSQL database name.
+#' @param user_id The User ID of the PostgreSQL server.
+#' @param user_password The User Password of the PostgreSQL server.
+#' @param port_number The Port Number of the PostgreSQL server.
+#' @param endpoint The endpoint of the PostgreSQL server. If NULL, defaults to
+#' postgres.database.azure.com.
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore
+#' does not exist, it will create one. The default is FALSE.
+#' @return The `azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore`
+#' object.
+#' @export
+#' @md
+register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
+                                                 server_name, database_name,
+                                                 user_id, user_password,
+                                                 port_number = NULL,
+                                                 endpoint = NULL,
+                                                 overwrite = FALSE) {
+  azureml$core$Datastore$register_azure_postgre_sql(workspace,
+                                                    datastore_name,
+                                                    server_name,
+                                                    database_name,
+                                                    user_id,
+                                                    user_password,
+                                                    port_number,
+                                                    endpoint,
+                                                    overwrite)
 }

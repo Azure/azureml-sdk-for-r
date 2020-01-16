@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log a accuracy table to the artifact store. — log_accuracy_table_to_run • azureml</title>
+<title>Log an accuracy table metric to a run — log_accuracy_table_to_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="Log a accuracy table to the artifact store. — log_accuracy_table_to_run" />
+<meta property="og:title" content="Log an accuracy table metric to a run — log_accuracy_table_to_run" />
 
-<meta property="og:description" content="Log a accuracy table to the artifact store." />
+<meta property="og:description" content="The accuracy table metric is a multi-use non-scalar metric that can be
+used to produce multiple types of line charts that vary continuously
+over the space of predicted probabilities. Examples of these charts are
+ROC, precision-recall, and lift curves." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,8 +68,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">azureml</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <a class="navbar-link" href="../index.html">azuremlsdk</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -74,7 +77,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -89,18 +92,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/cnn-tuning-with-hyperdrive/cnn-tuning-with-hyperdrive.html">Hyperparameter Tuning a Keras Model with HyperDrive</a>
+      <a href="../articles/installation.html">Install the Azure ML SDK for R</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploying to AKS with Azure ML SDK for R</a>
+      <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/installation.html">Installing AzureML SDK for R</a>
+      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Training a TensorFlow Model on MNIST</a>
+      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+    </li>
+    <li>
+      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+    </li>
+    <li>
+      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -124,14 +136,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log a accuracy table to the artifact store.</h1>
+    <h1>Log an accuracy table metric to a run</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
     <div class="hidden name"><code>log_accuracy_table_to_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Log a accuracy table to the artifact store.</p>
+    <p>The accuracy table metric is a multi-use non-scalar metric that can be
+used to produce multiple types of line charts that vary continuously
+over the space of predicted probabilities. Examples of these charts are
+ROC, precision-recall, and lift curves.</p>
     
     </div>
 
@@ -142,22 +157,67 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the accuracy table</p></td>
+      <td><p>A string of the name of the metric.</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>json containing name, version, and data properties</p></td>
+      <td><p>A named list containing name, version, and data properties.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>An optional metric description</p></td>
+      <td><p>(Optional) A string of the metric description.</p></td>
     </tr>
     <tr>
       <th>run</th>
-      <td><p>Run object. If not specified, will default to current run from
-service context.</p></td>
+      <td><p>The <code>Run</code> object. If not specified, will default
+to the current run from the service context.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The calculation of the accuracy table is similar to the calculation of
+an ROC curve. An ROC curve stores true positive rates and false positive
+rates at many different probability thresholds. The accuracy table stores
+the raw number of true positives, false positives, true negatives, and
+false negatives at many probability thresholds.</p>
+<p>There are two methods used for selecting thresholds: "probability" and
+"percentile." They differ in how they sample from the space of predicted
+probabilities.</p>
+<p>Probability thresholds are uniformly spaced thresholds between 0 and 1.
+If NUM_POINTS were 5 the probability thresholds would be
+c(0.0, 0.25, 0.5, 0.75, 1.0).</p>
+<p>Percentile thresholds are spaced according to the distribution of predicted
+probabilities. Each threshold corresponds to the percentile of the data at
+a probability threshold. For example, if NUM_POINTS were 5, then the first
+threshold would be at the 0th percentile, the second at the 25th percentile,
+the third at the 50th, and so on.</p>
+<p>The probability tables and percentile tables are both 3D lists where the
+first dimension represents the class label, the second dimension represents
+the sample at one threshold (scales with NUM_POINTS), and the third dimension
+always has 4 values: TP, FP, TN, FN, and always in that order.</p>
+<p>The confusion values (TP, FP, TN, FN) are computed with the one vs. rest
+strategy. See the following link for more details:
+https://en.wikipedia.org/wiki/Multiclass_classification.</p>
+<p>N = # of samples in validation dataset (200 in example),
+M = # thresholds = # samples taken from the probability space (5 in example),
+C = # classes in full dataset (3 in example)</p>
+<p>Some invariants of the accuracy table:</p><ul>
+<li><p>TP + FP + TN + FN = N for all thresholds for all classes</p></li>
+<li><p>TP + FN is the same at all thresholds for any class</p></li>
+<li><p>TN + FP is the same at all thresholds for any class</p></li>
+<li><p>Probability tables and percentile tables have shape (C, M, 4)</p></li>
+</ul>
+
+<p>Note: M can be any value and controls the resolution of the charts.
+This is independent of the dataset, is defined when calculating metrics,
+and trades off storage space, computation time, and resolution.</p>
+<p>Class labels should be strings, confusion values should be integers,
+and thresholds should be doubles.</p>
     
 
   </div>
@@ -165,7 +225,11 @@ service context.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>
@@ -173,7 +237,7 @@ service context.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Himanshu Chandola, Billy Hu, Heemanshu Suri, Diondra Peck, Microsoft.</p>
+  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">
