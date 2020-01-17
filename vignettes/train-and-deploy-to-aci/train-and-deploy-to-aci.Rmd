@@ -33,17 +33,14 @@ The setup for your development work in this tutorial includes the following acti
 * Create an experiment to track your runs
 * Create a remote compute target to use for training
 
+If you are using RStudio from a Notebook VM, open this tutorial as a project in RStudio with File > Open Project and select
+your cloned `train-and-deploy-to-aci` folder. 
+
 ### Install required packages
 This tutorial assumes you already have the Azure ML SDK installed. Go ahead and import the **azuremlsdk** package.
 
 ```{r eval=FALSE}
 library(azuremlsdk)
-```
-
-The tutorial uses data from the [**DAAG** package](https://cran.r-project.org/package=DAAG). Install the package if you don't have it.
-
-```{r eval=FALSE}
-install.packages("DAAG")
 ```
 
 The training and scoring scripts (`accidents.R` and `accident_predict.R`) have some additional dependencies. If you plan on running those scripts locally, make sure you have those required packages as well.
@@ -83,15 +80,23 @@ if (is.null(compute_target)) {
 ```
 
 ## Prepare data for training
-This tutorial uses data from the **DAAG** package. This dataset includes data from over 25,000 car crashes in the US, with variables you can use to predict the likelihood of a fatality. First, import the data into R and transform it into a new dataframe `accidents` for analysis, and export it to an `Rdata` file.
+This tutorial uses data from the US [National Highway Traffic Safety Administration](https://cdan.nhtsa.gov/tsftables/tsfar.htm)  
+(with thanks to [Mary C. Meyer and Tremika Finney](https://www.stat.colostate.edu/~meyer/airbags.htm)).
+This dataset includes data from over 25,000 car crashes in the US, with variables you can use to predict the likelihood of a fatality. First, import the data into R and transform it into a new dataframe `accidents` for analysis, and export it to an `Rdata` file.
 
 ```{r load_data, eval=FALSE}
-library(DAAG)
-data(nassCDS)
+nassCDS <- read.csv("nassCDS.csv", 
+                     colClasses=c("factor","numeric","factor",
+                                  "factor","factor","numeric",
+                                  "factor","numeric","numeric",
+                                  "numeric","character","character",
+                                  "numeric","numeric","character"))
 
 accidents <- na.omit(nassCDS[,c("dead","dvcat","seatbelt","frontal","sex","ageOFocc","yearVeh","airbag","occRole")])
 accidents$frontal <- factor(accidents$frontal, labels=c("notfrontal","frontal"))
 accidents$occRole <- factor(accidents$occRole)
+accidents$dvcat <- ordered(accidents$dvcat, 
+                          levels=c("1-9km/h","10-24","25-39","40-54","55+"))
 
 saveRDS(accidents, file="accidents.Rd")
 ```
