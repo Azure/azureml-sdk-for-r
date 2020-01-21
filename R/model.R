@@ -61,6 +61,8 @@ get_model <- function(workspace,
 #' be used to specify individual files to bundle together as the `Model`
 #' object, as opposed to using the entire contents of the folder.
 #' @param model_name A string of the name to register the model with.
+#' @param datasets A list of tuples where the first element describes the
+#' dataset-model relationship and the second element is the dataset.
 #' @param tags A named list of key-value tags to give the model, e.g.
 #' `list("key" = "value")`
 #' @param properties A named list of key-value properties to give the model,
@@ -84,6 +86,7 @@ get_model <- function(workspace,
 register_model <- function(workspace,
                            model_path,
                            model_name,
+                           datasets = NULL,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
@@ -94,7 +97,8 @@ register_model <- function(workspace,
                                        tags = tags,
                                        properties = properties,
                                        description = description,
-                                       child_paths = child_paths)
+                                       child_paths = child_paths,
+                                       datasets = datasets)
   invisible(model)
 }
 
