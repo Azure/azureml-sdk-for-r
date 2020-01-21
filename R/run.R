@@ -870,6 +870,21 @@ create_child_runs <- function(parent_run,
   parent_run$create_children(count, tag_key, tag_values)
 }
 
+#' Submit an experiment and return the active child run
+#'
+#' @description
+#' Submit an experiment and return the active child run.
+#' @param parent_run The parent `Run` object.
+#' @param config The `RunConfig` object
+#' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
+#' @return A `Run` object.
+#' @md
+submit_child_run <- function(parent_run,
+                             config = NULL,
+                             tags = NULL) {
+  parent_run$submit_child(config, tags)
+}
+
 #' Get all children for the current run selected by specified filters
 #'
 #' @description
