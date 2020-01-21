@@ -878,7 +878,6 @@ create_child_runs <- function(parent_run,
 #' @param config The `RunConfig` object
 #' @param tags Tags to be added to the submitted run, e.g., {"tag": "value"}.
 #' @return A `Run` object.
-#' @export
 #' @md
 submit_child_run <- function(parent_run,
                              config = NULL,
