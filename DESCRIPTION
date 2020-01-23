@@ -28,7 +28,7 @@ Depends:
     R (>= 3.5.0)
 Imports:
     ggplot2,
-    reticulate (>= 1.12),
+    reticulate (>= 1.12, < 1.14),
     plyr (>= 1.8),
     DT,
     rstudioapi (>= 0.7),
