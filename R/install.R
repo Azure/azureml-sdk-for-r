@@ -30,7 +30,7 @@ install_azureml <- function(version = "1.0.74",
 
   # set envname based on reticulate version
   if (is.null(custom_envname)) {
-    if (packageVersion("reticulate") >= "1.14") {
+    if (utils::packageVersion("reticulate") >= "1.14") {
       envname <- "r-reticulate"
     } else {
       envname <- "r-azureml"
