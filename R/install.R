@@ -3,7 +3,8 @@
 
 #' Install azureml sdk package
 #' @param version azureml sdk package version
-#' @param envname name of environment to create
+#' @param custom_envname name of environment to create, if environment other
+#' than default is desired
 #' @param conda_python_version version of python for conda environment
 #' @param restart_session restart R session after installation
 #' @param remove_existing_env delete the conda environment if already exists
