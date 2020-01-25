@@ -8,8 +8,7 @@
 #
 
 library(shiny)
-library(jsonlite)
-library(azuremlsdk)
+library(httr)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -71,10 +70,7 @@ server <- function(input, output) {
         occRole="pass"        # "driver" "pass"
     )
     
-    
     pred <- reactive({
-        ws <- load_workspace_from_config()
-        aci_service <- get_webservice(ws, "accident-pred")    
 
         newdata$yearVeh <- input$yearVeh
         newdata$ageOFocc <- input$age
@@ -85,7 +81,13 @@ server <- function(input, output) {
         newdata$airbag <- input$airbag
         newdata$occRole <- input$occRole
         
-        invoke_webservice(aci_service, toJSON(newdata)) 
+        ## Endpoint for published model
+        ## You can get this from the "Endpoints" section in ml.azure.com
+        ## or via the R SDK with get_webservice(ws, "accident-pred")$scoring_uri
+        endpoint <- "http://152e4dc0-d947-4eaa-97a4-031e795742ac.westus.azurecontainer.io/score"
+
+        v <- POST(endpoint, body=newdata, encode="json")
+        content(v)[[1]]
     })
 
     output$prediction <- renderText({pred()})
@@ -99,5 +101,4 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-
 
