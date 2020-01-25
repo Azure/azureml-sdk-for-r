@@ -81,7 +81,7 @@ server <- function(input, output) {
         newdata$airbag <- input$airbag
         newdata$occRole <- input$occRole
         
-        ## Endpoint for published model
+        ## Replace this with the endpoint for your published model.
         ## You can get this from the "Endpoints" section in ml.azure.com
         ## or via the R SDK with get_webservice(ws, "accident-pred")$scoring_uri
         endpoint <- "http://152e4dc0-d947-4eaa-97a4-031e795742ac.westus.azurecontainer.io/score"
