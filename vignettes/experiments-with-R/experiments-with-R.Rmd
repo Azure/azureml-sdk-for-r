@@ -1,0 +1,31 @@
+---
+title: "A Deeper Dive into Experiments with R"
+author: "David Smith"
+date: "1/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## A Deeper Dive into Experiments with R
+
+In this vignette, we will go into more details about experiments.
+
+* Work with multiple experiments
+* Control experiments with command line arguments
+* Track multiple metrics
+* Use caret to train models and deploy to Kubernetes
+
+We will use the `accidents` data, which was saved to your shared data store in the vignette "Train and deploy your first model with Azure ML". Run that vignette first, or the following command will not work.
+
+## Load the data
+
+```{r load-data}
+library(azuremlsdk)
+ws <- load_workspace_from_config()
+ds <- get_default_datastore(ws)
+download_from_datastore(ds, target_path="vignettes/experiments-with-R",prefix="accidentdata")
+```
+
