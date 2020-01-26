@@ -26,6 +26,6 @@ We will use the `accidents` data, which was saved to your shared data store in t
 library(azuremlsdk)
 ws <- load_workspace_from_config()
 ds <- get_default_datastore(ws)
-download_from_datastore(ds, target_path="vignettes/experiments-with-R",prefix="accidentdata")
+download_from_datastore(ds, target_path=".",prefix="accidentdata")
 ```
 
