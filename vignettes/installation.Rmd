@@ -38,7 +38,7 @@ Lastly, use the **azuremlsdk** R library to install the Python SDK. By default, 
 azuremlsdk::install_azureml()
 ```
 
-If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists to create a new environment, you can also do so: 
+If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so: 
 ``` {r eval=FALSE}
 azuremlsdk::install_azureml(version = NULL, 
                             custom_envname = "<your conda environment name>",
