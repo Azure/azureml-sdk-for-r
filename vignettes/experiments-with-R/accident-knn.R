@@ -19,8 +19,9 @@ paste(opt$data_folder)
 accidents <- readRDS(file.path(opt$data_folder, "accidents.Rd"))
 summary(accidents)
 
-## Create 75% data partition for use with caret
+## Create data partition for use with caret
 train.pct <- as.numeric(opt$percent_train)
+if(length(train.pct)==0 || (train.pct<0) || (train.pct>1)) train.pct <- 0.75
 accident_idx <- createDataPartition(accidents$dead, p = train.pct, list = FALSE)
 accident_trn <- accidents[accident_idx, ]
 accident_tst <- accidents[-accident_idx, ]
