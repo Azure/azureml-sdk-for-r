@@ -24,12 +24,12 @@ install.packages('remotes')
 
 Then, you can use the `install_github` function to install the package.
 ``` {r install_azuremlsdk, eval=FALSE}
-remotes::install_cran('azuremlsdk', repos = 'http://cran.us.r-project.org')
+remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/')
 ```
 
 If you are using R installed from CRAN, which comes with 32-bit and 64-bit binaries, you may need to specify the parameter `INSTALL_opts=c("--no-multiarch")` to only build for the current 64-bit architecture.
 ``` {r eval=FALSE}
-remotes::install_cran('azuremlsdk', repos = 'http://cran.us.r-project.org', INSTALL_opts=c("--no-multiarch"))
+remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/', INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Install the Azure ML Python SDK
