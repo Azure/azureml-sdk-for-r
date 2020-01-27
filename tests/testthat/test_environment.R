@@ -47,7 +47,7 @@ test_that("create dockerfile", {
                                   "clean -ay && pip install --no-cache-dir ",
                                   "azureml-defaults\nENV TAR=\"/bin/tar\"\n",
                                   "RUN R -e \"remotes::install_cran('azuremlsdk'",
-                                  ", repos = 'http://cran.us.r-project.org', ",
+                                  ", repos = 'https://cloud.r-project.org/', ",
                                   "upgrade = FALSE)\"\n"))
 
   # cran packages
@@ -55,8 +55,8 @@ test_that("create dockerfile", {
                                      cran_packages = c("ggplot2"),
                                      install_system_packages = FALSE)
   expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
-                                  "packages('ggplot2', repos = \'http://cran",
-                                  ".us.r-project.org\')\"\n"))
+                                  "packages('ggplot2', repos = \'https://",
+                                  "cloud.r-project.org/\')\"\n"))
 
   # github packages
   dockerfile <- generate_docker_file(github_packages = c(
