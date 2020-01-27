@@ -33,16 +33,18 @@ remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/', INST
 ```
 
 ## Install the Azure ML Python SDK
-Lastly, use the **azuremlsdk** R library to install the Python SDK. By default, `azuremlsdk::install_azureml()` will install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`.
+Lastly, use the **azuremlsdk** R library to install the Python SDK. By default, `azuremlsdk::install_azureml()` will install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml` if reticulate < 1.14 or `r-reticulate` if reticulate ≥ 1.14.
 ``` {r install_pythonsdk, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
 
-If you would like to override the default version, environment name, or Python version, you can pass in those arguments: 
+If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so: 
 ``` {r eval=FALSE}
 azuremlsdk::install_azureml(version = NULL, 
-                            envname = "<your conda environment name>",
-                            conda_python_version = "<desired python version>")
+                            custom_envname = "<your conda environment name>",
+                            conda_python_version = "<desired python version>",
+                            restart_session = TRUE,
+                            remove_existing_env = TRUE)
 ```
 
 ## Test installation
