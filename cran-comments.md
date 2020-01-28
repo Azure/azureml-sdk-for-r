@@ -8,4 +8,9 @@ This is a minor release.
 * win-builder: windows-x86_64-devel
 
 ## R CMD check results
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+Adressing the note:
+* Found the following assignments to the global environment:
+   File 'azuremlsdk/R/run.R':
+     assign(widget_obj_names[[x]], widget_obj_vals[[x]], envir = .GlobalEnv)
+  * The widgets run as a background job and have to access these variables in order to function successfully. The only way it could work is if these variables are added to the Global Environment so that they are available to the application.
