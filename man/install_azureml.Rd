@@ -4,7 +4,7 @@
 \alias{install_azureml}
 \title{Install azureml sdk package}
 \usage{
-install_azureml(version = "1.0.74", custom_envname = NULL,
+install_azureml(version = "1.0.85", custom_envname = NULL,
   conda_python_version = "3.6", restart_session = TRUE,
   remove_existing_env = FALSE)
 }
