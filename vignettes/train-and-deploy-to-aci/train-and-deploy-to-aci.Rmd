@@ -307,26 +307,6 @@ prob <- invoke_webservice(aci_service, toJSON(newdata))
 prob
 ```
 
-## Use the prediction service in an application
-
-To use the prediction service you have just published in an application, you will need to know the 
-service endpoint. You can find it in the Azure ML interface in the "Endpoints" section, or extract it using the SDK as follows:
-
-```{r get_endpoint, eval=FALSE}
-endpoint <- aci_service$scoring_uri
-```
-You can call this endpoint from any application using an HTTP POST call, and providing the JSON-encoded 
-variable values as the body of the call. You can do this from any application using any language, and
-it's easy in R using the `httr` package:
-
-```{r use_httr, eval=FALSE}
-library(httr)
-v <- POST(endpoint, body=newdata, encode="json")
-prediction <- content(v)[[1]]
-```
-
-You can see an example of this in action by opening `app.R` in the `accident-app` folder in RStudio, and clicking "Run App" to launch a Shiny app that demonstrates generating predictions from the service.
-
 ## Clean up resources
 
 Delete the resources once you no longer need them. Don't delete any resource you plan to still use. 

@@ -4,6 +4,7 @@
 library(azuremlsdk)
 library(optparse)
 library(caret)
+library(glmnet)
 
 options <- list(
   make_option(c("-d", "--data_folder")),
