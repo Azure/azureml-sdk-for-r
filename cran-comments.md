@@ -1,3 +1,6 @@
+## Release summary
+This is a minor release.
+
 ## Test environments
 * local: windows-x86_64-devel
 * azure devops: Ubuntu:16.04 LTS
