@@ -5,3 +5,4 @@
 config.json
 accidents.Rd
 model.rds
+_generated_score.py

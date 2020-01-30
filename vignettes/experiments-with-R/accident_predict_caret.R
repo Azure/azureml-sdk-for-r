@@ -13,7 +13,7 @@ init <- function()
   function(data)
   {
     vars <- as.data.frame(fromJSON(data))
-    prediction <- predict(model, newdata=data, type="prob")[,"dead"]
+    prediction <- predict(model, newdata=vars, type="prob")[,"dead"]
     toJSON(prediction)
   }
 }

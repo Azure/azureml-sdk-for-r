@@ -182,7 +182,7 @@ accident_model <- readRDS("outputs/model.rds")
 model <- register_model(ws, 
                         model_path = "outputs/model.rds", 
                         model_name = "accidents_model_caret",
-                        description = "Predict probablity of auto accident using caret")
+                        description = "Predict probability of auto accident using caret")
 
 r_env <- r_environment(name = "basic_env")
 
@@ -208,9 +208,10 @@ aci_service <- deploy_model(ws,
 wait_for_deployment(aci_service, show_output = TRUE)
 ```
 
-If you wanted to deploy to Kubernetes, you would use this instead:
+If you wanted to deploy to Kubernetes, you would use something like this instead:
 
 ```{r provis-aks, eval=FALSE}
+## DO NOT RUN: sample code for Kubernetes deployment
 aks_target <- create_aks_compute(ws, 
                                  cluster_name = 'caretkluster',
                                  vm_size='Standard_D2_v2',
@@ -219,23 +220,16 @@ aks_target <- create_aks_compute(ws,
 wait_for_provisioning_completion(aks_target, show_output = TRUE)
 ```
 
-## Use the prediction service in an application
+## Use the prediction service in a Shiny application
 
-To use the prediction service you have just published in an application, you will need to know the 
-service endpoint. You can find it in the Azure ML interface in the "Endpoints" section, or extract it using the SDK as follows:
+We have provided the server and UI for a shiny application
+in the `accident-app` folder. The app uses the global variable `accident-endpoint` to find the endpoint of the prediction service to call, so set it here:
 
 ```{r get_endpoint, eval=FALSE}
-endpoint <- aci_service$scoring_uri
+accident.endpoint <- get_webservice(ws,   "accident-predict-caret")$scoring_uri
 ```
-You can call this endpoint from any application using an HTTP POST call, and providing the JSON-encoded 
-variable values as the body of the call. You can do this from any application using any language, and
-it's easy in R using the `httr` package:
+You can run the app by opening `app.R` in the `accident-app` folder in RStudio and clicking "Run App", or by running the code below. Try out different values of the input variables to see how they affect the predicted probability of a fatal accident.
 
-```{r use_httr, eval=FALSE}
-library(httr)
-v <- POST(endpoint, body=newdata, encode="json")
-prediction <- content(v)[[1]]
+```{r shiny-app, eval=FALSE}
+shiny::runApp("accident-app")
 ```
-
-You can see an example of this in action by opening `app.R` in the `accident-app` folder in RStudio, and clicking "Run App" to launch a Shiny app that demonstrates generating predictions from the service.
-
