@@ -35,12 +35,12 @@ remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/', INST
 ## Install the Azure ML Python SDK
 Lastly, use the **azuremlsdk** R library to install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/).
 
-If using an Azure Machine Learning Compute Instance or a CRAN installation with `reticulate` >= 1.14, use the `install_azureml` function with the conda environment set to `r-reticulate`.
+If using an Azure Machine Learning Compute Instance or a CRAN installation with `reticulate >= 1.14`, use the `azuremlsdk::install_azureml()` function with the conda environment set to `r-reticulate`.
 ``` {r install_pythonsdk1, eval=FALSE}
 azuremlsdk::install_azureml(envname = 'r-reticulate')
 ```
 
-If using a CRAN installation with `reticulate` < 1.14 or a GitHub installation, by default, `azuremlsdk::install_azureml()` will install in a conda environment called `r-azureml` if reticulate < 1.14 or `r-reticulate` if reticulate ≥ 1.14. There is no need to specify the conda environment.
+If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, by default, `azuremlsdk::install_azureml()` will install in a conda environment called `r-azureml` if `reticulate < 1.14` or `r-reticulate` if `reticulate ≥ 1.14`. There is no need to specify the conda environment.
 ``` {r install_pythonsdk2, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
