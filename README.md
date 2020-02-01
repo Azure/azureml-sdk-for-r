@@ -41,14 +41,14 @@ Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already i
 ```R
 # Install Azure ML SDK from CRAN
 install.packages("azuremlsdk")
-azuremlsdk::install_azureml(envname = "r-reticulate")
 
 # Or the development version from GitHub
-install.packages("remotes")
+# install.packages("remotes")
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
+
+# Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 azuremlsdk::install_azureml()
 ```
-
 Now, you're ready to get started!
 
 For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](https://azure.github.io/azureml-sdk-for-r/articles/installation.html).
