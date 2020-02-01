@@ -43,7 +43,7 @@ Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already i
 install.packages("azuremlsdk")
 
 # Or the development version from GitHub
-# install.packages("remotes")
+install.packages("remotes")
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
 # Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
