@@ -3,7 +3,7 @@
 
 #' Install azureml sdk package
 #' @param version azureml sdk package version
-#' @param custom_envname name of environment to create, if environment other
+#' @param envname name of environment to create, if environment other
 #' than default is desired
 #' @param conda_python_version version of python for conda environment
 #' @param restart_session restart R session after installation
@@ -11,7 +11,7 @@
 #' @return None
 #' @export
 install_azureml <- function(version = "1.0.85",
-                            custom_envname = NULL,
+                            envname = NULL,
                             conda_python_version = "3.6",
                             restart_session = TRUE,
                             remove_existing_env = FALSE) {
@@ -29,14 +29,12 @@ install_azureml <- function(version = "1.0.85",
   }
 
   # set envname based on reticulate version
-  if (is.null(custom_envname)) {
+  if (is.null(envname)) {
     if (utils::packageVersion("reticulate") >= "1.14") {
       envname <- "r-reticulate"
     } else {
       envname <- "r-azureml"
     }
-  } else {
-    envname <- custom_envname
   }
 
   # remove the conda environment if needed
