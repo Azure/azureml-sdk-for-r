@@ -17,14 +17,17 @@ You do not need run this if you are working on an Azure Machine Learning Compute
 If you do not have Conda already installed on your machine, you will first need to install it, since the Azure ML R SDK uses **reticulate** to bind to the Python SDK. We recommend installing [Miniconda](https://docs.conda.io/en/latest/miniconda.html), which is a smaller, lightweight version of Anaconda. Choose the 64-bit binary for Python 3.5 or later.
 
 ## Install the **azuremlsdk** R package
-You will need **remotes** to install **azuremlsdk** from the GitHub repo.
+The stable release of the Azure ML SDK can be installed from CRAN or the development version can 
+be installed from GitHub. You will need **remotes** to install the **azuremlsdk** package.
 ``` {r install_remotes, eval=FALSE}
 install.packages('remotes')
 ``` 
 
-Then, you can use the `install_github` function to install the package.
+Then, you can use the `install_github` or `install_cran` functions to install the package.
 ``` {r install_azuremlsdk, eval=FALSE}
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
+
+remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/')
 ```
 
 If you are using R installed from CRAN, which comes with 32-bit and 64-bit binaries, you may need to specify the parameter `INSTALL_opts=c("--no-multiarch")` to only build for the current 64-bit architecture.
@@ -40,7 +43,7 @@ If using an Azure Machine Learning Compute Instance or a CRAN installation with 
 azuremlsdk::install_azureml(envname = 'r-reticulate')
 ```
 
-If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, by default, the correct conda environment will be selected automatically. There is no need to specify the `envname` parameter.
+If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, the correct conda environment will be selected automatically. There is no need to specify the `envname` parameter.
 ``` {r install_pythonsdk2, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
