@@ -24,7 +24,7 @@ install.packages('remotes')
 
 Then, you can use the `install_github` function to install the package.
 ``` {r install_azuremlsdk, eval=FALSE}
-remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/')
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 ```
 
 If you are using R installed from CRAN, which comes with 32-bit and 64-bit binaries, you may need to specify the parameter `INSTALL_opts=c("--no-multiarch")` to only build for the current 64-bit architecture.
@@ -40,7 +40,7 @@ If using an Azure Machine Learning Compute Instance or a CRAN installation with 
 azuremlsdk::install_azureml(envname = 'r-reticulate')
 ```
 
-If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, by default, `azuremlsdk::install_azureml()` will install in a conda environment called `r-azureml` if `reticulate < 1.14` or `r-reticulate` if `reticulate ≥ 1.14`. There is no need to specify the conda environment.
+If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, by default, the correct conda environment will be selected automatically. There is no need to specify the `envname` parameter.
 ``` {r install_pythonsdk2, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
