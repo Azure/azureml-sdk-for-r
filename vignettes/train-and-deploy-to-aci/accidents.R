@@ -3,7 +3,6 @@
 
 library(azuremlsdk)
 library(optparse)
-library(caret)
 
 options <- list(
   make_option(c("-d", "--data_folder"))
@@ -20,10 +19,8 @@ summary(accidents)
 mod <- glm(dead ~ dvcat + seatbelt + frontal + sex + ageOFocc + yearVeh + airbag  + occRole, family=binomial, data=accidents)
 summary(mod)
 predictions <- factor(ifelse(predict(mod)>0.1, "dead","alive"))
-conf_matrix <- confusionMatrix(predictions, accidents$dead)
-message(conf_matrix)
-
-log_metric_to_run("Accuracy", conf_matrix$overall["Accuracy"])
+accuracy <- mean(predictions == accidents$dead)
+log_metric_to_run("Accuracy", accuracy)
 
 output_dir = "outputs"
 if (!dir.exists(output_dir)){
