@@ -99,7 +99,7 @@
     <div class="page-header toc-ignore">
       <h1>Install the Azure ML SDK for R</h1>
             
-            <h4 class="date">2020-02-03</h4>
+            <h4 class="date">2020-02-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
@@ -119,35 +119,35 @@
 <h2 class="hasAnchor">
 <a href="#install-the-azuremlsdk-r-package" class="anchor"></a>Install the <strong>azuremlsdk</strong> R package</h2>
 <p>The stable release of the Azure ML SDK can be installed from CRAN or the development version can be installed from GitHub. You will need <strong>remotes</strong> to install the <strong>azuremlsdk</strong> package.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'remotes'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'remotes'</span>)</a></code></pre></div>
 <p>Then, you can use the <code>install_github</code> or <code>install_cran</code> functions to install the package.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_cran.html">install_cran</a></span>(<span class="st">'azuremlsdk'</span>, <span class="dt">repos =</span> <span class="st">'https://cloud.r-project.org/'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_cran.html">install_cran</a></span>(<span class="st">'azuremlsdk'</span>, <span class="dt">repos =</span> <span class="st">'https://cloud.r-project.org/'</span>)</a></code></pre></div>
 <p>If you are using R installed from CRAN, which comes with 32-bit and 64-bit binaries, you may need to specify the parameter <code>INSTALL_opts=c("--no-multiarch")</code> to only build for the current 64-bit architecture.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_cran.html">install_cran</a></span>(<span class="st">'azuremlsdk'</span>, <span class="dt">repos =</span> <span class="st">'https://cloud.r-project.org/'</span>, <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_cran.html">install_cran</a></span>(<span class="st">'azuremlsdk'</span>, <span class="dt">repos =</span> <span class="st">'https://cloud.r-project.org/'</span>, <span class="dt">INSTALL_opts=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-multiarch"</span>))</a></code></pre></div>
 </div>
 <div id="install-the-azure-ml-python-sdk" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install-the-azure-ml-python-sdk" class="anchor"></a>Install the Azure ML Python SDK</h2>
 <p>Lastly, use the <strong>azuremlsdk</strong> R library to install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the Python SDK</a>.</p>
-<p>If using an Azure Machine Learning Compute Instance or a CRAN installation with <code>reticulate &gt;= 1.14</code>, use the <code><a href="../reference/install_azureml.html">azuremlsdk::install_azureml()</a></code> function with the conda environment set to <code>r-reticulate</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">envname =</span> <span class="st">'r-reticulate'</span>)</span></code></pre></div>
+<p>If using an Azure Machine Learning Compute Instance or a CRAN installation with <code>reticulate &gt;= 1.14</code>, use the <code><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">azuremlsdk::install_azureml()</a></code> function with the conda environment set to <code>r-reticulate</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">envname =</span> <span class="st">'r-reticulate'</span>)</a></code></pre></div>
 <p>If using a CRAN installation with <code>reticulate &lt; 1.14</code> or a GitHub installation, the correct conda environment will be selected automatically. There is no need to specify the <code>envname</code> parameter.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
 <p>If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </span>
-<span id="cb6-2"><a href="#cb6-2"></a>                            <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                            <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>                            <span class="dt">restart_session =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb6-5"><a href="#cb6-5"></a>                            <span class="dt">remove_existing_env =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                            <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                            <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">restart_session =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">                            <span class="dt">remove_existing_env =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="test-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-installation" class="anchor"></a>Test installation</h2>
 <p>You can confirm your installation worked by loading the library and successfully retrieving a run.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/get_current_run.html">get_current_run</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
 </div>
 <div id="troubleshooting" class="section level2">
 <h2 class="hasAnchor">
@@ -156,33 +156,33 @@
 <li><p>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
 <li>
 <p>If installation fails due to this error:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>Error <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/strptime.html">strptime</a></span>(xx, f, <span class="dt">tz =</span> tz) <span class="op">:</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>(converted from warning) unable to identify current timezone <span class="st">'C'</span><span class="op">:</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>please set environment variable <span class="st">'TZ'</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>In R CMD INSTALL</span>
-<span id="cb8-5"><a href="#cb8-5"></a>Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="st">  </span>(converted from warning) installation of package ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>azureml_<span class="dv">0</span>.<span class="dv">4</span>.<span class="fl">0.</span>tar.gz’ had non<span class="op">-</span>zero exit</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  status</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">Error <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/strptime.html">strptime</a></span>(xx, f, <span class="dt">tz =</span> tz) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span>(converted from warning) unable to identify current timezone <span class="st">'C'</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">please set environment variable <span class="st">'TZ'</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">In R CMD INSTALL</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">  </span>(converted from warning) installation of package ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>azureml_<span class="dv">0</span>.<span class="dv">4</span>.<span class="fl">0.</span>tar.gz’ had non<span class="op">-</span>zero exit</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">  status</a></code></pre></div>
 <p>You will need to set your time zone environment variable to GMT and restart the installation process.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">TZ=</span><span class="st">'GMT'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">TZ=</span><span class="st">'GMT'</span>)</a></code></pre></div>
 </li>
 <li>
 <p>If the following permission error occurs while installing in RStudio, change your RStudio session to administrator mode, and re-run the installation command.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Downloading GitHub repo Azure<span class="op">/</span>azureml<span class="op">-</span>sdk<span class="op">-</span><span class="cf">for</span><span class="op">-</span>r<span class="op">@</span>master</span>
-<span id="cb10-2"><a href="#cb10-2"></a>Skipping <span class="dv">2</span> packages ahead of CRAN<span class="op">:</span><span class="st"> </span>reticulate, rlang</span>
-<span id="cb10-3"><a href="#cb10-3"></a>Running <span class="st">`</span><span class="dt">R CMD build</span><span class="st">`</span>...</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a>Error<span class="op">:</span><span class="st"> </span>(converted from warning) invalid package</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="st">'C:/.../file2b441bf23631'</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>In R CMD INSTALL</span>
-<span id="cb10-8"><a href="#cb10-8"></a>Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="st">  </span>(converted from warning) installation of package</span>
-<span id="cb10-10"><a href="#cb10-10"></a>  ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>file2b441bf23631’ had non<span class="op">-</span>zero exit status</span>
-<span id="cb10-11"><a href="#cb10-11"></a>In addition<span class="op">:</span><span class="st"> </span>Warning messages<span class="op">:</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b44144a540f'</span><span class="op">:</span><span class="st"> </span>Permission denied</span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b4463c21577'</span><span class="op">:</span><span class="st"> </span>Permission denied</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">Downloading GitHub repo Azure<span class="op">/</span>azureml<span class="op">-</span>sdk<span class="op">-</span><span class="cf">for</span><span class="op">-</span>r<span class="op">@</span>master</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">Skipping <span class="dv">2</span> packages ahead of CRAN<span class="op">:</span><span class="st"> </span>reticulate, rlang</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">Running <span class="st">`</span><span class="dt">R CMD build</span><span class="st">`</span>...</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">Error<span class="op">:</span><span class="st"> </span>(converted from warning) invalid package</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">'C:/.../file2b441bf23631'</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">In R CMD INSTALL</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">Error <span class="cf">in</span> <span class="kw">i.p</span>(...) <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="st">  </span>(converted from warning) installation of package</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">  ‘C<span class="op">:</span><span class="er">/</span>...<span class="op">/</span>file2b441bf23631’ had non<span class="op">-</span>zero exit status</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">In addition<span class="op">:</span><span class="st"> </span>Warning messages<span class="op">:</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b44144a540f'</span><span class="op">:</span><span class="st"> </span>Permission denied</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>In <span class="kw"><a href="https://rdrr.io/r/base/connections.html">file</a></span>(con, <span class="st">"r"</span>) <span class="op">:</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="st">  </span>cannot open file <span class="st">'C:...</span><span class="ch">\f</span><span class="st">ile2b4463c21577'</span><span class="op">:</span><span class="st"> </span>Permission denied</a></code></pre></div>
 </li>
 </ul>
 </div>
