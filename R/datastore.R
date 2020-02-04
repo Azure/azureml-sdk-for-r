@@ -365,18 +365,18 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
 #' @param tenant_id The Directory ID/Tenant ID of the service principal.
 #' @param client_id The Client ID/Application ID of the service principal.
 #' @param client_secret The secret of the service principal.
-#' @param resource_url The resource URL, which determines what operations will be 
-#' performed on the data lake store, defaults to https://storage.azure.com/ which 
+#' @param resource_url The resource URL, which determines what operations will be
+#' performed on the data lake store, defaults to https://storage.azure.com/ which
 #' allows us to perform filesystem operations.
 #' @param authority_url The authority URL used to authenticate the user, defaults to
 #' "https://login.microsoftonline.com".
-#' @param protocol: Protocol to use to connect to the blob container. If None, 
+#' @param protocol: Protocol to use to connect to the blob container. If None,
 #' defaults to "https".
-#' @param endpoint The endpoint of the blob container. If None, defaults to 
+#' @param endpoint The endpoint of the blob container. If None, defaults to
 #' "core.windows.net".
 #' @param overwrite Whether to overwrite an existing datastore. If the datastore
 #' does not exist, it will create one. The default is FALSE.
-#' @return The `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore` 
+#' @return The `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore`
 #' object.
 #' @export
 #' @md
