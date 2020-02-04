@@ -352,3 +352,45 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
                                                     endpoint,
                                                     overwrite)
 }
+
+#' Initialize a new Azure Data Lake Gen2 Datastore.
+#'
+#' @description
+#' Initialize a new Azure Data Lake Gen2 Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param filesystem The name of the Data Lake Gen2 filesystem.
+#' @param account_name The storage account name.
+#' @param tenant_id The Directory ID/Tenant ID of the service principal.
+#' @param client_id The Client ID/Application ID of the service principal.
+#' @param client_secret The secret of the service principal.
+#' @param resource_url The resource URL, which determines what operations will be 
+#' performed on the data lake store, defaults to https://storage.azure.com/ which 
+#' allows us to perform filesystem operations.
+#' @param authority_url The authority URL used to authenticate the user, defaults to
+#' "https://login.microsoftonline.com".
+#' @param protocol: Protocol to use to connect to the blob container. If None, 
+#' defaults to "https".
+#' @param endpoint The endpoint of the blob container. If None, defaults to 
+#' "core.windows.net".
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore
+#' does not exist, it will create one. The default is FALSE.
+#' @return The `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore` 
+#' object.
+#' @export
+#' @md
+register_azure_data_lake_gen2 <- function(workspace, datastore_name, filesystem,
+                                          account_name, tenant_id, client_id,
+                                          client_secret, resource_url = NULL,
+                                          authority_url = NULL, protocol = NULL,
+                                          endpoint = NULL, overwrite = FALSE) {
+  azureml$core$Datastore$register_azure_data_lake_gen2(workspace,
+                                                       datastore_name,
+                                                       filesystem, account_name,
+                                                       tenant_id, client_id,
+                                                       client_secret,
+                                                       resource_url,
+                                                       authority_url, protocol,
+                                                       endpoint, overwrite)
+}
