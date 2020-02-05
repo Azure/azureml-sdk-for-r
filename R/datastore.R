@@ -380,11 +380,15 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
 #' object.
 #' @export
 #' @md
-register_azure_data_lake_gen2 <- function(workspace, datastore_name, filesystem,
-                                          account_name, tenant_id, client_id,
-                                          client_secret, resource_url = NULL,
-                                          authority_url = NULL, protocol = NULL,
-                                          endpoint = NULL, overwrite = FALSE) {
+register_azure_data_lake_gen2_datastore <- function(workspace, datastore_name,
+                                                    filesystem, account_name,
+                                                    tenant_id, client_id,
+                                                    client_secret,
+                                                    resource_url = NULL,
+                                                    authority_url = NULL,
+                                                    protocol = NULL,
+                                                    endpoint = NULL,
+                                                    overwrite = FALSE) {
   azureml$core$Datastore$register_azure_data_lake_gen2(workspace,
                                                        datastore_name,
                                                        filesystem, account_name,
