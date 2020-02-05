@@ -680,7 +680,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             shiny::shinyOptions,
                             Sys.time())
 
-    .envir=as.environment(1)
+    .envir <- as.environment(1)
 
     lapply(seq_along(widget_obj_names),
            function(x) {
