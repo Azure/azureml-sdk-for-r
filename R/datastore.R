@@ -370,7 +370,7 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
 #' allows us to perform filesystem operations.
 #' @param authority_url The authority URL used to authenticate the user, defaults to
 #' "https://login.microsoftonline.com".
-#' @param protocol: Protocol to use to connect to the blob container. If None,
+#' @param protocol Protocol to use to connect to the blob container. If None,
 #' defaults to "https".
 #' @param endpoint The endpoint of the blob container. If None, defaults to
 #' "core.windows.net".

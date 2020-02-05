@@ -31,14 +31,14 @@ allows us to perform filesystem operations.}
 \item{authority_url}{The authority URL used to authenticate the user, defaults to
 "https://login.microsoftonline.com".}
 
+\item{protocol}{Protocol to use to connect to the blob container. If None,
+defaults to "https".}
+
 \item{endpoint}{The endpoint of the blob container. If None, defaults to
 "core.windows.net".}
 
 \item{overwrite}{Whether to overwrite an existing datastore. If the datastore
 does not exist, it will create one. The default is FALSE.}
-
-\item{protocol:}{Protocol to use to connect to the blob container. If None,
-defaults to "https".}
 }
 \value{
 The \code{azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore}
