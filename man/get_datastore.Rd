@@ -12,7 +12,12 @@ get_datastore(workspace, datastore_name)
 \item{datastore_name}{A string of the name of the datastore.}
 }
 \value{
-The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.
+The \code{azureml.data.azure_sql_database.AzureBlobDatastore},
+\code{azureml.data.azure_sql_database.AzureFileDatastore},
+\code{azureml.data.azure_sql_database.AzureSqlDatabaseDatastore},
+\code{azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore},
+\code{azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore}, or
+\code{azureml.data.azure_sql_database.AzureSqlDatabaseDatastore} object.
 }
 \description{
 Get the corresponding datastore object for an existing

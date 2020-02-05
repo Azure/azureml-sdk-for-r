@@ -93,7 +93,12 @@ download_from_datastore <- function(datastore,
 #' datastore by name from the given workspace.
 #' @param workspace The `Workspace` object.
 #' @param datastore_name A string of the name of the datastore.
-#' @return The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @return The `azureml.data.azure_sql_database.AzureBlobDatastore`,
+#' `azureml.data.azure_sql_database.AzureFileDatastore`,
+#' `azureml.data.azure_sql_database.AzureSqlDatabaseDatastore`,
+#' `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore`,
+#' `azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore`, or
+#' `azureml.data.azure_sql_database.AzureSqlDatabaseDatastore` object.
 #' @export
 #' @md
 get_datastore <- function(workspace, datastore_name) {
