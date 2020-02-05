@@ -1,3 +1,18 @@
+# azuremlsdk 0.6.85
+## New features
+- Methods for creating and managing Azure ML Datasets.
+- Update `create_workspace()` to use `sku` parameter.
+- Expose `file_name` parameter to `load_workspace_from_config()`.
+- v2 of the Azure ML run details widget in RStudio Viewer pane.
+
+## Bug fixes
+- Fix installation issue introduced by latest **reticulate** 1.14 release.
+- Fix default CRAN CDN.
+- Remove dependency on **DAAG** package in train-and-deploy-to-aci vignette.
+
+# azuremlsdk 0.5.7.9000
+`view_run_details` for invoking Azure ML run details widget with live updates in RStudio Viewer pane.
+
 # azuremlsdk 0.5.7
 Initial CRAN release
 

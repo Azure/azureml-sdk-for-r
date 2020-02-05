@@ -76,7 +76,7 @@ here." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -170,7 +170,7 @@ on the predefined Docker images that are used for training if
   <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_run_duration_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>max_run_duration_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -273,6 +273,11 @@ exclusive with the other environment-related parameters <code>custom_docker_imag
 , <code>image_registry_details</code>, <code>use_gpu</code>, <code>environment_variables</code>, <code>shm_size</code>,
 <code>cran_packages</code>, <code>github_packages</code>, and <code>custom_url_packages</code> and if set
 will take precedence over those parameters.</p></td>
+    </tr>
+    <tr>
+      <th>inputs</th>
+      <td><p>A list of DataReference objects or DatasetConsumptionConfig
+objects to use as input.</p></td>
     </tr>
     </table>
     

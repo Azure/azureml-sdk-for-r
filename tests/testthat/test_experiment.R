@@ -50,7 +50,8 @@ test_that("create, submit experiment, run in default amlcompute,
   unlink(tmp_dir_name, recursive = TRUE)
 })
 
-test_that("submit experiment through a custom environment", {
+test_that("submit experiment through a custom environment,
+          add child run with config", {
   skip_if_no_subscription()
   ws <- existing_ws
   
@@ -69,6 +70,7 @@ test_that("submit experiment through a custom environment", {
   
   exp <- experiment(ws, "estimator_run")
   run <- submit_experiment(exp, est)
+
   wait_for_run_completion(run, show_output = TRUE)
   expect_equal(run$status, "Completed")
   
@@ -124,4 +126,25 @@ test_that("Create an interactive run, log metrics locally.", {
   files <- get_run_file_names(run)
   image_found <- grep("myplot", files)
   expect_true(length(image_found) > 0)
+})
+
+test_that("Create and submit child runs", {
+  skip('skip')
+  ws <- existing_ws
+
+  exp <- experiment(ws, "estimator_run")
+  run <- start_logging_run(exp)
+
+  # create new child runs
+  extra_child <- create_child_run(run, run_id = "my_new_child_2")
+  expect_equal(extra_child$id, "my_new_child_2")
+
+  extra_children <- create_child_runs(run, count = 3L)
+  expect_equal(length(extra_children), 3)
+
+  child_runs <- get_child_runs(run)
+  expect_equal(length(child_runs), 5)
+
+  # tear down resources
+  unlink(tmp_dir_name, recursive = TRUE)
 })

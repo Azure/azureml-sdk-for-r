@@ -67,7 +67,7 @@ the log_*() methods." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -146,7 +146,8 @@ the <code>log_*()</code> methods.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_run_metrics</span>(<span class='no'>run</span>)</pre>
+    <pre class="usage"><span class='fu'>get_run_metrics</span>(<span class='no'>run</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>populate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,6 +155,22 @@ the <code>log_*()</code> methods.</p>
     <tr>
       <th>run</th>
       <td><p>The <code>Run</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>The name of the metric.</p></td>
+    </tr>
+    <tr>
+      <th>recursive</th>
+      <td><p>If specified, returns runs matching specified <em>"property"</em> or <em>"property"</em>: <em>"value"</em>.</p></td>
+    </tr>
+    <tr>
+      <th>run_type</th>
+      <td><p>run type</p></td>
+    </tr>
+    <tr>
+      <th>populate</th>
+      <td><p>Boolean indicating whether to fetch the contents of external data linked to the metric.</p></td>
     </tr>
     </table>
     

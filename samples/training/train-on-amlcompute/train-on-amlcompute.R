@@ -17,7 +17,7 @@ upload_files_to_datastore(ds,
                           overwrite = TRUE)
 
 # Create AmlCompute cluster
-cluster_name <- "rcluster"
+cluster_name <- "r-cluster"
 compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"

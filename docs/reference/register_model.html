@@ -75,7 +75,7 @@ and the new model is registered under the same name." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -162,8 +162,9 @@ and the new model is registered under the same name.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,6 +184,11 @@ object, as opposed to using the entire contents of the folder.</p></td>
     <tr>
       <th>model_name</th>
       <td><p>A string of the name to register the model with.</p></td>
+    </tr>
+    <tr>
+      <th>datasets</th>
+      <td><p>A list of tuples where the first element describes the
+dataset-model relationship and the second element is the dataset.</p></td>
     </tr>
     <tr>
       <th>tags</th>

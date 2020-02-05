@@ -17,32 +17,44 @@ You do not need run this if you are working on an Azure Machine Learning Compute
 If you do not have Conda already installed on your machine, you will first need to install it, since the Azure ML R SDK uses **reticulate** to bind to the Python SDK. We recommend installing [Miniconda](https://docs.conda.io/en/latest/miniconda.html), which is a smaller, lightweight version of Anaconda. Choose the 64-bit binary for Python 3.5 or later.
 
 ## Install the **azuremlsdk** R package
-You will need **remotes** to install **azuremlsdk** from the GitHub repo.
+The stable release of the Azure ML SDK can be installed from CRAN or the development version can 
+be installed from GitHub. You will need **remotes** to install the **azuremlsdk** package.
 ``` {r install_remotes, eval=FALSE}
 install.packages('remotes')
 ``` 
 
-Then, you can use the `install_github` function to install the package.
+Then, you can use the `install_github` or `install_cran` functions to install the package.
 ``` {r install_azuremlsdk, eval=FALSE}
-remotes::install_cran('azuremlsdk', repos = 'http://cran.us.r-project.org')
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
+
+remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/')
 ```
 
 If you are using R installed from CRAN, which comes with 32-bit and 64-bit binaries, you may need to specify the parameter `INSTALL_opts=c("--no-multiarch")` to only build for the current 64-bit architecture.
 ``` {r eval=FALSE}
-remotes::install_cran('azuremlsdk', repos = 'http://cran.us.r-project.org', INSTALL_opts=c("--no-multiarch"))
+remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/', INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Install the Azure ML Python SDK
-Lastly, use the **azuremlsdk** R library to install the Python SDK. By default, `azuremlsdk::install_azureml()` will install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/) in a conda environment called `r-azureml`.
-``` {r install_pythonsdk, eval=FALSE}
+Lastly, use the **azuremlsdk** R library to install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/).
+
+If using an Azure Machine Learning Compute Instance or a CRAN installation with `reticulate >= 1.14`, use the `azuremlsdk::install_azureml()` function with the conda environment set to `r-reticulate`.
+``` {r install_pythonsdk1, eval=FALSE}
+azuremlsdk::install_azureml(envname = 'r-reticulate')
+```
+
+If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, the correct conda environment will be selected automatically. There is no need to specify the `envname` parameter.
+``` {r install_pythonsdk2, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
 
-If you would like to override the default version, environment name, or Python version, you can pass in those arguments: 
+If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so: 
 ``` {r eval=FALSE}
 azuremlsdk::install_azureml(version = NULL, 
                             envname = "<your conda environment name>",
-                            conda_python_version = "<desired python version>")
+                            conda_python_version = "<desired python version>",
+                            restart_session = TRUE,
+                            remove_existing_env = TRUE)
 ```
 
 ## Test installation

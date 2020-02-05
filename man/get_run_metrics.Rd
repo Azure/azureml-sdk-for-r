@@ -4,10 +4,19 @@
 \alias{get_run_metrics}
 \title{Get the metrics logged to a run}
 \usage{
-get_run_metrics(run)
+get_run_metrics(run, name = NULL, recursive = FALSE, run_type = NULL,
+  populate = FALSE)
 }
 \arguments{
 \item{run}{The \code{Run} object.}
+
+\item{name}{The name of the metric.}
+
+\item{recursive}{If specified, returns runs matching specified \emph{"property"} or {\emph{"property"}: \emph{"value"}}.}
+
+\item{run_type}{run type}
+
+\item{populate}{Boolean indicating whether to fetch the contents of external data linked to the metric.}
 }
 \value{
 A named list of the metrics associated with the run,

@@ -1,7 +1,7 @@
 Package: azuremlsdk
 Type: Package
 Title: Interface to the 'Azure Machine Learning' 'SDK'
-Version: 0.5.7
+Version: 0.6.85
 Authors@R: c(
     person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
     person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
@@ -33,8 +33,9 @@ Imports:
     DT,
     rstudioapi (>= 0.7),
     htmltools,
-    here,
-    servr
+    servr,
+    shiny,
+    shinycssloaders
 Suggests: rmarkdown,
     knitr,
     testthat,

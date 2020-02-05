@@ -4,8 +4,9 @@
 \alias{register_model}
 \title{Register a model to a given workspace}
 \usage{
-register_model(workspace, model_path, model_name, tags = NULL,
-  properties = NULL, description = NULL, child_paths = NULL)
+register_model(workspace, model_path, model_name, datasets = NULL,
+  tags = NULL, properties = NULL, description = NULL,
+  child_paths = NULL)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -17,6 +18,9 @@ be used to specify individual files to bundle together as the \code{Model}
 object, as opposed to using the entire contents of the folder.}
 
 \item{model_name}{A string of the name to register the model with.}
+
+\item{datasets}{A list of tuples where the first element describes the
+dataset-model relationship and the second element is the dataset.}
 
 \item{tags}{A named list of key-value tags to give the model, e.g.
 \code{list("key" = "value")}}

@@ -10,7 +10,7 @@ estimator(source_directory, compute_target = NULL, vm_size = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
   image_registry_details = NULL, use_gpu = FALSE,
   environment_variables = NULL, shm_size = NULL,
-  max_run_duration_seconds = NULL, environment = NULL)
+  max_run_duration_seconds = NULL, environment = NULL, inputs = NULL)
 }
 \arguments{
 \item{source_directory}{A string of the local directory containing
@@ -79,6 +79,9 @@ exclusive with the other environment-related parameters \code{custom_docker_imag
 , \code{image_registry_details}, \code{use_gpu}, \code{environment_variables}, \code{shm_size},
 \code{cran_packages}, \code{github_packages}, and \code{custom_url_packages} and if set
 will take precedence over those parameters.}
+
+\item{inputs}{A list of DataReference objects or DatasetConsumptionConfig
+objects to use as input.}
 }
 \value{
 The \code{Estimator} object.

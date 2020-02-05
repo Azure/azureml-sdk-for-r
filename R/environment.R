@@ -250,7 +250,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
     base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_cran('azuremlsdk', ",
-                              "repos = 'http://cran.us.r-project.org', ",
+                              "repos = 'https://cloud.r-project.org/', ",
                               "upgrade = FALSE)\"\n")
   }
 
@@ -259,7 +259,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
       base_dockerfile <- paste0(
           base_dockerfile,
           sprintf("RUN R -e \"install.packages(\'%s\', ", package),
-          "repos = \'http://cran.us.r-project.org\')\"\n")
+          "repos = \'https://cloud.r-project.org/\')\"\n")
     }
   }
 

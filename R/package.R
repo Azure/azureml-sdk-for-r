@@ -10,8 +10,18 @@
 
     on_load = function() {
       # This function will be called on successful load
+
+      # set user agent
       ver <- toString(utils::packageVersion("azuremlsdk"))
       azureml$"_base_sdk_common"$user_agent$append("azureml-r-sdk", ver)
+
+      # override workspace __repr__ from python
+      azureml$core$Workspace$"__repr__" <- function(self) {
+        sprintf("create_workspace(name=\"%s\", subscription_id=\"%s\", resource_group=\"%s\")", 
+          self$"_workspace_name",
+          self$"_subscription_id",
+          self$"_resource_group")
+        }
     },
 
     on_error = function(e) {
