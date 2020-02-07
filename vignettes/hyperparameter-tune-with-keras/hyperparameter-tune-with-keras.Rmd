@@ -146,7 +146,7 @@ __Continuous hyperparameters__ are specified as a distribution over a continuous
  * `normal(mu, sigma)`
  * `lognormal(mu, sigma)`
 
-Here, we will use the [`random_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html) function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions.
+Here, we will use the [`random_parameter_sampling()`](https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html) function to define the search space for each hyperparameter. `batch_size` and `epochs` will be chosen from discrete sets while `lr` and `decay` will be drawn from continuous distributions. If you wish to fix a script parameter's value, simply remove it from your sampling function list, and it will be excluded from tuning and kept at the value assigned to it in the estimator step.
 
 Other available sampling function options are:
 
