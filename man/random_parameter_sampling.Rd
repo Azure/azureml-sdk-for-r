@@ -33,7 +33,7 @@ use include:
 \dontrun{
 param_sampling <- random_parameter_sampling(list("learning_rate" = normal(10, 3),
                                                  "keep_probability" = uniform(0.05, 0.1),
-                                                 "batch_size" = choice(16, 32, 64, 128)))
+                                                 "batch_size" = choice(c(16, 32, 64, 128))))
 }
 }
 \seealso{
