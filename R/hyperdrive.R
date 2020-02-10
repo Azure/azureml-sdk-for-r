@@ -396,7 +396,7 @@ bayesian_parameter_sampling <- function(parameter_space) {
 #' @description
 #' Specify a discrete set of options to sample the hyperparameters
 #' from.
-#' @param options An integer vector of discrete values to choose from.
+#' @param options A vector of values to choose from.
 #' @return A list of the stochastic expression.
 #' @export
 #' @seealso
