@@ -28,9 +28,9 @@ allows for managed access control.
 }
 \examples{
 # Service principal authentication involves creating an App Registration in
-Azure Active Directory. First, you generate a client secret, and then you grant
-your service principal role access to your machine learning workspace. Then,
-you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
+# Azure Active Directory. First, you generate a client secret, and then you grant
+# your service principal role access to your machine learning workspace. Then,
+# you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
 \dontrun{
 svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
 svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
