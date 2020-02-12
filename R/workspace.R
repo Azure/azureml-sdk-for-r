@@ -87,6 +87,8 @@
 #'          prefix,
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
+#' @seealso 
+#' `service_principal_authentication()`
 #' @md
 create_workspace <- function(
   name,
@@ -332,3 +334,43 @@ set_default_datastore <- function(workspace, datastore_name) {
   workspace$set_default_datastore(datastore_name)
   invisible(NULL)
 }
+
+#' Manages authentication using a service principle instead of a user identity.
+#' 
+#' @description
+#' Service Principal authentication is suitable for automated workflows like for CI/CD scenarios.
+#' This type of authentication decouples the authentication process from any specific user login, and
+#' allows for managed access control.
+#' @param tenant_id The string id of the active directory tenant that the service
+#' identity belongs to.
+#' @param service_principal_id The service principal ID string.
+#' @param service_principal_password The service principal password/key string.
+#' @param cloud The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+#' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
+#' @return `ServicePrincipalAuthentication` object
+#' @export
+#' @examples
+#' # Service principal authentication involves creating an App Registration in
+#' Azure Active Directory. First, you generate a client secret, and then you grant
+#' your service principal role access to your machine learning workspace. Then,
+#' you use the ServicePrincipalAuthentication class to manage your authentication flow.
+#' \dontrun{
+#' svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
+#' svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
+#'                                            service_principal_id="my-application-id",
+#'                                            service_principal_password=svc_pr_password)
+#' 
+#' ws <- get_workspace("<your workspace name>",
+#'                     "<your subscription ID>",
+#'                     "<your resource group>",
+#'                     auth = svc_pr)
+#' }
+#' @seealso
+#' `get_workspace()`
+#' @md
+service_principal_authentication <- function(tenant_id, service_principal_id,
+                                             service_principal_password,
+                                             cloud = 'AzureCloud') {
+  azureml$core$authentication$ServicePrincipalAuthentication(
+    tenant_id = tenant_id, service_principal_id = service_principal_id,
+    service_principal_password = service_principal_password, cloud = cloud)
