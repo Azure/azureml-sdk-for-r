@@ -19,6 +19,9 @@
 #'   sensitive information that's needed by the workspace.
 #' @param name A string of the new workspace name. Workspace name has to be
 #' between 2 and 32 characters of letters and numbers.
+#' @param auth The `ServicePrincipalAuthentication` or `InteractiveLoginAuthentication`
+#' object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+#' the default Azure CLI credentials will be used or the API will prompt for credentials.
 #' @param subscription_id A string of the subscription ID of the containing
 #' subscription for the new workspace. The parameter is required if the user has
 #' access to more than one subscription.
@@ -87,6 +90,7 @@
 #' @md
 create_workspace <- function(
   name,
+  auth = NULL,
   subscription_id = NULL,
   resource_group = NULL,
   location = NULL,
@@ -101,6 +105,7 @@ create_workspace <- function(
   sku = "basic") {
   ws <-
     azureml$core$Workspace$create(name = name,
+                                  auth = auth,
                                   subscription_id = subscription_id,
                                   resource_group = resource_group,
                                   location = location,
@@ -123,6 +128,9 @@ create_workspace <- function(
 #' workspace. Throws an exception if the workpsace doesn't exist or the
 #' required fields don't lead to a uniquely identifiable workspace.
 #' @param name A string of the workspace name to get.
+#' @param auth The `ServicePrincipalAuthentication` or `InteractiveLoginAuthentication`
+#' object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+#' the default Azure CLI credentials will be used or the API will prompt for credentials.
 #' @param subscription_id A string of the subscription ID to use. The parameter
 #' is required if the user has access to more than one subscription.
 #' @param resource_group A string of the resource group to use. If `NULL` the
@@ -130,9 +138,10 @@ create_workspace <- function(
 #' @return The `Workspace` object.
 #' @export
 #' @md
-get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
+get_workspace <- function(name, auth = NULL,subscription_id = NULL,
+                          resource_group = NULL) {
   tryCatch({
-    azureml$core$Workspace$get(name, auth = NULL,
+    azureml$core$Workspace$get(name, auth = auth,
                                subscription_id = subscription_id,
                                resource_group = resource_group)
   },

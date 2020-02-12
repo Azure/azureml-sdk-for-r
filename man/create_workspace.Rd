@@ -4,15 +4,20 @@
 \alias{create_workspace}
 \title{Create a new Azure Machine Learning workspace}
 \usage{
-create_workspace(name, subscription_id = NULL, resource_group = NULL,
-  location = NULL, create_resource_group = TRUE,
-  friendly_name = NULL, storage_account = NULL, key_vault = NULL,
-  app_insights = NULL, container_registry = NULL, exist_ok = FALSE,
-  show_output = TRUE, sku = "basic")
+create_workspace(name, auth = NULL, subscription_id = NULL,
+  resource_group = NULL, location = NULL,
+  create_resource_group = TRUE, friendly_name = NULL,
+  storage_account = NULL, key_vault = NULL, app_insights = NULL,
+  container_registry = NULL, exist_ok = FALSE, show_output = TRUE,
+  sku = "basic")
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be
 between 2 and 32 characters of letters and numbers.}
+
+\item{auth}{The \code{ServicePrincipalAuthentication} or \code{InteractiveLoginAuthentication}
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.}
 
 \item{subscription_id}{A string of the subscription ID of the containing
 subscription for the new workspace. The parameter is required if the user has
