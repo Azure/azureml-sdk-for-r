@@ -99,7 +99,7 @@
 #'          prefix,
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
-#' @seealso 
+#' @seealso
 #' #' \code{\link{service_principal_authentication}}
 #' @md
 create_workspace <- function(
@@ -158,7 +158,7 @@ create_workspace <- function(
 #' @return The `Workspace` object.
 #' @export
 #' @md
-get_workspace <- function(name, auth = NULL,subscription_id = NULL,
+get_workspace <- function(name, auth = NULL, subscription_id = NULL,
                           resource_group = NULL) {
   tryCatch({
     azureml$core$Workspace$get(name, auth = auth,
@@ -354,7 +354,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 }
 
 #' Manages authentication using a service principle instead of a user identity.
-#' 
+#'
 #' @description
 #' Service Principal authentication is suitable for automated workflows like for CI/CD scenarios.
 #' This type of authentication decouples the authentication process from any specific user login, and
@@ -377,7 +377,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 #' svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
 #'                                            service_principal_id="my-application-id",
 #'                                            service_principal_password=svc_pr_password)
-#' 
+#'
 #' ws <- get_workspace("<your workspace name>",
 #'                     "<your subscription ID>",
 #'                     "<your resource group>",
@@ -388,7 +388,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 #' @md
 service_principal_authentication <- function(tenant_id, service_principal_id,
                                              service_principal_password,
-                                             cloud = 'AzureCloud') {
+                                             cloud = "AzureCloud") {
   azureml$core$authentication$ServicePrincipalAuthentication(
     tenant_id = tenant_id, service_principal_id = service_principal_id,
     service_principal_password = service_principal_password, cloud = cloud)
