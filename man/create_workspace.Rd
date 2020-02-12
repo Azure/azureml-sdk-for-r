@@ -58,8 +58,7 @@ workspace to pull and push both experimentation and webservices images. If
 \item{cmk_keyvault}{A string representing the key vault containing the customer
 managed key in the Azure resource ID format:
 '/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
-example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'
-See example code below for more details on the Azure resource ID format.}
+example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.}
 
 \item{resource_cmk_uri}{The key URI of the customer managed key to encrypt the data at rest.
 The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
@@ -132,5 +131,5 @@ ws <- create_workspace(
 }
 }
 \seealso{
-\code{service_principal_authentication()}
+#' \code{\link{service_principal_authentication}}
 }

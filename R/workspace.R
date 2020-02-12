@@ -51,8 +51,7 @@
 #' @param cmk_keyvault A string representing the key vault containing the customer
 #' managed key in the Azure resource ID format:
 #' '/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
-#' example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'
-#' See example code below for more details on the Azure resource ID format.
+#' example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.
 #' @param resource_cmk_uri The key URI of the customer managed key to encrypt the data at rest.
 #' The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
 #' For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
@@ -101,7 +100,7 @@
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
 #' @seealso 
-#' `service_principal_authentication()`
+#' #' \code{\link{service_principal_authentication}}
 #' @md
 create_workspace <- function(
   name,
@@ -372,7 +371,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 #' # Service principal authentication involves creating an App Registration in
 #' Azure Active Directory. First, you generate a client secret, and then you grant
 #' your service principal role access to your machine learning workspace. Then,
-#' you use the ServicePrincipalAuthentication class to manage your authentication flow.
+#' you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
 #' \dontrun{
 #' svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
 #' svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
@@ -385,7 +384,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 #'                     auth = svc_pr)
 #' }
 #' @seealso
-#' `get_workspace()`
+#' \code{\link{get_workspace}}
 #' @md
 service_principal_authentication <- function(tenant_id, service_principal_id,
                                              service_principal_password,
