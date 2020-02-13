@@ -93,6 +93,8 @@ get_input_dataset_from_run <- function(name, run = NULL) {
 #' returned dataset. Defaults to True. Validation requires that the data source
 #' is accessible from the current compute.
 #' @return The FileDataset object
+#' @export
+#' @md
 create_file_dataset_from_files <- function(path, validate = TRUE) {
   azureml$data$dataset_factory$FileDatasetFactory$from_files(path, validate)
 }
