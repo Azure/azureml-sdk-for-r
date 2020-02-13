@@ -16,6 +16,10 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
                             overwrite = TRUE)
   dataset <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
 
+  # load data into data frame
+  pandas_df <- load_dataset_into_data_frame(dataset)
+  expect_equal(is.data.frame(pandas_df), TRUE)
+
   # register two versions of the dataset
   register_dataset(ws, dataset, "iris")
   register_dataset(ws, dataset, "iris", create_new_version = TRUE)
