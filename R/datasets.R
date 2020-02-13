@@ -510,7 +510,7 @@ define_timestamp_columns_for_dataset <- function(dataset, fine_grain_timestamp,
 #' @export
 #' @md
 load_dataset_into_data_frame <- function(dataset)	{
-  dataset$to_pandas_data_frame()
+  dataset$to_pandas_dataframe()
 }
 
 #' Convert the current dataset into a FileDataset containing CSV files.
