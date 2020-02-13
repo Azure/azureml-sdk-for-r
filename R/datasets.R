@@ -154,8 +154,8 @@ download_from_file_dataset <- function(dataset, target_path = NULL,
 #' type `azureml.dataprep.fuse.daemon.MountContext`.
 #' @export
 #' @md
-mount_file_dataset <- function(dataset, mount_point) {
-  dataset$mount(mount_point)
+mount_file_dataset <- function(dataset, mount_point = NULL) {
+  dataset$mount(mount_point = mount_point)
 }
 
 #' Skip file streams from the top of the dataset by the specified count.
