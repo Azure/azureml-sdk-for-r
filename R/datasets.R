@@ -154,8 +154,8 @@ download_from_file_dataset <- function(dataset, target_path = NULL,
 #' type `azureml.dataprep.fuse.daemon.MountContext`.
 #' @export
 #' @md
-mount_file_dataset <- function(dataset, mount_point) {
-  dataset$mount(mount_point)
+mount_file_dataset <- function(dataset, mount_point = NULL) {
+  dataset$mount(mount_point = mount_point)
 }
 
 #' Skip file streams from the top of the dataset by the specified count.
@@ -506,11 +506,19 @@ define_timestamp_columns_for_dataset <- function(dataset, fine_grain_timestamp,
 #' Load all records from the dataset into a dataframe.
 #'
 #' @param dataset The Tabular Dataset object.
-#' @return A dataframe.
+#' @param on_error How to handle any error values in the dataset, such as those
+#' produced by an error while parsing values. Valid values are 'null' which replaces
+#' them with NULL; and 'fail' which will result in an exception.
+#' @param out_of_range_datetime How to handle date-time values that are outside
+#' the range supported by Pandas. Valid values are 'null' which replaces them with
+#' NULL; and 'fail' which will result in an exception.
+#' @return A data.frame.
 #' @export
 #' @md
-load_dataset_into_data_frame <- function(dataset)	{
-  dataset$to_pandas_data_frame()
+load_dataset_into_data_frame <- function(dataset, on_error = "null",
+                                         out_of_range_datetime = "null")	{
+  dataset$to_pandas_dataframe(on_error = on_error,
+                              out_of_range_datetime = out_of_range_datetime)
 }
 
 #' Convert the current dataset into a FileDataset containing CSV files.
