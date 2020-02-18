@@ -148,7 +148,8 @@ required fields don't lead to a uniquely identifiable workspace.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_workspace</span>(<span class='no'>name</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_workspace</span>(<span class='no'>name</span>, <span class='kw'>auth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +157,12 @@ required fields don't lead to a uniquely identifiable workspace.</p>
     <tr>
       <th>name</th>
       <td><p>A string of the workspace name to get.</p></td>
+    </tr>
+    <tr>
+      <th>auth</th>
+      <td><p>The <code>ServicePrincipalAuthentication</code> or <code>InteractiveLoginAuthentication</code>
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>

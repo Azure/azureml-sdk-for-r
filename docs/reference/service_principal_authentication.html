@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a context manager for mounting file streams defined by the dataset as local files. — mount_file_dataset • azuremlsdk</title>
+<title>Manages authentication using a service principle instead of a user identity. — service_principal_authentication • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,15 +32,11 @@
 
 
 
-<meta property="og:title" content="Create a context manager for mounting file streams defined by the dataset as local files. — mount_file_dataset" />
+<meta property="og:title" content="Manages authentication using a service principle instead of a user identity. — service_principal_authentication" />
 
-<meta property="og:description" content="Create a context manager for mounting file streams defined by the dataset as local files.
-A context manager will be returned to manage the lifecycle of the mount.
-To mount, you will need to enter the context manager and to unmount, exit from
-the context manager. Mount is only supported on Unix or Unix-like operating systems
-and libfuse must be present. If you are running inside a docker container, the docker
-container must be started with the --privileged flag or started with
---cap-add SYS_ADMIN --device /dev/fuse." />
+<meta property="og:description" content="Service Principal authentication is suitable for automated workflows like for CI/CD scenarios.
+This type of authentication decouples the authentication process from any specific user login, and
+allows for managed access control." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,45 +135,70 @@ container must be started with the --privileged flag or started with
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a context manager for mounting file streams defined by the dataset as local files.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>mount_file_dataset.Rd</code></div>
+    <h1>Manages authentication using a service principle instead of a user identity.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
+    <div class="hidden name"><code>service_principal_authentication.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a context manager for mounting file streams defined by the dataset as local files.
-A context manager will be returned to manage the lifecycle of the mount.
-To mount, you will need to enter the context manager and to unmount, exit from
-the context manager. Mount is only supported on Unix or Unix-like operating systems
-and libfuse must be present. If you are running inside a docker container, the docker
-container must be started with the <code>--privileged</code> flag or started with
-<code>--cap-add SYS_ADMIN --device /dev/fuse</code>.</p>
+    <p>Service Principal authentication is suitable for automated workflows like for CI/CD scenarios.
+This type of authentication decouples the authentication process from any specific user login, and
+allows for managed access control.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>mount_file_dataset</span>(<span class='no'>dataset</span>, <span class='kw'>mount_point</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>service_principal_authentication</span>(<span class='no'>tenant_id</span>, <span class='no'>service_principal_id</span>,
+  <span class='no'>service_principal_password</span>, <span class='kw'>cloud</span> <span class='kw'>=</span> <span class='st'>"AzureCloud"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset</th>
-      <td><p>The Dataset object.</p></td>
+      <th>tenant_id</th>
+      <td><p>The string id of the active directory tenant that the service
+identity belongs to.</p></td>
     </tr>
     <tr>
-      <th>mount_point</th>
-      <td><p>The local directory to mount the files to. If NULL, the
-data will be mounted into a temporary directory.</p></td>
+      <th>service_principal_id</th>
+      <td><p>The service principal ID string.</p></td>
+    </tr>
+    <tr>
+      <th>service_principal_password</th>
+      <td><p>The service principal password/key string.</p></td>
+    </tr>
+    <tr>
+      <th>cloud</th>
+      <td><p>The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+"AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a context manager for managing the lifecycle of the mount of
-type <code>azureml.dataprep.fuse.daemon.MountContext</code>.</p>
+    <p><code>ServicePrincipalAuthentication</code> object</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>get_workspace</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Service principal authentication involves creating an App Registration in</span>
+<span class='co'># Azure Active Directory. First, you generate a client secret, and then you grant</span>
+<span class='co'># your service principal role access to your machine learning workspace. Then,</span>
+<span class='co'># you use the `ServicePrincipalAuthentication` object to manage your authentication flow.</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>svc_pr_password</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"AZUREML_PASSWORD"</span>)
+<span class='no'>svc_pr</span> <span class='kw'>&lt;-</span> <span class='fu'>service_principal_authentication</span>(<span class='kw'>tenant_id</span><span class='kw'>=</span><span class='st'>"my-tenant-id"</span>,
+                                           <span class='kw'>service_principal_id</span><span class='kw'>=</span><span class='st'>"my-application-id"</span>,
+                                           <span class='kw'>service_principal_password</span><span class='kw'>=</span><span class='no'>svc_pr_password</span>)
+
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>get_workspace</span>(<span class='st'>"&lt;your workspace name&gt;"</span>,
+                    <span class='st'>"&lt;your subscription ID&gt;"</span>,
+                    <span class='st'>"&lt;your resource group&gt;"</span>,
+                    <span class='kw'>auth</span> <span class='kw'>=</span> <span class='no'>svc_pr</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -185,7 +206,11 @@ type <code>azureml.dataprep.fuse.daemon.MountContext</code>.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
