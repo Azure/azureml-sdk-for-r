@@ -4,15 +4,21 @@
 \alias{create_workspace}
 \title{Create a new Azure Machine Learning workspace}
 \usage{
-create_workspace(name, subscription_id = NULL, resource_group = NULL,
-  location = NULL, create_resource_group = TRUE,
-  friendly_name = NULL, storage_account = NULL, key_vault = NULL,
-  app_insights = NULL, container_registry = NULL, exist_ok = FALSE,
+create_workspace(name, auth = NULL, subscription_id = NULL,
+  resource_group = NULL, location = NULL,
+  create_resource_group = TRUE, friendly_name = NULL,
+  storage_account = NULL, key_vault = NULL, app_insights = NULL,
+  container_registry = NULL, cmk_keyvault = NULL,
+  resource_cmk_uri = NULL, hbi_workspace = FALSE, exist_ok = FALSE,
   show_output = TRUE, sku = "basic")
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be
 between 2 and 32 characters of letters and numbers.}
+
+\item{auth}{The \code{ServicePrincipalAuthentication} or \code{InteractiveLoginAuthentication}
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.}
 
 \item{subscription_id}{A string of the subscription ID of the containing
 subscription for the new workspace. The parameter is required if the user has
@@ -48,6 +54,21 @@ log webservices events. If \code{NULL} a new Application Insights will be create
 Azure resource ID format. The container registry will be used by the
 workspace to pull and push both experimentation and webservices images. If
 \code{NULL} a new container registry will be created.}
+
+\item{cmk_keyvault}{A string representing the key vault containing the customer
+managed key in the Azure resource ID format:
+'/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
+example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.}
+
+\item{resource_cmk_uri}{The key URI of the customer managed key to encrypt the data at rest.
+The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
+For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
+Refer to https://docs.microsoft.com/azure-stack/user/azure-stack-key-vault-manage-portal for steps on how
+to create a key and get its URI.}
+
+\item{hbi_workspace}{Specifies whether the customer data is of High Business
+Impact(HBI), i.e., contains sensitive business information. The default value
+is FALSE. When set to TRUE, downstream services will selectively disable logging.}
 
 \item{exist_ok}{If \code{TRUE} the method will not fail if the workspace already
 exists.}
@@ -108,4 +129,7 @@ ws <- create_workspace(
          prefix,
          'microsoft.containerregistry/registries/mycontainerregistry'))
 }
+}
+\seealso{
+#' \code{\link{service_principal_authentication}}
 }
