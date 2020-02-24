@@ -707,15 +707,21 @@ view_run_details <- function(run, auto_refresh = TRUE) {
     Sys.setenv(AZUREML_RSTUDIO_WIDGET_JOB = current_job_id)
     # nolint end
 
-    # check if using notebook vm and assign host
-    nb_vm_file_path <- "~/../../mnt/azmnt/.nbvm"
-    if (file.exists(nb_vm_file_path)) {
-      nb_vm_file_info <- readLines(nb_vm_file_path, warn = FALSE)
-      instance_name <- gsub("instance=", "", nb_vm_file_info[2])
-      domain_suffix <- gsub("domainsuffix=", "", nb_vm_file_info[3])
+    # check if using notebook vm/CI and assign host
+    info_file_path <- "~/../../mnt/azmnt/.nbvm"
+    if (file.exists(info_file_path)) {
+      info_file <- readLines(info_file_path, warn = FALSE)
+      if (length(info_file) == 3) { # NBVM files containe blank first line
+        instance_name <- gsub("instance=", "", info_file[2])
+        domain_suffix <- gsub("domainsuffix=", "", info_file[3])
+      }
+      if (length(info_file) == 2) { # CI files are 2 lines
+        instance_name <- gsub("instance=", "", info_file[1])
+        domain_suffix <- gsub("domainsuffix=", "", info_file[2])
+      }
 
       host <- paste0("https://", instance_name, "-", port, ".", domain_suffix)
-      Sys.sleep(1) # Notebook VM server requires longer to connect to host
+      Sys.sleep(1) # server requires longer to connect to host
     } else {
       host <- paste0("http://localhost:", port)
     }
