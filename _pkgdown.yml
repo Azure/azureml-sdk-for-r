@@ -60,7 +60,7 @@ reference:
   - '`list_supported_vm_sizes`'
   - '`delete_compute`'
 - title: Working with data
-  desc: Functions for managing and accessing data for your machine learning workflows. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.
+  desc: Functions for accessing your data in Azure Storage services. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service.
   contents:
   - '`upload_files_to_datastore`'
   - '`upload_to_datastore`'
@@ -68,7 +68,45 @@ reference:
   - '`get_datastore`'
   - '`register_azure_blob_container_datastore`'
   - '`register_azure_file_share_datastore`'
+  - '`register_azure_sql_database_datastore`'
+  - '`register_azure_postgre_sql_datastore`'
   - '`unregister_datastore`'
+- title: Working with datasets
+  desc: Functions for managing datasets. An Azure Machine Learning **Dataset** allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of `FileDataset` and `TabularDataset`.
+  contents:
+  - '`register_dataset`'
+  - '`unregister_all_dataset_versions`'
+  - '`get_dataset_by_name`'
+  - '`get_dataset_by_id`'
+  - '`get_input_dataset_from_run`'
+  - '`create_file_dataset_from_files`'
+  - '`get_file_dataset_paths`'
+  - '`download_from_file_dataset`'
+  - '`mount_file_dataset`'
+  - '`skip_from_dataset`'
+  - '`take_from_dataset`'
+  - '`take_sample_from_dataset`'
+  - '`random_split_dataset`'
+  - '`create_tabular_dataset_from_parquet_files`'
+  - '`create_tabular_dataset_from_delimited_files`'
+  - '`create_tabular_dataset_from_json_lines_files`'
+  - '`create_tabular_dataset_from_sql_query`'
+  - '`drop_columns_from_dataset`'
+  - '`keep_columns_from_dataset`'
+  - '`filter_dataset_after_time`'
+  - '`filter_dataset_before_time`'
+  - '`filter_dataset_between_time`'
+  - '`filter_dataset_from_recent_time`'
+  - '`define_timestamp_columns_for_dataset`'
+  - '`load_dataset_into_data_frame`'
+  - '`convert_to_dataset_with_csv_files`'
+  - '`convert_to_dataset_with_parquet_files`'
+  - '`data_type_bool`'
+  - '`data_type_datetime`'
+  - '`data_type_double`'
+  - '`data_type_long`'
+  - '`data_type_string`'
+  - '`promote_headers_behavior`'
 - title: Environments
   desc: Functions for managing environments. An Azure Machine Learning **Environment** allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see `r_environment()`.
   contents:
