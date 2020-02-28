@@ -1,0 +1,65 @@
+---
+title: "Troubleshooting"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Troubleshooting}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This guide covers known issues and troubleshooting for using R in Azure Machine Learning.
+
+The list will continue to evolve as new issues are discovered and old ones are resolved.
+
+## Installation
+For issues with installing the **azuremlsdk** package, please refer to the [troubleshooting](https://azure.github.io/azureml-sdk-for-r/articles/installation.html#troubleshooting) section of the installation guide.
+
+## Compute instance
+The following address issues when developing in R on a [Compute instance](https://docs.microsoft.com/azure/machine-learning/concept-compute-instance) using RStudio or Jupyter.
+
+### Older version of azuremlsdk
+There will usually be a lag in between the latest release of the **azuremlsdk** package to CRAN and when the package version is updated on the compute instance. You can determine what version of the SDK you have by running `packageVersion("azuremlsdk")`.
+
+Right now, the latest version of the package on CRAN is 0.6.85, but the version on the compute instance is 0.5.7, which we are currently in the process of updating. Version 0.6.85 includes Azure ML Datasets functionality and several bug fixes, so if you need to access those immediately you can update the version yourself:
+``` {r eval=FALSE}
+install.packages("azuremlsdk")
+azuremlsdk::install_azureml(envname = 'r-reticulate')
+```
+
+If you are using version 0.5.7 and see some variation of the following error messages, you are likely running into a bug that is fixed with the 0.6.85 release, and you should follow the above guidance to update the SDK.
+
+* `Error: Python module azureml was not found.` 
+* `AttributeError: module 'azureml' has no attribute 'core'`
+
+### Error: "Unable to install packages"
+You may run into an error installing R packages from Jupyter using the R kernel, even though the same installation works from RStudio. The error will look as follows: 
+```
+Installing package into '/usr/local/lib/R/site-library' (as 'lib' is unspecified)
+
+Warning message in install.packages(<package name>):
+"'lib = "/usr/local/lib/R/site-library"' is not writable"
+```
+
+The discrepancy is due to RStudio assuming a different default library location than the R kernel in Jupyter. 
+
+You can work around this by specifying a library location you have permission to such as the home directory "/home/azureuser/R". 
+
+1. From your Jupyter notebook run:  
+`install.packages("<package name>", lib="/home/azureuser")`
+2. Then add a call to `.libPaths()` at the beginning of your notebook to tell Jupyter where your packages are:  
+`.libPaths("/home/azureuser/R")`
+
+An alternative is to give yourself access to the default folder by running a `chmod` or `chown` command from the terminal.
+
+## Training
+
+### "PermissionError" when submitting an experiment in RStudio
+If the following error occurs when submitting an experiment using RStudio: 
+```
+Error in py_call_impl(callable, dots$args, dots$keywords) : 
+ PermissionError: [Errno 13] Permission denied
+```
+Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.
+  
+In order to submit an experiment, the Azure ML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, the recommended best practice is to isolate project files into their own directory.
