@@ -45,4 +45,5 @@ ws <- get_workspace("<your workspace name>",
 }
 \seealso{
 \code{\link{get_workspace}}
+\code{\link{interactive_login_authentication}}
 }
