@@ -20,6 +20,10 @@ navbar:
       href: articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html
     - text: Deploy a web service to Azure Kubernetes Service
       href: articles/deploy-to-aks/deploy-to-aks.html
+    - text: ---
+    - text: Guides
+    - text: Troubleshooting
+      href: articles/guides/troubleshooting.html
   - text: News
     href: news/index.html
 
@@ -33,6 +37,7 @@ reference:
   contents:
   - '`create_workspace`'
   - '`get_workspace`'
+  - '`service_principal_authentication`'
   - '`load_workspace_from_config`'
   - '`write_workspace_config`'
   - '`get_default_datastore`'
