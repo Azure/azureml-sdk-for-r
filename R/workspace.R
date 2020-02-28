@@ -100,7 +100,9 @@
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
 #' @seealso
-#' #' \code{\link{service_principal_authentication}}
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{get_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 create_workspace <- function(
   name,
@@ -157,6 +159,10 @@ create_workspace <- function(
 #' method will search all resource groups in the subscription.
 #' @return The `Workspace` object.
 #' @export
+#' @seealso 
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{create_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 get_workspace <- function(name, auth = NULL, subscription_id = NULL,
                           resource_group = NULL) {
