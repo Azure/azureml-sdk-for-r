@@ -159,7 +159,7 @@ create_workspace <- function(
 #' method will search all resource groups in the subscription.
 #' @return The `Workspace` object.
 #' @export
-#' @seealso 
+#' @seealso
 #' \code{\link{service_principal_authentication}}
 #' \code{\link{create_workspace}}
 #' \code{\link{interactive_login_authentication}}
