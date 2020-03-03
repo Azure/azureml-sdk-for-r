@@ -81,7 +81,8 @@ ws <- create_workspace(name = workspace_name,
                        subscription_id = subscription_id,
                        resource_group = resource_group,
                        location = workspace_region,
-                       exist_ok = TRUE)
+                       exist_ok = TRUE,
+                       auth = authentication)
 ```
 
 You can out write out the workspace ARM properties to a config file with [`write_workspace_config()`](https://azure.github.io/azureml-sdk-for-r/reference/write_workspace_config.html). The method provides a simple way of reusing the same workspace across multiple files or projects. Users can save the workspace details with `write_workspace_config()`, and use [`load_workspace_from_config()`](https://azure.github.io/azureml-sdk-for-r/reference/load_workspace_from_config.html) to load the same workspace in different files or projects without retyping the workspace ARM properties. The method defaults to writing out the config file to the current working directory with "config.json" as the file name. To specify a different path or file name, set the `path` and `file_name` parameters.
@@ -104,5 +105,50 @@ You can also initialize a workspace using the [`get_workspace()`](https://azure.
 ``` {r get_workspace, eval=FALSE}
 ws <- get_workspace(name = workspace_name,
                     subscription_id = subscription_id,
-                    resource_group = resource_group)
+                    resource_group = resource_group,
+                    auth = authentication)
 ```
+
+### Authenticate a workspace
+It will sometimes be necessary to provide authentication when accessing a workspace. 
+
+If you receive the error:
+
+```
+AuthenticationException: You don't have access to xxxxxx-xxxx-xxx-xxx-xxxxxxxxxx
+subscription. All the subscriptions that you have access to = ...
+check that the you used correct login and entered the correct subscription ID.
+```
+or
+```
+All the subscriptions that you have access to = []
+```
+
+You may have to specify the tenant ID of the Azure Active Directory you're using in order to gain access. An example would be accessing a subscription as a guest to a tenant that is not your default.
+
+AzureML SDK for R supports two authentication methods: `service_principal_authentication` and `interactive_login_authentication`. Interactive Login Authenticaion is suitable for local experimentation while Service Principal Authentication is suitable for automated workflows. To use either, construct the 
+authenticator object and assign it to the `auth` param of `get_workspace` or `create_workspace`.
+
+```{r ila-authenticate, eval=FALSE}
+interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
+
+ws <- get_workspace("<your workspace name>",
+                    "<your subscription ID>",
+                    "<your resource group>",
+                    auth = interactive_auth)
+```
+
+```{r spa-authenticate, eval=FALSE}
+svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
+svc_pr <- service_principal_authentication(tenant_id="my-tenant-id"
+                                           service_principal_id="my-application-id",
+                                           service_principal_password=svc_pr_password)
+
+ws <- get_workspace("<your workspace name>",
+                    "<your subscription ID>",
+                    "<your resource group>",
+                    auth = svc_pr)
+```
+
+For more information on the two methods,
+read [the official Azure Machine Learning documentation](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/manage-azureml-service/authentication-in-azureml/authentication-in-azureml.ipynb).

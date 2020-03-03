@@ -131,5 +131,7 @@ ws <- create_workspace(
 }
 }
 \seealso{
-#' \code{\link{service_principal_authentication}}
+\code{\link{service_principal_authentication}}
+\code{\link{get_workspace}}
+\code{\link{interactive_login_authentication}}
 }

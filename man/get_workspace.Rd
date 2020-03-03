@@ -28,3 +28,8 @@ Returns a \code{Workspace} object for an existing Azure Machine Learning
 workspace. Throws an exception if the workpsace doesn't exist or the
 required fields don't lead to a uniquely identifiable workspace.
 }
+\seealso{
+\code{\link{service_principal_authentication}}
+\code{\link{create_workspace}}
+\code{\link{interactive_login_authentication}}
+}

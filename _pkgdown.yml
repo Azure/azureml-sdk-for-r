@@ -50,6 +50,8 @@ reference:
   - '`get_secrets`'
   - '`delete_secrets`'
   - '`list_secrets`'
+  - '`service_principal_authentication`'
+  - '`interactive_login_authentication`'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:

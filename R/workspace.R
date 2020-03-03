@@ -100,7 +100,9 @@
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
 #' @seealso
-#' #' \code{\link{service_principal_authentication}}
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{get_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 create_workspace <- function(
   name,
@@ -157,6 +159,10 @@ create_workspace <- function(
 #' method will search all resource groups in the subscription.
 #' @return The `Workspace` object.
 #' @export
+#' @seealso
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{create_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 get_workspace <- function(name, auth = NULL, subscription_id = NULL,
                           resource_group = NULL) {
@@ -385,6 +391,7 @@ set_default_datastore <- function(workspace, datastore_name) {
 #' }
 #' @seealso
 #' \code{\link{get_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 service_principal_authentication <- function(tenant_id, service_principal_id,
                                              service_principal_password,
@@ -392,4 +399,40 @@ service_principal_authentication <- function(tenant_id, service_principal_id,
   azureml$core$authentication$ServicePrincipalAuthentication(
     tenant_id = tenant_id, service_principal_id = service_principal_id,
     service_principal_password = service_principal_password, cloud = cloud)
+}
+
+#' Manages authentication and acquires an authorization token in interactive login workflows.
+#'
+#' @description
+#' Interactive login authentication is suitable for local experimentation on your own computer, and is the
+#' default authentication model when using Azure Machine Learning SDK.
+#' The constructor of the class will prompt you to login. The constructor then will save the credentials
+#' for any subsequent attempts. If you are already logged in with the Azure CLI or have logged-in before, the
+#' constructor will load the existing credentials without prompt.
+#' @param force Indicates whether "az login" will be run even if the old "az login" is still valid.
+#' @param tenant_id The string id of the active directory tenant that the service
+#' identity belongs to. This is can be used to specify a specific tenant when
+#' you have access to multiple tenants. If unspecified, the default tenant will be used.
+#' @param cloud The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+#' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
+#' @return `InteractiveLoginAuthentication` object
+#' @export
+#' @examples
+#' \dontrun{
+#' interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
+#'
+#' ws <- get_workspace("<your workspace name>",
+#'                     "<your subscription ID>",
+#'                     "<your resource group>",
+#'                     auth = interactive_auth)
+#' }
+#' @seealso
+#' \code{\link{get_workspace}}
+#' \code{\link{service_principal_authentication}}
+#' @md
+interactive_login_authentication <- function(force = FALSE,
+                                             tenant_id = NULL,
+                                             cloud = "AzureCloud") {
+  azureml$core$authentication$InteractiveLoginAuthentication(
+    force = force, tenant_id = tenant_id, cloud = cloud)
 }
