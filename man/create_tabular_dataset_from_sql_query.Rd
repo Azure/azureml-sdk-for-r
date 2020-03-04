@@ -29,3 +29,6 @@ a Datastore and the datastore type must be of a SQL kind. Column data types are
 read from data types in SQL query result. Providing `set_column_types` will
 override the data type  for the specified columns in the returned Tabular Dataset.
 }
+\seealso{
+\code{\link{data_path}}
+}

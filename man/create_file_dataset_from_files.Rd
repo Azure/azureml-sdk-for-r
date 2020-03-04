@@ -19,3 +19,6 @@ The FileDataset object
 \description{
 Create a FileDataset to represent file streams.
 }
+\seealso{
+\code{\link{data_path}}
+}
