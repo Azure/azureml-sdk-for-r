@@ -691,7 +691,7 @@ promote_headers_behavior <- function(option) {
 #' \code{\link{create_tabular_dataset_from_json_lines_files}}
 #' \code{\link{create_tabular_dataset_from_sql_query}}
 #' @md
-data_path <- function(datastore = NULL, path_on_datastore = NULL, name = NULL) {
+data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
   azureml$data$datapath$DataPath(datastore = datastore,
                                  path_on_datastore = path_on_datastore,
                                  name = name)

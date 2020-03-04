@@ -4,7 +4,7 @@
 \alias{data_path}
 \title{Represents a path to data in a datastore.}
 \usage{
-data_path(datastore = NULL, path_on_datastore = NULL, name = NULL)
+data_path(datastore, path_on_datastore = NULL, name = NULL)
 }
 \arguments{
 \item{datastore}{The Datastore to reference.}
