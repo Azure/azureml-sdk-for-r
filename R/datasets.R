@@ -707,7 +707,7 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
 #' be used in data plane.
 #' @param dataset The dataset that will be consumed in the run.
 #' @param mode Defines how the dataset should be delivered to the compute target. There are three modes:
-#' 
+#'
 #' 'direct': consume the dataset as dataset.
 #' 'download': download the dataset and consume the dataset as downloaded path.
 #' 'mount': mount the dataset and consume the dataset as mount path.
@@ -726,7 +726,7 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
 #' @seealso
 #' \code{\link{estimator}}
 #' @md
-dataset_consumption_config <- function(name, dataset, mode = 'direct',
+dataset_consumption_config <- function(name, dataset, mode = "direct",
                                        path_on_compute = NULL) {
   azureml$data$dataset_consumption_config$DatasetConsumptionConfig(
     name = name,
