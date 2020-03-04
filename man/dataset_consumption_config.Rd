@@ -19,6 +19,10 @@ be used in data plane.}
 'direct': consume the dataset as dataset.
 'download': download the dataset and consume the dataset as downloaded path.
 'mount': mount the dataset and consume the dataset as mount path.}
+
+\item{path_on_compute}{The target path on the compute to make the data available at.
+The folder structure of the source data will be kept, however, we might add prefixes
+to this folder structure to avoid collision.}
 }
 \value{
 The \code{DatasetConsumptionConfig} object.
