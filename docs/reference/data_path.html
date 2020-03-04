@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a FileDataset to represent file streams. — create_file_dataset_from_files • azuremlsdk</title>
+<title>Represents a path to data in a datastore. — data_path • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Create a FileDataset to represent file streams. — create_file_dataset_from_files" />
+<meta property="og:title" content="Represents a path to data in a datastore. — data_path" />
 
-<meta property="og:description" content="Create a FileDataset to represent file streams." />
+<meta property="og:description" content="The path represented by DataPath object can point to a directory or a data artifact (blob, file)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -138,43 +138,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a FileDataset to represent file streams.</h1>
+    <h1>Represents a path to data in a datastore.</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>create_file_dataset_from_files.Rd</code></div>
+    <div class="hidden name"><code>data_path.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a FileDataset to represent file streams.</p>
+    <p>The path represented by DataPath object can point to a directory or a data artifact (blob, file).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_file_dataset_from_files</span>(<span class='no'>path</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>data_path</span>(<span class='no'>datastore</span>, <span class='kw'>path_on_datastore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>A data path in a registered datastore or a local path.</p></td>
+      <th>datastore</th>
+      <td><p>The Datastore to reference.</p></td>
     </tr>
     <tr>
-      <th>validate</th>
-      <td><p>Indicates whether to validate if data can be loaded from the
-returned dataset. Defaults to True. Validation requires that the data source
-is accessible from the current compute.</p></td>
+      <th>path_on_datastore</th>
+      <td><p>The relative path in the backing storage for the data reference.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>An optional name for the DataPath.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The FileDataset object</p>
+    <p>The <code>DataPath</code> object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>data_path</code></p></div>
+    <div class='dont-index'><p><code>create_file_dataset_from_files</code>
+<code>create_tabular_dataset_from_parquet_files</code>
+<code>create_tabular_dataset_from_delimited_files</code>
+<code>create_tabular_dataset_from_json_lines_files</code>
+<code>create_tabular_dataset_from_sql_query</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -184,7 +192,9 @@ is accessible from the current compute.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
