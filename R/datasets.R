@@ -696,3 +696,60 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
                                  path_on_datastore = path_on_datastore,
                                  name = name)
 }
+
+#' Defines options for how column headers are processed when reading data from files to create a dataset.
+#'
+#' @description
+#' Defines options for how column headers are processed when reading data from files to create a dataset.
+#' These enumeration values are used in the Dataset class method.
+#'
+#' @param option An integer corresponding to an option for how column headers are to be processed
+#' * 0: NO_HEADERS No column headers are read
+#' * 1: ONLY_FIRST_FILE_HAS_HEADERS Read headers only from first row of first file, everything else is data.
+#' * 2: COMBINE_ALL_FILES_HEADERS Read headers from first row of each file, combining identically named columns.
+#' * 3: ALL_FILES_HAVE_SAME_HEADERS Read headers from first row of first file, drops first row from other files.
+#' @return The PromoteHeadersBehavior object.
+#' @export
+#' @md
+promote_headers_behavior <- function(option) {
+  option <- as.integer(option)
+  azureml$data$dataset_type_definitions$PromoteHeadersBehavior(option)
+}
+
+#' Represent how to deliver the dataset to a compute target.
+#'
+#' @description
+#' Represent how to deliver the dataset to a compute target.
+#'
+#' @param name The name of the dataset in the run, which can be different to the
+#' registered name. The name will be registered as environment variable and can
+#' be used in data plane.
+#' @param dataset The dataset that will be consumed in the run.
+#' @param mode Defines how the dataset should be delivered to the compute target. There are three modes:
+#' 
+#' 'direct': consume the dataset as dataset.
+#' 'download': download the dataset and consume the dataset as downloaded path.
+#' 'mount': mount the dataset and consume the dataset as mount path.
+#' @path_on_compute The target path on the compute to make the data available at.
+#' The folder structure of the source data will be kept, however, we might add prefixes
+#' to this folder structure to avoid collision.
+#' @return The `DatasetConsumptionConfig` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  inputs = list(dataset_consumption_config('mydataset', dataset, mode = 'download')),
+#'                  compute_target = compute_target)
+#'}
+#' @seealso
+#' \code{\link{estimator}}
+#' @md
+dataset_consumption_config <- function(name, dataset, mode = 'direct',
+                                       path_on_compute = NULL) {
+  azureml$data$dataset_consumption_config$DatasetConsumptionConfig(
+    name = name,
+    dataset = dataset,
+    mode = mode,
+    path_on_compute = path_on_compute)
+}
