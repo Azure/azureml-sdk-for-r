@@ -47,3 +47,6 @@ The Tabular Dataset object.
 Create an unregistered, in-memory Dataset from delimited files.
 Use this method to read delimited text files when you want to control the options used.
 }
+\seealso{
+\code{\link{data_path}}
+}

@@ -94,6 +94,8 @@ get_input_dataset_from_run <- function(name, run = NULL) {
 #' is accessible from the current compute.
 #' @return The FileDataset object
 #' @export
+#' @seealso
+#' \code{\link{data_path}}
 #' @md
 create_file_dataset_from_files <- function(path, validate = TRUE) {
   azureml$data$dataset_factory$FileDatasetFactory$from_files(path, validate)
@@ -241,6 +243,8 @@ random_split_dataset <- function(dataset, percentage, seed = NULL) {
 #' of string type and 'PartitionDate' of datetime type.
 #' @return The Tabular Dataset object.
 #' @export
+#' @seealso
+#' \code{\link{data_path}}
 #' @md
 create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
                                                       include_path = FALSE,
@@ -282,6 +286,8 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
 #' be specified using `PromoteHeadersBehavior`.
 #' @return The Tabular Dataset object.
 #' @export
+#' @seealso
+#' \code{\link{data_path}}
 #' @md
 create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
                                                       include_path = FALSE,
@@ -331,6 +337,8 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
 #' of string type and 'PartitionDate' of datetime type.
 #' @return The Tabular Dataset object.
 #' @export
+#' @seealso
+#' \code{\link{data_path}}
 #' @md
 create_tabular_dataset_from_json_lines_files <- function(
                                                       path,
@@ -364,6 +372,8 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' column name and value is data type.
 #' @return The Tabular Dataset object
 #' @export
+#' @seealso
+#' \code{\link{data_path}}
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL) {
@@ -649,4 +659,40 @@ data_type_string <- function() {
 promote_headers_behavior <- function(option) {
   option <- as.integer(option)
   azureml$data$dataset_type_definitions$PromoteHeadersBehavior(option)
+}
+
+#' Represents a path to data in a datastore.
+#'
+#' @description
+#' The path represented by DataPath object can point to a directory or a data artifact (blob, file).
+#'
+#' @param datastore The Datastore to reference.
+#' @param path_on_datastore The relative path in the backing storage for the data reference.
+#' @param name An optional name for the DataPath.
+#' @return The `DataPath` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' my_data <- register_azure_blob_container_datastore(
+#'     workspace = ws,
+#'     datastore_name = blob_datastore_name,
+#'     container_name = ws_blob_datastore$container_name,
+#'     account_name = ws_blob_datastore$account_name,
+#'     account_key = ws_blob_datastore$account_key,
+#'     create_if_not_exists = TRUE)
+#'
+#' datapath <- data_path(my_data, <path_on_my_datastore>)
+#' dataset <- create_file_dataset_from_files(datapath)
+#' }
+#' @seealso
+#' \code{\link{create_file_dataset_from_files}}
+#' \code{\link{create_tabular_dataset_from_parquet_files}}
+#' \code{\link{create_tabular_dataset_from_delimited_files}}
+#' \code{\link{create_tabular_dataset_from_json_lines_files}}
+#' \code{\link{create_tabular_dataset_from_sql_query}}
+#' @md
+data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
+  azureml$data$datapath$DataPath(datastore = datastore,
+                                 path_on_datastore = path_on_datastore,
+                                 name = name)
 }

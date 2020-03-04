@@ -44,3 +44,6 @@ a Datastore or behind public web urls. Column data types are read from data type
 in the JSON Lines files. Providing `set_column_types` will override the data type
 for the specified columns in the returned Tabular Dataset.
 }
+\seealso{
+\code{\link{data_path}}
+}
