@@ -664,7 +664,7 @@ promote_headers_behavior <- function(option) {
 #' Represents a path to data in a datastore.
 #'
 #' @description
-#' The path represented by DataPath object can point to a directory or a data artifact (blob, file). 
+#' The path represented by DataPath object can point to a directory or a data artifact (blob, file).
 #'
 #' @param datastore The Datastore to reference.
 #' @param path_on_datastore The relative path in the backing storage for the data reference.
@@ -674,11 +674,11 @@ promote_headers_behavior <- function(option) {
 #' @examples
 #' \dontrun{
 #' my_data <- register_azure_blob_container_datastore(
-#'     workspace = ws, 
-#'     datastore_name = blob_datastore_name, 
-#'     container_name = ws_blob_datastore$container_name, 
-#'     account_name = ws_blob_datastore$account_name, 
-#'     account_key = ws_blob_datastore$account_key, 
+#'     workspace = ws,
+#'     datastore_name = blob_datastore_name,
+#'     container_name = ws_blob_datastore$container_name,
+#'     account_name = ws_blob_datastore$account_name,
+#'     account_key = ws_blob_datastore$account_key,
 #'     create_if_not_exists = TRUE)
 #'
 #' datapath <- data_path(my_data, <path_on_my_datastore>)

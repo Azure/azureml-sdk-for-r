@@ -22,11 +22,11 @@ The path represented by DataPath object can point to a directory or a data artif
 \examples{
 \dontrun{
 my_data <- register_azure_blob_container_datastore(
-    workspace = ws, 
-    datastore_name = blob_datastore_name, 
-    container_name = ws_blob_datastore$container_name, 
-    account_name = ws_blob_datastore$account_name, 
-    account_key = ws_blob_datastore$account_key, 
+    workspace = ws,
+    datastore_name = blob_datastore_name,
+    container_name = ws_blob_datastore$container_name,
+    account_name = ws_blob_datastore$account_name,
+    account_key = ws_blob_datastore$account_key,
     create_if_not_exists = TRUE)
 
 datapath <- data_path(my_data, <path_on_my_datastore>)
