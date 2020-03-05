@@ -26,7 +26,7 @@ rc <- resource_configuration(2, 2, 0)
 
 registered_model <- register_model_from_run(run, "my_model_name",
                                             "path_to_my_model",
-                                            resource_configuration = rc) 
+                                            resource_configuration = rc)
 }
 }
 \seealso{

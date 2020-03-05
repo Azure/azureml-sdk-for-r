@@ -528,10 +528,10 @@ def run(input_data):
 }
 
 #' Register a model for operationalization.
-#' 
+#'
 #' @description
 #' Register a model for operationalization.
-#' 
+#'
 #' @param run The `Run` object.
 #' @param model_name The name of the model.
 #' @param model_path The relative cloud path to the model, for example,
@@ -556,7 +556,7 @@ def run(input_data):
 register_model_from_run <- function(run, model_name, model_path = NULL,
                                     tags = NULL, properties = NULL,
                                     model_framework = NULL,
-                                    modeL_framework_version = NULL,
+                                    model_framework_version = NULL,
                                     description = NULL, datasets = NULL,
                                     sample_input_dataset = NULL,
                                     sample_output_dataset = NULL,
@@ -572,10 +572,10 @@ register_model_from_run <- function(run, model_name, model_path = NULL,
 }
 
 #' Initialize the  ResourceConfiguration.
-#' 
+#'
 #' @description
 #' Initialize the  ResourceConfiguration.
-#' 
+#'
 #' @param cpu The number of CPU cores to allocate for this resource. Can be a decimal.
 #' @param memory_in_gb: The amount of memory (in GB) to allocate for this resource.
 #' Can be a decimal If `TRUE`, decode the raw log bytes to a string.
@@ -585,10 +585,10 @@ register_model_from_run <- function(run, model_name, model_path = NULL,
 #' @examples
 #' \dontrun{
 #' rc <- resource_configuration(2, 2, 0)
-#' 
+#'
 #' registered_model <- register_model_from_run(run, "my_model_name",
 #'                                             "path_to_my_model",
-#'                                             resource_configuration = rc) 
+#'                                             resource_configuration = rc)
 #' }
 #' @seealso
 #' \code{\link{register_model_from_run}}

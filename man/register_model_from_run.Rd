@@ -6,7 +6,7 @@
 \usage{
 register_model_from_run(run, model_name, model_path = NULL,
   tags = NULL, properties = NULL, model_framework = NULL,
-  modeL_framework_version = NULL, description = NULL,
+  model_framework_version = NULL, description = NULL,
   datasets = NULL, sample_input_dataset = NULL,
   sample_output_dataset = NULL, resource_configuration = NULL)
 }
@@ -26,6 +26,8 @@ These properties cannot be changed after model creation, however new key-value p
 \item{model_framework}{Framework of the model to register. Currently supported
 frameworks: TensorFlow, ScikitLearn, Onnx, Custom}
 
+\item{model_framework_version}{The version of the model's framework.}
+
 \item{description}{An optional description of the model.}
 
 \item{datasets}{A list of tuples where the first element describes the dataset-model
@@ -36,8 +38,6 @@ relationship and the second element is the dataset.}
 \item{sample_output_dataset}{Sample output dataset for the registered model.}
 
 \item{resource_configuration}{`ResourceConfiguration`` object to run the registered model.}
-
-\item{model_framework_version}{The version of the model's framework.}
 }
 \value{
 The registered Model.
