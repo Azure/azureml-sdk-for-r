@@ -72,6 +72,9 @@ get_model <- function(workspace,
 #' by `model_name`. Must be provided in conjunction with a `model_path`
 #' pointing to a folder; only the specified files will be bundled into the
 #' `Model` object.
+#' @param sample_input_dataset Sample input dataset for the registered model.
+#' @param sample_output_dataset Sample output dataset for the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The `Model` object.
 #' @export
 #' @examples
@@ -90,15 +93,21 @@ register_model <- function(workspace,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
-                           child_paths = NULL) {
+                           child_paths = NULL,
+                           sample_input_dataset = NULL,
+                           sample_output_dataset = NULL,
+                           resource_configuration = NULL) {
   model <- azureml$core$Model$register(workspace,
-                                       model_path,
-                                       model_name,
-                                       tags = tags,
-                                       properties = properties,
-                                       description = description,
-                                       child_paths = child_paths,
-                                       datasets = datasets)
+                                model_path,
+                                model_name,
+                                tags = tags,
+                                properties = properties,
+                                description = description,
+                                child_paths = child_paths,
+                                datasets = datasets,
+                                sample_input_dataset = sample_input_dataset,
+                                sample_output_dataset = sample_output_dataset,
+                                resource_configuration = resource_configuration)
   invisible(model)
 }
 
