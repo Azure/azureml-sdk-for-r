@@ -539,9 +539,6 @@ def run(input_data):
 #' @param tags A dictionary of key value tags to assign to the model.
 #' @param properties A dictionary of key value properties to assign to the model.
 #' These properties cannot be changed after model creation, however new key-value pairs can be added.
-#' @param model_framework Framework of the model to register. Currently supported
-#' frameworks: TensorFlow, ScikitLearn, Onnx, Custom
-#' @param model_framework_version The version of the model's framework.
 #' @param description An optional description of the model.
 #' @param datasets A list of tuples where the first element describes the dataset-model
 #' relationship and the second element is the dataset.
@@ -555,17 +552,14 @@ def run(input_data):
 #' @md
 register_model_from_run <- function(run, model_name, model_path = NULL,
                                     tags = NULL, properties = NULL,
-                                    model_framework = NULL,
-                                    model_framework_version = NULL,
                                     description = NULL, datasets = NULL,
                                     sample_input_dataset = NULL,
                                     sample_output_dataset = NULL,
                                     resource_configuration = NULL) {
   run$register_model(run = run, model_name = model_name,
                      model_path = model_path, tags = tags,
-                     properties = properties, model_framework = model_framework,
-                     model_framework_version = model_framework_version,
-                     description = description, datasets = datasets,
+                     properties = properties, description = description,
+                     datasets = datasets,
                      sample_input_dataset = sample_input_dataset,
                      sample_output_dataset = sample_output_dataset,
                      resource_configuration = resource_configuration)

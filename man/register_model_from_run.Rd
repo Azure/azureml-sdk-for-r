@@ -5,8 +5,7 @@
 \title{Register a model for operationalization.}
 \usage{
 register_model_from_run(run, model_name, model_path = NULL,
-  tags = NULL, properties = NULL, model_framework = NULL,
-  model_framework_version = NULL, description = NULL,
+  tags = NULL, properties = NULL, description = NULL,
   datasets = NULL, sample_input_dataset = NULL,
   sample_output_dataset = NULL, resource_configuration = NULL)
 }
@@ -22,11 +21,6 @@ register_model_from_run(run, model_name, model_path = NULL,
 
 \item{properties}{A dictionary of key value properties to assign to the model.
 These properties cannot be changed after model creation, however new key-value pairs can be added.}
-
-\item{model_framework}{Framework of the model to register. Currently supported
-frameworks: TensorFlow, ScikitLearn, Onnx, Custom}
-
-\item{model_framework_version}{The version of the model's framework.}
 
 \item{description}{An optional description of the model.}
 
