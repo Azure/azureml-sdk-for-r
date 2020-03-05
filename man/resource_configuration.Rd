@@ -9,10 +9,10 @@ resource_configuration(cpu = NULL, memory_in_gb = NULL, gpu = NULL)
 \arguments{
 \item{cpu}{The number of CPU cores to allocate for this resource. Can be a decimal.}
 
-\item{gpu}{The number of GPUs to allocate for this resource.}
-
-\item{memory_in_gb:}{The amount of memory (in GB) to allocate for this resource.
+\item{memory_in_gb}{The amount of memory (in GB) to allocate for this resource.
 Can be a decimal If \code{TRUE}, decode the raw log bytes to a string.}
+
+\item{gpu}{The number of GPUs to allocate for this resource.}
 }
 \value{
 The \code{ResourceConfiguration} object.

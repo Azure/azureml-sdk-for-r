@@ -577,7 +577,7 @@ register_model_from_run <- function(run, model_name, model_path = NULL,
 #' Initialize the  ResourceConfiguration.
 #'
 #' @param cpu The number of CPU cores to allocate for this resource. Can be a decimal.
-#' @param memory_in_gb: The amount of memory (in GB) to allocate for this resource.
+#' @param memory_in_gb The amount of memory (in GB) to allocate for this resource.
 #' Can be a decimal If `TRUE`, decode the raw log bytes to a string.
 #' @param gpu The number of GPUs to allocate for this resource.
 #' @return The `ResourceConfiguration` object.
