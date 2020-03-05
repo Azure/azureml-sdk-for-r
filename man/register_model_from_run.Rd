@@ -35,7 +35,7 @@ relationship and the second element is the dataset.}
 
 \item{sample_output_dataset}{Sample output dataset for the registered model.}
 
-\item{resource_configuration}{Resource configuration to run the registered model.}
+\item{resource_configuration}{`ResourceConfiguration`` object to run the registered model.}
 
 \item{model_framework_version}{The version of the model's framework.}
 }
@@ -44,4 +44,7 @@ The registered Model.
 }
 \description{
 Register a model for operationalization.
+}
+\seealso{
+\code{\link{resource_configuration}}
 }

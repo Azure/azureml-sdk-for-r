@@ -538,9 +538,11 @@ def run(input_data):
 #' relationship and the second element is the dataset.
 #' @param sample_input_dataset Sample input dataset for the registered model.
 #' @param sample_output_dataset Sample output dataset for the registered model.
-#' @param resource_configuration Resource configuration to run the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The registered Model.
 #' @export
+#' @seealso
+#' \code{\link{resource_configuration}}
 #' @md
 register_model_from_run <- function(run, model_name, model_path = NULL,
                                     tags = NULL, properties = NULL,
@@ -558,4 +560,32 @@ register_model_from_run <- function(run, model_name, model_path = NULL,
                      sample_input_dataset = sample_input_dataset,
                      sample_output_dataset = sample_output_dataset,
                      resource_configuration = resource_configuration)
+}
+
+#' Initialize the  ResourceConfiguration.
+#' 
+#' @description
+#' Initialize the  ResourceConfiguration.
+#' 
+#' @param cpu The number of CPU cores to allocate for this resource. Can be a decimal.
+#' @param memory_in_gb: The amount of memory (in GB) to allocate for this resource.
+#' Can be a decimal If `TRUE`, decode the raw log bytes to a string.
+#' @param gpu The number of GPUs to allocate for this resource.
+#' @return The `ResourceConfiguration` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' rc <- resource_configuration(2, 2, 0)
+#' 
+#' registered_model <- register_model_from_run(run, "my_model_name",
+#'                                             "path_to_my_model",
+#'                                             resource_configuration = rc) 
+#' }
+#' @seealso
+#' \code{\link{register_model_from_run}}
+#' @md
+resource_configuration <- function(cpu = NULL, memory_in_gb = NULL,
+                                   gpu = NULL) {
+  azureml$core$resource_configuration$ResourceConfiguration(
+    cpu = cpu, memory_in_gb = memory_in_gb, gpu = gpu)
 }
