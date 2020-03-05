@@ -72,7 +72,10 @@
 #' @return The `Estimator` object.
 #' @export
 #' @seealso
-#' `r_environment()`, `container_registry()`, `submit_experiment()`
+#' \code{\link{r_environment}}
+#' \code{\link{container_registry}}
+#' \code{\link{submit_experiment}}
+#' \code{\link{dataset_consumption_config}}
 #' @md
 estimator <- function(source_directory,
                       compute_target = NULL,

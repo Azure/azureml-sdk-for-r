@@ -115,6 +115,7 @@ reference:
   - '`data_type_string`'
   - '`promote_headers_behavior`'
   - '`data_path`'
+  - '`dataset_consumption_config`'
 - title: Environments
   desc: Functions for managing environments. An Azure Machine Learning **Environment** allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see `r_environment()`.
   contents:

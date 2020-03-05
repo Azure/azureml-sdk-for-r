@@ -696,3 +696,41 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
                                  path_on_datastore = path_on_datastore,
                                  name = name)
 }
+
+#' Represent how to deliver the dataset to a compute target.
+#'
+#' @description
+#' Represent how to deliver the dataset to a compute target.
+#'
+#' @param name The name of the dataset in the run, which can be different to the
+#' registered name. The name will be registered as environment variable and can
+#' be used in data plane.
+#' @param dataset The dataset that will be consumed in the run.
+#' @param mode Defines how the dataset should be delivered to the compute target. There are three modes:
+#'
+#' 'direct': consume the dataset as dataset.
+#' 'download': download the dataset and consume the dataset as downloaded path.
+#' 'mount': mount the dataset and consume the dataset as mount path.
+#' @param path_on_compute The target path on the compute to make the data available at.
+#' The folder structure of the source data will be kept, however, we might add prefixes
+#' to this folder structure to avoid collision.
+#' @return The `DatasetConsumptionConfig` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  inputs = list(dataset_consumption_config('mydataset', dataset, mode = 'download')),
+#'                  compute_target = compute_target)
+#'}
+#' @seealso
+#' \code{\link{estimator}}
+#' @md
+dataset_consumption_config <- function(name, dataset, mode = "direct",
+                                       path_on_compute = NULL) {
+  azureml$data$dataset_consumption_config$DatasetConsumptionConfig(
+    name = name,
+    dataset = dataset,
+    mode = mode,
+    path_on_compute = path_on_compute)
+}
