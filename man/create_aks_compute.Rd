@@ -9,7 +9,8 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
   ssl_key_pem_file = NULL, location = NULL,
   vnet_resourcegroup_name = NULL, vnet_name = NULL,
   subnet_name = NULL, service_cidr = NULL, dns_service_ip = NULL,
-  docker_bridge_cidr = NULL, cluster_purpose = NULL)
+  docker_bridge_cidr = NULL, cluster_purpose = c("DevTest",
+  "FastProd"))
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

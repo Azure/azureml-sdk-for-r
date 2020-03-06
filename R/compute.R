@@ -270,12 +270,9 @@ create_aks_compute <- function(workspace,
                                service_cidr = NULL,
                                dns_service_ip = NULL,
                                docker_bridge_cidr = NULL,
-                               cluster_purpose = NULL) {
+                               cluster_purpose = c("DevTest", "FastProd")) {
 
-  if (!is.element(cluster_purpose, c("DevTest", "FastProd"))) {
-    stop(paste(cluster_purpose, "is not a valid cluster_purpose value.
-               Please see documentation."))
-  }
+  cluster_purpose <- match.arg(cluster_purpose)
 
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(
     agent_count = agent_count,
