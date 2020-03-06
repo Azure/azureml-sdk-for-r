@@ -9,7 +9,7 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
   ssl_key_pem_file = NULL, location = NULL,
   vnet_resourcegroup_name = NULL, vnet_name = NULL,
   subnet_name = NULL, service_cidr = NULL, dns_service_ip = NULL,
-  docker_bridge_cidr = NULL)
+  docker_bridge_cidr = NULL, cluster_purpose = NULL)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -54,6 +54,11 @@ service cluster IPs.}
 \item{dns_service_ip}{A string of the container's DNS server IP address.}
 
 \item{docker_bridge_cidr}{A string of a CIDR notation IP for Docker bridge.}
+
+\item{cluster_purpose}{A string describing argeted usage of the cluster.
+This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
+Options are "FastProd" and "DevTest". More detailed information of these values
+and their use cases can be found here: https://aka.ms/azureml-create-attach-aks}
 }
 \value{
 An \code{AksCompute} object.

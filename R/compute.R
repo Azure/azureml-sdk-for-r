@@ -237,6 +237,10 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' service cluster IPs.
 #' @param dns_service_ip A string of the container's DNS server IP address.
 #' @param docker_bridge_cidr A string of a CIDR notation IP for Docker bridge.
+#' @param cluster_purpose A string describing argeted usage of the cluster. 
+#' This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
+#' Options are "FastProd" and "DevTest". More detailed information of these values
+#' and their use cases can be found here: https://aka.ms/azureml-create-attach-aks
 #' @return An `AksCompute` object.
 #' @export
 #' @section Details:
@@ -265,7 +269,16 @@ create_aks_compute <- function(workspace,
                                subnet_name = NULL,
                                service_cidr = NULL,
                                dns_service_ip = NULL,
-                               docker_bridge_cidr = NULL) {
+                               docker_bridge_cidr = NULL,
+                               cluster_purpose = NULL) {
+  
+  if (cluster_purpose %in% c('DevTest', 'FastProd')) {
+    ifelse(cluster_purpose == 'DevTest', 'DEV_TEST', 'FAST_PROD')
+  } else {
+    stop(paste(cluster_purpose, "is not a valid cluster_purpose value.
+               Please see documentation."))
+  }
+
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(
     agent_count = agent_count,
     vm_size = vm_size,
@@ -278,7 +291,8 @@ create_aks_compute <- function(workspace,
     subnet_name = subnet_name,
     service_cidr = service_cidr,
     dns_service_ip = dns_service_ip,
-    docker_bridge_cidr = docker_bridge_cidr)
+    docker_bridge_cidr = docker_bridge_cidr,
+    cluster_purpose = cluster_purpose)
 
   azureml$core$compute$ComputeTarget$create(workspace,
                                             cluster_name,
