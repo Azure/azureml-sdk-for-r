@@ -309,29 +309,43 @@ get_aks_compute_credentials <- function(cluster) {
 #' If you want to secure your AKS cluster using an Azure Virtual Network, you
 #' must create the virtual network first. For more information, see
 #' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet)
+#'
+#' If you want to re-attach an AKS cluster, for example to to change SSL or other
+#' cluster configuration settings, you must first remove the existing attachment
+#' with `detach_aks_compute()`.
+#'
+#' Attaching a cluster will take approximately 5 minutes.
 #' @param workspace The `Workspace` object to attach the AKS cluster to.
-#' @param cluster_name A string of the name for the cluster.
-#' @param resource_id A string of the resource ID for the AKS cluster being
-#' attached.
 #' @param resource_group A string of the resource group in which the AKS cluster
 #' is located.
+#' @param cluster_name A string of the name of the AKS cluster.
+#' @param cluster_purpose The targeted usage of the cluster. The possible values are
+#' "DevTest" or "FastProd". This is used to provision Azure Machine Learning components
+#' to ensure the desired level of fault-tolerance and QoS. If your cluster has less
+#' than 12 virtual CPUs, you will need to specify "DevTest" for this argument. We
+#' recommend that your cluster have at least 2 virtual CPUs for dev/test usage. 
 #' @return The `AksCompute` object.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```r
 #' ws <- load_workspace_from_config()
 #' compute_target <- attach_aks_compute(ws,
-#'                                      cluster_name = 'mycluster',
-#'                                      resource_id = 'myresourceid',
-#'                                      resource_group = 'myresourcegroup')
-#' }
+#'                                      resource_group = 'myresourcegroup',
+#'                                      cluster_name = 'myakscluster')
+#' ```
+#'
+#' If the cluster has less than 12 virtual CPUs, you will need to also specify the
+#' `cluster_purpose` parameter in the `attach_aks_compute()` call: `cluster_purpose = 'DevTest'`.
+#' @seealso
+#' `detach_aks_compute()`
 #' @md
 attach_aks_compute <- function(workspace,
+                               resource_group,.
                                cluster_name,
-                               resource_id = NULL,
-                               resource_group = NULL) {
+                               cluster_purpose = c("FastProd", "DevTest")) {
+  cluster_purpose <- match.arg(cluster_purpose)
   attach_config <- azureml$core$compute$AksCompute$attach_configuration(
-    resource_group = resource_group, resource_id = resource_id)
+    resource_group = resource_group, cluster_name = cluster_name, cluster_purpose = cluster_purpose)
 
   azureml$core$compute$ComputeTarget$attach(workspace,
                                             cluster_name,
