@@ -237,7 +237,7 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' service cluster IPs.
 #' @param dns_service_ip A string of the container's DNS server IP address.
 #' @param docker_bridge_cidr A string of a CIDR notation IP for Docker bridge.
-#' @param cluster_purpose A string describing targeted usage of the cluster. 
+#' @param cluster_purpose A string describing targeted usage of the cluster.
 #' This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
 #' 'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
 #' 'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
@@ -271,8 +271,8 @@ create_aks_compute <- function(workspace,
                                dns_service_ip = NULL,
                                docker_bridge_cidr = NULL,
                                cluster_purpose = NULL) {
-  
-  if (!is.element(cluster_purpose, c('DevTest', 'FastProd'))) {
+
+  if (!is.element(cluster_purpose, c("DevTest", "FastProd"))) {
     stop(paste(cluster_purpose, "is not a valid cluster_purpose value.
                Please see documentation."))
   }
