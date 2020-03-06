@@ -323,7 +323,7 @@ get_aks_compute_credentials <- function(cluster) {
 #' "DevTest" or "FastProd". This is used to provision Azure Machine Learning components
 #' to ensure the desired level of fault-tolerance and QoS. If your cluster has less
 #' than 12 virtual CPUs, you will need to specify "DevTest" for this argument. We
-#' recommend that your cluster have at least 2 virtual CPUs for dev/test usage. 
+#' recommend that your cluster have at least 2 virtual CPUs for dev/test usage.
 #' @return The `AksCompute` object.
 #' @export
 #' @section Examples:
@@ -340,7 +340,7 @@ get_aks_compute_credentials <- function(cluster) {
 #' `detach_aks_compute()`
 #' @md
 attach_aks_compute <- function(workspace,
-                               resource_group,.
+                               resource_group,
                                cluster_name,
                                cluster_purpose = c("FastProd", "DevTest")) {
   cluster_purpose <- match.arg(cluster_purpose)
