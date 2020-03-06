@@ -72,6 +72,9 @@ get_model <- function(workspace,
 #' by `model_name`. Must be provided in conjunction with a `model_path`
 #' pointing to a folder; only the specified files will be bundled into the
 #' `Model` object.
+#' @param sample_input_dataset Sample input dataset for the registered model.
+#' @param sample_output_dataset Sample output dataset for the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The `Model` object.
 #' @export
 #' @examples
@@ -90,15 +93,21 @@ register_model <- function(workspace,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
-                           child_paths = NULL) {
+                           child_paths = NULL,
+                           sample_input_dataset = NULL,
+                           sample_output_dataset = NULL,
+                           resource_configuration = NULL) {
   model <- azureml$core$Model$register(workspace,
-                                       model_path,
-                                       model_name,
-                                       tags = tags,
-                                       properties = properties,
-                                       description = description,
-                                       child_paths = child_paths,
-                                       datasets = datasets)
+                                model_path,
+                                model_name,
+                                tags = tags,
+                                properties = properties,
+                                description = description,
+                                child_paths = child_paths,
+                                datasets = datasets,
+                                sample_input_dataset = sample_input_dataset,
+                                sample_output_dataset = sample_output_dataset,
+                                resource_configuration = resource_configuration)
   invisible(model)
 }
 
@@ -516,4 +525,70 @@ def run(input_data):
   writeLines(score_py_template, py_file)
   close(py_file)
   invisible(NULL)
+}
+
+#' Register a model for operationalization.
+#'
+#' @description
+#' Register a model for operationalization.
+#'
+#' @param run The `Run` object.
+#' @param model_name The name of the model.
+#' @param model_path The relative cloud path to the model, for example,
+#' "outputs/modelname". When not specified, `model_name` is used as the path.
+#' @param tags A dictionary of key value tags to assign to the model.
+#' @param properties A dictionary of key value properties to assign to the model.
+#' These properties cannot be changed after model creation, however new key-value pairs can be added.
+#' @param description An optional description of the model.
+#' @param datasets A list of tuples where the first element describes the dataset-model
+#' relationship and the second element is the dataset.
+#' @param sample_input_dataset Sample input dataset for the registered model.
+#' @param sample_output_dataset Sample output dataset for the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
+#' @return The registered Model.
+#' @export
+#' @seealso
+#' \code{\link{resource_configuration}}
+#' @md
+register_model_from_run <- function(run, model_name, model_path = NULL,
+                                    tags = NULL, properties = NULL,
+                                    description = NULL, datasets = NULL,
+                                    sample_input_dataset = NULL,
+                                    sample_output_dataset = NULL,
+                                    resource_configuration = NULL) {
+  run$register_model(run = run, model_name = model_name,
+                     model_path = model_path, tags = tags,
+                     properties = properties, description = description,
+                     datasets = datasets,
+                     sample_input_dataset = sample_input_dataset,
+                     sample_output_dataset = sample_output_dataset,
+                     resource_configuration = resource_configuration)
+}
+
+#' Initialize the  ResourceConfiguration.
+#'
+#' @description
+#' Initialize the  ResourceConfiguration.
+#'
+#' @param cpu The number of CPU cores to allocate for this resource. Can be a decimal.
+#' @param memory_in_gb The amount of memory (in GB) to allocate for this resource.
+#' Can be a decimal If `TRUE`, decode the raw log bytes to a string.
+#' @param gpu The number of GPUs to allocate for this resource.
+#' @return The `ResourceConfiguration` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' rc <- resource_configuration(2, 2, 0)
+#'
+#' registered_model <- register_model_from_run(run, "my_model_name",
+#'                                             "path_to_my_model",
+#'                                             resource_configuration = rc)
+#' }
+#' @seealso
+#' \code{\link{register_model_from_run}}
+#' @md
+resource_configuration <- function(cpu = NULL, memory_in_gb = NULL,
+                                   gpu = NULL) {
+  azureml$core$resource_configuration$ResourceConfiguration(
+    cpu = cpu, memory_in_gb = memory_in_gb, gpu = gpu)
 }

@@ -6,7 +6,8 @@
 \usage{
 register_model(workspace, model_path, model_name, datasets = NULL,
   tags = NULL, properties = NULL, description = NULL,
-  child_paths = NULL)
+  child_paths = NULL, sample_input_dataset = NULL,
+  sample_output_dataset = NULL, resource_configuration = NULL)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -34,6 +35,12 @@ e.g. \code{list("key" = "value")}.}
 by \code{model_name}. Must be provided in conjunction with a \code{model_path}
 pointing to a folder; only the specified files will be bundled into the
 \code{Model} object.}
+
+\item{sample_input_dataset}{Sample input dataset for the registered model.}
+
+\item{sample_output_dataset}{Sample output dataset for the registered model.}
+
+\item{resource_configuration}{`ResourceConfiguration`` object to run the registered model.}
 }
 \value{
 The \code{Model} object.
