@@ -55,10 +55,10 @@ service cluster IPs.}
 
 \item{docker_bridge_cidr}{A string of a CIDR notation IP for Docker bridge.}
 
-\item{cluster_purpose}{A string describing argeted usage of the cluster.
+\item{cluster_purpose}{A string describing targeted usage of the cluster.
 This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
-Options are "FastProd" and "DevTest". More detailed information of these values
-and their use cases can be found here: https://aka.ms/azureml-create-attach-aks}
+'FAST_PROD' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
+'DEV_TEST' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.}
 }
 \value{
 An \code{AksCompute} object.
