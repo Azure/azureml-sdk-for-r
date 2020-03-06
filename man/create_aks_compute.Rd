@@ -57,8 +57,8 @@ service cluster IPs.}
 
 \item{cluster_purpose}{A string describing targeted usage of the cluster.
 This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
-'FAST_PROD' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
-'DEV_TEST' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.}
+'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
+'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.}
 }
 \value{
 An \code{AksCompute} object.
