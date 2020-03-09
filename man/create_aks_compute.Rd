@@ -9,8 +9,8 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
   ssl_key_pem_file = NULL, location = NULL,
   vnet_resourcegroup_name = NULL, vnet_name = NULL,
   subnet_name = NULL, service_cidr = NULL, dns_service_ip = NULL,
-  docker_bridge_cidr = NULL, cluster_purpose = c("DevTest",
-  "FastProd"))
+  docker_bridge_cidr = NULL, cluster_purpose = c("FastProd",
+  "DevTest"))
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -59,7 +59,8 @@ service cluster IPs.}
 \item{cluster_purpose}{A string describing targeted usage of the cluster.
 This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
 'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
-'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.}
+'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
+'FastProd'is the default value.}
 }
 \value{
 An \code{AksCompute} object.

@@ -241,6 +241,7 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
 #' 'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
 #' 'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
+#' 'FastProd'is the default value.
 #' @return An `AksCompute` object.
 #' @export
 #' @section Details:
@@ -270,7 +271,7 @@ create_aks_compute <- function(workspace,
                                service_cidr = NULL,
                                dns_service_ip = NULL,
                                docker_bridge_cidr = NULL,
-                               cluster_purpose = c("DevTest", "FastProd")) {
+                               cluster_purpose = c("FastProd", "DevTest")) {
 
   cluster_purpose <- match.arg(cluster_purpose)
 
