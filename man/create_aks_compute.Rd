@@ -81,12 +81,14 @@ network, see
 \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
 }
 
-\examples{
-# Create an AksCompute cluster using the default configuration (you can also
+\section{Examples}{
+\preformatted{# Create an AksCompute cluster using the default configuration (you can also
 # provide parameters to customize this)
-\dontrun{
+
 ws <- load_workspace_from_config()
+
 compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 wait_for_provisioning_completion(compute_target)
 }
 }
+

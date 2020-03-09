@@ -248,14 +248,16 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' For more information on using an AksCompute resource within a virtual
 #' network, see
 #' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).
-#' @examples
+#' @section Examples:
+#' ```r
 #' # Create an AksCompute cluster using the default configuration (you can also
 #' # provide parameters to customize this)
-#' \dontrun{
+#' 
 #' ws <- load_workspace_from_config()
+#' 
 #' compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 #' wait_for_provisioning_completion(compute_target)
-#' }
+#' ```
 #' @md
 create_aks_compute <- function(workspace,
                                cluster_name,
