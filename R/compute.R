@@ -237,20 +237,27 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' service cluster IPs.
 #' @param dns_service_ip A string of the container's DNS server IP address.
 #' @param docker_bridge_cidr A string of a CIDR notation IP for Docker bridge.
+#' @param cluster_purpose A string describing targeted usage of the cluster.
+#' This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
+#' 'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
+#' 'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
+#' 'FastProd'is the default value.
 #' @return An `AksCompute` object.
 #' @export
 #' @section Details:
 #' For more information on using an AksCompute resource within a virtual
 #' network, see
 #' [Secure Azure ML experimentation and inference jobs within an Azure Virtual Network](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks).
-#' @examples
+#' @section Examples:
+#' ```r
 #' # Create an AksCompute cluster using the default configuration (you can also
 #' # provide parameters to customize this)
-#' \dontrun{
+#'
 #' ws <- load_workspace_from_config()
+#'
 #' compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 #' wait_for_provisioning_completion(compute_target)
-#' }
+#' ```
 #' @md
 create_aks_compute <- function(workspace,
                                cluster_name,
@@ -265,7 +272,11 @@ create_aks_compute <- function(workspace,
                                subnet_name = NULL,
                                service_cidr = NULL,
                                dns_service_ip = NULL,
-                               docker_bridge_cidr = NULL) {
+                               docker_bridge_cidr = NULL,
+                               cluster_purpose = c("FastProd", "DevTest")) {
+
+  cluster_purpose <- match.arg(cluster_purpose)
+
   compute_config <- azureml$core$compute$AksCompute$provisioning_configuration(
     agent_count = agent_count,
     vm_size = vm_size,
@@ -278,7 +289,8 @@ create_aks_compute <- function(workspace,
     subnet_name = subnet_name,
     service_cidr = service_cidr,
     dns_service_ip = dns_service_ip,
-    docker_bridge_cidr = docker_bridge_cidr)
+    docker_bridge_cidr = docker_bridge_cidr,
+    cluster_purpose = cluster_purpose)
 
   azureml$core$compute$ComputeTarget$create(workspace,
                                             cluster_name,
