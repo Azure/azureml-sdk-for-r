@@ -252,9 +252,9 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' ```r
 #' # Create an AksCompute cluster using the default configuration (you can also
 #' # provide parameters to customize this)
-#' 
+#'
 #' ws <- load_workspace_from_config()
-#' 
+#'
 #' compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 #' wait_for_provisioning_completion(compute_target)
 #' ```
