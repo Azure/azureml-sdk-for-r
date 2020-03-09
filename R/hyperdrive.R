@@ -321,7 +321,7 @@ truncation_selection_policy <- function(truncation_percentage,
 #' \dontrun{
 #' param_sampling <- random_parameter_sampling(list("learning_rate" = normal(10, 3),
 #'                                                  "keep_probability" = uniform(0.05, 0.1),
-#'                                                  "batch_size" = choice(16, 32, 64, 128)))
+#'                                                  "batch_size" = choice(c(16, 32, 64, 128))))
 #' }
 #' @seealso
 #' `choice()`, `randint()`, `uniform()`, `quniform()`, `loguniform()`,
@@ -343,8 +343,8 @@ random_parameter_sampling <- function(parameter_space, properties = NULL) {
 #' @export
 #' @examples
 #' \dontrun{
-#' param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(1, 2, 3),
-#'                                                "batch_size" = choice(16, 32)))
+#' param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(c(1, 2, 3)),
+#'                                                "batch_size" = choice(c(16, 32))))
 #' }
 #' @seealso
 #' `choice()`
@@ -380,7 +380,7 @@ grid_parameter_sampling <- function(parameter_space) {
 #' @examples
 #' \dontrun{
 #' param_sampling <- bayesian_parameter_sampling(list("learning_rate" = uniform(0.05, 0.1),
-#'                                                    "batch_size" = choice(16, 32, 64, 128)))
+#'                                                    "batch_size" = choice(c(16, 32, 64, 128))))
 #' }
 #' @seealso
 #' `choice()`, `uniform()`, `quniform()`
@@ -396,8 +396,7 @@ bayesian_parameter_sampling <- function(parameter_space) {
 #' @description
 #' Specify a discrete set of options to sample the hyperparameters
 #' from.
-#' @param options An integer vector of discrete values to choose from, or
-#' one or more comma-separated discrete values to choose from.
+#' @param options A vector of values to choose from.
 #' @return A list of the stochastic expression.
 #' @export
 #' @seealso

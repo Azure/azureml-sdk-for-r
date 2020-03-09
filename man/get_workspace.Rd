@@ -4,10 +4,15 @@
 \alias{get_workspace}
 \title{Get an existing workspace}
 \usage{
-get_workspace(name, subscription_id = NULL, resource_group = NULL)
+get_workspace(name, auth = NULL, subscription_id = NULL,
+  resource_group = NULL)
 }
 \arguments{
 \item{name}{A string of the workspace name to get.}
+
+\item{auth}{The \code{ServicePrincipalAuthentication} or \code{InteractiveLoginAuthentication}
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.}
 
 \item{subscription_id}{A string of the subscription ID to use. The parameter
 is required if the user has access to more than one subscription.}
@@ -22,4 +27,9 @@ The \code{Workspace} object.
 Returns a \code{Workspace} object for an existing Azure Machine Learning
 workspace. Throws an exception if the workpsace doesn't exist or the
 required fields don't lead to a uniquely identifiable workspace.
+}
+\seealso{
+\code{\link{service_principal_authentication}}
+\code{\link{create_workspace}}
+\code{\link{interactive_login_authentication}}
 }

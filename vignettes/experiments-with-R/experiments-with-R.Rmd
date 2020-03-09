@@ -65,7 +65,7 @@ exp <- experiment(ws, "accident")
 
 Now, train the GLM model by submitting the script `accident-glm.R` to the experiment.
 
-```{r run-experiment, eval=FALSE}
+```{r run-experiment-1, eval=FALSE}
 est <- estimator(source_directory=".",
                  entry_script = "accident-glm.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
@@ -96,7 +96,7 @@ We also track the algorithm used with the "Method" metric. (It's not really a me
 
 For now, submit expermiments for the KNN and GLMnet models:
 
-```{r run-experiment, eval=FALSE}
+```{r run-experiment-2, eval=FALSE}
 est <- estimator(source_directory=".",
                  entry_script = "accident-knn.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
@@ -165,7 +165,7 @@ run.glmnet <- submit_experiment(exp, est)
 ```
 We can check the accuracy for our runs at `ml.azure.com`, or by querying the service directly:
 
-```{r check-metrics}
+```{r check-metrics, eval=FALSE}
 get_run_metrics(run.glm)$Accuracy
 get_run_metrics(run.knn)$Accuracy
 get_run_metrics(run.glmnet)$Accuracy

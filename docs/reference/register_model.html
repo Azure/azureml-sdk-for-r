@@ -115,6 +115,11 @@ and the new model is registered under the same name." />
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -164,7 +169,8 @@ and the new model is registered under the same name.</p>
 
     <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_input_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sample_output_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_configuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,6 +216,18 @@ e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("key" = "value")</a><
 by <code>model_name</code>. Must be provided in conjunction with a <code>model_path</code>
 pointing to a folder; only the specified files will be bundled into the
 <code>Model</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>sample_input_dataset</th>
+      <td><p>Sample input dataset for the registered model.</p></td>
+    </tr>
+    <tr>
+      <th>sample_output_dataset</th>
+      <td><p>Sample output dataset for the registered model.</p></td>
+    </tr>
+    <tr>
+      <th>resource_configuration</th>
+      <td><p>`ResourceConfiguration`` object to run the registered model.</p></td>
     </tr>
     </table>
     

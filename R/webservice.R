@@ -167,14 +167,11 @@ generate_new_webservice_key <- function(webservice, key_type) {
 #' access the following boolean property from the Webservice object:
 #' `service$token_auth_enabled`
 #' @param webservice The `AksWebservice` object.
-#' @return A list of string and datetime corresponding to the auth token
-#' and the token's expiration time. You will need to request a new
-#' token using `get_webservice_token()` after the token's expiration
-#' time.
+#' @return An `AksServiceAccessToken` object.
 #' @export
 #' @md
 get_webservice_token <- function(webservice) {
-  webservice$get_token()
+  webservice$get_access_token()
 }
 
 #' Convert this Webservice into a json serialized dictionary.

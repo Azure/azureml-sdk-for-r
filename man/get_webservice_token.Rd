@@ -10,10 +10,7 @@ get_webservice_token(webservice)
 \item{webservice}{The \code{AksWebservice} object.}
 }
 \value{
-A list of string and datetime corresponding to the auth token
-and the token's expiration time. You will need to request a new
-token using \code{get_webservice_token()} after the token's expiration
-time.
+An \code{AksServiceAccessToken} object.
 }
 \description{
 Get the authentication token, scoped to the current user,

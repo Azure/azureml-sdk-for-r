@@ -38,7 +38,7 @@ using Bayesian parameter sampling, \code{early_termination_policy} must be
 \examples{
 \dontrun{
 param_sampling <- bayesian_parameter_sampling(list("learning_rate" = uniform(0.05, 0.1),
-                                                   "batch_size" = choice(16, 32, 64, 128)))
+                                                   "batch_size" = choice(c(16, 32, 64, 128))))
 }
 }
 \seealso{

@@ -71,6 +71,11 @@
     <li>
       <a href="../../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../../articles/guides/troubleshooting.html">Troubleshooting</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -99,7 +104,7 @@
     <div class="page-header toc-ignore">
       <h1>Hyperparameter tune a Keras model</h1>
             
-            <h4 class="date">2020-02-04</h4>
+            <h4 class="date">2020-03-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd"><code>vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd</code></a></small>
       <div class="hidden name"><code>hyperparameter-tune-with-keras.Rmd</code></div>
@@ -236,7 +241,7 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/normal.html">normal(mu, sigma)</a></code></li>
 <li><code><a href="https://rdrr.io/pkg/azuremlsdk/man/lognormal.html">lognormal(mu, sigma)</a></code></li>
 </ul>
-<p>Here, we will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/random_parameter_sampling.html">random_parameter_sampling()</a></code></a> function to define the search space for each hyperparameter. <code>batch_size</code> and <code>epochs</code> will be chosen from discrete sets while <code>lr</code> and <code>decay</code> will be drawn from continuous distributions.</p>
+<p>Here, we will use the <a href="https://azure.github.io/azureml-sdk-for-r/reference/random_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/random_parameter_sampling.html">random_parameter_sampling()</a></code></a> function to define the search space for each hyperparameter. <code>batch_size</code> and <code>epochs</code> will be chosen from discrete sets while <code>lr</code> and <code>decay</code> will be drawn from continuous distributions. If you wish to fix a script parameter’s value, simply remove it from your sampling function list, and it will be excluded from tuning and kept at the value assigned to it in the estimator step.</p>
 <p>Other available sampling function options are:</p>
 <ul>
 <li><a href="https://azure.github.io/azureml-sdk-for-r/reference/grid_parameter_sampling.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/grid_parameter_sampling.html">grid_parameter_sampling()</a></code></a></li>

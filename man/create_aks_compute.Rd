@@ -9,7 +9,8 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
   ssl_key_pem_file = NULL, location = NULL,
   vnet_resourcegroup_name = NULL, vnet_name = NULL,
   subnet_name = NULL, service_cidr = NULL, dns_service_ip = NULL,
-  docker_bridge_cidr = NULL)
+  docker_bridge_cidr = NULL, cluster_purpose = c("FastProd",
+  "DevTest"))
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -54,6 +55,12 @@ service cluster IPs.}
 \item{dns_service_ip}{A string of the container's DNS server IP address.}
 
 \item{docker_bridge_cidr}{A string of a CIDR notation IP for Docker bridge.}
+
+\item{cluster_purpose}{A string describing targeted usage of the cluster.
+This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
+'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
+'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
+'FastProd'is the default value.}
 }
 \value{
 An \code{AksCompute} object.
@@ -74,12 +81,14 @@ network, see
 \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}.
 }
 
-\examples{
-# Create an AksCompute cluster using the default configuration (you can also
+\section{Examples}{
+\preformatted{# Create an AksCompute cluster using the default configuration (you can also
 # provide parameters to customize this)
-\dontrun{
+
 ws <- load_workspace_from_config()
+
 compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 wait_for_provisioning_completion(compute_target)
 }
 }
+

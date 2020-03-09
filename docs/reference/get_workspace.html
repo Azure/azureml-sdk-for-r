@@ -108,6 +108,11 @@ required fields don't lead to a uniquely identifiable workspace." />
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -148,7 +153,8 @@ required fields don't lead to a uniquely identifiable workspace.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_workspace</span>(<span class='no'>name</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_workspace</span>(<span class='no'>name</span>, <span class='kw'>auth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +162,12 @@ required fields don't lead to a uniquely identifiable workspace.</p>
     <tr>
       <th>name</th>
       <td><p>A string of the workspace name to get.</p></td>
+    </tr>
+    <tr>
+      <th>auth</th>
+      <td><p>The <code>ServicePrincipalAuthentication</code> or <code>InteractiveLoginAuthentication</code>
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>
@@ -173,6 +185,12 @@ method will search all resource groups in the subscription.</p></td>
 
     <p>The <code>Workspace</code> object.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>service_principal_authentication</code>
+<code>create_workspace</code>
+<code>interactive_login_authentication</code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -181,6 +199,8 @@ method will search all resource groups in the subscription.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

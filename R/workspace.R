@@ -19,6 +19,9 @@
 #'   sensitive information that's needed by the workspace.
 #' @param name A string of the new workspace name. Workspace name has to be
 #' between 2 and 32 characters of letters and numbers.
+#' @param auth The `ServicePrincipalAuthentication` or `InteractiveLoginAuthentication`
+#' object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+#' the default Azure CLI credentials will be used or the API will prompt for credentials.
 #' @param subscription_id A string of the subscription ID of the containing
 #' subscription for the new workspace. The parameter is required if the user has
 #' access to more than one subscription.
@@ -45,6 +48,18 @@
 #' Azure resource ID format. The container registry will be used by the
 #' workspace to pull and push both experimentation and webservices images. If
 #' `NULL` a new container registry will be created.
+#' @param cmk_keyvault A string representing the key vault containing the customer
+#' managed key in the Azure resource ID format:
+#' '/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
+#' example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.
+#' @param resource_cmk_uri The key URI of the customer managed key to encrypt the data at rest.
+#' The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
+#' For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
+#' Refer to https://docs.microsoft.com/azure-stack/user/azure-stack-key-vault-manage-portal for steps on how
+#' to create a key and get its URI.
+#' @param hbi_workspace Specifies whether the customer data is of High Business
+#' Impact(HBI), i.e., contains sensitive business information. The default value
+#' is FALSE. When set to TRUE, downstream services will selectively disable logging.
 #' @param exist_ok If `TRUE` the method will not fail if the workspace already
 #' exists.
 #' @param show_output If `TRUE` the method will print out incremental progress
@@ -84,9 +99,14 @@
 #'          prefix,
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
+#' @seealso
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{get_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
 create_workspace <- function(
   name,
+  auth = NULL,
   subscription_id = NULL,
   resource_group = NULL,
   location = NULL,
@@ -96,11 +116,15 @@ create_workspace <- function(
   key_vault = NULL,
   app_insights = NULL,
   container_registry = NULL,
+  cmk_keyvault = NULL,
+  resource_cmk_uri = NULL,
+  hbi_workspace = FALSE,
   exist_ok = FALSE,
   show_output = TRUE,
   sku = "basic") {
   ws <-
     azureml$core$Workspace$create(name = name,
+                                  auth = auth,
                                   subscription_id = subscription_id,
                                   resource_group = resource_group,
                                   location = location,
@@ -110,6 +134,9 @@ create_workspace <- function(
                                   key_vault = key_vault,
                                   app_insights = app_insights,
                                   container_registry = container_registry,
+                                  cmk_keyvault = cmk_keyvault,
+                                  resource_cmk_uri = resource_cmk_uri,
+                                  hbi_workspace = hbi_workspace,
                                   exist_ok = exist_ok,
                                   show_output = show_output,
                                   sku = sku)
@@ -123,16 +150,24 @@ create_workspace <- function(
 #' workspace. Throws an exception if the workpsace doesn't exist or the
 #' required fields don't lead to a uniquely identifiable workspace.
 #' @param name A string of the workspace name to get.
+#' @param auth The `ServicePrincipalAuthentication` or `InteractiveLoginAuthentication`
+#' object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+#' the default Azure CLI credentials will be used or the API will prompt for credentials.
 #' @param subscription_id A string of the subscription ID to use. The parameter
 #' is required if the user has access to more than one subscription.
 #' @param resource_group A string of the resource group to use. If `NULL` the
 #' method will search all resource groups in the subscription.
 #' @return The `Workspace` object.
 #' @export
+#' @seealso
+#' \code{\link{service_principal_authentication}}
+#' \code{\link{create_workspace}}
+#' \code{\link{interactive_login_authentication}}
 #' @md
-get_workspace <- function(name, subscription_id = NULL, resource_group = NULL) {
+get_workspace <- function(name, auth = NULL, subscription_id = NULL,
+                          resource_group = NULL) {
   tryCatch({
-    azureml$core$Workspace$get(name, auth = NULL,
+    azureml$core$Workspace$get(name, auth = auth,
                                subscription_id = subscription_id,
                                resource_group = resource_group)
   },
@@ -322,4 +357,82 @@ get_workspace_details <- function(workspace) {
 set_default_datastore <- function(workspace, datastore_name) {
   workspace$set_default_datastore(datastore_name)
   invisible(NULL)
+}
+
+#' Manages authentication using a service principle instead of a user identity.
+#'
+#' @description
+#' Service Principal authentication is suitable for automated workflows like for CI/CD scenarios.
+#' This type of authentication decouples the authentication process from any specific user login, and
+#' allows for managed access control.
+#' @param tenant_id The string id of the active directory tenant that the service
+#' identity belongs to.
+#' @param service_principal_id The service principal ID string.
+#' @param service_principal_password The service principal password/key string.
+#' @param cloud The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+#' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
+#' @return `ServicePrincipalAuthentication` object
+#' @export
+#' @examples
+#' # Service principal authentication involves creating an App Registration in
+#' # Azure Active Directory. First, you generate a client secret, and then you grant
+#' # your service principal role access to your machine learning workspace. Then,
+#' # you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
+#' \dontrun{
+#' svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
+#' svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
+#'                                            service_principal_id="my-application-id",
+#'                                            service_principal_password=svc_pr_password)
+#'
+#' ws <- get_workspace("<your workspace name>",
+#'                     "<your subscription ID>",
+#'                     "<your resource group>",
+#'                     auth = svc_pr)
+#' }
+#' @seealso
+#' \code{\link{get_workspace}}
+#' \code{\link{interactive_login_authentication}}
+#' @md
+service_principal_authentication <- function(tenant_id, service_principal_id,
+                                             service_principal_password,
+                                             cloud = "AzureCloud") {
+  azureml$core$authentication$ServicePrincipalAuthentication(
+    tenant_id = tenant_id, service_principal_id = service_principal_id,
+    service_principal_password = service_principal_password, cloud = cloud)
+}
+
+#' Manages authentication and acquires an authorization token in interactive login workflows.
+#'
+#' @description
+#' Interactive login authentication is suitable for local experimentation on your own computer, and is the
+#' default authentication model when using Azure Machine Learning SDK.
+#' The constructor of the class will prompt you to login. The constructor then will save the credentials
+#' for any subsequent attempts. If you are already logged in with the Azure CLI or have logged-in before, the
+#' constructor will load the existing credentials without prompt.
+#' @param force Indicates whether "az login" will be run even if the old "az login" is still valid.
+#' @param tenant_id The string id of the active directory tenant that the service
+#' identity belongs to. This is can be used to specify a specific tenant when
+#' you have access to multiple tenants. If unspecified, the default tenant will be used.
+#' @param cloud The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+#' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
+#' @return `InteractiveLoginAuthentication` object
+#' @export
+#' @examples
+#' \dontrun{
+#' interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
+#'
+#' ws <- get_workspace("<your workspace name>",
+#'                     "<your subscription ID>",
+#'                     "<your resource group>",
+#'                     auth = interactive_auth)
+#' }
+#' @seealso
+#' \code{\link{get_workspace}}
+#' \code{\link{service_principal_authentication}}
+#' @md
+interactive_login_authentication <- function(force = FALSE,
+                                             tenant_id = NULL,
+                                             cloud = "AzureCloud") {
+  azureml$core$authentication$InteractiveLoginAuthentication(
+    force = force, tenant_id = tenant_id, cloud = cloud)
 }

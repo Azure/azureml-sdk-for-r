@@ -4,7 +4,7 @@
 \alias{mount_file_dataset}
 \title{Create a context manager for mounting file streams defined by the dataset as local files.}
 \usage{
-mount_file_dataset(dataset, mount_point)
+mount_file_dataset(dataset, mount_point = NULL)
 }
 \arguments{
 \item{dataset}{The Dataset object.}

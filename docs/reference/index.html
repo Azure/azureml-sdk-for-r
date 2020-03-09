@@ -103,6 +103,11 @@
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -177,6 +182,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="service_principal_authentication.html">service_principal_authentication()</a></code> </p>
+        </td>
+        <td><p>Manages authentication using a service principle instead of a user identity.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="load_workspace_from_config.html">load_workspace_from_config()</a></code> </p>
         </td>
         <td><p>Load workspace configuration details from a config file</p></td>
@@ -246,6 +257,12 @@
           <p><code><a href="list_secrets.html">list_secrets()</a></code> </p>
         </td>
         <td><p>List the secrets in a keyvault</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="interactive_login_authentication.html">interactive_login_authentication()</a></code> </p>
+        </td>
+        <td><p>Manages authentication and acquires an authorization token in interactive login workflows.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -326,7 +343,7 @@ compute target</p></td>
       <tr>
         <th colspan="2">
           <h2 id="section-working-with-data" class="hasAnchor"><a href="#section-working-with-data" class="anchor"></a>Working with data</h2>
-          <p class="section-desc"><p>Functions for managing and accessing data for your machine learning workflows. A <strong>Datastore</strong> is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.</p></p>
+          <p class="section-desc"><p>Functions for accessing your data in Azure Storage services. A <strong>Datastore</strong> is attached to a workspace and is used to store connection information to an Azure storage service.</p></p>
         </th>
       </tr>
       <tr>
@@ -368,9 +385,239 @@ compute target</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="register_azure_sql_database_datastore.html">register_azure_sql_database_datastore()</a></code> </p>
+        </td>
+        <td><p>Initialize a new Azure SQL database Datastore.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="register_azure_postgre_sql_datastore.html">register_azure_postgre_sql_datastore()</a></code> </p>
+        </td>
+        <td><p>Initialize a new Azure PostgreSQL Datastore.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="unregister_datastore.html">unregister_datastore()</a></code> </p>
         </td>
         <td><p>Unregister a datastore from its associated workspace</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-working-with-datasets" class="hasAnchor"><a href="#section-working-with-datasets" class="anchor"></a>Working with datasets</h2>
+          <p class="section-desc"><p>Functions for managing datasets. An Azure Machine Learning <strong>Dataset</strong> allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of <code>FileDataset</code> and <code>TabularDataset</code>.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="register_dataset.html">register_dataset()</a></code> </p>
+        </td>
+        <td><p>Register a Dataset in the workspace</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unregister_all_dataset_versions.html">unregister_all_dataset_versions()</a></code> </p>
+        </td>
+        <td><p>Unregister all versions under the registration name of this dataset from the workspace.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_dataset_by_name.html">get_dataset_by_name()</a></code> </p>
+        </td>
+        <td><p>Get a registered Dataset from the workspace by its registration name.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_dataset_by_id.html">get_dataset_by_id()</a></code> </p>
+        </td>
+        <td><p>Get Dataset by ID.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_input_dataset_from_run.html">get_input_dataset_from_run()</a></code> </p>
+        </td>
+        <td><p>Return the named list for input datasets.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_file_dataset_from_files.html">create_file_dataset_from_files()</a></code> </p>
+        </td>
+        <td><p>Create a FileDataset to represent file streams.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_file_dataset_paths.html">get_file_dataset_paths()</a></code> </p>
+        </td>
+        <td><p>Get a list of file paths for each file stream defined by the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="download_from_file_dataset.html">download_from_file_dataset()</a></code> </p>
+        </td>
+        <td><p>Download file streams defined by the dataset as local files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mount_file_dataset.html">mount_file_dataset()</a></code> </p>
+        </td>
+        <td><p>Create a context manager for mounting file streams defined by the dataset as local files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="skip_from_dataset.html">skip_from_dataset()</a></code> </p>
+        </td>
+        <td><p>Skip file streams from the top of the dataset by the specified count.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="take_from_dataset.html">take_from_dataset()</a></code> </p>
+        </td>
+        <td><p>Take a sample of file streams from top of the dataset by the specified count.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="take_sample_from_dataset.html">take_sample_from_dataset()</a></code> </p>
+        </td>
+        <td><p>Take a random sample of file streams in the dataset approximately by the probability specified.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="random_split_dataset.html">random_split_dataset()</a></code> </p>
+        </td>
+        <td><p>Split file streams in the dataset into two parts randomly and approximately by the percentage specified.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_tabular_dataset_from_parquet_files.html">create_tabular_dataset_from_parquet_files()</a></code> </p>
+        </td>
+        <td><p>Create an unregistered, in-memory Dataset from parquet files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_tabular_dataset_from_delimited_files.html">create_tabular_dataset_from_delimited_files()</a></code> </p>
+        </td>
+        <td><p>Create an unregistered, in-memory Dataset from delimited files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_tabular_dataset_from_json_lines_files.html">create_tabular_dataset_from_json_lines_files()</a></code> </p>
+        </td>
+        <td><p>Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_tabular_dataset_from_sql_query.html">create_tabular_dataset_from_sql_query()</a></code> </p>
+        </td>
+        <td><p>Create a TabularDataset to represent tabular data in SQL databases.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="drop_columns_from_dataset.html">drop_columns_from_dataset()</a></code> </p>
+        </td>
+        <td><p>Drop the specified columns from the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="keep_columns_from_dataset.html">keep_columns_from_dataset()</a></code> </p>
+        </td>
+        <td><p>Keep the specified columns and drops all others from the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter_dataset_after_time.html">filter_dataset_after_time()</a></code> </p>
+        </td>
+        <td><p>Filter Tabular Dataset with time stamp columns after a specified start time.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter_dataset_before_time.html">filter_dataset_before_time()</a></code> </p>
+        </td>
+        <td><p>Filter Tabular Dataset with time stamp columns before a specified end time.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter_dataset_between_time.html">filter_dataset_between_time()</a></code> </p>
+        </td>
+        <td><p>Filter Tabular Dataset between a specified start and end time.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="filter_dataset_from_recent_time.html">filter_dataset_from_recent_time()</a></code> </p>
+        </td>
+        <td><p>Filter Tabular Dataset to contain only the specified duration (amount) of recent data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="define_timestamp_columns_for_dataset.html">define_timestamp_columns_for_dataset()</a></code> </p>
+        </td>
+        <td><p>Define timestamp columns for the dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_dataset_into_data_frame.html">load_dataset_into_data_frame()</a></code> </p>
+        </td>
+        <td><p>Load all records from the dataset into a dataframe.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="convert_to_dataset_with_csv_files.html">convert_to_dataset_with_csv_files()</a></code> </p>
+        </td>
+        <td><p>Convert the current dataset into a FileDataset containing CSV files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="convert_to_dataset_with_parquet_files.html">convert_to_dataset_with_parquet_files()</a></code> </p>
+        </td>
+        <td><p>Convert the current dataset into a FileDataset containing Parquet files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_type_bool.html">data_type_bool()</a></code> </p>
+        </td>
+        <td><p>Configure conversion to bool.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_type_datetime.html">data_type_datetime()</a></code> </p>
+        </td>
+        <td><p>Configure conversion to datetime.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_type_double.html">data_type_double()</a></code> </p>
+        </td>
+        <td><p>Configure conversion to 53-bit double.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_type_long.html">data_type_long()</a></code> </p>
+        </td>
+        <td><p>Configure conversion to 64-bit integer.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_type_string.html">data_type_string()</a></code> </p>
+        </td>
+        <td><p>Configure conversion to string.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="promote_headers_behavior.html">promote_headers_behavior()</a></code> </p>
+        </td>
+        <td><p>Defines options for how column headers are processed when reading data from files to create a dataset.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_path.html">data_path()</a></code> </p>
+        </td>
+        <td><p>Represents a path to data in a datastore.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dataset_consumption_config.html">dataset_consumption_config()</a></code> </p>
+        </td>
+        <td><p>Represent how to deliver the dataset to a compute target.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -753,6 +1000,12 @@ best primary metric</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="register_model_from_run.html">register_model_from_run()</a></code> </p>
+        </td>
+        <td><p>Register a model for operationalization.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="download_model.html">download_model()</a></code> </p>
         </td>
         <td><p>Download a model to the local file system</p></td>
@@ -921,6 +1174,7 @@ your local file system</p></td>
       <li><a href="#section-workspaces">Workspaces</a></li>
       <li><a href="#section-compute-targets">Compute targets</a></li>
       <li><a href="#section-working-with-data">Working with data</a></li>
+      <li><a href="#section-working-with-datasets">Working with datasets</a></li>
       <li><a href="#section-environments">Environments</a></li>
       <li><a href="#section-training-experimentation">Training &amp; experimentation</a></li>
       <li><a href="#section-hyperparameter-tuning">Hyperparameter tuning</a></li>
