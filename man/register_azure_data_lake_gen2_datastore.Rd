@@ -47,3 +47,18 @@ object.
 \description{
 Initialize a new Azure Data Lake Gen2 Datastore.
 }
+\section{Examples}{
+\preformatted{# Create and register an Azure Data Lake Gen2 Datastore to a workspace.
+
+my_adlsgen2_ds <- register_azure_data_lake_gen2_datastore(workspace = your_workspace,
+                                                          datastore_name = <name for this datastore>,
+                                                          filesystem = 'test',
+                                                          tenant_id = your_workspace$auth$tenant_id,
+                                                          client_id = your_workspace$auth$service_principal_id,
+                                                          client_secret = your_workspace$auth$service_principal_password)
+}
+}
+
+\seealso{
+\code{\link[=unregister_datastore(), get_datastore]{unregister_datastore(), get_datastore()}}
+}
