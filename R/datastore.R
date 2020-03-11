@@ -395,7 +395,7 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
 #'                                                           client_id = your_workspace$auth$service_principal_id,
 #'                                                           client_secret = your_workspace$auth$service_principal_password)
 #' ```
-#' @seealso [unregister_datastore(), get_datastore()]
+#' @seealso [unregister_datastore()], [get_datastore()]
 #' @md
 register_azure_data_lake_gen2_datastore <- function(workspace, datastore_name,
                                                     filesystem, account_name,

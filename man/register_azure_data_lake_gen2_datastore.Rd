@@ -60,5 +60,5 @@ my_adlsgen2_ds <- register_azure_data_lake_gen2_datastore(workspace = your_works
 }
 
 \seealso{
-\code{\link[=unregister_datastore(), get_datastore]{unregister_datastore(), get_datastore()}}
+\code{\link[=unregister_datastore]{unregister_datastore()}}, \code{\link[=get_datastore]{get_datastore()}}
 }
