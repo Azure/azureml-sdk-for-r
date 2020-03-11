@@ -74,23 +74,21 @@ test_that("register azure blob/fileshare datastores", {
 
 })
 
-test_that("register azure gen2 datastore", {
+test_that("creates, registers, and unregisters azure gen2 datastore", {
   skip_if_no_subscription()
   ws <- existing_ws
   
   # register azure gen2 datastore
-  ws_gen2_datastore <- get_datastore(ws, "workspacegen2datastore")
-  gen2_datastore_name <- paste0("dsgen2", gsub("-", "", "build_num"))
-  register_azure_data_lake_gen2(ws,
-                                gen2_datastore_name,
-                                ws_gen2_datastore$filesystem,
-                                ws_gen2_datastore$account_name,
-                                ws_gen2_datastore$tenant_id,
-                                ws_gen2_datastore$client_id,
-                                ws_gen2_datastore$client_secret)
+  adls_name <- paste0("dsgen2", gsub("-", "", "build_num"))
+  register_azure_data_lake_gen2_datastore(workspace = ws,
+                                          datastore_name = adls_name,
+                                          filesystem = 'test',
+                                          tenant_id = ws$auth$tenant_id,
+                                          client_id = ws$auth$service_principal_id,
+                                          client_secret = ws$auth$service_principal_password)
 
-  ws_gen2_datastore <- get_datastore(ws, gen2_datastore_name)
-  expect_equal(ws_gen2_datastore$name, gen2_datastore_name)
-  unregister_datastore(ws_gen2_datastore)
+  registered_gen2_datastore <- get_datastore(ws, adls_name)
+  expect_equal(registered_gen2_datastore$name, adls_name)
+  unregister_datastore(registered_gen2_datastore)
   
 })
