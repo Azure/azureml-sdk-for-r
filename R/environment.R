@@ -94,10 +94,10 @@ r_environment <- function(name, version = NULL,
                           shm_size = NULL) {
   env <- azureml$core$Environment(name)
   env$version <- version
-  env$python$user_managed_dependencies <- TRUE
   env$environment_variables <- environment_variables
   env$docker$enabled <- TRUE
   env$docker$base_image <- custom_docker_image
+  env$r <- azureml$core$environment$RSection()
 
   if (!is.null(image_registry_details)) {
     env$docker$base_image_registry <- image_registry_details
@@ -108,41 +108,36 @@ r_environment <- function(name, version = NULL,
 
   if (is.null(custom_docker_image)) {
     if (use_gpu) {
-      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base-",
+      env$docker$base_image <- paste0("mcr.microsoft.com/azureml/base-",
                                         "gpu:openmpi3.1.2-cuda10.0-cudnn7-",
                                         "ubuntu16.04")
     }
     else {
-      base_image_with_address <- paste0("mcr.microsoft.com/azureml/base:",
+      env$docker$base_image <- paste0("mcr.microsoft.com/azureml/base:",
                                         "openmpi3.1.2-ubuntu16.04")
     }
-
-    env$docker$base_dockerfile <- generate_docker_file(base_image_with_address,
-                                                       cran_packages,
-                                                       github_packages,
-                                                       custom_url_packages)
-    env$docker$base_image <- NULL
   }
-  else {
-    # if extra package is specified, generate dockerfile
-    if (!is.null(cran_packages) ||
-        !is.null(github_packages) ||
-        !is.null(custom_url_packages)) {
-      base_image_with_address <- env$docker$base_image
-      registry_address <- env$docker$base_image_registry$address
-      if (!is.null(env$docker$base_image_registry$address)) {
-        base_image_with_address <- paste(registry_address,
-                                         env$docker$base_image,
-                                         sep = "/")
-      }
-      env$docker$base_dockerfile <- generate_docker_file(
-        base_image_with_address,
-        cran_packages,
-        github_packages,
-        custom_url_packages,
-        FALSE)
-      env$docker$base_image <- NULL
+
+  if(!is.null(cran_packages)){
+    env$r$cran_packages <- list()
+    for(package in cran_packages){
+      cran_package <- azureml$core$environment$RCranPackage()
+      cran_package$name <- package
     }
+    list.append(env$r$cran_packages, cran_package)
+  }
+  
+  if (!is.null(github_packages)) {
+    env$r$github_packages <- list()
+    for(package in github_packages){
+      github_package <- azureml$core$environment$RGithubPackage()
+      github_package$repository <- package
+    }
+    list.append(env$r$github_packages, github_package)
+  }
+  
+  if (!is.null(custom_url_packages)) {
+    env$r$custom_url_packages <- list(custom_url_packages)
   }
 
   invisible(env)
@@ -218,67 +213,4 @@ container_registry <- function(address = NULL,
   container_registry$password <- password
 
   invisible(container_registry)
-}
-
-#' Generate a dockerfile string to build the image for training.
-#' @param custom_docker_image The name of the docker image from which the image
-#' to use for training will be built. If not set, a default CPU based image will
-#' be used as the base image.
-#' @param cran_packages character vector of cran packages to be installed.
-#' @param github_packages character vector of github packages to be installed.
-#' @param custom_url_packages character vector of packages to be installed from
-#' local, directory or custom url.
-#' @param install_system_packages logical parameter to specify if system
-#' packages should be installed at runtime.
-#' @return Dockerfile string
-generate_docker_file <- function(custom_docker_image = NULL,
-                                 cran_packages = NULL,
-                                 github_packages = NULL,
-                                 custom_url_packages = NULL,
-                                 install_system_packages = TRUE) {
-  base_dockerfile <- NULL
-  base_dockerfile <- paste0(base_dockerfile, sprintf("FROM %s\n",
-                                                     custom_docker_image))
-
-  if (install_system_packages) {
-    base_dockerfile <- paste0(base_dockerfile,
-                              "RUN conda install -c r -y r-essentials=3.6.0 ",
-                              "r-reticulate rpy2 r-remotes r-e1071 ",
-                              "r-optparse && conda clean -ay && pip ",
-                              "install --no-cache-dir azureml-defaults\n")
-
-    base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
-    base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
-                              "install_cran('azuremlsdk', ",
-                              "repos = 'https://cloud.r-project.org/', ",
-                              "upgrade = FALSE)\"\n")
-  }
-
-  if (!is.null(cran_packages)) {
-    for (package in cran_packages) {
-      base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', ", package),
-          "repos = \'https://cloud.r-project.org/\')\"\n")
-    }
-  }
-
-  if (!is.null(github_packages)) {
-    for (package in github_packages) {
-      base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"devtools::install_github(\'%s\')\"\n", package))
-    }
-  }
-
-  if (!is.null(custom_url_packages)) {
-    for (package in custom_url_packages) {
-      base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', repos = NULL)\"\n",
-                  package))
-    }
-  }
-
-  invisible(base_dockerfile)
 }
