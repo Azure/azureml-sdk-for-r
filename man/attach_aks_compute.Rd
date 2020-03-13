@@ -4,19 +4,22 @@
 \alias{attach_aks_compute}
 \title{Attach an existing AKS cluster to a workspace}
 \usage{
-attach_aks_compute(workspace, cluster_name, resource_id = NULL,
-  resource_group = NULL)
+attach_aks_compute(workspace, resource_group, cluster_name,
+  cluster_purpose = c("FastProd", "DevTest"))
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object to attach the AKS cluster to.}
 
-\item{cluster_name}{A string of the name for the cluster.}
-
-\item{resource_id}{A string of the resource ID for the AKS cluster being
-attached.}
-
 \item{resource_group}{A string of the resource group in which the AKS cluster
 is located.}
+
+\item{cluster_name}{A string of the name of the AKS cluster.}
+
+\item{cluster_purpose}{The targeted usage of the cluster. The possible values are
+"DevTest" or "FastProd". This is used to provision Azure Machine Learning components
+to ensure the desired level of fault-tolerance and QoS. If your cluster has less
+than 12 virtual CPUs, you will need to specify "DevTest" for this argument. We
+recommend that your cluster have at least 2 virtual CPUs for dev/test usage.}
 }
 \value{
 The \code{AksCompute} object.
@@ -30,13 +33,24 @@ workspace.
 If you want to secure your AKS cluster using an Azure Virtual Network, you
 must create the virtual network first. For more information, see
 \href{https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet}{Secure Azure ML experimentation and inference jobs within an Azure Virtual Network}
+
+If you want to re-attach an AKS cluster, for example to to change SSL or other
+cluster configuration settings, you must first remove the existing attachment
+with \code{detach_aks_compute()}.
+
+Attaching a cluster will take approximately 5 minutes.
 }
-\examples{
-\dontrun{
-ws <- load_workspace_from_config()
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
 compute_target <- attach_aks_compute(ws,
-                                     cluster_name = 'mycluster',
-                                     resource_id = 'myresourceid',
-                                     resource_group = 'myresourcegroup')
+                                     resource_group = 'myresourcegroup',
+                                     cluster_name = 'myakscluster')
 }
+
+If the cluster has less than 12 virtual CPUs, you will need to also specify the
+\code{cluster_purpose} parameter in the \code{attach_aks_compute()} call: \code{cluster_purpose = 'DevTest'}.
+}
+
+\seealso{
+\code{detach_aks_compute()}
 }

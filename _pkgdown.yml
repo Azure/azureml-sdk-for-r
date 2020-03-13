@@ -77,6 +77,7 @@ reference:
   - '`register_azure_file_share_datastore`'
   - '`register_azure_sql_database_datastore`'
   - '`register_azure_postgre_sql_datastore`'
+  - '`register_azure_data_lake_gen2_datastore`'
   - '`unregister_datastore`'
 - title: Working with datasets
   desc: Functions for managing datasets. An Azure Machine Learning **Dataset** allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of `FileDataset` and `TabularDataset`.
