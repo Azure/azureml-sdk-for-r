@@ -100,9 +100,7 @@
 #'          'microsoft.containerregistry/registries/mycontainerregistry'))
 #' }
 #' @seealso
-#' \code{\link{service_principal_authentication}}
-#' \code{\link{get_workspace}}
-#' \code{\link{interactive_login_authentication}}
+#' [get_workspace()] [service_principal_authentication()] [interactive_login_authentication()]
 #' @md
 create_workspace <- function(
   name,
@@ -160,9 +158,7 @@ create_workspace <- function(
 #' @return The `Workspace` object.
 #' @export
 #' @seealso
-#' \code{\link{service_principal_authentication}}
-#' \code{\link{create_workspace}}
-#' \code{\link{interactive_login_authentication}}
+#' [create_workspace()] [service_principal_authentication()] [interactive_login_authentication()]
 #' @md
 get_workspace <- function(name, auth = NULL, subscription_id = NULL,
                           resource_group = NULL) {
@@ -195,6 +191,7 @@ get_workspace <- function(name, auth = NULL, subscription_id = NULL,
 #' @param file_name A string that will override the config file name to
 #' search for when path is a directory path.
 #' @return The `Workspace` object.
+#' @seealso [write_workspace_config()]
 #' @export
 #' @md
 load_workspace_from_config <- function(path = NULL, file_name = NULL) {
@@ -257,6 +254,7 @@ list_workspaces <- function(subscription_id, resource_group = NULL) {
 #' @param file_name A string of the name to use for the config file. The
 #' parameter defaults to `'config.json'`.
 #' @return None
+#' @seealso [load_workspace_from_config()]
 #' @export
 #' @md
 write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
@@ -279,20 +277,21 @@ write_workspace_config <- function(workspace, path = NULL, file_name = NULL) {
 #' @param workspace The `Workspace` object.
 #' @return The default `Datastore` object.
 #' @export
-#' @examples
-#' # Get the default datastore for the datastore
-#' \dontrun{
+#' @section Examples:
+#' Get the default datastore for the datastore:
+#' ```
 #' ws <- load_workspace_from_config()
 #' ds <- get_default_datastore(ws)
-#' }
+#' ```
 #'
-#' # If you have not changed the default datastore for the workspace, the
-#' # following code will return the same datastore object as the above
-#' # example
-#' \dontrun{
+#' If you have not changed the default datastore for the workspace, the
+#' following code will return the same datastore object as the above
+#' example:
+#' ```
 #' ws <- load_workspace_from_config()
 #' ds <- get_datastore(ws, datastore_name = 'workspaceblobstore')
-#' }
+#' ```
+#' @seealso [set_default_datastore()]
 #' @md
 get_default_datastore <- function(workspace) {
   workspace$get_default_datastore()
@@ -308,7 +307,7 @@ get_default_datastore <- function(workspace) {
 #' @return The `Keyvault` object.
 #' @export
 #' @seealso
-#' `set_secrets()`, `get_secrets()`, `list_secrets()`, `delete_secrets()`
+#' [set_secrets()] [get_secrets()] [list_secrets()] [delete_secrets()]
 #' @md
 get_default_keyvault <- function(workspace) {
   workspace$get_default_keyvault()
@@ -353,6 +352,7 @@ get_workspace_details <- function(workspace) {
 #' @param datastore_name The name of the datastore to be set as default.
 #' @return None
 #' @export
+#' @seealso [get_default_datastore()]
 #' @md
 set_default_datastore <- function(workspace, datastore_name) {
   workspace$set_default_datastore(datastore_name)
@@ -373,12 +373,12 @@ set_default_datastore <- function(workspace, datastore_name) {
 #' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
 #' @return `ServicePrincipalAuthentication` object
 #' @export
-#' @examples
-#' # Service principal authentication involves creating an App Registration in
-#' # Azure Active Directory. First, you generate a client secret, and then you grant
-#' # your service principal role access to your machine learning workspace. Then,
-#' # you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
-#' \dontrun{
+#' @section Examples:
+#' Service principal authentication involves creating an App Registration in
+#' Azure Active Directory. First, you generate a client secret, and then you grant
+#' your service principal role access to your machine learning workspace. Then,
+#' you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
+#' ```
 #' svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
 #' svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
 #'                                            service_principal_id="my-application-id",
@@ -388,10 +388,9 @@ set_default_datastore <- function(workspace, datastore_name) {
 #'                     "<your subscription ID>",
 #'                     "<your resource group>",
 #'                     auth = svc_pr)
-#' }
+#' ```
 #' @seealso
-#' \code{\link{get_workspace}}
-#' \code{\link{interactive_login_authentication}}
+#' [get_workspace()] [interactive_login_authentication()]
 #' @md
 service_principal_authentication <- function(tenant_id, service_principal_id,
                                              service_principal_password,
@@ -417,8 +416,8 @@ service_principal_authentication <- function(tenant_id, service_principal_id,
 #' "AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.
 #' @return `InteractiveLoginAuthentication` object
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
 #'
 #' ws <- get_workspace("<your workspace name>",
@@ -426,9 +425,9 @@ service_principal_authentication <- function(tenant_id, service_principal_id,
 #'                     "<your resource group>",
 #'                     auth = interactive_auth)
 #' }
+#' ```
 #' @seealso
-#' \code{\link{get_workspace}}
-#' \code{\link{service_principal_authentication}}
+#' [get_workspace()] [service_principal_authentication()]
 #' @md
 interactive_login_authentication <- function(force = FALSE,
                                              tenant_id = NULL,
