@@ -117,14 +117,17 @@ r_environment <- function(name, version = NULL,
                                         "openmpi3.1.2-ubuntu16.04")
     }
   }
+  else{
+    env$r$user_managed <- TRUE
+  }
 
   if(!is.null(cran_packages)){
     env$r$cran_packages <- list()
     for(package in cran_packages){
       cran_package <- azureml$core$environment$RCranPackage()
       cran_package$name <- package
+      env$r$cran_packages <- c(env$r$cran_packages, cran_package)
     }
-    list.append(env$r$cran_packages, cran_package)
   }
   
   if (!is.null(github_packages)) {
@@ -132,10 +135,10 @@ r_environment <- function(name, version = NULL,
     for(package in github_packages){
       github_package <- azureml$core$environment$RGithubPackage()
       github_package$repository <- package
+      env$r$github_packages <- c(env$r$github_packages, github_package)
     }
-    list.append(env$r$github_packages, github_package)
   }
-  
+
   if (!is.null(custom_url_packages)) {
     env$r$custom_url_packages <- list(custom_url_packages)
   }
