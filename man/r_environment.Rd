@@ -5,7 +5,7 @@
 \title{Create an environment}
 \usage{
 r_environment(name, version = NULL, environment_variables = NULL,
-  cran_packages = NULL, github_packages = NULL,
+  rscript_path = NULL, cran_packages = NULL, github_packages = NULL,
   custom_url_packages = NULL, custom_docker_image = NULL,
   image_registry_details = NULL, use_gpu = FALSE, shm_size = NULL)
 }
@@ -17,6 +17,9 @@ r_environment(name, version = NULL, environment_variables = NULL,
 \item{environment_variables}{A named list of environment variables names
 and values. These environment variables are set on the process where the user
 script is being executed.}
+
+\item{rscript_path}{The Rscript path to use if an environment build is not required.
+The path specified gets used to call the user script.}
 
 \item{cran_packages}{A character vector of CRAN packages to be installed.}
 
