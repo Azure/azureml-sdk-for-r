@@ -7,10 +7,6 @@ cluster_name <- Sys.getenv("TEST_CLUSTER_NAME", unset = "r-cluster-cpu")
 test_env <- paste0('test_', as.integer(Sys.time()))
 build_num <- Sys.getenv('TEST_BUILD_NUMBER')
 build_num <- gsub('[.]', '-', build_num)
-tenant_id <- Sys.getenv('TEST_TENANT_ID')
-storage_account <- Sys.getenv('TEST_STORAGE_ACCOUNT')
-service_principal_info <- list(id = Sys.getenv('TEST_SERVICE_PRINCIPAL_ID'),
-                            password = Sys.getenv('TEST_SERVICE_PRINCIPAL_PW'))
 
 
 library(azuremlsdk)
