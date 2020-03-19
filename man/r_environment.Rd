@@ -6,8 +6,9 @@
 \usage{
 r_environment(name, version = NULL, environment_variables = NULL,
   rscript_path = NULL, cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, custom_docker_image = NULL,
-  image_registry_details = NULL, use_gpu = FALSE, shm_size = NULL)
+  custom_url_packages = NULL, bioconductor_packages = NULL,
+  custom_docker_image = NULL, image_registry_details = NULL,
+  use_gpu = FALSE, shm_size = NULL)
 }
 \arguments{
 \item{name}{A string of the name of the environment.}
@@ -27,6 +28,9 @@ The path specified gets used to call the user script.}
 
 \item{custom_url_packages}{A character vector of packages to be installed
 from local directory or custom URL.}
+
+\item{bioconductor_packages}{A character vector of packages to be installed
+from Bioconductor.}
 
 \item{custom_docker_image}{A string of the name of the Docker image from
 which the image to use for training or deployment will be built. If not set,

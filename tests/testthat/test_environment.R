@@ -22,10 +22,23 @@ test_that("create environment and check parameters", {
   expect_equal(env$docker$base_image, custom_docker_image_name)
 
   # use extra packages
-  env <- r_environment(env_name, cran_packages = c("ggplot2", "dplyr"))
+  env <- r_environment(env_name, cran_packages = c("ggplot2", "dplyr"),
+                       github_packages = c("Azure/azureml-sdk-for-r"),
+                       custom_url_packages = c("/some/package/dir"),
+                       bioconductor_packages = c("a4", "BiocCheck"))
   expect_equal(length(env$r$cran_packages), 2)
   expect_equal(env$r$cran_packages[[1]]$name, "ggplot2")
   expect_equal(env$r$cran_packages[[2]]$name, "dplyr")
+
+  expect_equal(length(env$r$github_packages), 1)
+  expect_equal(env$r$github_packages[[1]]$repository, "Azure/azureml-sdk-for-r")
+
+  expect_equal(length(env$r$custom_url_packages), 1)
+  expect_equal(env$r$custom_url_packages[[1]], "/some/package/dir")
+
+  expect_equal(length(env$r$bioconductor_packages), 2)
+  expect_equal(env$r$bioconductor_packages[[1]], "a4")
+  expect_equal(env$r$bioconductor_packages[[2]], "BiocCheck")
 })
 
 test_that("create, register, and get environment", {

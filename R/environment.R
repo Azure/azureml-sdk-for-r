@@ -18,10 +18,14 @@
 #' @param environment_variables A named list of environment variables names
 #' and values. These environment variables are set on the process where the user
 #' script is being executed.
+#' @param rscript_path The Rscript path to use if an environment build is not required.
+#' The path specified gets used to call the user script.
 #' @param cran_packages A character vector of CRAN packages to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
+#' @param bioconductor_packages A character vector of packages to be installed
+#' from Bioconductor.
 #' @param custom_docker_image A string of the name of the Docker image from
 #' which the image to use for training or deployment will be built. If not set,
 #' a predefined Docker image will be used. To use an image from a private Docker
@@ -85,9 +89,11 @@
 #' @md
 r_environment <- function(name, version = NULL,
                           environment_variables = NULL,
+                          rscript_path = NULL,
                           cran_packages = NULL,
                           github_packages = NULL,
                           custom_url_packages = NULL,
+                          bioconductor_packages = NULL,
                           custom_docker_image = NULL,
                           image_registry_details = NULL,
                           use_gpu = FALSE,
@@ -98,6 +104,7 @@ r_environment <- function(name, version = NULL,
   env$docker$enabled <- TRUE
   env$docker$base_image <- custom_docker_image
   env$r <- azureml$core$environment$RSection()
+  env$r$rscript_path <- rscript_path
 
   if (!is.null(image_registry_details)) {
     env$docker$base_image_registry <- image_registry_details
@@ -121,9 +128,9 @@ r_environment <- function(name, version = NULL,
     env$r$user_managed <- TRUE
   }
 
-  if(!is.null(cran_packages)){
+  if (!is.null(cran_packages)) {
     env$r$cran_packages <- list()
-    for(package in cran_packages){
+    for (package in cran_packages) {
       cran_package <- azureml$core$environment$RCranPackage()
       cran_package$name <- package
       env$r$cran_packages <- c(env$r$cran_packages, cran_package)
@@ -132,7 +139,7 @@ r_environment <- function(name, version = NULL,
   
   if (!is.null(github_packages)) {
     env$r$github_packages <- list()
-    for(package in github_packages){
+    for (package in github_packages) {
       github_package <- azureml$core$environment$RGithubPackage()
       github_package$repository <- package
       env$r$github_packages <- c(env$r$github_packages, github_package)
@@ -141,6 +148,10 @@ r_environment <- function(name, version = NULL,
 
   if (!is.null(custom_url_packages)) {
     env$r$custom_url_packages <- list(custom_url_packages)
+  }
+
+  if (!is.null(bioconductor_packages)) {
+    env$r$bioconductor_packages <- list(bioconductor_packages)
   }
 
   invisible(env)
