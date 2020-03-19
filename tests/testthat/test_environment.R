@@ -64,8 +64,8 @@ test_that("create dockerfile", {
                                        "https://github/user/repo2"),
                                      install_system_packages = FALSE)
   expected_dockerfile <- paste0(
-    "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
-    "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
+    "RUN R -e \"remotes::install_github(\'https://github/user/repo1\')\"\n",
+    "RUN R -e \"remotes::install_github(\'https://github/user/repo2\')\"\n")
   expect_equal(dockerfile, expected_dockerfile)
   
   # custom url

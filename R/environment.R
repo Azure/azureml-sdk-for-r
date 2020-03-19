@@ -267,7 +267,7 @@ generate_docker_file <- function(custom_docker_image = NULL,
     for (package in github_packages) {
       base_dockerfile <- paste0(
           base_dockerfile,
-          sprintf("RUN R -e \"devtools::install_github(\'%s\')\"\n", package))
+          sprintf("RUN R -e \"remotes::install_github(\'%s\')\"\n", package))
     }
   }
 
