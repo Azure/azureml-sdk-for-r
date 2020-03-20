@@ -20,8 +20,10 @@ object, as opposed to using the entire contents of the folder.}
 
 \item{model_name}{A string of the name to register the model with.}
 
-\item{datasets}{A list of tuples where the first element describes the
-dataset-model relationship and the second element is the dataset.}
+\item{datasets}{A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+\code{list(list("training", train_ds), list("inferencing", infer_ds))}. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.}
 
 \item{tags}{A named list of key-value tags to give the model, e.g.
 \code{list("key" = "value")}}
@@ -58,12 +60,15 @@ model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.
 }
-\examples{
-# Registering a model from a single file
-\dontrun{
-ws <- load_workspace_from_config()
+\section{Examples}{
+Registering a model from a single file\preformatted{ws <- load_workspace_from_config()
 model <- register_model(ws,
                         model_path = "my_model.rds",
-                        model_name = "my_model")
+                        model_name = "my_model",
+                        datasets = list(list("training", train_dataset)))
 }
+}
+
+\seealso{
+\code{\link[=resource_configuration]{resource_configuration()}}
 }
