@@ -6,7 +6,7 @@
 \usage{
 register_model_from_run(run, model_name, model_path = NULL,
   tags = NULL, properties = NULL, description = NULL,
-  datasets = datasets, sample_input_dataset = NULL,
+  datasets = NULL, sample_input_dataset = NULL,
   sample_output_dataset = NULL, resource_configuration = NULL)
 }
 \arguments{
