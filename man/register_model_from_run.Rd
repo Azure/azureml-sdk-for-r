@@ -6,7 +6,7 @@
 \usage{
 register_model_from_run(run, model_name, model_path = NULL,
   tags = NULL, properties = NULL, description = NULL,
-  datasets = NULL, sample_input_dataset = NULL,
+  datasets = datasets, sample_input_dataset = NULL,
   sample_output_dataset = NULL, resource_configuration = NULL)
 }
 \arguments{
@@ -24,8 +24,10 @@ These properties cannot be changed after model creation, however new key-value p
 
 \item{description}{An optional description of the model.}
 
-\item{datasets}{A list of tuples where the first element describes the dataset-model
-relationship and the second element is the dataset.}
+\item{datasets}{A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+\code{list(list("training", train_ds), list("inferencing", infer_ds))}. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.}
 
 \item{sample_input_dataset}{Sample input dataset for the registered model.}
 
@@ -39,6 +41,17 @@ The registered Model.
 \description{
 Register a model for operationalization.
 }
+\section{Examples}{
+\preformatted{registered_model <- register_model_from_run(run = run,
+                                            model_name = "my model",
+                                            model_path = 'outputs/model.rds',
+                                            tags = list("version" = "0"),
+                                            datasets = list(list("training", train_dataset),
+                                                            list("validation", validation_dataset)),
+                                            resource_configuration = resource_configuration(2, 2, 0))
+}
+}
+
 \seealso{
-\code{\link{resource_configuration}}
+\code{\link[=resource_configuration]{resource_configuration()}}
 }
