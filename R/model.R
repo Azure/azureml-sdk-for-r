@@ -61,8 +61,10 @@ get_model <- function(workspace,
 #' be used to specify individual files to bundle together as the `Model`
 #' object, as opposed to using the entire contents of the folder.
 #' @param model_name A string of the name to register the model with.
-#' @param datasets A list of tuples where the first element describes the
-#' dataset-model relationship and the second element is the dataset.
+#' @param datasets A list of two-element lists where the first element is the
+#' dataset-model relationship and the second is the corresponding dataset, e.g.
+#' `list(list("training", train_ds), list("inferencing", infer_ds))`. Valid
+#' values for the data-model relationship are 'training', 'validation', and 'inferencing'.
 #' @param tags A named list of key-value tags to give the model, e.g.
 #' `list("key" = "value")`
 #' @param properties A named list of key-value properties to give the model,
@@ -77,14 +79,16 @@ get_model <- function(workspace,
 #' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The `Model` object.
 #' @export
-#' @examples
+#' @section Examples:
 #' # Registering a model from a single file
-#' \dontrun{
+#' ```
 #' ws <- load_workspace_from_config()
 #' model <- register_model(ws,
 #'                         model_path = "my_model.rds",
-#'                         model_name = "my_model")
-#' }
+#'                         model_name = "my_model",
+#'                         datasets = list(list("training", train_dataset)))
+#' ```
+#' @seealso [resource_configuration()]
 #' @md
 register_model <- function(workspace,
                            model_path,
@@ -97,6 +101,14 @@ register_model <- function(workspace,
                            sample_input_dataset = NULL,
                            sample_output_dataset = NULL,
                            resource_configuration = NULL) {
+
+  user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+  valid_ds_scenarios <- c("training", "inferencing", "validation")
+  if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+    stop("One or more of your data-model relationship values is invalid.
+         Valid values are 'training', 'validation', and 'inferencing'")
+  }
+
   model <- azureml$core$Model$register(workspace,
                                 model_path,
                                 model_name,
@@ -540,23 +552,42 @@ def run(input_data):
 #' @param properties A dictionary of key value properties to assign to the model.
 #' These properties cannot be changed after model creation, however new key-value pairs can be added.
 #' @param description An optional description of the model.
-#' @param datasets A list of tuples where the first element describes the dataset-model
-#' relationship and the second element is the dataset.
+#' @param datasets A list of two-element lists where the first element is the
+#' dataset-model relationship and the second is the corresponding dataset, e.g.
+#' `list(list("training", train_ds), list("inferencing", infer_ds))`. Valid
+#' values for the data-model relationship are 'training', 'validation', and 'inferencing'.
 #' @param sample_input_dataset Sample input dataset for the registered model.
 #' @param sample_output_dataset Sample output dataset for the registered model.
 #' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The registered Model.
 #' @export
-#' @seealso
-#' \code{\link{resource_configuration}}
+#' @section Examples:
+#' ```
+#' registered_model <- register_model_from_run(run = run,
+#'                                             model_name = "my model",
+#'                                             model_path = 'outputs/model.rds',
+#'                                             tags = list("version" = "0"),
+#'                                             datasets = list(list("training", train_dataset),
+#'                                                             list("validation", validation_dataset)),
+#'                                             resource_configuration = resource_configuration(2, 2, 0))
+#' ```
+#' @seealso [resource_configuration()]
 #' @md
 register_model_from_run <- function(run, model_name, model_path = NULL,
                                     tags = NULL, properties = NULL,
-                                    description = NULL, datasets = NULL,
+                                    description = NULL, datasets = datasets,
                                     sample_input_dataset = NULL,
                                     sample_output_dataset = NULL,
                                     resource_configuration = NULL) {
-  run$register_model(run = run, model_name = model_name,
+
+  user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+  valid_ds_scenarios <- c("training", "inferencing", "validation")
+  if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+    stop("One or more of your data-model relationship values is invalid.
+         Valid values are 'training', 'validation', and 'inferencing'")
+  }
+
+  run$register_model(model_name = model_name,
                      model_path = model_path, tags = tags,
                      properties = properties, description = description,
                      datasets = datasets,
