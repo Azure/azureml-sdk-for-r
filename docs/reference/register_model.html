@@ -193,8 +193,10 @@ object, as opposed to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>datasets</th>
-      <td><p>A list of tuples where the first element describes the
-dataset-model relationship and the second element is the dataset.</p></td>
+      <td><p>A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list(list("training", train_ds), list("inferencing", infer_ds))</a></code>. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.</p></td>
     </tr>
     <tr>
       <th>tags</th>
@@ -235,15 +237,21 @@ pointing to a folder; only the specified files will be bundled into the
 
     <p>The <code>Model</code> object.</p>
     
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Registering a model from a single file</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>register_model</span>(<span class='no'>ws</span>,
-                        <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='st'>"my_model.rds"</span>,
-                        <span class='kw'>model_name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
-}</div></pre>
+
+    <p>Registering a model from a single file</p><pre>ws &lt;- load_workspace_from_config()
+model &lt;- register_model(ws,
+                        model_path = "my_model.rds",
+                        model_name = "my_model",
+                        datasets = list(list("training", train_dataset)))
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>resource_configuration()</code></p></div>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -251,9 +259,11 @@ pointing to a folder; only the specified files will be bundled into the
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
+
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
