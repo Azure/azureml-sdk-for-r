@@ -575,7 +575,7 @@ def run(input_data):
 #' @md
 register_model_from_run <- function(run, model_name, model_path = NULL,
                                     tags = NULL, properties = NULL,
-                                    description = NULL, datasets = datasets,
+                                    description = NULL, datasets = NULL,
                                     sample_input_dataset = NULL,
                                     sample_output_dataset = NULL,
                                     resource_configuration = NULL) {
