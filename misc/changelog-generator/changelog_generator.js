@@ -74,18 +74,18 @@ if (changes.length) {
 const newVersion = [String(major), String(minor), String(patch)].join('.');
 
 // format commits into markdown
-let newNotes = `# Version ${newVersion} (${
+let newNotes = `# azuremlsdk ${newVersion} (${
 new Date().toISOString().split("T")[0]
 })\n\n`;
 
 if (changes.length) {
-  newNotes = utils.formatUpdates(newNotes, `## Breaking Changes\n`, changes);
+  newNotes = utils.formatUpdates(newNotes, `## Breaking changes\n`, changes);
 }
 if (features.length) {
-  newNotes = utils.formatUpdates(newNotes, `## New Features\n`, features);
+  newNotes = utils.formatUpdates(newNotes, `## New features\n`, features);
 }
 if (fixes.length) {
-  newNotes = utils.formatUpdates(newNotes, `## Bug Fixes\n`, fixes);
+  newNotes = utils.formatUpdates(newNotes, `## Bug fixes\n`, fixes);
 }
 
 // prepend the new release notes to the current file
