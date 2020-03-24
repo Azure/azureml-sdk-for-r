@@ -5,7 +5,7 @@ function parseMessage() {
   const commit = arguments[2];
   
   commitArray.push(
-    `* ${commit.message.replace(message_prefix, "")} ([${commit.sha.substring(
+    `* ${commit.message.substring(message_prefix)} ([${commit.sha.substring(
       0,
       6
     )}](https://github.com/Azure/azureml-sdk-for-r/commit/${
