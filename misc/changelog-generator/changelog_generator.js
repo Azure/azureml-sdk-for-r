@@ -2,7 +2,7 @@
 
 var utils = require("./utils.js");
 
-// get log info (and latest tagest if not first release)
+// get log info (and latest tag if not first release)
 const child = require("child_process");
 const fs = require("fs");
 var output;
