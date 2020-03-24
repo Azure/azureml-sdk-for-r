@@ -1,9 +1,9 @@
 
-function parseMessage() {
-  const message_prefix = arguments[0];
-  var commitArray = arguments[1];
-  const commit = arguments[2];
-  
+function parseMessage(message_prefix, commitArray, commit) {
+/*
+  Strips commit message of prefix and pushes to returned array
+*/
+
   commitArray.push(
     `* ${commit.message.substring(message_prefix)} ([${commit.sha.substring(
       0,
@@ -16,11 +16,11 @@ function parseMessage() {
   return commitArray
 }
 
-function formatUpdates() {
-  var notes = arguments[0];
-  const sectionHeading = arguments[1];
-  const messages = arguments[2];
-  
+function formatUpdates(notes, sectionHeading, messages) {
+/*
+  Format a section with a heading a corresponding commit messages
+*/
+
   notes += sectionHeading;
   messages.forEach(message => {
     notes += message;
