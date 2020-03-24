@@ -43,19 +43,17 @@ var major = Number(currVersion[0]), minor = Number(currVersion[1]), patch = Numb
 
 // sort commits by message tags
 var changes = [], features = [], fixes = [];
-var breakingChange = false, addedFunctionality = false, bugPatch = false;
 
 commitsArray.forEach(commit => {
   
   if (commit.message.toLowerCase().startsWith("breaking-change:")) {
     changes = utils.parseMessage("breaking-change:", changes, commit);
-    breakingChange = true;
+    
   } else if (commit.message.toLowerCase().startsWith("feature:")) {
     features = utils.parseMessage("feature:", features, commit);
-    addedFunctionality = true;
+    
   } else if (commit.message.toLowerCase().startsWith("fix:")) {
     fixes = utils.parseMessage("fix:", fixes, commit);
-    bugPatch = true;
   }
 });
 
