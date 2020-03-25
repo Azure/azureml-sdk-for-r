@@ -47,7 +47,7 @@ validate_samples <- function(args) {
       setwd(root_dir)
     },
     error = function(e) {
-      stop(message(e))
+      stop(entry_script, "\n", message(e))
     })
   }
 }
