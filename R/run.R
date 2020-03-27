@@ -13,13 +13,13 @@
 #' @return A named list of the metrics associated with the run,
 #' e.g. `list("metric_name" = metric)`.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #' run <- get_run(exp, run_id = "myrunid")
 #' metrics <- get_run_metrics(run)
-#' }
+#' ```
 #' @md
 get_run_metrics <- function(run,
                             name = NULL,
@@ -37,6 +37,7 @@ get_run_metrics <- function(run,
 #' @param show_output If `TRUE`, print verbose output to console.
 #' @return None
 #' @export
+#' @seealso [submit_experiment()]
 #' @md
 wait_for_run_completion <- function(run, show_output = TRUE) {
   tryCatch({
@@ -118,6 +119,7 @@ get_run <- function(experiment, run_id) {
 #' the artifact to.
 #' @return None
 #' @export
+#' @seealso [download_files_from_run()]
 #' @md
 download_file_from_run <- function(run, name, output_file_path = NULL) {
   run$download_file(name, output_file_path)
@@ -140,8 +142,9 @@ download_file_from_run <- function(run, name, output_file_path = NULL) {
 #' where the artifacts will be downloaded to.
 #' @param batch_size An int of the number of files to download per batch.
 #' @return None
-#' @md
 #' @export
+#' @seealso [download_file_from_run()]
+#' @md
 download_files_from_run <- function(run, prefix = NULL, output_directory = NULL,
                                     output_paths = NULL, batch_size = 100L) {
   run$download_files(prefix = prefix,
@@ -169,6 +172,7 @@ download_files_from_run <- function(run, prefix = NULL, output_directory = NULL,
 #' the run is still in progress.
 #' * *properties*: Immutable key-value pairs associated with the run.
 #' * *logFiles*: Log files from the run.
+#' @seealso [get_run_details_with_logs()]
 #' @md
 get_run_details <- function(run) {
   run$get_details()
@@ -178,8 +182,7 @@ get_run_details <- function(run) {
 #' @param run The `Run` object.
 #' @return A named list of the run details and log file contents.
 #' @export
-#' @seealso
-#' `get_run_details()`
+#' @seealso [get_run_details()]
 #' @md
 get_run_details_with_logs <- function(run) {
   run$get_details_with_logs()
@@ -192,8 +195,7 @@ get_run_details_with_logs <- function(run) {
 #' @return A list of strings of the paths for existing artifacts
 #' in the run record.
 #' @export
-#' @seealso
-#' `download_file_from_run()`, `download_files_from_run()`
+#' @seealso [download_file_from_run()] [download_files_from_run()]
 #' @md
 get_run_file_names <- function(run) {
   run$get_file_names()
@@ -220,8 +222,7 @@ get_run_file_names <- function(run) {
 #' @return A list of found and not found secrets as data frame.
 #' If a secret was not found, the corresponding element will be `NULL`.
 #' @export
-#' @seealso
-#' `set_secrets()`
+#' @seealso [set_secrets()]
 #' @md
 get_secrets_from_run <- function(run, secrets) {
   secrets <- run$get_secrets(secrets)
@@ -241,10 +242,10 @@ get_secrets_from_run <- function(run, secrets) {
 #' to the current run from the service context.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' log_metric_to_run("Accuracy", 0.95)
-#' }
+#' ```
 #' @md
 log_metric_to_run <- function(name, value, run = NULL) {
   if (is.null(run)) {
@@ -394,10 +395,10 @@ log_image_to_run <- function(name, path = NULL, plot = NULL,
 #' to the current run from the service context.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
-#' }
+#' ```
 #' @md
 log_list_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -423,8 +424,8 @@ log_list_to_run <- function(name, value, description = "", run = NULL) {
 #' to the current run from the service context.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' data <- list("bin_averages" = c(0.25, 0.75),
 #'              "bin_errors" = c(0.013, 0.042),
 #'              "bin_counts" = c(56, 34),
@@ -433,7 +434,7 @@ log_list_to_run <- function(name, value, description = "", run = NULL) {
 #'                     "schema_version" = "v1",
 #'                     "data" = data)
 #' log_predictions_to_run("mypredictions", predictions)
-#' }
+#' ```
 #' @md
 log_predictions_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -457,15 +458,15 @@ log_predictions_to_run <- function(name, value, description = "", run = NULL) {
 #' to the current run from the service context.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' data <- list("bin_edges" = c(50, 100, 200, 300, 350),
 #'              "bin_counts" = c(0.88, 20, 30, 50.99))
 #' residuals <- list("schema_type" = "residuals",
 #'                     "schema_version" = "v1",
 #'                     "data" = data)
 #' log_predictions_to_run("myresiduals", predictions)
-#' }
+#' ```
 #' @md
 log_residuals_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -491,20 +492,20 @@ log_residuals_to_run <- function(name, value, description = "", run = NULL) {
 #' specified.
 #' @return None
 #' @export
-#' @examples
-#' # Log an arbitrary tuple
-#' \dontrun{
+#' @section Examples:
+#' Log an arbitrary tuple:
+#' ```
 #' log_row_to_run("Y over X", x = 1, y = 0.4)
-#' }
+#' ```
 #'
-#' # Log the complete table
-#' \dontrun{
+#' Log the complete table:
+#' ```
 #' citrus <- c("orange", "lemon", "lime")
 #' sizes <- c(10, 7, 3)
 #' for (i in seq_along(citrus)) {
 #'     log_row_to_run("citrus", fruit = citrus[i], size = sizes[i])
 #' }
-#' }
+#' ```
 #' @md
 log_row_to_run <- function(name, description = "", run = NULL, ...) {
   if (is.null(run)) {
@@ -528,12 +529,11 @@ log_row_to_run <- function(name, description = "", run = NULL, ...) {
 #' to the current run from the service context.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' log_table_to_run("Y over X",
-#'                  list("x" = c(1, 2, 3)),
-#'                  list("y" = c(0.6, 0.7, 0.89)))
-#' }
+#'                  list("x" = c(1, 2, 3), "y" = c(0.6, 0.7, 0.89)))
+#' ```
 #' @md
 log_table_to_run <- function(name, value, description = "", run = NULL) {
   if (is.null(run)) {
@@ -651,6 +651,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @param auto_refresh Boolean indicating whether or not widget should update
 #' run details automatically. The default is TRUE when using RStudio.
 #' @export
+#' @md
 view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
@@ -754,8 +755,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 #' @param run The `Run` object.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #'
@@ -770,7 +771,8 @@ view_run_details <- function(run, auto_refresh = TRUE) {
 #'
 #' # Download a file from the run record
 #' download_file_from_run(filename1, "file_1.txt")
-#' }
+#' ```
+#' @seealso [upload_folder_to_run()] [download_file_from_run()] [download_files_from_run()]
 #' @md
 upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
                                 run = NULL) {
@@ -800,8 +802,8 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
 #' @param run The `Run` object.
 #' @return None
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' ws <- load_workspace_from_config()
 #' exp <- experiment(ws, name = 'myexperiment')
 #'
@@ -814,7 +816,8 @@ upload_files_to_run <- function(names, paths, timeout_seconds = NULL,
 #'
 #' # Download a file from the run record
 #' download_file_from_run("important_files/existing_file.txt", "local_file.txt")
-#' }
+#' ```
+#' @seealso [upload_files_to_run()] [download_file_from_run()] [download_files_from_run()]
 #' @md
 upload_folder_to_run <- function(name, path, run = NULL) {
   if (is.null(run)) {
@@ -832,8 +835,7 @@ upload_folder_to_run <- function(name, path, run = NULL) {
 #' @param run The `Run` object.
 #' @return None
 #' @export
-#' @seealso
-#' `start_logging_run()`
+#' @seealso [start_logging_run()]
 #' @md
 complete_run <- function(run) {
   run$complete()
