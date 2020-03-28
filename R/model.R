@@ -102,11 +102,13 @@ register_model <- function(workspace,
                            sample_output_dataset = NULL,
                            resource_configuration = NULL) {
 
-  user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
-  valid_ds_scenarios <- c("training", "inferencing", "validation")
-  if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
-    stop("One or more of your data-model relationship values is invalid.
-         Valid values are 'training', 'validation', and 'inferencing'")
+  if (!is.null(datasets)) {
+    user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+    valid_ds_scenarios <- c("training", "inferencing", "validation")
+    if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+      stop("One or more of your data-model relationship values is invalid.
+           Valid values are 'training', 'validation', and 'inferencing'")
+    }
   }
 
   model <- azureml$core$Model$register(workspace,
@@ -580,11 +582,13 @@ register_model_from_run <- function(run, model_name, model_path = NULL,
                                     sample_output_dataset = NULL,
                                     resource_configuration = NULL) {
 
-  user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
-  valid_ds_scenarios <- c("training", "inferencing", "validation")
-  if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
-    stop("One or more of your data-model relationship values is invalid.
-         Valid values are 'training', 'validation', and 'inferencing'")
+  if (!is.null(datasets)) {
+    user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+    valid_ds_scenarios <- c("training", "inferencing", "validation")
+    if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+      stop("One or more of your data-model relationship values is invalid.
+           Valid values are 'training', 'validation', and 'inferencing'")
+    }
   }
 
   run$register_model(model_name = model_name,
