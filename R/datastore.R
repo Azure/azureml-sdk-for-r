@@ -383,7 +383,6 @@ register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
 #' does not exist, it will create one. The default is FALSE.
 #' @return The `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore`
 #' object.
-#' @export
 #' @section Examples:
 #' ```r
 #' # Create and register an Azure Data Lake Gen2 Datastore to a workspace.
