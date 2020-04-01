@@ -424,7 +424,6 @@ service_principal_authentication <- function(tenant_id, service_principal_id,
 #'                     "<your subscription ID>",
 #'                     "<your resource group>",
 #'                     auth = interactive_auth)
-#' }
 #' ```
 #' @seealso
 #' [get_workspace()] [service_principal_authentication()]
