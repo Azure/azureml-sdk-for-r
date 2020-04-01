@@ -136,7 +136,7 @@ r_environment <- function(name, version = NULL,
       env$r$cran_packages <- c(env$r$cran_packages, cran_package)
     }
   }
-  
+
   if (!is.null(github_packages)) {
     env$r$github_packages <- list()
     for (package in github_packages) {
