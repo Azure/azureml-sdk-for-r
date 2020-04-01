@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get an existing datastore — get_datastore • azuremlsdk</title>
+<title>Represent how to deliver the dataset to a compute target. — dataset_consumption_config • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
 
 
-<meta property="og:title" content="Get an existing datastore — get_datastore" />
+<meta property="og:title" content="Represent how to deliver the dataset to a compute target. — dataset_consumption_config" />
 
-<meta property="og:description" content="Get the corresponding datastore object for an existing
-datastore by name from the given workspace." />
+<meta property="og:description" content="Represent how to deliver the dataset to a compute target." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,43 +138,64 @@ datastore by name from the given workspace." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get an existing datastore</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
-    <div class="hidden name"><code>get_datastore.Rd</code></div>
+    <h1>Represent how to deliver the dataset to a compute target.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
+    <div class="hidden name"><code>dataset_consumption_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the corresponding datastore object for an existing
-datastore by name from the given workspace.</p>
+    <p>Represent how to deliver the dataset to a compute target.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_datastore</span>(<span class='no'>workspace</span>, <span class='no'>datastore_name</span>)</pre>
+    <pre class="usage"><span class='fu'>dataset_consumption_config</span>(<span class='no'>name</span>, <span class='no'>dataset</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"direct"</span>,
+  <span class='kw'>path_on_compute</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
+      <th>name</th>
+      <td><p>The name of the dataset in the run, which can be different to the
+registered name. The name will be registered as environment variable and can
+be used in data plane.</p></td>
     </tr>
     <tr>
-      <th>datastore_name</th>
-      <td><p>A string of the name of the datastore.</p></td>
+      <th>dataset</th>
+      <td><p>The dataset that will be consumed in the run.</p></td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td><p>Defines how the dataset should be delivered to the compute target. There are three modes:</p>
+<p>'direct': consume the dataset as dataset.
+'download': download the dataset and consume the dataset as downloaded path.
+'mount': mount the dataset and consume the dataset as mount path.</p></td>
+    </tr>
+    <tr>
+      <th>path_on_compute</th>
+      <td><p>The target path on the compute to make the data available at.
+The folder structure of the source data will be kept, however, we might add prefixes
+to this folder structure to avoid collision.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The <code>azureml.data.azure_sql_database.AzureBlobDatastore</code>,
-<code>azureml.data.azure_sql_database.AzureFileDatastore</code>,
-<code>azureml.data.azure_sql_database.AzureSqlDatabaseDatastore</code>,
-<code>azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore</code>,
-<code>azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore</code>, or
-<code>azureml.data.azure_sql_database.AzureSqlDatabaseDatastore</code> object.</p>
+    <p>The <code>DatasetConsumptionConfig</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>estimator</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>est</span> <span class='kw'>&lt;-</span> <span class='fu'>estimator</span>(<span class='kw'>source_directory</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+                 <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='st'>"train.R"</span>,
+                 <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>dataset_consumption_config</span>(<span class='st'>'mydataset'</span>, <span class='no'>dataset</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>'download'</span>)),
+                 <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='no'>compute_target</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -183,7 +203,11 @@ datastore by name from the given workspace.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

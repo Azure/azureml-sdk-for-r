@@ -169,7 +169,8 @@ and the new model is registered under the same name.</p>
 
     <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_input_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sample_output_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_configuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,8 +193,10 @@ object, as opposed to using the entire contents of the folder.</p></td>
     </tr>
     <tr>
       <th>datasets</th>
-      <td><p>A list of tuples where the first element describes the
-dataset-model relationship and the second element is the dataset.</p></td>
+      <td><p>A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list(list("training", train_ds), list("inferencing", infer_ds))</a></code>. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.</p></td>
     </tr>
     <tr>
       <th>tags</th>
@@ -216,21 +219,39 @@ by <code>model_name</code>. Must be provided in conjunction with a <code>model_p
 pointing to a folder; only the specified files will be bundled into the
 <code>Model</code> object.</p></td>
     </tr>
+    <tr>
+      <th>sample_input_dataset</th>
+      <td><p>Sample input dataset for the registered model.</p></td>
+    </tr>
+    <tr>
+      <th>sample_output_dataset</th>
+      <td><p>Sample output dataset for the registered model.</p></td>
+    </tr>
+    <tr>
+      <th>resource_configuration</th>
+      <td><p>`ResourceConfiguration`` object to run the registered model.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The <code>Model</code> object.</p>
     
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Registering a model from a single file</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>register_model</span>(<span class='no'>ws</span>,
-                        <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='st'>"my_model.rds"</span>,
-                        <span class='kw'>model_name</span> <span class='kw'>=</span> <span class='st'>"my_model"</span>)
-}</div></pre>
+
+    <p>Registering a model from a single file</p><pre>ws &lt;- load_workspace_from_config()
+model &lt;- register_model(ws,
+                        model_path = "my_model.rds",
+                        model_name = "my_model",
+                        datasets = list(list("training", train_dataset)))
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>resource_configuration()</code></p></div>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -238,9 +259,11 @@ pointing to a folder; only the specified files will be bundled into the
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
+
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

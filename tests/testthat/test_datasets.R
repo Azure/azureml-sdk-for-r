@@ -60,7 +60,8 @@ test_that("register datastore, create file dataset,
     create_if_not_exists = TRUE)
 
   path_on_datastore <- mnist_data$path('mnist')
-  dataset <- create_file_dataset_from_files(path_on_datastore)
+  datapath <- data_path(mnist_data, path_on_datastore)
+  dataset <- create_file_dataset_from_files(datapath)
 
   file_dataset_path <- get_file_dataset_paths(dataset)
   expect_equal(file_dataset_path, 'train-dataset/file/iris.csv')

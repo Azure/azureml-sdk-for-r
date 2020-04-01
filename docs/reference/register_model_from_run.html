@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an AksCompute cluster — create_aks_compute • azuremlsdk</title>
+<title>Register a model for operationalization. — register_model_from_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,15 +32,9 @@
 
 
 
-<meta property="og:title" content="Create an AksCompute cluster — create_aks_compute" />
+<meta property="og:title" content="Register a model for operationalization. — register_model_from_run" />
 
-<meta property="og:description" content="Provision an Azure Kubernetes Service instance (AksCompute) as a compute
-target for web service deployment. AksCompute is recommended for high-scale
-production deployments and provides fast response time and autoscaling of
-the deployed service. Cluster autoscaling isn't supported through the Azure
-ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
-cluster in the Azure portal. Once created, the cluster can be reused for
-multiple deployments." />
+<meta property="og:description" content="Register a model for operationalization." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -144,139 +138,92 @@ multiple deployments." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an AksCompute cluster</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
-    <div class="hidden name"><code>create_aks_compute.Rd</code></div>
+    <h1>Register a model for operationalization.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/model.R'><code>R/model.R</code></a></small>
+    <div class="hidden name"><code>register_model_from_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Provision an Azure Kubernetes Service instance (AksCompute) as a compute
-target for web service deployment. AksCompute is recommended for high-scale
-production deployments and provides fast response time and autoscaling of
-the deployed service. Cluster autoscaling isn't supported through the Azure
-ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
-cluster in the Azure portal. Once created, the cluster can be reused for
-multiple deployments.</p>
+    <p>Register a model for operationalization.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='kw'>agent_count</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_cname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_cert_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ssl_key_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vnet_resourcegroup_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>service_cidr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dns_service_ip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>docker_bridge_cidr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cluster_purpose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FastProd"</span>,
-  <span class='st'>"DevTest"</span>))</pre>
+    <pre class="usage"><span class='fu'>register_model_from_run</span>(<span class='no'>run</span>, <span class='no'>model_name</span>, <span class='kw'>model_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_input_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sample_output_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_configuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
+      <th>run</th>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     <tr>
-      <th>cluster_name</th>
-      <td><p>A string of the name of the cluster.</p></td>
+      <th>model_name</th>
+      <td><p>The name of the model.</p></td>
     </tr>
     <tr>
-      <th>agent_count</th>
-      <td><p>An integer of the number of agents (VMs) to host
-containers. Defaults to <code>3</code>.</p></td>
+      <th>model_path</th>
+      <td><p>The relative cloud path to the model, for example,
+"outputs/modelname". When not specified, <code>model_name</code> is used as the path.</p></td>
     </tr>
     <tr>
-      <th>vm_size</th>
-      <td><p>A string of the size of agent VMs. More details can be found
-<a href='https://aka.ms/azureml-vm-details'>here</a>.
-Note that not all sizes are available in all regions, as detailed in the
-aformentioned link. Defaults to <code>'Standard_D3_v2'</code>.</p></td>
+      <th>tags</th>
+      <td><p>A dictionary of key value tags to assign to the model.</p></td>
     </tr>
     <tr>
-      <th>ssl_cname</th>
-      <td><p>A string of a CName to use if enabling SSL validation on
-the cluster. Must provide all three - CName, cert file, and key file - to
-enable SSL validation.</p></td>
+      <th>properties</th>
+      <td><p>A dictionary of key value properties to assign to the model.
+These properties cannot be changed after model creation, however new key-value pairs can be added.</p></td>
     </tr>
     <tr>
-      <th>ssl_cert_pem_file</th>
-      <td><p>A string of a file path to a file containing cert
-information for SSL validation. Must provide all three - CName, cert file,
-and key file - to enable SSL validation.</p></td>
+      <th>description</th>
+      <td><p>An optional description of the model.</p></td>
     </tr>
     <tr>
-      <th>ssl_key_pem_file</th>
-      <td><p>A string of a file path to a file containing key
-information for SSL validation. Must provide all three - CName, cert file,
-and key file - to enable SSL validation.</p></td>
+      <th>datasets</th>
+      <td><p>A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+<code><a href='https://rdrr.io/r/base/list.html'>list(list("training", train_ds), list("inferencing", infer_ds))</a></code>. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.</p></td>
     </tr>
     <tr>
-      <th>location</th>
-      <td><p>A string of the location to provision the cluster in. If not
-specified, defaults to the workspace location. Available regions for this
-compute can be found here:
-"https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=kubernetes-service".</p></td>
+      <th>sample_input_dataset</th>
+      <td><p>Sample input dataset for the registered model.</p></td>
     </tr>
     <tr>
-      <th>vnet_resourcegroup_name</th>
-      <td><p>A string of the name of the resource group
-where the virtual network is located.</p></td>
+      <th>sample_output_dataset</th>
+      <td><p>Sample output dataset for the registered model.</p></td>
     </tr>
     <tr>
-      <th>vnet_name</th>
-      <td><p>A string of the name of the virtual network.</p></td>
-    </tr>
-    <tr>
-      <th>subnet_name</th>
-      <td><p>A string of the name of the subnet inside the vnet.</p></td>
-    </tr>
-    <tr>
-      <th>service_cidr</th>
-      <td><p>A string of a CIDR notation IP range from which to assign
-service cluster IPs.</p></td>
-    </tr>
-    <tr>
-      <th>dns_service_ip</th>
-      <td><p>A string of the container's DNS server IP address.</p></td>
-    </tr>
-    <tr>
-      <th>docker_bridge_cidr</th>
-      <td><p>A string of a CIDR notation IP for Docker bridge.</p></td>
-    </tr>
-    <tr>
-      <th>cluster_purpose</th>
-      <td><p>A string describing targeted usage of the cluster.
-This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
-'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
-'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
-'FastProd'is the default value.</p></td>
+      <th>resource_configuration</th>
+      <td><p>`ResourceConfiguration`` object to run the registered model.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>AksCompute</code> object.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    
-
-<p>For more information on using an AksCompute resource within a virtual
-network, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
+    <p>The registered Model.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
-<pre># Create an AksCompute cluster using the default configuration (you can also
-# provide parameters to customize this)
-
-ws &lt;- load_workspace_from_config()
-
-compute_target &lt;- create_aks_compute(ws, cluster_name = 'mycluster')
-wait_for_provisioning_completion(compute_target)
+<pre>registered_model &lt;- register_model_from_run(run = run,
+                                            model_name = "my model",
+                                            model_path = 'outputs/model.rds',
+                                            tags = list("version" = "0"),
+                                            datasets = list(list("training", train_dataset),
+                                                            list("validation", validation_dataset)),
+                                            resource_configuration = resource_configuration(2, 2, 0))
 </pre>
 
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>resource_configuration()</code></p></div>
     
 
   </div>
@@ -287,9 +234,9 @@ wait_for_provisioning_completion(compute_target)
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

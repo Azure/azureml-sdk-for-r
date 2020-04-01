@@ -37,3 +37,6 @@ The Tabular Dataset object.
 \description{
 Create an unregistered, in-memory Dataset from parquet files.
 }
+\seealso{
+\code{\link{data_path}}
+}

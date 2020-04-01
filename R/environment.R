@@ -126,6 +126,7 @@ r_environment <- function(name, version = NULL,
   }
   else{
     env$r$user_managed <- TRUE
+    env$python$user_managed_dependencies <- TRUE
   }
 
   if (!is.null(cran_packages)) {

@@ -50,6 +50,8 @@ reference:
   - '`get_secrets`'
   - '`delete_secrets`'
   - '`list_secrets`'
+  - '`service_principal_authentication`'
+  - '`interactive_login_authentication`'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:
@@ -75,6 +77,7 @@ reference:
   - '`register_azure_file_share_datastore`'
   - '`register_azure_sql_database_datastore`'
   - '`register_azure_postgre_sql_datastore`'
+  - '`register_azure_data_lake_gen2_datastore`'
   - '`unregister_datastore`'
 - title: Working with datasets
   desc: Functions for managing datasets. An Azure Machine Learning **Dataset** allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of `FileDataset` and `TabularDataset`.
@@ -112,6 +115,8 @@ reference:
   - '`data_type_long`'
   - '`data_type_string`'
   - '`promote_headers_behavior`'
+  - '`data_path`'
+  - '`dataset_consumption_config`'
 - title: Environments
   desc: Functions for managing environments. An Azure Machine Learning **Environment** allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see `r_environment()`.
   contents:
@@ -181,6 +186,7 @@ reference:
   contents:
   - '`get_model`'
   - '`register_model`'
+  - '`register_model_from_run`'
   - '`download_model`'
   - '`deploy_model`'
   - '`package_model`'

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an AksCompute cluster — create_aks_compute • azuremlsdk</title>
+<title>Initialize a new Azure Data Lake Gen2 Datastore. — register_azure_data_lake_gen2_datastore • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,15 +32,9 @@
 
 
 
-<meta property="og:title" content="Create an AksCompute cluster — create_aks_compute" />
+<meta property="og:title" content="Initialize a new Azure Data Lake Gen2 Datastore. — register_azure_data_lake_gen2_datastore" />
 
-<meta property="og:description" content="Provision an Azure Kubernetes Service instance (AksCompute) as a compute
-target for web service deployment. AksCompute is recommended for high-scale
-production deployments and provides fast response time and autoscaling of
-the deployed service. Cluster autoscaling isn't supported through the Azure
-ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
-cluster in the Azure portal. Once created, the cluster can be reused for
-multiple deployments." />
+<meta property="og:description" content="Initialize a new Azure Data Lake Gen2 Datastore." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -144,139 +138,103 @@ multiple deployments." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an AksCompute cluster</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/compute.R'><code>R/compute.R</code></a></small>
-    <div class="hidden name"><code>create_aks_compute.Rd</code></div>
+    <h1>Initialize a new Azure Data Lake Gen2 Datastore.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
+    <div class="hidden name"><code>register_azure_data_lake_gen2_datastore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Provision an Azure Kubernetes Service instance (AksCompute) as a compute
-target for web service deployment. AksCompute is recommended for high-scale
-production deployments and provides fast response time and autoscaling of
-the deployed service. Cluster autoscaling isn't supported through the Azure
-ML R SDK. To change the nodes in the AksCompute cluster, use the UI for the
-cluster in the Azure portal. Once created, the cluster can be reused for
-multiple deployments.</p>
+    <p>Initialize a new Azure Data Lake Gen2 Datastore.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='kw'>agent_count</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_cname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl_cert_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ssl_key_pem_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vnet_resourcegroup_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>service_cidr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dns_service_ip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>docker_bridge_cidr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cluster_purpose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FastProd"</span>,
-  <span class='st'>"DevTest"</span>))</pre>
+    <pre class="usage"><span class='fu'>register_azure_data_lake_gen2_datastore</span>(<span class='no'>workspace</span>, <span class='no'>datastore_name</span>,
+  <span class='no'>filesystem</span>, <span class='no'>account_name</span>, <span class='no'>tenant_id</span>, <span class='no'>client_id</span>, <span class='no'>client_secret</span>,
+  <span class='kw'>resource_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>authority_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>protocol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
+      <td><p>The workspace this datastore belongs to.</p></td>
     </tr>
     <tr>
-      <th>cluster_name</th>
-      <td><p>A string of the name of the cluster.</p></td>
+      <th>datastore_name</th>
+      <td><p>The datastore name.</p></td>
     </tr>
     <tr>
-      <th>agent_count</th>
-      <td><p>An integer of the number of agents (VMs) to host
-containers. Defaults to <code>3</code>.</p></td>
+      <th>filesystem</th>
+      <td><p>The name of the Data Lake Gen2 filesystem.</p></td>
     </tr>
     <tr>
-      <th>vm_size</th>
-      <td><p>A string of the size of agent VMs. More details can be found
-<a href='https://aka.ms/azureml-vm-details'>here</a>.
-Note that not all sizes are available in all regions, as detailed in the
-aformentioned link. Defaults to <code>'Standard_D3_v2'</code>.</p></td>
+      <th>account_name</th>
+      <td><p>The storage account name.</p></td>
     </tr>
     <tr>
-      <th>ssl_cname</th>
-      <td><p>A string of a CName to use if enabling SSL validation on
-the cluster. Must provide all three - CName, cert file, and key file - to
-enable SSL validation.</p></td>
+      <th>tenant_id</th>
+      <td><p>The Directory ID/Tenant ID of the service principal.</p></td>
     </tr>
     <tr>
-      <th>ssl_cert_pem_file</th>
-      <td><p>A string of a file path to a file containing cert
-information for SSL validation. Must provide all three - CName, cert file,
-and key file - to enable SSL validation.</p></td>
+      <th>client_id</th>
+      <td><p>The Client ID/Application ID of the service principal.</p></td>
     </tr>
     <tr>
-      <th>ssl_key_pem_file</th>
-      <td><p>A string of a file path to a file containing key
-information for SSL validation. Must provide all three - CName, cert file,
-and key file - to enable SSL validation.</p></td>
+      <th>client_secret</th>
+      <td><p>The secret of the service principal.</p></td>
     </tr>
     <tr>
-      <th>location</th>
-      <td><p>A string of the location to provision the cluster in. If not
-specified, defaults to the workspace location. Available regions for this
-compute can be found here:
-"https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=kubernetes-service".</p></td>
+      <th>resource_url</th>
+      <td><p>The resource URL, which determines what operations will be
+performed on the data lake store, defaults to https://storage.azure.com/ which
+allows us to perform filesystem operations.</p></td>
     </tr>
     <tr>
-      <th>vnet_resourcegroup_name</th>
-      <td><p>A string of the name of the resource group
-where the virtual network is located.</p></td>
+      <th>authority_url</th>
+      <td><p>The authority URL used to authenticate the user, defaults to
+"https://login.microsoftonline.com".</p></td>
     </tr>
     <tr>
-      <th>vnet_name</th>
-      <td><p>A string of the name of the virtual network.</p></td>
+      <th>protocol</th>
+      <td><p>Protocol to use to connect to the blob container. If None,
+defaults to "https".</p></td>
     </tr>
     <tr>
-      <th>subnet_name</th>
-      <td><p>A string of the name of the subnet inside the vnet.</p></td>
+      <th>endpoint</th>
+      <td><p>The endpoint of the blob container. If None, defaults to
+"core.windows.net".</p></td>
     </tr>
     <tr>
-      <th>service_cidr</th>
-      <td><p>A string of a CIDR notation IP range from which to assign
-service cluster IPs.</p></td>
-    </tr>
-    <tr>
-      <th>dns_service_ip</th>
-      <td><p>A string of the container's DNS server IP address.</p></td>
-    </tr>
-    <tr>
-      <th>docker_bridge_cidr</th>
-      <td><p>A string of a CIDR notation IP for Docker bridge.</p></td>
-    </tr>
-    <tr>
-      <th>cluster_purpose</th>
-      <td><p>A string describing targeted usage of the cluster.
-This is used to provision Azure Machine Learning components to ensure the desired level of fault-tolerance and QoS.
-'FastProd' will provision components to handle higher levels of traffic with production quality fault-tolerance. This will default the AKS cluster to have 3 nodes.
-'DevTest' will provision components at a minimal level for testing. This will default the AKS cluster to have 1 node.
-'FastProd'is the default value.</p></td>
+      <th>overwrite</th>
+      <td><p>Whether to overwrite an existing datastore. If the datastore
+does not exist, it will create one. The default is FALSE.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>AksCompute</code> object.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    
-
-<p>For more information on using an AksCompute resource within a virtual
-network, see
-<a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#use-azure-kubernetes-service-aks'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a>.</p>
+    <p>The <code>azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore</code>
+object.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
-<pre># Create an AksCompute cluster using the default configuration (you can also
-# provide parameters to customize this)
+<pre># Create and register an Azure Data Lake Gen2 Datastore to a workspace.
 
-ws &lt;- load_workspace_from_config()
-
-compute_target &lt;- create_aks_compute(ws, cluster_name = 'mycluster')
-wait_for_provisioning_completion(compute_target)
+my_adlsgen2_ds &lt;- register_azure_data_lake_gen2_datastore(workspace = your_workspace,
+                                                          datastore_name = &lt;name for this datastore&gt;,
+                                                          filesystem = 'test',
+                                                          tenant_id = your_workspace$auth$tenant_id,
+                                                          client_id = your_workspace$auth$service_principal_id,
+                                                          client_secret = your_workspace$auth$service_principal_password)
 </pre>
 
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>unregister_datastore()</code>, <code>get_datastore()</code></p></div>
     
 
   </div>
@@ -287,9 +245,9 @@ wait_for_provisioning_completion(compute_target)
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

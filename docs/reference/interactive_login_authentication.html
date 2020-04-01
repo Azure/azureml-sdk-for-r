@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get an existing datastore — get_datastore • azuremlsdk</title>
+<title>Manages authentication and acquires an authorization token in interactive login workflows. — interactive_login_authentication • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,13 @@
 
 
 
-<meta property="og:title" content="Get an existing datastore — get_datastore" />
+<meta property="og:title" content="Manages authentication and acquires an authorization token in interactive login workflows. — interactive_login_authentication" />
 
-<meta property="og:description" content="Get the corresponding datastore object for an existing
-datastore by name from the given workspace." />
+<meta property="og:description" content="Interactive login authentication is suitable for local experimentation on your own computer, and is the
+default authentication model when using Azure Machine Learning SDK.
+The constructor of the class will prompt you to login. The constructor then will save the credentials
+for any subsequent attempts. If you are already logged in with the Azure CLI or have logged-in before, the
+constructor will load the existing credentials without prompt." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,43 +142,63 @@ datastore by name from the given workspace." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get an existing datastore</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datastore.R'><code>R/datastore.R</code></a></small>
-    <div class="hidden name"><code>get_datastore.Rd</code></div>
+    <h1>Manages authentication and acquires an authorization token in interactive login workflows.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/workspace.R'><code>R/workspace.R</code></a></small>
+    <div class="hidden name"><code>interactive_login_authentication.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get the corresponding datastore object for an existing
-datastore by name from the given workspace.</p>
+    <p>Interactive login authentication is suitable for local experimentation on your own computer, and is the
+default authentication model when using Azure Machine Learning SDK.
+The constructor of the class will prompt you to login. The constructor then will save the credentials
+for any subsequent attempts. If you are already logged in with the Azure CLI or have logged-in before, the
+constructor will load the existing credentials without prompt.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_datastore</span>(<span class='no'>workspace</span>, <span class='no'>datastore_name</span>)</pre>
+    <pre class="usage"><span class='fu'>interactive_login_authentication</span>(<span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>tenant_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cloud</span> <span class='kw'>=</span> <span class='st'>"AzureCloud"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>workspace</th>
-      <td><p>The <code>Workspace</code> object.</p></td>
+      <th>force</th>
+      <td><p>Indicates whether "az login" will be run even if the old "az login" is still valid.</p></td>
     </tr>
     <tr>
-      <th>datastore_name</th>
-      <td><p>A string of the name of the datastore.</p></td>
+      <th>tenant_id</th>
+      <td><p>The string id of the active directory tenant that the service
+identity belongs to. This is can be used to specify a specific tenant when
+you have access to multiple tenants. If unspecified, the default tenant will be used.</p></td>
+    </tr>
+    <tr>
+      <th>cloud</th>
+      <td><p>The name of the target cloud. Can be one of "AzureCloud", "AzureChinaCloud", or
+"AzureUSGovernment". If no cloud is specified, "AzureCloud" is used.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The <code>azureml.data.azure_sql_database.AzureBlobDatastore</code>,
-<code>azureml.data.azure_sql_database.AzureFileDatastore</code>,
-<code>azureml.data.azure_sql_database.AzureSqlDatabaseDatastore</code>,
-<code>azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore</code>,
-<code>azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore</code>, or
-<code>azureml.data.azure_sql_database.AzureSqlDatabaseDatastore</code> object.</p>
+    <p><code>InteractiveLoginAuthentication</code> object</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>get_workspace</code>
+<code>service_principal_authentication</code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>interactive_auth</span> <span class='kw'>&lt;-</span> <span class='fu'>interactive_login_authentication</span>(<span class='kw'>tenant_id</span><span class='kw'>=</span><span class='st'>"your-tenant-id"</span>)
+
+<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>get_workspace</span>(<span class='st'>"&lt;your workspace name&gt;"</span>,
+                    <span class='st'>"&lt;your subscription ID&gt;"</span>,
+                    <span class='st'>"&lt;your resource group&gt;"</span>,
+                    <span class='kw'>auth</span> <span class='kw'>=</span> <span class='no'>interactive_auth</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -183,7 +206,11 @@ datastore by name from the given workspace.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
