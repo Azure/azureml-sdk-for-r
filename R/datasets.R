@@ -362,12 +362,12 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' read from data types in SQL query result. Providing `set_column_types` will
 #' override the data type  for the specified columns in the returned Tabular Dataset.
 #'
-#' @param query A SQL-kind datastore and a query
+#' @param query A two-item list of a SQL-kind datastore and a query or a `DataPath` object
 #' @param validate Boolean to validate if data can be loaded from the returned dataset.
-#' Defaults to True. Validation requires that the data source is accessible from
+#' Defaults to TRUE. Validation requires that the data source is accessible from
 #' the current compute.
 #' @param set_column_types A named list to set column data type, where key is
-#' column name and value is data type.
+#' column name and value is a `DataType` object.
 #' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
 #' and generating an error. The default is 30 seconds.
 #' @return The Tabular Dataset object
