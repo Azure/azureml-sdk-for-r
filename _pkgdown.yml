@@ -22,6 +22,8 @@ navbar:
       href: articles/deploy-to-aks/deploy-to-aks.html
     - text: ---
     - text: Guides
+    - text: Deploying models
+      href: articles/guides/deploying-models.html
     - text: Troubleshooting
       href: articles/guides/troubleshooting.html
   - text: News
@@ -213,3 +215,4 @@ reference:
   - '`update_local_webservice`'
   - '`delete_local_webservice`'
   - '`reload_local_webservice_assets`'
+  - '`resource_configuration`'

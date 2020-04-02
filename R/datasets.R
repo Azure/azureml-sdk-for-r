@@ -669,8 +669,8 @@ promote_headers_behavior <- function(option) {
 #' @param name An optional name for the DataPath.
 #' @return The `DataPath` object.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' my_data <- register_azure_blob_container_datastore(
 #'     workspace = ws,
 #'     datastore_name = blob_datastore_name,
@@ -681,7 +681,7 @@ promote_headers_behavior <- function(option) {
 #'
 #' datapath <- data_path(my_data, <path_on_my_datastore>)
 #' dataset <- create_file_dataset_from_files(datapath)
-#' }
+#' ```
 #' @seealso
 #' \code{\link{create_file_dataset_from_files}}
 #' \code{\link{create_tabular_dataset_from_parquet_files}}
@@ -714,13 +714,13 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
 #' to this folder structure to avoid collision.
 #' @return The `DatasetConsumptionConfig` object.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' est <- estimator(source_directory = ".",
 #'                  entry_script = "train.R",
 #'                  inputs = list(dataset_consumption_config('mydataset', dataset, mode = 'download')),
 #'                  compute_target = compute_target)
-#'}
+#' ```
 #' @seealso
 #' \code{\link{estimator}}
 #' @md

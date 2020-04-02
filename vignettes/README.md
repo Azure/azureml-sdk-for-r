@@ -14,3 +14,8 @@ The following vignettes are included:
 > If you are running these examples on an Azure Machine Learning compute instance, skip the installation and configuration vignettes (#1 and #2), as the compute instance has the Azure ML SDK pre-installed and your workspace details pre-configured.
 
 For additional examples on using the R SDK, see the [samples](../samples) folder.
+
+### Azure ML guides
+In addition to the end-to-end vignettes, the [guides](guides/) directory contains more detailed documentation for the following:
+* [Deploying models](deploying-models.Rmd): Where and how to deploy models on Azure ML.
+* [Troubleshooting](troubleshooting.Rmd): Known issues and troubleshooting for using R in Azure ML.
