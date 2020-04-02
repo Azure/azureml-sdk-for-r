@@ -376,9 +376,6 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' \code{\link{data_path}}
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
-                                                  set_column_types = NULL) {
-  azureml$core$dataset$Dataset$Tabular$from_sql_query(query, validate,
-                                                      set_column_types)
                                                   set_column_types = NULL,
                                                   query_timeout = 30) {
   azureml$core$dataset$Dataset$Tabular$from_sql_query(
