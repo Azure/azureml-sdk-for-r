@@ -46,9 +46,7 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @export
 #' @md
 get_dataset_by_name <- function(workspace, name, version = "latest") {
-  azureml$data$abstract_dataset$AbstractDataset$get_by_name(workspace,
-                                                            name,
-                                                            version)
+  azureml$core$dataset$Dataset$get_by_name(workspace, name, version)
 }
 
 #' Get Dataset by ID.
@@ -62,7 +60,7 @@ get_dataset_by_name <- function(workspace, name, version = "latest") {
 #' @export
 #' @md
 get_dataset_by_id <- function(workspace, id) {
-  azureml$data$abstract_dataset$AbstractDataset$get_by_id(workspace, id)
+  azureml$core$dataset$Dataset$get_by_id(workspace, id)
 }
 
 #' Return the named list for input datasets.
