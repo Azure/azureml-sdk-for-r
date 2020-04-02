@@ -368,6 +368,8 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' the current compute.
 #' @param set_column_types A named list to set column data type, where key is
 #' column name and value is data type.
+#' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
+#' and generating an error. The default is 30 seconds.
 #' @return The Tabular Dataset object
 #' @export
 #' @seealso
@@ -377,6 +379,13 @@ create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL) {
   azureml$core$dataset$Dataset$Tabular$from_sql_query(query, validate,
                                                       set_column_types)
+                                                  set_column_types = NULL,
+                                                  query_timeout = 30) {
+  azureml$core$dataset$Dataset$Tabular$from_sql_query(
+                                            query = query,
+                                            validate = validate,
+                                            set_column_types = set_column_types,
+                                            query_timeout = query_timeout)
 }
 
 #' Drop the specified columns from the dataset.
