@@ -74,6 +74,9 @@
     <li class="divider">
     <li class="dropdown-header">Guides</li>
     <li>
+      <a href="../../articles/guides/deploying-models.html">Deploying models</a>
+    </li>
+    <li>
       <a href="../../articles/guides/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
@@ -169,6 +172,18 @@ Warning message in install.packages(&lt;package name&gt;):
 <p>In order to submit an experiment, the Azure ML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, the recommended best practice is to isolate project files into their own directory.</p>
 </div>
 </div>
+<div id="deployment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deployment" class="anchor"></a>Deployment</h2>
+<p>For information on troubleshooting web service deployment issues, see the “Troubleshooting section” of the <a href="https://azure.github.io/azureml-sdk-for-r/articles/guides/deploying-models.html#troubleshooting-deployment">Deploying models</a> guide.</p>
+</div>
+<div id="resource-quotas" class="section level2">
+<h2 class="hasAnchor">
+<a href="#resource-quotas" class="anchor"></a>Resource quotas</h2>
+<p>You may hit resource quota issues, such as the error below:</p>
+<pre><code>Operation could not be completed as it results in exceeding approved Total Regional Cores quota.</code></pre>
+<p>For information on quotas, see <a href="https://docs.microsoft.com/azure/machine-learning/how-to-manage-quotas">Manage and request quotas for Azure resources</a>.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -179,6 +194,8 @@ Warning message in install.packages(&lt;package name&gt;):
 <li><a href="#installation">Installation</a></li>
       <li><a href="#compute-instance">Compute instance</a></li>
       <li><a href="#training">Training</a></li>
+      <li><a href="#deployment">Deployment</a></li>
+      <li><a href="#resource-quotas">Resource quotas</a></li>
       </ul>
 </div>
       </div>
