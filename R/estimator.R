@@ -71,6 +71,13 @@
 #' objects to use as input.
 #' @return The `Estimator` object.
 #' @export
+#' @section Examples:
+#' ```
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  cran_packages = c("ggplot2==3.3.0", "stringr"),
+#'                  compute_target = compute_target)
+#' ```
 #' @seealso
 #' \code{\link{r_environment}}
 #' \code{\link{container_registry}}

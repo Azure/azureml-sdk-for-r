@@ -100,6 +100,17 @@ on the predefined Docker images that are used for training if
 \code{custom_docker_image} is not specified, see the documentation
 \href{https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images}{here}.
 }
+\section{Examples}{
+\preformatted{est <- estimator(source_directory = ".",
+                 entry_script = "train.R",
+                 cran_packages = c("ggplot2==3.3.0", "stringr"),
+                 compute_target = compute_target)
+}
+}
+
 \seealso{
-\code{r_environment()}, \code{container_registry()}, \code{submit_experiment()}
+\code{\link{r_environment}}
+\code{\link{container_registry}}
+\code{\link{submit_experiment}}
+\code{\link{dataset_consumption_config}}
 }
