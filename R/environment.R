@@ -256,10 +256,10 @@ generate_docker_file <- function(custom_docker_image = NULL,
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {
-      
+
       # parse for package version, if provided
       package <- strsplit(package, "==")[[1]]
-      
+
       if (length(package) == 1) {
         base_dockerfile <- paste0(
           base_dockerfile,
