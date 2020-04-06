@@ -37,7 +37,6 @@ override the data type  for the specified columns in the returned Tabular Datase
 datastore <- get_datastore(ws, 'sql-db')
 query <- data_path(datastore, 'SELECT * FROM my_table')
 tab_ds <- create_tabular_dataset_from_sql_query(query, query_timeout = 10)
-df <- load_dataset_into_data_frame(tab_ds)
 
 # use `set_column_types` param to set column data types
 data_types <- list(ID = data_type_string(),
@@ -51,5 +50,6 @@ set_tab_ds <- create_tabular_dataset_from_sql_query(query, set_column_types = da
 }
 
 \seealso{
-\code{\link{data_path}}
+\code{\link[=data_path]{data_path()}} \code{\link[=data_type_datetime]{data_type_datetime()}} \code{\link[=data_type_bool]{data_type_bool()}}
+\code{\link[=data_type_double]{data_type_double()}} \code{\link[=data_type_string]{data_type_string()}} \code{\link[=data_type_long]{data_type_long()}}
 }
