@@ -50,14 +50,22 @@ test_that("create dockerfile", {
                                   ", repos = 'https://cloud.r-project.org/', ",
                                   "upgrade = FALSE)\"\n"))
 
-  # cran packages
+  # cran packages w/o version
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
                                      cran_packages = c("ggplot2"),
                                      install_system_packages = FALSE)
-  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
-                                  "packages('ggplot2', repos = \'https://",
+  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"remotes::install_version",
+                                  "('ggplot2', repos = \'https://",
                                   "cloud.r-project.org/\')\"\n"))
-
+  
+  # cran packages w/ version 
+  dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
+                                     cran_packages = c("ggplot2==0.0.0"),
+                                     install_system_packages = FALSE)
+  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"remotes::install_version",
+                                  "('ggplot2', version = '0.0.0', repos = \'https://",
+                                  "cloud.r-project.org/\')\"\n"))
+  
   # github packages
   dockerfile <- generate_docker_file(github_packages = c(
                                        "https://github/user/repo1", 
