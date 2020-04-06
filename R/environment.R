@@ -257,23 +257,22 @@ generate_docker_file <- function(custom_docker_image = NULL,
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {
 
-      # parse for package version, if provided
-      package <- strsplit(package, "==")[[1]]
+      # parse to split package name from version, if version provided
+      package_info <- strsplit(package, "==")[[1]]
+      package_name <- package_info[1]
+      version <- NULL
 
-      if (length(package) == 1) {
-        base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', ", package),
-          "repos = \'https://cloud.r-project.org/\')\"\n"
-        )
-      } else {
-        base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"remotes::install_version(\'%s\',
-                  version = \'%s\', ", package[1], package[2]),
-          "repos = \'https://cloud.r-project.org/\')\"\n"
-        )
+      if (length(package_info) == 2) {
+        version <- sprintf(" version = \'%s\',", package_info[2])
       }
+
+      base_dockerfile <- paste0(
+        base_dockerfile,
+        paste0(sprintf("RUN R -e \"remotes::install_version(\'%s\',",
+                       package_name),
+               version,
+               " repos = \'https://cloud.r-project.org/\')\"\n")
+      )
     }
   }
 
