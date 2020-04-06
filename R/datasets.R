@@ -370,8 +370,26 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' column name and value is data type.
 #' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
 #' and generating an error. The default is 30 seconds.
-#' @return The Tabular Dataset object
+#' @return A `Tabular Dataset` object
 #' @export
+#' @section Examples:
+#' ```
+#' # create tabular dataset from a SQL database in datastore
+#' datastore <- get_datastore(ws, 'sql-db')
+#' query <- data_path(datastore, 'SELECT * FROM my_table')
+#' tab_ds <- create_tabular_dataset_from_sql_query(query, query_timeout = 10)
+#' df <- load_dataset_into_data_frame(tab_ds)
+#' 
+#' # use `set_column_types` param to set column data types
+#' data_types <- list('ID' = data_type_string(),
+#'                    'Date' = data_type_datetime('%d/%m/%Y %I:%M:%S %p'),
+#'                    'Count' = data_type_long(),
+#'                    'Latitude' = data_type_double(),
+#'                    'Found' = data_type_bool())
+#'                    
+#' set_tab_ds <- create_tabular_dataset_from_sql_query(query, set_column_types = data_types)
+
+#' ```
 #' @seealso
 #' \code{\link{data_path}}
 #' @md
