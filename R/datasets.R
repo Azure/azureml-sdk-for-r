@@ -390,7 +390,7 @@ create_tabular_dataset_from_json_lines_files <- function(
 
 #' ```
 #' @seealso [data_path()] [data_type_datetime()] [data_type_bool()]
-#' [data_type_double()] [data_type_string()] [data_type_long()] 
+#' [data_type_double()] [data_type_string()] [data_type_long()]
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL,
