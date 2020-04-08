@@ -165,7 +165,7 @@ override the data type  for the specified columns in the returned Tabular Datase
     </div>
 
     <pre class="usage"><span class='fu'>create_tabular_dataset_from_sql_query</span>(<span class='no'>query</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>query_timeout</span> <span class='kw'>=</span> <span class='fl'>30L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,15 +185,40 @@ the current compute.</p></td>
       <td><p>A named list to set column data type, where key is
 column name and value is data type.</p></td>
     </tr>
+    <tr>
+      <th>query_timeout</th>
+      <td><p>Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
+and generating an error. The default is 30 seconds.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The Tabular Dataset object</p>
+    <p>A <code>TabularDataset</code> object</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre># create tabular dataset from a SQL database in datastore
+datastore &lt;- get_datastore(ws, 'sql-db')
+query &lt;- data_path(datastore, 'SELECT * FROM my_table')
+tab_ds &lt;- create_tabular_dataset_from_sql_query(query, query_timeout = 10)
+
+# use `set_column_types` param to set column data types
+data_types &lt;- list(ID = data_type_string(),
+                   Date = data_type_datetime('%d/%m/%Y %I:%M:%S %p'),
+                   Count = data_type_long(),
+                   Latitude = data_type_double(),
+                   Found = data_type_bool())
+
+set_tab_ds &lt;- create_tabular_dataset_from_sql_query(query, set_column_types = data_types)
+</pre>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>data_path</code></p></div>
+    <div class='dont-index'><p><code>data_path()</code> <code>data_type_datetime()</code> <code>data_type_bool()</code>
+<code>data_type_double()</code> <code>data_type_string()</code> <code>data_type_long()</code></p></div>
     
 
   </div>
@@ -203,6 +228,8 @@ column name and value is data type.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
