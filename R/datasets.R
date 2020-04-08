@@ -394,11 +394,11 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
                                                   set_column_types = NULL,
-                                                  query_timeout = 30) {
+                                                  query_timeout = 30L) {
   azureml$core$dataset$Dataset$Tabular$from_sql_query(query = query,
-                                            validate = validate,
-                                            set_column_types = set_column_types,
-                                            query_timeout = query_timeout)
+                                      validate = validate,
+                                      set_column_types = set_column_types,
+                                      query_timeout = as.integer(query_timeout))
 }
 
 #' Drop the specified columns from the dataset.
