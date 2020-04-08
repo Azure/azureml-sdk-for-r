@@ -295,3 +295,26 @@ generate_docker_file <- function(custom_docker_image = NULL,
 
   invisible(base_dockerfile)
 }
+
+#' Specifies a CRAN package to install in environment
+#'
+#' @description
+#' Specifies a CRAN package to install in run environment
+#' 
+#' @param name A string of the package name
+#' @param version A string of the package version, if not latest. Default will
+#' pull latest version number.
+#' @param repos A character vector containing the base URL(s) of repositories
+#' to use, e.g., the URL of a CRAN mirror. The default is
+#' c("https://cloud.r-project.org").
+#' @return A named list
+#' @export
+#' @seealso
+#' `r_environment()`, `estimator()`
+#' @md
+cran_package <- function(name, version = NULL,
+                         repos = c("https://cloud.r-project.org")) {
+  cran_package <- list(name = name, version = version, repos = repos)
+
+  return(cran_package)
+}
