@@ -21,7 +21,7 @@ column name and value is data type.}
 and generating an error. The default is 30 seconds.}
 }
 \value{
-A \code{Tabular Dataset} object
+A \code{TabularDataset} object
 }
 \description{
 Create a TabularDataset to represent tabular data in SQL databases.

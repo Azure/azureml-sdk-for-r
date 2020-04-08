@@ -370,7 +370,7 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' column name and value is data type.
 #' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
 #' and generating an error. The default is 30 seconds.
-#' @return A `Tabular Dataset` object
+#' @return A `TabularDataset` object
 #' @export
 #' @section Examples:
 #' ```
