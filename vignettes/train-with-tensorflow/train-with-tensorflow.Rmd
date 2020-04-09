@@ -103,7 +103,8 @@ To create the estimator, define the following:
 est <- estimator(source_directory = ".",
                  entry_script = "tf_mnist.R",
                  compute_target = compute_target,
-                 cran_packages = c("tensorflow==1.14.0"),
+                 cran_packages = list(cran_package("tensorflow",
+                                                   version = "1.14.0")),
                  use_gpu = TRUE)
 ```
 
