@@ -101,17 +101,17 @@ on the predefined Docker images that are used for training if
 \href{https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images}{here}.
 }
 \section{Examples}{
-\preformatted{est <- estimator(source_directory = ".",
+\preformatted{pkg1 <- cran_package("ggplot2", version = "3.3.0")
+pkg2 <- cran_package("stringr")
+
+est <- estimator(source_directory = ".",
                  entry_script = "train.R",
-                 cran_packages = c("ggplot2==3.3.0", "stringr"),
+                 cran_packages = list(pkg1, pkg2),
                  compute_target = compute_target)
 }
 }
 
 \seealso{
-\code{r_environment()}, \code{container_registry()}, \code{submit_experiment()}
-\code{\link{r_environment}}
-\code{\link{container_registry}}
-\code{\link{submit_experiment}}
-\code{\link{dataset_consumption_config}}
+\code{\link[=r_environment]{r_environment()}}, \code{\link[=container_registry]{container_registry()}}, \code{\link[=submit_experiment]{submit_experiment()}},
+\code{\link[=dataset_consumption_config]{dataset_consumption_config()}}, \code{\link[=cran_package]{cran_package()}}
 }
