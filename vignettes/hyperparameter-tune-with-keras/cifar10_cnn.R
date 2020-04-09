@@ -7,7 +7,7 @@
 #' epochs, though it is still underfitting at that point.
 
 library(keras)
-install_keras(version = "2.2.5.0", tensorflow = "1.14.0-gpu")
+install_keras()
 
 library(azuremlsdk)
 

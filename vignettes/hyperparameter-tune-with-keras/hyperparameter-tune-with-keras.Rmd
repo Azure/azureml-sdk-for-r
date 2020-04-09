@@ -121,8 +121,7 @@ See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/esti
 est <- estimator(source_directory = ".",
                  entry_script = "cifar10_cnn.R",
                  compute_target = compute_target,
-                 cran_packages = list(cran_package("keras",
-                                                   version = "2.2.5.0")),
+                 cran_packages = list(cran_package("keras"),
                  use_gpu = TRUE)
 ```
 
