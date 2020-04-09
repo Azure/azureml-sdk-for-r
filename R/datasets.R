@@ -368,15 +368,37 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' the current compute.
 #' @param set_column_types A named list to set column data type, where key is
 #' column name and value is data type.
-#' @return The Tabular Dataset object
+#' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
+#' and generating an error. The default is 30 seconds.
+#' @return A `TabularDataset` object
 #' @export
-#' @seealso
-#' \code{\link{data_path}}
+#' @section Examples:
+#' ```
+#' # create tabular dataset from a SQL database in datastore
+#' datastore <- get_datastore(ws, 'sql-db')
+#' query <- data_path(datastore, 'SELECT * FROM my_table')
+#' tab_ds <- create_tabular_dataset_from_sql_query(query, query_timeout = 10)
+#'
+#' # use `set_column_types` param to set column data types
+#' data_types <- list(ID = data_type_string(),
+#'                    Date = data_type_datetime('%d/%m/%Y %I:%M:%S %p'),
+#'                    Count = data_type_long(),
+#'                    Latitude = data_type_double(),
+#'                    Found = data_type_bool())
+#'
+#' set_tab_ds <- create_tabular_dataset_from_sql_query(query, set_column_types = data_types)
+
+#' ```
+#' @seealso [data_path()] [data_type_datetime()] [data_type_bool()]
+#' [data_type_double()] [data_type_string()] [data_type_long()]
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
-                                                  set_column_types = NULL) {
-  azureml$core$dataset$Dataset$Tabular$from_sql_query(query, validate,
-                                                      set_column_types)
+                                                  set_column_types = NULL,
+                                                  query_timeout = 30L) {
+  azureml$core$dataset$Dataset$Tabular$from_sql_query(query = query,
+                                      validate = validate,
+                                      set_column_types = set_column_types,
+                                      query_timeout = as.integer(query_timeout))
 }
 
 #' Drop the specified columns from the dataset.
