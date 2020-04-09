@@ -119,7 +119,7 @@ To create the estimator, define the following:
 est <- estimator(source_directory = ".",
                  entry_script = "cifar10_cnn.R",
                  compute_target = compute_target,
-                 cran_packages = c("keras"),
+                 cran_packages = list(cran_package("keras")),
                  use_gpu = TRUE)
 ```
 
