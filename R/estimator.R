@@ -73,16 +73,18 @@
 #' @export
 #' @section Examples:
 #' ```
+#' pkg1 <- cran_package("ggplot2", version = "3.3.0")
+#' pkg2 <- cran_package("stringr")
+#'
 #' est <- estimator(source_directory = ".",
 #'                  entry_script = "train.R",
-#'                  cran_packages = c("ggplot2==3.3.0", "stringr"),
+#'                  cran_packages = list(pkg1, pkg2),
 #'                  compute_target = compute_target)
 #' ```
 #' @seealso
-#' \code{\link{r_environment}}
-#' \code{\link{container_registry}}
-#' \code{\link{submit_experiment}}
-#' \code{\link{dataset_consumption_config}}
+#' [r_environment()], [container_registry()], [submit_experiment()],
+#' [dataset_consumption_config()], [cran_package()]
+#'
 #' @md
 estimator <- function(source_directory,
                       compute_target = NULL,
