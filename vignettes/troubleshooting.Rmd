@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting"
+title: "Known issues and troubleshooting"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
