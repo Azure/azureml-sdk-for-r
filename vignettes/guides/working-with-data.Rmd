@@ -1,0 +1,315 @@
+---
+title: "Working with data"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with data}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This guide covers the details of connecting to Azure storage services via Azure Machine Learning datastores, and managing and consuming your data via Azure Machine Learning datasets.
+
+## Connect to Azure Storage Services
+Azure Machine Learning datastores securely keep the connection information to your Azure storage, so you don't have to code it in your scripts. Register and create a datastore to easily connect to your storage account, and access the data in your underlying Azure storage service.
+
+### Create and register datastores
+When you register an Azure storage solution as a datastore, you automatically create and register that datastore to a specific workspace. You can create and register datastores using the R SDK or [Azure Machine Learning studio](ml.azure.com).
+
+The following data storage service types are currently supported. See the reference documentation for the `register_*()` methods for the full set of parameters for each method and example usage.
+
+Storage type | Authentication type | Registration method
+------------ | ------------------- | -------------------
+[Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) | Account key <br> SAS token | [`register_azure_blob_container_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/register_azure_blob_container_datastore.html)
+[Azure File Share](https://docs.microsoft.com/azure/storage/files/storage-files-introduction) | Account key <br> SAS token | [`register_azure_file_share_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/register_azure_file_share_datastore.html)
+[Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) | SQL authentication <br> Service principal| [`register_azure_sql_database_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/register_azure_sql_database_datastore.html)
+[Azure PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview) | SQL authentication | [`register_azure_postgre_sql_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/register_azure_postgre_sql_datastore.html)
+[Azure Data Lake Storage Gen 2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-introduction) | Service principal| [`register_azure_data_lake_gen2_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/register_azure_data_lake_gen2_datastore.html)
+
+Below is an example of registering an Azure Blob container as a datastore. You can find the information you need to populate the register call (e.g. account name and key) from the [Azure portal](https://portal.azure.com/).
+```{r eval=FALSE}
+ws <- load_workspace_from_config()
+my_datastore <- register_azure_blob_container_datastore(ws,
+                                                        datastore_name = 'mydatastore',
+                                                        container_name = 'myazureblobcontainername',
+                                                        account_name = 'mystorageaccoutname',
+                                                        account_key = 'mystorageaccountkey')
+```
+
+### Default datastore
+When you create a workspace, an Azure blob container and an Azure file share are automatically registered to the workspace. They're named `workspaceblobstore` and `workspacefilestore`, respectively. `workspaceblobstore` is used to store workspace artifacts and your machine learning experiment logs. `workspacefilestore` is used to store notebooks and R scripts authorized via [compute instance](https://docs.microsoft.com/azure/machine-learning/concept-compute-instance#accessing-files). The `workspaceblobstore` container is set as the default datastore. If you do not wish to register your own datastores, you can optionally use either of these datastores.
+
+```{r eval=FALSE}
+# Retrieve the default datastore from your workspace
+datastore <- get_default_datastore(ws)
+
+# Set a different datastore as the default datastore, in this case the blob container datastore registered earlier
+set_default_datastore(ws, datastore_name = 'mydatastore')
+```
+
+### Get datastores from your workspace
+To get a specific datastore from your workspace, use the  [`get_datastore()`](https://azure.github.io/azureml-sdk-for-r/reference/get_datastore.html) method.
+```{r eval=FALSE}
+# Get a named datastore from the current workspace
+datastore <- get_datastore(ws, datastore_name = 'mydatastore')
+```
+
+To get the list of all datastores registered with a given workspace:
+```{r eval=FALSE}
+# Get a named list of all the datastores in the workspace
+ws$datastores
+
+# Get a specific datastore with the given datastore name (equivalent to using get_datastore())
+ws$datastores['mydatastore']
+```
+
+### Upload and download data
+You can make changes to your stored data in the datastore's underlying Azure storage service directly. 
+
+For `AzureBlobDatastore` and `AzureFileDatastore`, the R SDK also includes `upload_*()` and `download_*()` methods uploading and downloading data via the datastore object.
+
+#### Upload
+Upload either a directory or individual files to the datastore:
+```{r eval=FALSE}
+# Upload a local directory to the Azure storage the datastore points to
+upload_to_datastore(datastore, src_dir = 'my source directory', target_path = 'my target path', overwrite = TRUE)
+
+# Upload a list of individual files
+upload_files_to_datastore(datastore, files = c('file1.txt', 'file2.txt'), target_path = 'my target path', overwrite = TRUE)
+```
+
+The `target_path` parameter specifies the location in the file share (or blob container) to upload to. It defaults to `NULL`, so the data is uploaded to root. If `overwrite = TRUE`, any existing data at `target_path` is overwritten. See the reference documentation for the full set of parameters
+
+#### Download
+Download data from a datastore to your local file system:
+```{r eval=FALSE}
+download_from_datastore(datastore, target_path = 'my target path', prefix = 'my prefix', overwrite = TRUE)
+```
+
+The `target_path` parameter is the location of the local directory to download the data to. To specify a path to the folder in the file share (or blob container) to download, provide that path to `prefix.` If `prefix` is `NULL`, all the contents of your file share (or blob container) will be downloaded.
+
+### Unregister datastores
+Once you no longer need a datastore, you can unregister the datastore from its associated workspace. The underlying Azure storage will not be deleted.
+```{r eval=FALSE}
+unregister_datastore(datastore)
+```
+
+## Manage and consume data with datasets
+To interact with data in your datastores or to package your data into a consumable object for machine learning tasks, like training, create an Azure Machine Learning dataset. Azure Machine Learning datasets are references that point to the data in your storage service. They aren't copies of your data, so no extra storage cost is incurred. Register the dataset to your workspace to share and reuse it across different experiments without data ingestion complexities.
+
+### Dataset types
+Azure ML supports two types of datasets:
+
+* A `TabularDataset` represents data in a tabular format by parsing the provided file or list of files. This provides you with the ability to materialize the data into a data.frame or Spark DataFrame. You can create a TabularDataset object from .csv, .tsv, .parquet, .jsonl files, and from SQL query results.
+* A `FileDataset` references single or multiple files in your datastores or public URLs. By this method, you can download or mount the files to your compute as a FileDataset object. 
+
+### Create datasets
+You can create both TabularDatasets and FileDatasets by using the R SDK or through [Azure Machine Learning studio](ml.azure.com). For more information on creating datasets from the studio UI, see [here](https://docs.microsoft.com/azure/machine-learning/how-to-create-register-datasets#on-the-web).
+
+#### Create a TabularDataset
+There are several available methods for creating an unregistered, in-memory TabularDataset:
+
+**1. [`create_tabular_dataset_from_delimited_files()`](https://azure.github.io/azureml-sdk-for-r/reference/create_tabular_dataset_from_delimited_files.html)**
+
+Create a TabularDataset by reading in delimited text files (e.g. in .csv or .tsv format). If you're reading from multiple files, results will be aggregated into one tabular representation.
+
+For the data to be accessible by Azure ML, the delimited files specified by path must be located in Datastore or behind public web urls.
+
+By default, when you create a TabularDataset, column data types are inferred automatically. If the inferred types don't match your expectations, you can specify column types by using the `set_column_types` parameter. The parameter `infer_column_type` is only applicable for datasets created from delimited files.
+
+```{r eval=FALSE}
+# Create a tabular dataset from delimited files in a datastore
+blob_datastore <- get_datastore(ws, datastore_name = 'workspaceblobstore')
+datastore_paths <- list(data_path(blob_datastore, 'weather/2018/11.csv'), data_path('weather/2019/12.csv'), data_path('weather/2019/*.csv'))
+
+dataset <- create_tabular_dataset_from_delimited_files(path = datastore_paths)
+
+# Create a tabular dataset from delimited files behind public web URLs
+web_paths = list('https://url/datafile1.tsv' 'https://url/datafile2.tsv')
+
+dataset <- create_tabular_dataset_from_delimited_files(path = web_paths, separator='\t')
+```
+
+**2. [`create_tabular_dataset_from_json_lines_files()`](https://azure.github.io/azureml-sdk-for-r/reference/create_tabular_dataset_from_json_lines_files.html)**
+
+Create a TabularDataset that defines the operations to load data from JSON Lines files (http://jsonlines.org/) into tabular representation.
+
+For the data to be accessible by Azure ML, the JSON Lines files specified by path must be located in a datastore or behind public web URLs.
+
+```{r eval=FALSE}
+# Create a tabular dataset from JSON Lines files in a datastore
+blob_datastore <- get_datastore(ws, datastore_name = 'workspaceblobstore')
+datastore_paths <- list(data_path(blob_datastore, 'weather/2018/11.jsonl'), data_path('weather/2019/12.jsonl'), data_path('weather/2019/*.jsonl'))
+
+dataset <- create_tabular_dataset_from_json_lines_files(path = datastore_paths)
+
+# Create a tabular dataset from JSON Lines files behind public web URLs
+web_paths = list('https://url/datafile1.jsonl', 'https://url/datafile2.jsonl')
+
+dataset <- create_tabular_dataset_from_json_lines_files(path = web_paths)
+```
+
+**3. [`create_tabular_dataset_from_sql_query()`](https://azure.github.io/azureml-sdk-for-r/reference/create_tabular_dataset_from_sql_query.html)**
+
+Create a TabularDataset by reading from a SQL database. The created TabularDataset defines the operations to load data from the SQL database into tabular representation. For the data to be accessible by Azure ML, the SQL database specified by the `query` argument must be registered as a datastore and the datastore type must be of a SQL kind.
+
+```{r eval=FALSE}
+# Create tabular dataset from a SQL database in datastore
+sql_datastore <- get_datastore(ws, datastore_name = 'mssql')
+query <- data_path(sql_datastore, path_on_datastore = 'SELECT * FROM my_table')
+
+dataset <- create_tabular_dataset_from_sql_query(query)
+```
+
+**4. [`create_tabular_dataset_from_parquet_files()`](https://azure.github.io/azureml-sdk-for-r/reference/create_tabular_dataset_from_parquet_files.html)**
+
+Create a TabularDataset that defines the operations to load data from Parquet files into tabular representation.
+
+For the data to be accessible by Azure ML, the Parquet files specified by path must be located in a datastore or behind public web URLs.
+
+```{r eval=FALSE}
+# Create a tabular dataset from Parquet files in a datastore
+blob_datastore <- get_datastore(ws, datastore_name = 'workspaceblobstore')
+datastore_paths <- list(data_path(blob_datastore, 'weather/2018/11.parquet'), data_path('weather/2019/12.parquet'), data_path('weather/2019/*.parquet'))
+
+dataset <- create_tabular_dataset_from_parquet_files(path = datastore_paths)
+
+# Create a tabular dataset from Parquet files behind public web URLs
+web_paths = list('https://url/datafile1.parquet', 'https://url/datafile2.parquet')
+
+dataset <- create_tabular_dataset_from_parquet_files(path = web_paths)
+```
+
+#### Create a FileDataset
+Use the [**`create_file_dataset_from_files()`**](https://azure.github.io/azureml-sdk-for-r/reference/create_file_dataset_from_files.html) method to load files in any format and to create an unregistered FileDataset. 
+
+If your storage is behind a a virtual network or firewall, set the parameter `validate = FALSE`. This bypasses the initial validation step, and ensures that you can create your dataset from these secure files.
+
+For the data to be accessible by Azure ML, the files specified by path must be located in a datastore or be accessible with public web URLs.
+
+```{r eval=FALSE}
+# Create a file dataset from files in a datastore
+blob_datastore <- get_datastore(ws, datastore_name = 'workspaceblobstore')
+datastore_paths <- list(data_path(blob_datastore, 'animals'))
+
+dataset <- create_file_dataset_from_files(path = datastore_paths)
+
+# Create a file dataset from files behind public web URLs
+web_paths = list('https://azureopendatastorage.blob.core.windows.net/mnist/train-images-idx3-ubyte.gz', 'https://azureopendatastorage.blob.core.windows.net/mnist/train-labels-idx1-ubyte.gz')
+
+dataset <- create_file_dataset_from_files(path = web_paths)
+```
+
+### Register datasets
+To complete the creation process, register your dataset with a workspace. Use the [`register_dataset()`](https://azure.github.io/azureml-sdk-for-r/reference/register_dataset.html) method to register datasets with your workspace in order to share them with others and reuse them across various experiments.
+
+Note that datasets created through Azure Machine Learning studio are automatically registered to the workspace.
+
+```{r eval=FALSE}
+dataset <- register_dataset(ws, dataset = dataset, name = 'my training data')
+```
+
+### Version datasets
+You can register a new dataset under the same name by creating a new version. A dataset version is a way to bookmark the state of your data so that you can apply a specific version of the dataset for experimentation or future reproduction. 
+
+When you create a dataset version, you're not creating an extra copy of data with the workspace. Because datasets are references to the data in your storage service, you have a single source of truth, managed by your storage service.
+
+For more information on versioning datasets, including versioning best practices, see [How to version and track datasets](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-version-track-datasets).
+
+### Access datasets during training
+To consume datasets in a remote training run, you can either use a TabularDataset directly in your training script, or use a FileDataset and mount or download files to a remote compute for training.
+
+#### Option 1: Use datasets directly in training scripts
+
+**Create a TabularDataset**
+```{r eval=FALSE}
+# Create a TabularDataset from a web URL
+web_path <- list('https://dprepdata.blob.core.windows.net/demo/Titanic.csv')
+titanic_dataset <- create_tabular_dataset_from_delimited_files(path = web_path)
+```
+
+**Configure the estimator**
+
+In order to access the above dataset in your training script, you will need to create a `DatasetConsumptionConfig` using  [`dataset_consumption_config()`](https://azure.github.io/azureml-sdk-for-r/reference/dataset_consumption_config.html) that represents the dataset and a name to assign the dataset. This is the name used to reference the dataset during the run; it can be different than the registered name of the dataset. Then, pass the `DatasetConsumptionConfig` to the `inputs` parameter of the `estimator()` method.
+
+```{r eval=FALSE}
+# Create a DatasetConsumptionConfig for the dataset
+titanic_config <- dataset_consumption_config(name = 'titanic', 
+                                             dataset = titanic_dataset)
+
+# Pass the config in a list to the `inputs` parameter
+estimator <- estimator(source_directory = './my-src-folder', 
+                       compute_target = compute_target,
+                       entry_script = 'train.R',
+                       inputs = list(titanic_config))
+```
+
+**Access the input dataset in your training script**
+
+TabularDataset objects provide the ability to load the data into a data frame so that you can work with familiar data preparation and training libraries. To leverage this capability, you can retrieve the TabularDataset specified in your estimator configuration in your script.
+
+Inside the training script `train.R`:
+```{r eval=FALSE}
+# Get the input dataset by name
+titanic_dataset <- get_input_dataset_from_run('titanic')
+
+# Load the TabularDataset into a data frame
+df <- load_dataset_into_data_frame(titanic_dataset)
+```
+
+#### Option 2: Mount or download files to a remote compute target
+If you want to make your data files available on the compute target for training, use FileDataset to mount or download files referred by it.
+
+**Mount vs. download**
+
+Mounting or downloading files of any format are supported for datasets created from Azure Blob storage, Azure Files, Azure Data Lake Storage Gen2, Azure SQL Database, and Azure Database for PostgreSQL.
+
+When you mount a dataset, you attach the files referenced by the dataset to a directory (mount point) and make it available on the compute target. Mounting is supported for Linux-based computes, including AmlCompute and virtual machines. When you download a dataset, all the files referenced by the dataset will be downloaded to the compute target. Downloading is supported for all compute types.
+
+If your script processes all files referenced by the dataset, and your compute disk can fit your full dataset, downloading is recommended to avoid the overhead of streaming data from storage services. If your data size exceeds the compute disk size, downloading is not possible. For this scenario, we recommend mounting since only the data files used by your script are loaded at the time of processing.
+
+The below code mounts a `dataset` to the temp directory at `mounted_path` if you want to mount a dataset yourself. If you want to mount or download a dataset for a remote training run, see the following sections starting with "Create a FileDataset" instead.
+
+```{r eval=FALSE}
+mounted_path <- tempdir()
+
+# Mount dataset onto the mounted_path of a Linux-based compute. Creates a context manager to manage the lifecycle of the mount
+mount_context <- mount_file_dataset(dataset, mount_point = mounted_path)
+
+# Enter the context manager to mount
+mount_context$start()
+
+# Any actions you want to do with the mounted dataset
+
+# Exit from the context manager to unmount
+mount_context$stop()
+```
+
+**Create a FileDataset**
+```{r eval=FALSE}
+# Create a FileDataset from web URLs
+web_paths = list('https://azureopendatastorage.blob.core.windows.net/mnist/train-images-idx3-ubyte.gz', 'https://azureopendatastorage.blob.core.windows.net/mnist/train-labels-idx1-ubyte.gz')
+
+mnist_dataset <- create_file_dataset_from_files(path = web_paths)
+```
+
+**Configure the estimator**
+```{r eval=FALSE}
+# Create a DatasetConsumptionConfig for the dataset
+mnist_config <- dataset_consumption_config(name = 'mnist', 
+                                           dataset = mnist_dataset,
+                                           mode = 'mount')
+
+# Pass the config in a list to the `inputs` parameter
+estimator <- estimator(source_directory = './my-src-folder', 
+                       compute_target = compute_target,
+                       entry_script = 'train.R',
+                       inputs = list(mnist_config))
+```
+
+**Retrieve the data in your training script**
+
+## Additional references
+For additional resources on using datastores and datasets, you can refer to the following:
+
+* [Connect to Azure storage services](https://docs.microsoft.com/azure/machine-learning/how-to-access-data)
