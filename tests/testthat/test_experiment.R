@@ -24,7 +24,8 @@ test_that("create, submit experiment, run in default amlcompute,
                    compute_target = existing_compute$name, 
                    entry_script = script_name, 
                    script_params = list("data_folder" = ds$as_mount()),
-                   cran_packages = c("dplyr", "ggplot2"))
+                   cran_packages = list(cran_package("dplyr"),
+                                        cran_package("ggplot2")))
   
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
@@ -61,7 +62,8 @@ test_that("submit experiment through a custom environment,
   dir.create(tmp_dir_name)
   file.copy(script_name, tmp_dir_name)
   
-  env <- r_environment("myenv", cran_packages = c("dplyr", "ggplot2"))
+  env <- r_environment("myenv", cran_packages = list(cran_package("dplyr"),
+                                                     cran_package("ggplot2")))
 
   est <- estimator(tmp_dir_name,
                    compute_target = existing_compute$name, 
