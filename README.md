@@ -44,7 +44,7 @@ install.packages("azuremlsdk")
 
 # Or the development version from GitHub
 install.packages("remotes")
-remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r', build_vignettes = TRUE)
 
 # Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 azuremlsdk::install_azureml()
