@@ -250,7 +250,7 @@ list_workspaces <- function(subscription_id, resource_group = NULL) {
 #' workspace ARM properties.
 #' @param workspace The `Workspace` object whose config has to be written down.
 #' @param path A string of the location to write the config.json file.
-#' The parameter defaults to the current working directory.
+#' The parameter defaults to '.azureml/' in the current working directory.
 #' @param file_name A string of the name to use for the config file. The
 #' parameter defaults to `'config.json'`.
 #' @return None
