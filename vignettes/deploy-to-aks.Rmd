@@ -45,13 +45,13 @@ ws <- get_workspace("<your workspace name>", "<your subscription ID>", "<your re
 ```
 
 ## Register the model
-In this tutorial we will deploy a model that was trained in one of the [samples](https://github.com/Azure/azureml-sdk-for-r/blob/master/samples/training/train-on-amlcompute/train-on-amlcompute.R). The model was trained with the Iris dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica). We have provided the model file (`model.rds`) for the tutorial; it is located in the same directory as this vignette.
+In this tutorial we will deploy a model that was trained in one of the [samples](https://github.com/Azure/azureml-sdk-for-r/blob/master/samples/training/train-on-amlcompute/train-on-amlcompute.R). The model was trained with the Iris dataset and can be used to determine if a flower is one of three Iris flower species (setosa, versicolor, virginica). We have provided the model file (`model.rds`) for the tutorial; it is located in the `deploy-to-aks` subfolder of this vignette.
 
 First, register the model to your workspace with [`register_model()`](https://azure.github.io/azureml-sdk-for-r/reference/register_model.html). A registered model can be any collection of files, but in this case the R model file is sufficient. Azure ML will use the registered model for deployment.
 
 ```{r register_model, eval=FALSE}
 model <- register_model(ws, 
-                        model_path = "model.rds", 
+                        model_path = "deploy-to-aks/model.rds", 
                         model_name = "iris_model",
                         description = "Predict an Iris flower type")
 ```
@@ -92,7 +92,7 @@ Now you have everything you need to create an inference config for encapsulating
 
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
-  entry_script = "score.R",
+  entry_script = "deploy-to-aks/score.R",
   source_directory = ".",
   environment = r_env)
 ```
