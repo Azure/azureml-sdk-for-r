@@ -119,6 +119,9 @@ here." />
     <li class="divider"></li>
     <li class="dropdown-header">Guides</li>
     <li>
+      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+    </li>
+    <li>
       <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
@@ -290,9 +293,23 @@ objects to use as input.</p></td>
 
     <p>The <code>Estimator</code> object.</p>
     
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>pkg1 &lt;- cran_package("ggplot2", version = "3.3.0")
+pkg2 &lt;- cran_package("stringr")
+
+est &lt;- estimator(source_directory = ".",
+                 entry_script = "train.R",
+                 cran_packages = list(pkg1, pkg2),
+                 compute_target = compute_target)
+</pre>
+
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>r_environment()</code>, <code>container_registry()</code>, <code>submit_experiment()</code></p></div>
+    <div class='dont-index'><p><code>r_environment()</code>, <code>container_registry()</code>, <code>submit_experiment()</code>,
+<code>dataset_consumption_config()</code>, <code>cran_package()</code></p></div>
     
 
   </div>
@@ -302,6 +319,8 @@ objects to use as input.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

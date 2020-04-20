@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configure conversion to bool. — data_type_bool • azuremlsdk</title>
+<title>Specifies a CRAN package to install in environment — cran_package • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Configure conversion to bool. — data_type_bool" />
+<meta property="og:title" content="Specifies a CRAN package to install in environment — cran_package" />
 
-<meta property="og:description" content="Configure conversion to bool." />
+<meta property="og:description" content="Specifies a CRAN package to install in run environment" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -141,30 +141,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configure conversion to bool.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>data_type_bool.Rd</code></div>
+    <h1>Specifies a CRAN package to install in environment</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
+    <div class="hidden name"><code>cran_package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Configure conversion to bool.</p>
+    <p>Specifies a CRAN package to install in run environment</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>data_type_bool</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>cran_package</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"https://cloud.r-project.org"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>The package name</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>A string of the package version. If not provided, version
+will default to latest</p></td>
+    </tr>
+    <tr>
+      <th>repo</th>
+      <td><p>The base URL of the repository to use, e.g., the URL of a
+CRAN mirror. If not provided, the package will be pulled from
+"https://cloud.r-project.org".</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Converted DataType object.</p>
+    <p>A named list containing the package specifications</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>pkg1 &lt;- cran_package("ggplot2", version = "3.3.0")
+pkg2 &lt;- cran_package("stringr")
+pkg3 &lt;- cran_package("ggplot2", version = "0.9.1",
+                     repo = "http://cran.us.r-project.org")
+
+est &lt;- estimator(source_directory = ".",
+                 entry_script = "train.R",
+                 cran_packages = list(pkg1, pkg2, pkg3),
+                 compute_target = compute_target)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>r_environment()</code>, <code>estimator()</code></p></div>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

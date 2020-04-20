@@ -20,7 +20,7 @@
 #' script is being executed.
 #' @param rscript_path The Rscript path to use if an environment build is not required.
 #' The path specified gets used to call the user script.
-#' @param cran_packages A character vector of CRAN packages to be installed.
+#' @param cran_packages A named list of CRAN packages to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
@@ -133,7 +133,9 @@ r_environment <- function(name, version = NULL,
     env$r$cran_packages <- list()
     for (package in cran_packages) {
       cran_package <- azureml$core$environment$RCranPackage()
-      cran_package$name <- package
+      cran_package$name <- package$name
+      cran_package$version <- package$version
+      cran_package$repository <- package$repository
       env$r$cran_packages <- c(env$r$cran_packages, cran_package)
     }
   }
@@ -228,4 +230,37 @@ container_registry <- function(address = NULL,
   container_registry$password <- password
 
   invisible(container_registry)
+}
+
+#' Specifies a CRAN package to install in environment
+#'
+#' @description
+#' Specifies a CRAN package to install in run environment
+#'
+#' @param name The package name
+#' @param version A string of the package version. If not provided, version
+#' will default to latest
+#' @param repo The base URL of the repository to use, e.g., the URL of a
+#' CRAN mirror. If not provided, the package will be pulled from
+#' "https://cloud.r-project.org".
+#' @return A named list containing the package specifications
+#' @export
+#' @section Examples:
+#' ```
+#' pkg1 <- cran_package("ggplot2", version = "3.3.0")
+#' pkg2 <- cran_package("stringr")
+#' pkg3 <- cran_package("ggplot2", version = "0.9.1",
+#'                      repo = "http://cran.us.r-project.org")
+#'
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  cran_packages = list(pkg1, pkg2, pkg3),
+#'                  compute_target = compute_target)
+#' ```
+#' @seealso [r_environment()], [estimator()]
+#' @md
+cran_package <- function(name, version = NULL, repo = "https://cloud.r-project.org") {
+  cran_package <- list(name = name, version = version, repo = repo)
+
+  return(cran_package)
 }

@@ -46,9 +46,7 @@ unregister_all_dataset_versions <- function(dataset) {
 #' @export
 #' @md
 get_dataset_by_name <- function(workspace, name, version = "latest") {
-  azureml$data$abstract_dataset$AbstractDataset$get_by_name(workspace,
-                                                            name,
-                                                            version)
+  azureml$core$dataset$Dataset$get_by_name(workspace, name, version)
 }
 
 #' Get Dataset by ID.
@@ -62,7 +60,7 @@ get_dataset_by_name <- function(workspace, name, version = "latest") {
 #' @export
 #' @md
 get_dataset_by_id <- function(workspace, id) {
-  azureml$data$abstract_dataset$AbstractDataset$get_by_id(workspace, id)
+  azureml$core$dataset$Dataset$get_by_id(workspace, id)
 }
 
 #' Return the named list for input datasets.
@@ -370,15 +368,37 @@ create_tabular_dataset_from_json_lines_files <- function(
 #' the current compute.
 #' @param set_column_types A named list to set column data type, where key is
 #' column name and value is data type.
-#' @return The Tabular Dataset object
+#' @param query_timeout Sets the wait time (as an int, in seconds) before terminating the attempt to execute a command
+#' and generating an error. The default is 30 seconds.
+#' @return A `TabularDataset` object
 #' @export
-#' @seealso
-#' \code{\link{data_path}}
+#' @section Examples:
+#' ```
+#' # create tabular dataset from a SQL database in datastore
+#' datastore <- get_datastore(ws, 'sql-db')
+#' query <- data_path(datastore, 'SELECT * FROM my_table')
+#' tab_ds <- create_tabular_dataset_from_sql_query(query, query_timeout = 10)
+#'
+#' # use `set_column_types` param to set column data types
+#' data_types <- list(ID = data_type_string(),
+#'                    Date = data_type_datetime('%d/%m/%Y %I:%M:%S %p'),
+#'                    Count = data_type_long(),
+#'                    Latitude = data_type_double(),
+#'                    Found = data_type_bool())
+#'
+#' set_tab_ds <- create_tabular_dataset_from_sql_query(query, set_column_types = data_types)
+
+#' ```
+#' @seealso [data_path()] [data_type_datetime()] [data_type_bool()]
+#' [data_type_double()] [data_type_string()] [data_type_long()]
 #' @md
 create_tabular_dataset_from_sql_query <- function(query, validate = TRUE,
-                                                  set_column_types = NULL) {
-  azureml$core$dataset$Dataset$Tabular$from_sql_query(query, validate,
-                                                      set_column_types)
+                                                  set_column_types = NULL,
+                                                  query_timeout = 30L) {
+  azureml$core$dataset$Dataset$Tabular$from_sql_query(query = query,
+                                      validate = validate,
+                                      set_column_types = set_column_types,
+                                      query_timeout = as.integer(query_timeout))
 }
 
 #' Drop the specified columns from the dataset.
@@ -671,8 +691,8 @@ promote_headers_behavior <- function(option) {
 #' @param name An optional name for the DataPath.
 #' @return The `DataPath` object.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' my_data <- register_azure_blob_container_datastore(
 #'     workspace = ws,
 #'     datastore_name = blob_datastore_name,
@@ -683,7 +703,7 @@ promote_headers_behavior <- function(option) {
 #'
 #' datapath <- data_path(my_data, <path_on_my_datastore>)
 #' dataset <- create_file_dataset_from_files(datapath)
-#' }
+#' ```
 #' @seealso
 #' \code{\link{create_file_dataset_from_files}}
 #' \code{\link{create_tabular_dataset_from_parquet_files}}
@@ -716,13 +736,13 @@ data_path <- function(datastore, path_on_datastore = NULL, name = NULL) {
 #' to this folder structure to avoid collision.
 #' @return The `DatasetConsumptionConfig` object.
 #' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' ```
 #' est <- estimator(source_directory = ".",
 #'                  entry_script = "train.R",
 #'                  inputs = list(dataset_consumption_config('mydataset', dataset, mode = 'download')),
 #'                  compute_target = compute_target)
-#'}
+#' ```
 #' @seealso
 #' \code{\link{estimator}}
 #' @md
