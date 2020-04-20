@@ -80,7 +80,7 @@ service$token_auth_enabled" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -119,6 +119,14 @@ service$token_auth_enabled" />
     </li>
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+    </li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
 </li>
@@ -185,10 +193,7 @@ access the following boolean property from the Webservice object:
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of string and datetime corresponding to the auth token
-and the token's expiration time. You will need to request a new
-token using <code>get_webservice_token()</code> after the token's expiration
-time.</p>
+    <p>An <code>AksServiceAccessToken</code> object.</p>
     
 
   </div>

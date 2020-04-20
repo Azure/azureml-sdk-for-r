@@ -1,5 +1,5 @@
 ## Azure ML vignettes
-These vignettes are end-to-end tutorials for using the Azure Machine Learning service with the R SDK.
+These vignettes are end-to-end tutorials for using Azure Machine Learning with the R SDK.
 
 Before running a vignette in RStudio, set the working directory to the folder that contains the vignette file (.Rmd file) in RStudio using `setwd(dirname)` or Session -> Set Working Directory -> To Source File Location. Each vignette assumes that the data and scripts are in the current working directory.
 
@@ -15,15 +15,7 @@ The following vignettes are included:
 
 For additional examples on using the R SDK, see the [samples](../samples) folder.
 
-### Troubleshooting
-
-- If the following error occurs when submitting an experiment using RStudio:
-   ```R
-    Error in py_call_impl(callable, dots$args, dots$keywords) : 
-     PermissionError: [Errno 13] Permission denied
-   ```
-  Move the files for your project into a subdirectory and reset the working directory to that directory before re-submitting.
-  
-  In order to submit an experiment, the Azure ML SDK must create a .zip file of the project directory to send to the service. However,
-  the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio
-  session. For this reason, the recommended best practice is to isolate project files into their own directory.
+### Azure ML guides
+In addition to the end-to-end vignettes, the [guides](guides/) directory contains more detailed documentation for the following:
+* [Deploying models](deploying-models.Rmd): Where and how to deploy models on Azure ML.
+* [Troubleshooting](troubleshooting.Rmd): Known issues and troubleshooting for using R in Azure ML.

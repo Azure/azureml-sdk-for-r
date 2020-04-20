@@ -20,6 +20,12 @@ navbar:
       href: articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html
     - text: Deploy a web service to Azure Kubernetes Service
       href: articles/deploy-to-aks/deploy-to-aks.html
+    - text: ---
+    - text: Guides
+    - text: Deploying models
+      href: articles/guides/deploying-models.html
+    - text: Troubleshooting
+      href: articles/guides/troubleshooting.html
   - text: News
     href: news/index.html
 
@@ -29,10 +35,11 @@ reference:
   contents:
   - '`install_azureml`'
 - title: Workspaces
-  desc: Functions for managing workspace resources. A **Workspace** is the top-level resource for Azure Machine Learning service. It provides a centralized place to work with all the artifacts you create when you use Azure ML.
+  desc: Functions for managing workspace resources. A **Workspace** is the top-level resource for Azure Machine Learning. It provides a centralized place to work with all the artifacts you create when you use Azure ML.
   contents:
   - '`create_workspace`'
   - '`get_workspace`'
+  - '`service_principal_authentication`'
   - '`load_workspace_from_config`'
   - '`write_workspace_config`'
   - '`get_default_datastore`'
@@ -45,6 +52,8 @@ reference:
   - '`get_secrets`'
   - '`delete_secrets`'
   - '`list_secrets`'
+  - '`service_principal_authentication`'
+  - '`interactive_login_authentication`'
 - title: Compute targets
   desc: Functions for managing compute resources. A **Compute Target** is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include `AmlCompute` and `AksCompute`.
   contents:
@@ -60,7 +69,7 @@ reference:
   - '`list_supported_vm_sizes`'
   - '`delete_compute`'
 - title: Working with data
-  desc: Functions for managing and accessing data for your machine learning workflows. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service. Azure storage services that can be registered as datastores through the R SDK include Azure Blob Container and Azure File Share.
+  desc: Functions for accessing your data in Azure Storage services. A **Datastore** is attached to a workspace and is used to store connection information to an Azure storage service.
   contents:
   - '`upload_files_to_datastore`'
   - '`upload_to_datastore`'
@@ -68,7 +77,48 @@ reference:
   - '`get_datastore`'
   - '`register_azure_blob_container_datastore`'
   - '`register_azure_file_share_datastore`'
+  - '`register_azure_sql_database_datastore`'
+  - '`register_azure_postgre_sql_datastore`'
+  - '`register_azure_data_lake_gen2_datastore`'
   - '`unregister_datastore`'
+- title: Working with datasets
+  desc: Functions for managing datasets. An Azure Machine Learning **Dataset** allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of `FileDataset` and `TabularDataset`.
+  contents:
+  - '`register_dataset`'
+  - '`unregister_all_dataset_versions`'
+  - '`get_dataset_by_name`'
+  - '`get_dataset_by_id`'
+  - '`get_input_dataset_from_run`'
+  - '`create_file_dataset_from_files`'
+  - '`get_file_dataset_paths`'
+  - '`download_from_file_dataset`'
+  - '`mount_file_dataset`'
+  - '`skip_from_dataset`'
+  - '`take_from_dataset`'
+  - '`take_sample_from_dataset`'
+  - '`random_split_dataset`'
+  - '`create_tabular_dataset_from_parquet_files`'
+  - '`create_tabular_dataset_from_delimited_files`'
+  - '`create_tabular_dataset_from_json_lines_files`'
+  - '`create_tabular_dataset_from_sql_query`'
+  - '`drop_columns_from_dataset`'
+  - '`keep_columns_from_dataset`'
+  - '`filter_dataset_after_time`'
+  - '`filter_dataset_before_time`'
+  - '`filter_dataset_between_time`'
+  - '`filter_dataset_from_recent_time`'
+  - '`define_timestamp_columns_for_dataset`'
+  - '`load_dataset_into_data_frame`'
+  - '`convert_to_dataset_with_csv_files`'
+  - '`convert_to_dataset_with_parquet_files`'
+  - '`data_type_bool`'
+  - '`data_type_datetime`'
+  - '`data_type_double`'
+  - '`data_type_long`'
+  - '`data_type_string`'
+  - '`promote_headers_behavior`'
+  - '`data_path`'
+  - '`dataset_consumption_config`'
 - title: Environments
   desc: Functions for managing environments. An Azure Machine Learning **Environment** allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see `r_environment()`.
   contents:
@@ -108,6 +158,7 @@ reference:
   - '`log_row_to_run`'
   - '`log_table_to_run`'
   - '`view_run_details`'
+  - '`cran_package`'
 - title: Hyperparameter tuning
   desc: Functions for configuring and managing hyperparameter tuning (HyperDrive) experiments. Azure ML's HyperDrive functionality enables you to automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You can also define early termination policies in which poorly performing experiment runs are canceled and new ones started.
   contents:
@@ -138,6 +189,7 @@ reference:
   contents:
   - '`get_model`'
   - '`register_model`'
+  - '`register_model_from_run`'
   - '`download_model`'
   - '`deploy_model`'
   - '`package_model`'
@@ -164,3 +216,4 @@ reference:
   - '`update_local_webservice`'
   - '`delete_local_webservice`'
   - '`reload_local_webservice_assets`'
+  - '`resource_configuration`'

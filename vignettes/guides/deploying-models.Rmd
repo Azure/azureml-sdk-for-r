@@ -1,0 +1,262 @@
+---
+title: "Deploying models"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deploying models}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This guide covers the details for deploying models as web services on Azure Machine Learning.
+
+## Choose a compute target
+You can use the following compute targets, or compute resources, to host your web service deployment:
+
+Compute target | Used for | GPU support | Description
+-------------- | -------- | ----------- | -----------
+Local web service | Testing/debugging | | Use for limited testing and troubleshooting. Hardware acceleration depends on use of libraries in the local system.
+Azure ML compute instance web service | Testing/debugging | | Used for limited testing and troubleshooting.
+Azure Container Instances (ACI) | Testing or development | | Use for low-scale CPU-based workloads that require less than 48 GB of RAM.
+Azure Kubernetes Service (AKS) | Real-time inference | Yes | Use for high-scale production deployments. Provides fast response time and autoscaling of the deployed service. Cluster autoscaling isn't supported through the Azure Machine Learning SDK. To change the nodes in the AKS cluster, use the UI for your AKS cluster in the Azure portal.
+
+NOTE:  
+Although compute targets like local and Azure Machine Learning compute instance support GPU for training and experimentation, using GPU for inference when deployed as a web service is supported only on Azure Kubernetes Service.
+
+## Prepare deloyment artifacts
+To deploy a model, you need the following:
+
+* **Entry script and source code dependencies**: This script accepts requests, scores the requests by using the model, and returns the results.
+* **Inference environment**: The Azure ML environment, which includes the package dependencies required to run the model.
+* **Deployment configuration**: The configuration for the compute target that hosts the deployed model. It describes things like memory and CPU requirements needed to run the model.
+
+### 1. Define your entry script and dependencies
+To deploy a model, you must provide an entry script (also referred to as the scoring script) that accepts requests, scores the requests by using the model, and returns the results. The entry script is specific to your model. It must understand the format of the incoming request data, the format of the data expected by your model, and the format of the data returned to clients. If the request data is in a format that is not usable by your model, the script can transform it into an acceptable format. It can also transform the response before returning it to the client.
+
+The entry script must contain an **`init()`** method that loads your model and then returns a function that uses the model to make a prediction based on the input data passed to the function. Azure ML runs the `init()` method once, when the Docker container for your web service is started. The prediction function returned by `init()` will be run every time the service is invoked to make a prediction on some input data. The inputs and outputs of this prediction function typically use JSON for serialization and deserialization.
+
+#### Locate model files in your entry script
+To locate the registered model(s) in your entry script, use the `AZUREML_MODEL_DIR` environment variable that is created during the service deployment. This environment variable contains the path to the model location.
+
+The following table describes the value of `AZUREML_MODEL_DIR` depending on the number of models deployed:
+
+Deployment | Environment variable value
+---------- | --------------------------
+Single model | The path to the folder containing the model.
+Multiple models | The path to the folder containing all models. Models are located by name and version in this folder (`$MODEL_NAME/$VERSION`)
+
+To get the path to the model file in your entry script, combine the environment variable with the file path you're looking for.
+
+**Single model example**
+```{r eval=FALSE}
+# Example when the model is a file
+model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model.rds')
+
+# Example when the model is a folder containing a file
+model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model_folder', 'my_model.rds')
+
+```
+
+**Multiple model example**
+```{r eval=FALSE}
+# Example when the model is a file, and the deployment contains multiple versions of the same model
+first_model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model', '1', 'my_model.rds')
+
+second_model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model', '2', 'my_model.rds')
+```
+
+#### Example entry script
+The following is an example entry script. You can see the full tutorial [here](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html).
+
+```{r eval=FALSE}
+library(jsonlite)
+
+init <- function()
+{
+  # Get the path to the model location of the registered model in Azure ML
+  model_path <- Sys.getenv("AZUREML_MODEL_DIR")
+  
+  # Load the model
+  model <- readRDS(file.path(model_path, "model.rds"))
+  message("logistic regression model loaded")
+  
+  # The following method will be called by Azure ML each time the deployed web service is invoked
+  function(data)
+  {
+    # Deserialize the input data to the service
+    vars <- as.data.frame(fromJSON(data))
+    
+    # Evaluate the data on the deployed model
+    prediction <- as.numeric(predict(model, vars, type="response")*100)
+    
+    # Return the prediction serialized to JSON
+    toJSON(prediction)
+  }
+}
+```
+
+### 2. Define your inference environment
+You will also need to provide an Azure ML environment ([`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html)) that defines all the dependencies required to execute your scoring script. You can create a new environment for deployment, or use a previously instatiated environment or registered environment.
+
+Then define the inference configuration, which consists of the entry script, the environment, and optionally the directory that contains all the files needed to package and deploy your model (such as helper files for the entry script). See the reference documentation for [`inference_config()`](https://azure.github.io/azureml-sdk-for-r/reference/inference_config.html).
+
+```{r eval=FALSE}
+myenv = get_environment(ws, name = 'myenv', version = '1')
+
+inference_config = inference_config(entry_script = 'score.R',
+                                    source_directory = './my_scoring_folder',
+                                    environment = myenv)
+
+```
+
+Note that if you specify the `source_directory` parameter, the entry script file must be located in that directory, and the value to `entry_script` should be the relative path of the file inside that directory.
+
+### 3. Define your deployment configuration
+Before deploying your model, you must define the deployment configuration. The deployment configuration is specific to the compute target that will host the web service. For example, when you deploy a model locally, you must specify the port where the service accepts requests.
+
+The following table provides examples for creating the deployment configuration for each compute target:
+
+Compute target | Deployment configuration | Example
+-------------- | ------------------------ | -------
+Local | [`local_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/local_webservice_deployment_config.html) | `deployment_config <- local_webservice_deployment_config(port = 8890)`
+Azure Container Instances (ACI) | [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) | `deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)`
+Azure Kubernetes Service (AKS) | [`aks_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aks_webservice_deployment_config.html) | `deployment_config <- aks_webservice_deployment_config(cpu_cores = 1, memory_gb = 1)`
+
+## Deploy to target
+Finally, deploy your model(s) as a web service to the target of your choice. To deploy the model(s), you will provide the inference configuration and deployment configuration you created in the above steps, in addition to the models you want to deploy, to [`deploy_model()`](https://azure.github.io/azureml-sdk-for-r/reference/deploy_model.html). If you are deploying to AKS, you will also have to provide the AKS compute target.
+
+### 1. Local deployment
+To deploy a model locally, you need to have Docker installed on your local machine. If you are deploying locally from a compute instance, Docker will already be installed.
+
+For an example of local deployment, see the [deploy-to-local](https://github.com/Azure/azureml-sdk-for-r/tree/master/samples/deployment/deploy-to-local) sample.
+
+### 2. ACI deployment
+For an example of deploying to ACI, see the [train-and-deploy-to-aci](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html) vignette.
+
+### 3. AKS deployment
+To deploy a model to AKS, you will first need an AKS cluster for the deployment compute target. You can either
+
+* create a new AKS cluster with [`create_aks_compute()`](https://azure.github.io/azureml-sdk-for-r/reference/create_aks_compute.html)
+* or attach an existing AKS cluster if you already have one in your Azure subscription with [`attach_aks_compute()`](https://azure.github.io/azureml-sdk-for-r/reference/attach_aks_compute.html)
+
+You can instead also create or attach an AKS cluster via the CLI or [studio](ml.azure.com) UI.
+
+For an example of deploying to AKS, see the [deploy-to-aks](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html) vignette.
+
+### Troubleshooting deployment
+If your service deployment fails, you can use [`get_webservice_logs()`](https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_logs.html) to inspect the detailed Docker engine log messages from your web service deployment. Note that if your initial deployment fails and you want to attempt a new deployment, you will first need to delete the original web service if you want to use the same web service name. You can use the [`delete_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/delete_webservice.html) method.
+
+For a more detailed guide on working around or solving common deployment errors, see [Troubleshooting AKS and ACI deployments](https://docs.microsoft.com/azure/machine-learning/how-to-troubleshoot-deployment).
+
+### Web service authentication
+The easiest way to authenticate to deployed web services is to use key-based authentication, which generates static bearer-type authentication keys that do not need to be refreshed.
+
+AKS deployments additionally support token-based auth.
+
+The primary difference is that keys are static and can be regenerated manually, and tokens need to be refreshed upon expiration.
+
+Authentication method | ACI | AKS
+--------------------- | --- | ---
+Key | Disabled by default | Enabled by default
+Token | Not available | Disabled by default
+
+#### Key-based authentication
+Web services deployed on AKS have key-based auth enabled by default. ACI-deployed services have key-based auth disabled by default, but you can enable it by setting `auth_enabled = TRUE` when creating the ACI web service. The following is an example of creating an ACI deployment configuration with key-based auth enabled.
+
+```{r eval=FALSE}
+deployment_config <- aci_webservice_deployment_config(cpu_cores = 1, 
+                                                      memory_gb = 1,
+                                                      auth_enabled = TRUE)
+```
+
+To fetch the auth keys, use [`get_webservice_keys()`](https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_keys.html). To regenerate a key, use the [`generate_new_webservice_key()`](https://azure.github.io/azureml-sdk-for-r/reference/generate_new_webservice_key.html) function:
+
+```{r eval=FALSE}
+# Generate the primary auth key
+primary_key <- generate_new_webservice_key(service, key_type = "Primary")
+
+# Generate the secondary auth key
+secondary_key <- generate_new_webservice_key(service, key_type = "Secondary")
+```
+
+#### Token-based authentication
+When you enable token authentication for a web service, users must present an Azure Machine Learning JSON Web Token (JWT) to the web service to access it. The token expires after a specified timeframe and needs to be refreshed to continue making calls.
+
+Token auth is disabled by default when you deploy to AKS. To control token auth, use the `token_auth_enabled` parameter when you create or update a deployment:
+
+```{r eval=FALSE}
+deployment_config <- aks_webservice_deployment_config(cpu_cores = 1, 
+                                                      memory_gb = 1,
+                                                      token_auth_enabled = TRUE)
+```
+
+If token authentication is enabled, you can use the [`get_webservice_token()`](https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_token.html) method to retrieve a JWT. You will need to request a new token by the token's `refresh_after` time.
+
+```{r eval=FALSE}
+aks_service_access_token <- get_webservice_token(service)
+
+# Get the JWT
+jwt <- aks_service_access_token$access_token
+# Get the time after which token should be refreshed
+refresh_after <- aks_service_access_token$refresh_after
+
+```
+
+We strongly recommend that you create your Azure ML workspace in the same region as your AKS cluster. To authenticate with a token, the web service will make a call to the region in which your workspace is created. If your workspace's region is unavailable, then you will not be able to fetch a token for your web service, even if your cluster is in a different region than your workspace. This effectively results in token-based auth being unavailable until your workspace's region is available again. In addition, the greater the distance between your cluster's region and your workspace's region, the longer it will take to fetch a token.
+
+For more information on authentication in Azure ML, see [Set up authentication for Azure Machine Learning resources and workflows](https://docs.microsoft.com/azure/machine-learning/how-to-setup-authentication).
+
+## Consume web service
+Every deployed web service provides a REST endpoint, so you can create client applications in any programming language. If you've enabled key-based authentication for your service, you need to provide a service key as a token in your request header. If you've enabled token-based authentication for your service, you need to provide an Azure Machine Learning JSON Web Token (JWT) as a bearer token in your request header.
+
+To get the endpoint for the deployed web service, use the scoring_uri property:
+```
+service$scoring_uri
+```
+
+You can also retrieve the schema JSON document after you deploy the service. Use the swagger_uri property from the deployed web service to get the URI to the local web service's Swagger file: 
+```
+service$swagger_uri
+```
+
+You can then use the scoring URI and a package such as **httr** to invoke the web service via request-response consumption.
+
+Optionally, you can use the [`invoke_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/invoke_webservice.html) method from **azuremlsdk** to directly invoke the web service if you have the web service object:
+``` {r eval=FALSE}
+library(jsonlite)
+
+newdata <- data.frame( # valid values shown below
+ dvcat="10-24",        # "1-9km/h" "10-24"   "25-39"   "40-54"   "55+"  
+ seatbelt="none",      # "none"   "belted"  
+ frontal="frontal",    # "notfrontal" "frontal"
+ sex="f",              # "f" "m"
+ ageOFocc=22,          # age in years, 16-97
+ yearVeh=2002,         # year of vehicle, 1955-2003
+ airbag="none",        # "none"   "airbag"   
+ occRole="pass"        # "driver" "pass"
+ )
+
+prob <- invoke_webservice(service, toJSON(newdata))
+prob
+```
+
+## Update web service
+To update a web service, use the corresponding `update_*()` method. You can update the web service to use a new model, a new entry script, or new dependencies that can be specified in an inference configuration.
+
+* To update a locally deployed web service, use [`update_local_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/update_local_webservice.html)
+* To update a deployed ACI web service, use [`update_aci_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/update_aci_webservice.html)
+* To update a deployed AKS web service, use [`update_aks_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/update_aks_webservice.html)
+
+## Clean up resources
+* To delete a deployed ACI or AKS web service, use [`delete_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/delete_webservice.html)
+* To delete a locally deployed web service, use [`delete_local_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/delete_local_webservice.html)
+* To delete a registered model, use [`delete_model()`](https://azure.github.io/azureml-sdk-for-r/reference/delete_model.html)
+
+## Additional references
+For additional resources on model deployments, you can refer to the following:
+
+* [Deploy models with Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-and-where)
+* [Securing Azure Machine Learning web services with SSL](https://docs.microsoft.com/azure/machine-learning/how-to-secure-web-service)
+* [Troubleshooting AKS and ACI deployments](https://docs.microsoft.com/azure/machine-learning/how-to-troubleshoot-deployment)
+* [Create event alerts and triggers for model deployments](https://docs.microsoft.com/azure/machine-learning/how-to-use-event-grid)
+* [Monitor your Azure Machine Learning models with Application Insights](https://docs.microsoft.com/azure/machine-learning/how-to-enable-app-insights)

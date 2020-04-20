@@ -93,7 +93,12 @@ download_from_datastore <- function(datastore,
 #' datastore by name from the given workspace.
 #' @param workspace The `Workspace` object.
 #' @param datastore_name A string of the name of the datastore.
-#' @return The `AzureBlobDatastore` or `AzureFileDatastore` object.
+#' @return The `azureml.data.azure_sql_database.AzureBlobDatastore`,
+#' `azureml.data.azure_sql_database.AzureFileDatastore`,
+#' `azureml.data.azure_sql_database.AzureSqlDatabaseDatastore`,
+#' `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore`,
+#' `azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore`, or
+#' `azureml.data.azure_sql_database.AzureSqlDatabaseDatastore` object.
 #' @export
 #' @md
 get_datastore <- function(workspace, datastore_name) {
@@ -262,4 +267,150 @@ register_azure_file_share_datastore <- function(workspace,
 unregister_datastore <- function(datastore) {
   datastore$unregister()
   invisible(NULL)
+}
+
+#' Initialize a new Azure SQL database Datastore.
+#'
+#' @description
+#' Initialize a new Azure SQL database Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param server_name The SQL server name.
+#' @param database_name The SQL database name.
+#' @param tenant_id The Directory ID/Tenant ID of the service principal.
+#' @param client_id The Client ID/Application ID of the service principal.
+#' @param client_secret The secret of the service principal.
+#' @param resource_url The resource URL, which determines what operations will
+#' be performed on the SQL database store, if NULL, defaults to
+#' https://database.windows.net/.
+#' @param authority_url The authority URL used to authenticate the user, defaults
+#' to https://login.microsoftonline.com.
+#' @param endpoint The endpoint of the SQL server. If NULL, defaults to
+#' database.windows.net.
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore does
+#' not exist, it will create one. The default is FALSE.
+#' @param username The username of the database user to access the database.
+#' @param password The password of the database user to access the database.
+#' @return The `azureml.data.azure_sql_database_datastore.AzureSqlDatabaseDatastore`
+#' object.
+#' @export
+#' @md
+register_azure_sql_database_datastore <- function(workspace, datastore_name,
+                                                  server_name, database_name,
+                                                  tenant_id, client_id,
+                                                  client_secret,
+                                                  resource_url = NULL,
+                                                  authority_url = NULL,
+                                                  endpoint = NULL,
+                                                  overwrite = FALSE,
+                                                  username = NULL,
+                                                  password = NULL) {
+  azureml$core$Datastore$register_azure_sql_database(workspace,
+                                                     datastore_name,
+                                                     server_name,
+                                                     database_name,
+                                                     tenant_id,
+                                                     client_id,
+                                                     client_secret,
+                                                     resource_url,
+                                                     authority_url,
+                                                     endpoint,
+                                                     overwrite,
+                                                     username,
+                                                     password)
+}
+
+#' Initialize a new Azure PostgreSQL Datastore.
+#'
+#' @description
+#' Initialize a new Azure PostgreSQL Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param server_name The PostgreSQL server name.
+#' @param database_name The PostgreSQL database name.
+#' @param user_id The User ID of the PostgreSQL server.
+#' @param user_password The User Password of the PostgreSQL server.
+#' @param port_number The Port Number of the PostgreSQL server.
+#' @param endpoint The endpoint of the PostgreSQL server. If NULL, defaults to
+#' postgres.database.azure.com.
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore
+#' does not exist, it will create one. The default is FALSE.
+#' @return The `azureml.data.azure_postgre_sql_datastore.AzurePostgreSqlDatastore`
+#' object.
+#' @export
+#' @md
+register_azure_postgre_sql_datastore <- function(workspace, datastore_name,
+                                                 server_name, database_name,
+                                                 user_id, user_password,
+                                                 port_number = NULL,
+                                                 endpoint = NULL,
+                                                 overwrite = FALSE) {
+  azureml$core$Datastore$register_azure_postgre_sql(workspace,
+                                                    datastore_name,
+                                                    server_name,
+                                                    database_name,
+                                                    user_id,
+                                                    user_password,
+                                                    port_number,
+                                                    endpoint,
+                                                    overwrite)
+}
+
+#' Initialize a new Azure Data Lake Gen2 Datastore.
+#'
+#' @description
+#' Initialize a new Azure Data Lake Gen2 Datastore.
+#'
+#' @param workspace The workspace this datastore belongs to.
+#' @param datastore_name The datastore name.
+#' @param filesystem The name of the Data Lake Gen2 filesystem.
+#' @param account_name The storage account name.
+#' @param tenant_id The Directory ID/Tenant ID of the service principal.
+#' @param client_id The Client ID/Application ID of the service principal.
+#' @param client_secret The secret of the service principal.
+#' @param resource_url The resource URL, which determines what operations will be
+#' performed on the data lake store, defaults to https://storage.azure.com/ which
+#' allows us to perform filesystem operations.
+#' @param authority_url The authority URL used to authenticate the user, defaults to
+#' "https://login.microsoftonline.com".
+#' @param protocol Protocol to use to connect to the blob container. If None,
+#' defaults to "https".
+#' @param endpoint The endpoint of the blob container. If None, defaults to
+#' "core.windows.net".
+#' @param overwrite Whether to overwrite an existing datastore. If the datastore
+#' does not exist, it will create one. The default is FALSE.
+#' @return The `azureml.data.azure_data_lake_datastore.AzureDataLakeGen2Datastore`
+#' object.
+#' @section Examples:
+#' ```r
+#' # Create and register an Azure Data Lake Gen2 Datastore to a workspace.
+#'
+#' my_adlsgen2_ds <- register_azure_data_lake_gen2_datastore(workspace = your_workspace,
+#'                                                           datastore_name = <name for this datastore>,
+#'                                                           filesystem = 'test',
+#'                                                           tenant_id = your_workspace$auth$tenant_id,
+#'                                                           client_id = your_workspace$auth$service_principal_id,
+#'                                                           client_secret = your_workspace$auth$service_principal_password)
+#' ```
+#' @seealso [unregister_datastore()], [get_datastore()]
+#' @md
+register_azure_data_lake_gen2_datastore <- function(workspace, datastore_name,
+                                                    filesystem, account_name,
+                                                    tenant_id, client_id,
+                                                    client_secret,
+                                                    resource_url = NULL,
+                                                    authority_url = NULL,
+                                                    protocol = NULL,
+                                                    endpoint = NULL,
+                                                    overwrite = FALSE) {
+  azureml$core$Datastore$register_azure_data_lake_gen2(workspace,
+                                                       datastore_name,
+                                                       filesystem, account_name,
+                                                       tenant_id, client_id,
+                                                       client_secret,
+                                                       resource_url,
+                                                       authority_url, protocol,
+                                                       endpoint, overwrite)
 }

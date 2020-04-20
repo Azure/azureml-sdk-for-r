@@ -40,7 +40,11 @@ The existing AKS cluster can be in a different Azure region than your
 workspace.
 If you want to secure your AKS cluster using an Azure Virtual Network, you
 must create the virtual network first. For more information, see
-Secure Azure ML experimentation and inference jobs within an Azure Virtual Network" />
+Secure Azure ML experimentation and inference jobs within an Azure Virtual Network
+If you want to re-attach an AKS cluster, for example to to change SSL or other
+cluster configuration settings, you must first remove the existing attachment
+with detach_aks_compute().
+Attaching a cluster will take approximately 5 minutes." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -72,7 +76,7 @@ Secure Azure ML experimentation and inference jobs within an Azure Virtual Netwo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -111,6 +115,14 @@ Secure Azure ML experimentation and inference jobs within an Azure Virtual Netwo
     </li>
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+    </li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
 </li>
@@ -153,11 +165,15 @@ workspace.</p>
 <p>If you want to secure your AKS cluster using an Azure Virtual Network, you
 must create the virtual network first. For more information, see
 <a href='https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-enable-virtual-network#aksvnet'>Secure Azure ML experimentation and inference jobs within an Azure Virtual Network</a></p>
+<p>If you want to re-attach an AKS cluster, for example to to change SSL or other
+cluster configuration settings, you must first remove the existing attachment
+with <code>detach_aks_compute()</code>.</p>
+<p>Attaching a cluster will take approximately 5 minutes.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='kw'>resource_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>resource_group</span>, <span class='no'>cluster_name</span>,
+  <span class='kw'>cluster_purpose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FastProd"</span>, <span class='st'>"DevTest"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,18 +183,21 @@ must create the virtual network first. For more information, see
       <td><p>The <code>Workspace</code> object to attach the AKS cluster to.</p></td>
     </tr>
     <tr>
-      <th>cluster_name</th>
-      <td><p>A string of the name for the cluster.</p></td>
-    </tr>
-    <tr>
-      <th>resource_id</th>
-      <td><p>A string of the resource ID for the AKS cluster being
-attached.</p></td>
-    </tr>
-    <tr>
       <th>resource_group</th>
       <td><p>A string of the resource group in which the AKS cluster
 is located.</p></td>
+    </tr>
+    <tr>
+      <th>cluster_name</th>
+      <td><p>A string of the name of the AKS cluster.</p></td>
+    </tr>
+    <tr>
+      <th>cluster_purpose</th>
+      <td><p>The targeted usage of the cluster. The possible values are
+"DevTest" or "FastProd". This is used to provision Azure Machine Learning components
+to ensure the desired level of fault-tolerance and QoS. If your cluster has less
+than 12 virtual CPUs, you will need to specify "DevTest" for this argument. We
+recommend that your cluster have at least 2 virtual CPUs for dev/test usage.</p></td>
     </tr>
     </table>
     
@@ -186,15 +205,23 @@ is located.</p></td>
 
     <p>The <code>AksCompute</code> object.</p>
     
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>compute_target</span> <span class='kw'>&lt;-</span> <span class='fu'>attach_aks_compute</span>(<span class='no'>ws</span>,
-                                     <span class='kw'>cluster_name</span> <span class='kw'>=</span> <span class='st'>'mycluster'</span>,
-                                     <span class='kw'>resource_id</span> <span class='kw'>=</span> <span class='st'>'myresourceid'</span>,
-                                     <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='st'>'myresourcegroup'</span>)
-}</div></pre>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+compute_target &lt;- attach_aks_compute(ws,
+                                     resource_group = 'myresourcegroup',
+                                     cluster_name = 'myakscluster')
+</pre>
+
+<p>If the cluster has less than 12 virtual CPUs, you will need to also specify the
+<code>cluster_purpose</code> parameter in the <code>attach_aks_compute()</code> call: <code>cluster_purpose = 'DevTest'</code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>detach_aks_compute()</code></p></div>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -202,9 +229,11 @@ is located.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
+
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>

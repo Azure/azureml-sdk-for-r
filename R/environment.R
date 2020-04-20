@@ -250,35 +250,77 @@ generate_docker_file <- function(custom_docker_image = NULL,
     base_dockerfile <- paste0(base_dockerfile, "ENV TAR=\"/bin/tar\"\n")
     base_dockerfile <- paste0(base_dockerfile, "RUN R -e \"remotes::",
                               "install_cran('azuremlsdk', ",
-                              "repos = 'http://cran.us.r-project.org', ",
+                              "repos = 'https://cloud.r-project.org/', ",
                               "upgrade = FALSE)\"\n")
   }
 
   if (!is.null(cran_packages)) {
     for (package in cran_packages) {
+
+      package$repo <- sprintf("c(\'%s\')", package$repo)
+
       base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', ", package),
-          "repos = \'http://cran.us.r-project.org\')\"\n")
+        base_dockerfile,
+        paste0("RUN R -e \"remotes::install_version",
+               sprintf("(\'%s\'", package$name),
+               sprintf(", version = \'%s\'", package$version),
+               sprintf(", repos = %s", package$repo),
+               ")\"\n"
+        )
+      )
     }
   }
 
-  if (!is.null(github_packages)) {
-    for (package in github_packages) {
-      base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"devtools::install_github(\'%s\')\"\n", package))
-    }
-  }
 
-  if (!is.null(custom_url_packages)) {
-    for (package in custom_url_packages) {
-      base_dockerfile <- paste0(
-          base_dockerfile,
-          sprintf("RUN R -e \"install.packages(\'%s\', repos = NULL)\"\n",
-                  package))
-    }
+if (!is.null(github_packages)) {
+  for (package in github_packages) {
+    base_dockerfile <- paste0(
+      base_dockerfile,
+      sprintf("RUN R -e \"remotes::install_github(\'%s\')\"\n", package))
   }
+}
 
-  invisible(base_dockerfile)
+if (!is.null(custom_url_packages)) {
+  for (package in custom_url_packages) {
+    base_dockerfile <- paste0(
+      base_dockerfile,
+      sprintf("RUN R -e \"install.packages(\'%s\', repos = NULL)\"\n",
+              package))
+  }
+}
+
+invisible(base_dockerfile)
+}
+
+#' Specifies a CRAN package to install in environment
+#'
+#' @description
+#' Specifies a CRAN package to install in run environment
+#'
+#' @param name The package name
+#' @param version A string of the package version. If not provided, version
+#' will default to latest
+#' @param repo The base URL of the repository to use, e.g., the URL of a
+#' CRAN mirror. If not provided, the package will be pulled from
+#' "https://cloud.r-project.org".
+#' @return A named list containing the package specifications
+#' @export
+#' @section Examples:
+#' ```
+#' pkg1 <- cran_package("ggplot2", version = "3.3.0")
+#' pkg2 <- cran_package("stringr")
+#' pkg3 <- cran_package("ggplot2", version = "0.9.1",
+#'                      repo = "http://cran.us.r-project.org")
+#'
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  cran_packages = list(pkg1, pkg2, pkg3),
+#'                  compute_target = compute_target)
+#' ```
+#' @seealso [r_environment()], [estimator()]
+#' @md
+cran_package <- function(name, version = NULL, repo = "https://cloud.r-project.org") {
+  cran_package <- list(name = name, version = version, repo = repo)
+
+  return(cran_package)
 }

@@ -11,8 +11,23 @@ test_that("get, register, download, serialize, deserialize and delete model", {
   dir.create(tmp_dir_path)
   file.create(file.path(tmp_dir_path, model_name))
   
-  # register the model
-  model <- register_model(ws, tmp_dir_path, model_name)
+  # register the model (with datasets)
+  ds <- get_default_datastore(ws)
+
+  file_name <- "iris.csv"
+  upload_files_to_datastore(ds,
+                            files = list(file.path(".", file_name)),
+                            target_path = 'train-dataset/tabular/',
+                            overwrite = TRUE)
+  
+  train_ds <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
+  val_ds <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
+  infer_ds <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
+
+  model <- register_model(ws, tmp_dir_path, model_name,
+                          datasets = list(list("training", train_ds),
+                                          list("validation", val_ds),
+                                          list("inferencing", infer_ds)))
   
   # get model
   ws_model <- get_model(ws, model_name)

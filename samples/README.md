@@ -1,5 +1,5 @@
 ## Azure ML samples
-These samples are short code examples for using the Azure Machine Learning service with the R SDK. If you are new to the R SDK, we recommend that you first take a look at the more detailed end-to-end [vignettes](../vignettes).
+These samples are short code examples for using Azure Machine Learning with the R SDK. If you are new to the R SDK, we recommend that you first take a look at the more detailed end-to-end [vignettes](../vignettes).
 
 Before running a sample in RStudio, set the working directory to the folder that contains the sample script in RStudio using `setwd(dirname)` or Session -> Set Working Directory -> To Source File Location. Each vignette assumes that the data and scripts are in the current working directory.
 

@@ -9,7 +9,7 @@ vignette: >
   \use_package{UTF-8}
 ---
 
-In this tutorial, you learn the foundational design patterns in Azure Machine Learning.  You'll train and deploy a **caret** model to predict the likelihood of a fatality in an automobile accident. After completing this tutorial, you'll have the practical knowledge of the R SDK to scale up to developing more-complex experiments and workflows.
+In this tutorial, you learn the foundational design patterns in Azure Machine Learning.  You'll train and deploy a Generalized Linear Model to predict the likelihood of a fatality in an automobile accident. After completing this tutorial, you'll have the practical knowledge of the R SDK to scale up to developing more-complex experiments and workflows.
 
 In this tutorial, you learn the following tasks:
 
@@ -33,17 +33,17 @@ The setup for your development work in this tutorial includes the following acti
 * Create an experiment to track your runs
 * Create a remote compute target to use for training
 
+If you are using RStudio from a Notebook VM, open this tutorial as a project in RStudio with File > Open Project and select
+your cloned `train-and-deploy-to-aci` folder. 
+
 ### Install required packages
-This tutorial assumes you already have the Azure ML SDK installed. Go ahead and import the **azuremlsdk** package.
+This tutorial assumes you already have the Azure ML SDK installed. 
+(If you are running this vignette from an RStudio instance in an Azure
+ML Compute Instance or Notebook VM, the package is already installed for you.)
+Go ahead and load the **azuremlsdk** package.
 
 ```{r eval=FALSE}
 library(azuremlsdk)
-```
-
-The tutorial uses data from the [**DAAG** package](https://cran.r-project.org/package=DAAG). Install the package if you don't have it.
-
-```{r eval=FALSE}
-install.packages("DAAG")
 ```
 
 The training and scoring scripts (`accidents.R` and `accident_predict.R`) have some additional dependencies. If you plan on running those scripts locally, make sure you have those required packages as well.
@@ -76,22 +76,31 @@ if (is.null(compute_target)) {
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,
                                        vm_size = vm_size,
-                                       max_nodes = 1)
+                                       max_nodes = 2)
   
   wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
 ```
+This cluster has a maximum size of two nodes, but only one will be provisioned for now. The second will only be provisioned as needed, and will automatically de-provision when no longer in use. You can even set `min_nodes=0` to make the first node provision on demand as well (and experiments will wait for the node to provision before starting).
 
 ## Prepare data for training
-This tutorial uses data from the **DAAG** package. This dataset includes data from over 25,000 car crashes in the US, with variables you can use to predict the likelihood of a fatality. First, import the data into R and transform it into a new dataframe `accidents` for analysis, and export it to an `Rdata` file.
+This tutorial uses data from the US [National Highway Traffic Safety Administration](https://cdan.nhtsa.gov/tsftables/tsfar.htm)  
+(with thanks to [Mary C. Meyer and Tremika Finney](https://www.stat.colostate.edu/~meyer/airbags.htm)).
+This dataset includes data from over 25,000 car crashes in the US, with variables you can use to predict the likelihood of a fatality. First, import the data into R and transform it into a new dataframe `accidents` for analysis, and export it to an `Rdata` file.
 
 ```{r load_data, eval=FALSE}
-library(DAAG)
-data(nassCDS)
+nassCDS <- read.csv("nassCDS.csv", 
+                     colClasses=c("factor","numeric","factor",
+                                  "factor","factor","numeric",
+                                  "factor","numeric","numeric",
+                                  "numeric","character","character",
+                                  "numeric","numeric","character"))
 
 accidents <- na.omit(nassCDS[,c("dead","dvcat","seatbelt","frontal","sex","ageOFocc","yearVeh","airbag","occRole")])
 accidents$frontal <- factor(accidents$frontal, labels=c("notfrontal","frontal"))
 accidents$occRole <- factor(accidents$occRole)
+accidents$dvcat <- ordered(accidents$dvcat, 
+                          levels=c("1-9km/h","10-24","25-39","40-54","55+"))
 
 saveRDS(accidents, file="accidents.Rd")
 ```
@@ -108,7 +117,6 @@ upload_files_to_datastore(ds,
                           target_path = target_path,
                           overwrite = TRUE)
 ```
-
 
 ## Train a model
 
@@ -298,12 +306,6 @@ newdata <- data.frame( # valid values shown below
 
 prob <- invoke_webservice(aci_service, toJSON(newdata))
 prob
-```
-
-You can also get the web service's HTTP endpoint, which accepts REST client calls. You can share this endpoint with anyone who wants to test the web service or integrate it into an application.
-
-```{r get_endpoint, eval=FALSE}
-aci_service$scoring_uri
 ```
 
 ## Clean up resources

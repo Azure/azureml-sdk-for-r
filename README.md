@@ -5,7 +5,7 @@
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master&label=Docs)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/azuremlsdk)](https://cran.r-project.org/package=azuremlsdk)
 
-Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with the Azure Machine Learning service. 
+Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with Azure Machine Learning. 
 
 Azure Machine Learning SDK for R uses the reticulate package to bind to [Azure Machine Learning's Python SDK](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.
 
@@ -32,7 +32,7 @@ Please take a look at the package website https://azure.github.io/azureml-sdk-fo
 | [HyperDrive](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-hyperparameter-tuning) | HyperDrive automates the process of running hyperparameter sweeps for an `Experiment`. | :heavy_check_mark: |
 | [Model](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Cloud representations of machine learning models that help you transfer models between local development environments and the `Workspace` object in the cloud. | :heavy_check_mark: |
 | [Webservice](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-model-management-deployment) | Models can be packaged into container images that include the runtime environment and dependencies. Models must be built into an image before you deploy them as a web service. `Webservice` is the abstract parent class for creating and deploying web services for your models. | :heavy_check_mark: |
-| [Dataset](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :arrows_counterclockwise: |
+| [Dataset](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-azure-machine-learning-architecture#datasets-and-datastores) | An Azure Machine Learning `Dataset` allows you to explore, transform, and manage your data for various scenarios such as model training and pipeline creation. When you are ready to use the data for training, you can save the Dataset to your Azure ML workspace to get versioning and reproducibility capabilities. | :heavy_check_mark: |
 
 ## Installation
 
@@ -43,13 +43,12 @@ Install [Conda](https://docs.conda.io/en/latest/miniconda.html) if not already i
 install.packages("azuremlsdk")
 
 # Or the development version from GitHub
-# install.packages("remotes")
+install.packages("remotes")
 remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
 
 # Then, use `install_azureml()` to install the compiled code from the AzureML Python SDK.
 azuremlsdk::install_azureml()
 ```
-
 Now, you're ready to get started!
 
 For a more detailed walk-through of the installation process, advanced options, and troubleshooting, see our [Installation Guide](https://azure.github.io/azureml-sdk-for-r/articles/installation.html).
@@ -95,7 +94,7 @@ Take a look at our [code samples](https://github.com/Azure/azureml-sdk-for-r/tre
  
 ## Resources
 * R SDK package documentation: https://azure.github.io/azureml-sdk-for-r/reference/index.html
-* Azure Machine Learning service: https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml
+* Azure Machine Learning: https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml
 
 ## Contribute
 We welcome contributions from the community. If you would like to contribute to the repository, please refer to the [contribution guide](https://github.com/Azure/azureml-sdk-for-r/blob/master/CONTRIBUTING.md).

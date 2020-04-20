@@ -7,8 +7,7 @@
 choice(options)
 }
 \arguments{
-\item{options}{An integer vector of discrete values to choose from, or
-one or more comma-separated discrete values to choose from.}
+\item{options}{A vector of values to choose from.}
 }
 \value{
 A list of the stochastic expression.

@@ -20,8 +20,8 @@ specified using \code{choice()}.
 }
 \examples{
 \dontrun{
-param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(1, 2, 3),
-                                               "batch_size" = choice(16, 32)))
+param_sampling <- grid_parameter_sampling(list("num_hidden_layers" = choice(c(1, 2, 3)),
+                                               "batch_size" = choice(c(16, 32))))
 }
 }
 \seealso{

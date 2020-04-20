@@ -12,7 +12,7 @@ test_that("create environment and check parameters", {
   expect_equal(env$version, "1")
   expect_equal(env$docker$enabled, TRUE)
   expect_equal(env$docker$base_image, NULL)
-
+  
   # use custom docker image
   custom_docker_image_name = "temp_image"
   env <- r_environment(env_name, custom_docker_image = custom_docker_image_name)
@@ -25,15 +25,15 @@ test_that("create environment and check parameters", {
 test_that("create, register, and get environment", {
   skip_if_no_subscription()
   ws <- existing_ws
-
+  
   env_name <- "testenv"
-
+  
   # Create environment
   env <- r_environment(env_name, version = "1")
-
+  
   # Register environment
   register_environment(env, ws)
-
+  
   # Get environment
   environ <- get_environment(ws, env_name, "1")
   expect_equal(env$name, environ$name)
@@ -47,32 +47,39 @@ test_that("create dockerfile", {
                                   "clean -ay && pip install --no-cache-dir ",
                                   "azureml-defaults\nENV TAR=\"/bin/tar\"\n",
                                   "RUN R -e \"remotes::install_cran('azuremlsdk'",
-                                  ", repos = 'http://cran.us.r-project.org', ",
+                                  ", repos = 'https://cloud.r-project.org/', ",
                                   "upgrade = FALSE)\"\n"))
-
+  
   # cran packages
+  cran_pkg_1 <- cran_package("ggplot2")
+  cran_pkg_2 <- cran_package("stringr", "0.0.0", "https://some-other-repo.com/")
+  cran_pkg_3 <- cran_package('shiny', "1.14")
   dockerfile <- generate_docker_file(custom_docker_image = "ubuntu-18.04",
-                                     cran_packages = c("ggplot2"),
+                                     cran_packages = list(cran_pkg_1,
+                                                          cran_pkg_2,
+                                                          cran_pkg_3),
                                      install_system_packages = FALSE)
-  expect_equal(dockerfile, paste0("FROM ubuntu-18.04\nRUN R -e \"install.",
-                                  "packages('ggplot2', repos = \'http://cran",
-                                  ".us.r-project.org\')\"\n"))
-
+  expected_dockerfile <- paste0("FROM ubuntu-18.04\n",
+                                "RUN R -e \"remotes::install_version('ggplot2', repos = c('https://cloud.r-project.org'))\"\n",
+                                "RUN R -e \"remotes::install_version('stringr', version = '0.0.0', repos = c('https://some-other-repo.com/'))\"\n",
+                                "RUN R -e \"remotes::install_version('shiny', version = '1.14', repos = c('https://cloud.r-project.org'))\"\n")
+  expect_equal(dockerfile, expected_dockerfile)
+  
   # github packages
   dockerfile <- generate_docker_file(github_packages = c(
-                                       "https://github/user/repo1", 
-                                       "https://github/user/repo2"),
-                                     install_system_packages = FALSE)
+    "https://github/user/repo1", 
+    "https://github/user/repo2"),
+    install_system_packages = FALSE)
   expected_dockerfile <- paste0(
-    "RUN R -e \"devtools::install_github(\'https://github/user/repo1\')\"\n",
-    "RUN R -e \"devtools::install_github(\'https://github/user/repo2\')\"\n")
+    "RUN R -e \"remotes::install_github(\'https://github/user/repo1\')\"\n",
+    "RUN R -e \"remotes::install_github(\'https://github/user/repo2\')\"\n")
   expect_equal(dockerfile, expected_dockerfile)
   
   # custom url
   dockerfile <- generate_docker_file(custom_url_packages = c(
-                                       "https://url/pak1.tar", 
-                                       "https://url/pak2.tar"),
-                                     install_system_packages = FALSE)
+    "https://url/pak1.tar", 
+    "https://url/pak2.tar"),
+    install_system_packages = FALSE)
   expected_dockerfile <- paste0(
     "RUN R -e \"install.packages(\'https://url/pak1.tar\', repos = NULL)\"\n",
     "RUN R -e \"install.packages(\'https://url/pak2.tar\', repos = NULL)\"\n")

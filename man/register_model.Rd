@@ -4,8 +4,10 @@
 \alias{register_model}
 \title{Register a model to a given workspace}
 \usage{
-register_model(workspace, model_path, model_name, tags = NULL,
-  properties = NULL, description = NULL, child_paths = NULL)
+register_model(workspace, model_path, model_name, datasets = NULL,
+  tags = NULL, properties = NULL, description = NULL,
+  child_paths = NULL, sample_input_dataset = NULL,
+  sample_output_dataset = NULL, resource_configuration = NULL)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -17,6 +19,11 @@ be used to specify individual files to bundle together as the \code{Model}
 object, as opposed to using the entire contents of the folder.}
 
 \item{model_name}{A string of the name to register the model with.}
+
+\item{datasets}{A list of two-element lists where the first element is the
+dataset-model relationship and the second is the corresponding dataset, e.g.
+\code{list(list("training", train_ds), list("inferencing", infer_ds))}. Valid
+values for the data-model relationship are 'training', 'validation', and 'inferencing'.}
 
 \item{tags}{A named list of key-value tags to give the model, e.g.
 \code{list("key" = "value")}}
@@ -30,6 +37,12 @@ e.g. \code{list("key" = "value")}.}
 by \code{model_name}. Must be provided in conjunction with a \code{model_path}
 pointing to a folder; only the specified files will be bundled into the
 \code{Model} object.}
+
+\item{sample_input_dataset}{Sample input dataset for the registered model.}
+
+\item{sample_output_dataset}{Sample output dataset for the registered model.}
+
+\item{resource_configuration}{`ResourceConfiguration`` object to run the registered model.}
 }
 \value{
 The \code{Model} object.
@@ -47,12 +60,15 @@ model with the same name as an existing one, your workspace's model
 registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.
 }
-\examples{
-# Registering a model from a single file
-\dontrun{
-ws <- load_workspace_from_config()
+\section{Examples}{
+Registering a model from a single file\preformatted{ws <- load_workspace_from_config()
 model <- register_model(ws,
                         model_path = "my_model.rds",
-                        model_name = "my_model")
+                        model_name = "my_model",
+                        datasets = list(list("training", train_dataset)))
 }
+}
+
+\seealso{
+\code{\link[=resource_configuration]{resource_configuration()}}
 }

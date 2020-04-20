@@ -61,6 +61,10 @@ get_model <- function(workspace,
 #' be used to specify individual files to bundle together as the `Model`
 #' object, as opposed to using the entire contents of the folder.
 #' @param model_name A string of the name to register the model with.
+#' @param datasets A list of two-element lists where the first element is the
+#' dataset-model relationship and the second is the corresponding dataset, e.g.
+#' `list(list("training", train_ds), list("inferencing", infer_ds))`. Valid
+#' values for the data-model relationship are 'training', 'validation', and 'inferencing'.
 #' @param tags A named list of key-value tags to give the model, e.g.
 #' `list("key" = "value")`
 #' @param properties A named list of key-value properties to give the model,
@@ -70,31 +74,54 @@ get_model <- function(workspace,
 #' by `model_name`. Must be provided in conjunction with a `model_path`
 #' pointing to a folder; only the specified files will be bundled into the
 #' `Model` object.
+#' @param sample_input_dataset Sample input dataset for the registered model.
+#' @param sample_output_dataset Sample output dataset for the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
 #' @return The `Model` object.
 #' @export
-#' @examples
+#' @section Examples:
 #' # Registering a model from a single file
-#' \dontrun{
+#' ```
 #' ws <- load_workspace_from_config()
 #' model <- register_model(ws,
 #'                         model_path = "my_model.rds",
-#'                         model_name = "my_model")
-#' }
+#'                         model_name = "my_model",
+#'                         datasets = list(list("training", train_dataset)))
+#' ```
+#' @seealso [resource_configuration()]
 #' @md
 register_model <- function(workspace,
                            model_path,
                            model_name,
+                           datasets = NULL,
                            tags = NULL,
                            properties = NULL,
                            description = NULL,
-                           child_paths = NULL) {
+                           child_paths = NULL,
+                           sample_input_dataset = NULL,
+                           sample_output_dataset = NULL,
+                           resource_configuration = NULL) {
+
+  if (!is.null(datasets)) {
+    user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+    valid_ds_scenarios <- c("training", "inferencing", "validation")
+    if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+      stop("One or more of your data-model relationship values is invalid.
+           Valid values are 'training', 'validation', and 'inferencing'")
+    }
+  }
+
   model <- azureml$core$Model$register(workspace,
-                                       model_path,
-                                       model_name,
-                                       tags = tags,
-                                       properties = properties,
-                                       description = description,
-                                       child_paths = child_paths)
+                                model_path,
+                                model_name,
+                                tags = tags,
+                                properties = properties,
+                                description = description,
+                                child_paths = child_paths,
+                                datasets = datasets,
+                                sample_input_dataset = sample_input_dataset,
+                                sample_output_dataset = sample_output_dataset,
+                                resource_configuration = resource_configuration)
   invisible(model)
 }
 
@@ -512,4 +539,91 @@ def run(input_data):
   writeLines(score_py_template, py_file)
   close(py_file)
   invisible(NULL)
+}
+
+#' Register a model for operationalization.
+#'
+#' @description
+#' Register a model for operationalization.
+#'
+#' @param run The `Run` object.
+#' @param model_name The name of the model.
+#' @param model_path The relative cloud path to the model, for example,
+#' "outputs/modelname". When not specified, `model_name` is used as the path.
+#' @param tags A dictionary of key value tags to assign to the model.
+#' @param properties A dictionary of key value properties to assign to the model.
+#' These properties cannot be changed after model creation, however new key-value pairs can be added.
+#' @param description An optional description of the model.
+#' @param datasets A list of two-element lists where the first element is the
+#' dataset-model relationship and the second is the corresponding dataset, e.g.
+#' `list(list("training", train_ds), list("inferencing", infer_ds))`. Valid
+#' values for the data-model relationship are 'training', 'validation', and 'inferencing'.
+#' @param sample_input_dataset Sample input dataset for the registered model.
+#' @param sample_output_dataset Sample output dataset for the registered model.
+#' @param resource_configuration `ResourceConfiguration`` object to run the registered model.
+#' @return The registered Model.
+#' @export
+#' @section Examples:
+#' ```
+#' registered_model <- register_model_from_run(run = run,
+#'                                             model_name = "my model",
+#'                                             model_path = 'outputs/model.rds',
+#'                                             tags = list("version" = "0"),
+#'                                             datasets = list(list("training", train_dataset),
+#'                                                             list("validation", validation_dataset)),
+#'                                             resource_configuration = resource_configuration(2, 2, 0))
+#' ```
+#' @seealso [resource_configuration()]
+#' @md
+register_model_from_run <- function(run, model_name, model_path = NULL,
+                                    tags = NULL, properties = NULL,
+                                    description = NULL, datasets = NULL,
+                                    sample_input_dataset = NULL,
+                                    sample_output_dataset = NULL,
+                                    resource_configuration = NULL) {
+
+  if (!is.null(datasets)) {
+    user_ds_scenarios <- strsplit(unlist(lapply(datasets, "[", 1)), " ")
+    valid_ds_scenarios <- c("training", "inferencing", "validation")
+    if (!(all(user_ds_scenarios %in% valid_ds_scenarios))) {
+      stop("One or more of your data-model relationship values is invalid.
+           Valid values are 'training', 'validation', and 'inferencing'")
+    }
+  }
+
+  run$register_model(model_name = model_name,
+                     model_path = model_path, tags = tags,
+                     properties = properties, description = description,
+                     datasets = datasets,
+                     sample_input_dataset = sample_input_dataset,
+                     sample_output_dataset = sample_output_dataset,
+                     resource_configuration = resource_configuration)
+}
+
+#' Initialize the  ResourceConfiguration.
+#'
+#' @description
+#' Initialize the  ResourceConfiguration.
+#'
+#' @param cpu The number of CPU cores to allocate for this resource. Can be a decimal.
+#' @param memory_in_gb The amount of memory (in GB) to allocate for this resource.
+#' Can be a decimal If `TRUE`, decode the raw log bytes to a string.
+#' @param gpu The number of GPUs to allocate for this resource.
+#' @return The `ResourceConfiguration` object.
+#' @export
+#' @examples
+#' \dontrun{
+#' rc <- resource_configuration(2, 2, 0)
+#'
+#' registered_model <- register_model_from_run(run, "my_model_name",
+#'                                             "path_to_my_model",
+#'                                             resource_configuration = rc)
+#' }
+#' @seealso
+#' \code{\link{register_model_from_run}}
+#' @md
+resource_configuration <- function(cpu = NULL, memory_in_gb = NULL,
+                                   gpu = NULL) {
+  azureml$core$resource_configuration$ResourceConfiguration(
+    cpu = cpu, memory_in_gb = memory_in_gb, gpu = gpu)
 }

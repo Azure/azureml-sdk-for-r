@@ -79,7 +79,7 @@ sensitive information that's needed by the workspace.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
       </span>
     </div>
 
@@ -118,6 +118,14 @@ sensitive information that's needed by the workspace.
     </li>
     <li>
       <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Guides</li>
+    <li>
+      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+    </li>
+    <li>
+      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
 </li>
@@ -170,10 +178,12 @@ sensitive information that's needed by the workspace.</p></li>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_workspace</span>(<span class='no'>name</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>create_workspace</span>(<span class='no'>name</span>, <span class='kw'>auth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subscription_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>resource_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>create_resource_group</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>friendly_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>storage_account</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key_vault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>container_registry</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cmk_keyvault</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>resource_cmk_uri</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>hbi_workspace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>exist_ok</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>show_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sku</span> <span class='kw'>=</span> <span class='st'>"basic"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -183,6 +193,12 @@ sensitive information that's needed by the workspace.</p></li>
       <th>name</th>
       <td><p>A string of the new workspace name. Workspace name has to be
 between 2 and 32 characters of letters and numbers.</p></td>
+    </tr>
+    <tr>
+      <th>auth</th>
+      <td><p>The <code>ServicePrincipalAuthentication</code> or <code>InteractiveLoginAuthentication</code>
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.</p></td>
     </tr>
     <tr>
       <th>subscription_id</th>
@@ -238,6 +254,27 @@ workspace to pull and push both experimentation and webservices images. If
 <code>NULL</code> a new container registry will be created.</p></td>
     </tr>
     <tr>
+      <th>cmk_keyvault</th>
+      <td><p>A string representing the key vault containing the customer
+managed key in the Azure resource ID format:
+'/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
+example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.</p></td>
+    </tr>
+    <tr>
+      <th>resource_cmk_uri</th>
+      <td><p>The key URI of the customer managed key to encrypt the data at rest.
+The URI format is: 'https://&lt;keyvault-dns-name&gt;/keys/&lt;key-name&gt;/&lt;key-version&gt;'.
+For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
+Refer to https://docs.microsoft.com/azure-stack/user/azure-stack-key-vault-manage-portal for steps on how
+to create a key and get its URI.</p></td>
+    </tr>
+    <tr>
+      <th>hbi_workspace</th>
+      <td><p>Specifies whether the customer data is of High Business
+Impact(HBI), i.e., contains sensitive business information. The default value
+is FALSE. When set to TRUE, downstream services will selectively disable logging.</p></td>
+    </tr>
+    <tr>
       <th>exist_ok</th>
       <td><p>If <code>TRUE</code> the method will not fail if the workspace already
 exists.</p></td>
@@ -257,6 +294,12 @@ of method.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The <code>Workspace</code> object.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>service_principal_authentication</code>
+<code>get_workspace</code>
+<code>interactive_login_authentication</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -297,6 +340,8 @@ of method.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

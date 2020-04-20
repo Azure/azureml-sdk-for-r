@@ -67,10 +67,24 @@
 #' , `image_registry_details`, `use_gpu`, `environment_variables`, `shm_size`,
 #' `cran_packages`, `github_packages`, and `custom_url_packages` and if set
 #' will take precedence over those parameters.
+#' @param inputs A list of DataReference objects or DatasetConsumptionConfig
+#' objects to use as input.
 #' @return The `Estimator` object.
 #' @export
+#' @section Examples:
+#' ```
+#' pkg1 <- cran_package("ggplot2", version = "3.3.0")
+#' pkg2 <- cran_package("stringr")
+#'
+#' est <- estimator(source_directory = ".",
+#'                  entry_script = "train.R",
+#'                  cran_packages = list(pkg1, pkg2),
+#'                  compute_target = compute_target)
+#' ```
 #' @seealso
-#' `r_environment()`, `container_registry()`, `submit_experiment()`
+#' [r_environment()], [container_registry()], [submit_experiment()],
+#' [dataset_consumption_config()], [cran_package()]
+#'
 #' @md
 estimator <- function(source_directory,
                       compute_target = NULL,
@@ -87,7 +101,8 @@ estimator <- function(source_directory,
                       environment_variables = NULL,
                       shm_size = NULL,
                       max_run_duration_seconds = NULL,
-                      environment = NULL) {
+                      environment = NULL,
+                      inputs = NULL) {
 
   if (is.null(environment)) {
     environment <- r_environment(
@@ -110,7 +125,8 @@ estimator <- function(source_directory,
     entry_script = entry_script,
     script_params = script_params,
     max_run_duration_seconds = max_run_duration_seconds,
-    environment_definition = environment)
+    environment_definition = environment,
+    inputs = inputs)
 
   run_config <- est$run_config
   run_config$framework <- "R"
