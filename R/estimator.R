@@ -35,7 +35,7 @@
 #' to start training.
 #' @param script_params A named list of the command-line arguments to pass to
 #' the training script specified in `entry_script`.
-#' @param cran_packages A character vector of CRAN packages to be installed.
+#' @param cran_packages A named list of CRAN packages to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.

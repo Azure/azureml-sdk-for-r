@@ -6,7 +6,6 @@ test_that("create estimator", {
   est <- estimator(".",
                    compute_target = "local",
                    script_params = list("param1" = 1),
-                   cran_packages = list(cran_package("ggplot2")),
                    use_gpu = TRUE,
                    environment_variables = list("var1" = "val1"))
   
