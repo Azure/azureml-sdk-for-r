@@ -22,7 +22,7 @@ script is being executed.}
 \item{rscript_path}{The Rscript path to use if an environment build is not required.
 The path specified gets used to call the user script.}
 
-\item{cran_packages}{A character vector of CRAN packages to be installed.}
+\item{cran_packages}{A named list of CRAN packages to be installed.}
 
 \item{github_packages}{A character vector of GitHub packages to be installed.}
 
