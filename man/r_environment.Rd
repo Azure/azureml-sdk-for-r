@@ -18,7 +18,7 @@ r_environment(name, version = NULL, environment_variables = NULL,
 and values. These environment variables are set on the process where the user
 script is being executed.}
 
-\item{cran_packages}{A character vector of CRAN packages to be installed.}
+\item{cran_packages}{A list of \code{cran_package} objects to be installed.}
 
 \item{github_packages}{A character vector of GitHub packages to be installed.}
 
