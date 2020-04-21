@@ -18,7 +18,7 @@
 #' @param environment_variables A named list of environment variables names
 #' and values. These environment variables are set on the process where the user
 #' script is being executed.
-#' @param cran_packages A character vector of CRAN packages to be installed.
+#' @param cran_packages A list of `cran_package` objects to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
@@ -224,7 +224,7 @@ container_registry <- function(address = NULL,
 #' @param custom_docker_image The name of the docker image from which the image
 #' to use for training will be built. If not set, a default CPU based image will
 #' be used as the base image.
-#' @param cran_packages character vector of cran packages to be installed.
+#' @param cran_packages list of `cran_package` objects to be installed.
 #' @param github_packages character vector of github packages to be installed.
 #' @param custom_url_packages character vector of packages to be installed from
 #' local, directory or custom url.

@@ -13,7 +13,7 @@ generate_docker_file(custom_docker_image = NULL, cran_packages = NULL,
 to use for training will be built. If not set, a default CPU based image will
 be used as the base image.}
 
-\item{cran_packages}{character vector of cran packages to be installed.}
+\item{cran_packages}{list of `cran_package` objects to be installed.}
 
 \item{github_packages}{character vector of github packages to be installed.}
 
