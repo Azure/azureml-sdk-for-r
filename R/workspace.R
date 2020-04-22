@@ -318,10 +318,10 @@ get_default_keyvault <- function(workspace) {
 #' @description
 #' Returns the details of the workspace.
 #' @param workspace The `Workspace` object.
-#' @return workspace details as data frame.
+#' @return Named list of the workspace details.
 #' @export
 #' @section Details:
-#' The returned list contains the following named elements:
+#' The returned named list contains the following elements:
 #' * *id*: URI pointing to the workspace resource, containing subscription ID,
 #' resource group, and workspace name.
 #' * *name*: Workspace name.
