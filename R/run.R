@@ -202,6 +202,7 @@ get_run_file_names <- function(run) {
 }
 
 #' Get secrets from the keyvault associated with a run's workspace
+#'
 #' @description
 #' From within the script of a run submitted using
 #' `submit_experiment()`, you can use `get_secrets_from_run()`
@@ -219,7 +220,7 @@ get_run_file_names <- function(run) {
 #' @param run The `Run` object.
 #' @param secrets A vector of strings of secret names to retrieve
 #' the values for.
-#' @return A list of found and not found secrets as data frame.
+#' @return A named list of found and not found secrets.
 #' If a secret was not found, the corresponding element will be `NULL`.
 #' @export
 #' @seealso [set_secrets()]
