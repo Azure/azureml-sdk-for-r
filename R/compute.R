@@ -306,8 +306,7 @@ create_aks_compute <- function(workspace,
 #' @export
 #' @md
 get_aks_compute_credentials <- function(cluster) {
-  creds <- cluster$get_credentials()
-  as.data.frame(creds)
+  cluster$get_credentials()
 }
 
 #' Attach an existing AKS cluster to a workspace
