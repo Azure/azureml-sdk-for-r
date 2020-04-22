@@ -340,8 +340,7 @@ get_default_keyvault <- function(workspace) {
 #' * *storageAccount*: Workspace storage account.
 #' @md
 get_workspace_details <- function(workspace) {
-  details <- workspace$get_details()
-  as.data.frame(details)
+  workspace$get_details()
 }
 
 #' Set the default datastore for a workspace
