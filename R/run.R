@@ -225,8 +225,7 @@ get_run_file_names <- function(run) {
 #' @seealso [set_secrets()]
 #' @md
 get_secrets_from_run <- function(run, secrets) {
-  secrets <- run$get_secrets(secrets)
-  as.data.frame(secrets)
+  run$get_secrets(secrets)
 }
 
 #' Log a metric to a run
