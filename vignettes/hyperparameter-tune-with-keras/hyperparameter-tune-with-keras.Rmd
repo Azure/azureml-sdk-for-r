@@ -203,7 +203,7 @@ hyperdrive_run <- submit_experiment(exp, hyperdrive_config)
 You can view the HyperDrive run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
 
 ```{r eval=FALSE}
-view_run_details(hyperdrive_run)
+plot_run_details(run)
 ```
 
 Wait until hyperparameter tuning is complete before you run more code.
