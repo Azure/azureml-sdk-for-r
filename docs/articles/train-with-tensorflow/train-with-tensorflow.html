@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Train a TensorFlow model</h1>
             
-            <h4 class="date">2020-04-23</h4>
+            <h4 class="date">2020-04-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-with-tensorflow/train-with-tensorflow.Rmd"><code>vignettes/train-with-tensorflow/train-with-tensorflow.Rmd</code></a></small>
       <div class="hidden name"><code>train-with-tensorflow.Rmd</code></div>
@@ -214,7 +214,7 @@
 <p>Finally submit the job to run on your cluster. <a href="https://azure.github.io/azureml-sdk-for-r/reference/submit_experiment.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment()</a></code></a> returns a <code>Run</code> object that you can then use to interface with the run.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
 <p>You can view the run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/plot_run_details.html">plot_run_details</a></span>(run)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
 <p>Model training happens in the background. Wait until the model has finished training before you run more code.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
