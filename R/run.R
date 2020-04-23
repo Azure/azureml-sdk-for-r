@@ -650,7 +650,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @param run Run object
 #' @param auto_refresh Boolean indicating whether or not widget should update
 #' run details automatically. The default is TRUE when using RStudio.
-#' @export
 #' @md
 view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
