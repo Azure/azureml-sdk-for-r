@@ -545,9 +545,16 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Generate table of run details
+#'
+#' @description
+#' Generate table of run details including Run Status, Start Time,
+#' Duration, Script Name, Arguments, link to web portal, and any run errors.
+#'
 #' @param run The `Run` object.
+#' @return Datatable with run details
+#' @export
 #' @md
-.create_run_details_plot <- function(run) {
+create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
