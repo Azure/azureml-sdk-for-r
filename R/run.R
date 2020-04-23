@@ -554,7 +554,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @return Datatable with run details
 #' @export
 #' @md
-plot_run_details <- function(run) {
+create_run_details_plot <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -681,7 +681,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$experiment$workspace$name,
                             run$experiment$name,
                             run$id,
-                            plot_run_details(run),
+                            .create_run_details_plot(run),
                             port,
                             shinycssloaders::withSpinner,
                             shiny::shinyOptions,
@@ -741,7 +741,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       utils::browseURL(host)
     }
   } else {
-    plot_run_details(run)
+    .create_run_details_plot(run)
   }
 }
 
