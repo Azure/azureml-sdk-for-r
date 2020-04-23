@@ -545,9 +545,23 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Generate table of run details
+#' 
+#' @description
+#' Plot a table of run details including
+#'  * ID
+#'  * Status
+#'  * Start Time
+#'  * Duration
+#'  * Script Name
+#'  * Arguments
+#'  * Link to Web Portal view
+#'  * Errors
+#'
 #' @param run The `Run` object.
+#' @return Datatable containing run details
+#' @export
 #' @md
-.plot_run_details <- function(run) {
+plot_run_details <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -674,7 +688,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$experiment$workspace$name,
                             run$experiment$name,
                             run$id,
-                            .plot_run_details(run),
+                            plot_run_details(run),
                             port,
                             shinycssloaders::withSpinner,
                             shiny::shinyOptions,
@@ -734,7 +748,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       utils::browseURL(host)
     }
   } else {
-    .plot_run_details(run)
+    plot_run_details(run)
   }
 }
 
