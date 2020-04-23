@@ -40,7 +40,7 @@ exp <- experiment(ws, experiment_name)
 
 # Submit job and display the run details
 run <- submit_experiment(exp, est)
-plot_run_details(run)
+view_run_details(run)
 wait_for_run_completion(run, show_output = TRUE)
 
 # Get the run metrics

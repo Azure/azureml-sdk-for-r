@@ -76,7 +76,7 @@ run <- submit_experiment(exp, est)
 As usual, we can track the progress of the run in Azure ML by clicking on the "Web View" link displayed by this widget.
 
 ```{r view_run, eval=FALSE}
-plot_run_details(run)
+view_run_details(run)
 ```
 
 Now let's submit scripts fitting K-nearest-neighbors and GLMnet models to the data. We'll submit them to the same experiment, which will allow us to track and compare the accuracy of each model. In each script, the 
