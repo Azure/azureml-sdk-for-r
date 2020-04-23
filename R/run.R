@@ -545,7 +545,7 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Generate table of run details
-#' 
+#'
 #' @description
 #' Plot a table of run details including
 #'  * ID
