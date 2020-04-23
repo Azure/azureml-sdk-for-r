@@ -170,7 +170,7 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4">                 <span class="dt">compute_target =</span> compute_target)</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
 <p>As usual, we can track the progress of the run in Azure ML by clicking on the “Web View” link displayed by this widget.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/plot_run_details.html">plot_run_details</a></span>(run)</a></code></pre></div>
 <p>Now let’s submit scripts fitting K-nearest-neighbors and GLMnet models to the data. We’ll submit them to the same experiment, which will allow us to track and compare the accuracy of each model. In each script, the accuracy statistic is tracked with this line of code:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">### DO NOT RUN: tracking code from accident-XXX.R scripts</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/log_metric_to_run.html">log_metric_to_run</a></span>(<span class="st">"Accuracy"</span>,</a>

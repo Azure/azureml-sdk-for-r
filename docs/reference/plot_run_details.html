@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate table of run details — .create_run_details_plot • azuremlsdk</title>
+<title>Generate table of run details — plot_run_details • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Generate table of run details — .create_run_details_plot" />
+<meta property="og:title" content="Generate table of run details — plot_run_details" />
 
-<meta property="og:description" content="Generate table of run details" />
+<meta property="og:description" content="Generate table of run details including Run Status, Start Time,
+Duration, Script Name, Arguments, link to web portal, and any run errors." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -143,16 +144,17 @@
     <div class="page-header">
     <h1>Generate table of run details</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>dot-create_run_details_plot.Rd</code></div>
+    <div class="hidden name"><code>plot_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generate table of run details</p>
+    <p>Generate table of run details including Run Status, Start Time,
+Duration, Script Name, Arguments, link to web portal, and any run errors.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>.create_run_details_plot</span>(<span class='no'>run</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_run_details</span>(<span class='no'>run</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,13 +165,19 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Datatable with run details</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
