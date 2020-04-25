@@ -74,7 +74,8 @@ workers <- function(data) {
     new.env(parent = emptyenv())
   })
   noexport <- union(obj$noexport, obj$argnames)
-  foreach::getexports(expr, exportenv, envir, bad = noexport)
+  packages <- getexports(expr, exportenv, envir, bad=noexport)
+  packages = c(packages, obj$packages)
   vars <- ls(exportenv)
 
   export <- unique(obj$export)
@@ -98,8 +99,9 @@ workers <- function(data) {
     }
   }
 
-  expr <- compiler::compile(expr,
-                            env = envir,
+  assign("packages", obj$packages, global_env)
+
+  expr <- compiler::compile(expr, env = envir,
                             options = list(suppressUndefined = TRUE))
 
   assign("expr", expr, global_env)
@@ -137,8 +139,7 @@ workers <- function(data) {
   wait_for_run_completion(run, show_output = TRUE)
 
   # merge results
-  result <- merge_results(node_count, process_count_per_node, run,
-                          source_dir)
+  result <- merge_results(node_count, process_count_per_node, run, source_dir)
 
   # delete generated files
   unlink(source_dir, recursive = TRUE)
@@ -203,12 +204,18 @@ if (is.na(task_rank)) {
   output_file <- paste0(\"task_\", task_rank, \".rds\")
 }
 
+exportEnv <- globalEnv$exportenv
+parent.env(exportEnv) <- globalenv()
+
+for (p in globalEnv$packages)
+  library(p, character.only=TRUE)
+
 result <- lapply(task_args, function(args) {
   tryCatch({
     lapply(names(args), function(n)
       assign(n, args[[n]], pos = globalEnv$exportenv))
 
-    eval(globalEnv$expr, envir = globalEnv$exportenv)
+    eval(globalEnv$expr, envir=globalEnv$exportenv)
   },
   error = function(e) {
     print(e)
