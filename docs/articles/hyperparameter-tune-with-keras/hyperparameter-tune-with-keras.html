@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Hyperparameter tune a Keras model</h1>
             
-            <h4 class="date">2020-04-21</h4>
+            <h4 class="date">2020-04-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd"><code>vignettes/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.Rmd</code></a></small>
       <div class="hidden name"><code>hyperparameter-tune-with-keras.Rmd</code></div>
@@ -286,7 +286,7 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <p>Finally submit the experiment to run on your cluster. The parent HyperDrive run will launch the individual child runs. <code><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment()</a></code> will return a <code>HyperDriveRun</code> object that you will use to interface with the run. In this tutorial, since the cluster we created scales to a max of <code>4</code> nodes, all 4 child runs will be launched in parallel.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">hyperdrive_run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, hyperdrive_config)</a></code></pre></div>
 <p>You can view the HyperDrive run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(hyperdrive_run)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/plot_run_details.html">plot_run_details</a></span>(hyperdrive_run)</a></code></pre></div>
 <p>Wait until hyperparameter tuning is complete before you run more code.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_run_completion.html">wait_for_run_completion</a></span>(hyperdrive_run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Initialize run details widget — view_run_details • azuremlsdk</title>
+<title>Generate table of run details — plot_run_details • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,17 +32,19 @@
 
 
 
-<meta property="og:title" content="Initialize run details widget — view_run_details" />
+<meta property="og:title" content="Generate table of run details — plot_run_details" />
 
-<meta property="og:description" content="Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer
-is unavailable) showing details of the submitted run. If using RStudio, the
-plot will auto-update with information collected from the server. For more
-details about the run, click the web view link. The widget will stop running
-once the run has reached a terminal state: &quot;Failed&quot;, &quot;Completed&quot;, or
-&quot;Canceled&quot;.
-If you are running this method from an RMarkdown file, the
-run details table will show up in the code chunk output
-instead of the Viewer." />
+<meta property="og:description" content="Plot a table of run details including
+ID
+Status
+Start Time
+Duration
+Script Name
+Arguments
+Link to Web Portal view
+Errors
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -149,40 +151,41 @@ instead of the Viewer." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Initialize run details widget</h1>
+    <h1>Generate table of run details</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
-    <div class="hidden name"><code>view_run_details.Rd</code></div>
+    <div class="hidden name"><code>plot_run_details.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Initializes a ShinyApp in RStudio Viewer (or the default browser if Viewer
-is unavailable) showing details of the submitted run. If using RStudio, the
-plot will auto-update with information collected from the server. For more
-details about the run, click the web view link. The widget will stop running
-once the run has reached a terminal state: "Failed", "Completed", or
-"Canceled".</p>
-<p>If you are running this method from an RMarkdown file, the
-run details table will show up in the code chunk output
-instead of the Viewer.</p>
+    <p>Plot a table of run details including</p><ul>
+<li><p>ID</p></li>
+<li><p>Status</p></li>
+<li><p>Start Time</p></li>
+<li><p>Duration</p></li>
+<li><p>Script Name</p></li>
+<li><p>Arguments</p></li>
+<li><p>Link to Web Portal view</p></li>
+<li><p>Errors</p></li>
+</ul>
+
     
     </div>
 
-    <pre class="usage"><span class='fu'>view_run_details</span>(<span class='no'>run</span>, <span class='kw'>auto_refresh</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_run_details</span>(<span class='no'>run</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>run</th>
-      <td><p>Run object</p></td>
-    </tr>
-    <tr>
-      <th>auto_refresh</th>
-      <td><p>Boolean indicating whether or not widget should update
-run details automatically. The default is TRUE when using RStudio.</p></td>
+      <td><p>The <code>Run</code> object.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Datatable containing run details</p>
     
 
   </div>
@@ -190,7 +193,9 @@ run details automatically. The default is TRUE when using RStudio.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
