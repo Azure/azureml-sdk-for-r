@@ -120,7 +120,7 @@ run <- submit_experiment(exp, est)
 You can view the run’s details as a table. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.
 
 ```{r eval=FALSE}
-view_run_details(run)
+plot_run_details(run)
 ```
 
 Model training happens in the background. Wait until the model has finished training before you run more code.
