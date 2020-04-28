@@ -129,7 +129,7 @@ For this tutorial, fit a logistic regression model on your uploaded data using y
 * Submit the job
 
 ### Prepare the training script
-A training script called `accidents.R` has been provided for you has been provided for you in the `train-and-deploy-first-model` folder. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
+A training script called `accidents.R` has been provided for you in the `train-and-deploy-first-model` folder. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
 
 * The training script takes an argument `-d` to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.
 * The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com). See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()`.
