@@ -14,7 +14,7 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
 
 .info <- function(data, item) {
   switch(item,
-         workers = workers(data),
+         workers = .workers(data),
          name = "doAzureMLParallel",
          version = utils::packageDescription("do_azureml_parallel",
                                              fields = "Version"),
@@ -26,7 +26,7 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   function() NULL
 }
 
-workers <- function(data) {
+.workers <- function(data) {
   max_nodes <- data$cls$scale_settings$maximum_node_count
   max_nodes
 }
@@ -74,8 +74,8 @@ workers <- function(data) {
     new.env(parent = emptyenv())
   })
   noexport <- union(obj$noexport, obj$argnames)
-  packages <- getexports(expr, exportenv, envir, bad=noexport)
-  packages = c(packages, obj$packages)
+  packages <- foreach::getexports(expr, exportenv, envir, bad = noexport)
+  packages <- c(packages, obj$packages)
   vars <- ls(exportenv)
 
   export <- unique(obj$export)
@@ -146,6 +146,11 @@ workers <- function(data) {
   invisible(result)
 }
 
+#' Splits the job into parallel tasks.
+#' @param args_list The list of arguments which are distributed across all the
+#' processes.
+#' @param node_count Number of nodes in the AmlCompute cluster.
+#' @param process_count_per_node Number of processes per node.
 split_tasks <- function(args_list, node_count, process_count_per_node) {
   ntasks <- length(args_list)
   num_processes <- node_count * process_count_per_node
@@ -169,8 +174,14 @@ split_tasks <- function(args_list, node_count, process_count_per_node) {
   invisible(task_args)
 }
 
+#' Combine the results from the parallel training.
+#' @param node_count Number of nodes in the AmlCompute cluster.
+#' @param process_count_per_node Number of processes per node.
+#' @param run The run object whose output needs to be combined.
+#' @param source_directory The directory where the output from the run
+#' would be downloaded.
 merge_results <- function(node_count, process_count_per_node, run,
-                          source_dir) {
+                          source_directory) {
   result <- list()
   num_processes <- node_count * process_count_per_node
   for (i in seq_len(num_processes)) {
@@ -180,15 +191,19 @@ merge_results <- function(node_count, process_count_per_node, run,
       file_name <- paste0("task_", i - 1, ".rds")
     }
     run$download_file(name = file.path("outputs", file_name),
-                      output_file_path = file.path(source_dir, file_name))
+                      output_file_path = file.path(source_directory,
+                                                   file_name))
 
-    task_data <- readRDS(file.path(source_dir, file_name))
+    task_data <- readRDS(file.path(source_directory, file_name))
     result <- append(result, task_data)
   }
 
   invisible(result)
 }
 
+#' Generates the control script for the experiment.
+#' @param source_directory The directory which contains all the files
+#' needed for the experiment.
 generate_entry_script <- function(source_directory) {
   r_launcher_script <- "
 globalEnv <- readRDS(\"env.rds\")
