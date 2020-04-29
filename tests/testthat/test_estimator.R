@@ -9,7 +9,8 @@ test_that("create estimator", {
                          environment_variables = list("var1" = "val1"))
 
   est <- estimator(".", compute_target = "local",
-                   script_params = list("param1" = 1))
+                   script_params = list("param1" = 1),
+                   environment = r_env)
   
   expect_equal(est$run_config$target, "local")
   expect_equal(length(est$run_config$arguments), 2)
