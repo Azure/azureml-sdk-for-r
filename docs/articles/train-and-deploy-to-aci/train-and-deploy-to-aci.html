@@ -108,7 +108,7 @@
       <h1>Train and deploy your first model with Azure ML</h1>
                         <h4 class="author">David Smith</h4>
             
-            <h4 class="date">2020-04-14</h4>
+            <h4 class="date">2020-04-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/train-and-deploy-to-aci/train-and-deploy-to-aci.Rmd"><code>vignettes/train-and-deploy-to-aci/train-and-deploy-to-aci.Rmd</code></a></small>
       <div class="hidden name"><code>train-and-deploy-to-aci.Rmd</code></div>
@@ -258,7 +258,7 @@
 <p>Finally submit the job to run on your cluster. <code><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment()</a></code> returns a Run object that you then use to interface with the run. In total, the first run takes <strong>about 10 minutes</strong>. But for later runs, the same Docker image is reused as long as the script dependencies don’t change. In this case, the image is cached and the container startup time is much faster.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">run &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/submit_experiment.html">submit_experiment</a></span>(exp, est)</a></code></pre></div>
 <p>You can view a table of the run’s details. Clicking the “Web View” link provided will bring you to Azure Machine Learning studio, where you can monitor the run in the UI.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/view_run_details.html">view_run_details</a></span>(run)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/plot_run_details.html">plot_run_details</a></span>(run)</a></code></pre></div>
 <p>Model training happens in the background. Wait until the model has finished training before you run more code.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/wait_for_run_completion.html">wait_for_run_completion</a></span>(run, <span class="dt">show_output =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You – and colleagues with access to the workspace – can submit multiple experiments in parallel, and Azure ML will take of scheduling the tasks on the compute cluster. You can even configure the cluster to automatically scale up to multiple nodes, and scale back when there are no more compute tasks in the queue. This configuration is a cost-effective way for teams to share compute resources.</p>

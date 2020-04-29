@@ -545,9 +545,23 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Generate table of run details
+#'
+#' @description
+#' Plot a table of run details including
+#'  * ID
+#'  * Status
+#'  * Start Time
+#'  * Duration
+#'  * Script Name
+#'  * Arguments
+#'  * Link to Web Portal view
+#'  * Errors
+#'
 #' @param run The `Run` object.
+#' @return Datatable containing run details
+#' @export
 #' @md
-.create_run_details_plot <- function(run) {
+plot_run_details <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -650,7 +664,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @param run Run object
 #' @param auto_refresh Boolean indicating whether or not widget should update
 #' run details automatically. The default is TRUE when using RStudio.
-#' @export
 #' @md
 view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
@@ -675,7 +688,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$experiment$workspace$name,
                             run$experiment$name,
                             run$id,
-                            .create_run_details_plot(run),
+                            plot_run_details(run),
                             port,
                             shinycssloaders::withSpinner,
                             shiny::shinyOptions,
@@ -735,7 +748,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       utils::browseURL(host)
     }
   } else {
-    .create_run_details_plot(run)
+    plot_run_details(run)
   }
 }
 

@@ -20,7 +20,7 @@
 #' script is being executed.
 #' @param rscript_path The Rscript path to use if an environment build is not required.
 #' The path specified gets used to call the user script.
-#' @param cran_packages A named list of CRAN packages to be installed.
+#' @param cran_packages A list of `cran_package` objects to be installed.
 #' @param github_packages A character vector of GitHub packages to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.

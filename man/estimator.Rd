@@ -38,7 +38,7 @@ to start training.}
 \item{script_params}{A named list of the command-line arguments to pass to
 the training script specified in \code{entry_script}.}
 
-\item{cran_packages}{A named list of CRAN packages to be installed.}
+\item{cran_packages}{A list of \code{cran_package} objects to be installed.}
 
 \item{github_packages}{A character vector of GitHub packages to be installed.}
 
