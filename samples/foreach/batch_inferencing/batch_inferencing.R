@@ -23,7 +23,8 @@ nRows <- nrow(data)
 result <- foreach(i = 1:nRows,
                   .packages = "jsonlite",
                   node_count = 3L,
-			      process_count_per_node = 2L,
+                  process_count_per_node = 2L,
+                  experiment_name = "iris_inferencing",
                   job_timeout = 3600) %dopar% {
 
                  prediction <- predict(model, data[i, ])

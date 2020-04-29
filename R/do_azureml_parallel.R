@@ -41,6 +41,7 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   process_count_per_node <- 1L
   r_env <- NULL
   max_run_duration_seconds <- NULL
+  experiment_name <- "r-foreach"
 
   if (!is.null(obj$args$job_timeout)) {
     max_run_duration_seconds <- obj$args$job_timeout
@@ -60,6 +61,11 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   if (!is.null(obj$args$r_env)) {
     r_env <- obj$args$r_env
     obj$args$r_env <- NULL
+  }
+
+  if (!is.null(obj$args$experiment_name)) {
+    experiment_name <- obj$args$experiment_name
+    obj$args$experiment_name <- NULL
   }
 
   it <- iterators::iter(obj)
@@ -133,7 +139,6 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   run_config$mpi <- dist_backend
   run_config$node_count <- node_count
 
-  experiment_name <- "r-foreach"
   exp <- experiment(data$ws, experiment_name)
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
