@@ -30,10 +30,6 @@ test_that("create, get, save, load and delete workspace", {
   loaded_ws <- load_workspace_from_config(".")
   expect_equal(loaded_ws$name, workspace_name)
 
-  ws_details <- get_workspace_details(ws)
-  expect_equal(nrow(ws_details), 1)
-  expect_equal(length(ws_details), 15)
-    
   # delete workspace
   delete_workspace(existing_ws)
     

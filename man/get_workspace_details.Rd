@@ -10,14 +10,14 @@ get_workspace_details(workspace)
 \item{workspace}{The \code{Workspace} object.}
 }
 \value{
-workspace details as data frame.
+Named list of the workspace details.
 }
 \description{
 Returns the details of the workspace.
 }
 \section{Details}{
 
-The returned list contains the following named elements:
+The returned named list contains the following elements:
 \itemize{
 \item \emph{id}: URI pointing to the workspace resource, containing subscription ID,
 resource group, and workspace name.

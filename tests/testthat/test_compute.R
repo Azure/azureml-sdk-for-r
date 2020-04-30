@@ -38,10 +38,6 @@ test_that("create akscompute", {
   compute_target <- get_compute(ws, cluster_name = cluster_name)
   expect_equal(compute_target$name, cluster_name)
 
-  credentials <- get_aks_compute_credentials(compute_target)
-  expect_equal(nrow(credentials), 1)
-  expect_equal(length(credentials), 4)
-
   # tear down compute
   delete_compute(compute_target)
 })
