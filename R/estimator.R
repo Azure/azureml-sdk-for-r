@@ -105,10 +105,9 @@ estimator <- function(source_directory,
                       inputs = NULL) {
 
   if (is.null(environment)) {
-    if(!is.null(cran_packages) || !is.null(github_packages) ||
-       !is.null(custom_url_packages) || !is.null(custom_docker_image) ||
-       !is.null(image_registry_details) || use_gpu ||
-       !is.null(environment_variables) || !is.null(shm_size)) {
+    if (!is.null(list(cran_packages, github_packages, custom_url_packages,
+                      custom_docker_image, image_registry_details,
+                      environment_variables, shm_size)) || use_gpu) {
       warning(paste0("cran_packages, github_packages, custom_url_packages, ",
                      "custom_docker_image, image_registry_details, use_gpu, ",
                      "environment_variables, and shm_size parameters will be",
