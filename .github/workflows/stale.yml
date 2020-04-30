@@ -31,6 +31,10 @@ jobs:
 
             const now = new Date().getTime();
             for (const issue of issues) {
+              if (now - new Date(issue.updated_at).getTime() < elapsedMilSeconds) {
+                continue;
+              }
+
               const labels = github.issues.listLabelsOnIssue.endpoint.merge({
                 ...context.repo,
                 issue_number: issue.number,
