@@ -24,21 +24,30 @@ jobs:
               state: 'open',
             });
             const issues = await github.paginate(opts);
-
-            // check if issue is old enough to be stale
+            
+            // check if issue is stale, label
             const elapsedDays = 30
             const elapsedMilSeconds = elapsedDays * 24 * 60 * 60 * 1000;
 
             const now = new Date().getTime();
             for (const issue of issues) {
-              if (now - new Date(issue.updated_at).getTime() < elapsedMilSeconds) {
-                continue;
-              }
-              github.issues.addLabels({
+              const labels = github.issues.listLabelsOnIssue.endpoint.merge({
                 ...context.repo,
                 issue_number: issue.number,
-                labels: ['stale:no-recent-activity']
               });
+
+              for (const label of labels) {
+                \\ exit if already labeled stale or in progress
+                if (label.name == 'stale:no-recent-activity' || label.name == 'in-progress') {
+                  break;
+                } else {
+                 github.issues.addLabels({
+                    ...context.repo,
+                    issue_number: issue.number,
+                    labels: ['stale:no-recent-activity']
+                  });   
+                }
+              }
             }
 
       - name: Remove stale label
@@ -73,8 +82,7 @@ jobs:
         with:
           github-token: ${{github.token}}
           script: |
-            // Fetch the list of all open issues that have the 'stale' label
-            // attached
+            // Fetch the list of all open issues that have the 'stale' label attached
             const opts = github.issues.listForRepo.endpoint.merge({
               ...context.repo,
               state: 'open',
