@@ -43,9 +43,9 @@ jobs:
               for (const label of labels) {
                 \\ exit if already labeled stale or in progress
                 if (label.name == 'stale:no-recent-activity' || label.name == 'in-progress') {
-                  break;
+                  continue;
                 } else {
-                 github.issues.addLabels({
+                  github.issues.addLabels({
                     ...context.repo,
                     issue_number: issue.number,
                     labels: ['stale:no-recent-activity']
