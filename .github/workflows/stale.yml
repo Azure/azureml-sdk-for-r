@@ -26,7 +26,7 @@ jobs:
             const issues = await github.paginate(opts);
             
             // check if issue is stale, label
-            const elapsedDays = 30
+            const elapsedDays = 30;
             const elapsedMilSeconds = elapsedDays * 24 * 60 * 60 * 1000;
 
             const now = new Date().getTime();
@@ -40,17 +40,22 @@ jobs:
                 issue_number: issue.number,
               });
 
+              var mark_stale = true;
+
               for (const label of labels) {
                 \\ exit if already labeled stale or in progress
                 if (label.name == 'stale:no-recent-activity' || label.name == 'in-progress') {
-                  continue;
-                } else {
-                  github.issues.addLabels({
-                    ...context.repo,
-                    issue_number: issue.number,
-                    labels: ['stale:no-recent-activity']
-                  });   
+                  mark_stale = false;
+                  break;
                 }
+              }
+              
+              if (mark_stale) {
+                github.issues.addLabels({
+                ...context.repo,
+                issue_number: issue.number,
+                labels: ['stale:no-recent-activity']
+                });  
               }
             }
 
