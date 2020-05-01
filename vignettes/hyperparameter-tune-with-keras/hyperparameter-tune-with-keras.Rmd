@@ -119,7 +119,7 @@ See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/
 
 ```{r create_estimator, eval=FALSE}
 env <- r_environment("tensorflow-env",
-                     cran_packages = list(cran_package("keras"),
+                     cran_packages = list(cran_package("keras")),
                      use_gpu = TRUE)
 est <- estimator(source_directory = ".",
                  entry_script = "cifar10_cnn.R",
