@@ -73,13 +73,13 @@
 #' @export
 #' @section Examples:
 #' ```
-#' pkg1 <- cran_package("ggplot2", version = "3.3.0")
-#' pkg2 <- cran_package("stringr")
-#'
+#' r_env <- r_environment(name = "r-env",
+#'                        cran_packages = list(cran_package("dplyr"),
+#'                                             cran_package("ggplot2")))
 #' est <- estimator(source_directory = ".",
 #'                  entry_script = "train.R",
-#'                  cran_packages = list(pkg1, pkg2),
-#'                  compute_target = compute_target)
+#'                  compute_target = compute_target,
+#'                  environment = r_env)
 #' ```
 #' @seealso
 #' [r_environment()], [container_registry()], [submit_experiment()],
@@ -105,6 +105,16 @@ estimator <- function(source_directory,
                       inputs = NULL) {
 
   if (is.null(environment)) {
+    if (!is.null(list(cran_packages, github_packages, custom_url_packages,
+                      custom_docker_image, image_registry_details,
+                      environment_variables, shm_size)) || use_gpu) {
+      warning(paste0("cran_packages, github_packages, custom_url_packages, ",
+                     "custom_docker_image, image_registry_details, use_gpu, ",
+                     "environment_variables, and shm_size parameters will be",
+                     " deprecated. Please create an environment object with ",
+                     "them using r_environment() and pass the environment",
+                     " object to the estimator()."))
+    }
     environment <- r_environment(
       name = "estimatorenv",
       environment_variables = environment_variables,
