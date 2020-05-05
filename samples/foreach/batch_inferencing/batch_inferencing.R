@@ -8,7 +8,7 @@ library(foreach)
 # this won't be required when register_do_azureml_parallel() method is public.
 devtools::load_all()
 
-workspace <- load_workspace_from_config()
+ws <- load_workspace_from_config()
 amlcluster <- get_compute(ws, "r-cluster")
 
 # call this method to register foreach backend with Workspace and AmlCompute cluster on which
