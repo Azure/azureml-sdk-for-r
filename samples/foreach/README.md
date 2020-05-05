@@ -32,3 +32,12 @@ Once your job is complete, you can delete the cluster:
 delete_compute(amlcluster)
 ```
 Or, if you had provisioned your cluster with autoscale settings with `min_nodes = 0`, the cluster will autoscale back down to zero nodes once the job is complete.
+
+### Azure ML-specific configurations for foreach
+| Argument name | Default value | Type | Description |
+| ------------- | :-------------: | :-----: | :----- |
+| `node_count` | `1L` | Integer | The number of nodes in your cluster to use for the parallel execution. |
+| `process_count_per_node` | `1L` | Integer | The number of processes (or "workers") to run on each node. |
+| `job_timeout` | `1200L` | Integer | The maximum allowed time in seconds for the job to run. Azure ML will attempt to automatically cancel the job if it take longer than this value. |
+| `experiment_name` | `"r-foreach"` | String | The name of the experiment that your job will be tracked under. This is the name that will appear in [Azure ML studio](ml.azure.com). |
+| `r_env` | `NULL` | Azure ML Environment | The Azure ML Environment that defines the Docker image that will run as a container on each of the nodes for the job. Use [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) to create the environment. You will need to explicitly load any of the packages installed by the environment definition in your `foreach` loop. Optionally, you can use the `.packages` option instead to install CRAN packages needed. These packages will be installed before each iteration in the loop is run.|
