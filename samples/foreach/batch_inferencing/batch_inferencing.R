@@ -13,7 +13,7 @@ amlcluster <- get_compute(ws, "r-cluster")
 
 # call this method to register foreach backend with Workspace and AmlCompute cluster on which
 # parallel job would run.
-register_do_azureml_parallel(workspace, amlcluster)
+register_do_azureml_parallel(ws, amlcluster)
 
 model <- readRDS("model.rds")
 
