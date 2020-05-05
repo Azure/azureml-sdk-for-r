@@ -44,4 +44,4 @@ The below table includes additional Azure ML-specific options that you can confi
 | `r_env` | `NULL` | Azure ML Environment | The Azure ML Environment that defines the Docker image that will run as a container on each of the nodes for the job. Use [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) to create the environment. You will need to explicitly load any of the packages installed by the environment definition in your `foreach` loop. Optionally, you can use the `.packages` option instead to install CRAN packages needed. These packages will be installed before each iteration in the loop is run.|
 
 ### Examples
-For an example of using AmlCompute as your foreach backend, see the [batch inferencing](batch_inferencing) sample.
+For an example of using `AmlCompute` as your foreach backend, see the [batch inferencing](batch_inferencing) sample.
