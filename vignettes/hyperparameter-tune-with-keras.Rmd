@@ -77,7 +77,7 @@ if (is.null(compute_target))
 ```
 
 ## Prepare the training script
-A training script called `cifar10_cnn.R` has been provided for you in the same directory as this tutorial.
+A training script called `cifar10_cnn.R` has been provided for you in the `hyperparameter-tune-with-keras` folder.
 
 In order to leverage HyperDrive, the training script for your model must log the relevant metrics during model training. When you configure the hyperparameter tuning run, you specify the primary metric to use for evaluating run performance. You must log this metric so it is available to the hyperparameter tuning process.
 
@@ -122,7 +122,7 @@ env <- r_environment("tensorflow-env",
                      cran_packages = list(cran_package("keras")),
                      use_gpu = TRUE)
 est <- estimator(source_directory = ".",
-                 entry_script = "cifar10_cnn.R",
+                 entry_script = "hyperparameter-tune-with-keras/cifar10_cnn.R",
                  compute_target = compute_target,
                  environment = env)
 ```
