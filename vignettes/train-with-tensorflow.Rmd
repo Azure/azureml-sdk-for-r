@@ -106,8 +106,8 @@ env <- r_environment("tensorflow-env",
                      cran_packages = list(cran_package("tensorflow",
                                                        version = "1.14.0")),
                      use_gpu = TRUE)
-est <- estimator(source_directory = ".",
-                 entry_script = "train-with-tensorflow/tf_mnist.R",
+est <- estimator(source_directory = "train-with-tensorflow",
+                 entry_script = "tf_mnist.R",
                  compute_target = compute_target,
                  environment = env)
 ```
