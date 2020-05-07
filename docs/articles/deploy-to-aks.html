@@ -191,8 +191,8 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">r_env &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment</a></span>(<span class="dt">name =</span> <span class="st">"deploy_env"</span>)</a></code></pre></div>
 <p>Now you have everything you need to create an inference config for encapsulating your scoring script and environment dependencies.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">inference_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/inference_config.html">inference_config</a></span>(</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"deploy-to-aks/score.R"</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"."</span>,</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">entry_script =</span> <span class="st">"score.R"</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">source_directory =</span> <span class="st">"deploy-to-aks"</span>,</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dt">environment =</span> r_env)</a></code></pre></div>
 </div>
 <div id="deploy-to-aks" class="section level3">
