@@ -41,7 +41,7 @@ The below table includes additional Azure ML-specific options that you can confi
 | `process_count_per_node` | `1L` | Integer | The number of processes (or "workers") to run on each node. |
 | `job_timeout` | `1200L` | Integer | The maximum allowed time in seconds for the job to run. Azure ML will attempt to automatically cancel the job if it take longer than this value. |
 | `experiment_name` | `"r-foreach"` | String | The name of the experiment that your job will be tracked under. This is the name that will appear in [Azure ML studio](ml.azure.com). |
-| `r_env` | `NULL` | Azure ML Environment | The Azure ML Environment that defines the Docker image that will run as a container on each of the nodes for the job. Use [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) to create the environment. You will need to explicitly load any of the packages installed by the environment definition in your `foreach` loop. For CRAN packages, you can use the `.packages` option to specify which CRAN packages to load in order to execute the code in the loop successfully. |
+| `r_env` | `NULL` | Azure ML Environment | The Azure ML Environment that defines the Docker image that will run as a container on each of the nodes for the job. Use [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) to create the environment. Use the `.packages` option to specify which packages to load in order to execute the code in the loop successfully. |
 
 ### Examples
 For an example of using `AmlCompute` as your foreach backend, see the [batch inferencing](batch_inferencing) sample.
