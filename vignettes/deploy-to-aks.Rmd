@@ -92,8 +92,8 @@ Now you have everything you need to create an inference config for encapsulating
 
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
-  entry_script = "deploy-to-aks/score.R",
-  source_directory = ".",
+  entry_script = "score.R",
+  source_directory = "deploy-to-aks",
   environment = r_env)
 ```
 

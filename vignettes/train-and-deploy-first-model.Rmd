@@ -148,8 +148,8 @@ To create the estimator, define:
 * Any environment dependencies required for training. The default Docker image built for training already contains the three packages (`caret`, `e1071`, and `optparse`) needed in the training script.  So you don't need to specify additional information. If you are using R packages that are not included by default, use the estimator's `cran_packages` parameter to add additional CRAN packages. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
 
 ```{r create_estimator, eval=FALSE}
-est <- estimator(source_directory = ".",
-                 entry_script = "train-and-deploy-first-model/accidents.R",
+est <- estimator(source_directory = "train-and-deploy-first-model",
+                 entry_script = "accidents.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target
                  )
@@ -262,13 +262,13 @@ Now you have everything you need to create an **inference config** for encapsula
 
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
-  entry_script = "train-and-deploy-first-model/accident_predict.R",
-  source_directory = ".",
+  entry_script = "accident_predict.R",
+  source_directory = "train-and-deploy-first-model",
   environment = r_env)
 ```
 
 ### Deploy to ACI
-In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html).)
+In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks.html).)
 
 ``` {r create_aci_config, eval=FALSE}
 aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)

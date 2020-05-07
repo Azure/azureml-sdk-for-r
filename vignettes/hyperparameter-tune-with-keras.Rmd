@@ -121,8 +121,8 @@ See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/
 env <- r_environment("tensorflow-env",
                      cran_packages = list(cran_package("keras")),
                      use_gpu = TRUE)
-est <- estimator(source_directory = ".",
-                 entry_script = "hyperparameter-tune-with-keras/cifar10_cnn.R",
+est <- estimator(source_directory = "hyperparameter-tune-with-keras",
+                 entry_script = "cifar10_cnn.R",
                  compute_target = compute_target,
                  environment = env)
 ```
