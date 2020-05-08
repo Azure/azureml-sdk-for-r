@@ -105,7 +105,13 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
     }
   }
 
-  assign("packages", obj$packages, global_env)
+  pkgname <- if (exists('packageName', mode='function'))
+    packageName(envir)
+  else
+    NULL
+
+  assign("packages", packages, global_env)
+  assign("pkgname", pkgname, global_env)
 
   expr <- compiler::compile(expr, env = envir,
                             options = list(suppressUndefined = TRUE))
@@ -187,8 +193,10 @@ split_tasks <- function(args_list, node_count, process_count_per_node) {
 #' would be downloaded.
 merge_results <- function(node_count, process_count_per_node, run,
                           source_directory) {
-  result <- list()
   num_processes <- node_count * process_count_per_node
+
+  result <- list()
+
   for (i in seq_len(num_processes)) {
     if (num_processes == 1) {
       file_name <- "task.rds"
@@ -211,6 +219,44 @@ merge_results <- function(node_count, process_count_per_node, run,
 #' needed for the experiment.
 generate_entry_script <- function(source_directory) {
   r_launcher_script <- "
+
+getparentenv <- function(pkgname) {
+  parenv <- NULL
+
+  tryCatch({
+    # pkgname is NULL in many cases, as when the foreach loop
+    # is executed interactively or in an R script
+    if (is.character(pkgname)) {
+      # load the specified package
+      if (require(pkgname, character.only=TRUE)) {
+        pkgenv <- as.environment(paste0('package:', pkgname))
+        for (sym in ls(pkgenv)) {
+          fun <- get(sym, pkgenv, inherits=FALSE)
+          if (is.function(fun)) {
+            env <- environment(fun)
+            if (is.environment(env)) {
+              parenv <- env
+              break
+            }
+          }
+        }
+        if (is.null(parenv)) {
+          stop('loaded ', pkgname, ', but parent search failed', call.=FALSE)
+        } else {
+          message('loaded ', pkgname, ' and set parent environment')
+        }
+      }
+    }
+  },
+  error=function(e) {
+    cat(sprintf('Error getting parent environment: %s\n',
+                conditionMessage(e)))
+  })
+
+  # return the global environment by default
+  if (is.null(parenv)) globalenv() else parenv
+}
+
 globalEnv <- readRDS(\"env.rds\")
 
 task_rank <- Sys.getenv(\"OMPI_COMM_WORLD_RANK\", unset = NA)
@@ -225,7 +271,8 @@ if (is.na(task_rank)) {
 }
 
 exportEnv <- globalEnv$exportenv
-parent.env(exportEnv) <- globalenv()
+parent.env(exportEnv) <- getparentenv(globalEnv$pkgname)
+attach(exportEnv)
 
 for (p in globalEnv$packages)
   library(p, character.only=TRUE)
