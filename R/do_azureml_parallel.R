@@ -106,7 +106,7 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   }
 
   pkgname <- if (exists("packageName", mode = "function"))
-    packageName(envir)
+    utils::packageName(envir)
   else
     NULL
 

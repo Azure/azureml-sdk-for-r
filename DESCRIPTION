@@ -42,5 +42,6 @@ Suggests: rmarkdown,
     dplyr,
     jsonlite,
     foreach,
-    iterators
+    iterators,
+    utils
 VignetteBuilder: knitr
