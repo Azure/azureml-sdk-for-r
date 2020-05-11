@@ -13,19 +13,19 @@ navbar:
     - text: Set up an Azure ML workspace
       href: articles/configuration.html
     - text: Train and deploy your first model with Azure ML
-      href: articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html
+      href: articles/train-and-deploy-first-model.html
     - text: Train a TensorFlow model
-      href: articles/train-with-tensorflow/train-with-tensorflow.html
+      href: articles/train-with-tensorflow.html
     - text: Hyperparameter tune a Keras model
-      href: articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html
+      href: articles/hyperparameter-tune-with-keras.html
     - text: Deploy a web service to Azure Kubernetes Service
-      href: articles/deploy-to-aks/deploy-to-aks.html
+      href: articles/deploy-to-aks.html
     - text: ---
     - text: Guides
     - text: Deploying models
-      href: articles/guides/deploying-models.html
+      href: articles/deploying-models.html
     - text: Troubleshooting
-      href: articles/guides/troubleshooting.html
+      href: articles/troubleshooting.html
   - text: News
     href: news/index.html
 

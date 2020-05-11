@@ -25,8 +25,10 @@ test_that("create environment and check parameters", {
   cran_pkg1 <- cran_package("ggplot2")
   cran_pkg2 <- cran_package("dplyr")
 
+  github_pkg1 <- github_package("Azure/azureml-sdk-for-r")
+
   env <- r_environment(env_name, cran_packages = list(cran_pkg1, cran_pkg2),
-                       github_packages = c("Azure/azureml-sdk-for-r"),
+                       github_packages = list(github_pkg1),
                        custom_url_packages = c("/some/package/dir"),
                        bioconductor_packages = c("a4", "BiocCheck"))
   expect_equal(length(env$r$cran_packages), 2)

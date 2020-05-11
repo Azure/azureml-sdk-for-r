@@ -77,7 +77,7 @@ if (is.null(compute_target))
 ```
 
 ## Prepare the training script
-A training script called `cifar10_cnn.R` has been provided for you in the same directory as this tutorial.
+A training script called `cifar10_cnn.R` has been provided for you in the `hyperparameter-tune-with-keras` folder.
 
 In order to leverage HyperDrive, the training script for your model must log the relevant metrics during model training. When you configure the hyperparameter tuning run, you specify the primary metric to use for evaluating run performance. You must log this metric so it is available to the hyperparameter tuning process.
 
@@ -113,16 +113,18 @@ To create the estimator, define the following:
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
 * Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, specify the package information by creating a
-`cran_package` object and pass the object in a list to the `cran_packages` parameter to have it installed in the Docker container where the job will run.
-See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
-* Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
+`cran_package` object and pass the object in a list to the `cran_packages` parameter to have it installed in the Docker container where the job will run.  Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
+See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options.
+*
 
 ```{r create_estimator, eval=FALSE}
-est <- estimator(source_directory = ".",
+env <- r_environment("tensorflow-env",
+                     cran_packages = list(cran_package("keras")),
+                     use_gpu = TRUE)
+est <- estimator(source_directory = "hyperparameter-tune-with-keras",
                  entry_script = "cifar10_cnn.R",
                  compute_target = compute_target,
-                 cran_packages = list(cran_package("keras")),
-                 use_gpu = TRUE)
+                 environment = env)
 ```
 
 ## Configure the HyperDrive run

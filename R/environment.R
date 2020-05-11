@@ -21,7 +21,7 @@
 #' @param rscript_path The Rscript path to use if an environment build is not required.
 #' The path specified gets used to call the user script.
 #' @param cran_packages A list of `cran_package` objects to be installed.
-#' @param github_packages A character vector of GitHub packages to be installed.
+#' @param github_packages A list of `github_package` objects to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
 #' @param bioconductor_packages A character vector of packages to be installed
@@ -144,7 +144,8 @@ r_environment <- function(name, version = NULL,
     env$r$github_packages <- list()
     for (package in github_packages) {
       github_package <- azureml$core$environment$RGithubPackage()
-      github_package$repository <- package
+      github_package$repository <- package$repository
+      github_package$auth_token <- package$auth_token
       env$r$github_packages <- c(env$r$github_packages, github_package)
     }
   }
@@ -252,15 +253,38 @@ container_registry <- function(address = NULL,
 #' pkg3 <- cran_package("ggplot2", version = "0.9.1",
 #'                      repo = "http://cran.us.r-project.org")
 #'
-#' est <- estimator(source_directory = ".",
-#'                  entry_script = "train.R",
-#'                  cran_packages = list(pkg1, pkg2, pkg3),
-#'                  compute_target = compute_target)
+#' est <- r_environment(name = "r_env",
+#'                      cran_packages = list(pkg1, pkg2, pkg3))
 #' ```
-#' @seealso [r_environment()], [estimator()]
+#' @seealso [r_environment()]
 #' @md
 cran_package <- function(name, version = NULL, repo = "https://cloud.r-project.org") {
   cran_package <- list(name = name, version = version, repo = repo)
 
   return(cran_package)
+}
+
+#' Specifies a Github package to install in environment
+#'
+#' @description
+#' Specifies a Github package to install in run environment
+#'
+#' @param repository Repository address in the format
+#' username/repo[/subdir][@ref|#pull].
+#' @param auth_token Personal access token to install from a private repo.
+#' @return A named list containing the package specifications
+#' @export
+#' @section Examples:
+#' ```
+#' pkg1 <- github_package("Azure/azureml-sdk-for-r")
+#'
+#' est <- r_environment(name = "r_env",
+#'                      github_packages = list(pkg1))
+#' ```
+#' @seealso [r_environment()]
+#' @md
+github_package <- function(repository, auth_token = NULL) {
+  github_package <- list(repository = repository, auth_token = auth_token)
+
+  return(github_package)
 }

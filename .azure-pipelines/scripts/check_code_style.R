@@ -6,10 +6,17 @@ if (length(args) == 0) {
 
 library("lintr")
 
-check_code_style <- function(directory) {
+check_code_style <- function(args) {
+  skip_tests = c("package.R")
+  if (length(args) > 1) {
+    skip_tests <- append(skip_tests, unlist(strsplit(args[2], ";")))
+  }
+
+  directory = args[1]
   files <- list.files(directory)
+
   for (filename in files) {
-    if (filename == "package.R"){
+    if (filename %in% skip_tests) {
       next
     }
 
@@ -29,4 +36,4 @@ check_code_style <- function(directory) {
   }
 }
 
-check_code_style(directory = args[1])
+check_code_style(args)

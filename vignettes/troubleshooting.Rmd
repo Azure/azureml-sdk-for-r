@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting"
+title: "Known issues and troubleshooting"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -65,7 +65,7 @@ Move the files for your project into a subdirectory and reset the working direct
 In order to submit an experiment, the Azure ML SDK must create a .zip file of the project directory to send to the service. However, the SDK does not have permission to write into the .Rproj.user subdirectory that is automatically created during an RStudio session. For this reason, the recommended best practice is to isolate project files into their own directory.
 
 ## Deployment
-For information on troubleshooting web service deployment issues, see the "Troubleshooting section" of the [Deploying models](https://azure.github.io/azureml-sdk-for-r/articles/guides/deploying-models.html#troubleshooting-deployment) guide.
+For information on troubleshooting web service deployment issues, see the "Troubleshooting section" of the [Deploying models](https://azure.github.io/azureml-sdk-for-r/articles/deploying-models.html#troubleshooting-deployment) guide.
 
 ## Resource quotas
 You may hit resource quota issues, such as the error below:

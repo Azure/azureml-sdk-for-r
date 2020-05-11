@@ -40,5 +40,7 @@ Suggests: rmarkdown,
     knitr,
     testthat,
     dplyr,
-    jsonlite
+    jsonlite,
+    foreach,
+    iterators
 VignetteBuilder: knitr

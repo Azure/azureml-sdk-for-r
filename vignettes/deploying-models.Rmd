@@ -66,7 +66,7 @@ second_model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model', '2',
 ```
 
 #### Example entry script
-The following is an example entry script. You can see the full tutorial [here](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html).
+The following is an example entry script. You can see the full tutorial [here](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-first-model.html).
 
 ```{r eval=FALSE}
 library(jsonlite)
@@ -131,7 +131,7 @@ To deploy a model locally, you need to have Docker installed on your local machi
 For an example of local deployment, see the [deploy-to-local](https://github.com/Azure/azureml-sdk-for-r/tree/master/samples/deployment/deploy-to-local) sample.
 
 ### 2. ACI deployment
-For an example of deploying to ACI, see the [train-and-deploy-to-aci](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html) vignette.
+For an example of deploying to ACI, see the [train-and-deploy-to-aci](https://azure.github.io/azureml-sdk-for-r/articles/train-and-deploy-first-model.html) vignette.
 
 ### 3. AKS deployment
 To deploy a model to AKS, you will first need an AKS cluster for the deployment compute target. You can either
@@ -141,7 +141,7 @@ To deploy a model to AKS, you will first need an AKS cluster for the deployment 
 
 You can instead also create or attach an AKS cluster via the CLI or [studio](ml.azure.com) UI.
 
-For an example of deploying to AKS, see the [deploy-to-aks](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html) vignette.
+For an example of deploying to AKS, see the [deploy-to-aks](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks.html) vignette.
 
 ### Troubleshooting deployment
 If your service deployment fails, you can use [`get_webservice_logs()`](https://azure.github.io/azureml-sdk-for-r/reference/get_webservice_logs.html) to inspect the detailed Docker engine log messages from your web service deployment. Note that if your initial deployment fails and you want to attempt a new deployment, you will first need to delete the original web service if you want to use the same web service name. You can use the [`delete_webservice()`](https://azure.github.io/azureml-sdk-for-r/reference/delete_webservice.html) method.
