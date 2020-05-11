@@ -7,8 +7,7 @@
 github_package(repository, auth_token = NULL)
 }
 \arguments{
-\item{repository}{Repository address in the format
-username/repo\link[=@ref|#pull]{/subdir}.}
+\item{repository}{Repository address of the github package}
 
 \item{auth_token}{Personal access token to install from a private repo.}
 }

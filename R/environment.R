@@ -269,8 +269,7 @@ cran_package <- function(name, version = NULL, repo = "https://cloud.r-project.o
 #' @description
 #' Specifies a Github package to install in run environment
 #'
-#' @param repository Repository address in the format
-#' username/repo[/subdir][@ref|#pull].
+#' @param repository Repository address of the github package
 #' @param auth_token Personal access token to install from a private repo.
 #' @return A named list containing the package specifications
 #' @export
