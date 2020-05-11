@@ -1,22 +1,25 @@
 ---
-title: "A Deeper Dive into Experiments with R"
-author: "David Smith"
-date: "1/26/2020"
-output: html_document
+title: "A Deeper Dive into Experiments"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A Deeper Dive into Experiments}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## A Deeper Dive into Experiments with R
+## A Deeper Dive into Experiments
 
 In this vignette, we will go into more details about experiments.
 
 * Work with multiple experiments
 * Control experiments with command line arguments
 * Track multiple metrics
-* Use caret to train models and deploy to Kubernetes
+* Use caret to train models and deploy as a web service
 
 We will use the `accidents` data, which was saved to your shared data store in the vignette "Train and deploy your first model with Azure ML". We will also use the cluster `rcluster` created in that same vignette. Run that vignette first (at least through the section "Upload data to the datastore"), or the following commands will not work.
 
@@ -28,7 +31,7 @@ ws <- load_workspace_from_config()
 ds <- get_default_datastore(ws)
 target_path <- "accidentdata"
 
-#download_from_datastore(ds, target_path=".",prefix="accidentdata")
+download_from_datastore(ds, target_path=".", prefix="accidentdata")
 
 ## Find the compute target
 cluster_name <- "rcluster"
@@ -37,12 +40,14 @@ if(is.null(compute_target)) stop("Training cluster not found")
 ```
 
 ## Try out several models
-We have provided three different experiment files: [`accident-glm.R`](accident-glm.R), [`accident-knn.R`](accident-knn.R), [`accident-glmnet.R`](accident-glmnet.R). Each uses the `caret` package to fit a predictive model to the accidents data (GLM, KNN and GLMNET respectively). Here are the parts of `accident-glm.R` that load the data and fit the model. 
+We have provided three different experiment files in the `experiments-deep-dive` folder:
+[`accident-glm.R`](accident-glm.R), [`accident-knn.R`](accident-knn.R), [`accident-glmnet.R`](accident-glmnet.R). 
+Each uses the `caret` package to fit a predictive model to the accidents data (GLM, KNN and GLMNET respectively). Here are the parts of `accident-glm.R` that load the data and fit the model. 
 
 The script loads the data `accidents` from the shared datastore, and then creates a training partition `accident_trn`. This data is then passed to the caret `train` function to fit a generalized linear model (in this case, a logistic regression).
 
 ```{r accident-glm, eval=FALSE}
-### FROM FILE: accident-glm.R - do not run this code
+### FROM FILE: accident-glm.R - do not run this code chunk
 
 ## Caret GLM model on training set with 5-fold cross validation
 accident_glm_mod <- train(
@@ -66,7 +71,7 @@ exp <- experiment(ws, "accident")
 Now, train the GLM model by submitting the script `accident-glm.R` to the experiment.
 
 ```{r run-experiment-1, eval=FALSE}
-est <- estimator(source_directory=".",
+est <- estimator(source_directory="experiments-deep-dive",
                  entry_script = "accident-glm.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target)
@@ -83,13 +88,13 @@ Now let's submit scripts fitting K-nearest-neighbors and GLMnet models to the da
 accuracy statistic is tracked with this line of code:
 
 ```{r tracking_code, eval=FALSE}
-### DO NOT RUN: tracking code from accident-XXX.R scripts
+### DO NOT RUN THIS CODE CHUNK: tracking code from accident-XXX.R scripts
 log_metric_to_run("Accuracy",
                   calc_acc(actual = accident_tst$dead,
                            predicted = predict(accident_glmnet_mod, newdata = accident_tst))
 )
-log_metric_to_run("Method","GLMNET")
-log_metric_to_run("TrainPCT",train.pct)
+log_metric_to_run("Method", "GLMNET")
+log_metric_to_run("TrainPCT", train.pct)
 ```
 
 We also track the algorithm used with the "Method" metric. (It's not really a metric, but it's useful to track in the Experiment view.) We also track the percentage of data used for the training set (the remainder is used for the test set, where accuracy is calculated). By default it is set to 75%, and we'll see how to change that in the next session.
@@ -97,13 +102,13 @@ We also track the algorithm used with the "Method" metric. (It's not really a me
 For now, submit expermiments for the KNN and GLMnet models:
 
 ```{r run-experiment-2, eval=FALSE}
-est <- estimator(source_directory=".",
+est <- estimator(source_directory="experiments-deep-dive",
                  entry_script = "accident-knn.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target)
 run <- submit_experiment(exp, est)
 
-est <- estimator(source_directory=".",
+est <- estimator(source_directory="experiments-deep-dive",
                  entry_script = "accident-glmnet.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target)
@@ -117,7 +122,7 @@ Also take a look at your experiment, by clicking on "Experiments" and then "acci
 Speaking of the training percentage, the experiment scripts have been designed to accept a command-line argument to specify the proportion used for the training set. The code, which makes use of the `optparse` package, looks like this:
 
 ```{r options-code, eval=FALSE}
-## DO NOT RUN: options code from experiment script
+## DO NOT RUN THIS CODE CHUNK: options code from experiment script
 options <- list(
   make_option(c("-d", "--data_folder")),
   make_option(c("-p", "--percent_train"))
@@ -135,7 +140,7 @@ We can use this option to pass in a value for the training percentage when we su
 train_pct_exp <- 0.80
 
 ## GLM model
-est <- estimator(source_directory = ".",
+est <- estimator(source_directory = "experiments-deep-dive",
                  entry_script = "accident-glm.R",
                  script_params = list("--data_folder" = ds$path(target_path),
                                       "--percent_train" = train_pct_exp),
@@ -145,7 +150,7 @@ run.glm <- submit_experiment(exp, est)
 
 ## KNN model
 exp <- experiment(ws, "accident")
-est <- estimator(source_directory = ".", 
+est <- estimator(source_directory = "experiments-deep-dive", 
                  entry_script = "accident-knn.R",
                  script_params = list("--data_folder" = ds$path(target_path),
                                       "--percent_train" = train_pct_exp),
@@ -155,7 +160,7 @@ run.knn <- submit_experiment(exp, est)
 
 ## GLMNET model
 exp <- experiment(ws, "accident")
-est <- estimator(source_directory = ".", 
+est <- estimator(source_directory = "experiments-deep-dive", 
                  entry_script = "accident-glmnet.R",
                  script_params = list("--data_folder" = ds$path(target_path),
                                       "--percent_train" = train_pct_exp),
@@ -163,7 +168,7 @@ est <- estimator(source_directory = ".",
 )
 run.glmnet <- submit_experiment(exp, est)
 ```
-We can check the accuracy for our runs at `ml.azure.com`, or by querying the service directly:
+We can check the accuracy for our runs after they complete at `ml.azure.com`, or by querying the service directly:
 
 ```{r check-metrics, eval=FALSE}
 get_run_metrics(run.glm)$Accuracy
@@ -188,7 +193,7 @@ r_env <- r_environment(name = "basic_env")
 
 inference_config <- inference_config(
   entry_script = "accident_predict_caret.R",
-  source_directory = ".",
+  source_directory = "experiments-deep-dive",
   environment = r_env)
 ```
 
@@ -208,17 +213,7 @@ aci_service <- deploy_model(ws,
 wait_for_deployment(aci_service, show_output = TRUE)
 ```
 
-If you wanted to deploy to Kubernetes, you would use something like this instead:
-
-```{r provis-aks, eval=FALSE}
-## DO NOT RUN: sample code for Kubernetes deployment
-aks_target <- create_aks_compute(ws, 
-                                 cluster_name = 'caretkluster',
-                                 vm_size='Standard_D2_v2',
-                                 agent_count=12)
-
-wait_for_provisioning_completion(aks_target, show_output = TRUE)
-```
+If you wanted to deploy to Kubernetes, see the [deploy-to-aks](deploy-to-aks.Rmd) vignette for an example.
 
 ## Use the prediction service in a Shiny application
 
@@ -226,10 +221,10 @@ We have provided the server and UI for a shiny application
 in the `accident-app` folder. The app uses the global variable `accident-endpoint` to find the endpoint of the prediction service to call, so set it here:
 
 ```{r get_endpoint, eval=FALSE}
-accident.endpoint <- get_webservice(ws,   "accident-predict-caret")$scoring_uri
+accident.endpoint <- get_webservice(ws,   "accident-pred-caret")$scoring_uri
 ```
-You can run the app by opening `app.R` in the `accident-app` folder in RStudio and clicking "Run App", or by running the code below. Try out different values of the input variables to see how they affect the predicted probability of a fatal accident.
+You can run the app by opening `app.R` in the `experiments-with-R/accident-app` folder in RStudio and clicking "Run App", or by running the code below. Try out different values of the input variables to see how they affect the predicted probability of a fatal accident.
 
 ```{r shiny-app, eval=FALSE}
-shiny::runApp("accident-app")
+shiny::runApp("experiments-with-R/accident-app")
 ```

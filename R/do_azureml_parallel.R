@@ -193,10 +193,8 @@ split_tasks <- function(args_list, node_count, process_count_per_node) {
 #' would be downloaded.
 merge_results <- function(node_count, process_count_per_node, run,
                           source_directory) {
-  num_processes <- node_count * process_count_per_node
-
   result <- list()
-
+  num_processes <- node_count * process_count_per_node
   for (i in seq_len(num_processes)) {
     if (num_processes == 1) {
       file_name <- "task.rds"

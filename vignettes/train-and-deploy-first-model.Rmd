@@ -33,13 +33,14 @@ The setup for your development work in this tutorial includes the following acti
 * Create an experiment to track your runs
 * Create a remote compute target to use for training
 
-If you are using RStudio from a Notebook VM, open this tutorial as a project in RStudio with File > Open Project and select
-your cloned `train-and-deploy-to-aci` folder. 
+To run this notebook in an Azure ML Compute Instance, visit the [Azure Machine Learning studio](https://ml.azure.com) and browse to 
+Notebooks > Samples > Azure ML gallery > Samples > R > <version> > vignettes. Click the "..." icon next to vignettes and chose "clone". Launch RStudio Server from the link
+in the "Compute" tab. In RStudio, select "File > New Project > Existing Directory" and browse to the cloned "Vignettes" folder.
 
 ### Install required packages
 This tutorial assumes you already have the Azure ML SDK installed. 
 (If you are running this vignette from an RStudio instance in an Azure
-ML Compute Instance or Notebook VM, the package is already installed for you.)
+ML Compute Instance, the package is already installed for you.)
 Go ahead and load the **azuremlsdk** package.
 
 ```{r eval=FALSE}
@@ -76,6 +77,7 @@ if (is.null(compute_target)) {
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,
                                        vm_size = vm_size,
+                                       min_nodes = 1,
                                        max_nodes = 2)
   
   wait_for_provisioning_completion(compute_target, show_output = TRUE)
@@ -89,7 +91,7 @@ This tutorial uses data from the US [National Highway Traffic Safety Administrat
 This dataset includes data from over 25,000 car crashes in the US, with variables you can use to predict the likelihood of a fatality. First, import the data into R and transform it into a new dataframe `accidents` for analysis, and export it to an `Rdata` file.
 
 ```{r load_data, eval=FALSE}
-nassCDS <- read.csv("nassCDS.csv", 
+nassCDS <- read.csv("train-and-deploy-first-model/nassCDS.csv", 
                      colClasses=c("factor","numeric","factor",
                                   "factor","factor","numeric",
                                   "factor","numeric","numeric",
@@ -127,7 +129,7 @@ For this tutorial, fit a logistic regression model on your uploaded data using y
 * Submit the job
 
 ### Prepare the training script
-A training script called `accidents.R` has been provided for you in the same directory as this tutorial. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
+A training script called `accidents.R` has been provided for you in the `train-and-deploy-first-model` folder. Notice the following details **inside the training script** that have been done to leverage the Azure ML service for training:
 
 * The training script takes an argument `-d` to find the directory that contains the training data. When you define and submit your job later, you point to the datastore for this argument. Azure ML will mount the storage folder to the remote cluster for the training job.
 * The training script logs the final accuracy as a metric to the run record in Azure ML using `log_metric_to_run()`. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record. The metrics can then be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com). See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-training-experimentation) for the full set of logging methods `log_*()`.
@@ -146,7 +148,7 @@ To create the estimator, define:
 * Any environment dependencies required for training. The default Docker image built for training already contains the three packages (`caret`, `e1071`, and `optparse`) needed in the training script.  So you don't need to specify additional information. If you are using R packages that are not included by default, use the estimator's `cran_packages` parameter to add additional CRAN packages. See the [`estimator()`](https://azure.github.io/azureml-sdk-for-r/reference/estimator.html) reference for the full set of configurable options.
 
 ```{r create_estimator, eval=FALSE}
-est <- estimator(source_directory = ".",
+est <- estimator(source_directory = "train-and-deploy-first-model",
                  entry_script = "accidents.R",
                  script_params = list("--data_folder" = ds$path(target_path)),
                  compute_target = compute_target
@@ -261,12 +263,12 @@ Now you have everything you need to create an **inference config** for encapsula
 ``` {r create_inference_config, eval=FALSE}
 inference_config <- inference_config(
   entry_script = "accident_predict.R",
-  source_directory = ".",
+  source_directory = "train-and-deploy-first-model",
   environment = r_env)
 ```
 
 ### Deploy to ACI
-In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks/deploy-to-aks.html).)
+In this tutorial, you will deploy your service to ACI. This code provisions a single container to respond to inbound requests, which is suitable for testing and light loads. See [`aci_webservice_deployment_config()`](https://azure.github.io/azureml-sdk-for-r/reference/aci_webservice_deployment_config.html) for additional configurable options. (For production-scale deployments, you can also [deploy to Azure Kubernetes Service](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks.html).)
 
 ``` {r create_aci_config, eval=FALSE}
 aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)
