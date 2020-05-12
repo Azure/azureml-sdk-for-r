@@ -167,9 +167,10 @@ depending on the <code>use_gpu</code> flag) and install any R packages specified
     </div>
 
     <pre class="usage"><span class='fu'>r_environment</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>rscript_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bioconductor_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,17 +190,27 @@ and values. These environment variables are set on the process where the user
 script is being executed.</p></td>
     </tr>
     <tr>
+      <th>rscript_path</th>
+      <td><p>The Rscript path to use if an environment build is not required.
+The path specified gets used to call the user script.</p></td>
+    </tr>
+    <tr>
       <th>cran_packages</th>
       <td><p>A list of <code>cran_package</code> objects to be installed.</p></td>
     </tr>
     <tr>
       <th>github_packages</th>
-      <td><p>A character vector of GitHub packages to be installed.</p></td>
+      <td><p>A list of <code>github_package</code> objects to be installed.</p></td>
     </tr>
     <tr>
       <th>custom_url_packages</th>
       <td><p>A character vector of packages to be installed
 from local directory or custom URL.</p></td>
+    </tr>
+    <tr>
+      <th>bioconductor_packages</th>
+      <td><p>A character vector of packages to be installed
+from Bioconductor.</p></td>
     </tr>
     <tr>
       <th>custom_docker_image</th>

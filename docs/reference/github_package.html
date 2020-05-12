@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate a dockerfile string to build the image for training. — generate_docker_file • azuremlsdk</title>
+<title>Specifies a Github package to install in environment — github_package • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Generate a dockerfile string to build the image for training. — generate_docker_file" />
+<meta property="og:title" content="Specifies a Github package to install in environment — github_package" />
 
-<meta property="og:description" content="Generate a dockerfile string to build the image for training." />
+<meta property="og:description" content="Specifies a Github package to install in run environment" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -141,53 +141,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate a dockerfile string to build the image for training.</h1>
+    <h1>Specifies a Github package to install in environment</h1>
     <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/environment.R'><code>R/environment.R</code></a></small>
-    <div class="hidden name"><code>generate_docker_file.Rd</code></div>
+    <div class="hidden name"><code>github_package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Generate a dockerfile string to build the image for training.</p>
+    <p>Specifies a Github package to install in run environment</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>generate_docker_file</span>(<span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>install_system_packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>github_package</span>(<span class='no'>repository</span>, <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>custom_docker_image</th>
-      <td><p>The name of the docker image from which the image
-to use for training will be built. If not set, a default CPU based image will
-be used as the base image.</p></td>
+      <th>repository</th>
+      <td><p>Repository address of the github package</p></td>
     </tr>
     <tr>
-      <th>cran_packages</th>
-      <td><p>list of `cran_package` objects to be installed.</p></td>
-    </tr>
-    <tr>
-      <th>github_packages</th>
-      <td><p>character vector of github packages to be installed.</p></td>
-    </tr>
-    <tr>
-      <th>custom_url_packages</th>
-      <td><p>character vector of packages to be installed from
-local, directory or custom url.</p></td>
-    </tr>
-    <tr>
-      <th>install_system_packages</th>
-      <td><p>logical parameter to specify if system
-packages should be installed at runtime.</p></td>
+      <th>auth_token</th>
+      <td><p>Personal access token to install from a private repo.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Dockerfile string</p>
+    <p>A named list containing the package specifications</p>
+    
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>pkg1 &lt;- github_package("Azure/azureml-sdk-for-r")
+
+est &lt;- r_environment(name = "r_env",
+                     github_packages = list(pkg1))
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>r_environment()</code></p></div>
     
 
   </div>
@@ -197,6 +193,10 @@ packages should be installed at runtime.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#examples">Examples</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
