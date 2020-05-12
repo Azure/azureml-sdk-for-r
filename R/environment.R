@@ -151,17 +151,11 @@ r_environment <- function(name, version = NULL,
   }
 
   if (!is.null(custom_url_packages)) {
-    env$r$custom_url_packages <- list()
-    for (package in custom_url_packages) {
-      env$r$custom_url_packages <- c(env$r$custom_url_packages, package)
-    }
+    env$r$custom_url_packages <- c(custom_url_packages)
   }
 
   if (!is.null(bioconductor_packages)) {
-    env$r$bioconductor_packages <- list()
-    for (package in bioconductor_packages) {
-      env$r$bioconductor_packages <- c(env$r$bioconductor_packages, package)
-    }
+    env$r$bioconductor_packages <- c(bioconductor_packages)
   }
 
   invisible(env)
