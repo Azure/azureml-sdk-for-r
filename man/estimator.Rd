@@ -40,7 +40,7 @@ the training script specified in \code{entry_script}.}
 
 \item{cran_packages}{A list of \code{cran_package} objects to be installed.}
 
-\item{github_packages}{A character vector of GitHub packages to be installed.}
+\item{github_packages}{A list of \code{github_package} objects to be installed.}
 
 \item{custom_url_packages}{A character vector of packages to be installed
 from local directory or custom URL.}
