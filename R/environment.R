@@ -143,7 +143,7 @@ r_environment <- function(name, version = NULL,
   if (!is.null(github_packages)) {
     env$r$github_packages <- list()
     for (package in github_packages) {
-      github_package <- azureml$core$environment$RGithubPackage()
+      github_package <- azureml$core$environment$RGitHubPackage()
       github_package$repository <- package$repository
       github_package$auth_token <- package$auth_token
       env$r$github_packages <- c(env$r$github_packages, github_package)
@@ -253,7 +253,7 @@ container_registry <- function(address = NULL,
 #' pkg3 <- cran_package("ggplot2", version = "0.9.1",
 #'                      repo = "http://cran.us.r-project.org")
 #'
-#' est <- r_environment(name = "r_env",
+#' env <- r_environment(name = "r_env",
 #'                      cran_packages = list(pkg1, pkg2, pkg3))
 #' ```
 #' @seealso [r_environment()]
@@ -277,7 +277,7 @@ cran_package <- function(name, version = NULL, repo = "https://cloud.r-project.o
 #' ```
 #' pkg1 <- github_package("Azure/azureml-sdk-for-r")
 #'
-#' est <- r_environment(name = "r_env",
+#' env <- r_environment(name = "r_env",
 #'                      github_packages = list(pkg1))
 #' ```
 #' @seealso [r_environment()]
