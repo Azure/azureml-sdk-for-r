@@ -18,8 +18,10 @@
 #' @param environment_variables A named list of environment variables names
 #' and values. These environment variables are set on the process where the user
 #' script is being executed.
+#' @param r_version The version of R to be installed.
 #' @param rscript_path The Rscript path to use if an environment build is not required.
 #' The path specified gets used to call the user script.
+#' @param snapshot_date Date of MRAN snapshot to use.
 #' @param cran_packages A list of `cran_package` objects to be installed.
 #' @param github_packages A list of `github_package` objects to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
@@ -89,7 +91,9 @@
 #' @md
 r_environment <- function(name, version = NULL,
                           environment_variables = NULL,
+                          r_version = NULL,
                           rscript_path = NULL,
+                          snapshot_date = NULL,
                           cran_packages = NULL,
                           github_packages = NULL,
                           custom_url_packages = NULL,
@@ -104,7 +108,9 @@ r_environment <- function(name, version = NULL,
   env$docker$enabled <- TRUE
   env$docker$base_image <- custom_docker_image
   env$r <- azureml$core$environment$RSection()
+  env$r$r_version <- r_version
   env$r$rscript_path <- rscript_path
+  env$r$snapshot_date <- snapshot_date
 
   if (!is.null(image_registry_details)) {
     env$docker$base_image_registry <- image_registry_details

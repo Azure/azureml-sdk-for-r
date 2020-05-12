@@ -7,11 +7,12 @@ test_that("create environment and check parameters", {
   env_name <- "testenv"
   
   # Create environment
-  env <- r_environment(env_name, version = "1")
+  env <- r_environment(env_name, version = "1", r_version = "3.5.2")
   expect_equal(env$name, env_name)
   expect_equal(env$version, "1")
   expect_equal(env$docker$enabled, TRUE)
   expect_equal(env$docker$base_dockerfile, NULL)
+  expect_equal(env$r$r_version, "3.5.2")
 
   # use custom docker image
   custom_docker_image_name = "temp_image"
