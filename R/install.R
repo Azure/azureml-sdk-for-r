@@ -10,7 +10,7 @@
 #' @param remove_existing_env delete the conda environment if already exists
 #' @return None
 #' @export
-install_azureml <- function(version = "1.0.85",
+install_azureml <- function(version = "1.5.0",
                             envname = NULL,
                             conda_python_version = "3.6",
                             restart_session = TRUE,
