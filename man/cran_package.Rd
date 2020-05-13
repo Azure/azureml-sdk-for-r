@@ -29,7 +29,7 @@ pkg2 <- cran_package("stringr")
 pkg3 <- cran_package("ggplot2", version = "0.9.1",
                      repo = "http://cran.us.r-project.org")
 
-est <- r_environment(name = "r_env",
+env <- r_environment(name = "r_env",
                      cran_packages = list(pkg1, pkg2, pkg3))
 }
 }
