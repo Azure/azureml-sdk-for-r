@@ -36,7 +36,7 @@
 #' @param script_params A named list of the command-line arguments to pass to
 #' the training script specified in `entry_script`.
 #' @param cran_packages A list of `cran_package` objects to be installed.
-#' @param github_packages A character vector of GitHub packages to be installed.
+#' @param github_packages A list of `github_package` objects to be installed.
 #' @param custom_url_packages A character vector of packages to be installed
 #' from local directory or custom URL.
 #' @param custom_docker_image A string of the name of the Docker image from

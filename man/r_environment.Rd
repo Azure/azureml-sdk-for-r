@@ -5,9 +5,11 @@
 \title{Create an environment}
 \usage{
 r_environment(name, version = NULL, environment_variables = NULL,
+  r_version = NULL, rscript_path = NULL, snapshot_date = NULL,
   cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, custom_docker_image = NULL,
-  image_registry_details = NULL, use_gpu = FALSE, shm_size = NULL)
+  custom_url_packages = NULL, bioconductor_packages = NULL,
+  custom_docker_image = NULL, image_registry_details = NULL,
+  use_gpu = FALSE, shm_size = NULL)
 }
 \arguments{
 \item{name}{A string of the name of the environment.}
@@ -18,12 +20,22 @@ r_environment(name, version = NULL, environment_variables = NULL,
 and values. These environment variables are set on the process where the user
 script is being executed.}
 
+\item{r_version}{The version of R to be installed.}
+
+\item{rscript_path}{The Rscript path to use if an environment build is not required.
+The path specified gets used to call the user script.}
+
+\item{snapshot_date}{Date of MRAN snapshot to use.}
+
 \item{cran_packages}{A list of \code{cran_package} objects to be installed.}
 
-\item{github_packages}{A character vector of GitHub packages to be installed.}
+\item{github_packages}{A list of \code{github_package} objects to be installed.}
 
 \item{custom_url_packages}{A character vector of packages to be installed
 from local directory or custom URL.}
+
+\item{bioconductor_packages}{A character vector of packages to be installed
+from Bioconductor.}
 
 \item{custom_docker_image}{A string of the name of the Docker image from
 which the image to use for training or deployment will be built. If not set,

@@ -187,16 +187,14 @@ pkg2 &lt;- cran_package("stringr")
 pkg3 &lt;- cran_package("ggplot2", version = "0.9.1",
                      repo = "http://cran.us.r-project.org")
 
-est &lt;- estimator(source_directory = ".",
-                 entry_script = "train.R",
-                 cran_packages = list(pkg1, pkg2, pkg3),
-                 compute_target = compute_target)
+est &lt;- r_environment(name = "r_env",
+                     cran_packages = list(pkg1, pkg2, pkg3))
 </pre>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>r_environment()</code>, <code>estimator()</code></p></div>
+    <div class='dont-index'><p><code>r_environment()</code></p></div>
     
 
   </div>
