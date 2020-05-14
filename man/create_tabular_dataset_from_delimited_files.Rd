@@ -7,7 +7,8 @@
 create_tabular_dataset_from_delimited_files(path, validate = TRUE,
   include_path = FALSE, infer_column_types = TRUE,
   set_column_types = NULL, separator = ",", header = TRUE,
-  partition_format = NULL)
+  partition_format = NULL, support_multi_line = FALSE,
+  empty_as_string = FALSE)
 }
 \arguments{
 \item{path}{A data path in a registered datastore, a local path, or an HTTP URL.}
@@ -39,6 +40,17 @@ type. The format should start from the postition of first partition key until th
 For example, given a file path '../USA/2019/01/01/data.csv' and data is partitioned by country and time,
 we can define '/{Country}/{PartitionDate:yyyy/MM/dd}/data.csv' to create columns 'Country'
 of string type and 'PartitionDate' of datetime type.}
+
+\item{support_multi_line}{By default (support_multi_line=FALSE), all line breaks,
+including those in quoted field values, will be interpreted as a record break. Reading data this way is
+faster and more optimized for parallel execution on multiple CPU cores. However, it may result in silently
+producing more records with misaligned field values. This should be set to TRUE when the delimited files
+are known to contain quoted line breaks.}
+
+\item{empty_as_string}{Specify if empty field values should be loaded as empty strings.
+The default (FALSE) will read empty field values as nulls. Passing this as TRUE will read empty
+field values as empty strings. If the values are converted to numeric or datetime then this has no effect,
+as empty values will be converted to nulls.}
 }
 \value{
 The Tabular Dataset object.

@@ -282,18 +282,25 @@ create_tabular_dataset_from_parquet_files <- function(path, validate = TRUE,
 #' @param header Controls how column headers are promoted when reading from files. Defaults to True for all
 #' files having the same header. Files will read as having no header When header=False. More options can
 #' be specified using `PromoteHeadersBehavior`.
+#' @param support_multi_line By default (support_multi_line=FALSE), all line breaks,
+#' including those in quoted field values, will be interpreted as a record break. Reading data this way is
+#' faster and more optimized for parallel execution on multiple CPU cores. However, it may result in silently
+#' producing more records with misaligned field values. This should be set to TRUE when the delimited files
+#' are known to contain quoted line breaks.
+#' @param empty_as_string Specify if empty field values should be loaded as empty strings.
+#' The default (FALSE) will read empty field values as nulls. Passing this as TRUE will read empty
+#' field values as empty strings. If the values are converted to numeric or datetime then this has no effect,
+#' as empty values will be converted to nulls.
 #' @return The Tabular Dataset object.
 #' @export
 #' @seealso
 #' \code{\link{data_path}}
 #' @md
-create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
-                                                      include_path = FALSE,
-                                                      infer_column_types = TRUE,
-                                                      set_column_types = NULL,
-                                                      separator = ",",
-                                                      header = TRUE,
-                                                      partition_format = NULL) {
+create_tabular_dataset_from_delimited_files <- function(
+  path, validate = TRUE, include_path = FALSE, infer_column_types = TRUE,
+  set_column_types = NULL, separator = ",", header = TRUE,
+  partition_format = NULL, support_multi_line = FALSE,
+  empty_as_string = FALSE) {
   azureml$core$dataset$Dataset$Tabular$from_delimited_files(path,
                                                             validate,
                                                             include_path,
@@ -301,7 +308,9 @@ create_tabular_dataset_from_delimited_files <- function(path, validate = TRUE,
                                                             set_column_types,
                                                             separator,
                                                             header,
-                                                            partition_format)
+                                                            partition_format,
+                                                            support_multi_line,
+                                                            empty_as_string)
 }
 
 #' Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).

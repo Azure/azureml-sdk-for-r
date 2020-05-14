@@ -20,7 +20,7 @@ Specifies a Github package to install in run environment
 \section{Examples}{
 \preformatted{pkg1 <- github_package("Azure/azureml-sdk-for-r")
 
-est <- r_environment(name = "r_env",
+env <- r_environment(name = "r_env",
                      github_packages = list(pkg1))
 }
 }
