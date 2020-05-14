@@ -53,7 +53,9 @@ validate_samples <- function(args) {
 }
 
 if(!is.na(subscription_id)) {
-  ws <- get_workspace(workspace_name, subscription_id, resource_group)
+  ws <- get_workspace(name = workspace_name,
+                      subscription_id = subscription_id,
+                      resource_group = resource_group)
   write_workspace_config(ws, path = root_dir)
   validate_samples(args)
 }
