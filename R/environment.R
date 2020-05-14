@@ -41,7 +41,7 @@
 #' @section Details:
 #' Once built, the Docker image appears in the Azure Container Registry
 #' associated with your workspace, by default. The repository name has the form
-#' *azureml/azureml_<uuid>*. The unique identifier (*uuid*) part corresponds to
+#' `azureml/azureml_<uuid>`. The unique identifier (`uuid`) part corresponds to
 #' a hash computed from the environment configuration. This allows the service
 #' to determine whether an image corresponding to the given environment already
 #' exists for reuse.

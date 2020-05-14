@@ -4,10 +4,19 @@
 \alias{register_model}
 \title{Register a model to a given workspace}
 \usage{
-register_model(workspace, model_path, model_name, datasets = NULL,
-  tags = NULL, properties = NULL, description = NULL,
-  child_paths = NULL, sample_input_dataset = NULL,
-  sample_output_dataset = NULL, resource_configuration = NULL)
+register_model(
+  workspace,
+  model_path,
+  model_name,
+  datasets = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  child_paths = NULL,
+  sample_input_dataset = NULL,
+  sample_output_dataset = NULL,
+  resource_configuration = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -61,7 +70,8 @@ registry assumes that it's a new version. The version is incremented,
 and the new model is registered under the same name.
 }
 \section{Examples}{
-Registering a model from a single file\preformatted{ws <- load_workspace_from_config()
+
+Registering a model from a single file:\preformatted{ws <- load_workspace_from_config()
 model <- register_model(ws,
                         model_path = "my_model.rds",
                         model_name = "my_model",

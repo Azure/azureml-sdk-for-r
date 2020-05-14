@@ -50,11 +50,11 @@
 #' `NULL` a new container registry will be created.
 #' @param cmk_keyvault A string representing the key vault containing the customer
 #' managed key in the Azure resource ID format:
-#' '/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
-#' example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.
+#' `/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/`. For
+#' example: `/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault`.
 #' @param resource_cmk_uri The key URI of the customer managed key to encrypt the data at rest.
-#' The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
-#' For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
+#' The URI format is: `https://<keyvault-dns-name>/keys/<key-name>/<key-version>`.
+#' For example, `https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b`.
 #' Refer to https://docs.microsoft.com/azure-stack/user/azure-stack-key-vault-manage-portal for steps on how
 #' to create a key and get its URI.
 #' @param hbi_workspace Specifies whether the customer data is of High Business

@@ -4,10 +4,18 @@
 \alias{r_environment}
 \title{Create an environment}
 \usage{
-r_environment(name, version = NULL, environment_variables = NULL,
-  cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, custom_docker_image = NULL,
-  image_registry_details = NULL, use_gpu = FALSE, shm_size = NULL)
+r_environment(
+  name,
+  version = NULL,
+  environment_variables = NULL,
+  cran_packages = NULL,
+  github_packages = NULL,
+  custom_url_packages = NULL,
+  custom_docker_image = NULL,
+  image_registry_details = NULL,
+  use_gpu = FALSE,
+  shm_size = NULL
+)
 }
 \arguments{
 \item{name}{A string of the name of the environment.}
@@ -61,7 +69,7 @@ depending on the \code{use_gpu} flag) and install any R packages specified in th
 
 Once built, the Docker image appears in the Azure Container Registry
 associated with your workspace, by default. The repository name has the form
-\emph{azureml/azureml_<uuid>}. The unique identifier (\emph{uuid}) part corresponds to
+\verb{azureml/azureml_<uuid>}. The unique identifier (\code{uuid}) part corresponds to
 a hash computed from the environment configuration. This allows the service
 to determine whether an image corresponding to the given environment already
 exists for reuse.

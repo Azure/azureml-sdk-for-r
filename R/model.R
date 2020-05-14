@@ -80,7 +80,7 @@ get_model <- function(workspace,
 #' @return The `Model` object.
 #' @export
 #' @section Examples:
-#' # Registering a model from a single file
+#' Registering a model from a single file:
 #' ```
 #' ws <- load_workspace_from_config()
 #' model <- register_model(ws,

@@ -4,13 +4,25 @@
 \alias{create_workspace}
 \title{Create a new Azure Machine Learning workspace}
 \usage{
-create_workspace(name, auth = NULL, subscription_id = NULL,
-  resource_group = NULL, location = NULL,
-  create_resource_group = TRUE, friendly_name = NULL,
-  storage_account = NULL, key_vault = NULL, app_insights = NULL,
-  container_registry = NULL, cmk_keyvault = NULL,
-  resource_cmk_uri = NULL, hbi_workspace = FALSE, exist_ok = FALSE,
-  show_output = TRUE, sku = "basic")
+create_workspace(
+  name,
+  auth = NULL,
+  subscription_id = NULL,
+  resource_group = NULL,
+  location = NULL,
+  create_resource_group = TRUE,
+  friendly_name = NULL,
+  storage_account = NULL,
+  key_vault = NULL,
+  app_insights = NULL,
+  container_registry = NULL,
+  cmk_keyvault = NULL,
+  resource_cmk_uri = NULL,
+  hbi_workspace = FALSE,
+  exist_ok = FALSE,
+  show_output = TRUE,
+  sku = "basic"
+)
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be
@@ -57,12 +69,12 @@ workspace to pull and push both experimentation and webservices images. If
 
 \item{cmk_keyvault}{A string representing the key vault containing the customer
 managed key in the Azure resource ID format:
-'/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/'. For
-example: '/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault'.}
+\verb{/subscriptions//resourcegroups//providers/microsoft.keyvault/vaults/}. For
+example: \verb{/subscriptions/d139f240-94e6-4175-87a7-954b9d27db16/resourcegroups/myresourcegroup/providers/microsoft.keyvault/vaults/mykeyvault}.}
 
 \item{resource_cmk_uri}{The key URI of the customer managed key to encrypt the data at rest.
-The URI format is: 'https://<keyvault-dns-name>/keys/<key-name>/<key-version>'.
-For example, 'https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b'.
+The URI format is: \verb{https://<keyvault-dns-name>/keys/<key-name>/<key-version>}.
+For example, \verb{https://mykeyvault.vault.azure.net/keys/mykey/bc5dce6d01df49w2na7ffb11a2ee008b}.
 Refer to https://docs.microsoft.com/azure-stack/user/azure-stack-key-vault-manage-portal for steps on how
 to create a key and get its URI.}
 
@@ -98,23 +110,20 @@ models.
 sensitive information that's needed by the workspace.
 }
 }
-\examples{
-# This example requires only minimal specification, and all dependent
-# resources as well as the resource group will be created automatically.
-\dontrun{
-ws <- create_workspace(name = 'myworkspace',
+\section{Examples}{
+
+This example requires only minimal specification, and all dependent
+resources as well as the resource group will be created automatically.\preformatted{ws <- create_workspace(name = 'myworkspace',
                        subscription_id = '<azure-subscription-id>',
                        resource_group = 'myresourcegroup',
                        location = 'eastus2')
 }
 
-# This example shows how to reuse existing Azure resources by making
-# use of all parameters utilizing the Azure resource ID format. The specific
-# Azure resource IDs can be retrieved through the Azure Portal or SDK. This
-# assumes that the resource group, storage account, key vault, App Insights
-# and container registry already exist
-\dontrun{
-prefix = "subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/"
+This example shows how to reuse existing Azure resources by making
+use of all parameters utilizing the Azure resource ID format. The specific
+Azure resource IDs can be retrieved through the Azure Portal or SDK. This
+assumes that the resource group, storage account, key vault, App Insights
+and container registry already exist.\preformatted{prefix = "subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/"
 ws <- create_workspace(
        name = 'myworkspace',
        subscription_id = '<azure-subscription-id>',
@@ -130,8 +139,7 @@ ws <- create_workspace(
          'microsoft.containerregistry/registries/mycontainerregistry'))
 }
 }
+
 \seealso{
-\code{\link{service_principal_authentication}}
-\code{\link{get_workspace}}
-\code{\link{interactive_login_authentication}}
+\code{\link[=get_workspace]{get_workspace()}} \code{\link[=service_principal_authentication]{service_principal_authentication()}} \code{\link[=interactive_login_authentication]{interactive_login_authentication()}}
 }
