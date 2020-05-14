@@ -38,9 +38,9 @@ to start training.}
 \item{script_params}{A named list of the command-line arguments to pass to
 the training script specified in \code{entry_script}.}
 
-\item{cran_packages}{A character vector of CRAN packages to be installed.}
+\item{cran_packages}{A list of \code{cran_package} objects to be installed.}
 
-\item{github_packages}{A character vector of GitHub packages to be installed.}
+\item{github_packages}{A list of \code{github_package} objects to be installed.}
 
 \item{custom_url_packages}{A character vector of packages to be installed
 from local directory or custom URL.}
@@ -101,13 +101,13 @@ on the predefined Docker images that are used for training if
 \href{https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html#predefined-docker-images}{here}.
 }
 \section{Examples}{
-\preformatted{pkg1 <- cran_package("ggplot2", version = "3.3.0")
-pkg2 <- cran_package("stringr")
-
+\preformatted{r_env <- r_environment(name = "r-env",
+                       cran_packages = list(cran_package("dplyr"),
+                                            cran_package("ggplot2")))
 est <- estimator(source_directory = ".",
                  entry_script = "train.R",
-                 cran_packages = list(pkg1, pkg2),
-                 compute_target = compute_target)
+                 compute_target = compute_target,
+                 environment = r_env)
 }
 }
 

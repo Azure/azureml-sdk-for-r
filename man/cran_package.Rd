@@ -29,13 +29,11 @@ pkg2 <- cran_package("stringr")
 pkg3 <- cran_package("ggplot2", version = "0.9.1",
                      repo = "http://cran.us.r-project.org")
 
-est <- estimator(source_directory = ".",
-                 entry_script = "train.R",
-                 cran_packages = list(pkg1, pkg2, pkg3),
-                 compute_target = compute_target)
+est <- r_environment(name = "r_env",
+                     cran_packages = list(pkg1, pkg2, pkg3))
 }
 }
 
 \seealso{
-\code{\link[=r_environment]{r_environment()}}, \code{\link[=estimator]{estimator()}}
+\code{\link[=r_environment]{r_environment()}}
 }

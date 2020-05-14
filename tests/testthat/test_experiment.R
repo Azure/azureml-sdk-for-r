@@ -20,12 +20,15 @@ test_that("create, submit experiment, run in default amlcompute,
 
   ds <- get_default_datastore(ws)
 
+  r_env <- r_environment("r-env",
+                         cran_packages = list(cran_package("dplyr"),
+                                              cran_package("ggplot2")))
+
   est <- estimator(tmp_dir_name,
                    compute_target = existing_compute$name, 
                    entry_script = script_name, 
                    script_params = list("data_folder" = ds$as_mount()),
-                   cran_packages = list(cran_package("dplyr"),
-                                        cran_package("ggplot2")))
+                   environment = r_env)
   
   run <- submit_experiment(exp, est)
   wait_for_run_completion(run, show_output = TRUE)
@@ -37,7 +40,6 @@ test_that("create, submit experiment, run in default amlcompute,
   keyvault <- ws$get_default_keyvault()
   keyvault$set_secret(name="mysecret", value = "temp_secret")
   secrets <- get_secrets_from_run(run, list("mysecret"))
-  expect_equal(nrow(secrets), 1)
   expect_equal(any(secrets == "temp_secret"), TRUE)
 
   # upload files to the run

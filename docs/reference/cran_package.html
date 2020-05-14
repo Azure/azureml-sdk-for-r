@@ -95,24 +95,24 @@
       <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+      <a href="../articles/train-and-deploy-first-model.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+      <a href="../articles/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
     <li>
-      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+      <a href="../articles/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+      <a href="../articles/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Guides</li>
     <li>
-      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+      <a href="../articles/deploying-models.html">Deploying models</a>
     </li>
     <li>
-      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
+      <a href="../articles/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
 </li>
@@ -187,16 +187,14 @@ pkg2 &lt;- cran_package("stringr")
 pkg3 &lt;- cran_package("ggplot2", version = "0.9.1",
                      repo = "http://cran.us.r-project.org")
 
-est &lt;- estimator(source_directory = ".",
-                 entry_script = "train.R",
-                 cran_packages = list(pkg1, pkg2, pkg3),
-                 compute_target = compute_target)
+est &lt;- r_environment(name = "r_env",
+                     cran_packages = list(pkg1, pkg2, pkg3))
 </pre>
 
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>r_environment()</code>, <code>estimator()</code></p></div>
+    <div class='dont-index'><p><code>r_environment()</code></p></div>
     
 
   </div>

@@ -105,24 +105,24 @@ here." />
       <a href="../articles/configuration.html">Set up an Azure ML workspace</a>
     </li>
     <li>
-      <a href="../articles/train-and-deploy-to-aci/train-and-deploy-to-aci.html">Train and deploy your first model with Azure ML</a>
+      <a href="../articles/train-and-deploy-first-model.html">Train and deploy your first model with Azure ML</a>
     </li>
     <li>
-      <a href="../articles/train-with-tensorflow/train-with-tensorflow.html">Train a TensorFlow model</a>
+      <a href="../articles/train-with-tensorflow.html">Train a TensorFlow model</a>
     </li>
     <li>
-      <a href="../articles/hyperparameter-tune-with-keras/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
+      <a href="../articles/hyperparameter-tune-with-keras.html">Hyperparameter tune a Keras model</a>
     </li>
     <li>
-      <a href="../articles/deploy-to-aks/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
+      <a href="../articles/deploy-to-aks.html">Deploy a web service to Azure Kubernetes Service</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Guides</li>
     <li>
-      <a href="../articles/guides/deploying-models.html">Deploying models</a>
+      <a href="../articles/deploying-models.html">Deploying models</a>
     </li>
     <li>
-      <a href="../articles/guides/troubleshooting.html">Troubleshooting</a>
+      <a href="../articles/troubleshooting.html">Troubleshooting</a>
     </li>
   </ul>
 </li>
@@ -222,11 +222,11 @@ the training script specified in <code>entry_script</code>.</p></td>
     </tr>
     <tr>
       <th>cran_packages</th>
-      <td><p>A character vector of CRAN packages to be installed.</p></td>
+      <td><p>A list of <code>cran_package</code> objects to be installed.</p></td>
     </tr>
     <tr>
       <th>github_packages</th>
-      <td><p>A character vector of GitHub packages to be installed.</p></td>
+      <td><p>A list of <code>github_package</code> objects to be installed.</p></td>
     </tr>
     <tr>
       <th>custom_url_packages</th>
@@ -296,13 +296,13 @@ objects to use as input.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
     
-<pre>pkg1 &lt;- cran_package("ggplot2", version = "3.3.0")
-pkg2 &lt;- cran_package("stringr")
-
+<pre>r_env &lt;- r_environment(name = "r-env",
+                       cran_packages = list(cran_package("dplyr"),
+                                            cran_package("ggplot2")))
 est &lt;- estimator(source_directory = ".",
                  entry_script = "train.R",
-                 cran_packages = list(pkg1, pkg2),
-                 compute_target = compute_target)
+                 compute_target = compute_target,
+                 environment = r_env)
 </pre>
 
     

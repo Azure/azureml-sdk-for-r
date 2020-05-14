@@ -202,6 +202,7 @@ get_run_file_names <- function(run) {
 }
 
 #' Get secrets from the keyvault associated with a run's workspace
+#'
 #' @description
 #' From within the script of a run submitted using
 #' `submit_experiment()`, you can use `get_secrets_from_run()`
@@ -219,14 +220,13 @@ get_run_file_names <- function(run) {
 #' @param run The `Run` object.
 #' @param secrets A vector of strings of secret names to retrieve
 #' the values for.
-#' @return A list of found and not found secrets as data frame.
+#' @return A named list of found and not found secrets.
 #' If a secret was not found, the corresponding element will be `NULL`.
 #' @export
 #' @seealso [set_secrets()]
 #' @md
 get_secrets_from_run <- function(run, secrets) {
-  secrets <- run$get_secrets(secrets)
-  as.data.frame(secrets)
+  run$get_secrets(secrets)
 }
 
 #' Log a metric to a run
@@ -545,9 +545,23 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 }
 
 #' Generate table of run details
+#'
+#' @description
+#' Plot a table of run details including
+#'  * ID
+#'  * Status
+#'  * Start Time
+#'  * Duration
+#'  * Script Name
+#'  * Arguments
+#'  * Link to Web Portal view
+#'  * Errors
+#'
 #' @param run The `Run` object.
+#' @return Datatable containing run details
+#' @export
 #' @md
-.create_run_details_plot <- function(run) {
+plot_run_details <- function(run) {
   handle_null <- function(arg, placeholder = "-") {
     if (is.list(arg) && !length(arg) || arg == "" || is.null(arg)) {
       placeholder
@@ -650,7 +664,6 @@ log_table_to_run <- function(name, value, description = "", run = NULL) {
 #' @param run Run object
 #' @param auto_refresh Boolean indicating whether or not widget should update
 #' run details automatically. The default is TRUE when using RStudio.
-#' @export
 #' @md
 view_run_details <- function(run, auto_refresh = TRUE) {
   if (rstudioapi::isAvailable() &&
@@ -675,7 +688,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
                             run$experiment$workspace$name,
                             run$experiment$name,
                             run$id,
-                            .create_run_details_plot(run),
+                            plot_run_details(run),
                             port,
                             shinycssloaders::withSpinner,
                             shiny::shinyOptions,
@@ -735,7 +748,7 @@ view_run_details <- function(run, auto_refresh = TRUE) {
       utils::browseURL(host)
     }
   } else {
-    .create_run_details_plot(run)
+    plot_run_details(run)
   }
 }
 
