@@ -9,8 +9,9 @@ write_workspace_config(workspace, path = NULL, file_name = NULL)
 \arguments{
 \item{workspace}{The \code{Workspace} object whose config has to be written down.}
 
-\item{path}{A string of the location to write the config.json file.
-The parameter defaults to the current working directory.}
+\item{path}{A string of the location to write the config.json file. The config
+file will be located in a directory called '.azureml'. The parameter defaults to
+the current working directory, so by default config.json will be located at '.azureml/'.}
 
 \item{file_name}{A string of the name to use for the config file. The
 parameter defaults to \code{'config.json'}.}
@@ -26,4 +27,7 @@ multiple files or projects. Users can save the workspace ARM properties
 using this function, and use \code{load_workspace_from_config()} to load the
 same workspace in different files or projects without retyping the
 workspace ARM properties.
+}
+\seealso{
+\code{\link[=load_workspace_from_config]{load_workspace_from_config()}}
 }
