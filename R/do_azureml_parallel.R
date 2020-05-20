@@ -150,7 +150,18 @@ register_do_azureml_parallel <- function(workspace, compute_target) {
   wait_for_run_completion(run, show_output = TRUE)
 
   # merge results
-  result <- merge_results(node_count, process_count_per_node, run, source_dir)
+  merged_result <- merge_results(node_count, process_count_per_node, run, source_dir)
+
+  accumulator <- foreach::makeAccum(it)
+  tryCatch({
+    accumulator(merged_result, tags = seq_along(merged_result))
+  }, error = function(e) {
+    cat("error calling combine function:\n")
+    print(e)
+    NULL
+  })
+
+  result <- foreach::getResult(it)
 
   # delete generated files
   unlink(source_dir, recursive = TRUE)
