@@ -65,6 +65,18 @@ get_current_run()
 ```
 
 ## Troubleshooting
+-   If you're using the compute instance, the first time you run `library(azuremlsdk)` you may run into the following prompt:
+
+    ```R
+    > library(azuremlsdk)
+    No non-system installation of Python could be found.
+    Would you like to download and install Miniconda?
+    Miniconda is an open source environment management system for Python.
+    See https://docs.conda.io/en/latest/miniconda.html for more details.
+    ```
+    
+    This is the reticulate package prompting the user if they want to have Miniconda installed (see [GitHub issue](https://github.com/rstudio/reticulate/issues/607)). Since the compute instance already has Anaconda, you can just respond "N" to the prompt. You will receive the message "Installation aborted", which just means that Miniconda won't be installed. You will only be prompted for this once for each new compute instance you spin up.
+
 -   In step 3 of the installation, if you get ssl errors on windows, it is due to an
 outdated openssl binary. Install the latest openssl binaries from
 [here](https://wiki.openssl.org/index.php/Binaries).
