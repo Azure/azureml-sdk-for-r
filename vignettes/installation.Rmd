@@ -37,23 +37,17 @@ remotes::install_cran('azuremlsdk', repos = 'https://cloud.r-project.org/', INST
 
 ## Install the Azure ML Python SDK
 Lastly, use the **azuremlsdk** R library to install the [latest version of the Python SDK](https://pypi.org/project/azureml-sdk/).
-
-If using an Azure Machine Learning Compute Instance or a CRAN installation with `reticulate >= 1.14`, use the `azuremlsdk::install_azureml()` function with the conda environment set to `r-reticulate`.
-``` {r install_pythonsdk1, eval=FALSE}
-azuremlsdk::install_azureml(envname = 'r-reticulate')
-```
-
-If using a CRAN installation with `reticulate < 1.14` or a GitHub installation, the correct conda environment will be selected automatically. There is no need to specify the `envname` parameter.
-``` {r install_pythonsdk2, eval=FALSE}
+``` {r install_pythonsdk, eval=FALSE}
 azuremlsdk::install_azureml()
 ```
 
-If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so: 
+By default, `install_azureml()` creates a conda environment called 'r-reticulate', installs the Python SDK in that environment, and restarts the R session after installation (if running in RStudio).
+If you would like to override the default version of the Python SDK, the environment name, or the Python version, you can pass in those arguments. If you would like to  delete the conda environment if it already exists and create a new environment, or not restart the R session after installation, you can also do so: 
 ``` {r eval=FALSE}
 azuremlsdk::install_azureml(version = NULL, 
                             envname = "<your conda environment name>",
                             conda_python_version = "<desired python version>",
-                            restart_session = TRUE,
+                            restart_session = FALSE,
                             remove_existing_env = TRUE)
 ```
 
