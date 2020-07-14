@@ -1,3 +1,14 @@
+# azuremlsdk 0.8.0
+## New features
+- Foreach backend for distirbuted training and batch inferencing.
+- R Section in Environment Definition.
+- Added Azure Data Lake Gen2 Datastore support.
+
+## Bug fixes
+- Fix issues with Dataset creation and usage.
+- Fix Interactive Authentication
+
+
 # azuremlsdk 0.6.85
 ## New features
 - Methods for creating and managing Azure ML Datasets.
