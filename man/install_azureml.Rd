@@ -5,7 +5,7 @@
 \title{Install azureml sdk package}
 \usage{
 install_azureml(
-  version = "1.8.0",
+  version = "1.9.0",
   envname = "r-reticulate",
   conda_python_version = "3.6",
   restart_session = TRUE,
