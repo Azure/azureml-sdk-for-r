@@ -16,7 +16,7 @@ install_azureml <- function(version = "1.9.0",
                             restart_session = TRUE,
                             remove_existing_env = FALSE) {
   main_package <- "azureml-sdk"
-  default_packages <- c("numpy", "azureml-dataprep[pandas]")
+  default_packages <- c("numpy", "pandas")
 
   # set version if provided
   if (!is.null(version)) {
