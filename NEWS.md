@@ -1,15 +1,29 @@
 # azuremlsdk 0.10.0
 ## New features
-- Foreach backend for distributed training and batch inferencing.
-- R Section in Environment Definition.
-- Added Azure Data Lake Gen2 Datastore support.
+- Add foreach backend for distributed training and batch inferencing.
+- Add R Section in Environment Definition.
+- Add Azure Data Lake Gen2 Datastore support as an experimental feature.
+- Add `github_package()` and `cran_package()` constructors to specify packages and
+  package versions in Estimator and Environment Definition.
+- Expose `query_timeout` parameter for `create_tabular_dataset_from_sql_query()`.
+- Add `data_path()` so that Dataset constructors can take in DataPath objects.
+- Add `dataset_consumption_config()`.
+- Add support for ResourceConfiguration and registering models from run.
+- Expose `cluster_purpose` param for `create_aks_compute()`.
+- Add `interactive_login_authentication()`.
 
 ## Bug fixes
 - Fix issues with Dataset creation and usage.
-- Fix Interactive Authentication
+- Fix Interactive Authentication.
 
 ## Breaking Changes
-- Removed Run Details widget support
+- Removed Run Details widget support.
+
+## Documentation
+- Add "Troubleshooting" article.
+- Add "Deploying models" vignette.
+- Add sample for batch inferencing with foreach backend.
+- Make all vignettes discoverable via CRAN.
 
 # azuremlsdk 0.6.85
 ## New features
