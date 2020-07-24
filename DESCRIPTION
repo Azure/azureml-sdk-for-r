@@ -3,12 +3,7 @@ Type: Package
 Title: Interface to the 'Azure Machine Learning' 'SDK'
 Version: 0.9.0
 Authors@R: c(
-    person("Heemanshu", "Suri", email = "Heemanshu.Suri@microsoft.com", role = c("cre", "aut")),
-    person("Billy", "Hu", email = "ninhu@microsoft.com", role = c("aut")),
-    person("Diondra", "Peck", email = "Diondra.Peck@microsoft.com", role = c("aut")),
-    person("Minna", "Xiao", email = "Minna.Xiao@microsoft.com", role = c("aut")),
-    person("Himanshu", "Chandola", email = "Himanshu.Chandola@microsoft.com", role = c("ctb")),
-    person("Abe", "Omorogbe", email = "Osarumwense.Omorogbe@microsoft.com", role = c("ctb")),
+    person("AzureML R SDK Team", email = "amlrsdk@microsoft.com", role = c("cre", "aut", "ctb")),
     person("Microsoft", role = c("cph", "fnd")),
     person(family = "Google Inc.", role = c("cph"), comment = "Examples and Tutorials"),
     person(family = "The TensorFlow Authors", role = c("cph"), comment = "Examples and Tutorials"),
