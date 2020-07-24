@@ -1,4 +1,4 @@
-# azuremlsdk 0.9.0
+# azuremlsdk 0.10.0
 ## New features
 - Foreach backend for distributed training and batch inferencing.
 - R Section in Environment Definition.
