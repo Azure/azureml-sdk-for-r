@@ -3,7 +3,7 @@ title: "Known issues and troubleshooting"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Troubleshooting}
+  %\VignetteIndexEntry{Known issues and troubleshooting}
   %\VignetteEngine{knitr::rmarkdown}
   \use_package{UTF-8}
 ---
