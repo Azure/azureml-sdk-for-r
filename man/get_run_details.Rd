@@ -30,3 +30,6 @@ the run is still in progress.
 \item \emph{logFiles}: Log files from the run.
 }
 }
+\seealso{
+\code{\link[=get_run_details_with_logs]{get_run_details_with_logs()}}
+}

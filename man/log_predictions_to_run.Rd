@@ -27,9 +27,8 @@ of predicted values for a regression task.
 The predictions are binned and standard deviations are calculated
 for error bars on a line chart.
 }
-\examples{
-\dontrun{
-data <- list("bin_averages" = c(0.25, 0.75),
+\section{Examples}{
+\preformatted{data <- list("bin_averages" = c(0.25, 0.75),
              "bin_errors" = c(0.013, 0.042),
              "bin_counts" = c(56, 34),
              "bin_edges" = c(0.0, 0.5, 1.0))
@@ -39,3 +38,4 @@ predictions <- list("schema_type" = "predictions",
 log_predictions_to_run("mypredictions", predictions)
 }
 }
+

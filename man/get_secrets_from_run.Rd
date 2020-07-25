@@ -32,5 +32,5 @@ Be careful not to expose the secret(s) values by writing or
 printing them out.
 }
 \seealso{
-\code{set_secrets()}
+\code{\link[=set_secrets]{set_secrets()}}
 }

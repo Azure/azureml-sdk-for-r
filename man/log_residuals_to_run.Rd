@@ -25,9 +25,8 @@ of residuals for a regression task. The residuals are \code{predicted - actual}.
 
 There should be one more edge than the number of counts.
 }
-\examples{
-\dontrun{
-data <- list("bin_edges" = c(50, 100, 200, 300, 350),
+\section{Examples}{
+\preformatted{data <- list("bin_edges" = c(50, 100, 200, 300, 350),
              "bin_counts" = c(0.88, 20, 30, 50.99))
 residuals <- list("schema_type" = "residuals",
                     "schema_version" = "v1",
@@ -35,3 +34,4 @@ residuals <- list("schema_type" = "residuals",
 log_predictions_to_run("myresiduals", predictions)
 }
 }
+

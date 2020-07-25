@@ -16,5 +16,5 @@ A named list of the run details and log file contents.
 Get the details of a run along with the log files' contents
 }
 \seealso{
-\code{get_run_details()}
+\code{\link[=get_run_details]{get_run_details()}}
 }

@@ -98,23 +98,20 @@ models.
 sensitive information that's needed by the workspace.
 }
 }
-\examples{
-# This example requires only minimal specification, and all dependent
-# resources as well as the resource group will be created automatically.
-\dontrun{
-ws <- create_workspace(name = 'myworkspace',
+\section{Examples}{
+
+This example requires only minimal specification, and all dependent
+resources as well as the resource group will be created automatically.\preformatted{ws <- create_workspace(name = 'myworkspace',
                        subscription_id = '<azure-subscription-id>',
                        resource_group = 'myresourcegroup',
                        location = 'eastus2')
 }
 
-# This example shows how to reuse existing Azure resources by making
-# use of all parameters utilizing the Azure resource ID format. The specific
-# Azure resource IDs can be retrieved through the Azure Portal or SDK. This
-# assumes that the resource group, storage account, key vault, App Insights
-# and container registry already exist
-\dontrun{
-prefix = "subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/"
+This example shows how to reuse existing Azure resources by making
+use of all parameters utilizing the Azure resource ID format. The specific
+Azure resource IDs can be retrieved through the Azure Portal or SDK. This
+assumes that the resource group, storage account, key vault, App Insights
+and container registry already exist.\preformatted{prefix = "subscriptions/<azure-subscription-id>/resourcegroups/myresourcegroup/providers/"
 ws <- create_workspace(
        name = 'myworkspace',
        subscription_id = '<azure-subscription-id>',
@@ -130,8 +127,7 @@ ws <- create_workspace(
          'microsoft.containerregistry/registries/mycontainerregistry'))
 }
 }
+
 \seealso{
-\code{\link{service_principal_authentication}}
-\code{\link{get_workspace}}
-\code{\link{interactive_login_authentication}}
+\code{\link[=get_workspace]{get_workspace()}} \code{\link[=service_principal_authentication]{service_principal_authentication()}} \code{\link[=interactive_login_authentication]{interactive_login_authentication()}}
 }

@@ -24,8 +24,8 @@ be stored in the run record in the experiment. You can log
 the same metric multiple times within a run, the result being
 considered a vector of that metric.
 }
-\examples{
-\dontrun{
-log_metric_to_run("Accuracy", 0.95)
+\section{Examples}{
+\preformatted{log_metric_to_run("Accuracy", 0.95)
 }
 }
+
