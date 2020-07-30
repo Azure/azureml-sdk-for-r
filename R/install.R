@@ -18,10 +18,8 @@ install_azureml <- function(version = "1.10.0",
   main_package <- "azureml-sdk"
   default_packages <- c("numpy", "pandas")
 
-  # set version if provided
-  if (!is.null(version)) {
-    main_package <- paste(main_package, "==", version, sep = "")
-  }
+  # set version
+  main_package <- paste(main_package, "==", version, sep = "")
 
   # check for anaconda installation
   if (is.null(reticulate::conda_binary())) {
@@ -48,6 +46,7 @@ install_azureml <- function(version = "1.10.0",
   }
 
   # install packages
+  print("installing packages")
   reticulate::py_install(
     packages = c(main_package, default_packages),
     envname = envname,
