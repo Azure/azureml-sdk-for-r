@@ -46,7 +46,6 @@ install_azureml <- function(version = "1.10.0",
   }
 
   # install packages
-  print("installing packages")
   reticulate::py_install(
     packages = c(main_package, default_packages),
     envname = envname,
