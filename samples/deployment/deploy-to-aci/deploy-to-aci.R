@@ -23,7 +23,7 @@ deployment_config <- aci_webservice_deployment_config(cpu_cores = 1,
                                                       memory_gb = 1)
 
 # Deploy the web service
-service_name <- paste0('aciservice_', as.integer(Sys.time()))
+service_name <- paste0('aciservice-', sample(1:100, 1, replace=TRUE))
 service <- deploy_model(ws, 
                         service_name, 
                         list(model), 
