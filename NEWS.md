@@ -10,7 +10,7 @@
 - Add `dataset_consumption_config()`. (#272)
 - Add support for ResourceConfiguration and registering models from run.(#300)
 - Expose `cluster_purpose` param for `create_aks_compute()`. (#276)
-- Add `interactive_login_authentication()`. (#263)
+- Add `interactive_login_authentication()` and `service_principal_authentication`. (#263) (#241)
 - Deprecate live run widget.
 
 ## Bug fixes
