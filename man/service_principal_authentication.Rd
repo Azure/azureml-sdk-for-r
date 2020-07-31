@@ -26,13 +26,12 @@ Service Principal authentication is suitable for automated workflows like for CI
 This type of authentication decouples the authentication process from any specific user login, and
 allows for managed access control.
 }
-\examples{
-# Service principal authentication involves creating an App Registration in
-# Azure Active Directory. First, you generate a client secret, and then you grant
-# your service principal role access to your machine learning workspace. Then,
-# you use the `ServicePrincipalAuthentication` object to manage your authentication flow.
-\dontrun{
-svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
+\section{Examples}{
+
+Service principal authentication involves creating an App Registration in
+Azure Active Directory. First, you generate a client secret, and then you grant
+your service principal role access to your machine learning workspace. Then,
+you use the \code{ServicePrincipalAuthentication} object to manage your authentication flow.\preformatted{svc_pr_password <- Sys.getenv("AZUREML_PASSWORD")
 svc_pr <- service_principal_authentication(tenant_id="my-tenant-id",
                                            service_principal_id="my-application-id",
                                            service_principal_password=svc_pr_password)
@@ -43,7 +42,7 @@ ws <- get_workspace("<your workspace name>",
                     auth = svc_pr)
 }
 }
+
 \seealso{
-\code{\link{get_workspace}}
-\code{\link{interactive_login_authentication}}
+\code{\link[=get_workspace]{get_workspace()}} \code{\link[=interactive_login_authentication]{interactive_login_authentication()}}
 }

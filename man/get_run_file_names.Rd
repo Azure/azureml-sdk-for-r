@@ -17,5 +17,5 @@ in the run record.
 Get the list of files stored in a run record.
 }
 \seealso{
-\code{download_file_from_run()}, \code{download_files_from_run()}
+\code{\link[=download_file_from_run]{download_file_from_run()}} \code{\link[=download_files_from_run]{download_files_from_run()}}
 }

@@ -25,3 +25,6 @@ projects. Users can save the workspace ARM properties using
 \code{write_workspace_config()}, and use this method to load the same workspace
 in different files or projects without retyping the workspace ARM properties.
 }
+\seealso{
+\code{\link[=write_workspace_config]{write_workspace_config()}}
+}

@@ -19,9 +19,8 @@ The \code{DataPath} object.
 \description{
 The path represented by DataPath object can point to a directory or a data artifact (blob, file).
 }
-\examples{
-\dontrun{
-my_data <- register_azure_blob_container_datastore(
+\section{Examples}{
+\preformatted{my_data <- register_azure_blob_container_datastore(
     workspace = ws,
     datastore_name = blob_datastore_name,
     container_name = ws_blob_datastore$container_name,
@@ -33,6 +32,7 @@ datapath <- data_path(my_data, <path_on_my_datastore>)
 dataset <- create_file_dataset_from_files(datapath)
 }
 }
+
 \seealso{
 \code{\link{create_file_dataset_from_files}}
 \code{\link{create_tabular_dataset_from_parquet_files}}

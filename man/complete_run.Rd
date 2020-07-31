@@ -16,5 +16,5 @@ None
 Mark the run as completed. Use for an interactive logging run.
 }
 \seealso{
-\code{start_logging_run()}
+\code{\link[=start_logging_run]{start_logging_run()}}
 }

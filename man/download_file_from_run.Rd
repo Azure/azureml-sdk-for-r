@@ -26,3 +26,6 @@ the \code{./outputs} or \code{./logs} folders during a run.
 You can see what files are available to download from the run record
 by calling \code{get_run_file_names()}.
 }
+\seealso{
+\code{\link[=download_files_from_run]{download_files_from_run()}}
+}

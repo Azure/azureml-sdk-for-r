@@ -666,6 +666,7 @@ plot_run_details <- function(run) {
 #' run details automatically. The default is TRUE when using RStudio.
 #' @md
 view_run_details <- function(run, auto_refresh = TRUE) {
+  .Deprecated()
   if (rstudioapi::isAvailable() &&
       auto_refresh) {
 

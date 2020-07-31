@@ -18,3 +18,6 @@ None
 Wait for the run to reach a terminal state. Typically called
 after submitting an experiment run with \code{submit_experiment()}.
 }
+\seealso{
+\code{\link[=submit_experiment]{submit_experiment()}}
+}

@@ -28,9 +28,8 @@ directory, which defaults to "./outputs". Use \code{upload_files_to_run()}
 only when additional files need to be uploaded or an output directory
 is not specified.
 }
-\examples{
-\dontrun{
-ws <- load_workspace_from_config()
+\section{Examples}{
+\preformatted{ws <- load_workspace_from_config()
 exp <- experiment(ws, name = 'myexperiment')
 
 # Start an interactive logging run
@@ -45,4 +44,8 @@ upload_files_to_run(names = c(filename1, filename2),
 # Download a file from the run record
 download_file_from_run(filename1, "file_1.txt")
 }
+}
+
+\seealso{
+\code{\link[=upload_folder_to_run]{upload_folder_to_run()}} \code{\link[=download_file_from_run]{download_file_from_run()}} \code{\link[=download_files_from_run]{download_files_from_run()}}
 }

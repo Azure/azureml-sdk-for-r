@@ -31,3 +31,6 @@ were uploaded to the run record via \code{upload_files_to_run()} or
 \code{upload_folder_to_run()}, or any files that were written out to
 the \code{./outputs} or \code{./logs} folders during a run.
 }
+\seealso{
+\code{\link[=download_file_from_run]{download_file_from_run()}}
+}

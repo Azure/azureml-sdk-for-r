@@ -17,3 +17,6 @@ None
 \description{
 Set the default datastore associated with the workspace.
 }
+\seealso{
+\code{\link[=get_default_datastore]{get_default_datastore()}}
+}

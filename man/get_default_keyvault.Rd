@@ -18,5 +18,5 @@ Returns a \code{Keyvault} object representing the default
 associated with the workspace.
 }
 \seealso{
-\code{set_secrets()}, \code{get_secrets()}, \code{list_secrets()}, \code{delete_secrets()}
+\code{\link[=set_secrets]{set_secrets()}} \code{\link[=get_secrets]{get_secrets()}} \code{\link[=list_secrets]{list_secrets()}} \code{\link[=delete_secrets]{delete_secrets()}}
 }

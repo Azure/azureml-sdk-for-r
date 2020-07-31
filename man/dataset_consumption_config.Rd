@@ -30,14 +30,14 @@ The \code{DatasetConsumptionConfig} object.
 \description{
 Represent how to deliver the dataset to a compute target.
 }
-\examples{
-\dontrun{
-est <- estimator(source_directory = ".",
+\section{Examples}{
+\preformatted{est <- estimator(source_directory = ".",
                  entry_script = "train.R",
                  inputs = list(dataset_consumption_config('mydataset', dataset, mode = 'download')),
                  compute_target = compute_target)
 }
 }
+
 \seealso{
 \code{\link{estimator}}
 }

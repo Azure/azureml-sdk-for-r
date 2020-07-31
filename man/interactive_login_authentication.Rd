@@ -27,9 +27,8 @@ The constructor of the class will prompt you to login. The constructor then will
 for any subsequent attempts. If you are already logged in with the Azure CLI or have logged-in before, the
 constructor will load the existing credentials without prompt.
 }
-\examples{
-\dontrun{
-interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
+\section{Examples}{
+\preformatted{interactive_auth <- interactive_login_authentication(tenant_id="your-tenant-id")
 
 ws <- get_workspace("<your workspace name>",
                     "<your subscription ID>",
@@ -37,7 +36,7 @@ ws <- get_workspace("<your workspace name>",
                     auth = interactive_auth)
 }
 }
+
 \seealso{
-\code{\link{get_workspace}}
-\code{\link{service_principal_authentication}}
+\code{\link[=get_workspace]{get_workspace()}} \code{\link[=service_principal_authentication]{service_principal_authentication()}}
 }

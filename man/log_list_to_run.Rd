@@ -22,8 +22,8 @@ None
 \description{
 Log a vector with the given metric name to the run.
 }
-\examples{
-\dontrun{
-log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
+\section{Examples}{
+\preformatted{log_list_to_run("Accuracies", c(0.6, 0.7, 0.87))
 }
 }
+

@@ -25,10 +25,9 @@ Log a table metric with the given metric name to the run. The
 table value is a named list where each element corresponds to
 a column of the table.
 }
-\examples{
-\dontrun{
-log_table_to_run("Y over X",
-                 list("x" = c(1, 2, 3)),
-                 list("y" = c(0.6, 0.7, 0.89)))
+\section{Examples}{
+\preformatted{log_table_to_run("Y over X",
+                 list("x" = c(1, 2, 3), "y" = c(0.6, 0.7, 0.89)))
 }
 }
+
