@@ -7,7 +7,6 @@
 #' epochs, though it is still underfitting at that point.
 
 library(keras)
-install_keras()
 
 library(azuremlsdk)
 

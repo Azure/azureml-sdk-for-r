@@ -16,7 +16,6 @@
 
 
 library(tensorflow)
-install_tensorflow(version = "1.14.0-gpu")
 
 library(azuremlsdk)
 
@@ -60,5 +59,3 @@ cat("Accuracy: ", sess$run(accuracy,
 log_metric_to_run("accuracy",
                   sess$run(accuracy, feed_dict = dict(x = mnist$test$images,
                                                       y_ = mnist$test$labels)))
-
-
