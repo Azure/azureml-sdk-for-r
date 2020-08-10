@@ -75,7 +75,7 @@ and the new model is registered under the same name." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -170,19 +170,10 @@ and the new model is registered under the same name.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>register_model</span>(
-  <span class='no'>workspace</span>,
-  <span class='no'>model_path</span>,
-  <span class='no'>model_name</span>,
-  <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sample_input_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sample_output_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>resource_configuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>register_model</span>(<span class='no'>workspace</span>, <span class='no'>model_path</span>, <span class='no'>model_name</span>, <span class='kw'>datasets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>child_paths</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sample_input_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sample_output_dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>resource_configuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -285,7 +276,7 @@ model &lt;- register_model(ws,
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

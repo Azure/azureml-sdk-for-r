@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -175,6 +175,22 @@
 
     <p>The <code>DataPath</code> object.</p>
     
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>my_data &lt;- register_azure_blob_container_datastore(
+    workspace = ws,
+    datastore_name = blob_datastore_name,
+    container_name = ws_blob_datastore$container_name,
+    account_name = ws_blob_datastore$account_name,
+    account_key = ws_blob_datastore$account_key,
+    create_if_not_exists = TRUE)
+
+datapath &lt;- data_path(my_data, &lt;path_on_my_datastore&gt;)
+dataset &lt;- create_file_dataset_from_files(datapath)
+</pre>
+
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>create_file_dataset_from_files</code>
@@ -184,8 +200,6 @@
 <code>create_tabular_dataset_from_sql_query</code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -194,10 +208,10 @@
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -205,7 +219,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

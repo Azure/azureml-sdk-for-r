@@ -70,7 +70,7 @@ constructor will load the existing credentials without prompt." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -187,21 +187,23 @@ you have access to multiple tenants. If unspecified, the default tenant will be 
 
     <p><code>InteractiveLoginAuthentication</code> object</p>
     
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+
+    
+<pre>interactive_auth &lt;- interactive_login_authentication(tenant_id="your-tenant-id")
+
+ws &lt;- get_workspace("&lt;your workspace name&gt;",
+                    "&lt;your subscription ID&gt;",
+                    "&lt;your resource group&gt;",
+                    auth = interactive_auth)
+</pre>
+
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>get_workspace</code>
-<code>service_principal_authentication</code></p></div>
+    <div class='dont-index'><p><code>get_workspace()</code> <code>service_principal_authentication()</code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>interactive_auth</span> <span class='kw'>&lt;-</span> <span class='fu'>interactive_login_authentication</span>(<span class='kw'>tenant_id</span><span class='kw'>=</span><span class='st'>"your-tenant-id"</span>)
-
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>get_workspace</span>(<span class='st'>"&lt;your workspace name&gt;"</span>,
-                    <span class='st'>"&lt;your subscription ID&gt;"</span>,
-                    <span class='st'>"&lt;your resource group&gt;"</span>,
-                    <span class='kw'>auth</span> <span class='kw'>=</span> <span class='no'>interactive_auth</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -210,10 +212,10 @@ you have access to multiple tenants. If unspecified, the default tenant will be 
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -221,7 +223,7 @@ you have access to multiple tenants. If unspecified, the default tenant will be 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

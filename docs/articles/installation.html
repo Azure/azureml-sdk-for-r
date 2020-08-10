@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Install the Azure ML SDK for R</h1>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-08-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
@@ -139,28 +139,34 @@
 <h2 class="hasAnchor">
 <a href="#install-the-azure-ml-python-sdk" class="anchor"></a>Install the Azure ML Python SDK</h2>
 <p>Lastly, use the <strong>azuremlsdk</strong> R library to install the <a href="https://pypi.org/project/azureml-sdk/">latest version of the Python SDK</a>.</p>
-<p>If using an Azure Machine Learning Compute Instance or a CRAN installation with <code>reticulate &gt;= 1.14</code>, use the <code><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">azuremlsdk::install_azureml()</a></code> function with the conda environment set to <code>r-reticulate</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">envname =</span> <span class="st">'r-reticulate'</span>)</a></code></pre></div>
-<p>If using a CRAN installation with <code>reticulate &lt; 1.14</code> or a GitHub installation, the correct conda environment will be selected automatically. There is no need to specify the <code>envname</code> parameter.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
-<p>If you would like to override the default version, environment name, or Python version, you can pass in those arguments. If you would like to restart the R session after installation or delete the conda environment if it already exists and create a new environment, you can also do so:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">                            <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">                            <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>,</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">                            <span class="dt">restart_session =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">                            <span class="dt">remove_existing_env =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
+<p>By default, <code><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml()</a></code> creates a conda environment called ‘r-reticulate’, installs the Python SDK in that environment, and restarts the R session after installation (if running in RStudio). If you would like to override the default version of the Python SDK, the environment name, or the Python version, you can pass in those arguments. If you would like to delete the conda environment if it already exists and create a new environment, or not restart the R session after installation, you can also do so:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">version =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                            <span class="dt">envname =</span> <span class="st">"&lt;your conda environment name&gt;"</span>,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                            <span class="dt">conda_python_version =</span> <span class="st">"&lt;desired python version&gt;"</span>,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                            <span class="dt">restart_session =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">                            <span class="dt">remove_existing_env =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="test-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-installation" class="anchor"></a>Test installation</h2>
 <p>You can confirm your installation worked by loading the library and successfully retrieving a run.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_current_run.html">get_current_run</a></span>()</a></code></pre></div>
 </div>
 <div id="troubleshooting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
 <ul>
+<li>
+<p>If you’re using the compute instance, the first time you run <code><a href="https://rdrr.io/r/base/library.html">library(azuremlsdk)</a></code> you may run into the following prompt:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(azuremlsdk)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">No non<span class="op">-</span>system installation of Python could be found.</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">Would you like to download and install Miniconda?</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">Miniconda is an open source environment management system <span class="cf">for</span> Python.</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">See https<span class="op">:</span><span class="er">//</span>docs.conda.io<span class="op">/</span>en<span class="op">/</span>latest<span class="op">/</span>miniconda.html <span class="cf">for</span> more details.</a></code></pre></div>
+<p>This is the reticulate package prompting the user if they want to have Miniconda installed (see <a href="https://github.com/rstudio/reticulate/issues/607">GitHub issue</a>). Since the compute instance already has Anaconda, you can just respond “N” to the prompt. You will receive the message “Installation aborted”, which just means that Miniconda won’t be installed. You will only be prompted for this once for each new compute instance you spin up.</p>
+</li>
 <li><p>In step 3 of the installation, if you get ssl errors on windows, it is due to an outdated openssl binary. Install the latest openssl binaries from <a href="https://wiki.openssl.org/index.php/Binaries">here</a>.</p></li>
 <li>
 <p>If installation fails due to this error:</p>
@@ -215,7 +221,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

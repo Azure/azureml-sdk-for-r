@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Hyperparameter tune a Keras model</h1>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-08-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/hyperparameter-tune-with-keras.Rmd"><code>vignettes/hyperparameter-tune-with-keras.Rmd</code></a></small>
       <div class="hidden name"><code>hyperparameter-tune-with-keras.Rmd</code></div>
@@ -206,22 +206,20 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <div id="create-an-estimator" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-an-estimator" class="anchor"></a>Create an estimator</h2>
-<p>An Azure ML <strong>estimator</strong> encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html">here</a>. The estimator is used to define the configuration for each of the child runs that the parent HyperDrive run will kick off.</p>
+<p>An Azure ML <strong>estimator</strong> encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. The estimator is used to define the configuration for each of the child runs that the parent HyperDrive run will kick off.</p>
 <p>To create the estimator, define the following:</p>
 <ul>
 <li>The directory that contains your scripts needed for training (<code>source_directory</code>). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.</li>
 <li>The training script that will be executed (<code>entry_script</code>).</li>
 <li>The compute target (<code>compute_target</code>), in this case the AmlCompute cluster you created earlier.</li>
-<li>Any environment dependencies required for training. Since the training script requires the Keras package, which is not included in the image by default, specify the package information by creating a <code>cran_package</code> object and pass the object in a list to the <code>cran_packages</code> parameter to have it installed in the Docker container where the job will run. Set the <code>use_gpu = TRUE</code> flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment()</a></code></a> reference for the full set of configurable options.</li>
-<li>
+<li>Any environment dependencies required for training. For full control over your training environment (instead of using the defaults), you can create a custom Docker image to use for your remote run, which is what we’ve done in this example. The Docker image includes the necessary packages for Keras GPU training. The Dockerfile used to build the image is included in the <code>hyperparameter-tune-with-keras/</code> folder for reference. See the <a href="https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html"><code><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment()</a></code></a> reference for the full set of configurable options.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">env &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment</a></span>(<span class="st">"tensorflow-env"</span>,</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">                     <span class="dt">cran_packages =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/cran_package.html">cran_package</a></span>(<span class="st">"keras"</span>)),</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">                     <span class="dt">use_gpu =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">est &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"hyperparameter-tune-with-keras"</span>,</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">                 <span class="dt">entry_script =</span> <span class="st">"cifar10_cnn.R"</span>,</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">                 <span class="dt">compute_target =</span> compute_target,</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">                 <span class="dt">environment =</span> env)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">env &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/r_environment.html">r_environment</a></span>(<span class="st">"keras-env"</span>, <span class="dt">custom_docker_image =</span> <span class="st">"amlsamples/r-keras:latest"</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">est &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/estimator.html">estimator</a></span>(<span class="dt">source_directory =</span> <span class="st">"hyperparameter-tune-with-keras"</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                 <span class="dt">entry_script =</span> <span class="st">"cifar10_cnn.R"</span>,</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                 <span class="dt">compute_target =</span> compute_target,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">                 <span class="dt">environment =</span> env)</a></code></pre></div>
 </div>
 <div id="configure-the-hyperdrive-run" class="section level2">
 <h2 class="hasAnchor">
@@ -277,7 +275,7 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">hyperdrive_config &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/hyperdrive_config.html">hyperdrive_config</a></span>(<span class="dt">hyperparameter_sampling =</span> sampling,</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">                                       <span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/primary_metric_goal.html">primary_metric_goal</a></span>(<span class="st">"MINIMIZE"</span>),</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">                                       <span class="dt">primary_metric_name =</span> <span class="st">"Loss"</span>,</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">                                       <span class="dt">max_total_runs =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">                                       <span class="dt">max_total_runs =</span> <span class="dv">8</span>,</a>
 <a class="sourceLine" id="cb11-5" data-line-number="5">                                       <span class="dt">policy =</span> policy,</a>
 <a class="sourceLine" id="cb11-6" data-line-number="6">                                       <span class="dt">estimator =</span> est)</a></code></pre></div>
 </div>
@@ -343,7 +341,7 @@ log_metric_to_run("Loss", results[[1]])</a></code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

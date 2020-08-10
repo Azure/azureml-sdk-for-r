@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>A Deeper Dive into Experiments</h1>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-08-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/experiments-deep-dive.Rmd"><code>vignettes/experiments-deep-dive.Rmd</code></a></small>
       <div class="hidden name"><code>experiments-deep-dive.Rmd</code></div>
@@ -280,7 +280,7 @@
 <p>We have provided the server and UI for a shiny application in the <code>accident-app</code> folder. The app uses the global variable <code>accident-endpoint</code> to find the endpoint of the prediction service to call, so set it here:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">accident.endpoint &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/get_webservice.html">get_webservice</a></span>(ws,   <span class="st">"accident-pred-caret"</span>)<span class="op">$</span>scoring_uri</a></code></pre></div>
 <p>You can run the app by opening <code>app.R</code> in the <code>experiments-with-R/accident-app</code> folder in RStudio and clicking “Run App”, or by running the code below. Try out different values of the input variables to see how they affect the predicted probability of a fatal accident.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">shiny<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp</a></span>(<span class="st">"experiments-with-R/accident-app"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">shiny<span class="op">::</span><span class="kw"><a href="https://shiny.rstudio.com/reference/shiny/latest/runApp.html">runApp</a></span>(<span class="st">"experiments-with-R/accident-app"</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -304,7 +304,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

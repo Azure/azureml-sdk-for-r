@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -142,13 +142,53 @@
       <small>Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="azuremlsdk-0-6-85" class="section level1">
+    <div id="azuremlsdk-0-10-0" class="section level1">
 <h1 class="page-header">
-<a href="#azuremlsdk-0-6-85" class="anchor"></a>azuremlsdk 0.6.85<small> 2020-02-05 </small>
+<a href="#azuremlsdk-0-10-0" class="anchor"></a>azuremlsdk 0.10.0<small> Unreleased </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Add foreach backend for distributed training and batch inferencing. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/215'>#215</a>)</li>
+<li>Add R Section in Environment Definition.</li>
+<li>Add Azure Data Lake Gen2 Datastore support as an experimental feature.(<a href='https://github.com/azure/azureml-sdk-for-r/issues/279'>#279</a>)</li>
+<li>Add <code>github_package()</code> and <code>cran_package()</code> constructors to specify packages and package versions in Estimator and Environment Definition.(<a href='https://github.com/azure/azureml-sdk-for-r/issues/310'>#310</a>)</li>
+<li>Expose <code>query_timeout</code> parameter for <code>create_tabular_dataset_from_sql_query()</code>.(<a href='https://github.com/azure/azureml-sdk-for-r/issues/308'>#308</a>)</li>
+<li>Add <code>data_path()</code> so that Dataset constructors can take in DataPath objects. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/271'>#271</a>)</li>
+<li>Add <code>dataset_consumption_config()</code>. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/272'>#272</a>)</li>
+<li>Add support for ResourceConfiguration and registering models from run.(<a href='https://github.com/azure/azureml-sdk-for-r/issues/300'>#300</a>)</li>
+<li>Expose <code>cluster_purpose</code> param for <code>create_aks_compute()</code>. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/276'>#276</a>)</li>
+<li>Add <code>interactive_login_authentication()</code> and <code>service_principal_authentication</code>. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/263'>#263</a>) (<a href='https://github.com/azure/azureml-sdk-for-r/issues/241'>#241</a>)</li>
+<li>Deprecate live run widget.</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fix issues with Dataset creation and usage.</li>
+<li>Fix Interactive Authentication.</li>
+</ul>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<ul>
+<li>Add “Troubleshooting” article.</li>
+<li>Add “Deploying models” vignette.</li>
+<li>Add sample for batch inferencing with foreach backend.</li>
+<li>Make all vignettes discoverable via CRAN. (<a href='https://github.com/azure/azureml-sdk-for-r/issues/320'>#320</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="azuremlsdk-0-6-85" class="section level1">
+<h1 class="page-header">
+<a href="#azuremlsdk-0-6-85" class="anchor"></a>azuremlsdk 0.6.85<small> 2020-02-05 </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Methods for creating and managing Azure ML Datasets.</li>
 <li>Update <code>create_workspace()</code> to use <code>sku</code> parameter.</li>
@@ -156,9 +196,9 @@
 <li>v2 of the Azure ML run details widget in RStudio Viewer pane.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fix installation issue introduced by latest <strong>reticulate</strong> 1.14 release.</li>
 <li>Fix default CRAN CDN.</li>
@@ -198,9 +238,9 @@
 <code>view_run_details()</code> for invoking remote Azure ML run details in RStudio Viewer pane.</li>
 </ul>
 </div>
-<div id="documentation" class="section level2">
+<div id="documentation-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<a href="#documentation-1" class="anchor"></a>Documentation</h2>
 <ul>
 <li>Vignettes for installation, TensorFlow training on AmlCompute, hyperparameter tuning a Keras model with Azure ML’s HyperDrive service, and production deloying a model as a webservice to AKS.</li>
 <li>Additional code samples for setting up workspaces, training on AmlCompute, and deploying a model as a webservice to ACI.</li>
@@ -213,6 +253,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#azuremlsdk-0-10-0">0.10.0</a></li>
         <li><a href="#azuremlsdk-0-6-85">0.6.85</a></li>
         <li><a href="#azuremlsdk-0-5-7-9000">0.5.7.9000</a></li>
         <li><a href="#azuremlsdk-0-5-7">0.5.7</a></li>
@@ -225,7 +266,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

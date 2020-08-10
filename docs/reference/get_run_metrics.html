@@ -67,7 +67,7 @@ the log_*() methods." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -187,14 +187,17 @@ the <code>log_*()</code> methods.</p>
     <p>A named list of the metrics associated with the run,
 e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metric)</a></code>.</p>
     
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
-<span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>get_run</span>(<span class='no'>exp</span>, <span class='kw'>run_id</span> <span class='kw'>=</span> <span class='st'>"myrunid"</span>)
-<span class='no'>metrics</span> <span class='kw'>&lt;-</span> <span class='fu'>get_run_metrics</span>(<span class='no'>run</span>)
-}</div></pre>
+
+    
+<pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
+run &lt;- get_run(exp, run_id = "myrunid")
+metrics &lt;- get_run_metrics(run)
+</pre>
+
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -202,9 +205,9 @@ e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metri
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
+
       <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
@@ -212,7 +215,7 @@ e.g. <code><a href='https://rdrr.io/r/base/list.html'>list("metric_name" = metri
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

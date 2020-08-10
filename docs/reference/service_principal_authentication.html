@@ -68,7 +68,7 @@ allows for managed access control." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -186,28 +186,30 @@ identity belongs to.</p></td>
 
     <p><code>ServicePrincipalAuthentication</code> object</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
-    <div class='dont-index'><p><code>get_workspace</code>
-<code>interactive_login_authentication</code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Service principal authentication involves creating an App Registration in</span>
-<span class='co'># Azure Active Directory. First, you generate a client secret, and then you grant</span>
-<span class='co'># your service principal role access to your machine learning workspace. Then,</span>
-<span class='co'># you use the `ServicePrincipalAuthentication` object to manage your authentication flow.</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>svc_pr_password</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"AZUREML_PASSWORD"</span>)
-<span class='no'>svc_pr</span> <span class='kw'>&lt;-</span> <span class='fu'>service_principal_authentication</span>(<span class='kw'>tenant_id</span><span class='kw'>=</span><span class='st'>"my-tenant-id"</span>,
-                                           <span class='kw'>service_principal_id</span><span class='kw'>=</span><span class='st'>"my-application-id"</span>,
-                                           <span class='kw'>service_principal_password</span><span class='kw'>=</span><span class='no'>svc_pr_password</span>)
+<p>Service principal authentication involves creating an App Registration in
+Azure Active Directory. First, you generate a client secret, and then you grant
+your service principal role access to your machine learning workspace. Then,
+you use the <code>ServicePrincipalAuthentication</code> object to manage your authentication flow.</p><pre>svc_pr_password &lt;- Sys.getenv("AZUREML_PASSWORD")
+svc_pr &lt;- service_principal_authentication(tenant_id="my-tenant-id",
+                                           service_principal_id="my-application-id",
+                                           service_principal_password=svc_pr_password)
 
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>get_workspace</span>(<span class='st'>"&lt;your workspace name&gt;"</span>,
-                    <span class='st'>"&lt;your subscription ID&gt;"</span>,
-                    <span class='st'>"&lt;your resource group&gt;"</span>,
-                    <span class='kw'>auth</span> <span class='kw'>=</span> <span class='no'>svc_pr</span>)
-}</div></pre>
+ws &lt;- get_workspace("&lt;your workspace name&gt;",
+                    "&lt;your subscription ID&gt;",
+                    "&lt;your resource group&gt;",
+                    auth = svc_pr)
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>get_workspace()</code> <code>interactive_login_authentication()</code></p></div>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -216,10 +218,10 @@ identity belongs to.</p></td>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -227,7 +229,7 @@ identity belongs to.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

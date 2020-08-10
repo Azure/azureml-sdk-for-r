@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load all records from the dataset into a dataframe. — load_dataset_into_data_frame • azuremlsdk</title>
+<title>Submit an experiment and return the active child run — submit_child_run • azuremlsdk</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Load all records from the dataset into a dataframe. — load_dataset_into_data_frame" />
+<meta property="og:title" content="Submit an experiment and return the active child run — submit_child_run" />
 
-<meta property="og:description" content="Load all records from the dataset into a dataframe." />
+<meta property="og:description" content="Submit an experiment and return the active child run." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -141,44 +141,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load all records from the dataset into a dataframe.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>load_dataset_into_data_frame.Rd</code></div>
+    <h1>Submit an experiment and return the active child run</h1>
+    <small class="dont-index">Source: <a href='https://github.com/azure/azureml-sdk-for-r/blob/master/R/run.R'><code>R/run.R</code></a></small>
+    <div class="hidden name"><code>submit_child_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Load all records from the dataset into a dataframe.</p>
+    <p>Submit an experiment and return the active child run.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>load_dataset_into_data_frame</span>(<span class='no'>dataset</span>, <span class='kw'>on_error</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
-  <span class='kw'>out_of_range_datetime</span> <span class='kw'>=</span> <span class='st'>"null"</span>)</pre>
+    <pre class="usage"><span class='fu'>submit_child_run</span>(<span class='no'>parent_run</span>, <span class='kw'>config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset</th>
-      <td><p>The Tabular Dataset object.</p></td>
+      <th>parent_run</th>
+      <td><p>The parent <code>Run</code> object.</p></td>
     </tr>
     <tr>
-      <th>on_error</th>
-      <td><p>How to handle any error values in the dataset, such as those
-produced by an error while parsing values. Valid values are 'null' which replaces
-them with NULL; and 'fail' which will result in an exception.</p></td>
+      <th>config</th>
+      <td><p>The <code>RunConfig</code> object</p></td>
     </tr>
     <tr>
-      <th>out_of_range_datetime</th>
-      <td><p>How to handle date-time values that are outside
-the range supported by Pandas. Valid values are 'null' which replaces them with
-NULL; and 'fail' which will result in an exception.</p></td>
+      <th>tags</th>
+      <td><p>Tags to be added to the submitted run, e.g., "tag": "value".</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame.</p>
+    <p>A <code>Run</code> object.</p>
     
 
   </div>

@@ -71,7 +71,7 @@ is not specified." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.85</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -185,22 +185,29 @@ is not specified.</p>
 
     <p>None</p>
     
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'>load_workspace_from_config</span>()
-<span class='no'>exp</span> <span class='kw'>&lt;-</span> <span class='fu'>experiment</span>(<span class='no'>ws</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>'myexperiment'</span>)
 
-<span class='co'># Start an interactive logging run</span>
-<span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fu'>start_logging_run</span>(<span class='no'>exp</span>)
+    
+<pre>ws &lt;- load_workspace_from_config()
+exp &lt;- experiment(ws, name = 'myexperiment')
 
-<span class='co'># Upload folder to the run record</span>
-<span class='fu'>upload_folder_to_run</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"important_files"</span>,
-                     <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"path/on/disk"</span>)
+# Start an interactive logging run
+run &lt;- start_logging_run(exp)
 
-<span class='co'># Download a file from the run record</span>
-<span class='fu'>download_file_from_run</span>(<span class='st'>"important_files/existing_file.txt"</span>, <span class='st'>"local_file.txt"</span>)
-}</div></pre>
+# Upload folder to the run record
+upload_folder_to_run(name = "important_files",
+                     path = "path/on/disk")
+
+# Download a file from the run record
+download_file_from_run("important_files/existing_file.txt", "local_file.txt")
+</pre>
+
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>upload_files_to_run()</code> <code>download_file_from_run()</code> <code>download_files_from_run()</code></p></div>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -208,9 +215,11 @@ is not specified.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
+
       <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
   </div>
 </div>
@@ -218,7 +227,7 @@ is not specified.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Heemanshu Suri, Billy Hu, Diondra Peck, Minna Xiao, Microsoft.</p>
+  <p>Developed by AzureML R SDK Team, Microsoft.</p>
 </div>
 
 <div class="pkgdown">
