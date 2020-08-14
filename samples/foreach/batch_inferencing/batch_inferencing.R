@@ -9,7 +9,19 @@ library(foreach)
 devtools::load_all()
 
 ws <- load_workspace_from_config()
-amlcluster <- get_compute(ws, "r-cluster")
+
+# create AmlCompute cluster
+cluster_name <- "cpu-cluster"
+amlcluster <- get_compute(ws, cluster_name = cluster_name)
+if (is.null(compute_target)) {
+  vm_size <- "STANDARD_D2_V2"
+  compute_target <- create_aml_compute(workspace = ws,
+                                       cluster_name = cluster_name,
+                                       vm_size = vm_size,
+                                       max_nodes = 1)
+  
+  wait_for_provisioning_completion(compute_target, show_output = TRUE)
+}
 
 # call this method to register foreach backend with Workspace and AmlCompute cluster on which
 # parallel job would run.
