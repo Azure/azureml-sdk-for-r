@@ -1,11 +1,11 @@
 ---
 title: "Building custom Docker images for training and deployment"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    df_print: paged
-vignette: |
-  %\VignetteIndexEntry{Building custom Docker images for training and deployment} %\VignetteEngine{knitr::rmarkdown} \use_package{UTF-8}
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Building custom Docker images for training and deployment}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
 ---
 
 This guide covers how to build and use custom Docker images for training and deploying models with Azure Machine Learning.
