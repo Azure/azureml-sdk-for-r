@@ -12,7 +12,7 @@ ws <- load_workspace_from_config()
 
 # create AmlCompute cluster
 cluster_name <- "cpu-cluster"
-amlcluster <- get_compute(ws, cluster_name = cluster_name)
+compute_target <- get_compute(ws, cluster_name = cluster_name)
 if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"
   compute_target <- create_aml_compute(workspace = ws,
@@ -25,7 +25,7 @@ if (is.null(compute_target)) {
 
 # call this method to register foreach backend with Workspace and AmlCompute cluster on which
 # parallel job would run.
-register_do_azureml_parallel(ws, amlcluster)
+register_do_azureml_parallel(ws, compute_target)
 
 model <- readRDS("model.rds")
 
