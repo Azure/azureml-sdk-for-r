@@ -20,13 +20,19 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
   pandas_df <- load_dataset_into_data_frame(dataset)
   expect_equal(is.data.frame(pandas_df), TRUE)
 
-  # register two versions of the dataset
-  register_dataset(ws, dataset, "iris")
-  register_dataset(ws, dataset, "iris", create_new_version = TRUE)
+  # register first version of the dataset
+  dataset_name = paste0("iris-", sample.int(100, 1))
+  register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
+
+  # get number of datasets in workspace
+  registered_datasets_before <- ws$datasets
+  
+  # register second version of the dataset
+  register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
 
   # check updated number of datasets in workspace
-  all_registered_datasets <- ws$datasets
-  expect_equal(length(all_registered_datasets), 2)
+  registered_datasets_after <- ws$datasets
+  expect_equal(length(registered_datasets_before) + 1, length(registered_datasets_after))
 
   # unregister datasets
   unregister_all_dataset_versions(dataset)
