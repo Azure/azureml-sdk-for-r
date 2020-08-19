@@ -44,7 +44,7 @@ Optionally, you can also install the [R Essentials bundle](https://docs.anaconda
 ```
 FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
 
-RUN conda install -c r -y conda=4.8.3 pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
   conda install -c conda-forge -y mscorefonts && \
 	conda clean -ay && \
 	pip install --no-cache-dir azureml-defaults
@@ -65,7 +65,7 @@ Finally, specify any R packages that are required for your training script or sc
 ```
 FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
 
-RUN conda install -c r -y conda=4.8.3 pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
   conda install -c conda-forge -y mscorefonts && \
 	conda clean -ay && \
 	pip install --no-cache-dir azureml-defaults
@@ -78,7 +78,7 @@ If you want to install a package from GitHub, e.g. the Azure ML R SDK, you can d
 ```
 FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
 
-RUN conda install -c r -y conda=4.8.3 pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
   conda install -c conda-forge -y mscorefonts && \
 	conda clean -ay && \
 	pip install --no-cache-dir azureml-defaults
@@ -145,21 +145,27 @@ az acr build --image <image_name>:<tag> --registry <registry_name> --file Docker
 Now that your Docker image is published, you can create an Azure ML Environment and specify your custom image.
 
 For Docker Hub:
-```
-env <- r_environment("your-env-name", custom_docker_image = "<username>/<repository>:<tag>")
+```{r eval=FALSE}
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<username>/<repository>:<tag>")
 ```
 
 For ACR:
 ```{r eval=FALSE}
-env <- r_environment("your-env-name", custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>")
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>")
 ```
 
 If you want to use an image from a private container registry that is not in your workspace, you must specify the registry details using [`container_registry`](https://azure.github.io/azureml-sdk-for-r/reference/container_registry.html) and specify it to the `image_registry_details` parameter of `r_environment()`:
 
 ```{r eval=FALSE}
-registry_details <- container_registry(address = "<repository_name>.azurecr.io", username = <repository_name>, password = <your password>)
+registry_details <- container_registry(address = "<repository_name>.azurecr.io",
+                                       username = <repository_name>,
+                                       password = <your password>)
 
-env <- r_environment("your-env-name", custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>", image_registry_details = registry_details)
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>",
+                     image_registry_details = registry_details)
 ```
 
 ## Use the custom image for training
@@ -193,9 +199,9 @@ inference_config = inference_config(entry_script = 'score.R',
 aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)
 
 aci_service <- deploy_model(ws, 
-                            'your-service-name', 
-                            list(model), 
-                            inference_config, 
+                            'your-service-name',
+                            list(model),
+                            inference_config,
                             aci_config)
 ```
 
