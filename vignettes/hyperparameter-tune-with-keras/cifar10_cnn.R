@@ -7,7 +7,6 @@
 #' epochs, though it is still underfitting at that point.
 
 library(keras)
-install_keras()
 
 library(azuremlsdk)
 
@@ -91,7 +90,7 @@ model %>%
   compile(loss = "categorical_crossentropy",
           optimizer = opt,
           metrics = "accuracy"
-)
+  )
 
 
 # Training ----------------------------------------------------------------
@@ -105,7 +104,7 @@ if (!data_augmentation){
         epochs = epochs,
         validation_data = list(x_test, y_test),
         shuffle = TRUE
-  )
+    )
   
 } else {
   

@@ -69,7 +69,7 @@ if (is.null(compute_target))
 
 ## Prepare the training script
 
-A training script called `tf_mnist.R` has been provided for you in the `train-with-tensorflow` subfolder of this vignette. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com/).
+A training script called `tf_mnist.R` has been provided for you in the `train-with-tensorflow/` subfolder of this vignette. The Azure ML SDK provides a set of logging APIs for logging various metrics during training runs. These metrics are recorded and persisted in the experiment run record, and can be be accessed at any time or viewed in the run details page in [Azure Machine Learning studio](http://ml.azure.com/).
 
 In order to collect and upload run metrics, you need to do the following **inside the training script**:
 
@@ -89,23 +89,19 @@ See the [reference](https://azure.github.io/azureml-sdk-for-r/reference/index.ht
 
 ## Create an estimator
 
-An Azure ML **estimator** encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target. By default, the Docker image built for your training job will include R, the Azure ML SDK, and a set of commonly used R packages. See the full list of default packages included [here](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html).
+An Azure ML **estimator** encapsulates the run configuration information needed for executing a training script on the compute target. Azure ML runs are run as containerized jobs on the specified compute target.
 
 To create the estimator, define the following:
 
 * The directory that contains your scripts needed for training (`source_directory`). All the files in this directory are uploaded to the cluster node(s) for execution. The directory must contain your training script and any additional scripts required.
 * The training script that will be executed (`entry_script`).
 * The compute target (`compute_target`), in this case the AmlCompute cluster you created earlier.
-* Any environment dependencies required for training. Since the training script requires the TensorFlow 1.14.0 package, which is not included in the image by default, specify the package information by creating a
-`cran_package()` object and pass the object in a list to the `cran_packages` parameter to have it installed in the Docker container where the job will run. Set the `use_gpu = TRUE` flag so the default base GPU Docker image will be built, since the job will be run on a GPU cluster.
-See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options.
-* Pass the environment object to the environment parameter in estimator.
+* Any environment dependencies required for training. For full control over your training environment (instead of using the defaults), you can create a custom Docker image to use for your remote run, which is what we've done in this example. The Docker image includes the necessary packages for TensorFlow GPU training. The Dockerfile used to build the image is included in the `train-with-tensorflow/` folder for reference.
+See the [`r_environment()`](https://azure.github.io/azureml-sdk-for-r/reference/r_environment.html) reference for the full set of configurable options. Pass the environment object to the environment parameter in estimator.
 
 ```{r create_estimator, eval=FALSE}
-env <- r_environment("tensorflow-env",
-                     cran_packages = list(cran_package("tensorflow",
-                                                       version = "1.14.0")),
-                     use_gpu = TRUE)
+env <- r_environment("tensorflow-env", custom_docker_image = "amlsamples/r-tensorflow:latest")
+
 est <- estimator(source_directory = "train-with-tensorflow",
                  entry_script = "tf_mnist.R",
                  compute_target = compute_target,
