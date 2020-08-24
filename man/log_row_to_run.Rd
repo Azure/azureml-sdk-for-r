@@ -34,9 +34,9 @@ Log an arbitrary tuple:\preformatted{log_row_to_run("Y over X", x = 1, y = 0.4)
 
 Log the complete table:\preformatted{citrus <- c("orange", "lemon", "lime")
 sizes <- c(10, 7, 3)
-for (i in seq_along(citrus)) {
+for (i in seq_along(citrus)) \{
     log_row_to_run("citrus", fruit = citrus[i], size = sizes[i])
-}
+\}
 }
 }
 

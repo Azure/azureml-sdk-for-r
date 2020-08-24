@@ -4,8 +4,15 @@
 \alias{get_model}
 \title{Get a registered model}
 \usage{
-get_model(workspace, name = NULL, id = NULL, tags = NULL,
-  properties = NULL, version = NULL, run_id = NULL)
+get_model(
+  workspace,
+  name = NULL,
+  id = NULL,
+  tags = NULL,
+  properties = NULL,
+  version = NULL,
+  run_id = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

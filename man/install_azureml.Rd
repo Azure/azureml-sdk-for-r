@@ -4,9 +4,13 @@
 \alias{install_azureml}
 \title{Install azureml sdk package}
 \usage{
-install_azureml(version = "1.10.0", envname = "r-reticulate",
-  conda_python_version = "3.6", restart_session = TRUE,
-  remove_existing_env = FALSE)
+install_azureml(
+  version = "1.10.0",
+  envname = "r-reticulate",
+  conda_python_version = "3.6",
+  restart_session = TRUE,
+  remove_existing_env = FALSE
+)
 }
 \arguments{
 \item{version}{azureml sdk package version}

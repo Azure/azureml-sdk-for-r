@@ -4,8 +4,12 @@
 \alias{create_tabular_dataset_from_sql_query}
 \title{Create a TabularDataset to represent tabular data in SQL databases.}
 \usage{
-create_tabular_dataset_from_sql_query(query, validate = TRUE,
-  set_column_types = NULL, query_timeout = 30L)
+create_tabular_dataset_from_sql_query(
+  query,
+  validate = TRUE,
+  set_column_types = NULL,
+  query_timeout = 30L
+)
 }
 \arguments{
 \item{query}{A SQL-kind datastore and a query}

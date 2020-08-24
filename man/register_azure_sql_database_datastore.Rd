@@ -4,10 +4,21 @@
 \alias{register_azure_sql_database_datastore}
 \title{Initialize a new Azure SQL database Datastore.}
 \usage{
-register_azure_sql_database_datastore(workspace, datastore_name,
-  server_name, database_name, tenant_id, client_id, client_secret,
-  resource_url = NULL, authority_url = NULL, endpoint = NULL,
-  overwrite = FALSE, username = NULL, password = NULL)
+register_azure_sql_database_datastore(
+  workspace,
+  datastore_name,
+  server_name,
+  database_name,
+  tenant_id,
+  client_id,
+  client_secret,
+  resource_url = NULL,
+  authority_url = NULL,
+  endpoint = NULL,
+  overwrite = FALSE,
+  username = NULL,
+  password = NULL
+)
 }
 \arguments{
 \item{workspace}{The workspace this datastore belongs to.}

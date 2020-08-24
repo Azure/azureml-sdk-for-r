@@ -4,8 +4,7 @@
 \alias{download_from_file_dataset}
 \title{Download file streams defined by the dataset as local files.}
 \usage{
-download_from_file_dataset(dataset, target_path = NULL,
-  overwrite = FALSE)
+download_from_file_dataset(dataset, target_path = NULL, overwrite = FALSE)
 }
 \arguments{
 \item{dataset}{The Dataset object}

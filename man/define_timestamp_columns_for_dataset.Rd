@@ -4,8 +4,12 @@
 \alias{define_timestamp_columns_for_dataset}
 \title{Define timestamp columns for the dataset.}
 \usage{
-define_timestamp_columns_for_dataset(dataset, fine_grain_timestamp,
-  coarse_grain_timestamp = NULL, validate = FALSE)
+define_timestamp_columns_for_dataset(
+  dataset,
+  fine_grain_timestamp,
+  coarse_grain_timestamp = NULL,
+  validate = FALSE
+)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object.}
@@ -26,6 +30,6 @@ The Tabular Dataset with timestamp columns defined.
 Define timestamp columns for the dataset.
 The method defines columns to be used as timestamps. Timestamp columns on a dataset
 make it possible to treat the data as time-series data and enable additional capabilities.
-When a dataset has both \code{fine_grain_timestamp} and \code{coarse_grain_timestamp defined}
+When a dataset has both \code{fine_grain_timestamp} and \verb{coarse_grain_timestamp defined}
 specified, the two columns should represent the same timeline.
 }

@@ -4,8 +4,11 @@
 \alias{interactive_login_authentication}
 \title{Manages authentication and acquires an authorization token in interactive login workflows.}
 \usage{
-interactive_login_authentication(force = FALSE, tenant_id = NULL,
-  cloud = "AzureCloud")
+interactive_login_authentication(
+  force = FALSE,
+  tenant_id = NULL,
+  cloud = "AzureCloud"
+)
 }
 \arguments{
 \item{force}{Indicates whether "az login" will be run even if the old "az login" is still valid.}

@@ -4,8 +4,14 @@
 \alias{deploy_model}
 \title{Deploy a web service from registered model(s)}
 \usage{
-deploy_model(workspace, name, models, inference_config,
-  deployment_config = NULL, deployment_target = NULL)
+deploy_model(
+  workspace,
+  name,
+  models,
+  inference_config,
+  deployment_config = NULL,
+  deployment_target = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

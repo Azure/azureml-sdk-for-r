@@ -4,8 +4,12 @@
 \alias{attach_aks_compute}
 \title{Attach an existing AKS cluster to a workspace}
 \usage{
-attach_aks_compute(workspace, resource_group, cluster_name,
-  cluster_purpose = c("FastProd", "DevTest"))
+attach_aks_compute(
+  workspace,
+  resource_group,
+  cluster_name,
+  cluster_purpose = c("FastProd", "DevTest")
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object to attach the AKS cluster to.}
@@ -41,11 +45,11 @@ with \code{detach_aks_compute()}.
 Attaching a cluster will take approximately 5 minutes.
 }
 \section{Examples}{
-\preformatted{ws <- load_workspace_from_config()
+\if{html}{\out{<div class="r">}}\preformatted{ws <- load_workspace_from_config()
 compute_target <- attach_aks_compute(ws,
                                      resource_group = 'myresourcegroup',
                                      cluster_name = 'myakscluster')
-}
+}\if{html}{\out{</div>}}
 
 If the cluster has less than 12 virtual CPUs, you will need to also specify the
 \code{cluster_purpose} parameter in the \code{attach_aks_compute()} call: \code{cluster_purpose = 'DevTest'}.

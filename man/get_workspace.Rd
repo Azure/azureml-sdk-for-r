@@ -4,8 +4,7 @@
 \alias{get_workspace}
 \title{Get an existing workspace}
 \usage{
-get_workspace(name, auth = NULL, subscription_id = NULL,
-  resource_group = NULL)
+get_workspace(name, auth = NULL, subscription_id = NULL, resource_group = NULL)
 }
 \arguments{
 \item{name}{A string of the workspace name to get.}

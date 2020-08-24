@@ -2,7 +2,7 @@
 % Please edit documentation in R/hyperdrive.R
 \name{qnormal}
 \alias{qnormal}
-\title{Specify a normal distribution of the \code{form round(normal(mu, sigma) / q) * q}}
+\title{Specify a normal distribution of the \verb{form round(normal(mu, sigma) / q) * q}}
 \usage{
 qnormal(mu, sigma, q)
 }

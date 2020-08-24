@@ -4,11 +4,18 @@
 \alias{create_tabular_dataset_from_delimited_files}
 \title{Create an unregistered, in-memory Dataset from delimited files.}
 \usage{
-create_tabular_dataset_from_delimited_files(path, validate = TRUE,
-  include_path = FALSE, infer_column_types = TRUE,
-  set_column_types = NULL, separator = ",", header = TRUE,
-  partition_format = NULL, support_multi_line = FALSE,
-  empty_as_string = FALSE)
+create_tabular_dataset_from_delimited_files(
+  path,
+  validate = TRUE,
+  include_path = FALSE,
+  infer_column_types = TRUE,
+  set_column_types = NULL,
+  separator = ",",
+  header = TRUE,
+  partition_format = NULL,
+  support_multi_line = FALSE,
+  empty_as_string = FALSE
+)
 }
 \arguments{
 \item{path}{A data path in a registered datastore, a local path, or an HTTP URL.}

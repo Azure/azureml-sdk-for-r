@@ -4,9 +4,13 @@
 \alias{create_tabular_dataset_from_json_lines_files}
 \title{Create a TabularDataset to represent tabular data in JSON Lines files (http://jsonlines.org/).}
 \usage{
-create_tabular_dataset_from_json_lines_files(path, validate = TRUE,
-  include_path = FALSE, set_column_types = NULL,
-  partition_format = NULL)
+create_tabular_dataset_from_json_lines_files(
+  path,
+  validate = TRUE,
+  include_path = FALSE,
+  set_column_types = NULL,
+  partition_format = NULL
+)
 }
 \arguments{
 \item{path}{The path to the source files, which can be single value or list

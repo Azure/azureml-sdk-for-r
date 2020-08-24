@@ -4,8 +4,12 @@
 \alias{inference_config}
 \title{Create an inference configuration for model deployments}
 \usage{
-inference_config(entry_script, source_directory = ".",
-  description = NULL, environment = NULL)
+inference_config(
+  entry_script,
+  source_directory = ".",
+  description = NULL,
+  environment = NULL
+)
 }
 \arguments{
 \item{entry_script}{A string of the path to the local file that contains

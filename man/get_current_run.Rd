@@ -18,7 +18,7 @@ The \code{Run} object.
 This function is commonly used to retrieve the authenticated
 run object inside of a script to be submitted for execution
 via \code{submit_experiment()}. Note that the logging functions
-(\code{log_*} methods, \code{upload_files_to_run()}, \code{upload_folder_to_run()})
+(\verb{log_*} methods, \code{upload_files_to_run()}, \code{upload_folder_to_run()})
 will by default log the specified metrics or files to the
 run returned from \code{get_current_run()}.
 }
