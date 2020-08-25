@@ -22,16 +22,18 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
 
   # register first version of the dataset
   dataset_name = paste0("iris-", sample.int(100, 1))
-  register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
+  register_dataset(ws, dataset, dataset_name, create_new_version)
 
-  # get number of datasets in workspace
+  # get datasets in workspace
   registered_datasets_before <- ws$datasets
+  print(registered_datasets_before)
   
   # register second version of the dataset
   register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
 
   # check updated number of datasets in workspace
   registered_datasets_after <- ws$datasets
+  print(registered_datasets_after)
   expect_equal(length(registered_datasets_before) + 1, length(registered_datasets_after))
 
   # unregister datasets
