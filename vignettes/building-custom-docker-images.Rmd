@@ -1,0 +1,215 @@
+---
+title: "Building custom Docker images for training and deployment"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Building custom Docker images for training and deployment}
+  %\VignetteEngine{knitr::rmarkdown}
+  \use_package{UTF-8}
+---
+
+This guide covers how to build and use custom Docker images for training and deploying models with Azure Machine Learning.
+
+For remote training jobs and model deployments, Azure ML has a default environment that gets used. However, this default environment may not be sufficient for the requirements of your particular scenario. And if you specify additional dependencies on top of the default environment, you will have to wait through the image build process when you run the job. For these situations, we recommend that you create and use a custom Docker image. Typically, you create a custom image when you want to use Docker to manage your dependencies, maintain tighter control over component versions or save time during remote training runs or deployment. For example, you might want to standardize on a specific version of R or other component. You might also want to install software required by your training code or model, where the installation process takes a long time. Installing the software when creating the Docker image means that you don't have to install it for each remote run or deployment.
+
+## Prerequisites
+* To build and push a Docker image, you will need to have Docker installed. One recommended option is to use an Azure Machine Learning [compute instance](https://docs.microsoft.com/azure/machine-learning/concept-compute-instance), which has Docker pre-installed.
+* A Docker registry, such as [Docker Hub](https://hub.docker.com/) or [Azure Container Registry](https://docs.microsoft.com/azure/container-registry/), for publishing your Docker images.
+
+## Writing the Dockerfile
+The first step in building a Docker image is to write the Dockerfile, a text file that contains all the commands needed to build your image. Create a text file named `Dockerfile`. 
+
+### Choose the base image
+Most Dockerfiles start from a parent image, rather than from scratch. Azure ML has a set of maintained images that serve as base images for training and inference. You can find information on these images, including the Dockerfiles used to build them, at this GitHub repo [Azure/AzureML-Containers](https://github.com/Azure/AzureML-Containers). Depending on your scenario, you should pick an appropriate CPU or GPU image to use as the parent image. The base images include Miniconda, and the GPU base images include the necessary GPU drivers needed to run GPU jobs on Azure ML. [Here](https://github.com/Azure/AzureML-Containers#featured-tags) is the list of images and associated tags for the Azure ML base images.
+
+As an example, we will use one of the CPU images as the parent image for our Dockerfile:
+
+```
+FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
+```
+
+### Specify conda dependencies
+Since using Azure ML has some Python dependencies, we will add an instruction to install these dependencies via Conda, an open-source package management system:
+
+1. **rpy2**, a package required by Azure ML for inference scenarios. If you are not building an image for deploying a web service, you do not have to include this package.
+2. **mscorefonts**, a fonts package needed if your remote run writes out any plots or images (e.g. with `ggplot2`).
+3. **azureml-defaults**, a lightweight version of the full Azure ML Python SDK that includes the `azureml-core` and `applicationinsights` packages required for tasks such as logging metrics, uploading artifacts, accessing datastores from within runs, and inference. `azureml-defaults` should be sufficient for most remote training and deployment scenarios; if for some reason you need the full SDK, you can specify pip installing the full `azureml-sdk` package instead.
+
+We will also install the R interpreter via conda:
+
+4. **r-base**, a package for specifying the R interpreter.
+
+Optionally, you can also install the [R Essentials bundle](https://docs.anaconda.com/anaconda/user-guide/tasks/using-r-language/) **r-essentials**, which includes approximately 200 of the most popular R packages for data science, including dplyr, shiny, ggplot2, tidyr, caret, and nnet. For tighter control over package versions and the size of your image, however, it is better to explicitly specify each R package that you need (covered in the following section).
+
+```
+FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
+
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+  conda install -c conda-forge -y mscorefonts && \
+	conda clean -ay && \
+	pip install --no-cache-dir azureml-defaults
+```
+
+If you have any other Python dependencies, such as for TensorFlow or Keras, which also leverage reticulate to wrap the corresponding Python SDK like Azure ML does, you should also specify those. The following vignettes have Dockerfiles you can reference:
+
+* [TensorFlow](https://github.com/Azure/azureml-sdk-for-r/tree/master/vignettes/train-with-tensorflow)
+* [Keras](https://github.com/Azure/azureml-sdk-for-r/tree/master/vignettes/hyperparameter-tune-with-keras)
+
+**NOTE:**
+
+Although standard installation procedure for the Azure ML SDK (and TensorFlow and Keras) assumes installing the Python SDK via `install_azureml()`, you will not need to add an instruction for this in your Dockerfile (or inside your job script) since the above instruction already directly installs the Python SDK and reticulate will find the Python installation. In fact, for remote jobs on Azure ML, you should not use `install_azureml()`, as you may run into a "Permissions denied" issue with Docker running as non-root when creating the conda environment (which is what the `install_azureml()` method does).
+
+### Specify R packages
+Finally, specify any R packages that are required for your training script or scoring script. The following example installs several R packages from CRAN.
+
+```
+FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
+
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+  conda install -c conda-forge -y mscorefonts && \
+	conda clean -ay && \
+	pip install --no-cache-dir azureml-defaults
+	
+ENV TAR="/bin/tar"
+RUN R -e "install.packages(c('remotes', 'reticulate', 'optparse', 'azuremlsdk'), repos = 'https://cloud.r-project.org/')"
+```
+
+If you want to install a package from GitHub, e.g. the Azure ML R SDK, you can do the following:
+```
+FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04
+
+RUN conda install -c r -y pip=20.1.1 openssl=1.1.1c r-base rpy2 && \
+  conda install -c conda-forge -y mscorefonts && \
+	conda clean -ay && \
+	pip install --no-cache-dir azureml-defaults
+	
+ENV TAR="/bin/tar"
+RUN R -e "install.packages(c('remotes', 'reticulate', 'optparse'), repos = 'https://cloud.r-project.org/')"
+RUN R -e "remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')"
+```
+
+## Build and publish the image
+Now, build and publish your Docker image to a Docker registry. The following sections show examples for publish your image on either Docker Hub or Azure Container Registry.
+
+You can familiarize yourself first with the official [documentation](https://docs.docker.com/get-started/part2/) on building Docker images if you are new to it.
+
+### Publish on Docker Hub
+If you are using Docker Hub to publish your images, first create a Docker Hub account and a repository where you will publish your image. Then, run the following set of CLI commands.
+
+1. Log in into your Docker Hub account and provide the password when prompted:
+```
+docker login --username <your username>
+```
+
+2. Now, change your directory into the directory that contains the `Dockerfile`. Build your Docker image and tag it:
+```
+docker build --tag <your username>/<your repository>:<tag> .
+```
+
+By convention, you can have your repository correspond to the image name. By default, the tag will be given the tag `latest`.
+
+3. Once your image is built and you have verified that it is the image you want to publish, publish the image on Docker Hub:
+```
+docker push <your username>/<your repository>:<tag>
+```
+
+### Publish on Azure Container Registry
+The first time you train or deploy a model using an Azure Machine Learning workspace, an Azure Container Registry is created for your workspace.You can build and publish your image using this registry. (You can also use a standalone ACR registry if you prefer.)
+
+1. First, authenticate into your Azure subscription:
+```
+az login
+```
+
+2. Then, find the container registry name for your workspace:
+```
+az ml workspace show -w <your workspace> -g <resourcegroup> --query containerRegistry
+```
+
+The information returned is similar to the following text:
+`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.ContainerRegistry/registries/<registry_name>`
+
+The <registry_name> value is the name of the Azure Container Registry for your workspace.
+
+3. Authenticate to the Azure Container Registry:
+```
+az acr login --name <registry_name>
+```
+
+4. Change your directory into the directory that contains the `Dockerfile`. Use the following command to upload the Dockerfile and build it:
+```
+az acr build --image <image_name>:<tag> --registry <registry_name> --file Dockerfile .
+```
+
+## Create an Azure ML Environment
+Now that your Docker image is published, you can create an Azure ML Environment and specify your custom image.
+
+For Docker Hub:
+```{r eval=FALSE}
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<username>/<repository>:<tag>")
+```
+
+For ACR:
+```{r eval=FALSE}
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>")
+```
+
+If you want to use an image from a private container registry that is not in your workspace, you must specify the registry details using [`container_registry`](https://azure.github.io/azureml-sdk-for-r/reference/container_registry.html) and specify it to the `image_registry_details` parameter of `r_environment()`:
+
+```{r eval=FALSE}
+registry_details <- container_registry(address = "<repository_name>.azurecr.io",
+                                       username = <repository_name>,
+                                       password = <your password>)
+
+env <- r_environment("your-env-name",
+                     custom_docker_image = "<repository_name>.azurecr.io/<image_name>:<tag>",
+                     image_registry_details = registry_details)
+```
+
+## Use the custom image for training
+If you want to use your image for a remote training run, pass the environment you created into the estimator configuration for your job:
+
+```{r eval=FALSE}
+ws <- load_workspace_from_config()
+
+compute_target <- get_compute(ws, cluster_name = "your-cluster-name")
+
+exp <- experiment(workspace = ws, name = "your-experiment-name")
+
+est <- estimator(source_directory = ".",
+                 entry_script = "train.R",
+                 compute_target = compute_target,
+                 environment = env)
+                 
+run <- submit_experiment(exp, est)
+```
+
+
+## Use the custom image for deployment
+If you want to use the image for deploying a model as a web service, pass the environment you created into the inference configuration for your deployment:
+
+```{r eval=FALSE}
+model <- get_model(ws, name = "your-model-name")
+inference_config = inference_config(entry_script = 'score.R',
+                                    source_directory ='.',
+                                    environment = env)
+
+aci_config <- aci_webservice_deployment_config(cpu_cores = 1, memory_gb = 0.5)
+
+aci_service <- deploy_model(ws, 
+                            'your-service-name',
+                            list(model),
+                            inference_config,
+                            aci_config)
+```
+
+For more information on deploying models in Azure ML, see the [Deploying models](https://azure.github.io/azureml-sdk-for-r/articles/deploying-models.html) guide.
+
+## Additional references
+For additional resources on building and using custom Docker images, you can refer to the following:
+
+* [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) - Official Docker documentation
+* [How to create custom Docker images for Azure Machine Learning Environments](https://medium.com/microsoftazure/how-to-create-custom-docker-base-images-for-azure-machine-learning-environments-86aa4c7bc7b9) - Microsoft Azure Medium blog post
+* [Deploy a model using a custom Docker image](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-custom-docker-image) - Python SDK documentation, but core concepts still applicable

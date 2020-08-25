@@ -43,3 +43,6 @@ result <- foreach(i = 1:nRows,
                  result <- as.character(prediction)
                  toJSON(result)
 }
+
+# Delete cluster
+delete_compute(compute_target)

@@ -22,6 +22,8 @@ navbar:
       href: articles/deploy-to-aks.html
     - text: ---
     - text: Guides
+    - text: Building custom Docker images for training and deployment
+      href: articles/building-custom-docker-images.html
     - text: Deploying models
       href: articles/deploying-models.html
     - text: Troubleshooting
