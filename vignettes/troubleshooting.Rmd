@@ -19,18 +19,19 @@ For issues with installing the **azuremlsdk** package, please refer to the [trou
 The following address issues when developing in R on a [Compute instance](https://docs.microsoft.com/azure/machine-learning/concept-compute-instance) using RStudio or Jupyter.
 
 ### Older version of azuremlsdk
-There will usually be a lag in between the latest release of the **azuremlsdk** package to CRAN and when the package version is updated on the compute instance. You can determine what version of the SDK you have by running `packageVersion("azuremlsdk")`.
+There will sometimes be a lag in between the latest release of the **azuremlsdk** package to CRAN and when the package version is updated on the compute instance. You can determine what version of the SDK you have by running `packageVersion("azuremlsdk")`.
 
-Right now, the latest version of the package on CRAN is 0.6.85, but the version on the compute instance is 0.5.7, which we are currently in the process of updating. Version 0.6.85 includes Azure ML Datasets functionality and several bug fixes, so if you need to access those immediately you can update the version yourself:
+To update to the latest version on CRAN:
 ``` {r eval=FALSE}
 install.packages("azuremlsdk")
-azuremlsdk::install_azureml(envname = 'r-reticulate')
+azuremlsdk::install_azureml()
 ```
 
-If you are using version 0.5.7 and see some variation of the following error messages, you are likely running into a bug that is fixed with the 0.6.85 release, and you should follow the above guidance to update the SDK.
-
-* `Error: Python module azureml was not found.` 
-* `AttributeError: module 'azureml' has no attribute 'core'`
+To install the latest development version from GitHub:
+``` {r eval=FALSE}
+remotes::install_github('https://github.com/Azure/azureml-sdk-for-r')
+azuremlsdk::install_azureml()
+```
 
 ### Error: "Unable to install packages"
 You may run into an error installing R packages from Jupyter using the R kernel, even though the same installation works from RStudio. The error will look as follows: 
@@ -53,6 +54,22 @@ You can work around this by specifying a library location you have permission to
 An alternative is to give yourself access to the default folder by running a `chmod` or `chown` command from the terminal.
 
 ## Training
+
+### "ModuleNotFoundError": "No module named 'ruamel'"
+If the following error occurs for your training run (or deployment):
+```
+"ModuleNotFoundError": "No module named 'ruamel'"
+```
+This is due to an issue with the installation `ruamel.yaml` package required by `azureml-defaults` that happens with `pip > 20.1.1`.
+
+To work around this issue, you can pin `pip` to version 20.1.1. Two options for doing so:
+
+1. If you are using the default environment, you can modify your environment as follows:
+```{r eval=FALSE}
+nv <- r_environment(name = "my-env")
+env$python$conda_dependencies$add_conda_package('pip==20.1.1')
+```
+2. If you are using a custom Docker image, pin `pip=20.1.1`. You can refer to the ["Building custom Docker images](https://azure.github.io/azureml-sdk-for-r/articles/building-custom-docker-images.html) vignette for an example and more information.
 
 ### "PermissionError" when submitting an experiment in RStudio
 If the following error occurs when submitting an experiment using RStudio: 
