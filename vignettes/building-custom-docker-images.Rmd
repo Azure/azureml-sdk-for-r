@@ -20,7 +20,7 @@ For remote training jobs and model deployments, Azure ML has a default environme
 The first step in building a Docker image is to write the Dockerfile, a text file that contains all the commands needed to build your image. Create a text file named `Dockerfile`. 
 
 ### Choose the base image
-Most Dockerfiles start from a parent image, rather than from scratch. Azure ML has a set of maintained images that serve as base images for training and inference. You can find information on these images, including the Dockerfiles used to build them, at this GitHub repo [Azure/AzureML-Containers](https://github.com/Azure/AzureML-Containers). Depending on your scenario, you should pick an appropriate CPU or GPU image to use as the parent image. The base images include Miniconda and the assets required for the Azure ML inference stack. The GPU base images include the necessary GPU drivers needed to run GPU jobs on Azure ML. [Here](https://github.com/Azure/AzureML-Containers#featured-tags) is the list of images and associated tags for the Azure ML base images.
+Most Dockerfiles start from a parent image, rather than from scratch. Azure ML has a set of maintained images that serve as base images for training and inference. You can find information on these images, including the Dockerfiles used to build them, at this GitHub repo [Azure/AzureML-Containers](https://github.com/Azure/AzureML-Containers). Depending on your scenario, you should pick an appropriate CPU or GPU image to use as the parent image. The base images include Miniconda, and the GPU base images include the necessary GPU drivers needed to run GPU jobs on Azure ML. [Here](https://github.com/Azure/AzureML-Containers#featured-tags) is the list of images and associated tags for the Azure ML base images.
 
 As an example, we will use one of the CPU images as the parent image for our Dockerfile:
 
@@ -57,7 +57,7 @@ If you have any other Python dependencies, such as for TensorFlow or Keras, whic
 
 **NOTE:**
 
-Although standard installation procedure for the Azure ML SDK (and TensorFlow and Keras) assumes installing the Python SDK via `install_azureml()`, you will not need to add an instruction for this in your Dockerfile (or inside your job script) since the above instruction already directly installs the Python SDK. In fact, for remote jobs on Azure ML, you should not use `install_azureml()`, as you will not have the permissions required for creating a Python conda environment, which is what the install method does.
+Although standard installation procedure for the Azure ML SDK (and TensorFlow and Keras) assumes installing the Python SDK via `install_azureml()`, you will not need to add an instruction for this in your Dockerfile (or inside your job script) since the above instruction already directly installs the Python SDK and reticulate will find the Python installation. In fact, for remote jobs on Azure ML, you should not use `install_azureml()`, as you may run into a "Permissions denied" issue with Docker running as non-root when creating the conda environment (which is what the `install_azureml()` method does).
 
 ### Specify R packages
 Finally, specify any R packages that are required for your training script or scoring script. The following example installs several R packages from CRAN.
