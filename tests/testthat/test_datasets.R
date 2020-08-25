@@ -15,6 +15,7 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
                             target_path = 'train-dataset/tabular/',
                             overwrite = TRUE)
   dataset <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
+  unregister_all_dataset_versions(dataset)
 
   # load data into data frame
   pandas_df <- load_dataset_into_data_frame(dataset)
