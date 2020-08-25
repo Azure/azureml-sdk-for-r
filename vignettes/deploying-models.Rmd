@@ -10,6 +10,40 @@ vignette: >
 
 This guide covers the details for deploying models as web services on Azure Machine Learning.
 
+## Register your model
+A registered model is a logical container for one or more files that make up your model. For example, if you have a model that's stored in multiple files, you can register them as a single model in the workspace. After you register the files, you can then download or deploy the registered model and receive all the files that you registered.
+
+Machine learning models are registered in your Azure ML workspace. The model can come from Azure ML or from somewhere else. When registering a model, you can optionally provide metadata about the model. The tags and properties that you apply to a model registration can then be used to filter models.
+
+### Register a model from an Azure ML run
+When you use the SDK to train a model, you will have a corresponding `Run` object. If your training script wrote the model file(s) to the `'outputs'` folder, then you can register a model directly from that training run.
+
+```{r eval=FALSE}
+# Register a single file as the model
+model <- register_model_from_run(run,
+                                 model_path='outputs/my_model.rds',
+                                 model_name='my_model')
+```
+
+For more information, see the documentation for [`register_model_from_run()`](https://azure.github.io/azureml-sdk-for-r/reference/register_model_from_run.html)
+
+### Register a model from local file(s)
+You can register a model by providing the local path of the model. You can provide the path of either a folder or a single file. You can use this method to register models that were trained with Azure ML and then downloaded locally. You can also use this method to register models trained outside of Azure ML.
+
+```{r eval=FALSE}
+# Register a single file as the model
+model <- register_model(ws,
+                        model_path='my_model.rds',
+                        model_name='my_model')
+                        
+# Register a folder of files as the model
+model <- register_model(ws,
+                        model_path='my_model_dir/',
+                        model_name='my_model')
+```
+
+For more information, see the documentation for [`register_model()`](https://azure.github.io/azureml-sdk-for-r/reference/register_model.html)
+
 ## Choose a compute target
 You can use the following compute targets, or compute resources, to host your web service deployment:
 
@@ -36,7 +70,7 @@ To deploy a model, you must provide an entry script (also referred to as the sco
 The entry script must contain an **`init()`** method that loads your model and then returns a function that uses the model to make a prediction based on the input data passed to the function. Azure ML runs the `init()` method once, when the Docker container for your web service is started. The prediction function returned by `init()` will be run every time the service is invoked to make a prediction on some input data. The inputs and outputs of this prediction function typically use JSON for serialization and deserialization.
 
 #### Locate model files in your entry script
-To locate the registered model(s) in your entry script, use the `AZUREML_MODEL_DIR` environment variable that is created during the service deployment. This environment variable contains the path to the model location.
+To locate the registered model(s) in your entry script, use the `AZUREML_MODEL_DIR` environment variable that is created during the service deployment. This environment variable contains the path to the directory that contains the the deployed model(s).
 
 The following table describes the value of `AZUREML_MODEL_DIR` depending on the number of models deployed:
 
@@ -53,7 +87,7 @@ To get the path to the model file in your entry script, combine the environment 
 model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model.rds')
 
 # Example when the model is a folder containing a file
-model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model_folder', 'my_model.rds')
+model_path <- file.path(Sys.getenv('AZUREML_MODEL_DIR'), 'my_model_dir', 'my_model.rds')
 
 ```
 
