@@ -32,7 +32,9 @@ steps:
       targetType: 'inline'
       script: |
         Rscript './.azure-pipelines/scripts/check_code_style.R' 'R'
-    displayName: 'Check code style'
+        R -e 'install.packages("covr");
+              covr::codecov()'
+    displayName: 'Check code style and code coverage'
 
   - task: Bash@3
     inputs:
@@ -44,3 +46,4 @@ steps:
         stopifnot(length(check_results$warnings) == 0);
         stopifnot(length(check_results$notes) == 0)'
     displayName: 'Check package build'
+    
