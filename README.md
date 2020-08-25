@@ -4,7 +4,6 @@
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Sample%20Validation?branchName=master&&label=Samples)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master&label=Docs)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/azuremlsdk)](https://cran.r-project.org/package=azuremlsdk)
-[![codecov](https://codecov.io/gh/Azure/azureml-sdk-for-r/branch/master/graph/badge.svg)](https://codecov.io/gh/Azure/azureml-sdk-for-r)
 
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with Azure Machine Learning. 
 
