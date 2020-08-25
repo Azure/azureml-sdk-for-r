@@ -11,14 +11,14 @@ devtools::load_all()
 ws <- load_workspace_from_config()
 
 # create AmlCompute cluster
-cluster_name <- "cpu-cluster"
-compute_target <- get_compute(ws, cluster_name = cluster_name)
+cluster_name <- "sample-cpu-cluster"
+
 if (is.null(compute_target)) {
   vm_size <- "STANDARD_D2_V2"
   compute_target <- create_aml_compute(workspace = ws,
                                        cluster_name = cluster_name,
                                        vm_size = vm_size,
-                                       max_nodes = 3)
+                                       max_nodes = 3L)
   
   wait_for_provisioning_completion(compute_target, show_output = TRUE)
 }
