@@ -11,7 +11,7 @@ devtools::load_all()
 ws <- load_workspace_from_config()
 
 # create AmlCompute cluster
-cluster_name <- "sample-cpu-cluster"
+cluster_name <- "sample-cluster"
 vm_size <- "STANDARD_D2_V2"
 compute_target <- create_aml_compute(workspace = ws,
                                      cluster_name = cluster_name,
