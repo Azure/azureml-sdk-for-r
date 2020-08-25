@@ -22,7 +22,7 @@ test_that("create a tabular dataset, register multiple versions of a dataset,
 
   # register first version of the dataset
   dataset_name = paste0("iris-", sample.int(100, 1))
-  register_dataset(ws, dataset, dataset_name, create_new_version)
+  register_dataset(ws, dataset, dataset_name)
 
   # get datasets in workspace
   registered_datasets_before <- ws$datasets
