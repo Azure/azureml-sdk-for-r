@@ -25,9 +25,9 @@ test_that("create a tabular dataset,
   # register second version of the dataset
   registered_dataset2 <-register_dataset(ws, dataset, dataset_name, description='I am version 2', create_new_version=TRUE)
 
-  expect_equal(registered_dset1$name, registered_dset2$name)
-  expect_equal(registered_dset1$description, 'I am version 1')
-  expect_equal(registered_dset2$description, 'I am version 2')
+  expect_equal(registered_dataset1$name, registered_dataset2$name)
+  expect_equal(registered_dataset1$description, 'I am version 1')
+  expect_equal(registered_dataset2$description, 'I am version 2')
                    
   # unregister datasets
   unregister_all_dataset_versions(dataset)
