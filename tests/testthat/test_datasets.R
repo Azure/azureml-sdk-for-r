@@ -1,39 +1,34 @@
 context("datasets")
 source("utils.R")
 
-test_that("create a tabular dataset, register multiple versions of a dataset,
+test_that("create a tabular dataset,
+          load into data frame,
+          register multiple versions of a dataset,
           unregister a dataset",{
+                   
   skip_if_no_subscription()
   ws <- existing_ws
 
-  # upload files to datastore and create dataset
-  ds <- get_default_datastore(ws)
-
-  file_name <- "iris.csv"
-  upload_files_to_datastore(ds,
-                            files = list(file.path(".", file_name)),
-                            target_path = 'train-dataset/tabular/',
-                            overwrite = TRUE)
-  dataset <- create_tabular_dataset_from_delimited_files(ds$path('train-dataset/tabular/iris.csv'))
-
+  # create tabular dataset from delimited files
+  path_to_dataset <- "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/nyc_energy.csv"
+  dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)
+  
   # load data into data frame
   pandas_df <- load_dataset_into_data_frame(dataset)
   expect_equal(is.data.frame(pandas_df), TRUE)
-
+                  
   # register first version of the dataset
-  dataset_name = paste0("iris-", sample.int(100, 1))
-  register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
-
-  # get number of datasets in workspace
-  registered_datasets_before <- ws$datasets
-  
+  dataset_name <- paste0("energy-", sample.int(100, 1))
+  registered_dataset1 <-register_dataset(ws, dataset, dataset_name, description='I am version 1')
+  expect_equal(registered_dataset1$name, dataset_name)
+ 
   # register second version of the dataset
-  register_dataset(ws, dataset, dataset_name, create_new_version = TRUE)
+  registered_dataset2 <-register_dataset(ws, dataset, dataset_name, description='I am version 2', create_new_version=TRUE)
 
-  # check updated number of datasets in workspace
-  registered_datasets_after <- ws$datasets
-  expect_equal(length(registered_datasets_before) + 1, length(registered_datasets_after))
-
+  expect_equal(registered_dataset1$name, registered_dataset2$name)
+  expect_equal(registered_dataset1$description, 'I am version 1')
+  expect_equal(registered_dataset2$description, 'I am version 2')
+                   
   # unregister datasets
   unregister_all_dataset_versions(dataset)
   expect_equal(dataset$name, NULL)
