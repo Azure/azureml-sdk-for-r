@@ -16,11 +16,16 @@ test_that("create environment and check parameters", {
 
   # use custom docker image
   custom_docker_image_name = "temp_image"
-  env <- r_environment(env_name, custom_docker_image = custom_docker_image_name)
+  container_registry = container_registry(address="myregistry.azurecr.io")
+  env <- r_environment(env_name, custom_docker_image = custom_docker_image_name,
+                       image_registry_details = container_registry,
+                       shm_size = "2g")
   expect_equal(env$name, env_name)
   expect_equal(env$docker$enabled, TRUE)
   expect_equal(env$docker$base_dockerfile, NULL)
   expect_equal(env$docker$base_image, custom_docker_image_name)
+  expect_equal(env$docker$base_image_registry, container_registry)
+  expect_equal(env$docker$shm_size, "2g")
 
   # use extra packages
   cran_pkg1 <- cran_package("ggplot2")
@@ -45,9 +50,8 @@ test_that("create environment and check parameters", {
   expect_equal(length(env$r$bioconductor_packages), 2)
   expect_equal(env$r$bioconductor_packages[[1]], "a4")
   expect_equal(env$r$bioconductor_packages[[2]], "BiocCheck")
-})
 
-test_that("create, register, and get environment", {
+  #create, register, and get environment
   skip_if_no_subscription()
   ws <- existing_ws
   
