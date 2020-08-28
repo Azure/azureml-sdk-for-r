@@ -1,8 +1,7 @@
 context("datasets")
 source("utils.R")
 
-test_that("create a tabular dataset,
-          load into data frame"), {
+test_that("create a tabular dataset, load into data frame", {
   # create tabular dataset from delimited files
   path_to_dataset <- "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/nyc_energy.csv"
   dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)
