@@ -33,8 +33,9 @@ steps:
       script: |
         Rscript './.azure-pipelines/scripts/check_code_style.R' 'R'
         R -e 'install.packages("covr", repos = "http://cran.us.r-project.org");
-              covr::codecov(coverage = package_coverage(line_exclusions = list("R/environment.R" = c(189:190, 210))),
-                            token=$(CODECOV_TOKEN))'
+              library(covr);
+              codecov(coverage = package_coverage(line_exclusions = list("R/environment.R" = c(189:190, 210))),
+                      token=$(CODECOV_TOKEN))'
     displayName: 'Check code style and code coverage'
 
   - task: Bash@3
