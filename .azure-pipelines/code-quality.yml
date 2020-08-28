@@ -34,19 +34,18 @@ steps:
         Rscript './.azure-pipelines/scripts/check_code_style.R' 'R'
         R -e 'install.packages("covr", repos = "http://cran.us.r-project.org");
               library(covr);
-              codecov(coverage = package_coverage(line_exclusions = list("R/environment.R" = c(189:190, 210),
-                                        "R/compute.R" = c(79:96, 116:124, 143, 162:163, 182:186, 197:198)),
-                                        "R/datasets.R" = c(20, 33:34),
-                                        "R/datastore.R",
-                                        "R/experiment.R",
-                                        "R/experiment.R" = c(95:101, 121, 240:241, 353, 407, 630:631, 663:664, 692),
-                                        "R/install.R",
-                                        "R/keyvault.R" = c(23:24, 1:59),
-                                        "R/model.R" = c(34:41, 105:125, 148:149, 306:310, 342, 410, 423, 585:600),
-                                        "R/package.R",
-                                        "R/webservice.R" = c(1:96, 146:147),
-                                        "R/workspace.R" = c(123:199, 262:344)),
-                      token=$(CODECOV_TOKEN))'
+              codecov(line_exclusions = list("R/environment.R" = c(189:190, 210),
+                "R/compute.R" = c(79:96, 116:124, 143, 162:163, 182:186, 197:198)),
+                "R/datasets.R" = c(20, 33:34),
+                "R/datastore.R",
+                "R/experiment.R",
+                "R/experiment.R" = c(95:101, 121, 240:241, 353, 407, 630:631, 663:664, 692),
+                "R/install.R",
+                "R/keyvault.R" = c(23:24, 1:59),
+                "R/model.R" = c(34:41, 105:125, 148:149, 306:310, 342, 410, 423, 585:600),
+                "R/package.R",
+                "R/webservice.R" = c(1:96, 146:147),
+                "R/workspace.R" = c(123:199, 262:344)), token=$(CODECOV_TOKEN))'
     displayName: 'Check code style and code coverage'
 
   - task: Bash@3
