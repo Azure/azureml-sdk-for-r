@@ -16,4 +16,9 @@ test_that("create estimator", {
   expect_equal(length(est$run_config$arguments), 2)
   expect_equal(est$run_config$arguments[[1]], "param1")
   expect_equal(est$run_config$arguments[[2]], 1)
+
+  # check if no environment provided
+  est <- estimator(".", compute_target = "local",
+                   script_params = list("param1" = 1))
+  expect_equal(est$run_config$environment$name, "estimatorenv")
 })
