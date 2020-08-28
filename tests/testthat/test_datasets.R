@@ -2,13 +2,7 @@ context("datasets")
 source("utils.R")
 
 test_that("create a tabular dataset,
-          load into data frame,
-          register multiple versions of a dataset,
-          unregister a dataset",{
-                   
-  skip_if_no_subscription()
-  ws <- existing_ws
-
+          load into data frame"), {
   # create tabular dataset from delimited files
   path_to_dataset <- "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/nyc_energy.csv"
   dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)
@@ -16,7 +10,14 @@ test_that("create a tabular dataset,
   # load data into data frame
   pandas_df <- load_dataset_into_data_frame(dataset)
   expect_equal(is.data.frame(pandas_df), TRUE)
-                  
+})
+  
+test_that("register multiple versions of a dataset,
+          unregister a dataset", {
+                   
+  skip_if_no_subscription()
+  ws <- existing_ws
+
   # register first version of the dataset
   dataset_name <- paste0("energy-", sample.int(100, 1))
   registered_dataset1 <-register_dataset(ws, dataset, dataset_name, description='I am version 1')
