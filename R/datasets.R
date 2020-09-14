@@ -444,6 +444,26 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
   dataset$keep_columns(columns, validate)
 }
 
+#' Convert R datetime objects to Python datetime.datetime objects
+#' 
+#' @param posix_date The POSIX* object to be converted
+#' @return A Python datetime.datetime object
+#' @md
+.posixct_to_datetime <- function(posix_date) {
+  datetime <- import("datetime", convert=FALSE)
+  
+  parsed_date <- stringr::str_split(posix_date, "[- : ]")[[1]]
+  
+  year <- as.integer(parsed_date[1])
+  month <- as.integer(parsed_date[2])
+  day <- as.integer(parsed_date[3])
+  hour <- as.integer(parsed_date[4])
+  minute <- as.integer(parsed_date[5])
+  second <- as.integer(parsed_date[6])
+  
+  datetime$datetime(year, month, day, hour, minute, second)
+}
+
 #' Filter Tabular Dataset with time stamp columns after a specified start time.
 #'
 #' @description
