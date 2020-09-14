@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1>Known issues and troubleshooting</h1>
             
-            <h4 class="date">2020-08-25</h4>
+            <h4 class="date">2020-08-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/troubleshooting.Rmd"><code>vignettes/troubleshooting.Rmd</code></a></small>
       <div class="hidden name"><code>troubleshooting.Rmd</code></div>
@@ -133,15 +133,13 @@
 <div id="older-version-of-azuremlsdk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#older-version-of-azuremlsdk" class="anchor"></a>Older version of azuremlsdk</h3>
-<p>There will usually be a lag in between the latest release of the <strong>azuremlsdk</strong> package to CRAN and when the package version is updated on the compute instance. You can determine what version of the SDK you have by running <code><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion("azuremlsdk")</a></code>.</p>
-<p>Right now, the latest version of the package on CRAN is 0.6.85, but the version on the compute instance is 0.5.7, which we are currently in the process of updating. Version 0.6.85 includes Azure ML Datasets functionality and several bug fixes, so if you need to access those immediately you can update the version yourself:</p>
+<p>There will sometimes be a lag in between the latest release of the <strong>azuremlsdk</strong> package to CRAN and when the package version is updated on the compute instance. You can determine what version of the SDK you have by running <code><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion("azuremlsdk")</a></code>.</p>
+<p>To update to the latest version on CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"azuremlsdk"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>(<span class="dt">envname =</span> <span class="st">'r-reticulate'</span>)</a></code></pre></div>
-<p>If you are using version 0.5.7 and see some variation of the following error messages, you are likely running into a bug that is fixed with the 0.6.85 release, and you should follow the above guidance to update the SDK.</p>
-<ul>
-<li><code>Error: Python module azureml was not found.</code></li>
-<li><code>AttributeError: module 'azureml' has no attribute 'core'</code></li>
-</ul>
+<a class="sourceLine" id="cb1-2" data-line-number="2">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
+<p>To install the latest development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'https://github.com/Azure/azureml-sdk-for-r'</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">azuremlsdk<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/azuremlsdk/man/install_azureml.html">install_azureml</a></span>()</a></code></pre></div>
 </div>
 <div id="error-unable-to-install-packages" class="section level3">
 <h3 class="hasAnchor">
@@ -165,6 +163,22 @@ Warning message in install.packages(&lt;package name&gt;):
 <div id="training" class="section level2">
 <h2 class="hasAnchor">
 <a href="#training" class="anchor"></a>Training</h2>
+<div id="modulenotfounderror-no-module-named-ruamel" class="section level3">
+<h3 class="hasAnchor">
+<a href="#modulenotfounderror-no-module-named-ruamel" class="anchor"></a>“ModuleNotFoundError”: “No module named ‘ruamel’”</h3>
+<p>If the following error occurs for your training run (or deployment):</p>
+<pre><code>"ModuleNotFoundError": "No module named 'ruamel'"</code></pre>
+<p>This is due to an issue with the installation <code>ruamel.yaml</code> package required by <code>azureml-defaults</code> that happens with <code>pip &gt; 20.1.1</code>.</p>
+<p>To work around this issue, you can pin <code>pip</code> to version 20.1.1. Two options for doing so:</p>
+<ol style="list-style-type: decimal">
+<li>If you are using the default environment, you can modify your environment as follows:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">nv &lt;-<span class="st"> </span><span class="kw">r_environment</span>(<span class="dt">name =</span> <span class="st">"my-env"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">env<span class="op">$</span>python<span class="op">$</span>conda_dependencies<span class="op">$</span><span class="kw">add_conda_package</span>(<span class="st">'pip==20.1.1'</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>If you are using a custom Docker image, pin <code>pip=20.1.1</code>. You can refer to the <a href="https://azure.github.io/azureml-sdk-for-r/articles/building-custom-docker-images.html">"Building custom Docker images</a> vignette for an example and more information.</li>
+</ol>
+</div>
 <div id="permissionerror-when-submitting-an-experiment-in-rstudio" class="section level3">
 <h3 class="hasAnchor">
 <a href="#permissionerror-when-submitting-an-experiment-in-rstudio" class="anchor"></a>“PermissionError” when submitting an experiment in RStudio</h3>
