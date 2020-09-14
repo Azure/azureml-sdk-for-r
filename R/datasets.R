@@ -478,6 +478,7 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 #' @md
 filter_dataset_after_time <- function(dataset, start_time,
                                       include_boundary = TRUE) {
+  start_time <- .posixct_to_datetime(start_time)
   dataset$time_after(start_time, include_boundary)
 }
 
@@ -495,6 +496,7 @@ filter_dataset_after_time <- function(dataset, start_time,
 #' @md
 filter_dataset_before_time <- function(dataset, end_time,
                                        include_boundary = TRUE) {
+  end_time <- .posixct_to_datetime(end_time)
   dataset$time_before(end_time, include_boundary)
 }
 
@@ -513,6 +515,8 @@ filter_dataset_before_time <- function(dataset, end_time,
 #' @md
 filter_dataset_between_time <- function(dataset, start_time, end_time,
                                         include_boundary = TRUE) {
+  start_time <- .posixct_to_datetime(start_time)
+  end_time <- .posixct_to_datetime(end_time)
   dataset$time_between(start_time, end_time, include_boundary)
 }
 
