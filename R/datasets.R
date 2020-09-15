@@ -452,16 +452,16 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 .posixct_to_datetime <- function(posix_date) {
   datetime <- import("datetime", convert=FALSE)
   
-  parsed_date <- stringr::str_split(posix_date, "[- : ]")[[1]]
+  parsed_date <- sapply(stringr::str_split(posix_date, "[- : ]")[[1]],
+                        as.integer)
+  names(parsed_date) <- c("year", "month", "day", "hour", "minute", "second")
   
-  year <- as.integer(parsed_date[1])
-  month <- as.integer(parsed_date[2])
-  day <- as.integer(parsed_date[3])
-  hour <- as.integer(parsed_date[4])
-  minute <- as.integer(parsed_date[5])
-  second <- as.integer(parsed_date[6])
-  
-  datetime$datetime(year, month, day, hour, minute, second)
+  datetime$datetime(parsed_date[["year"]],
+                    parsed_date[["month"]],
+                    parsed_date[["day"]],
+                    parsed_date[["hour"]],
+                    parsed_date[["minute"]],
+                    parsed_date[["second"]])
 }
 
 #' Filter Tabular Dataset with time stamp columns after a specified start time.
