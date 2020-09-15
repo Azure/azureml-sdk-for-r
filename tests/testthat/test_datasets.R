@@ -12,9 +12,10 @@ test_that("create a tabular dataset,
   # create tabular dataset from delimited files
   date <- as.POSIXct("2011-05-01 17:55:23")
   path_to_dataset <- "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/nyc_energy.csv"
-  dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)
+  time_column_name <- 'timeStamp'
+  dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)$with_timestamp_columns(fine_grain_timestamp=time_column_name)
   filtered_dataset <- filter_dataset_before_time(dataset, date)
-  
+
   # load data into data frame
   pandas_df <- load_dataset_into_data_frame(filtered_dataset)
   expect_equal(is.data.frame(pandas_df), TRUE)
