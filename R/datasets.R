@@ -446,6 +446,8 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 
 #' Convert R datetime objects to Python datetime.datetime objects
 #' 
+#' Wrap all calls in suppressWarnings due to unnecessary warning in timedatectl
+#' package: https://stat.ethz.ch/pipermail/r-devel/2018-May/076163.html
 #' @param posix_date The POSIX* object to be converted
 #' @return A Python datetime.datetime object
 #' @md
@@ -478,7 +480,7 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 #' @md
 filter_dataset_after_time <- function(dataset, start_time,
                                       include_boundary = TRUE) {
-  start_time <- .posixct_to_datetime(start_time)
+  start_time <- suppressWarnings(.posixct_to_datetime(start_time))
   dataset$time_after(start_time, include_boundary)
 }
 
@@ -496,7 +498,7 @@ filter_dataset_after_time <- function(dataset, start_time,
 #' @md
 filter_dataset_before_time <- function(dataset, end_time,
                                        include_boundary = TRUE) {
-  end_time <- .posixct_to_datetime(end_time)
+  end_time <- suppressWarnings(.posixct_to_datetime(end_time))
   dataset$time_before(end_time, include_boundary)
 }
 
@@ -515,8 +517,8 @@ filter_dataset_before_time <- function(dataset, end_time,
 #' @md
 filter_dataset_between_time <- function(dataset, start_time, end_time,
                                         include_boundary = TRUE) {
-  start_time <- .posixct_to_datetime(start_time)
-  end_time <- .posixct_to_datetime(end_time)
+  start_time <- suppressWarnings(.posixct_to_datetime(start_time))
+  end_time <- suppressWarnings(.posixct_to_datetime(end_time))
   dataset$time_between(start_time, end_time, include_boundary)
 }
 
