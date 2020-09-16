@@ -110,7 +110,7 @@
     <div class="page-header toc-ignore">
       <h1>A Deeper Dive into Experiments</h1>
             
-            <h4 class="date">2020-08-27</h4>
+            <h4 class="date">2020-09-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/azure/azureml-sdk-for-r/blob/master/vignettes/experiments-deep-dive.Rmd"><code>vignettes/experiments-deep-dive.Rmd</code></a></small>
       <div class="hidden name"><code>experiments-deep-dive.Rmd</code></div>
@@ -149,7 +149,7 @@
 <div id="try-out-several-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#try-out-several-models" class="anchor"></a>Try out several models</h2>
-<p>We have provided three different experiment files in the <code>experiments-deep-dive</code> folder: <a href="accident-glm.R"><code>accident-glm.R</code></a>, <a href="accident-knn.R"><code>accident-knn.R</code></a>, <a href="accident-glmnet.R"><code>accident-glmnet.R</code></a>. Each uses the <code>caret</code> package to fit a predictive model to the accidents data (GLM, KNN and GLMNET respectively). Here are the parts of <code>accident-glm.R</code> that load the data and fit the model.</p>
+<p>We have provided three different experiment files in the <code>experiments-deep-dive</code> folder: <code>accident-glm.R</code>, <code>accident-knn.R</code>, <code>accident-glmnet.R</code>. Each uses the <code>caret</code> package to fit a predictive model to the accidents data (GLM, KNN and GLMNET respectively). Here are the parts of <code>accident-glm.R</code> that load the data and fit the model.</p>
 <p>The script loads the data <code>accidents</code> from the shared datastore, and then creates a training partition <code>accident_trn</code>. This data is then passed to the caret <code>train</code> function to fit a generalized linear model (in this case, a logistic regression).</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">### FROM FILE: accident-glm.R - do not run this code chunk</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
