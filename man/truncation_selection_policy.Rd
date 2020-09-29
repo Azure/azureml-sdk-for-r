@@ -4,8 +4,11 @@
 \alias{truncation_selection_policy}
 \title{Define a truncation selection policy for early termination of HyperDrive runs}
 \usage{
-truncation_selection_policy(truncation_percentage,
-  evaluation_interval = 1L, delay_evaluation = 0L)
+truncation_selection_policy(
+  truncation_percentage,
+  evaluation_interval = 1L,
+  delay_evaluation = 0L
+)
 }
 \arguments{
 \item{truncation_percentage}{An integer of the percentage of lowest
@@ -22,7 +25,7 @@ The \code{TruncationSelectionPolicy} object.
 \description{
 Truncation selection cancels a given percentage of lowest performing runs at
 each evaluation interval. Runs are compared based on their performance on the
-primary metric and the lowest X% are terminated.
+primary metric and the lowest X\% are terminated.
 }
 \section{Details}{
 

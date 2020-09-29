@@ -4,8 +4,7 @@
 \alias{log_image_to_run}
 \title{Log an image metric to a run}
 \usage{
-log_image_to_run(name, path = NULL, plot = NULL, description = "",
-  run = NULL)
+log_image_to_run(name, path = NULL, plot = NULL, description = "", run = NULL)
 }
 \arguments{
 \item{name}{A string of the name of the metric.}

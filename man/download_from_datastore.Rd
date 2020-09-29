@@ -4,8 +4,13 @@
 \alias{download_from_datastore}
 \title{Download data from a datastore to the local file system}
 \usage{
-download_from_datastore(datastore, target_path, prefix = NULL,
-  overwrite = FALSE, show_progress = TRUE)
+download_from_datastore(
+  datastore,
+  target_path,
+  prefix = NULL,
+  overwrite = FALSE,
+  show_progress = TRUE
+)
 }
 \arguments{
 \item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}

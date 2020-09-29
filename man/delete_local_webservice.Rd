@@ -4,8 +4,7 @@
 \alias{delete_local_webservice}
 \title{Delete a local web service from the local machine}
 \usage{
-delete_local_webservice(webservice, delete_cache = TRUE,
-  delete_image = FALSE)
+delete_local_webservice(webservice, delete_cache = TRUE, delete_image = FALSE)
 }
 \arguments{
 \item{webservice}{The \code{LocalWebservice} object.}

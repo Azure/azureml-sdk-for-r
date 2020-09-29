@@ -4,8 +4,12 @@
 \alias{update_aml_compute}
 \title{Update scale settings for an AmlCompute cluster}
 \usage{
-update_aml_compute(cluster, min_nodes = NULL, max_nodes = NULL,
-  idle_seconds_before_scaledown = NULL)
+update_aml_compute(
+  cluster,
+  min_nodes = NULL,
+  max_nodes = NULL,
+  idle_seconds_before_scaledown = NULL
+)
 }
 \arguments{
 \item{cluster}{The \code{AmlCompute} cluster.}

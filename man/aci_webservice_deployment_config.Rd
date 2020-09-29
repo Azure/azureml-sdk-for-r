@@ -4,11 +4,21 @@
 \alias{aci_webservice_deployment_config}
 \title{Create a deployment config for deploying an ACI web service}
 \usage{
-aci_webservice_deployment_config(cpu_cores = NULL, memory_gb = NULL,
-  tags = NULL, properties = NULL, description = NULL,
-  location = NULL, auth_enabled = NULL, ssl_enabled = NULL,
-  enable_app_insights = NULL, ssl_cert_pem_file = NULL,
-  ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)
+aci_webservice_deployment_config(
+  cpu_cores = NULL,
+  memory_gb = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  location = NULL,
+  auth_enabled = NULL,
+  ssl_enabled = NULL,
+  enable_app_insights = NULL,
+  ssl_cert_pem_file = NULL,
+  ssl_key_pem_file = NULL,
+  ssl_cname = NULL,
+  dns_name_label = NULL
+)
 }
 \arguments{
 \item{cpu_cores}{The number of cpu cores to allocate for

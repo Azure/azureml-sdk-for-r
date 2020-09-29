@@ -4,10 +4,19 @@
 \alias{register_azure_file_share_datastore}
 \title{Register an Azure file share as a datastore}
 \usage{
-register_azure_file_share_datastore(workspace, datastore_name,
-  file_share_name, account_name, sas_token = NULL, account_key = NULL,
-  protocol = NULL, endpoint = NULL, overwrite = FALSE,
-  create_if_not_exists = FALSE, skip_validation = FALSE)
+register_azure_file_share_datastore(
+  workspace,
+  datastore_name,
+  file_share_name,
+  account_name,
+  sas_token = NULL,
+  account_key = NULL,
+  protocol = NULL,
+  endpoint = NULL,
+  overwrite = FALSE,
+  create_if_not_exists = FALSE,
+  skip_validation = FALSE
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

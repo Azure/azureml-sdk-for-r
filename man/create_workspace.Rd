@@ -4,13 +4,25 @@
 \alias{create_workspace}
 \title{Create a new Azure Machine Learning workspace}
 \usage{
-create_workspace(name, auth = NULL, subscription_id = NULL,
-  resource_group = NULL, location = NULL,
-  create_resource_group = TRUE, friendly_name = NULL,
-  storage_account = NULL, key_vault = NULL, app_insights = NULL,
-  container_registry = NULL, cmk_keyvault = NULL,
-  resource_cmk_uri = NULL, hbi_workspace = FALSE, exist_ok = FALSE,
-  show_output = TRUE, sku = "basic")
+create_workspace(
+  name,
+  auth = NULL,
+  subscription_id = NULL,
+  resource_group = NULL,
+  location = NULL,
+  create_resource_group = TRUE,
+  friendly_name = NULL,
+  storage_account = NULL,
+  key_vault = NULL,
+  app_insights = NULL,
+  container_registry = NULL,
+  cmk_keyvault = NULL,
+  resource_cmk_uri = NULL,
+  hbi_workspace = FALSE,
+  exist_ok = FALSE,
+  show_output = TRUE,
+  sku = "basic"
+)
 }
 \arguments{
 \item{name}{A string of the new workspace name. Workspace name has to be

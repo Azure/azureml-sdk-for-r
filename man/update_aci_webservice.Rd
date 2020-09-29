@@ -4,11 +4,20 @@
 \alias{update_aci_webservice}
 \title{Update a deployed ACI web service}
 \usage{
-update_aci_webservice(webservice, tags = NULL, properties = NULL,
-  description = NULL, auth_enabled = NULL, ssl_enabled = NULL,
-  ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL,
-  ssl_cname = NULL, enable_app_insights = NULL, models = NULL,
-  inference_config = NULL)
+update_aci_webservice(
+  webservice,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  auth_enabled = NULL,
+  ssl_enabled = NULL,
+  ssl_cert_pem_file = NULL,
+  ssl_key_pem_file = NULL,
+  ssl_cname = NULL,
+  enable_app_insights = NULL,
+  models = NULL,
+  inference_config = NULL
+)
 }
 \arguments{
 \item{webservice}{The \code{AciWebservice} object.}

@@ -43,7 +43,7 @@ This policy is inspired from the research publication
 If you are looking for a conservative policy that provides savings without
 terminating promising jobs, you can use a \code{MedianStoppingPolicy} with
 \code{evaluation_interval = 1} and \code{delay_evaluation = 5}. These are conservative
-settings that can provide approximately 25%-35% savings with no loss on
+settings that can provide approximately 25\%-35\% savings with no loss on
 the primary metric (based on our evaluation data).
 }
 

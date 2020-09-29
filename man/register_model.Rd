@@ -4,10 +4,19 @@
 \alias{register_model}
 \title{Register a model to a given workspace}
 \usage{
-register_model(workspace, model_path, model_name, datasets = NULL,
-  tags = NULL, properties = NULL, description = NULL,
-  child_paths = NULL, sample_input_dataset = NULL,
-  sample_output_dataset = NULL, resource_configuration = NULL)
+register_model(
+  workspace,
+  model_path,
+  model_name,
+  datasets = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  child_paths = NULL,
+  sample_input_dataset = NULL,
+  sample_output_dataset = NULL,
+  resource_configuration = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

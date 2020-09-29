@@ -4,8 +4,13 @@
 \alias{download_files_from_run}
 \title{Download files from a run}
 \usage{
-download_files_from_run(run, prefix = NULL, output_directory = NULL,
-  output_paths = NULL, batch_size = 100L)
+download_files_from_run(
+  run,
+  prefix = NULL,
+  output_directory = NULL,
+  output_paths = NULL,
+  batch_size = 100L
+)
 }
 \arguments{
 \item{run}{The \code{Run} object.}

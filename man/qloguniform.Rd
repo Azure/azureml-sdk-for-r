@@ -3,7 +3,7 @@
 \name{qloguniform}
 \alias{qloguniform}
 \title{Specify a uniform distribution of the form
-\code{round(exp(uniform(min_value, max_value) / q) * q}}
+\verb{round(exp(uniform(min_value, max_value) / q) * q}}
 \usage{
 qloguniform(min_value, max_value, q)
 }
@@ -19,7 +19,7 @@ A list of the stochastic expression.
 }
 \description{
 Specify a uniform distribution of the form
-\code{round(exp(uniform(min_value, max_value) / q) * q}.
+\verb{round(exp(uniform(min_value, max_value) / q) * q}.
 
 This is suitable for a discrete variable with respect to which the objective
 is "smooth", and gets smoother with the size of the value, but which should

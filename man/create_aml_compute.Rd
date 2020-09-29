@@ -4,12 +4,23 @@
 \alias{create_aml_compute}
 \title{Create an AmlCompute cluster}
 \usage{
-create_aml_compute(workspace, cluster_name, vm_size,
-  vm_priority = "dedicated", min_nodes = 0, max_nodes = NULL,
-  idle_seconds_before_scaledown = NULL, admin_username = NULL,
-  admin_user_password = NULL, admin_user_ssh_key = NULL,
-  vnet_resourcegroup_name = NULL, vnet_name = NULL,
-  subnet_name = NULL, tags = NULL, description = NULL)
+create_aml_compute(
+  workspace,
+  cluster_name,
+  vm_size,
+  vm_priority = "dedicated",
+  min_nodes = 0,
+  max_nodes = NULL,
+  idle_seconds_before_scaledown = NULL,
+  admin_username = NULL,
+  admin_user_password = NULL,
+  admin_user_ssh_key = NULL,
+  vnet_resourcegroup_name = NULL,
+  vnet_name = NULL,
+  subnet_name = NULL,
+  tags = NULL,
+  description = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

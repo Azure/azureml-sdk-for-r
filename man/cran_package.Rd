@@ -4,8 +4,7 @@
 \alias{cran_package}
 \title{Specifies a CRAN package to install in environment}
 \usage{
-cran_package(name, version = NULL,
-  repo = "https://cloud.r-project.org")
+cran_package(name, version = NULL, repo = "https://cloud.r-project.org")
 }
 \arguments{
 \item{name}{The package name}

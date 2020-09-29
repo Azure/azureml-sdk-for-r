@@ -18,7 +18,7 @@ Description: Interface to the 'Azure Machine Learning' Software Development Kit
     <https://docs.microsoft.com/en-us/azure/machine-learning/service/overview-what-is-azure-ml>.
 Encoding: UTF-8
 License: MIT + file LICENSE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.5.0)
 Imports:

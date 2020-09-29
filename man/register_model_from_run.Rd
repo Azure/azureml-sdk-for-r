@@ -4,10 +4,18 @@
 \alias{register_model_from_run}
 \title{Register a model for operationalization.}
 \usage{
-register_model_from_run(run, model_name, model_path = NULL,
-  tags = NULL, properties = NULL, description = NULL,
-  datasets = NULL, sample_input_dataset = NULL,
-  sample_output_dataset = NULL, resource_configuration = NULL)
+register_model_from_run(
+  run,
+  model_name,
+  model_path = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  datasets = NULL,
+  sample_input_dataset = NULL,
+  sample_output_dataset = NULL,
+  resource_configuration = NULL
+)
 }
 \arguments{
 \item{run}{The \code{Run} object.}

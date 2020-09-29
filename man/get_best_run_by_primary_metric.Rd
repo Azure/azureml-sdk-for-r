@@ -4,8 +4,11 @@
 \alias{get_best_run_by_primary_metric}
 \title{Return the best performing run amongst all completed runs}
 \usage{
-get_best_run_by_primary_metric(hyperdrive_run, include_failed = TRUE,
-  include_canceled = TRUE)
+get_best_run_by_primary_metric(
+  hyperdrive_run,
+  include_failed = TRUE,
+  include_canceled = TRUE
+)
 }
 \arguments{
 \item{hyperdrive_run}{The \code{HyperDriveRun} object.}

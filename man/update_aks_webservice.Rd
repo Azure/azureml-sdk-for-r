@@ -4,18 +4,35 @@
 \alias{update_aks_webservice}
 \title{Update a deployed AKS web service}
 \usage{
-update_aks_webservice(webservice, autoscale_enabled = NULL,
-  autoscale_min_replicas = NULL, autoscale_max_replicas = NULL,
+update_aks_webservice(
+  webservice,
+  autoscale_enabled = NULL,
+  autoscale_min_replicas = NULL,
+  autoscale_max_replicas = NULL,
   autoscale_refresh_seconds = NULL,
-  autoscale_target_utilization = NULL, auth_enabled = NULL,
-  cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL,
-  scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL,
-  max_request_wait_time = NULL, num_replicas = NULL, tags = NULL,
-  properties = NULL, description = NULL, models = NULL,
-  inference_config = NULL, gpu_cores = NULL, period_seconds = NULL,
-  initial_delay_seconds = NULL, timeout_seconds = NULL,
-  success_threshold = NULL, failure_threshold = NULL,
-  namespace = NULL, token_auth_enabled = NULL)
+  autoscale_target_utilization = NULL,
+  auth_enabled = NULL,
+  cpu_cores = NULL,
+  memory_gb = NULL,
+  enable_app_insights = NULL,
+  scoring_timeout_ms = NULL,
+  replica_max_concurrent_requests = NULL,
+  max_request_wait_time = NULL,
+  num_replicas = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  models = NULL,
+  inference_config = NULL,
+  gpu_cores = NULL,
+  period_seconds = NULL,
+  initial_delay_seconds = NULL,
+  timeout_seconds = NULL,
+  success_threshold = NULL,
+  failure_threshold = NULL,
+  namespace = NULL,
+  token_auth_enabled = NULL
+)
 }
 \arguments{
 \item{webservice}{The \code{AksWebservice} object.}

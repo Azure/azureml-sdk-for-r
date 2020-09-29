@@ -4,8 +4,7 @@
 \alias{filter_dataset_from_recent_time}
 \title{Filter Tabular Dataset to contain only the specified duration (amount) of recent data.}
 \usage{
-filter_dataset_from_recent_time(dataset, time_delta,
-  include_boundary = TRUE)
+filter_dataset_from_recent_time(dataset, time_delta, include_boundary = TRUE)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object}

@@ -4,8 +4,14 @@
 \alias{upload_files_to_datastore}
 \title{Upload files to the Azure storage a datastore points to}
 \usage{
-upload_files_to_datastore(datastore, files, relative_root = NULL,
-  target_path = NULL, overwrite = FALSE, show_progress = TRUE)
+upload_files_to_datastore(
+  datastore,
+  files,
+  relative_root = NULL,
+  target_path = NULL,
+  overwrite = FALSE,
+  show_progress = TRUE
+)
 }
 \arguments{
 \item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}
@@ -14,9 +20,9 @@ upload_files_to_datastore(datastore, files, relative_root = NULL,
 
 \item{relative_root}{A string of the base path from which is used to
 determine the path of the files in the Azure storage. For example, if
-we upload \code{/path/to/file.txt}, and we define the base path to be \code{/path},
+we upload \verb{/path/to/file.txt}, and we define the base path to be \verb{/path},
 when \code{file.txt} is uploaded to the blob storage or file share, it will
-have the path of \code{/to/file.txt}. If \code{target_path} is also given, then it
+have the path of \verb{/to/file.txt}. If \code{target_path} is also given, then it
 will be used as the prefix for the derived path from above. The base path
 must be a common path of all of the files, otherwise an exception will be
 thrown.}

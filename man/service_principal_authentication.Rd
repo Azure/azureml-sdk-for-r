@@ -4,8 +4,12 @@
 \alias{service_principal_authentication}
 \title{Manages authentication using a service principle instead of a user identity.}
 \usage{
-service_principal_authentication(tenant_id, service_principal_id,
-  service_principal_password, cloud = "AzureCloud")
+service_principal_authentication(
+  tenant_id,
+  service_principal_id,
+  service_principal_password,
+  cloud = "AzureCloud"
+)
 }
 \arguments{
 \item{tenant_id}{The string id of the active directory tenant that the service

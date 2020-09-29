@@ -4,8 +4,12 @@
 \alias{bandit_policy}
 \title{Define a Bandit policy for early termination of HyperDrive runs}
 \usage{
-bandit_policy(slack_factor = NULL, slack_amount = NULL,
-  evaluation_interval = 1L, delay_evaluation = 0L)
+bandit_policy(
+  slack_factor = NULL,
+  slack_amount = NULL,
+  evaluation_interval = 1L,
+  delay_evaluation = 0L
+)
 }
 \arguments{
 \item{slack_factor}{A double of the ratio of the allowed distance from
@@ -68,7 +72,7 @@ first termination policy evaluation for a specific number of sequences.
 \examples{
 # In this example, the early termination policy is applied at every interval
 # when metrics are reported, starting at evaluation interval 5. Any run whose
-# best metric is less than (1 / (1 + 0.1)) or 91\\\% of the best performing run will
+# best metric is less than (1 / (1 + 0.1)) or 91\\% of the best performing run will
 # be terminated
 \dontrun{
 early_termination_policy = bandit_policy(slack_factor = 0.1,

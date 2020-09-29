@@ -4,8 +4,13 @@
 \alias{update_local_webservice}
 \title{Update a local web service}
 \usage{
-update_local_webservice(webservice, models = NULL,
-  deployment_config = NULL, wait = FALSE, inference_config = NULL)
+update_local_webservice(
+  webservice,
+  models = NULL,
+  deployment_config = NULL,
+  wait = FALSE,
+  inference_config = NULL
+)
 }
 \arguments{
 \item{webservice}{The \code{LocalWebservice} object.}

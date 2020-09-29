@@ -4,9 +4,13 @@
 \alias{create_tabular_dataset_from_parquet_files}
 \title{Create an unregistered, in-memory Dataset from parquet files.}
 \usage{
-create_tabular_dataset_from_parquet_files(path, validate = TRUE,
-  include_path = FALSE, set_column_types = NULL,
-  partition_format = NULL)
+create_tabular_dataset_from_parquet_files(
+  path,
+  validate = TRUE,
+  include_path = FALSE,
+  set_column_types = NULL,
+  partition_format = NULL
+)
 }
 \arguments{
 \item{path}{A data path in a registered datastore or a local path.}
