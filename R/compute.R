@@ -19,7 +19,7 @@
 #' @param workspace The `Workspace` object.
 #' @param cluster_name A string of the name of the cluster.
 #' @param vm_size A string of the size of agent VMs. More details can be found
-#' [here](https://aka.ms/azureml-vm-details).
+#' [here](https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object).
 #' Note that not all sizes are available in all regions, as detailed in the
 #' aformentioned link. Defaults to `'Standard_NC6'`.
 #' @param vm_priority A string of either `'dedicated'` or `'lowpriority'` to
@@ -213,7 +213,7 @@ list_nodes_in_aml_compute <- function(cluster) {
 #' @param agent_count An integer of the number of agents (VMs) to host
 #' containers. Defaults to `3`.
 #' @param vm_size A string of the size of agent VMs. More details can be found
-#' [here](https://aka.ms/azureml-vm-details).
+#' [here](https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object).
 #' Note that not all sizes are available in all regions, as detailed in the
 #' aformentioned link. Defaults to `'Standard_D3_v2'`.
 #' @param ssl_cname A string of a CName to use if enabling SSL validation on

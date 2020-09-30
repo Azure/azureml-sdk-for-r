@@ -1,4 +1,6 @@
 library(testthat)
 library(azuremlsdk)
 
-test_check("azuremlsdk")
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+  test_check("azuremlsdk") 
+}

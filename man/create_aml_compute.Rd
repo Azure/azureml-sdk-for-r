@@ -28,7 +28,7 @@ create_aml_compute(
 \item{cluster_name}{A string of the name of the cluster.}
 
 \item{vm_size}{A string of the size of agent VMs. More details can be found
-\href{https://aka.ms/azureml-vm-details}{here}.
+\href{https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object}{here}.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to \code{'Standard_NC6'}.}
 

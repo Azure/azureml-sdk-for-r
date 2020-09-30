@@ -31,7 +31,7 @@ create_aks_compute(
 containers. Defaults to \code{3}.}
 
 \item{vm_size}{A string of the size of agent VMs. More details can be found
-\href{https://aka.ms/azureml-vm-details}{here}.
+\href{https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object}{here}.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to \code{'Standard_D3_v2'}.}
 
