@@ -69,7 +69,7 @@ Values left as NULL will remain unchanged in the service." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -161,8 +161,13 @@ that can be specified in an inference configuration.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>update_local_webservice</span>(<span class='no'>webservice</span>, <span class='kw'>models</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>deployment_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>update_local_webservice</span>(
+  <span class='no'>webservice</span>,
+  <span class='kw'>models</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>deployment_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>wait</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>inference_config</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,7 +216,7 @@ healthy state. Defaults to <code>FALSE</code>.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

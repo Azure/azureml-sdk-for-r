@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -155,10 +155,20 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>register_azure_data_lake_gen2_datastore</span>(<span class='no'>workspace</span>, <span class='no'>datastore_name</span>,
-  <span class='no'>filesystem</span>, <span class='no'>account_name</span>, <span class='no'>tenant_id</span>, <span class='no'>client_id</span>, <span class='no'>client_secret</span>,
-  <span class='kw'>resource_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>authority_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>protocol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>register_azure_data_lake_gen2_datastore</span>(
+  <span class='no'>workspace</span>,
+  <span class='no'>datastore_name</span>,
+  <span class='no'>filesystem</span>,
+  <span class='no'>account_name</span>,
+  <span class='no'>tenant_id</span>,
+  <span class='no'>client_id</span>,
+  <span class='no'>client_secret</span>,
+  <span class='kw'>resource_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>authority_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>protocol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,8 +236,7 @@ object.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
-    
-<pre># Create and register an Azure Data Lake Gen2 Datastore to a workspace.
+    <p><div class="r"></p><pre># Create and register an Azure Data Lake Gen2 Datastore to a workspace.
 
 my_adlsgen2_ds &lt;- register_azure_data_lake_gen2_datastore(workspace = your_workspace,
                                                           datastore_name = &lt;name for this datastore&gt;,
@@ -235,8 +244,7 @@ my_adlsgen2_ds &lt;- register_azure_data_lake_gen2_datastore(workspace = your_wo
                                                           tenant_id = your_workspace$auth$tenant_id,
                                                           client_id = your_workspace$auth$service_principal_id,
                                                           client_secret = your_workspace$auth$service_principal_password)
-</pre>
-
+</pre><p></div></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -262,7 +270,7 @@ my_adlsgen2_ds &lt;- register_azure_data_lake_gen2_datastore(workspace = your_wo
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

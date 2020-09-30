@@ -72,7 +72,7 @@ override the data type  for the specified columns in the returned Tabular Datase
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -167,8 +167,12 @@ override the data type  for the specified columns in the returned Tabular Datase
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_tabular_dataset_from_sql_query</span>(<span class='no'>query</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>query_timeout</span> <span class='kw'>=</span> <span class='fl'>30L</span>)</pre>
+    <pre class="usage"><span class='fu'>create_tabular_dataset_from_sql_query</span>(
+  <span class='no'>query</span>,
+  <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>query_timeout</span> <span class='kw'>=</span> <span class='fl'>30L</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,7 +247,7 @@ set_tab_ds &lt;- create_tabular_dataset_from_sql_query(query, set_column_types =
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

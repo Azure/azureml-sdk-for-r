@@ -76,7 +76,7 @@ here." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -175,13 +175,25 @@ on the predefined Docker images that are used for training if
     
     </div>
 
-    <pre class="usage"><span class='fu'>estimator</span>(<span class='no'>source_directory</span>, <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>script_params</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_run_duration_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>estimator</span>(
+  <span class='no'>source_directory</span>,
+  <span class='kw'>compute_target</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>entry_script</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>script_params</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_run_duration_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>environment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>inputs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -334,7 +346,7 @@ est &lt;- estimator(source_directory = ".",
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

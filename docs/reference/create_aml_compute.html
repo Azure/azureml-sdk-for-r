@@ -76,7 +76,7 @@ Manage and request quotas for Azure resources." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -175,12 +175,23 @@ allocated. For more information, see
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_aml_compute</span>(<span class='no'>workspace</span>, <span class='no'>cluster_name</span>, <span class='no'>vm_size</span>,
-  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='st'>"dedicated"</span>, <span class='kw'>min_nodes</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>idle_seconds_before_scaledown</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>admin_username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>admin_user_password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>admin_user_ssh_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vnet_resourcegroup_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>vnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>create_aml_compute</span>(
+  <span class='no'>workspace</span>,
+  <span class='no'>cluster_name</span>,
+  <span class='no'>vm_size</span>,
+  <span class='kw'>vm_priority</span> <span class='kw'>=</span> <span class='st'>"dedicated"</span>,
+  <span class='kw'>min_nodes</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>idle_seconds_before_scaledown</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>admin_username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>admin_user_password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>admin_user_ssh_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vnet_resourcegroup_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>subnet_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +207,7 @@ allocated. For more information, see
     <tr>
       <th>vm_size</th>
       <td><p>A string of the size of agent VMs. More details can be found
-<a href='https://aka.ms/azureml-vm-details'>here</a>.
+<a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object'>here</a>.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to <code>'Standard_NC6'</code>.</p></td>
     </tr>
@@ -306,7 +317,7 @@ in a virtual network, see
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

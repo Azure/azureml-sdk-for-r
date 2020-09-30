@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -155,9 +155,13 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_tabular_dataset_from_parquet_files</span>(<span class='no'>path</span>, <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>include_path</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>partition_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>create_tabular_dataset_from_parquet_files</span>(
+  <span class='no'>path</span>,
+  <span class='kw'>validate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>include_path</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>set_column_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>partition_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,7 +226,7 @@ of string type and 'PartitionDate' of datetime type.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

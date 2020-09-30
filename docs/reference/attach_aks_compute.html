@@ -76,7 +76,7 @@ Attaching a cluster will take approximately 5 minutes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -175,8 +175,12 @@ with <code>detach_aks_compute()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attach_aks_compute</span>(<span class='no'>workspace</span>, <span class='no'>resource_group</span>, <span class='no'>cluster_name</span>,
-  <span class='kw'>cluster_purpose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FastProd"</span>, <span class='st'>"DevTest"</span>))</pre>
+    <pre class="usage"><span class='fu'>attach_aks_compute</span>(
+  <span class='no'>workspace</span>,
+  <span class='no'>resource_group</span>,
+  <span class='no'>cluster_name</span>,
+  <span class='kw'>cluster_purpose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"FastProd"</span>, <span class='st'>"DevTest"</span>)
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,13 +214,11 @@ recommend that your cluster have at least 2 virtual CPUs for dev/test usage.</p>
     
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
 
-    
-<pre>ws &lt;- load_workspace_from_config()
+    <p><div class="r"></p><pre>ws &lt;- load_workspace_from_config()
 compute_target &lt;- attach_aks_compute(ws,
                                      resource_group = 'myresourcegroup',
                                      cluster_name = 'myakscluster')
-</pre>
-
+</pre><p></div></p>
 <p>If the cluster has less than 12 virtual CPUs, you will need to also specify the
 <code>cluster_purpose</code> parameter in the <code>attach_aks_compute()</code> call: <code>cluster_purpose = 'DevTest'</code>.</p>
     
@@ -244,7 +246,7 @@ compute_target &lt;- attach_aks_compute(ws,
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

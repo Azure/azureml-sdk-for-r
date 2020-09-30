@@ -75,7 +75,7 @@ Hardware acceleration options
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -173,19 +173,34 @@ web service is only supported on AKS.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>aks_webservice_deployment_config</span>(<span class='kw'>autoscale_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>autoscale_min_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>autoscale_max_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>aks_webservice_deployment_config</span>(
+  <span class='kw'>autoscale_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>autoscale_min_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>autoscale_max_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>autoscale_refresh_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>autoscale_target_utilization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cpu_cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>memory_gb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>enable_app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scoring_timeout_ms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>replica_max_concurrent_requests</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_request_wait_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>num_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>primary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>secondary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gpu_cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>period_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>initial_delay_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>timeout_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>success_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>failure_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>token_auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>autoscale_target_utilization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cpu_cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>memory_gb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>enable_app_insights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scoring_timeout_ms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replica_max_concurrent_requests</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_request_wait_time</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>num_replicas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>primary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>secondary_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>gpu_cores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>period_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>initial_delay_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>timeout_seconds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>success_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>failure_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>namespace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>token_auth_enabled</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -385,7 +400,7 @@ cluster's region and your workspace's region, the longer it will take to fetch a
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

@@ -73,7 +73,7 @@ cran_packages, github_packages, or custom_url_packages parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -169,12 +169,22 @@ depending on the <code>use_gpu</code> flag) and install any R packages specified
     
     </div>
 
-    <pre class="usage"><span class='fu'>r_environment</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>r_version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rscript_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>snapshot_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bioconductor_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>r_environment</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>environment_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>r_version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rscript_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>snapshot_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cran_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>github_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_url_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bioconductor_packages</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_docker_image</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>image_registry_details</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_gpu</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>shm_size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -287,7 +297,7 @@ and include the following dependencies:</p><table class='table'>
 <tr><td>Commonly used R packages</td><td>-</td><td>80+ of the most popular R packages for
 data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
 and nnet. For the full list of packages included, see
-<a href='https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md'>here</a>.</td></tr>
+<a href='https://github.com/Azure/azureml-sdk-for-r/blob/master/misc/r-packages-docker.md'>here</a>.</td></tr>
 <tr><td>Python</td><td>3.7.0</td><td>-</td></tr>
 <tr><td>azureml-defaults</td><td>latest</td><td><code>azureml-defaults</code> contains the
 <code>azureml-core</code> and <code>applicationinsights</code> packages of the Python SDK that
@@ -334,7 +344,7 @@ deploying models. (from pip)</td></tr>
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

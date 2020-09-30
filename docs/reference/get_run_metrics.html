@@ -67,7 +67,7 @@ the log_*() methods." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -157,8 +157,13 @@ the <code>log_*()</code> methods.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_run_metrics</span>(<span class='no'>run</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>populate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_run_metrics</span>(
+  <span class='no'>run</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>populate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,7 +223,7 @@ metrics &lt;- get_run_metrics(run)
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

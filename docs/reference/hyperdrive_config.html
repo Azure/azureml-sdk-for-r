@@ -70,7 +70,7 @@ returned from this method to submit_experiment()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -163,9 +163,16 @@ returned from this method to <code>submit_experiment()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>hyperdrive_config</span>(<span class='no'>hyperparameter_sampling</span>, <span class='no'>primary_metric_name</span>,
-  <span class='no'>primary_metric_goal</span>, <span class='no'>max_total_runs</span>, <span class='kw'>max_concurrent_runs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_duration_minutes</span> <span class='kw'>=</span> <span class='fl'>10080L</span>, <span class='kw'>policy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>hyperdrive_config</span>(
+  <span class='no'>hyperparameter_sampling</span>,
+  <span class='no'>primary_metric_name</span>,
+  <span class='no'>primary_metric_goal</span>,
+  <span class='no'>max_total_runs</span>,
+  <span class='kw'>max_concurrent_runs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_duration_minutes</span> <span class='kw'>=</span> <span class='fl'>10080L</span>,
+  <span class='kw'>policy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,7 +225,7 @@ thresholds is reached.</p></td>
 object. If <code>NULL</code> (the default), no early termination policy will be used.</p>
 <p>The <code>MedianStoppingPolicy</code> with <code>delay_evaluation of = 5</code> is a good
 termination policy to start with. These are conservative settings that can
-provide 25<!-- %-35% savings with no loss on primary metric -->
+provide 25%-35% savings with no loss on primary metric
 (based on our evaluation data).</p></td>
     </tr>
     <tr>
@@ -289,7 +296,7 @@ provide 25<!-- %-35% savings with no loss on primary metric -->
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">

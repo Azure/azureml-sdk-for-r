@@ -36,7 +36,7 @@
 
 <meta property="og:description" content="Truncation selection cancels a given percentage of lowest performing runs at
 each evaluation interval. Runs are compared based on their performance on the
-primary metric and the lowest X" />
+primary metric and the lowest X% are terminated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -68,7 +68,7 @@ primary metric and the lowest X" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">azuremlsdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -155,12 +155,15 @@ primary metric and the lowest X" />
     
     <p>Truncation selection cancels a given percentage of lowest performing runs at
 each evaluation interval. Runs are compared based on their performance on the
-primary metric and the lowest X<!-- % are terminated. --></p>
+primary metric and the lowest X% are terminated.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>truncation_selection_policy</span>(<span class='no'>truncation_percentage</span>,
-  <span class='kw'>evaluation_interval</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>delay_evaluation</span> <span class='kw'>=</span> <span class='fl'>0L</span>)</pre>
+    <pre class="usage"><span class='fu'>truncation_selection_policy</span>(
+  <span class='no'>truncation_percentage</span>,
+  <span class='kw'>evaluation_interval</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>delay_evaluation</span> <span class='kw'>=</span> <span class='fl'>0L</span>
+)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,7 +246,7 @@ reported metrics for intervals greater than N.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by AzureML R SDK Team, Microsoft.</p>
+  <p>Developed by Diondra Peck, Minna Xiao, Microsoft.</p>
 </div>
 
 <div class="pkgdown">
