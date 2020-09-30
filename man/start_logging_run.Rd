@@ -4,8 +4,7 @@
 \alias{start_logging_run}
 \title{Create an interactive logging run}
 \usage{
-start_logging_run(experiment, outputs = NULL,
-  snapshot_directory = NULL)
+start_logging_run(experiment, outputs = NULL, snapshot_directory = NULL)
 }
 \arguments{
 \item{experiment}{The \code{Experiment} object.}

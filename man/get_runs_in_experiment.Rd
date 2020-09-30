@@ -4,8 +4,13 @@
 \alias{get_runs_in_experiment}
 \title{Return a generator of the runs for an experiment}
 \usage{
-get_runs_in_experiment(experiment, type = NULL, tags = NULL,
-  properties = NULL, include_children = FALSE)
+get_runs_in_experiment(
+  experiment,
+  type = NULL,
+  tags = NULL,
+  properties = NULL,
+  include_children = FALSE
+)
 }
 \arguments{
 \item{experiment}{The \code{Experiment} object.}

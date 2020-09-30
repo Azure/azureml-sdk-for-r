@@ -4,8 +4,13 @@
 \alias{upload_to_datastore}
 \title{Upload a local directory to the Azure storage a datastore points to}
 \usage{
-upload_to_datastore(datastore, src_dir, target_path = NULL,
-  overwrite = FALSE, show_progress = TRUE)
+upload_to_datastore(
+  datastore,
+  src_dir,
+  target_path = NULL,
+  overwrite = FALSE,
+  show_progress = TRUE
+)
 }
 \arguments{
 \item{datastore}{The \code{AzureBlobDatastore} or \code{AzureFileDatastore} object.}

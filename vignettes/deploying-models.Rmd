@@ -173,7 +173,7 @@ To deploy a model to AKS, you will first need an AKS cluster for the deployment 
 * create a new AKS cluster with [`create_aks_compute()`](https://azure.github.io/azureml-sdk-for-r/reference/create_aks_compute.html)
 * or attach an existing AKS cluster if you already have one in your Azure subscription with [`attach_aks_compute()`](https://azure.github.io/azureml-sdk-for-r/reference/attach_aks_compute.html)
 
-You can instead also create or attach an AKS cluster via the CLI or [studio](ml.azure.com) UI.
+You can instead also create or attach an AKS cluster via the CLI or [studio](https://ml.azure.com/selectWorkspace) UI.
 
 For an example of deploying to AKS, see the [deploy-to-aks](https://azure.github.io/azureml-sdk-for-r/articles/deploy-to-aks.html) vignette.
 

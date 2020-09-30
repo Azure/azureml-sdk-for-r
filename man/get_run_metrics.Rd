@@ -4,8 +4,13 @@
 \alias{get_run_metrics}
 \title{Get the metrics logged to a run}
 \usage{
-get_run_metrics(run, name = NULL, recursive = FALSE, run_type = NULL,
-  populate = FALSE)
+get_run_metrics(
+  run,
+  name = NULL,
+  recursive = FALSE,
+  run_type = NULL,
+  populate = FALSE
+)
 }
 \arguments{
 \item{run}{The \code{Run} object.}
@@ -24,7 +29,7 @@ e.g. \code{list("metric_name" = metric)}.
 }
 \description{
 Retrieve the metrics logged to a run that were logged with
-the \code{log_*()} methods.
+the \verb{log_*()} methods.
 }
 \section{Examples}{
 \preformatted{ws <- load_workspace_from_config()

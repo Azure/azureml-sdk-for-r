@@ -22,7 +22,7 @@ Specify a log uniform distribution.
 A value is drawn according to \code{exp(uniform(min_value, max_value))} so that
 the logarithm of the return value is uniformly distributed. When optimizing,
 this variable is constrained to the interval
-\code{[exp(min_value), exp(max_value)]}.
+\verb{[exp(min_value), exp(max_value)]}.
 }
 \seealso{
 \code{random_parameter_sampling()}, \code{grid_parameter_sampling()},

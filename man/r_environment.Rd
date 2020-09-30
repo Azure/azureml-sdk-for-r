@@ -4,12 +4,22 @@
 \alias{r_environment}
 \title{Create an environment}
 \usage{
-r_environment(name, version = NULL, environment_variables = NULL,
-  r_version = NULL, rscript_path = NULL, snapshot_date = NULL,
-  cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, bioconductor_packages = NULL,
-  custom_docker_image = NULL, image_registry_details = NULL,
-  use_gpu = FALSE, shm_size = NULL)
+r_environment(
+  name,
+  version = NULL,
+  environment_variables = NULL,
+  r_version = NULL,
+  rscript_path = NULL,
+  snapshot_date = NULL,
+  cran_packages = NULL,
+  github_packages = NULL,
+  custom_url_packages = NULL,
+  bioconductor_packages = NULL,
+  custom_docker_image = NULL,
+  image_registry_details = NULL,
+  use_gpu = FALSE,
+  shm_size = NULL
+)
 }
 \arguments{
 \item{name}{A string of the name of the environment.}
@@ -99,7 +109,7 @@ R \tab 3.6.0 \tab -\cr
 Commonly used R packages \tab - \tab 80+ of the most popular R packages for
 data science, including the IRKernel, dplyr, shiny, ggplot2, tidyr, caret,
 and nnet. For the full list of packages included, see
-\href{https://github.com/Azure/azureml-sdk-for-r/tree/master/misc/r-packages-docker.md}{here}.\cr
+\href{https://github.com/Azure/azureml-sdk-for-r/blob/master/misc/r-packages-docker.md}{here}.\cr
 Python \tab 3.7.0 \tab -\cr
 azureml-defaults \tab latest \tab \code{azureml-defaults} contains the
 \code{azureml-core} and \code{applicationinsights} packages of the Python SDK that

@@ -4,8 +4,11 @@
 \alias{load_dataset_into_data_frame}
 \title{Load all records from the dataset into a dataframe.}
 \usage{
-load_dataset_into_data_frame(dataset, on_error = "null",
-  out_of_range_datetime = "null")
+load_dataset_into_data_frame(
+  dataset,
+  on_error = "null",
+  out_of_range_datetime = "null"
+)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object.}

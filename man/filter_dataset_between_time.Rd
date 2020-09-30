@@ -4,8 +4,12 @@
 \alias{filter_dataset_between_time}
 \title{Filter Tabular Dataset between a specified start and end time.}
 \usage{
-filter_dataset_between_time(dataset, start_time, end_time,
-  include_boundary = TRUE)
+filter_dataset_between_time(
+  dataset,
+  start_time,
+  end_time,
+  include_boundary = TRUE
+)
 }
 \arguments{
 \item{dataset}{The Tabular Dataset object}

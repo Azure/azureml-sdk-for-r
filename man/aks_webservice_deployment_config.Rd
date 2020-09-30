@@ -4,19 +4,34 @@
 \alias{aks_webservice_deployment_config}
 \title{Create a deployment config for deploying an AKS web service}
 \usage{
-aks_webservice_deployment_config(autoscale_enabled = NULL,
-  autoscale_min_replicas = NULL, autoscale_max_replicas = NULL,
+aks_webservice_deployment_config(
+  autoscale_enabled = NULL,
+  autoscale_min_replicas = NULL,
+  autoscale_max_replicas = NULL,
   autoscale_refresh_seconds = NULL,
-  autoscale_target_utilization = NULL, auth_enabled = NULL,
-  cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL,
-  scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL,
-  max_request_wait_time = NULL, num_replicas = NULL,
-  primary_key = NULL, secondary_key = NULL, tags = NULL,
-  properties = NULL, description = NULL, gpu_cores = NULL,
-  period_seconds = NULL, initial_delay_seconds = NULL,
-  timeout_seconds = NULL, success_threshold = NULL,
-  failure_threshold = NULL, namespace = NULL,
-  token_auth_enabled = NULL)
+  autoscale_target_utilization = NULL,
+  auth_enabled = NULL,
+  cpu_cores = NULL,
+  memory_gb = NULL,
+  enable_app_insights = NULL,
+  scoring_timeout_ms = NULL,
+  replica_max_concurrent_requests = NULL,
+  max_request_wait_time = NULL,
+  num_replicas = NULL,
+  primary_key = NULL,
+  secondary_key = NULL,
+  tags = NULL,
+  properties = NULL,
+  description = NULL,
+  gpu_cores = NULL,
+  period_seconds = NULL,
+  initial_delay_seconds = NULL,
+  timeout_seconds = NULL,
+  success_threshold = NULL,
+  failure_threshold = NULL,
+  namespace = NULL,
+  token_auth_enabled = NULL
+)
 }
 \arguments{
 \item{autoscale_enabled}{If \code{TRUE} enable autoscaling for the web service.

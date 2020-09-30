@@ -1,4 +1,4 @@
-# azuremlsdk 0.10.0
+# azuremlsdk 1.10.0
 ## New features
 - Add foreach backend for distributed training and batch inferencing. (#215)
 - Add R Section in Environment Definition.

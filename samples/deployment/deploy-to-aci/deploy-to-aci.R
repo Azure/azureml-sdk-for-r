@@ -57,4 +57,3 @@ predicted_val
 
 # Delete the web service
 delete_webservice(service)
-

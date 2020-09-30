@@ -4,12 +4,23 @@
 \alias{create_aml_compute}
 \title{Create an AmlCompute cluster}
 \usage{
-create_aml_compute(workspace, cluster_name, vm_size,
-  vm_priority = "dedicated", min_nodes = 0, max_nodes = NULL,
-  idle_seconds_before_scaledown = NULL, admin_username = NULL,
-  admin_user_password = NULL, admin_user_ssh_key = NULL,
-  vnet_resourcegroup_name = NULL, vnet_name = NULL,
-  subnet_name = NULL, tags = NULL, description = NULL)
+create_aml_compute(
+  workspace,
+  cluster_name,
+  vm_size,
+  vm_priority = "dedicated",
+  min_nodes = 0,
+  max_nodes = NULL,
+  idle_seconds_before_scaledown = NULL,
+  admin_username = NULL,
+  admin_user_password = NULL,
+  admin_user_ssh_key = NULL,
+  vnet_resourcegroup_name = NULL,
+  vnet_name = NULL,
+  subnet_name = NULL,
+  tags = NULL,
+  description = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -17,7 +28,7 @@ create_aml_compute(workspace, cluster_name, vm_size,
 \item{cluster_name}{A string of the name of the cluster.}
 
 \item{vm_size}{A string of the size of agent VMs. More details can be found
-\href{https://aka.ms/azureml-vm-details}{here}.
+\href{https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object}{here}.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to \code{'Standard_NC6'}.}
 

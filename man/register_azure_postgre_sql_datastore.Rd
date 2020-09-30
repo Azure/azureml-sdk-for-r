@@ -4,9 +4,17 @@
 \alias{register_azure_postgre_sql_datastore}
 \title{Initialize a new Azure PostgreSQL Datastore.}
 \usage{
-register_azure_postgre_sql_datastore(workspace, datastore_name,
-  server_name, database_name, user_id, user_password, port_number = NULL,
-  endpoint = NULL, overwrite = FALSE)
+register_azure_postgre_sql_datastore(
+  workspace,
+  datastore_name,
+  server_name,
+  database_name,
+  user_id,
+  user_password,
+  port_number = NULL,
+  endpoint = NULL,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{workspace}{The workspace this datastore belongs to.}

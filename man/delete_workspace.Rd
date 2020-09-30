@@ -4,8 +4,11 @@
 \alias{delete_workspace}
 \title{Delete a workspace}
 \usage{
-delete_workspace(workspace, delete_dependent_resources = FALSE,
-  no_wait = FALSE)
+delete_workspace(
+  workspace,
+  delete_dependent_resources = FALSE,
+  no_wait = FALSE
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object of the workspace to delete.}

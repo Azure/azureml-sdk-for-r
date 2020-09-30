@@ -40,8 +40,7 @@ if(is.null(compute_target)) stop("Training cluster not found")
 ```
 
 ## Try out several models
-We have provided three different experiment files in the `experiments-deep-dive` folder:
-`accident-glm.R`, `accident-knn.R`, `accident-glmnet.R`. 
+We have provided three different experiment files in the `experiments-deep-dive` folder: `accident-glm.R`, `accident-knn.R`, and `accident-glmnet.R`]. 
 Each uses the `caret` package to fit a predictive model to the accidents data (GLM, KNN and GLMNET respectively). Here are the parts of `accident-glm.R` that load the data and fit the model. 
 
 The script loads the data `accidents` from the shared datastore, and then creates a training partition `accident_trn`. This data is then passed to the caret `train` function to fit a generalized linear model (in this case, a logistic regression).

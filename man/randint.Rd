@@ -2,7 +2,7 @@
 % Please edit documentation in R/hyperdrive.R
 \name{randint}
 \alias{randint}
-\title{Specify a set of random integers in the range \code{[0, upper)}}
+\title{Specify a set of random integers in the range \verb{[0, upper)}}
 \usage{
 randint(upper)
 }
@@ -14,7 +14,7 @@ integers (exclusive).}
 A list of the stochastic expression.
 }
 \description{
-Specify a set of random integers in the range \code{[0, upper)}
+Specify a set of random integers in the range \verb{[0, upper)}
 to sample the hyperparameters from.
 
 The semantics of this distribution is that there is no more

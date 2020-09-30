@@ -90,7 +90,7 @@ model %>%
   compile(loss = "categorical_crossentropy",
           optimizer = opt,
           metrics = "accuracy"
-)
+  )
 
 
 # Training ----------------------------------------------------------------
@@ -104,7 +104,7 @@ if (!data_augmentation){
         epochs = epochs,
         validation_data = list(x_test, y_test),
         shuffle = TRUE
-  )
+    )
   
 } else {
   

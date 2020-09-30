@@ -4,10 +4,20 @@
 \alias{register_azure_data_lake_gen2_datastore}
 \title{Initialize a new Azure Data Lake Gen2 Datastore.}
 \usage{
-register_azure_data_lake_gen2_datastore(workspace, datastore_name,
-  filesystem, account_name, tenant_id, client_id, client_secret,
-  resource_url = NULL, authority_url = NULL, protocol = NULL,
-  endpoint = NULL, overwrite = FALSE)
+register_azure_data_lake_gen2_datastore(
+  workspace,
+  datastore_name,
+  filesystem,
+  account_name,
+  tenant_id,
+  client_id,
+  client_secret,
+  resource_url = NULL,
+  authority_url = NULL,
+  protocol = NULL,
+  endpoint = NULL,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{workspace}{The workspace this datastore belongs to.}
@@ -48,7 +58,7 @@ object.
 Initialize a new Azure Data Lake Gen2 Datastore.
 }
 \section{Examples}{
-\preformatted{# Create and register an Azure Data Lake Gen2 Datastore to a workspace.
+\if{html}{\out{<div class="r">}}\preformatted{# Create and register an Azure Data Lake Gen2 Datastore to a workspace.
 
 my_adlsgen2_ds <- register_azure_data_lake_gen2_datastore(workspace = your_workspace,
                                                           datastore_name = <name for this datastore>,
@@ -56,7 +66,7 @@ my_adlsgen2_ds <- register_azure_data_lake_gen2_datastore(workspace = your_works
                                                           tenant_id = your_workspace$auth$tenant_id,
                                                           client_id = your_workspace$auth$service_principal_id,
                                                           client_secret = your_workspace$auth$service_principal_password)
-}
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

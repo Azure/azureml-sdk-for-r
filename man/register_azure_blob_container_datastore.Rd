@@ -4,12 +4,23 @@
 \alias{register_azure_blob_container_datastore}
 \title{Register an Azure blob container as a datastore}
 \usage{
-register_azure_blob_container_datastore(workspace, datastore_name,
-  container_name, account_name, sas_token = NULL, account_key = NULL,
-  protocol = NULL, endpoint = NULL, overwrite = FALSE,
-  create_if_not_exists = FALSE, skip_validation = FALSE,
-  blob_cache_timeout = NULL, grant_workspace_access = FALSE,
-  subscription_id = NULL, resource_group = NULL)
+register_azure_blob_container_datastore(
+  workspace,
+  datastore_name,
+  container_name,
+  account_name,
+  sas_token = NULL,
+  account_key = NULL,
+  protocol = NULL,
+  endpoint = NULL,
+  overwrite = FALSE,
+  create_if_not_exists = FALSE,
+  skip_validation = FALSE,
+  blob_cache_timeout = NULL,
+  grant_workspace_access = FALSE,
+  subscription_id = NULL,
+  resource_group = NULL
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

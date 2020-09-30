@@ -4,13 +4,23 @@
 \alias{create_aks_compute}
 \title{Create an AksCompute cluster}
 \usage{
-create_aks_compute(workspace, cluster_name, agent_count = NULL,
-  vm_size = NULL, ssl_cname = NULL, ssl_cert_pem_file = NULL,
-  ssl_key_pem_file = NULL, location = NULL,
-  vnet_resourcegroup_name = NULL, vnet_name = NULL,
-  subnet_name = NULL, service_cidr = NULL, dns_service_ip = NULL,
-  docker_bridge_cidr = NULL, cluster_purpose = c("FastProd",
-  "DevTest"))
+create_aks_compute(
+  workspace,
+  cluster_name,
+  agent_count = NULL,
+  vm_size = NULL,
+  ssl_cname = NULL,
+  ssl_cert_pem_file = NULL,
+  ssl_key_pem_file = NULL,
+  location = NULL,
+  vnet_resourcegroup_name = NULL,
+  vnet_name = NULL,
+  subnet_name = NULL,
+  service_cidr = NULL,
+  dns_service_ip = NULL,
+  docker_bridge_cidr = NULL,
+  cluster_purpose = c("FastProd", "DevTest")
+)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}
@@ -21,7 +31,7 @@ create_aks_compute(workspace, cluster_name, agent_count = NULL,
 containers. Defaults to \code{3}.}
 
 \item{vm_size}{A string of the size of agent VMs. More details can be found
-\href{https://aka.ms/azureml-vm-details}{here}.
+\href{https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/2019-12-01/virtualmachines#virtualmachineidentity-object}{here}.
 Note that not all sizes are available in all regions, as detailed in the
 aformentioned link. Defaults to \code{'Standard_D3_v2'}.}
 
@@ -82,13 +92,13 @@ network, see
 }
 
 \section{Examples}{
-\preformatted{# Create an AksCompute cluster using the default configuration (you can also
+\if{html}{\out{<div class="r">}}\preformatted{# Create an AksCompute cluster using the default configuration (you can also
 # provide parameters to customize this)
 
 ws <- load_workspace_from_config()
 
 compute_target <- create_aks_compute(ws, cluster_name = 'mycluster')
 wait_for_provisioning_completion(compute_target)
-}
+}\if{html}{\out{</div>}}
 }
 

@@ -6,7 +6,9 @@
 \title{azureml module
 User can access functions/modules in azureml that are not exposed through the
 exported R functions.}
-\format{An object of class \code{python.builtin.module} (inherits from \code{python.builtin.object}) of length 2.}
+\format{
+An object of class \code{python.builtin.module} (inherits from \code{python.builtin.object}) of length 5.
+}
 \usage{
 azureml
 }

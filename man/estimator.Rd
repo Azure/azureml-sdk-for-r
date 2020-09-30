@@ -4,13 +4,25 @@
 \alias{estimator}
 \title{Create an estimator}
 \usage{
-estimator(source_directory, compute_target = NULL, vm_size = NULL,
-  vm_priority = NULL, entry_script = NULL, script_params = NULL,
-  cran_packages = NULL, github_packages = NULL,
-  custom_url_packages = NULL, custom_docker_image = NULL,
-  image_registry_details = NULL, use_gpu = FALSE,
-  environment_variables = NULL, shm_size = NULL,
-  max_run_duration_seconds = NULL, environment = NULL, inputs = NULL)
+estimator(
+  source_directory,
+  compute_target = NULL,
+  vm_size = NULL,
+  vm_priority = NULL,
+  entry_script = NULL,
+  script_params = NULL,
+  cran_packages = NULL,
+  github_packages = NULL,
+  custom_url_packages = NULL,
+  custom_docker_image = NULL,
+  image_registry_details = NULL,
+  use_gpu = FALSE,
+  environment_variables = NULL,
+  shm_size = NULL,
+  max_run_duration_seconds = NULL,
+  environment = NULL,
+  inputs = NULL
+)
 }
 \arguments{
 \item{source_directory}{A string of the local directory containing

@@ -4,8 +4,7 @@
 \alias{create_child_run}
 \title{Create a child run}
 \usage{
-create_child_run(parent_run, name = NULL, run_id = NULL,
-  outputs = NULL)
+create_child_run(parent_run, name = NULL, run_id = NULL, outputs = NULL)
 }
 \arguments{
 \item{parent_run}{The parent \code{Run} object.}

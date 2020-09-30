@@ -4,8 +4,12 @@
 \alias{dataset_consumption_config}
 \title{Represent how to deliver the dataset to a compute target.}
 \usage{
-dataset_consumption_config(name, dataset, mode = "direct",
-  path_on_compute = NULL)
+dataset_consumption_config(
+  name,
+  dataset,
+  mode = "direct",
+  path_on_compute = NULL
+)
 }
 \arguments{
 \item{name}{The name of the dataset in the run, which can be different to the

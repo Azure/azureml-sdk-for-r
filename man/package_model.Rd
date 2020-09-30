@@ -5,8 +5,7 @@
 \title{Create a model package that packages all the assets needed to host a
 model as a web service}
 \usage{
-package_model(workspace, models, inference_config,
-  generate_dockerfile = FALSE)
+package_model(workspace, models, inference_config, generate_dockerfile = FALSE)
 }
 \arguments{
 \item{workspace}{The \code{Workspace} object.}

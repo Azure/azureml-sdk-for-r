@@ -4,9 +4,16 @@
 \alias{hyperdrive_config}
 \title{Create a configuration for a HyperDrive run}
 \usage{
-hyperdrive_config(hyperparameter_sampling, primary_metric_name,
-  primary_metric_goal, max_total_runs, max_concurrent_runs = NULL,
-  max_duration_minutes = 10080L, policy = NULL, estimator = NULL)
+hyperdrive_config(
+  hyperparameter_sampling,
+  primary_metric_name,
+  primary_metric_goal,
+  max_total_runs,
+  max_concurrent_runs = NULL,
+  max_duration_minutes = 10080L,
+  policy = NULL,
+  estimator = NULL
+)
 }
 \arguments{
 \item{hyperparameter_sampling}{The hyperparameter sampling space.
@@ -42,9 +49,9 @@ thresholds is reached.}
 \code{BanditPolicy}, \code{MedianStoppingPolicy}, or \code{TruncationSelectionPolicy}
 object. If \code{NULL} (the default), no early termination policy will be used.
 
-The \code{MedianStoppingPolicy} with \code{delay_evaluation of = 5} is a good
+The \code{MedianStoppingPolicy} with \verb{delay_evaluation of = 5} is a good
 termination policy to start with. These are conservative settings that can
-provide 25%-35% savings with no loss on primary metric
+provide 25\%-35\% savings with no loss on primary metric
 (based on our evaluation data).}
 
 \item{estimator}{The \code{Estimator} object.}
