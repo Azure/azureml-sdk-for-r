@@ -10,11 +10,14 @@ test_that("create a tabular dataset,
   ws <- existing_ws
 
   # create tabular dataset from delimited files
+  date <- as.POSIXct("2011-05-01 17:55:23")
   path_to_dataset <- "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/nyc_energy.csv"
-  dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)
-  
+  time_column_name <- 'timeStamp'
+  dataset <- create_tabular_dataset_from_delimited_files(path=path_to_dataset)$with_timestamp_columns(fine_grain_timestamp=time_column_name)
+  filtered_dataset <- filter_dataset_before_time(dataset, date)
+
   # load data into data frame
-  pandas_df <- load_dataset_into_data_frame(dataset)
+  pandas_df <- load_dataset_into_data_frame(filtered_dataset)
   expect_equal(is.data.frame(pandas_df), TRUE)
                   
   # register first version of the dataset
@@ -28,7 +31,7 @@ test_that("create a tabular dataset,
   expect_equal(registered_dataset1$name, registered_dataset2$name)
   expect_equal(registered_dataset1$description, 'I am version 1')
   expect_equal(registered_dataset2$description, 'I am version 2')
-                   
+
   # unregister datasets
   unregister_all_dataset_versions(dataset)
   expect_equal(dataset$name, NULL)
