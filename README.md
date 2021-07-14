@@ -5,6 +5,9 @@
 [![Build Status](https://msdata.visualstudio.com/Vienna/_apis/build/status/AzureML-SDK%20R/R%20SDK%20Docs?branchName=master&label=Docs)](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/azuremlsdk)](https://cran.r-project.org/package=azuremlsdk)
 
+## ** The Azure Machine Learning SDK for R will be deprecated by the end of 2021 to make way for an improved R training and deployment experience using Azure Machine Learning CLI 2.0. See the [samples repository](https://github.com/Azure/azureml-examples/tree/0849cbe797d1d524df9fe9d43ac8b36e75ea34ab/cli/jobs/train/r) to get started with the Public Preview edition of the 2.0 CLI. **
+
+
 Data scientists and AI developers use the Azure Machine Learning SDK for R to build and run machine learning workflows with Azure Machine Learning. 
 
 Azure Machine Learning SDK for R uses the reticulate package to bind to [Azure Machine Learning's Python SDK](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). By binding directly to Python, the Azure Machine Learning SDK for R allows you access to core objects and methods implemented in the Python SDK from any R environment you choose.
