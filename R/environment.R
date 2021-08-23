@@ -61,7 +61,7 @@
 #' training script or scoring script within a Docker container. If no custom
 #' Docker image is specified with the `custom_docker_image` parameter, Azure
 #' ML will build a predefined CPU or GPU Docker image. The predefine images extend
-#' the Ubuntu 16.04 [Azure ML base images](https://github.com/Azure/AzureML-Containers)
+#' the Ubuntu 18.04 [Azure ML base images](https://github.com/Azure/AzureML-Containers)
 #' and include the following dependencies:
 #' \tabular{rrr}{
 #' **Dependencies** \tab **Version** \tab **Remarks**\cr
@@ -122,12 +122,13 @@ r_environment <- function(name, version = NULL,
   if (is.null(custom_docker_image)) {
     if (use_gpu) {
       env$docker$base_image <- paste0("mcr.microsoft.com/azureml/base-",
-                                        "gpu:openmpi3.1.2-cuda10.0-cudnn7-",
-                                        "ubuntu16.04")
+                                      "gpu:openmpi3.1.2-cuda10.0-cudnn7-",
+                                      "ubuntu18.04")
     }
     else {
-      env$docker$base_image <- paste0("mcr.microsoft.com/azureml/base:",
-                                        "openmpi3.1.2-ubuntu16.04")
+      env$docker$base_image <- 
+      paste0("mcr.microsoft.com/azureml/base:",
+             "openmpi3.1.2-ubuntu18.04")
     }
   }
   else{
