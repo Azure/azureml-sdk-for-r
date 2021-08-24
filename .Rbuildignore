@@ -15,3 +15,5 @@
 ^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml
 ^misc$
+^_pkgdown\.yml$
+^pkgdown$

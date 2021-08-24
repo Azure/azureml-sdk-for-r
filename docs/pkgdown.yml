@@ -1,5 +1,16 @@
-pandoc: 2.2.3.2
-pkgdown: 1.4.1
+pandoc: '2.6'
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
+articles:
+  building-custom-docker-images: building-custom-docker-images.html
+  configuration: configuration.html
+  deploy-to-aks: deploy-to-aks.html
+  deploying-models: deploying-models.html
+  experiments-deep-dive: experiments-deep-dive.html
+  hyperparameter-tune-with-keras: hyperparameter-tune-with-keras.html
+  installation: installation.html
+  train-and-deploy-first-model: train-and-deploy-first-model.html
+  train-with-tensorflow: train-with-tensorflow.html
+  troubleshooting: troubleshooting.html
+last_built: 2021-08-24T17:30Z
 

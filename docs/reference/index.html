@@ -8,23 +8,29 @@
 
 <title>Function reference • azuremlsdk</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,7 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Function reference" />
+
 
 
 
@@ -49,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -120,11 +128,10 @@
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/azure/azureml-sdk-for-r">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/azure/azureml-sdk-for-r/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -159,6 +166,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -173,6 +185,11 @@
           <p class="section-desc"><p>Functions for managing workspace resources. A <strong>Workspace</strong> is the top-level resource for Azure Machine Learning. It provides a centralized place to work with all the artifacts you create when you use Azure ML.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -277,6 +294,11 @@
           <p class="section-desc"><p>Functions for managing compute resources. A <strong>Compute Target</strong> is a designated compute resource where you run your scripts or host your service deployments. Compute targets make it easy to change your compute environment without changing your code. Supported compute target types in the R SDK include <code>AmlCompute</code> and <code>AksCompute</code>.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -352,6 +374,11 @@ compute target</p></td>
           <p class="section-desc"><p>Functions for accessing your data in Azure Storage services. A <strong>Datastore</strong> is attached to a workspace and is used to store connection information to an Azure storage service.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -420,6 +447,11 @@ compute target</p></td>
           <p class="section-desc"><p>Functions for managing datasets. An Azure Machine Learning <strong>Dataset</strong> allows you to interact with data in your datastores and package your data into a consumable object for machine learning tasks. Datasets can be created from local files, public urls, or specific file(s) in your datastores. Azure ML supports Dataset types of <code>FileDataset</code> and <code>TabularDataset</code>.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -635,9 +667,14 @@ compute target</p></td>
       <tr>
         <th colspan="2">
           <h2 id="section-environments" class="hasAnchor"><a href="#section-environments" class="anchor"></a>Environments</h2>
-          <p class="section-desc"><p>Functions for managing environments. An Azure Machine Learning <strong>Environment</strong> allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see <code>r_environment()</code>.</p></p>
+          <p class="section-desc"><p>Functions for managing environments. An Azure Machine Learning <strong>Environment</strong> allows you to create, manage, and reuse the software dependencies required for training and deployment. Environments specify the R packages, environment variables, and software settings around your training and scoring scripts for your containerized training runs and deployments. They are managed and versioned entities within your Azure ML workspace that enable reproducible, auditable, and portable machine learning workflows across different compute targets. For more details, see <code><a href="../reference/r_environment.html">r_environment()</a></code>.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -679,9 +716,14 @@ compute target</p></td>
       <tr>
         <th colspan="2">
           <h2 id="section-training-experimentation" class="hasAnchor"><a href="#section-training-experimentation" class="anchor"></a>Training &amp; experimentation</h2>
-          <p class="section-desc"><p>Functions for managing experiments and runs. An <strong>Experiment</strong> is a grouping of the collection of runs from a specified script. A <strong>Run</strong> represents a single trial of an experiment. A run is the object used to monitor the asynchronous execution of a trial, log metrics and store output of the trial, and to analyze results and access artifacts generated by the trial. The following run types are supported - <code>ScriptRun</code> (for Estimator experiments) and <code>HyperDriveRun</code> (for HyperDrive experiments). For functions that are specific only to HyperDriveRuns, see the <strong>Hyperparameter tuning</strong> reference sections. An <strong>Estimator</strong> wraps run configuration information for specifying details of executing an R script. Running an Estimator experiment (using <code>submit_experiment()</code>) will return a <code>ScriptRun</code> object and execute your training script on the specified compute target.</p></p>
+          <p class="section-desc"><p>Functions for managing experiments and runs. An <strong>Experiment</strong> is a grouping of the collection of runs from a specified script. A <strong>Run</strong> represents a single trial of an experiment. A run is the object used to monitor the asynchronous execution of a trial, log metrics and store output of the trial, and to analyze results and access artifacts generated by the trial. The following run types are supported - <code>ScriptRun</code> (for Estimator experiments) and <code>HyperDriveRun</code> (for HyperDrive experiments). For functions that are specific only to HyperDriveRuns, see the <strong>Hyperparameter tuning</strong> reference sections. An <strong>Estimator</strong> wraps run configuration information for specifying details of executing an R script. Running an Estimator experiment (using <code><a href="../reference/submit_experiment.html">submit_experiment()</a></code>) will return a <code>ScriptRun</code> object and execute your training script on the specified compute target.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -870,6 +912,11 @@ compute target</p></td>
           <p class="section-desc"><p>Functions for configuring and managing hyperparameter tuning (HyperDrive) experiments. Azure ML’s HyperDrive functionality enables you to automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You can also define early termination policies in which poorly performing experiment runs are canceled and new ones started.</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1015,6 +1062,11 @@ best primary metric</p></td>
           <p class="section-desc"><p>Functions for model management and deployment. Registering a model allows you to store and version your trained model in a workspace. A registered <strong>Model</strong> can then be deployed as a <strong>Webservice</strong> using Azure ML. If you would like to access all the assets needed to host a model as a web service without actually deploying the model, you can do so by packaging the model as a <code>ModelPackage</code>. You can deploy your model as a <code>LocalWebservice</code> (locally), <code>AciWebservice</code> (on Azure Container Instances), or <code>AksWebservice</code> (on Azure Kubernetes Service).</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1203,19 +1255,10 @@ your local file system</p></td>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-installation">Installation</a></li>
-      <li><a href="#section-workspaces">Workspaces</a></li>
-      <li><a href="#section-compute-targets">Compute targets</a></li>
-      <li><a href="#section-working-with-data">Working with data</a></li>
-      <li><a href="#section-working-with-datasets">Working with datasets</a></li>
-      <li><a href="#section-environments">Environments</a></li>
-      <li><a href="#section-training-experimentation">Training &amp; experimentation</a></li>
-      <li><a href="#section-hyperparameter-tuning">Hyperparameter tuning</a></li>
-      <li><a href="#section-model-management-deployment">Model management &amp; deployment</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -1226,7 +1269,7 @@ your local file system</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
