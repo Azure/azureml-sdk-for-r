@@ -121,10 +121,10 @@ r_environment <- function(name, version = NULL,
 
   if (is.null(custom_docker_image)) {
     if (use_gpu) {
-      env$docker$base_image <- "mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.0-cudnn7-ubuntu18.04"
+      env$docker$base_image <- "mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.2-cudnn7-ubuntu18.04"
     }
     else {
-      env$docker$base_image <- "mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04"
+      env$docker$base_image <- "mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu16.04"
     }
   }
   else{
