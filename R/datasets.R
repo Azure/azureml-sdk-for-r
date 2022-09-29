@@ -444,6 +444,31 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
   dataset$keep_columns(columns, validate)
 }
 
+#' Convert R datetime objects to Python datetime.datetime objects
+#' 
+#' Wrapped in suppressWarnings() due to unnecessary warning in timedatectl
+#' package: https://stat.ethz.ch/pipermail/r-devel/2018-May/076163.html
+#' 
+#' @param posix_date The POSIX* object to be converted
+#' @return A Python datetime.datetime object
+#' @md
+.posixct_to_datetime <- function(posix_date) {
+  suppressWarnings({
+  datetime <- import("datetime", convert=FALSE)
+  
+  parsed_date <- sapply(stringr::str_split(posix_date, "[- : ]")[[1]],
+                        as.integer)
+  names(parsed_date) <- c("year", "month", "day", "hour", "minute", "second")
+  
+  datetime$datetime(parsed_date[["year"]],
+                    parsed_date[["month"]],
+                    parsed_date[["day"]],
+                    parsed_date[["hour"]],
+                    parsed_date[["minute"]],
+                    parsed_date[["second"]])
+  })
+}
+
 #' Filter Tabular Dataset with time stamp columns after a specified start time.
 #'
 #' @description
@@ -458,6 +483,7 @@ keep_columns_from_dataset <- function(dataset, columns, validate = FALSE) {
 #' @md
 filter_dataset_after_time <- function(dataset, start_time,
                                       include_boundary = TRUE) {
+  start_time <- .posixct_to_datetime(start_time)
   dataset$time_after(start_time, include_boundary)
 }
 
@@ -475,6 +501,7 @@ filter_dataset_after_time <- function(dataset, start_time,
 #' @md
 filter_dataset_before_time <- function(dataset, end_time,
                                        include_boundary = TRUE) {
+  end_time <- .posixct_to_datetime(end_time)
   dataset$time_before(end_time, include_boundary)
 }
 
@@ -493,6 +520,8 @@ filter_dataset_before_time <- function(dataset, end_time,
 #' @md
 filter_dataset_between_time <- function(dataset, start_time, end_time,
                                         include_boundary = TRUE) {
+  start_time <- .posixct_to_datetime(start_time)
+  end_time <- .posixct_to_datetime(end_time)
   dataset$time_between(start_time, end_time, include_boundary)
 }
 
